@@ -34,9 +34,9 @@ Multiple languages are supported.
 \section{Corresponding datafiles in the installed package}{
 
 
-  \code{inst/textdata/namelist.tsv}
+  \code{textdata/namelist.tsv}
 
-  \code{inst/textdata/namelist.yml}
+  \code{textdata/namelist.yml}
 }
 
 \seealso{
