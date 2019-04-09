@@ -1,0 +1,15 @@
+..generic:
+  optimize: yes
+  NA string: NA
+  sorting:
+  - lang
+  - code
+  hash: 3345146f5a5902a684bc1b965f00486c82952d94
+code:
+  class: character
+lang:
+  class: character
+name:
+  class: character
+shortname:
+  class: character
