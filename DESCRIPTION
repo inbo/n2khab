@@ -18,10 +18,13 @@ Depends:
 Imports:
     DBI,
     dplyr,
+    git2rdata,
+    plyr,
     purrr,
     raster,
     readr,
     rgdal,
+    rlang,
     sp,
     sf,
     stats,
