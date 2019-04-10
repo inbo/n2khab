@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_textdata.R
 \name{read_namelist}
 \alias{read_namelist}
-\title{Return the 'namelist' dataframe}
+\title{Return the 'namelist' data source as a dataframe}
 \usage{
 read_namelist(path = pkgdatasource_path("textdata/namelist", ".tsv"),
   file = "namelist", lang = "en")
@@ -12,8 +12,7 @@ read_namelist(path = pkgdatasource_path("textdata/namelist", ".tsv"),
 The default is to use the location of the data source as delivered by
 the installed package.}
 
-\item{file}{The filename of the data source, without extension in the case
-of multiple files with different extensions.
+\item{file}{The filename of the data source, without extension.
 The default is to use the file delivered by the installed package.}
 
 \item{lang}{An
@@ -28,7 +27,8 @@ The \code{namelist} dataframe, filtered according to the \code{lang} argument.
 See \code{\link{namelist}} for documentation of the dataframe's contents.
 }
 \description{
-Returns the included data source \code{\link{namelist}} as a dataframe.
+Returns the included data source \code{\link{namelist}} as a dataframe,
+by default filtered according to English names and shortnames.
 }
 \details{
 'namelist' is a data source in the

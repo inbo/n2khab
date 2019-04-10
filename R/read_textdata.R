@@ -1,6 +1,7 @@
-#' Return the 'namelist' dataframe
+#' Return the 'namelist' data source as a dataframe
 #'
-#' Returns the included data source \code{\link{namelist}} as a dataframe.
+#' Returns the included data source \code{\link{namelist}} as a dataframe,
+#' by default filtered according to English names and shortnames.
 #'
 #' 'namelist' is a data source in the
 #' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
@@ -13,8 +14,7 @@
 #' @param path Location of the data source.
 #' The default is to use the location of the data source as delivered by
 #' the installed package.
-#' @param file The filename of the data source, without extension in the case
-#' of multiple files with different extensions.
+#' @param file The filename of the data source, without extension.
 #' The default is to use the file delivered by the installed package.
 #' @param lang An
 #'   \href{https://www.w3.org/International/articles/language-tags/index.en}{IETF BCP
@@ -47,19 +47,31 @@
 #' @export
 #' @importFrom git2rdata read_vc
 #' @importFrom dplyr %>% filter
-#' @importFrom stringr str_c
 read_namelist <-
     function(path = pkgdatasource_path("textdata/namelist", ".tsv"),
              file = "namelist",
              lang = "en") {
 
         if (lang == "all") {
-            read_vc(file = file, root = path)
+            result <-
+                read_vc(file = file, root = path)
         } else {
-            read_vc(file = file, root = path) %>%
+            result <-
+                read_vc(file = file, root = path) %>%
                 filter(lang == !!lang)
         }
+
+        attr(result, "source") <- NULL
+
+        return(result)
     }
+
+
+
+
+
+
+
 
 
 #' Return the path of a package data source
@@ -75,6 +87,7 @@ read_namelist <-
 #'
 #' @return A character vector.
 #' @importFrom dplyr %>% filter
+#' @importFrom stringr str_c
 #' @keywords internal
 pkgdatasource_path <-
     function(file, extension = "") {
