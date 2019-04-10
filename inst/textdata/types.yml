@@ -1,0 +1,49 @@
+..generic:
+  optimize: no
+  NA string: NA
+  sorting: type
+  hash: 1110bab180e9a6041ada41451cb0fec46ad02751
+type:
+  class: character
+typelevel:
+  class: factor
+  labels:
+  - main_type
+  - subtype
+  index:
+  - 1
+  - 2
+  ordered: no
+main_type:
+  class: character
+typeclass:
+  class: factor
+  labels:
+  - CH
+  - CD
+  - ID
+  - FW
+  - HS
+  - SS
+  - GR
+  - BMF
+  - RC
+  - FS
+  index:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  ordered: no
+tag_1:
+  class: character
+tag_2:
+  class: character
+tag_3:
+  class: character
