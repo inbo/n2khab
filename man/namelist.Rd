@@ -4,7 +4,7 @@
 \alias{namelist}
 \title{Documentation of included data source 'namelist'}
 \format{A vc-formatted data source. As such, it corresponds to
-a dataframe \code{namelist} with many rows and 4 variables:
+a dataframe with many rows and 4 variables:
 \describe{
   \item{code}{A code used elsewhere.}
   \item{lang}{An
