@@ -41,5 +41,7 @@ Multiple languages are supported.
 
 \seealso{
 \code{\link{read_namelist}}
+
+Other n2khab-referencelists: \code{\link{types}}
 }
 \concept{n2khab-referencelists}
