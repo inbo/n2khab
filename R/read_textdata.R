@@ -159,7 +159,8 @@ pkgdatasource_path <-
 #' \itemize{
 #'   \item \code{type_name}
 #'   \item \code{type_shortname}
-#'   \item \code{typeclass_name}
+#'   \item \code{typeclass_name}: a factor with the level order
+#'   coinciding with that of \code{typeclass}.
 #'   \item \code{tag_1_name}
 #'   \item \code{tag_1_shortname}
 #'   \item \code{tag_2_name}
