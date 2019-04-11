@@ -1,0 +1,105 @@
+..generic:
+  optimize: no
+  NA string: NA
+  sorting: ep_code
+  hash: ef92f74bf2eb62b9a28d4e5ee6e8f4796e4edda5
+ep_code:
+  class: factor
+  labels:
+  - ep_011
+  - ep_012
+  - ep_013
+  - ep_014
+  - ep_015
+  - ep_03.1
+  - ep_03.2
+  - ep_03.3
+  - ep_03.4
+  - ep_04.1
+  - ep_04.2
+  - ep_04.3
+  - ep_05.1
+  - ep_05.2
+  - ep_061
+  - ep_062
+  - ep_063
+  - ep_064
+  - ep_065
+  - ep_066
+  - ep_07.1
+  - ep_07.2
+  - ep_07.3
+  - ep_07.4
+  - ep_08.1
+  - ep_08.2
+  - ep_08.3
+  - ep_08.4
+  - ep_08.5
+  - ep_09.1
+  - ep_09.2
+  - ep_09.3
+  - ep_101
+  - ep_102
+  - ep_103
+  index:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
+  - 32
+  - 33
+  - 34
+  - 35
+  ordered: no
+ep_class:
+  class: factor
+  labels:
+  - ep_class_01
+  - ep_class_03
+  - ep_class_04
+  - ep_class_05
+  - ep_class_06
+  - ep_class_07
+  - ep_class_08
+  - ep_class_09
+  - ep_class_10
+  index:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  ordered: no
+explanation:
+  class: character
