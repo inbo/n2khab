@@ -60,6 +60,7 @@ languages).
 \seealso{
 \code{\link{read_types}}
 
-Other n2khab-referencelists: \code{\link{namelist}}
+Other n2khab-referencelists: \code{\link{env_pressures}},
+  \code{\link{namelist}}
 }
 \concept{n2khab-referencelists}
