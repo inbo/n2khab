@@ -46,8 +46,8 @@ NULL
 #'
 #' 'types' is a data source in the
 #' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
-#' a checklist of types, represented by their codes, together with several
-#' attributes.
+#' a checklist of types, represented by their \strong{current} codes, together
+#' with several attributes.
 #' A 'type' refers to either a (main) habitat type, a
 #' habitat subtype or a regionally important biotope (RIB).
 #' The codes of types, typeclasses and tags are explained in the
@@ -60,6 +60,8 @@ NULL
 #'   \item{type}{Code of the type.
 #'   This is the ID for use in diverse workflows and datasets.
 #'   Names in multiple languages are to be found in \code{namelist}.
+#'   Only \emph{currently active} codes are kept in this list, in order to avoid
+#'   confusion (this especially relates to habitat subtypes and RIBs).
 #'   Contains no duplicates!}
 #'   \item{typelevel}{A factor that labels the type as
 #'    either \code{"main_type"} or \code{"subtype"}.}

@@ -54,8 +54,8 @@ in English by default.
 \details{
 'types' is a data source in the
 \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
-a checklist of types, represented by their codes, together with several
-attributes.
+a checklist of types, represented by their \strong{current} codes, together
+with several attributes.
 A 'type' refers to either a (main) habitat type, a
 habitat subtype or a regionally important biotope (RIB).
 
