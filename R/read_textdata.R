@@ -1,14 +1,18 @@
-#' Return the 'namelist' data source as a dataframe
+#' Return the 'namelist' data source as a tibble
 #'
-#' Returns the included data source \code{\link{namelist}} as a dataframe,
+#' Returns the included data source \code{\link{namelist}} as a
+#' \code{\link[tibble:tbl_df-class]{tibble}},
 #' by default filtered according to English names and shortnames.
 #'
 #' 'namelist' is a data source in the
 #' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
 #' names and (optionally) shortnames for IDs/codes used in other data sources.
 #'
-#' \code{read_namelist()} reads it and returns it as a dataframe.
-#' By default, the version delivered with the package is used and only English
+#' \code{read_namelist()} reads it and returns it as a
+#' \code{\link[tibble:tbl_df-class]{tibble}}.
+#' A tibble is a dataframe that makes working in the tidyverse a little
+#' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
+#' By default, the data version delivered with the package is used and only English
 #' names (\code{lang = "en"}) are returned.
 #'
 #' @param path Location of the data source.
@@ -19,13 +23,14 @@
 #' @param lang An
 #'   \href{https://www.w3.org/International/articles/language-tags/index.en}{IETF BCP
 #'   47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
-#'   the language of \code{name} and \code{shortname} to be returned in the dataframe.
-#'   If \code{lang = "all"}, the full \code{namelist} dataframe is returned, i.e.
+#'   the language of \code{name} and \code{shortname} to be returned in the tibble.
+#'   If \code{lang = "all"}, the full \code{namelist} tibble is returned, i.e.
 #'   containing all languages.
 #'
 #' @return
-#' The \code{namelist} dataframe, filtered according to the \code{lang} argument.
-#' See \code{\link{namelist}} for documentation of the dataframe's contents.
+#' The \code{namelist} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+#' filtered according to the \code{lang} argument.
+#' See \code{\link{namelist}} for documentation of the tibble's contents.
 #'
 #' @section Recommended usage:
 #'
@@ -46,7 +51,7 @@
 #'
 #' @export
 #' @importFrom git2rdata read_vc
-#' @importFrom dplyr %>% filter
+#' @importFrom dplyr %>% filter as_tibble
 read_namelist <-
     function(path = pkgdatasource_path("textdata/namelist", ".tsv"),
              file = "namelist",
@@ -63,7 +68,8 @@ read_namelist <-
 
         attr(result, "source") <- NULL
 
-        return(result)
+        result %>%
+            as_tibble
     }
 
 
@@ -105,9 +111,10 @@ pkgdatasource_path <-
 
 
 
-#' Return the 'types' data source as a dataframe with names & shortnames
+#' Return the 'types' data source as a tibble with names & shortnames
 #'
-#' Returns the included data source \code{\link{types}} as a dataframe.
+#' Returns the included data source \code{\link{types}} as a
+#' \code{\link[tibble:tbl_df-class]{tibble}}.
 #' Names and shortnames from \code{\link{namelist}} are added,
 #' in English by default.
 #'
@@ -119,8 +126,11 @@ pkgdatasource_path <-
 #' habitat subtype or a regionally important biotope (RIB).
 #'
 #' \code{read_types()} reads the 'types' data source, adds names + shortnames
-#' and returns it as a dataframe.
-#' By default, the version delivered with the package is used and English
+#' and returns it as a
+#' \code{\link[tibble:tbl_df-class]{tibble}}.
+#' A tibble is a dataframe that makes working in the tidyverse a little
+#' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
+#' By default, the data version delivered with the package is used and English
 #' names (\code{lang = "en"}) are returned for types, typeclasses and tags.
 #'
 #' @param path Location of the data sources \code{types} and \code{namelist}.
@@ -134,13 +144,13 @@ pkgdatasource_path <-
 #' @param lang An
 #'   \href{https://www.w3.org/International/articles/language-tags/index.en}{
 #'   IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
-#'   the language of names & shortnames to be returned in the dataframe.
+#'   the language of names & shortnames to be returned in the tibble.
 #'
 #' @return
-#' The \code{types} dataframe,
+#' The \code{types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
 #' with names & shortnames added for types, typeclasses and tags
 #' according to the \code{lang} argument.
-#' See \code{\link{types}} for documentation of the data source's contents.
+#' See \code{\link{types}} for documentation of the data-source's contents.
 #' See \code{\link{namelist}} for the link between codes or other identifiers
 #' and the corresponding names (and shortnames).
 #'
@@ -184,6 +194,7 @@ pkgdatasource_path <-
 #' rename
 #' tibble
 #' left_join
+#' as_tibble
 #' @importFrom plyr mapvalues
 #' @importFrom rlang .data
 read_types <-
@@ -234,7 +245,8 @@ read_types <-
                    4, 10,
                    5, 11:12,
                    6, 13:14,
-                   7, 15:16)
+                   7, 15:16) %>%
+            as_tibble
     }
 
 

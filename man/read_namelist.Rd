@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_textdata.R
 \name{read_namelist}
 \alias{read_namelist}
-\title{Return the 'namelist' data source as a dataframe}
+\title{Return the 'namelist' data source as a tibble}
 \usage{
 read_namelist(path = pkgdatasource_path("textdata/namelist", ".tsv"),
   file = "namelist", lang = "en")
@@ -18,16 +18,18 @@ The default is to use the file delivered by the installed package.}
 \item{lang}{An
 \href{https://www.w3.org/International/articles/language-tags/index.en}{IETF BCP
 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
-the language of \code{name} and \code{shortname} to be returned in the dataframe.
-If \code{lang = "all"}, the full \code{namelist} dataframe is returned, i.e.
+the language of \code{name} and \code{shortname} to be returned in the tibble.
+If \code{lang = "all"}, the full \code{namelist} tibble is returned, i.e.
 containing all languages.}
 }
 \value{
-The \code{namelist} dataframe, filtered according to the \code{lang} argument.
-See \code{\link{namelist}} for documentation of the dataframe's contents.
+The \code{namelist} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+filtered according to the \code{lang} argument.
+See \code{\link{namelist}} for documentation of the tibble's contents.
 }
 \description{
-Returns the included data source \code{\link{namelist}} as a dataframe,
+Returns the included data source \code{\link{namelist}} as a
+\code{\link[tibble:tbl_df-class]{tibble}},
 by default filtered according to English names and shortnames.
 }
 \details{
@@ -35,8 +37,11 @@ by default filtered according to English names and shortnames.
 \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
 names and (optionally) shortnames for IDs/codes used in other data sources.
 
-\code{read_namelist()} reads it and returns it as a dataframe.
-By default, the version delivered with the package is used and only English
+\code{read_namelist()} reads it and returns it as a
+\code{\link[tibble:tbl_df-class]{tibble}}.
+A tibble is a dataframe that makes working in the tidyverse a little
+\href{https://r4ds.had.co.nz/tibbles.html}{easier}.
+By default, the data version delivered with the package is used and only English
 names (\code{lang = "en"}) are returned.
 }
 \section{Recommended usage}{

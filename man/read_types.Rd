@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_textdata.R
 \name{read_types}
 \alias{read_types}
-\title{Return the 'types' data source as a dataframe with names & shortnames}
+\title{Return the 'types' data source as a tibble with names & shortnames}
 \usage{
 read_types(path = pkgdatasource_path("textdata/types", ".tsv"),
   file = "types", file_namelist = "namelist", lang = "en")
@@ -22,13 +22,13 @@ The default is to use the file delivered by the installed package.}
 \item{lang}{An
 \href{https://www.w3.org/International/articles/language-tags/index.en}{
 IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
-the language of names & shortnames to be returned in the dataframe.}
+the language of names & shortnames to be returned in the tibble.}
 }
 \value{
-The \code{types} dataframe,
+The \code{types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
 with names & shortnames added for types, typeclasses and tags
 according to the \code{lang} argument.
-See \code{\link{types}} for documentation of the data source's contents.
+See \code{\link{types}} for documentation of the data-source's contents.
 See \code{\link{namelist}} for the link between codes or other identifiers
 and the corresponding names (and shortnames).
 
@@ -46,7 +46,8 @@ The added names and shortnames are represented by the following variables:
 }
 }
 \description{
-Returns the included data source \code{\link{types}} as a dataframe.
+Returns the included data source \code{\link{types}} as a
+\code{\link[tibble:tbl_df-class]{tibble}}.
 Names and shortnames from \code{\link{namelist}} are added,
 in English by default.
 }
@@ -59,8 +60,11 @@ A 'type' refers to either a (main) habitat type, a
 habitat subtype or a regionally important biotope (RIB).
 
 \code{read_types()} reads the 'types' data source, adds names + shortnames
-and returns it as a dataframe.
-By default, the version delivered with the package is used and English
+and returns it as a
+\code{\link[tibble:tbl_df-class]{tibble}}.
+A tibble is a dataframe that makes working in the tidyverse a little
+\href{https://r4ds.had.co.nz/tibbles.html}{easier}.
+By default, the data version delivered with the package is used and English
 names (\code{lang = "en"}) are returned for types, typeclasses and tags.
 }
 \section{Recommended usage}{
