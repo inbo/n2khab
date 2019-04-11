@@ -252,3 +252,188 @@ read_types <-
 
 
 
+
+
+
+
+
+
+
+
+
+
+#' Return the 'env_pressures' data source as a tibble with human-readable
+#' attributes
+#'
+#' Returns the included data source \code{\link{env_pressures}} as a
+#' \code{\link[tibble:tbl_df-class]{tibble}}.
+#' Names, shortnames and explanations from \code{\link{namelist}} are added,
+#' in English by default.
+#'
+#' 'env_pressures' is a data source in the
+#' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
+#' a checklist of environmental pressures, represented by codes, together
+#' with the pressure-class and the textual explanation.
+#'
+#' \code{read_env_pressures()} reads the 'env_pressures' data source, adds
+#' human-readable attributes and returns it as a
+#' \code{\link[tibble:tbl_df-class]{tibble}}.
+#' A tibble is a dataframe that makes working in the tidyverse a little
+#' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
+#' By default, the data version delivered with the package is used and English
+#' text (\code{lang = "en"}) is returned for names of environmental pressures and
+#' pressure-classes, and for textual explanations.
+#'
+#' @param path Location of the data sources \code{env_pressures} and
+#' \code{namelist}.
+#' The default is to use the location of the data sources as delivered by
+#' the installed package.
+#' @param file The filename of the \code{env_pressures} data source, without
+#' extension.
+#' The default is to use the file delivered by the installed package.
+#' @param lang An
+#'   \href{https://www.w3.org/International/articles/language-tags/index.en}{
+#'   IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
+#'   the language of human-readable attributes to be returned in the tibble.
+#'
+#' @inheritParams read_types
+#'
+#' @return
+#' The \code{env_pressures} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+#' with human-readable text added for environmental pressures,
+#' pressure-classes and textual explanations
+#' according to the \code{lang} argument.
+#' The tibble has 35 rows and 6 variables.
+#' See \code{\link{env_pressures}} for documentation of the data-source's contents.
+#' See \code{\link{namelist}} for the link between codes or other identifiers
+#' and the corresponding text.
+#'
+#' The human-readable attributes are represented by the following variables:
+#' \describe{
+#'   \item{\code{ep_abbrev}}{A (language-dependent) abbreviation (alternative code)
+#'   of the environmental pressure.
+#'   Is a factor with the level order coinciding with that of
+#'   \code{ep_code}.}
+#'   \item{\code{ep_name}}{The name of the environmental pressure.
+#'   Is a factor with the level order coinciding with that of
+#'   \code{ep_code}.}
+#'   \item{\code{ep_class_name}}{The name of the environmental pressure's class.
+#'   Is a factor with the level order coinciding with that of
+#'   \code{ep_class}.}
+#'   \item{\code{explanation}}{An explanation of the environmental pressure.
+#'   \emph{Beware that this explanation is often shared between multiple
+#'   environmental pressures!}
+#'   Hence the added explanation may cover more than is revealed by the environmental
+#'   pressure's \strong{name}.}
+#' }
+#'
+#' @section Recommended usage:
+#'
+#'   \code{read_env_pressures()}
+#'
+#'   \code{read_env_pressures(lang = "nl")}
+#'
+#' @seealso
+#' \code{\link{env_pressures}}
+#'
+#' @family reading functions for n2khab-referencelists
+#'
+#' @examples
+#' \dontrun{
+#' read_env_pressures()
+#' read_env_pressures(lang = "nl")
+#' }
+#'
+#' @export
+#' @importFrom git2rdata read_vc
+#' @importFrom dplyr
+#' %>%
+#' select
+#' mutate
+#' rename
+#' tibble
+#' left_join
+#' as_tibble
+#' distinct
+#' arrange
+#' @importFrom rlang .data
+read_env_pressures <-
+    function(path = pkgdatasource_path("textdata/env_pressures", ".tsv"),
+             file = "env_pressures",
+             file_namelist = "namelist",
+             lang = "en") {
+
+        namelist <-
+            read_namelist(path = path,
+                          file = file_namelist,
+                          lang = lang) %>%
+            select(.data$code,
+                   .data$name,
+                   .data$shortname)
+
+        env_pressures_base <-
+            read_vc(file = file, root = path)
+
+        suppressWarnings(
+            env_pressures_base2 <-
+                read_vc(file = file, root = path) %>%
+                left_join(namelist, by = c("ep_code" = "code")) %>%
+                rename(ep_name = .data$name,
+                       ep_abbrev = .data$shortname) %>%
+                mutate(ep_code = .data$ep_code %>%
+                           factor(levels = env_pressures_base$ep_code %>% levels)
+                )
+            )
+
+        ep_levels <-
+            env_pressures_base2 %>%
+            distinct(.data$ep_code,
+                     .data$ep_name,
+                     .data$ep_abbrev) %>%
+            arrange(.data$ep_code)
+
+        ep_class_levels <-
+            tibble(codelevel = env_pressures_base$ep_class %>% levels) %>%
+            left_join(namelist %>% select(-.data$shortname),
+                      by = c("codelevel" = "code")) %>%
+            rename(namelevel = .data$name)
+
+        env_pressures_base2 %>%
+            mutate(ep_name = .data$ep_name %>%
+                       factor(levels = ep_levels$ep_name),
+                   ep_abbrev = .data$ep_abbrev %>%
+                       factor(levels = ep_levels$ep_abbrev),
+                   ep_class_name =
+                       .data$ep_class %>%
+                       mapvalues(from = ep_class_levels$codelevel,
+                                 to = ep_class_levels$namelevel)
+            ) %>%
+            left_join(namelist %>% select(-.data$shortname),
+                      by = c("explanation" = "code")) %>%
+            select(-.data$explanation) %>%
+            rename(explanation = .data$name) %>%
+            mutate(ep_code = .data$ep_code %>%
+                       factor(levels = env_pressures_base$ep_code %>% levels)
+            ) %>%
+            select(.data$ep_code,
+                   .data$ep_abbrev,
+                   .data$ep_name,
+                   .data$ep_class,
+                   .data$ep_class_name,
+                   .data$explanation) %>%
+            as_tibble
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
