@@ -28,6 +28,7 @@ the language of names & shortnames to be returned in the tibble.}
 The \code{types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
 with names & shortnames added for types, typeclasses and tags
 according to the \code{lang} argument.
+The tibble has 108 rows and 16 variables.
 See \code{\link{types}} for documentation of the data-source's contents.
 See \code{\link{namelist}} for the link between codes or other identifiers
 and the corresponding names (and shortnames).
