@@ -61,6 +61,7 @@ languages).
 \code{\link{read_types}}
 
 Other n2khab-referencelists: \code{\link{env_pressures}},
-  \code{\link{namelist}}
+  \code{\link{namelist}}, \code{\link{scheme_types}},
+  \code{\link{schemes}}
 }
 \concept{n2khab-referencelists}
