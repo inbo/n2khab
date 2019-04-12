@@ -1,0 +1,201 @@
+..generic:
+  optimize: yes
+  NA string: NA
+  sorting:
+  - programme
+  - scheme
+  hash: 63d793e7e7ba8e1bdb427367def3468d8537ed7d
+scheme:
+  class: factor
+  labels:
+  - ATM_03.1
+  - ATM_04.1
+  - ATM_08.1
+  - ATM_101
+  - ATM_102
+  - GW_03.3
+  - GW_04.2
+  - GW_05.1_aq
+  - GW_05.1_terr
+  - GW_05.2
+  - GW_07.1
+  - GW_08.3
+  - INUN_03.4
+  - INUN_061
+  - INUN_062
+  - INUN_063
+  - INUN_064
+  - INUN_065
+  - INUN_066
+  - INUN_07.2
+  - INUN_08.4
+  - INUN_103
+  - SOIL_012
+  - SOIL_013
+  - SOIL_03.2
+  - SOIL_08.2
+  - SURF_012
+  - SURF_03.2
+  - SURF_03.4
+  - SURF_064
+  - SURF_066
+  - SURF_07.2
+  - SURF_08.2
+  - SURF_08.4
+  index:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
+  - 32
+  - 33
+  - 34
+  ordered: no
+programme:
+  class: factor
+  labels: MNE
+  index: 1
+  ordered: no
+attribute_1:
+  class: factor
+  labels:
+  - ATM
+  - SOIL
+  - GW
+  - SURF
+  - INUN
+  index:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  ordered: no
+attribute_2:
+  class: factor
+  labels:
+  - ep_011
+  - ep_012
+  - ep_013
+  - ep_014
+  - ep_015
+  - ep_03.1
+  - ep_03.2
+  - ep_03.3
+  - ep_03.4
+  - ep_04.1
+  - ep_04.2
+  - ep_04.3
+  - ep_05.1
+  - ep_05.2
+  - ep_061
+  - ep_062
+  - ep_063
+  - ep_064
+  - ep_065
+  - ep_066
+  - ep_07.1
+  - ep_07.2
+  - ep_07.3
+  - ep_07.4
+  - ep_08.1
+  - ep_08.2
+  - ep_08.3
+  - ep_08.4
+  - ep_08.5
+  - ep_09.1
+  - ep_09.2
+  - ep_09.3
+  - ep_101
+  - ep_102
+  - ep_103
+  index:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
+  - 32
+  - 33
+  - 34
+  - 35
+  ordered: no
+attribute_3:
+  class: factor
+  labels:
+  - aq
+  - terr
+  index:
+  - 1
+  - 2
+  ordered: no
+spatial_restriction:
+  class: character
+notes:
+  class: character
+tag_1:
+  class: factor
+  labels:
+  - focal
+  - secondary
+  index:
+  - 1
+  - 2
+  ordered: no
+tag_2:
+  class: character
+tag_3:
+  class: character
