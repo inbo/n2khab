@@ -9,14 +9,14 @@ a dataframe with 35 rows and 3 variables:
   \item{ep_code}{Code of the environmental pressure, as a factor.
   This is the ID for use in diverse workflows and datasets.
   Corresponding names and abbreviations
-  in multiple languages are to be found in \code{namelist}
+  in multiple languages are to be found in \code{\link{namelist}}
   (as name and shortname, respectively).
   The abbreviation may be seen as an alternative, language-dependent code.
   Contains no duplicates!}
-  \item{ep_class}{A code explained by \code{namelist},
+  \item{ep_class}{A code explained by \code{\link{namelist}},
   corresponding to the environmental pressure's class.
   Is a factor.}
-  \item{explanation}{A code explained by \code{namelist},
+  \item{explanation}{A code explained by \code{\link{namelist}},
   corresponding to the explanation on the environmental pressure.}
 }}
 \source{

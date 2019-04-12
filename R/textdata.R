@@ -59,7 +59,7 @@ NULL
 #' \describe{
 #'   \item{type}{Code of the type.
 #'   This is the ID for use in diverse workflows and datasets.
-#'   Names in multiple languages are to be found in \code{namelist}.
+#'   Names in multiple languages are to be found in \code{\link{namelist}}.
 #'   Only \emph{currently active} codes are kept in this list, in order to avoid
 #'   confusion (this especially relates to habitat subtypes and RIBs).
 #'   Contains no duplicates!}
@@ -68,15 +68,15 @@ NULL
 #'   \item{main_type}{The main type that corresponds with \code{type}.
 #'   Each type is either a subtype of a main type, or is a main type itself.
 #'   This is indicated by \code{typelevel}.}
-#'   \item{typeclass}{A code explained by \code{namelist},
+#'   \item{typeclass}{A code explained by \code{\link{namelist}},
 #'   corresponding to the typeclass.
 #'   Is a factor.}
 #'   \item{tag_1}{Optional tag, e.g. a categorization ID explained
-#'   by \code{namelist}.}
+#'   by \code{\link{namelist}}.}
 #'   \item{tag_2}{Optional tag, e.g. a categorization ID explained
-#'   by \code{namelist}.}
+#'   by \code{\link{namelist}}.}
 #'   \item{tag_3}{Optional tag, e.g. a categorization ID explained
-#'   by \code{namelist}.} }
+#'   by \code{\link{namelist}}.} }
 #'
 #' @section Typical way of loading:
 #'
@@ -127,14 +127,14 @@ NULL
 #'   \item{ep_code}{Code of the environmental pressure, as a factor.
 #'   This is the ID for use in diverse workflows and datasets.
 #'   Corresponding names and abbreviations
-#'   in multiple languages are to be found in \code{namelist}
+#'   in multiple languages are to be found in \code{\link{namelist}}
 #'   (as name and shortname, respectively).
 #'   The abbreviation may be seen as an alternative, language-dependent code.
 #'   Contains no duplicates!}
-#'   \item{ep_class}{A code explained by \code{namelist},
+#'   \item{ep_class}{A code explained by \code{\link{namelist}},
 #'   corresponding to the environmental pressure's class.
 #'   Is a factor.}
-#'   \item{explanation}{A code explained by \code{namelist},
+#'   \item{explanation}{A code explained by \code{\link{namelist}},
 #'   corresponding to the explanation on the environmental pressure.}
 #' }
 #'

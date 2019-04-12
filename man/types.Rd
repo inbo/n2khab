@@ -8,7 +8,7 @@ a dataframe with 108 rows and 7 variables:
 \describe{
   \item{type}{Code of the type.
   This is the ID for use in diverse workflows and datasets.
-  Names in multiple languages are to be found in \code{namelist}.
+  Names in multiple languages are to be found in \code{\link{namelist}}.
   Only \emph{currently active} codes are kept in this list, in order to avoid
   confusion (this especially relates to habitat subtypes and RIBs).
   Contains no duplicates!}
@@ -17,15 +17,15 @@ a dataframe with 108 rows and 7 variables:
   \item{main_type}{The main type that corresponds with \code{type}.
   Each type is either a subtype of a main type, or is a main type itself.
   This is indicated by \code{typelevel}.}
-  \item{typeclass}{A code explained by \code{namelist},
+  \item{typeclass}{A code explained by \code{\link{namelist}},
   corresponding to the typeclass.
   Is a factor.}
   \item{tag_1}{Optional tag, e.g. a categorization ID explained
-  by \code{namelist}.}
+  by \code{\link{namelist}}.}
   \item{tag_2}{Optional tag, e.g. a categorization ID explained
-  by \code{namelist}.}
+  by \code{\link{namelist}}.}
   \item{tag_3}{Optional tag, e.g. a categorization ID explained
-  by \code{namelist}.} }}
+  by \code{\link{namelist}}.} }}
 \source{
 \href{https://docs.google.com/spreadsheets/d/1dK0S1Tt3RlVEh4WrNF5N_-hn0OXiTUVOvsL2JRhSl78}{This googlesheet}.
 Currently, the googlesheet and the data source are both kept up-to-date.
