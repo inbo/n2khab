@@ -111,6 +111,55 @@ pkgdatasource_path <-
 
 
 
+#' Translates a factor with levels mapped according to the namelist
+#'
+#' Translates a factor, by default using the 'name' variable from the
+#' 'namelist' object to substitute the factor levels. The join on 'namelist' is
+#' by the variable 'code'.
+#'
+#' @param x A factor.
+#' @param pick A character, referring to the variable from namelist
+#' (\code{"name"} or \code{"shortname"}) that should be used as translated
+#' factor levels.
+#' @param codelist An object conforming to \code{\link{namelist}}.
+#'
+#' @return A factor.
+#' @importFrom dplyr %>% left_join select
+#' @importFrom plyr mapvalues
+#' @keywords internal
+namelist_factor <-
+    function(x, pick = "name", codelist) {
+
+        suppressWarnings(
+            mapped_levels <-
+                x %>%
+                levels %>%
+                data.frame(code = .) %>%
+                left_join(codelist,
+                          by = "code") %>%
+                select(code, !!pick)
+        )
+
+        x %>%
+            mapvalues(from = mapped_levels$code,
+                      to = mapped_levels[,2])
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #' Return the 'types' data source as a tibble with names & shortnames
 #'
 #' Returns the included data source \code{\link{types}} as a
