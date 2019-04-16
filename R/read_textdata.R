@@ -132,12 +132,10 @@ namelist_factor <-
 
         suppressWarnings(
             mapped_levels <-
-                x %>%
-                levels %>%
-                data.frame(code = .) %>%
+                data.frame(code = levels(x)) %>%
                 left_join(codelist,
                           by = "code") %>%
-                select(code, !!pick)
+                select(.data$code, !!pick)
         )
 
         x %>%
