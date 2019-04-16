@@ -89,6 +89,8 @@ read_types(lang = "nl")
 \code{\link{types}}
 
 Other reading functions for n2khab-referencelists: \code{\link{read_env_pressures}},
-  \code{\link{read_namelist}}, \code{\link{read_schemes}}
+  \code{\link{read_namelist}},
+  \code{\link{read_scheme_types}},
+  \code{\link{read_schemes}}
 }
 \concept{reading functions for n2khab-referencelists}
