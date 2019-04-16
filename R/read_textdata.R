@@ -489,3 +489,179 @@ read_env_pressures <-
 
 
 
+#' Return the 'schemes' data source as a tibble with names & shortnames
+#'
+#' Returns the included data source \code{\link{schemes}} as a
+#' \code{\link[tibble:tbl_df-class]{tibble}}.
+#' Names and shortnames from \code{\link{namelist}} are added,
+#' in English by default.
+#'
+#' \code{\link{schemes}} is a data source in the
+#' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
+#' a list of (monitoring) schemes for N2KHAB monitoring programmes or
+#' other N2KHAB projects, together
+#' with defining attributes and optional information.
+#' A 'scheme' refers to a monitoring or research setup that determines
+#' which types (habitat/RIBs) are to be investigated for a question or for
+#' a bunch of related questions.
+#'
+#' \code{read_schemes()} reads the \code{\link{schemes}} data source, adds
+#' names + shortnames and returns it as a
+#' \code{\link[tibble:tbl_df-class]{tibble}}.
+#' A tibble is a dataframe that makes working in the tidyverse a little
+#' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
+#' By default, the data version delivered with the package is used and English
+#' names (\code{lang = "en"}) are returned for scheme, programme, attributes
+#' and tags.
+#'
+#' @param path Location of the data sources \code{schemes} and \code{namelist}.
+#' The default is to use the location of the data sources as delivered by
+#' the installed package.
+#' @param file The filename of the \code{schemes} data source, without extension.
+#' The default is to use the file delivered by the installed package.
+#'
+#' @inheritParams read_types
+#' @inheritParams read_env_pressures
+#'
+#' @return
+#' The \code{schemes} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+#' with names & shortnames added for scheme, programme, attributes and tags
+#' according to the \code{lang} argument.
+#' The tibble has 25 variables.
+#' See \code{\link{schemes}} for documentation of the data-source's contents.
+#' See \code{\link{namelist}} for the link between codes or other identifiers
+#' and the corresponding names (and shortnames).
+#'
+#' The added names and shortnames are represented by the following variables:
+#' \itemize{
+#'   \item \code{scheme_name}
+#'   \item \code{scheme_shortname}
+#'   \item \code{programme_name}
+#'   \item \code{attribute_1_name}
+#'   \item \code{attribute_1_shortname}
+#'   \item \code{attribute_2_name}
+#'   \item \code{attribute_2_shortname}
+#'   \item \code{attribute_3_name}
+#'   \item \code{attribute_3_shortname}
+#'   \item \code{tag_1_name}
+#'   \item \code{tag_1_shortname}
+#'   \item \code{tag_2_name}
+#'   \item \code{tag_2_shortname}
+#'   \item \code{tag_3_name}
+#'   \item \code{tag_3_shortname}
+#' }
+#'
+#' The added names and shortnames for scheme, programme and attributes are
+#' \emph{factors} with their level order according to that of the
+#' scheme, programme or attribute variable.
+#'
+#' @section Recommended usage:
+#'
+#'   \code{read_schemes()}
+#'
+#'   \code{read_schemes(lang = "nl")}
+#'
+#' @seealso
+#' \code{\link{schemes}}
+#'
+#' @family reading functions for n2khab-referencelists
+#'
+#' @examples
+#' \dontrun{
+#' read_schemes()
+#' read_schemes(lang = "nl")
+#' }
+#'
+#' @export
+#' @importFrom git2rdata read_vc
+#' @importFrom dplyr
+#' %>%
+#' filter
+#' select
+#' mutate
+#' left_join
+#' as_tibble
+#' contains
+#' @importFrom rlang .data
+read_schemes <-
+    function(path = pkgdatasource_path("textdata/schemes", ".tsv"),
+             file = "schemes",
+             file_namelist = "namelist",
+             lang = "en") {
+
+        namelist <-
+            read_namelist(path = path,
+                          file = file_namelist,
+                          lang = lang) %>%
+            select(.data$code,
+                   .data$name,
+                   .data$shortname)
+
+        suppressWarnings(
+        read_vc(file = file, root = path) %>%
+                mutate(
+                    scheme_name = namelist_factor(.data$scheme,
+                                                  codelist = namelist),
+                    scheme_shortname = namelist_factor(.data$scheme,
+                                                       "shortname",
+                                                       codelist = namelist),
+                    programme_name = namelist_factor(.data$programme,
+                                                     codelist = namelist),
+                    attribute_1_name = namelist_factor(.data$attribute_1,
+                                                       codelist = namelist),
+                    attribute_1_shortname = namelist_factor(.data$attribute_1,
+                                                            "shortname",
+                                                            codelist = namelist),
+                    attribute_2_name = namelist_factor(.data$attribute_2,
+                                                       codelist = namelist),
+                    attribute_2_shortname = namelist_factor(.data$attribute_2,
+                                                            "shortname",
+                                                            codelist = namelist),
+                    attribute_3_name = namelist_factor(.data$attribute_3,
+                                                       codelist = namelist),
+                    attribute_3_shortname = namelist_factor(.data$attribute_3,
+                                                            "shortname",
+                                                            codelist = namelist)
+                    ) %>%
+                left_join(namelist,
+                          by = c("tag_1" = "code")) %>%
+                rename(tag_1_name = .data$name,
+                       tag_1_shortname = .data$shortname) %>%
+                left_join(namelist,
+                          by = c("tag_2" = "code")) %>%
+                rename(tag_2_name = .data$name,
+                       tag_2_shortname = .data$shortname) %>%
+                left_join(namelist,
+                          by = c("tag_3" = "code")) %>%
+                rename(tag_3_name = .data$name,
+                       tag_3_shortname = .data$shortname) %>%
+                select(contains("scheme"),
+                       contains("programme"),
+                       contains("attribute"),
+                       .data$spatial_restriction,
+                       .data$notes,
+                       contains("tag")
+                       ) %>%
+                as_tibble)
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

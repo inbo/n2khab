@@ -2,10 +2,12 @@
 
 export(read_env_pressures)
 export(read_namelist)
+export(read_schemes)
 export(read_types)
 importFrom(dplyr,"%>%")
 importFrom(dplyr,arrange)
 importFrom(dplyr,as_tibble)
+importFrom(dplyr,contains)
 importFrom(dplyr,distinct)
 importFrom(dplyr,filter)
 importFrom(dplyr,left_join)
