@@ -38,7 +38,7 @@ The added names and shortnames are represented by the following variables:
   \item \code{type_name}
   \item \code{type_shortname}
   \item \code{typeclass_name}: a factor with the level order
-  coinciding with that of \code{typeclass}.
+  according to that of \code{typeclass}.
   \item \code{tag_1_name}
   \item \code{tag_1_shortname}
   \item \code{tag_2_name}
@@ -54,14 +54,15 @@ Names and shortnames from \code{\link{namelist}} are added,
 in English by default.
 }
 \details{
-'types' is a data source in the
+\code{\link{types}} is a data source in the
 \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
 a checklist of types, represented by their \strong{current} codes, together
 with several attributes.
 A 'type' refers to either a (main) habitat type, a
 habitat subtype or a regionally important biotope (RIB).
 
-\code{read_types()} reads the 'types' data source, adds names + shortnames
+\code{read_types()} reads the \code{\link{types}} data source, adds
+names + shortnames
 and returns it as a
 \code{\link[tibble:tbl_df-class]{tibble}}.
 A tibble is a dataframe that makes working in the tidyverse a little

@@ -33,7 +33,7 @@ Returns the included data source \code{\link{namelist}} as a
 by default filtered according to English names and shortnames.
 }
 \details{
-'namelist' is a data source in the
+\code{\link{namelist}} is a data source in the
 \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
 names and (optionally) shortnames for IDs/codes used in other data sources.
 

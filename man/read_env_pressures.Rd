@@ -64,12 +64,13 @@ Names, shortnames and explanations from \code{\link{namelist}} are added,
 in English by default.
 }
 \details{
-'env_pressures' is a data source in the
+\code{\link{env_pressures}} is a data source in the
 \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
 a checklist of environmental pressures, represented by codes, together
 with the pressure-class and the textual explanation.
 
-\code{read_env_pressures()} reads the 'env_pressures' data source, adds
+\code{read_env_pressures()} reads the \code{\link{env_pressures}} data
+source, adds
 human-readable attributes and returns it as a
 \code{\link[tibble:tbl_df-class]{tibble}}.
 A tibble is a dataframe that makes working in the tidyverse a little

@@ -4,7 +4,7 @@
 #' \code{\link[tibble:tbl_df-class]{tibble}},
 #' by default filtered according to English names and shortnames.
 #'
-#' 'namelist' is a data source in the
+#' \code{\link{namelist}} is a data source in the
 #' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
 #' names and (optionally) shortnames for IDs/codes used in other data sources.
 #'
@@ -118,14 +118,15 @@ pkgdatasource_path <-
 #' Names and shortnames from \code{\link{namelist}} are added,
 #' in English by default.
 #'
-#' 'types' is a data source in the
+#' \code{\link{types}} is a data source in the
 #' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
 #' a checklist of types, represented by their \strong{current} codes, together
 #' with several attributes.
 #' A 'type' refers to either a (main) habitat type, a
 #' habitat subtype or a regionally important biotope (RIB).
 #'
-#' \code{read_types()} reads the 'types' data source, adds names + shortnames
+#' \code{read_types()} reads the \code{\link{types}} data source, adds
+#' names + shortnames
 #' and returns it as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
 #' A tibble is a dataframe that makes working in the tidyverse a little
@@ -160,7 +161,7 @@ pkgdatasource_path <-
 #'   \item \code{type_name}
 #'   \item \code{type_shortname}
 #'   \item \code{typeclass_name}: a factor with the level order
-#'   coinciding with that of \code{typeclass}.
+#'   according to that of \code{typeclass}.
 #'   \item \code{tag_1_name}
 #'   \item \code{tag_1_shortname}
 #'   \item \code{tag_2_name}
@@ -271,12 +272,13 @@ read_types <-
 #' Names, shortnames and explanations from \code{\link{namelist}} are added,
 #' in English by default.
 #'
-#' 'env_pressures' is a data source in the
+#' \code{\link{env_pressures}} is a data source in the
 #' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
 #' a checklist of environmental pressures, represented by codes, together
 #' with the pressure-class and the textual explanation.
 #'
-#' \code{read_env_pressures()} reads the 'env_pressures' data source, adds
+#' \code{read_env_pressures()} reads the \code{\link{env_pressures}} data
+#' source, adds
 #' human-readable attributes and returns it as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
 #' A tibble is a dataframe that makes working in the tidyverse a little
