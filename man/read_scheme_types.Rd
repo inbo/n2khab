@@ -2,11 +2,11 @@
 % Please edit documentation in R/read_textdata.R
 \name{read_scheme_types}
 \alias{read_scheme_types}
-\title{Return the 'scheme_types' data source as a tibble with names & shortnames}
+\title{Return the 'scheme_types' data source as a tibble}
 \usage{
 read_scheme_types(path = pkgdatasource_path("textdata/scheme_types",
   ".tsv"), file = "scheme_types", file_namelist = "namelist",
-  lang = "en")
+  lang = "en", extended = FALSE)
 }
 \arguments{
 \item{path}{Location of the data sources \code{scheme_types},
@@ -25,18 +25,24 @@ The default is to use the file delivered by the installed package.}
 \href{https://www.w3.org/International/articles/language-tags/index.en}{
 IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
 the language of names & shortnames to be returned in the tibble.}
+
+\item{extended}{Should names & shortnames be added for scheme, programme,
+scheme attributes, type, typeclass and tags of scheme and type?}
 }
 \value{
 The \code{scheme_types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
-with names & shortnames added for scheme, programme,
+with names & shortnames added for the typegroup variable and optionally for
+scheme, programme,
 scheme attributes, type, typeclass and tags of scheme and type, all
 according to the \code{lang} argument.
-The tibble has 44 variables.
+The tibble has either 5 or 44 variables, depending on the \code{extended}
+argument.
 See \code{\link{scheme_types}} for documentation of the data-source's contents.
 See \code{\link{namelist}} for the link between codes or other identifiers
 and the corresponding names (and shortnames).
 
-The added names and shortnames are represented by the following variables:
+The \emph{optionally} added names and shortnames are represented by the
+following variables:
 \itemize{
   \item \code{scheme_name}
   \item \code{scheme_shortname}
@@ -64,14 +70,14 @@ The added names and shortnames are represented by the following variables:
   \item \code{typetag_3_shortname}
 }
 
-The added names and shortnames for scheme, programme, typeclass and
-attributes are \emph{factors} with their level order according to that of
-the scheme, programme, typeclass or attribute variable.
+The added names and shortnames for scheme, programme, typeclass,
+attributes and typegroup are \emph{factors} with their level order according
+to that of the scheme, programme, typeclass, attribute or typegroup variable.
 }
 \description{
 Returns the included data source \code{\link{scheme_types}} as a
 \code{\link[tibble:tbl_df-class]{tibble}}.
-Names and shortnames from \code{\link{namelist}} are added,
+Names and shortnames from \code{\link{namelist}} are optionally added,
 in English by default.
 }
 \details{
@@ -84,13 +90,13 @@ It also defines typegroup memberships of the types within specific schemes,
 if applicable.
 
 \code{read_scheme_types()} reads the \code{\link{scheme_types}} data
-source, adds names + shortnames and returns it as a
+source, optionally adds names + shortnames (always done for the typegroup)
+and returns it as a
 \code{\link[tibble:tbl_df-class]{tibble}}.
 A tibble is a dataframe that makes working in the tidyverse a little
 \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 By default, the data version delivered with the package is used and English
-names (\code{lang = "en"}) are returned for scheme, programme,
-scheme attributes, type, typeclass and tags of scheme and type.
+names (\code{lang = "en"}) are returned.
 }
 \section{Recommended usage}{
 

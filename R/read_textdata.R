@@ -663,11 +663,11 @@ read_schemes <-
 
 
 
-#' Return the 'scheme_types' data source as a tibble with names & shortnames
+#' Return the 'scheme_types' data source as a tibble
 #'
 #' Returns the included data source \code{\link{scheme_types}} as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
-#' Names and shortnames from \code{\link{namelist}} are added,
+#' Names and shortnames from \code{\link{namelist}} are optionally added,
 #' in English by default.
 #'
 #' \code{\link{scheme_types}} is a data source in the
@@ -679,13 +679,13 @@ read_schemes <-
 #' if applicable.
 #'
 #' \code{read_scheme_types()} reads the \code{\link{scheme_types}} data
-#' source, adds names + shortnames and returns it as a
+#' source, optionally adds names + shortnames (always done for the typegroup)
+#' and returns it as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
 #' A tibble is a dataframe that makes working in the tidyverse a little
 #' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 #' By default, the data version delivered with the package is used and English
-#' names (\code{lang = "en"}) are returned for scheme, programme,
-#' scheme attributes, type, typeclass and tags of scheme and type.
+#' names (\code{lang = "en"}) are returned.
 #'
 #' @param path Location of the data sources \code{scheme_types},
 #' \code{schemes}, \code{types} and \code{namelist}.
@@ -697,17 +697,23 @@ read_schemes <-
 #' @inheritParams read_types
 #' @inheritParams read_env_pressures
 #'
+#' @param extended Should names & shortnames be added for scheme, programme,
+#' scheme attributes, type, typeclass and tags of scheme and type?
+#'
 #' @return
 #' The \code{scheme_types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
-#' with names & shortnames added for scheme, programme,
+#' with names & shortnames added for the typegroup variable and optionally for
+#' scheme, programme,
 #' scheme attributes, type, typeclass and tags of scheme and type, all
 #' according to the \code{lang} argument.
-#' The tibble has 44 variables.
+#' The tibble has either 5 or 44 variables, depending on the \code{extended}
+#' argument.
 #' See \code{\link{scheme_types}} for documentation of the data-source's contents.
 #' See \code{\link{namelist}} for the link between codes or other identifiers
 #' and the corresponding names (and shortnames).
 #'
-#' The added names and shortnames are represented by the following variables:
+#' The \emph{optionally} added names and shortnames are represented by the
+#' following variables:
 #' \itemize{
 #'   \item \code{scheme_name}
 #'   \item \code{scheme_shortname}
@@ -735,9 +741,9 @@ read_schemes <-
 #'   \item \code{typetag_3_shortname}
 #' }
 #'
-#' The added names and shortnames for scheme, programme, typeclass and
-#' attributes are \emph{factors} with their level order according to that of
-#' the scheme, programme, typeclass or attribute variable.
+#' The added names and shortnames for scheme, programme, typeclass,
+#' attributes and typegroup are \emph{factors} with their level order according
+#' to that of the scheme, programme, typeclass, attribute or typegroup variable.
 #'
 #' @section Recommended usage:
 #'
@@ -772,7 +778,20 @@ read_schemes <-
 read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types", ".tsv"),
                               file = "scheme_types",
                               file_namelist = "namelist",
-                              lang = "en") {
+                              lang = "en",
+                              extended = FALSE) {
+
+    namelist <-
+        read_namelist(path = path,
+                      file = file_namelist,
+                      lang = lang) %>%
+        select(.data$code,
+               .data$name,
+               .data$shortname)
+
+    scheme_types <- read_vc(file = file, root = path)
+
+    if (extended) {
 
     schemes <-
         read_schemes(path = path,
@@ -796,15 +815,7 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
         mutate(key = str_c("type", .data$key)) %>%
         spread(key = .data$key, value = .data$value)
 
-    namelist <-
-        read_namelist(path = path,
-                      file = file_namelist,
-                      lang = lang) %>%
-        select(.data$code,
-               .data$name,
-               .data$shortname)
-
-    read_vc(file = file, root = path) %>%
+    scheme_types %>%
         left_join(schemes,
                   by = "scheme") %>%
         mutate(type = .data$type %>% as.character) %>%
@@ -822,6 +833,18 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
                                                      "shortname",
                                                      codelist = namelist)) %>%
         as_tibble
+
+    } else {
+
+        scheme_types %>%
+            mutate(typegroup_name = namelist_factor(.data$typegroup,
+                                                    codelist = namelist),
+                   typegroup_shortname = namelist_factor(.data$typegroup,
+                                                         "shortname",
+                                                         codelist = namelist)) %>%
+            as_tibble
+
+    }
 
 }
 
