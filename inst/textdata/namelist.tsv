@@ -12,8 +12,8 @@ code	lang	name	shortname
 2110	en	Embryonic shifting dunes	Embryonic dunes
 2120	en	"Shifting dunes along the shoreline with Ammophila arenaria (""white dunes"")"	White dunes
 2130	en	"Fixed coastal dunes with herbaceous vegetation (""grey dunes"")"	Grey dunes
-2130_had	en	Decalcified dune grasslands	Decalcified dune grasslands
-2130_hd	en	Calcareous dune grasslands	Calcareous dune grasslands
+2130_had	en	Decalcified dune grasslands	Decalcified grey dunes
+2130_hd	en	Calcareous dune grasslands	Calcareous grey dunes
 2150	en	Atlantic decalcified fixed dunes (Calluno-Ulicetea)	Calluna dune heaths
 2160	en	Dunes with Hippophaë rhamnoides	Hippophae rhamnoides dunes
 2170	en	Dunes with Salix repens ssp. argentea (Salicion arenariae)	Salix repens dunes
@@ -183,18 +183,21 @@ rbbha	en	Species-rich Agrostis grasslands (no 6230 habitat type)	Species-rich Ag
 rbbhc	en	Calthion grasslands	Calthion grasslands
 rbbhf	en	Filipendula tall herb communities with grassland features (no habitat type 6430)	Filipendula tall herb communities with grassland features
 rbbhfl	en	Tall herb communities with Lysimachia vulgaris and Calamagrostis canescens	Tall herb communities with Lysimachia vulgaris and Calamagrostis canescens
-rbbkam	en	Species-rich Cynosurion grasslands	Cynosurion grasslands
+rbbkam	en	Cynosurion grasslands	Cynosurion grasslands
+rbbkam+	en	Species-rich Cynosurion grasslands	Species-rich Cynosurion grasslands
 rbbmc	en	Tall sedges communities	Tall sedges communities
 rbbmr	en	Reed beds and other Phragmites communities (no habitat type 6430)	Reed beds and other Phragmites communities (not 6430)
 rbbms	en	Small sedge communities (no habitat type 7140)	Small sedge communities (not 7140)
-rbbppm	en	Old, structure rich Pinus sylvestris forests	Old, structure rich Pinus sylvestris forests
+rbbppm	en	Old, structure rich Pinus sylvestris forest	Old, structure rich Pinus sylvestris forest
 rbbsf	en	Wet Salix scrubs on nutrient rich soil (no habitat type 91E0)	Wet Salix scrubs on nutrient rich soil (not 91E0)
-rbbsg	en	Cytisus and Ulex scrub (no N2000 habitat type)	Cytisus and Ulex scrubs
-rbbsm	en	Myrica gale scrubs (no N2000 habitat type)	Myrica gale scrubs
+rbbsg	en	Cytisus and Ulex scrub	Cytisus and Ulex scrubs
+rbbsm	en	Myrica gale scrubs	Myrica gale scrubs
 rbbso	en	Wet Salix scrubs on acid peaty soil	Wet Salix scrubs on acid peaty soil
 rbbsp	en	Thorny scrubs	Thorny scrubs
-rbbvos	en	Species-rich Alopecurion grasslands (no 6510 habitat type)	Alopecurion grasslands (not 6510)
-rbbzil	en	Non-saline Potentilla anserina grasslands	Non-saline Potentilla anserina grasslands
+rbbvos	en	Alopecurion grasslands (no 6510 habitat type)	Alopecurion grasslands (not 6510)
+rbbvos+	en	Species-rich Alopecurion grasslands (no 6510 habitat type)	Species-rich Alopecurion grasslands (not 6510)
+rbbzil	en	Potentilla anserina grasslands	Potentilla anserina grasslands
+rbbzil+	en	Species-rich Potentilla anserina grasslands	Species-rich Potentilla anserina grasslands
 RC	en	Rocky habitats and caves	NA
 RW	en	Running water	NA
 secondary	en	Secondary scheme	NA
@@ -216,30 +219,30 @@ SURF_08.4	en	Surfacewater monitoring: environmental pressure 08.4_poll_sw	SURF: 
 SW	en	Standing water	NA
 terr	en	terrestrial	NA
 1130	nl	Estuaria	estuaria
-1140	nl	Bij eb droogvallende slikwadden en zandplaten	slik- en zandplaten
+1140	nl	Bij eb droogvallende slikwadden en zandplaten	bij eb droogvallend zand en slik
 1310	nl	Eenjarige pioniersvegetaties van slik- en zandgebieden met Salicornia spp. en andere zoutminnende soorten	zilte pionierbegroeiingen
 1310_pol	nl	binnendijks gelegen zeekraalvegetaties	binnendijkse zeekraalvegetatie
 1310_zk	nl	buitendijks laag schor met zeekraalvegetaties	buitendijks laag schor
 1310_zv	nl	buitendijks hoog schor met zeevetmuurvegetaties (Saginion maritimae)	buitendijks hoog schor
-1320	nl	Schorren met slijkgrasvegetatie (Spartinion maritimae)	slijkgrasvelden
-1330	nl	Atlantische schorren (Glauco-Puccinellietalia maritimae)	atlantische schorren
+1320	nl	Schorren met slijkgrasvegetatie (Spartinion maritimae)	schorren met slijkgras
+1330	nl	Atlantische schorren (Glauco-Puccinellietalia maritimae)	Atlantische schorren
 1330_da	nl	buitendijkse schorren	buitendijkse schor
 1330_hpr	nl	binnendijkse zilte vegetaties: zilte graslanden	zilte graslanden
 2110	nl	Embryonale wandelende duinen	embryonale duinen
-2120	nl	Wandelende duinen op de strandwal met Ammophila arenaria (‘witte duinen’)	witte duinen
-2130	nl	Vastgelegde duinen met kruidvegetatie (‘grijze duinen’)	grijze duinen
+2120	nl	Wandelende duinen op de strandwal met Ammophila arenaria (‘witte duinen’)	wandelende duinen
+2130	nl	Vastgelegde duinen met kruidvegetatie (‘grijze duinen’)	vastgelegde duinen
 2130_had	nl	duingraslanden van kalkarme milieus	kalkarme duingraslanden
 2130_hd	nl	duingraslanden van kalkrijke milieus	kalkrijke duingraslanden
-2150	nl	Atlantische vastgelegde ontkalkte duinen (Calluno-Ulicetae)	duinheiden met struikhei
-2160	nl	Duinen met Hyppophae rhamnoides	duindoornstruwelen
+2150	nl	Atlantische vastgelegde ontkalkte duinen (Calluno-Ulicetae)	vastgelegde ontkalkte duinen
+2160	nl	Duinen met Hyppophaë rhamnoides	duindoornstruwelen
 2170	nl	Duinen met Salix repens ssp. argentea (Salicion arenaria)	kruipwilgstruwelen
 2180	nl	Beboste duinen van het Atlantische, Continentale en Boreale kustgebied	duinbossen
 2190	nl	Vochtige duinvalleien	vochtige duinvalleien
 2190_a	nl	habitatwaardige plassen in vochtige duinvalleien (nog te officialiseren subtype, zie Steven De Saeger)	duinplassen
 2190_mp	nl	duinpannen met kalkminnende vegetaties	duinpannen (kalkrijk)
 2190_overig	nl	2190-habitat dat niet gedekt is door 2190_mp en 2190_a (nog te officialiseren subtype, zie Steven De Saeger)	vochtige duinvalleien - overig
-2310	nl	Psammofiele heide met Calluna en Genista	psammofiele heide
-2330	nl	Open grasland met Corynephorus- en Agrostissoorten op landduinen	zandverstuivingen
+2310	nl	Psammofiele heide met Calluna en Genista	droge heide op landduinen
+2330	nl	Open grasland met Corynephorus- en Agrostissoorten op landduinen	open grasland op landduinen
 2330_bu	nl	buntgrasverbond	buntgrasvegetatie
 2330_dw	nl	dwerghaververbond	dwerghavervegetatie
 3110	nl	Mineraalarme oligotrofe wateren van de Atlantische zandvlakten (Littorelletalia uniflorae)	zeer zwakgebufferde vennen
@@ -247,17 +250,17 @@ terr	en	terrestrial	NA
 3130_aom	nl	oligotrofe tot mesotrofe vijvers en vennen met pioniersgemeenschappen op de kale oever of in de ondiepe oeverzone (oeverkruidgemeenschappen; Littorelletea)	oligotrofe tot mesotrofe vijvers en vennen
 3130_na	nl	oevers van tijdelijke of permanente plassen of poelen met eenjarige dwergbiezenvegetaties (Isoëto-Nanojuncetea)	dwergbiezenvegetaties
 3140	nl	Kalkhoudende oligo-mesotrofe wateren met benthische Chara spp. vegetaties	kranswierwateren
-3150	nl	Van nature eutrofe meren met vegetaties van het type Magnopotamion of Hydrocharition	meren met krabbenscheer en fonteinkruiden
-3160	nl	Dystrofe natuurlijke poelen en meren	zure vennen
-3260	nl	Submontane en laaglandrivieren met vegetaties behorend tot het Ranunculion fluitantis en het Callitricho-Batrachion	beken en rivieren met waterplanten
-3270	nl	Rivieren met slikoevers met vegetaties behorend tot het Chenopodietum rubri p.p. en Bidention p.p.	slikkige rivieroevers
+3150	nl	Van nature eutrofe meren met vegetaties van het type Magnopotamion of Hydrocharition	van nature eutrofe wateren
+3160	nl	Dystrofe natuurlijke poelen en meren	dystrofe vennen
+3260	nl	Submontane en laaglandrivieren met vegetaties behorend tot het Ranunculion fluitantis en het Callitricho-Batrachion	beken en rivieren met bepaalde waterplanten
+3270	nl	Rivieren met slikoevers met vegetaties behorend tot het Chenopodietum rubri p.p. en Bidention p.p.	voedselrijke slikoevers met bepaalde eenjarige planten
 4010	nl	Noord-Atlantische vochtige heide met Erica tetralix	vochtige heide
 4030	nl	Droge Europese heide	droge heide
 5130	nl	Juniperus communis-formaties in heide of kalkgrasland	jeneverbesstruwelen
 5130_hei	nl	variant jeneverbesstruweel in heide (5130_hei)	jeneverbesstruweel in heide
 5130_kalk	nl	variant jeneverbesstruweel in kalkgrasland (5130_kalk)	jeneverbesstruweel in kalkgrasland
 6120	nl	Kalkminnend grasland op dorre zandbodem	stroomdalgraslanden
-6210	nl	Droge half-natuurlijke graslanden en struikvormende faciës op kalkhoudende bodems (Festuco Brometalia)	kalkgraslanden
+6210	nl	Droge halfnatuurlijke graslanden en struikvormende faciës op kalkhoudende bodems (Festuco Brometalia)	droge kalkgraslanden en struweel op kalkbodem
 6210_hk	nl	kalkgrasland (Gentiano-Koelerietum)	kalkgraslanden
 6210_sk	nl	kalkrijke zomen en struwelen	kalkrijke zomen en struwelen
 6230	nl	Soortenrijke heischrale graslanden op arme bodems van berggebieden (en van submontane gebieden in het binnenland van Europa)	heischrale graslanden
@@ -273,9 +276,9 @@ terr	en	terrestrial	NA
 6430_hf	nl	moerasspireaverbond (moerasspirearuigten)	moerasspirearuigte
 6430_hw	nl	verbond van Harig wilgenroosje	ruigte en zoom met harig wilgenroosje
 6430_mr	nl	ruigere rietlanden in zwak brakke omstandigheden met Echte heemst,  Moeraslathyrus en/of Moerasmelkdistel (brakke rietvegetaties met Echte heemst )	ruiger rietland
-6510	nl	Laaggelegen schraal hooiland (Alopecurus pratensis, Sanguisorba officinalis)	glanshaver- en vossenstaartgraslanden
+6510	nl	Laaggelegen schraal hooiland (Alopecurus pratensis, Sanguisorba officinalis)	soortenrijke glanshavergraslanden
 6510_hu	nl	glanshavergraslanden (Arrhenaterion)	glanshavergrasland
-6510_hua	nl	Grote vossenstaart-graslanden met Weidekervel of Weidekervel-torkruid (Alopecurion)	vossenstaartgrasland
+6510_hua	nl	Grote vossenstaart-graslanden met Weidekervel of Weidekervel-torkruid (Alopecurion)	habitatwaardig vossenstaartgrasland
 6510_huk	nl	kalkrijk kamgrasgrasland (Galio-Trifolietum)	kalkrijk kamgrasgrasland
 6510_hus	nl	glanshavergraslanden met Grote pimpernel	pimpernelgrasland
 7110	nl	Actief hoogveen	actief hoogveen
@@ -287,17 +290,17 @@ terr	en	terrestrial	NA
 7150	nl	Slenken in veengronden met vegetatie behorend tot het Rhynchosporion	pioniervegetaties met snavelbiezen
 7210	nl	Kalkhoudende moerassen met Cladium mariscus en soorten van het Caricion davallianae	galigaanmoerassen
 7220	nl	Kalktufbronnen met tufsteenformatie (Cratoneurion)	kalktufbronnen
-7230	nl	Alkalisch laagveen	kalkmoerassen
-8310	nl	Niet voor het publiek opengestelde grotten	grotten
+7230	nl	Alkalisch laagveen	alkalisch laagveen
+8310	nl	Niet voor het publiek opengestelde grotten	niet voor publiek opengestelde grotten
 9110	nl	Beukenbossen van het type Luzulo-Fagetum	veldbies-beukenbossen
-9120	nl	Atlantische zuurminnende beukenbossen met Ilex en soms ook Taxus in de ondergroei (Quercion robori-petraeae of Ilici-Fagenion)	beuken-eikenbossen met hulst
+9120	nl	Atlantische zuurminnende beukenbossen met Ilex en soms ook Taxus in de ondergroei (Quercion robori-petraeae of Ilici-Fagenion)	beuken-eikenbossen op zure bodem
 9120_qb	nl	eikenberkenbos als successiestadium van de zure eiken- en beukenbossen	eiken-berkenbos als successiestadium
-9130	nl	Beukenbossen van het type Asperulo-Fagetum.	neutrofiele beukenbossen
+9130	nl	Beukenbossen van het type Asperulo-Fagetum.	eiken-beukenbossen met wilde hyacint en parelgras-beukenbossen
 9130_end	nl	Atlantisch neutrofiel beukenbos gekenmerkt door een uitgesproken Atlantische invloed (Endymio-Fagetum)	atlantisch neutrofiel beukenbos
 9130_fm	nl	Midden-Europese neutrofiel beukenbos dat voorkomt in het Continentaal gebied op kalkhoudende, rijke bodems met typische aanwezigheid van Eenbloemig parelgras en Lievevrouwebedstro (Parelgras-Beukenbos, Melico-Fagetum)	midden-Europese neutrofiel beukenbos
 9150	nl	Midden-Europese kalkminnende beukenbossen behorende tot het Cephalanthero-Fagion	kalkminnende beukenbossen
 9160	nl	Sub-Atlantische en Midden-Europese wintereikenbossen of eiken-haagbeukbossen behorend tot het Carpinion-betuli	eiken-haagbeukenbossen
-9190	nl	Oude zuurminnende eikenbossen op zandvlakten met Quercus robur	oude eikenbossen
+9190	nl	Oude zuurminnende eikenbossen op zandvlakten met Quercus robur	oude eiken-berkenbossen
 91E0	nl	Bossen op alluviale grond met Alnus glutinosa en Fraxinus excelsior (Alno-Padion,Alnion incanae, Salicion albae)	vochtige alluviale bossen
 91E0_sf	nl	wilgenvloedbos (zachthoutooibos; Salicetum albae)	wilgenvloedbos
 91E0_va	nl	beekbegeleidend vogelkers-essenbos en essen-iepenbos (Pruno-Fraxinetum)	beekbegeleidend bos
@@ -305,7 +308,7 @@ terr	en	terrestrial	NA
 91E0_vm	nl	mesotroof broekbos op minder voedselrijke standplaatsen (Carici elongatae-Alnetum)	mesotroof broekbos
 91E0_vn	nl	ruigt-elzenbos (Filipendulo-Alnetum, Macrophorbio-Alnetum, Cirsio-Alnetum)	ruigt-elzenbos
 91E0_vo	nl	oligotroof broekbos, inclusief elzen-berkenbroekbos en berkenbroekbos (Carici laevigata-Alnetum)	oligotroof broekbos
-91F0	nl	Gemengde oeverformaties met Quercus robur, Ulmus laevis en Ulmus minor, Fraxinus excelsior of Fraxinus angustifolia, langs de grote rivieren (Ulmenion minoris)	droge hardhoutooibossen
+91F0	nl	Gemengde oeverformaties met Quercus robur, Ulmus laevis en Ulmus minor, Fraxinus excelsior of Fraxinus angustifolia, langs de grote rivieren (Ulmenion minoris)	hardhoutooibossen
 aq	nl	aquatisch	NA
 ATM	nl	Atmosferisch meetnet	NA
 ATM_03.1	nl	Atmosferisch meetnet: milieudruk 03.1_eutr_atm	ATM: 03.1_eutr_atm
@@ -415,22 +418,25 @@ INUN_103	nl	Inundatiemeetnet: milieudruk 103_klim_zee	INUN: 103_klim_zee
 MHQ	nl	Monitoringprogramma biotische habitatkwaliteit	NA
 MNE	nl	Monitoringprogramma natuurlijk milieu	NA
 rbbah	nl	brak tot zilt water	brak tot zilt water
-rbbha	nl	soortenrijk struisgrasgrasland, indien niet vervat in habitattype 6230	soortenrijk struisgrasgrasland
+rbbha	nl	soortenrijk, niet habitatwaardig struisgrasvegetatie	soortenrijke struisgrasvegetatie
 rbbhc	nl	dotterbloemgrasland	dotterbloemgrasland
-rbbhf	nl	moerasspirearuigte met graslandkenmerken (en daardoor niet behorend tot habitattype 6430)	moerasspirearuigte met graslandkenmerken
-rbbhfl	nl	natte ruigte met grote wederik en hennegras	natte ruigte, Kempisch type
-rbbkam	nl	soortenrijk kamgrasgrasland (valt onder soortenrijk permanent cultuurgrasland hp* en hpr*)	kamgrasgrasland
+rbbhf	nl	moerasspirearuigte met graslandkenmerken	moerasspirearuigte
+rbbhfl	nl	moerasspirearuigte met graslandkenmerken – zure variant (als rbbhf in de Habitatkaart; enkel via extra selectie in de BWK-velden te selecteren)	natte ruigte met grote wederik en hennegras
+rbbkam	nl	kamgrasland	kamgrasland
+rbbkam+	nl	soortenrijk kamgrasland	soortenrijk kamgrasland
 rbbmc	nl	grote zeggenvegetatie	grote zeggenvegetatie
-rbbmr	nl	rietland en andere vegetaties van het rietverbond (indien niet vervat onder habitattype 6430)	rietland en andere Phragmition-vegetaties niet vervat in 6430
-rbbms	nl	kleine zeggenvegetaties niet vervat in overgangsveen (type 7140)	kleine zeggenvegetaties niet vervat in 7140
-rbbppm	nl	structuurrijke, oude bestanden van grove den	structuurrijke, oude bestanden van grove den
-rbbsf	nl	vochtig wilgenstruweel op voedselrijke bodem (indien niet vervat in habitattype 91E0)	vochtig wilgenstruweel op voedselrijke bodem niet vervat in 91E0
-rbbsg	nl	brem- en gaspeldoornstruweel (indien niet vervat in een habitattype)	brem- en gaspeldoornstruweel niet vervat in een habitattype
-rbbsm	nl	gagelstruweel (indien niet vervat in een habitattype)	gagelstruweel niet vervat in een habitattype
+rbbmr	nl	rietland en andere vegetatie van het rietverbond	rietland en andere vegetatie van het rietverbond
+rbbms	nl	kleine zeggenvegetatie niet vervat in overgangsveen (7140)	kleine zeggenvegetatie niet vervat in 7140
+rbbppm	nl	structuurrijk, oud bestand van grove den	structuurrijk, oud bestand van grove den
+rbbsf	nl	moerasbos van breedbladige wilgen	moerasbos van breedbladige wilgen
+rbbsg	nl	brem- en gaspeldoornstruweel	brem- en gaspeldoornstruweel
+rbbsm	nl	gagelstruweel	gagelstruweel
 rbbso	nl	vochtig wilgenstruweel op venige en zure grond	vochtig wilgenstruweel op venige of zure grond
 rbbsp	nl	doornstruweel	doornstruweel
-rbbvos	nl	soortenrijk grote vossenstaartgrasland (valt onder soortenrijk permanent cultuurgrasland hp* en hpr*), indien niet vervat in habitattype 6510	grote vossenstaartgrasland niet vervat in 6510
-rbbzil	nl	zilverschoongrasland zonder zilte elementen (valt onder soortenrijk permanent cultuurgrasland hp* en hpr*)	zilverschoongrasland zonder zilte elementen
+rbbvos	nl	grote vossenstaartgrasland niet vervat in 6510	grote vossenstaartgrasland
+rbbvos+	nl	soortenrijk grote vossenstaartgrasland	soortenrijk grote vossenstaartgrasland
+rbbzil	nl	zilverschoongrasland	zilverschoongrasland
+rbbzil+	nl	soortenrijk zilverschoongrasland	soortenrijk zilverschoongrasland
 RC	nl	Rotsachtige habitats en grotten	NA
 RW	nl	Stromende wateren	NA
 secondary	nl	Secundair meetnet	NA

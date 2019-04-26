@@ -70,8 +70,11 @@ rbbhc	main_type	rbbhc	GR	NA	NA	NA
 rbbhf	main_type	rbbhf	GR	NA	NA	NA
 rbbhfl	main_type	rbbhfl	GR	NA	NA	NA
 rbbkam	main_type	rbbkam	GR	NA	NA	NA
+rbbkam+	subtype	rbbkam	GR	NA	NA	NA
 rbbvos	main_type	rbbvos	GR	NA	NA	NA
+rbbvos+	subtype	rbbvos	GR	NA	NA	NA
 rbbzil	main_type	rbbzil	GR	NA	NA	NA
+rbbzil+	subtype	rbbzil	GR	NA	NA	NA
 7110	main_type	7110	BMF	NA	NA	NA
 7140	main_type	7140	BMF	NA	NA	NA
 7140_base	subtype	7140	BMF	NA	NA	NA
