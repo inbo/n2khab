@@ -1,4 +1,7 @@
 baseConvert <- function(x, target, base=10) {
+    ifelse(is.na(x),
+           x,
+           {
     olddim <- dim(x)
     # Value -> Digit
     characters <- c(seq(0,9), LETTERS)
@@ -52,5 +55,6 @@ baseConvert <- function(x, target, base=10) {
         result <- sum
     }
 
-    return(structure(result, dim=olddim))
+    structure(result, dim=olddim)
+})
 }
