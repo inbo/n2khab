@@ -42,7 +42,8 @@ To ease reproducibility, this package therefore works with _locally stored_ data
 
 The `n2khabutils` functions, aimed at reading these data and returning them in R in some kind of standardized way, always provide _arguments_ to specify the file's name and location -- so you can in fact freely choose these.
 However, to **ease collaboration in scripting**, it is highly recommended to follow specific [data management standards for N2KHAB scripting workflows](https://github.com/inbo/n2khab-inputs/blob/master/datamanagement.md), which are also applied in the cloud storage.
-Moreover, the _functions assume_ these default locations and filenames to make your life easier.
+Moreover, by default the _functions assume_ these locations and filenames to make your life easier.
+
 Summarizing, this means:
 
 - use the data source's default ID to name both the data source specific subfolder and the data source file(s) (before the extension).
