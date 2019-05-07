@@ -1,6 +1,6 @@
 Package: n2khabutils
 Title: Data preparation for Flemish Natura 2000 habitat analyses
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: c(
     person("Floris", "Vanderhaeghe", 
             email = "floris.vanderhaeghe@inbo.be", 
