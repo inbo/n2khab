@@ -82,7 +82,7 @@ a dataframe with 10 variables:
 }}
 \source{
 \itemize{
-    \item{For the MNE-schemes: a vc-formatted, Dutch data source
+    \item{For the MNE-schemes: a vc-formatted, Dutch-language data source
     which can be found in the
     \href{https://github.com/inbo/n2khab-inputs}{
     n2khab-inputs Github repository}:
