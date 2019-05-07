@@ -1,0 +1,61 @@
+---
+title: "Where to store data sources"
+author: "Floris Vanderhaeghe"
+date: "2019-05-07"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{020. Where to store data sources}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+options(stringsAsFactors = FALSE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(n2khabutils)
+```
+
+## Data sources used by `n2khabutils` functions
+
+Apart from a few textual datasets, provided directly with this package,
+most data sources are made available through some cloud-based infrastructure.
+An overview is given [here](https://drive.google.com/file/d/1xZz9f9n8zSUxBJvW6WEFLyDK7Ya0u4iN/view).
+
+There is a major distinction between:
+
+- raw data, residing in a folder `data/10_raw`, publicly available and which you need to store locally to use them;
+- processed data, residing in a folder `data/20_processed`.
+
+While you can reproduce the processed data sources from an [R script on Github](https://github.com/inbo/n2khab-inputs/blob/master/src/complete_reproducible_workflow.R), this may take a long computing time in specific cases.
+The processed data sources are currently shared in a private cloud storage for INBO personnel (the path on the Q-share in the referred overview).
+They will also be shared publicly.
+_XXX the latter is to be implemented and further referred here XXX_
+
+
+## How to store the data sources
+
+Data sources evolve, and hence, data source versions succeed one another.
+To ease reproducibility, this package therefore works with _locally stored_ data sources.
+
+The `n2khabutils` functions, aimed at reading these data and returning them in R in some kind of standardized way, always provide _arguments_ to specify the file's name and location -- so you can in fact freely choose these.
+However, to **ease collaboration in scripting**, it is highly recommended to follow specific [data management standards for N2KHAB scripting workflows](https://github.com/inbo/n2khab-inputs/blob/master/datamanagement.md), which are also applied in the cloud storage.
+Moreover, the _functions assume_ these default locations and filenames to make your life easier.
+Summarizing, this means:
+
+- use the data source's default ID to name both the data source specific subfolder and the data source file(s) (before the extension).
+This name is version-agnostic!
+Versions can however be defined and checked for in a workflow, in a specific way.
+_XXX the latter is to be implemented and further referred here XXX_
+- depending on the data source, its own folder is to be stored either under `data/10_raw` or under `data/20_processed`.
+- the location of the `data` folder is specific to your setup and always needs to be specified as a function argument.
+If you are a contributor to the [n2khab-inputs](https://github.com/inbo/n2khab-inputs) git repository, you can follow its organisation and create the `data` folder at the root of the locally cloned repo (it is git-ignored).
+In a collaborative workflow it is recommended to **define a variable `datapath`** in a separate, user-specific script, 
+e.g.:
+
+    ```
+    datapath <- "my/absolute-or-relative/path/to/data"
+    ```
+    and feed the `datapath` variable to functions in the actual collaborative workflow.
