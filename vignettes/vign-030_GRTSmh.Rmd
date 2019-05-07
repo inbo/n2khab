@@ -1,0 +1,121 @@
+---
+title: "Using the GRTS data sources"
+author: "Floris Vanderhaeghe"
+date: "2019-05-07"
+bibliography: references.bib
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{030. Using the GRTS data sources}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+options(stringsAsFactors = FALSE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(n2khabutils)
+datapath <- "../../data"
+```
+
+## Intro
+
+With this vignette, you get acquainted with three functions that return a RasterLayer or a RasterBrick:
+
+- `read_GRTSmh()`
+- `read_GRTSmh_base4frac()`
+- `write_highlevel_GRTSmh()`
+
+The data source `GRTSmaster_habitats`, provided and documented in [Zenodo](https://zenodo.org/record/2611234), is a monolayered GeoTIFF file covering the whole of Flanders and the Brussels Capital Region at a resolution of 32 m.
+Its values are unique decimal integer ranking numbers from the GRTS algorithm applied to the Flemish and Brussels area.
+Beware that not all GRTS ranking numbers are present in the data source, as the original GRTS raster has been clipped with the Flemish outer borders (i.e., not excluding the Brussels Capital Region).
+
+The GRTS algorithm uses a quadrant-recursive, hierarchically randomized function that maps the unit square to the unit interval, resulting in a base-4 GRTS address for each location. The ranking numbers in `GRTSmaster_habitats` are base-10 numbers and follow the reverse hierarchical order: **each consecutive subset** of ranking numbers corresponds to a **spatially balanced** sample of locations. Hence, it allows **dynamical** sample sizes. More information on the GRTS algorithm can be found in @stevens_variance_2003 [-@stevens_spatially_2004] and in the [GRTS](https://github.com/ThierryO/grts) and [spsurvey](https://cran.r-project.org/web/packages/spsurvey) packages.
+
+
+## Data sources
+
+The following data sources are available:
+
+- the raw data source `GRTSmaster_habitats`, discussed above and available at [Zenodo](https://zenodo.org/record/2611234)
+- processed data sources:
+    - `GRTSmh_brick`: 10-layered GeoTIFF with the decimal integer ranking numbers of 10 hierarchical levels of the GRTS cell addresses, including the one from `GRTSmaster_habitats` (for more details see the [read_GRTSmh() documentation](../html/read_GRTSmh.html))
+    - `GRTSmh_base4frac`: is like a mirror to `GRTSmaster_habitats`, holding the ranking numbers as base 4 fractions (for more details see the [read_GRTSmh_base4frac() documentation](../html/read_GRTSmh.html))
+
+For more information on data storage and locations, there is a [specific vignette](../doc/vign-020_datastorage.html).
+
+## Get the rasters in R
+
+### read_GRTSmh()
+
+In the below R code, the recommendation has been followed to set the location of the `data` folder by a variable **`datapath`**.
+See the [vignette on data storage](../doc/vign-020_datastorage.html) for more information.
+
+`read_GRTSmh()` by default returns the `GRTSmaster_habitats` dataset:
+
+```{r eval=FALSE}
+read_GRTSmh(datapath)
+#> class       : RasterLayer 
+#> dimensions  : 2843, 7401, 21041043  (nrow, ncol, ncell)
+#> resolution  : 32, 32  (x, y)
+#> extent      : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
+#> coord. ref. : +proj=lcc +lat_1=49.8333339 +lat_2=51.16666723333333 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.01256 +y_0=5400088.4378 +ellps=intl +units=m +no_defs 
+#> data source : [...]/n2khab-inputs/data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif 
+#> names       : GRTSmaster_habitats 
+#> values      : 1, 67108857  (min, max)
+```
+
+With the argument `brick = TRUE` however, you will get the `GRTSmh_brick` data source, i.e. `GRTSmaster_habitats` plus 9 extra layers:
+
+```{r eval=FALSE}
+read_GRTSmh(datapath, brick = TRUE)
+#> class       : RasterBrick 
+#> dimensions  : 2843, 7401, 21041043, 10  (nrow, ncol, ncell, nlayers)
+#> resolution  : 32, 32  (x, y)
+#> extent      : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
+#> coord. ref. : +proj=lcc +lat_1=49.8333339 +lat_2=51.16666723333333 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.01256 +y_0=5400088.4378 +ellps=intl +units=m +no_defs 
+#> data source : [...]/n2khab-inputs/data/20_processed/GRTSmh_brick/GRTSmh_brick.tif 
+#> names       :   level0,   level1,   level2,   level3,   level4,   level5,   level6,   level7,   level8,   level9 
+#> min values  :        1,        1,        1,        1,        1,        1,        1,        1,        1,        1 
+#> max values  : 67108857, 16777209,  4194297,  1048569,   262137,    65529,    16377,     4089,     1017,      253
+```
+
+The higher-level ranking numbers of the RasterBrick allow spatially balanced samples at higher spatial levels than the resolution of 32, and can also be used for aggregation purposes.
+The provided hierarchical levels correspond to the vector `32 * 2^(0:9)` (minimum: 32 meters, maximum: 16384 meters), with the corresponding RasterBrick layers named as `level0` to `level9`.
+
+
+### read_GRTSmh_base4frac()
+
+Its use is just to return the base-4-fraction-converted `GRTSmaster_habitats` as a RasterLayer:
+
+```{r eval=FALSE}
+options(scipen = 999, digits = 15)
+read_GRTSmh_base4frac(datapath)
+#> class       : RasterLayer 
+#> dimensions  : 2843, 7401, 21041043  (nrow, ncol, ncell)
+#> resolution  : 32, 32  (x, y)
+#> extent      : 22029.591973471, 258861.591973471, 153054.113583292, 244030.113583292  (xmin, xmax, ymin, ymax)
+#> coord. ref. : +proj=lcc +lat_1=49.8333339 +lat_2=51.16666723333333 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.01256 +y_0=5400088.4378 +ellps=intl +units=m +no_defs 
+#> data source : [...]/n2khab-inputs/data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif 
+#> names       : GRTSmh_base4frac 
+#> values      : 0.0000000000001, 0.3333333333321  (min, max)
+```
+
+Note that the used options are necessary when treating these base-4-fraction GRTS addresses as characters; otherwise scientific notations will be used.
+
+Also, be warned that R does not actually regard the values as base 4, but as base 10. [^base4]
+
+[^base4]: So, what really matters is only the notation with many digits, to be _regarded_ as a base 4 fraction (and hence, handling it as a character in conversions is often necessary).
+The `n2khabutils` package also exports a `dec_to_base4frac()` and a `base4frac_to_dec()` function in its namespace.
+These functions will be relevant if you need to do such conversions yourself, and they are used in the code to generate the processed data sources.
+
+### write_highlevel_GRTSmh()
+
+_XXX work in progress XXX_
+
+
+## References
+
+
