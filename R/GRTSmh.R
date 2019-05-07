@@ -390,6 +390,11 @@ read_GRTSmh <-
 #' the original GRTS raster has been clipped with the Flemish outer borders
 #' (i.e., not excluding the Brussels Capital Region).
 #'
+#' Also, be warned that R does not regard the values as base 4, but
+#' as base 10.
+#' So, what really matters is only the notation with many digits, to be
+#' \emph{regarded} as a base 4 fraction.
+#'
 #' @param path Location of the file.
 #' Considering the default value of the \code{file} argument, use this argument
 #' in scripts to set the location of the folder '\strong{\code{data}}'.

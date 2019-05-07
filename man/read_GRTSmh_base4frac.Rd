@@ -47,6 +47,11 @@ the reverse hierarchical order in a GRTS sample as base-4-fraction addresses.
 Beware that not all GRTS ranking numbers are present in the data source, as
 the original GRTS raster has been clipped with the Flemish outer borders
 (i.e., not excluding the Brussels Capital Region).
+
+Also, be warned that R does not regard the values as base 4, but
+as base 10.
+So, what really matters is only the notation with many digits, to be
+\emph{regarded} as a base 4 fraction.
 }
 \examples{
 \dontrun{
