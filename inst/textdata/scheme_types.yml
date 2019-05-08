@@ -4,7 +4,7 @@
   sorting:
   - scheme
   - type
-  hash: 04fc82cfc91d2032b7c8dcae68eba3e805dee829
+  hash: 90b65ae1d72c8078397c1122db2796bb60ea3932
 scheme:
   class: factor
   labels:
@@ -42,6 +42,32 @@ scheme:
   - SURF_07.2
   - SURF_08.2
   - SURF_08.4
+  - HQ1330
+  - HQ2130
+  - HQ2160
+  - HQ2170
+  - HQ2180
+  - HQ2190
+  - HQ2310
+  - HQ2330
+  - HQ3110
+  - HQ3130
+  - HQ3140
+  - HQ3150
+  - HQ3160
+  - HQ3270
+  - HQ4010
+  - HQ4030
+  - HQ6120
+  - HQ6230
+  - HQ6410
+  - HQ6510
+  - HQ7140
+  - HQ9120
+  - HQ9130
+  - HQ9160
+  - HQ9190
+  - HQ91E0
   index:
   - 1
   - 2
@@ -77,6 +103,32 @@ scheme:
   - 32
   - 33
   - 34
+  - 35
+  - 36
+  - 37
+  - 38
+  - 39
+  - 40
+  - 41
+  - 42
+  - 43
+  - 44
+  - 45
+  - 46
+  - 47
+  - 48
+  - 49
+  - 50
+  - 51
+  - 52
+  - 53
+  - 54
+  - 55
+  - 56
+  - 57
+  - 58
+  - 59
+  - 60
   ordered: no
 type:
   class: factor
