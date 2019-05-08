@@ -278,7 +278,7 @@ NULL
 #' @source
 #'
 #' \itemize{
-#'     \item{For the MNE-schemes: a vc-formatted, Dutch data source
+#'     \item{For the MNE-schemes: a vc-formatted, Dutch-language data source
 #'     which can be found in the
 #'     \href{https://github.com/inbo/n2khab-inputs}{
 #'     n2khab-inputs Github repository}:
@@ -357,7 +357,7 @@ NULL
 #'     \item{For the MNE-schemes:
 #'       \itemize{
 #'         \item{the link between schemes and types comes from
-#'         a vc-formatted, Dutch data source
+#'         a vc-formatted, Dutch-language data source
 #'         which can be found in the
 #'         \href{https://github.com/inbo/n2khab-inputs}{
 #'         n2khab-inputs Github repository}:

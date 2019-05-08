@@ -238,9 +238,9 @@ terr	en	terrestrial	NA
 2170	nl	Duinen met Salix repens ssp. argentea (Salicion arenaria)	kruipwilgstruwelen
 2180	nl	Beboste duinen van het Atlantische, Continentale en Boreale kustgebied	duinbossen
 2190	nl	Vochtige duinvalleien	vochtige duinvalleien
-2190_a	nl	habitatwaardige plassen in vochtige duinvalleien (nog te officialiseren subtype, zie Steven De Saeger)	duinplassen
+2190_a	nl	habitatwaardige plassen in vochtige duinvalleien  (als 2190 in de Habitatkaart; enkel via extra selectie in de BWK-velden te selecteren)	duinplassen
 2190_mp	nl	duinpannen met kalkminnende vegetaties	duinpannen (kalkrijk)
-2190_overig	nl	2190-habitat dat niet gedekt is door 2190_mp en 2190_a (nog te officialiseren subtype, zie Steven De Saeger)	vochtige duinvalleien - overig
+2190_overig	nl	habitatwaardige plassen in vochtige duinvalleien  (als 2190 in de Habitatkaart; enkel via extra selectie in de BWK-velden te selecteren)	vochtige duinvalleien - overig
 2310	nl	Psammofiele heide met Calluna en Genista	droge heide op landduinen
 2330	nl	Open grasland met Corynephorus- en Agrostissoorten op landduinen	open grasland op landduinen
 2330_bu	nl	buntgrasverbond	buntgrasvegetatie
@@ -253,7 +253,7 @@ terr	en	terrestrial	NA
 3150	nl	Van nature eutrofe meren met vegetaties van het type Magnopotamion of Hydrocharition	van nature eutrofe wateren
 3160	nl	Dystrofe natuurlijke poelen en meren	dystrofe vennen
 3260	nl	Submontane en laaglandrivieren met vegetaties behorend tot het Ranunculion fluitantis en het Callitricho-Batrachion	beken en rivieren met bepaalde waterplanten
-3270	nl	Rivieren met slikoevers met vegetaties behorend tot het Chenopodietum rubri p.p. en Bidention p.p.	voedselrijke slikoevers met bepaalde eenjarige planten
+3270	nl	Rivieren met slikoevers met vegetaties behorend tot het Chenopodion rubri p.p. en Bidention p.p.	voedselrijke slikoevers met bepaalde eenjarige planten
 4010	nl	Noord-Atlantische vochtige heide met Erica tetralix	vochtige heide
 4030	nl	Droge Europese heide	droge heide
 5130	nl	Juniperus communis-formaties in heide of kalkgrasland	jeneverbesstruwelen

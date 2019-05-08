@@ -1,11 +1,47 @@
 Package: n2khabutils
 Title: Data preparation for Flemish Natura 2000 habitat analyses
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: c(
     person("Floris", "Vanderhaeghe", 
             email = "floris.vanderhaeghe@inbo.be", 
             role = c("aut", "cre"), 
             comment = c(ORCID = "0000-0002-6378-6229")), 
+    person("Dries", "Adriaens", 
+            email = "dries.adriaens@inbo.be", 
+            role = c("ctb"), 
+            comment = c(ORCID = "0000-0002-7216-3111")), 
+    person("Cécile", "Herr", 
+            email = "cecile.herr@inbo.be", 
+            role = c("ctb"), 
+            comment = c(ORCID = "0000-0002-2833-6046")), 
+    person("Maud", "Raman", 
+            email = "maud.raman@inbo.be", 
+            role = c("ctb"), 
+            comment = c(ORCID = "0000-0003-2116-4963")), 
+    person("Jan", "Wouters", 
+            email = "jan.wouters@inbo.be", 
+            role = c("ctb"), 
+            comment = c(ORCID = "0000-0001-8200-9102")), 
+    person("Steven", "De Saeger", 
+            email = "steven.desaeger@inbo.be", 
+            role = c("ctb"), 
+            comment = c(ORCID = "0000-0002-5477-3063")), 
+    person("Hans", "Van Calster", 
+            email = "hans.vancalster@inbo.be", 
+            role = c("ctb"), 
+            comment = c(ORCID = "0000-0001-8595-8426")), 
+    person("Nathalie", "Cools", 
+            email = "nathalie.cools@inbo.be", 
+            role = c("ctb"), 
+            comment = c(ORCID = "0000-0002-7059-2318")), 
+    person("Suzanna", "Lettens", 
+            email = "suzanna.lettens@inbo.be", 
+            role = c("ctb"), 
+            comment = c(ORCID = "0000-0001-5032-495X")), 
+    person("Arne", "Verstraeten", 
+            email = "arne.verstraeten@inbo.be", 
+            role = c("ctb"), 
+            comment = c(ORCID = "0000-0002-8813-1261")), 
     person("Research Institute for Nature and Forest", 
             email = "info@inbo.be", 
             role = c("cph", "fnd")))
@@ -30,9 +66,14 @@ Imports:
     stats,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    withr
 License: GPL-3
 URL: https://github.com/inbo/n2khab-inputs
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
