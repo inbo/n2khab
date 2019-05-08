@@ -4,7 +4,7 @@
   sorting:
   - programme
   - scheme
-  hash: 63d793e7e7ba8e1bdb427367def3468d8537ed7d
+  hash: dcdec23718d9919581a0baa5a22d12dc209dfaed
 scheme:
   class: factor
   labels:
@@ -42,6 +42,32 @@ scheme:
   - SURF_07.2
   - SURF_08.2
   - SURF_08.4
+  - HQ1330
+  - HQ2130
+  - HQ2160
+  - HQ2170
+  - HQ2180
+  - HQ2190
+  - HQ2310
+  - HQ2330
+  - HQ3110
+  - HQ3130
+  - HQ3140
+  - HQ3150
+  - HQ3160
+  - HQ3270
+  - HQ4010
+  - HQ4030
+  - HQ6120
+  - HQ6230
+  - HQ6410
+  - HQ6510
+  - HQ7140
+  - HQ9120
+  - HQ9130
+  - HQ9160
+  - HQ9190
+  - HQ91E0
   index:
   - 1
   - 2
@@ -77,11 +103,41 @@ scheme:
   - 32
   - 33
   - 34
+  - 35
+  - 36
+  - 37
+  - 38
+  - 39
+  - 40
+  - 41
+  - 42
+  - 43
+  - 44
+  - 45
+  - 46
+  - 47
+  - 48
+  - 49
+  - 50
+  - 51
+  - 52
+  - 53
+  - 54
+  - 55
+  - 56
+  - 57
+  - 58
+  - 59
+  - 60
   ordered: no
 programme:
   class: factor
-  labels: MNE
-  index: 1
+  labels:
+  - MNE
+  - MHQ
+  index:
+  - 1
+  - 2
   ordered: no
 attribute_1:
   class: factor
@@ -91,12 +147,64 @@ attribute_1:
   - GW
   - SURF
   - INUN
+  - '1330'
+  - '2130'
+  - '2160'
+  - '2170'
+  - '2180'
+  - '2190'
+  - '2310'
+  - '2330'
+  - '3110'
+  - '3130'
+  - '3140'
+  - '3150'
+  - '3160'
+  - '3270'
+  - '4010'
+  - '4030'
+  - '6120'
+  - '6230'
+  - '6410'
+  - '6510'
+  - '7140'
+  - '9120'
+  - '9130'
+  - '9160'
+  - '9190'
+  - 91E0
   index:
   - 1
   - 2
   - 3
   - 4
   - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
   ordered: no
 attribute_2:
   class: factor
@@ -191,9 +299,13 @@ tag_1:
   labels:
   - focal
   - secondary
+  - aq
+  - terr
   index:
   - 1
   - 2
+  - 3
+  - 4
   ordered: no
 tag_2:
   class: character
