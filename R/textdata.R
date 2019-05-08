@@ -214,6 +214,8 @@ NULL
 #'     collection) to which the scheme belongs, and which is named after the
 #'     environmental compartment (however note that the surfacewater superscheme
 #'     comprises two environmental compartments).}
+#'     \item{In MHQ, this is used to define the target habitat type of the
+#'     monitoring scheme.}
 #'   }
 #'   }
 #'   \item{attribute_2}{A second defining attribute of the scheme (if needed).
@@ -255,6 +257,8 @@ NULL
 #'   \itemize{
 #'     \item{In MNE, this is used to tag which schemes are focal schemes and
 #'     which ones are secondary schemes.}
+#'     \item{In MHQ, this is used to separate aquatic and terrestial
+#'     monitoring schemes.}
 #'   }
 #'   }
 #'   \item{tag_2}{Optional tag, e.g. a categorization ID explained
@@ -373,6 +377,13 @@ NULL
 #'         }
 #'     }
 #'   }
+#'
+#' \itemize{
+#'     \item{For the MHQ-schemes, the list of sampled types is based on the report of
+#'     \href{https://pureportal.inbo.be/portal/files/4339795/Westra_etal_2014_MonitoringNatura2000Habitats.pdf}{Westra \emph{et al.} (2014)}.
+#'   }
+#'  }
+#'
 #'
 #' @seealso \code{\link{read_scheme_types}}
 #'
