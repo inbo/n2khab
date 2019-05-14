@@ -1,6 +1,6 @@
-#' @title Create the data folder structure
+#' @title Create the data folder structure and return the path to the data folder
 #'
-#' @description This function will check for the existence of data folders and create them if necessary
+#' @description This function will check for the existence of data folders, create them if necessary, and return the path to the data folder (datapath object)
 #'
 #' @param root char either use the git root or rproj root (default)
 #'
