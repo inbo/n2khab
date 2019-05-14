@@ -2,7 +2,8 @@
 #'
 #' @description This function will check for the existence of data folders, create them if necessary, and return the path to the data folder (\code{datapath} object)
 #'
-#' @param root char either use the git root or rproj root (default)
+#' @param root Character string indicating whether the root folder of the current git repository or the root folder of the current Rstudio project should be used as the folder where you want the data folder structure to be created. Can be "rproj" (the default) for an Rstudio R project or "git" for a git repository.
+#' @param path An optional argument to specify a custom path to a folder where you want the data folder structure to be created. Default is \code{NA} (no custom path).
 #'
 #' @return A new data folder beneath specified root with subfolders \code{10_raw} and \code{20_processed} and an object \code{datapath} that points to the \code{data/} folder
 #'
@@ -14,19 +15,30 @@
 #' @examples
 #'filemanag_folders()
 #'
-filemanag_folders <- function(root = "rproj") {
+filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
     # directory setup
-    root <- tolower(root)
+    if (!is.na(path)) {
+        if (dir.exists(path)) {
+            datapath <- file.path(path, "data")
+        } else {
+            stop("The specified path does not exist.")
+        }
+    } else {
+        root <- tolower(root)
+        root <- match.arg(root)
 
-    if (root == "git") {
-        root <- find_root(is_git_root)
+        if (root == "git") {
+            root <- find_root(is_git_root)
+        }
+
+        if (root == "rproj") {
+            root <- find_root(is_rstudio_project)
+        }
+
+        datapath <- file.path(root, "data")
     }
 
-    if (root == "rproj") {
-        root <- find_root(is_rstudio_project)
-    }
 
-    datapath <- file.path(root, "data")
 
     # check for existence of the folder
     if (!dir.exists(datapath)) {
