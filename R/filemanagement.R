@@ -11,9 +11,9 @@
 #' @importFrom rprojroot is_rstudio_project
 #'
 #' @examples
-#'create_data_folders()
+#'filemanag_folders()
 #'
-create_data_folders <- function(root = "rproj") {
+filemanag_folders <- function(root = "rproj") {
     # directory setup
     root <- tolower(root)
 
@@ -59,7 +59,7 @@ create_data_folders <- function(root = "rproj") {
 #'
 #' @examples
 #'
-get_raw_data <- function(path, doi) {
+filemanag_zenodo <- function(path, doi) {
     if (is.missing(path)) {
 
     }
@@ -86,7 +86,7 @@ get_raw_data <- function(path, doi) {
 #'
 #' @examples
 #'
-get_processed_data <- function(path, filename) {
+filemanag_processed <- function(path, filename) {
 
 
 
