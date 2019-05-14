@@ -1,14 +1,15 @@
 #' @title Create the data folder structure and return the path to the data folder
 #'
-#' @description This function will check for the existence of data folders, create them if necessary, and return the path to the data folder (datapath object)
+#' @description This function will check for the existence of data folders, create them if necessary, and return the path to the data folder (\code{datapath} object)
 #'
 #' @param root char either use the git root or rproj root (default)
 #'
-#' @return A new data folder beneath specified root with subfolders 10_raw and 20_processed and an object datapath that points to the data/ folder
+#' @return A new data folder beneath specified root with subfolders \code{10_raw} and \code{20_processed} and an object \code{datapath} that points to the \code{data/} folder
 #'
-#' @importFrom rprojroot find_root
-#' @importFrom rprojroot is_git_root
-#' @importFrom rprojroot is_rstudio_project
+#' @importFrom rprojroot
+#' find_root
+#' is_git_root
+#' is_rstudio_project
 #'
 #' @examples
 #'filemanag_folders()
