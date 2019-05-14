@@ -65,6 +65,7 @@ Imports:
     readr,
     rgdal,
     rlang,
+    rprojroot,
     sp,
     sf,
     stats,
