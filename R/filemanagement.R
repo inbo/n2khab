@@ -1,11 +1,11 @@
 #' @title Create the data folder structure and return the path to the data folder
 #'
-#' @description This function will check for the existence of data folders, create them if necessary, and return the path to the data folder (\code{datapath} object)
+#' @description This function will check for the existence of data folders, create them if necessary, and return the path to the data folder
 #'
 #' @param root Character string indicating whether the root folder of the current git repository or the root folder of the current Rstudio project should be used as the folder where you want the data folder structure to be created. Can be "rproj" (the default) for an Rstudio R project or "git" for a git repository.
 #' @param path An optional argument to specify a custom path to a folder where you want the data folder structure to be created. Default is \code{NA} (no custom path).
 #'
-#' @return A new data folder beneath specified root with subfolders \code{10_raw} and \code{20_processed} and an object \code{datapath} that points to the \code{data/} folder
+#' @return A new data folder beneath specified root or path with subfolders \code{10_raw} and \code{20_processed} and a character string that gives the absolute path to the \code{data/} folder
 #'
 #' @importFrom rprojroot
 #' find_root
@@ -14,6 +14,7 @@
 #'
 #' @examples
 #'filemanag_folders()
+#'datapath <- filemanag_folders(root = "git")
 #'
 filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
     # directory setup
@@ -54,7 +55,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
         if (!dir.exists(file.path(datapath, subfolder))) {
             dir.create(file.path(datapath, subfolder))
         } else {
-            message(paste0("The path to ", subfolder, " already exists"))
+            message(paste0("The subfolder ", subfolder, " already exists"))
         }
     }
     datapath
