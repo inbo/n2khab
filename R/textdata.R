@@ -292,6 +292,11 @@ NULL
 #'     n2khab-mne-selections repository}.
 #'     }
 #'   }
+#' \itemize{
+#'     \item{More information on the MHQ-schemes can be found in
+#'     \href{https://pureportal.inbo.be/portal/files/4339795/Westra_etal_2014_MonitoringNatura2000Habitats.pdf}{Westra \emph{et al.} (2014)}.
+#'   }
+#'  }
 #'
 #' @seealso \code{\link{read_schemes}}
 #'
