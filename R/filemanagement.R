@@ -45,7 +45,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
         # create a new directory
         dir.create(file.path(datapath))
     } else {
-        message(paste0("The ", datapath, " already exists"))
+        message(paste0("The path to ", datapath, " already exists"))
     }
 
     # create subfolders
@@ -54,7 +54,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
         if (!dir.exists(file.path(datapath, subfolder))) {
             dir.create(file.path(datapath, subfolder))
         } else {
-            message(paste0("The ", subfolder, " already exists"))
+            message(paste0("The path to ", subfolder, " already exists"))
         }
     }
     datapath
