@@ -264,7 +264,14 @@ read_types <-
         types_base <-
             read_vc(file = file, root = path)
 
-        typeclass_levels <-
+        type_levels <-
+            tibble(codelevel = types_base$type %>% levels) %>%
+            left_join(namelist,
+                      by = c("codelevel" = "code")) %>%
+            rename(namelevel = .data$name,
+                   shortnamelevel = .data$shortname)
+
+                typeclass_levels <-
             tibble(codelevel = types_base$typeclass %>% levels) %>%
             left_join(namelist %>% select(-.data$shortname),
                        by = c("codelevel" = "code")) %>%
@@ -277,6 +284,14 @@ read_types <-
             mutate(type = factor(.data$type,
                                  levels = types_base$type %>%
                                      levels),
+                   type_name =
+                       .data$type %>%
+                       mapvalues(from = type_levels$codelevel,
+                                 to = type_levels$namelevel),
+                   type_shortname =
+                       .data$type %>%
+                       mapvalues(from = type_levels$codelevel,
+                                 to = type_levels$shortnamelevel),
                    typeclass_name =
                        .data$typeclass %>%
                        mapvalues(from = typeclass_levels$codelevel,
