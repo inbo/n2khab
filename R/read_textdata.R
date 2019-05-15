@@ -264,6 +264,7 @@ read_types <-
         types_base <-
             read_vc(file = file, root = path)
 
+        suppressWarnings({
         type_levels <-
             tibble(codelevel = types_base$type %>% levels) %>%
             left_join(namelist,
@@ -315,6 +316,7 @@ read_types <-
                    6, 13:14,
                    7, 15:16) %>%
             as_tibble
+        })
     }
 
 
