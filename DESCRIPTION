@@ -73,6 +73,8 @@ Imports:
     tibble,
     tidyr,
     withr
+Remotes:
+  inbo/git2rdata
 License: GPL-3
 URL: https://github.com/inbo/n2khab-inputs
 Encoding: UTF-8
