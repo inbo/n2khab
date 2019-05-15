@@ -43,6 +43,12 @@ Each combination of \code{scheme} and \code{type} must be unique.}
         }
     }
   }
+
+\itemize{
+    \item{For the MHQ-schemes, the list of sampled types is based on the report of
+    \href{https://pureportal.inbo.be/portal/files/4339795/Westra_etal_2014_MonitoringNatura2000Habitats.pdf}{Westra \emph{et al.} (2014)}.
+  }
+ }
 }
 \description{
 'scheme_types' is a data source in the

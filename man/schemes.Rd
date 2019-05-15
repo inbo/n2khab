@@ -32,6 +32,8 @@ a dataframe with 10 variables:
     collection) to which the scheme belongs, and which is named after the
     environmental compartment (however note that the surfacewater superscheme
     comprises two environmental compartments).}
+    \item{In MHQ, this is used to define the target habitat type of the
+    monitoring scheme.}
   }
   }
   \item{attribute_2}{A second defining attribute of the scheme (if needed).
@@ -73,6 +75,8 @@ a dataframe with 10 variables:
   \itemize{
     \item{In MNE, this is used to tag which schemes are focal schemes and
     which ones are secondary schemes.}
+    \item{In MHQ, this is used to separate aquatic and terrestial
+    monitoring schemes.}
   }
   }
   \item{tag_2}{Optional tag, e.g. a categorization ID explained
@@ -92,6 +96,11 @@ a dataframe with 10 variables:
     n2khab-mne-selections repository}.
     }
   }
+\itemize{
+    \item{More information on the MHQ-schemes can be found in
+    \href{https://pureportal.inbo.be/portal/files/4339795/Westra_etal_2014_MonitoringNatura2000Habitats.pdf}{Westra \emph{et al.} (2014)}.
+  }
+ }
 }
 \description{
 'schemes' is a data source in the
