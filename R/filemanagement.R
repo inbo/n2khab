@@ -1,8 +1,12 @@
-#' @title Create the data folder structure and return the path to the data folder
+#' @title Create a standard data folder structure and return the path to the \code{data} folder
 #'
-#' @description This function will check for the existence of data folders, create them if necessary, and return the path to the data folder
+#' @description This function will check for the existence of default data folders,
+#' create them if necessary, and return the path to the data folder.
 #'
-#' @param root Character string indicating whether the root folder of the current git repository or the root folder of the current Rstudio project should be used as the folder where you want the data folder structure to be created. Can be "rproj" (the default) for an Rstudio R project or "git" for a git repository.
+#' @param root Character string indicating whether the root folder of the current git repository or the root folder of the current Rstudio project should be used as the folder where you want the data folder structure to be created.
+#' Can be \code{"rproj"} (the default) for an RStudio R project or \code{"git"}
+#' for a git repository.
+#'
 #' @param path An optional argument to specify a custom path to a folder where you want the data folder structure to be created. Default is \code{NA} (no custom path).
 #'
 #' @return A new data folder beneath specified root or path with subfolders \code{10_raw} and \code{20_processed} and a character string that gives the absolute path to the \code{data/} folder
