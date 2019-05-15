@@ -65,7 +65,8 @@ NULL
 #'   Contains no duplicates!}
 #'   \item{typelevel}{A factor that labels the type as
 #'    either \code{"main_type"} or \code{"subtype"}.}
-#'   \item{main_type}{The main type that corresponds with \code{type}.
+#'   \item{main_type}{The main type that corresponds with \code{type},
+#'   as a factor.
 #'   Each type is either a subtype of a main type, or is a main type itself.
 #'   This is indicated by \code{typelevel}.}
 #'   \item{typeclass}{A code explained by \code{\link{namelist}},
