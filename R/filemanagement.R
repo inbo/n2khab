@@ -12,6 +12,8 @@
 #' is_git_root
 #' is_rstudio_project
 #'
+#' @export
+#'
 #' @examples
 #'filemanag_folders()
 #'datapath <- filemanag_folders(root = "git")
@@ -75,7 +77,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #' @return downloaded and unzipped file in the folder
 #'
 #'
-#' @examples
+#' @keywords internal
 #'
 filemanag_zenodo <- function(path, doi) {
     if (is.missing(path)) {
@@ -101,8 +103,7 @@ filemanag_zenodo <- function(path, doi) {
 #'
 #' @return downloaded files in the specified folder
 #'
-#'
-#' @examples
+#' @keywords internal
 #'
 filemanag_processed <- function(path, filename) {
 
