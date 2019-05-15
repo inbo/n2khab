@@ -94,11 +94,11 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #' @keywords internal
 #'
 filemanag_zenodo <- function(path, doi) {
-    if (is.missing(path)) {
+    if (missing(path)) {
 
     }
 
-    if (is.missing(doi)) {
+    if (missing(doi)) {
 
     }
 
