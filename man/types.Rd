@@ -6,7 +6,7 @@
 \format{A vc-formatted data source. As such, it corresponds to
 a dataframe with 108 rows and 7 variables:
 \describe{
-  \item{type}{Code of the type.
+  \item{type}{Code of the type, as a factor.
   This is the ID for use in diverse workflows and datasets.
   Names in multiple languages are to be found in \code{\link{namelist}}.
   Only \emph{currently active} codes are kept in this list, in order to avoid
