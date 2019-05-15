@@ -274,7 +274,10 @@ read_types <-
             left_join(namelist, by = c("type" = "code")) %>%
             rename(type_name = .data$name,
                    type_shortname = .data$shortname) %>%
-            mutate(typeclass_name =
+            mutate(type = factor(.data$type,
+                                 levels = types_base$type %>%
+                                     levels),
+                   typeclass_name =
                        .data$typeclass %>%
                        mapvalues(from = typeclass_levels$codelevel,
                                  to = typeclass_levels$namelevel)
