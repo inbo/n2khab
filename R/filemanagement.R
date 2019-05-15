@@ -18,7 +18,8 @@
 #'
 #' @param path An optional argument to specify a custom path to a folder where you want the data folder structure to be created. Default is \code{NA} (no custom path).
 #'
-#' @return A new data folder beneath specified root or path with subfolders \code{10_raw} and \code{20_processed} and a character string that gives the absolute path to the \code{data/} folder
+#' @return A character string that gives the absolute path to the \code{data/}
+#' folder.
 #'
 #' @importFrom rprojroot
 #' find_root
