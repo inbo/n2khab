@@ -3,6 +3,15 @@
 #' @description This function will check for the existence of default data folders,
 #' create them if necessary, and return the path to the data folder.
 #'
+#' @details In n2khab projects a standardized folder setup is used for binary
+#' data, as explained in the \href{doc/vign-020_datastorage.html}{vignette} on
+#' data storage.
+#' The functions creates the folders \code{data}, \code{data/10_raw}
+#' and \code{data/20_processed}, or prints a message if these already
+#' exist.
+#' You can use the value returned by the function as the `path` argument of
+#' functions that read particular data.
+#'
 #' @param root Character string indicating whether the root folder of the current git repository or the root folder of the current Rstudio project should be used as the folder where you want the data folder structure to be created.
 #' Can be \code{"rproj"} (the default) for an RStudio R project or \code{"git"}
 #' for a git repository.
