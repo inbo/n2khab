@@ -57,7 +57,7 @@ NULL
 #' @format A vc-formatted data source. As such, it corresponds to
 #' a dataframe with 108 rows and 7 variables:
 #' \describe{
-#'   \item{type}{Code of the type.
+#'   \item{type}{Code of the type, as a factor.
 #'   This is the ID for use in diverse workflows and datasets.
 #'   Names in multiple languages are to be found in \code{\link{namelist}}.
 #'   Only \emph{currently active} codes are kept in this list, in order to avoid
@@ -65,7 +65,8 @@ NULL
 #'   Contains no duplicates!}
 #'   \item{typelevel}{A factor that labels the type as
 #'    either \code{"main_type"} or \code{"subtype"}.}
-#'   \item{main_type}{The main type that corresponds with \code{type}.
+#'   \item{main_type}{The main type that corresponds with \code{type},
+#'   as a factor.
 #'   Each type is either a subtype of a main type, or is a main type itself.
 #'   This is indicated by \code{typelevel}.}
 #'   \item{typeclass}{A code explained by \code{\link{namelist}},
