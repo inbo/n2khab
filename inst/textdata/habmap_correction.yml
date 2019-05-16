@@ -1,0 +1,9 @@
+..generic:
+  optimize: yes
+  NA string: NA
+  sorting: code
+  hash: 662d4bad797cc4c189d3987f91fc279b652e1e03
+code:
+  class: character
+codeNew:
+  class: character
