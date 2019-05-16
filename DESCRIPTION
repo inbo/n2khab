@@ -58,7 +58,7 @@ Depends:
 Imports:
     DBI,
     dplyr,
-    git2rdata,
+    git2rdata (>= 0.0.4),
     plyr,
     purrr,
     raster,
@@ -74,7 +74,7 @@ Imports:
     tidyr,
     withr
 Remotes:
-  inbo/git2rdata
+  inbo/git2rdata@v0.0.4
 License: GPL-3
 URL: https://github.com/inbo/n2khab-inputs
 Encoding: UTF-8
