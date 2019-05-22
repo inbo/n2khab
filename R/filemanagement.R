@@ -90,20 +90,44 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #'
 #' @return downloaded and unzipped file in the folder
 #'
+#' @importFrom stringr fixed str_remove
+#' @importFrom curl curl_fetch_memory curl_download
+#' @importFrom jsonlite fromJSON
+#'
 #'
 #' @keywords internal
 #'
 filemanag_zenodo <- function(path, doi) {
     if (missing(path)) {
-
+        stop("Please provide a path to which the data need to be downloaded")
     }
-
     if (missing(doi)) {
-
+        stop("Please provide a doi for a Zenodo archive. This is a string starting with 10.5281/zenodo. followed by a unique number") #nolint
     }
 
+    # check for existence of the folder
+    if (!dir.exists(path)) {
+        stop("The path does not exist.")
+    }
 
+    base_url <- 'https://zenodo.org/api/records/'
 
+    record <- stringr::str_remove(doi, stringr::fixed("10.5281/zenodo."))
+
+    req <- curl_fetch_memory(paste0(url, record))
+
+    content <- fromJSON(rawToChar(req$content))
+
+    file_url <- content$files$links$self
+    file_name <- content$files$key
+
+    destfile <- paste0(path, file_name)
+
+    # to do add check-sum?
+
+    curl_download(url = file_url,
+                  destfile = destfile,
+                  quiet = FALSE)
 }
 
 
