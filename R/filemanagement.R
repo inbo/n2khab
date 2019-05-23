@@ -83,15 +83,14 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 
 #' @title Get raw data from a zenodo archive
 #'
-#' The function only works for Zenodo created DOI (not when the DOI is for
+#' This function will download data from Zenodo.
+#' It only works for Zenodo created DOI (not when the DOI is for
 #' example derived from Zookeys.)
-#'
-#' @description This function will download data from zenodo
 #'
 #' @param path local path to where the data need to be written
 #' @param doi doi (a pointer to the Zenodo archive)
 #'
-#' @return downloaded and unzipped file in the folder
+#' @return Downloaded file(s) in the specified folder.
 #'
 #' @importFrom stringr fixed str_remove
 #' @importFrom curl curl_fetch_memory curl_download
