@@ -93,7 +93,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #'
 #' @return downloaded and unzipped file in the folder
 #'
-#' @importFrom stringr fixed str_remove
+#' @importFrom stringr fixed str_remove str_split
 #' @importFrom curl curl_fetch_memory curl_download
 #' @importFrom jsonlite fromJSON
 #'
@@ -136,7 +136,7 @@ filemanag_zenodo <- function(path, doi) {
 
     # donwload each of the files
     for (url in file_urls) {
-        file_name <- tail(stringr::str_split(url, "/")[[1]], 1)
+        file_name <- tail(str_split(url, "/")[[1]], 1)
         destfile <- file.path(path, file_name)
         curl_download(url = url,
                       destfile = destfile,
