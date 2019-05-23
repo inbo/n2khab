@@ -83,10 +83,13 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 
 #' @title Get raw data from a zenodo archive
 #'
+#' The function only works for Zenodo created DOI (not when the DOI is for
+#' example derived from Zookeys.)
+#'
 #' @description This function will download data from zenodo
 #'
-#' @param path path to where the data need to be written
-#' @param doi doi (a pointer to the zenodo archive)
+#' @param path local path to where the data need to be written
+#' @param doi doi (a pointer to the Zenodo archive)
 #'
 #' @return downloaded and unzipped file in the folder
 #'
@@ -97,12 +100,21 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #'
 #' @keywords internal
 #'
+#' @examples
+#' # Single zip file deposition
+#' filemanag_zenodo(".", "10.5281/zenodo.1283345")
+#' # Multiple files deposition
+#' filemanag_zenodo(".", "10.5281/zenodo.1172801")
+#' # Single pdf file depoistion
+#' filemanag_zenodo(".", "10.5281/zenodo.168478")
 filemanag_zenodo <- function(path, doi) {
     if (missing(path)) {
         stop("Please provide a path to which the data need to be downloaded")
     }
     if (missing(doi)) {
-        stop("Please provide a doi for a Zenodo archive. This is a string starting with 10.5281/zenodo. followed by a unique number") #nolint
+        stop(paste0("Please provide a doi for a Zenodo archive. This is a ",
+                   "string starting with 10.5281/zenodo. followed by a ",
+                   "unique number."))
     }
 
     # check for existence of the folder
@@ -110,24 +122,24 @@ filemanag_zenodo <- function(path, doi) {
         stop("The path does not exist.")
     }
 
+    record <- str_remove(doi, fixed("10.5281/zenodo."))
+
+    # Retrieve file name by records call
     base_url <- 'https://zenodo.org/api/records/'
-
-    record <- stringr::str_remove(doi, stringr::fixed("10.5281/zenodo."))
-
-    req <- curl_fetch_memory(paste0(url, record))
-
+    req <- curl_fetch_memory(paste0(base_url, record))
     content <- fromJSON(rawToChar(req$content))
 
-    file_url <- content$files$links$self
-    file_name <- content$files$key
-
-    destfile <- paste0(path, file_name)
+    # extract individual file names and urls
+    file_urls <- content$files$links$self
 
     # to do add check-sum?
-
-    curl_download(url = file_url,
-                  destfile = destfile,
-                  quiet = FALSE)
+    for (url in file_urls) {
+        file_name <- tail(stringr::str_split(url, "/")[[1]], 1)
+        destfile <- file.path(path, file_name)
+        curl_download(url = url,
+                      destfile = destfile,
+                      quiet = FALSE)
+    }
 }
 
 
