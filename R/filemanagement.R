@@ -133,6 +133,8 @@ filemanag_zenodo <- function(path, doi) {
     file_urls <- content$files$links$self
 
     # to do add check-sum?
+
+    # donwload each of the files
     for (url in file_urls) {
         file_name <- tail(stringr::str_split(url, "/")[[1]], 1)
         destfile <- file.path(path, file_name)
