@@ -98,7 +98,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #' @importFrom jsonlite fromJSON
 #'
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' # Single zip file deposition
