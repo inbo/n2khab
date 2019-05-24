@@ -56,9 +56,11 @@ Description: The n2khabutils package is an R package with
 Depends: 
     R (>= 3.5.0)
 Imports:
+    curl,
     DBI,
     dplyr,
     git2rdata (>= 0.0.4),
+    jsonlite,
     plyr,
     purrr,
     raster,
@@ -72,6 +74,7 @@ Imports:
     stringr,
     tibble,
     tidyr,
+    utils,
     withr
 Remotes:
   inbo/git2rdata@v0.0.4

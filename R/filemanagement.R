@@ -96,6 +96,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #' @importFrom curl curl_fetch_memory curl_download
 #' @importFrom jsonlite fromJSON
 #' @importFrom tools md5sum
+#' @importFrom utils tail
 #'
 #'
 #' @export
