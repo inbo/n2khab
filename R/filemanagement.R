@@ -144,11 +144,17 @@ filemanag_zenodo <- function(path, doi) {
         curl_download(url = file_urls[i],
                       destfile = destfile,
                       quiet = FALSE)
-        md5 <- md5sum(destfile)
-        if (all.equal(unname(md5), str_split(file_md5[i], ":")[[1]][2])) {
-            print(paste0("md5sum ", md5, " is correct."))
+        md5 <- unname(md5sum(destfile))
+        zenodo_md5 <- str_split(file_md5[i], ":")[[1]][2]
+        if (all.equal(md5, zenodo_md5)) {
+            print(paste0("md5sum ", md5, " for ", file_name," is correct."))
         } else {
-            warning("md5 sum ", md5, " mismatch.")
+            warning(paste0("md5 sum ",
+                           md5,
+                           " for file",
+                           file_name,
+                           " does not match the Zenodo archived md5 sum ",
+                           zenodo_md5))
         }
     }
 }
