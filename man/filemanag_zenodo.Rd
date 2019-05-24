@@ -2,11 +2,7 @@
 % Please edit documentation in R/filemanagement.R
 \name{filemanag_zenodo}
 \alias{filemanag_zenodo}
-\title{Get raw data from a zenodo archive
-
-This function will download data from Zenodo (\href{https://zenodo.org}).
-It only works for Zenodo created DOI (not when the DOI is for
-example derived from Zookeys.)}
+\title{Get raw data from a Zenodo archive}
 \usage{
 filemanag_zenodo(path, doi)
 }
@@ -19,9 +15,7 @@ filemanag_zenodo(path, doi)
 Downloaded file(s) in the specified folder.
 }
 \description{
-Get raw data from a zenodo archive
-
-This function will download data from Zenodo (\href{https://zenodo.org}).
+This function will download data from Zenodo (\url{https://zenodo.org}).
 It only works for Zenodo created DOI (not when the DOI is for
 example derived from Zookeys.)
 }
