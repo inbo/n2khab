@@ -88,7 +88,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #' example derived from Zookeys.)
 #'
 #' @param path local path to where the data need to be written
-#' @param doi doi (a pointer to the Zenodo archive)
+#' @param doi a doi pointer to the Zenodo archive starting with '10.5281/zenodo.'. See examples.
 #'
 #' @return Downloaded file(s) in the specified folder.
 #'
