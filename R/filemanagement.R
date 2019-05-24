@@ -113,7 +113,7 @@ filemanag_zenodo <- function(path, doi) {
     }
     if (missing(doi)) {
         stop(paste0("Please provide a doi for a Zenodo archive. This is a ",
-                   "string starting with 10.5281/zenodo. followed by a ",
+                   "string starting with '10.5281/zenodo.' followed by a ",
                    "unique number."))
     }
 
