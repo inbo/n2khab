@@ -95,6 +95,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #' @importFrom stringr fixed str_remove str_split
 #' @importFrom curl curl_fetch_memory curl_download
 #' @importFrom jsonlite fromJSON
+#' @importFrom tools md5sum
 #'
 #'
 #' @export
@@ -105,7 +106,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #' filemanag_zenodo(".", "10.5281/zenodo.1283345")
 #' # Multiple files deposition
 #' filemanag_zenodo(".", "10.5281/zenodo.1172801")
-#' # Single pdf file depoistion
+#' # Single pdf file deposition
 #' filemanag_zenodo(".", "10.5281/zenodo.168478")
 #' }
 filemanag_zenodo <- function(path, doi) {
@@ -133,15 +134,22 @@ filemanag_zenodo <- function(path, doi) {
     # extract individual file names and urls
     file_urls <- content$files$links$self
 
-    # to do add check-sum?
+    # extract check-sum(s)
+    file_md5 <- content$files$checksum
 
     # donwload each of the files
-    for (url in file_urls) {
-        file_name <- tail(str_split(url, "/")[[1]], 1)
+    for (i in seq_along(file_urls)) {
+        file_name <- tail(str_split(file_urls[i], "/")[[1]], 1)
         destfile <- file.path(path, file_name)
-        curl_download(url = url,
+        curl_download(url = file_urls[i],
                       destfile = destfile,
                       quiet = FALSE)
+        md5 <- md5sum(destfile)
+        if (all.equal(unname(md5), str_split(file_md5[i], ":")[[1]][2])) {
+            print(paste0("md5sum ", md5, " is correct."))
+        } else {
+            warning("md5 sum ", md5, " mismatch.")
+        }
     }
 }
 
