@@ -100,12 +100,14 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Single zip file deposition
 #' filemanag_zenodo(".", "10.5281/zenodo.1283345")
 #' # Multiple files deposition
 #' filemanag_zenodo(".", "10.5281/zenodo.1172801")
 #' # Single pdf file depoistion
 #' filemanag_zenodo(".", "10.5281/zenodo.168478")
+#' }
 filemanag_zenodo <- function(path, doi) {
     if (missing(path)) {
         stop("Please provide a path to which the data need to be downloaded")
