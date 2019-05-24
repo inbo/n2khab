@@ -13,7 +13,7 @@ filemanag_zenodo(path, doi)
 \arguments{
 \item{path}{local path to where the data need to be written}
 
-\item{doi}{doi (a pointer to the Zenodo archive)}
+\item{doi}{a doi pointer to the Zenodo archive starting with '10.5281/zenodo.'. See examples.}
 }
 \value{
 Downloaded file(s) in the specified folder.
