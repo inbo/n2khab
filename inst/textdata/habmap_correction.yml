@@ -1,8 +1,0 @@
-..generic:
-  optimize: yes
-  NA string: NA
-  hash: 87b51493b875b4f3ce268bc502879c23b3f31875
-code:
-  class: character
-code_corrected:
-  class: character
