@@ -2,19 +2,30 @@
 % Please edit documentation in R/filemanagement.R
 \name{filemanag_zenodo}
 \alias{filemanag_zenodo}
-\title{Get raw data from a zenodo archive}
+\title{Get raw data from a Zenodo archive}
 \usage{
 filemanag_zenodo(path, doi)
 }
 \arguments{
-\item{path}{path to where the data need to be written}
+\item{path}{local path to where the data need to be written}
 
-\item{doi}{doi (a pointer to the zenodo archive)}
+\item{doi}{a doi pointer to the Zenodo archive starting with '10.5281/zenodo.'. See examples.}
 }
 \value{
-downloaded and unzipped file in the folder
+Downloaded file(s) in the specified folder.
 }
 \description{
-This function will download data from zenodo
+This function will download data from Zenodo (\url{https://zenodo.org}).
+It only works for Zenodo created DOI (not when the DOI is for
+example derived from Zookeys.)
 }
-\keyword{internal}
+\examples{
+\dontrun{
+# Single zip file deposition
+filemanag_zenodo(".", "10.5281/zenodo.1283345")
+# Multiple files deposition
+filemanag_zenodo(".", "10.5281/zenodo.1172801")
+# Single pdf file deposition
+filemanag_zenodo(".", "10.5281/zenodo.168478")
+}
+}
