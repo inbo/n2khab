@@ -574,7 +574,7 @@ read_GRTSmh_diffres <-
              level,
              polygon = FALSE) {
 
-        if (!(level %in% 1:9 & is.integer(level))) {
+        if (!(level %in% 1:9 & level %% 1 == 0)) {
             stop("level must be an integer in the range 1 to 9.")
         }
 
