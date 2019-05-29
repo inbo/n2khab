@@ -103,8 +103,8 @@ dec_to_base4frac <-
 #' integer values.
 #' Before the actual conversion happens, leading digits from the full GRTS
 #' address can be discarded according to the \code{level} specified by the user.
-#' Hence, the result may correspond to the GRTS ranking at a higher spatial
-#' level.
+#' Hence, the result may correspond to the GRTS ranking at a lower spatial
+#' resolution.
 #'
 #' For example, the base 4 fraction \code{0.0000000000100}
 #' is converted into decimal integer \code{16} (\code{= 4^2}) as long as the
@@ -272,9 +272,9 @@ base4frac_to_dec <-
 #' \code{INT4S} datatype.
 #'
 #' The higher-level ranking numbers of the RasterBrick allow spatially balanced
-#' samples at higher spatial levels than the resolution of 32, and can also be
+#' samples at lower spatial resolution than that of 32 m, and can also be
 #' used for aggregation purposes.
-#' The provided hierarchical levels correspond to the vector
+#' The provided hierarchical levels correspond to the resolutions vector
 #' \code{32 * 2^(0:9)} (minimum: 32 meters, maximum: 16384 meters), with
 #' the corresponding RasterBrick layers named as \code{level0} to \code{level9}.
 #'
@@ -385,6 +385,10 @@ read_GRTSmh <-
 #' (base 4) integers.
 #' This approach follows the one of Stevens & Olsen (2004) to represent
 #' the reverse hierarchical order in a GRTS sample as base-4-fraction addresses.
+#'
+#' See R-code in the \href{https://github.com/inbo/n2khab-inputs}{
+#' n2khab-inputs} repository for the creation from
+#' the \code{GRTSmaster_habitats} data source.
 #'
 #' Beware that not all GRTS ranking numbers are present in the data source, as
 #' the original GRTS raster has been clipped with the Flemish outer borders

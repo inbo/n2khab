@@ -76,9 +76,9 @@ Both GeoTIFFs (\code{GRTSmaster_habitats}, \code{GRTSmh_brick}) use the
 \code{INT4S} datatype.
 
 The higher-level ranking numbers of the RasterBrick allow spatially balanced
-samples at higher spatial levels than the resolution of 32, and can also be
+samples at lower spatial resolution than that of 32 m, and can also be
 used for aggregation purposes.
-The provided hierarchical levels correspond to the vector
+The provided hierarchical levels correspond to the resolutions vector
 \code{32 * 2^(0:9)} (minimum: 32 meters, maximum: 16384 meters), with
 the corresponding RasterBrick layers named as \code{level0} to \code{level9}.
 }

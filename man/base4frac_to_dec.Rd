@@ -26,8 +26,8 @@ raster data source \code{GRTSmaster_habitats} into decimal (i.e. base 10)
 integer values.
 Before the actual conversion happens, leading digits from the full GRTS
 address can be discarded according to the \code{level} specified by the user.
-Hence, the result may correspond to the GRTS ranking at a higher spatial
-level.
+Hence, the result may correspond to the GRTS ranking at a lower spatial
+resolution.
 }
 \details{
 For example, the base 4 fraction \code{0.0000000000100}

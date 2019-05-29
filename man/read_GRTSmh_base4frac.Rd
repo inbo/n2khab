@@ -44,6 +44,10 @@ Long base 4 fractions seem to be handled and stored easier than long
 This approach follows the one of Stevens & Olsen (2004) to represent
 the reverse hierarchical order in a GRTS sample as base-4-fraction addresses.
 
+See R-code in the \href{https://github.com/inbo/n2khab-inputs}{
+n2khab-inputs} repository for the creation from
+the \code{GRTSmaster_habitats} data source.
+
 Beware that not all GRTS ranking numbers are present in the data source, as
 the original GRTS raster has been clipped with the Flemish outer borders
 (i.e., not excluding the Brussels Capital Region).
