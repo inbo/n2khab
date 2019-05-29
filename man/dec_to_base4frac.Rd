@@ -55,6 +55,7 @@ Resources. Journal of the American Statistical Association 99 (465):
 \seealso{
 Other functions involved in processing the \code{GRTSmaster_habitats} data source: \code{\link{base4frac_to_dec}},
   \code{\link{read_GRTSmh_base4frac}},
+  \code{\link{read_GRTSmh_diffres}},
   \code{\link{read_GRTSmh}}
 }
 \concept{functions involved in processing the \code{GRTSmaster_habitats} data source}

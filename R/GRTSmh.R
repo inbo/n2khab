@@ -464,3 +464,154 @@ read_GRTSmh_base4frac <-
 
 
 
+#' Return a RasterLayer or an \code{sf} polygon layer from the processed data
+#' source \code{GRTSmh_diffres}
+#'
+#' The \code{GRTSmh_diffres} data source is derived from
+#' \code{GRTSmh_brick}.
+#' It provides the hierarchical levels 1 to 9 of the
+#' GRTS cell addresses at the corresponding spatial resolution.
+#' The function returns one selected level, either as an \code{sf} polygon layer
+#' or as a RasterLayer.
+#'
+#' The \code{GRTSmh_diffres} data source file is a file collection, composed of
+#' nine monolayered GeoTIFF files of the \code{INT4S} datatype plus a GeoPackage
+#' with nine polygon layers:
+#' \itemize{
+#' \item{The polygon layers in the GeoPackage are the dissolved, polygonized
+#' versions of levels 1 to 9 of the
+#' \code{GRTSmh_brick} data source (see \code{\link{read_GRTSmh}}).
+#' This means that they provide the decimal (i.e. base 10) integer values of
+#' the respective \emph{higher hierarchical levels} of the GRTS cell addresses
+#' of the raw data source \code{GRTSmaster_habitats}.
+#' Hence, the polygons are typically squares that correspond to the GRTS cell at
+#' the specified hierarchical level.
+#' The polygon layer is however restricted to the non-\code{NA} cells of the original
+#' \code{GRTSmaster_habitats} raster.
+#' Consequently, a part of the polygons is clipped along the Flemish border.
+#' }
+#' \item{The GeoTIFF files provide the respective levels 1 to 9 of the
+#' \code{GRTSmh_brick} data source in a raster format, at the resolution that
+#' correspond to the GRTS cell at the specified hierarchical level.
+#' The presence of \code{NA} cells around Flanders at level 0 implies that, with
+#' decreasing resolution, the raster's extent increases and larger areas outside
+#' Flanders are covered by non-\code{NA} cells along the border.
+#' }
+#' }
+#'
+#' The function returns the selected \code{level} either as an \code{sf} polygon
+#' layer or as a RasterLayer, depending on the
+#' \code{polygon} argument.
+#'
+#' The higher-level ranking numbers (compared to the original level 0) allow
+#' spatially balanced samples at lower spatial resolution than that of 32 m,
+#' and can also be used for aggregation purposes.
+#'
+#' The levels 1 to 9 correspond to the resolutions vector
+#' \code{32 * 2^(1:9)} in meters:
+#'
+#' \tabular{rr}{
+#' level \tab    resolution (m)\cr
+#' 1 \tab    64\cr
+#' 2 \tab   128\cr
+#' 3 \tab   256\cr
+#' 4 \tab   512\cr
+#' 5 \tab  1024\cr
+#' 6 \tab  2048\cr
+#' 7 \tab  4096\cr
+#' 8 \tab  8192\cr
+#' 9 \tab 16384
+#' }
+#'
+#' See R-code in the \href{https://github.com/inbo/n2khab-inputs}{
+#' n2khab-inputs} repository for the creation from
+#' the \code{GRTSmh_brick} data source.
+#'
+#' Beware that not all original GRTS ranking numbers at the specified level are
+#' provided, as the original GRTS raster has been clipped with the Flemish
+#' outer borders (i.e., not excluding the Brussels Capital Region).
+#'
+#' @param path The directory of the data source.
+#' Considering the default value of the \code{subdir} argument, use this argument
+#' in scripts to set the location of the folder '\strong{\code{data}}'.
+#' @param subdir The subdirectory path of the data source, as viewed from
+#' \code{path}.
+#' The default follows the data management advice in the
+#' \href{https://github.com/inbo/n2khab-inputs}{n2khab-inputs} repository.
+#' @param level Integer in the range from 1 to 9; determines the spatial
+#' resolution. See the Details section.
+#' @param polygon Logical; determines whether a polygon layer or a
+#' RasterLayer is returned. See the Details section.
+#'
+#' @return
+#' Either a RasterLayer or a Simple feature collection of geometry type
+#' \code{POLYGON}.
+#'
+#' @family functions involved in processing the \code{GRTSmaster_habitats} data source
+#'
+#' @examples
+#' \dontrun{
+#' # This example supposes that your working directory is a folder next to
+#' # the 'n2khab-inputs' repository AND that the
+#' # 'GRTSmh_diffres' data source is present in the default subdirectory.
+#' # In all other cases, this example won't work but at least you can consider
+#' # what to do.
+#' r <- read_GRTSmh_diffres("../n2khab-inputs/data", level = 7)
+#' r
+#' sp::spplot(r)
+#' p <- read_GRTSmh_diffres("../n2khab-inputs/data", level = 7, polygon = TRUE)
+#' p
+#' plot(p)
+#' }
+#'
+#' @export
+#' @importFrom stringr str_c
+#' @importFrom sf st_read
+#' @importFrom raster raster
+read_GRTSmh_diffres <-
+    function(path,
+             subdir = "20_processed/GRTSmh_diffres",
+             level,
+             polygon = FALSE) {
+
+        if (!(level %in% 1:9 & is.integer(level))) {
+            stop("level must be an integer in the range 1 to 9.")
+        }
+
+        if (polygon) {
+
+            st_read(file.path(path, subdir,
+                              "GRTSmh_diffres.gpkg"),
+                    layer = str_c("GRTSmh_polygonized_level", level),
+                    quiet = TRUE)
+
+        } else {
+
+            r <- raster(file.path(path, subdir,
+                             str_c("GRTSmh_diffres.",
+                                   level, ".tif")))
+            names(r) <- str_c("level", level)
+            r
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
