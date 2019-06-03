@@ -55,7 +55,7 @@ Consequently, a part of the polygons is clipped along the Flemish border.
 }
 \item{The GeoTIFF files provide the respective levels 1 to 9 of the
 \code{GRTSmh_brick} data source in a raster format, at the resolution that
-correspond to the GRTS cell at the specified hierarchical level.
+corresponds to the GRTS cell at the specified hierarchical level.
 The presence of \code{NA} cells around Flanders at level 0 implies that, with
 decreasing resolution, the raster's extent increases and larger areas outside
 Flanders are covered by non-\code{NA} cells along the border.
@@ -90,7 +90,7 @@ See R-code in the \href{https://github.com/inbo/n2khab-inputs}{
 n2khab-inputs} repository for the creation from
 the \code{GRTSmh_brick} data source.
 
-Beware that not all original GRTS ranking numbers at the specified level are
+Beware that not all GRTS ranking numbers at the specified level are
 provided, as the original GRTS raster has been clipped with the Flemish
 outer borders (i.e., not excluding the Brussels Capital Region).
 }
