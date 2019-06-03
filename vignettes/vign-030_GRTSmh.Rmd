@@ -24,7 +24,7 @@ datapath <- "../../data"
 
 ## Intro
 
-With this vignette, you get acquainted with three functions that return a RasterLayer or a RasterBrick:
+With this vignette, you get acquainted with three functions that usually return a RasterLayer or a RasterBrick:
 
 - `read_GRTSmh()`
 - `read_GRTSmh_base4frac()`
