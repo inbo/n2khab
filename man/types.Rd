@@ -4,7 +4,7 @@
 \alias{types}
 \title{Documentation of included data source 'types'}
 \format{A vc-formatted data source. As such, it corresponds to
-a dataframe with 108 rows and 7 variables:
+a dataframe with 7 variables:
 \describe{
   \item{type}{Code of the type, as a factor.
   This is the ID for use in diverse workflows and datasets.
