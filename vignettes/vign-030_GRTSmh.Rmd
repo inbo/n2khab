@@ -44,7 +44,7 @@ The following data sources are available:
 - the raw data source `GRTSmaster_habitats`, discussed above and available at [Zenodo](https://zenodo.org/record/2611234)
 - processed data sources:
     - `GRTSmh_brick`: 10-layered GeoTIFF with the decimal integer ranking numbers of 10 hierarchical levels (0 - 9) of the GRTS cell addresses, including the one from `GRTSmaster_habitats` (i.e. level 0; for more details see the [read_GRTSmh() documentation](../html/read_GRTSmh.html))
-    - `GRTSmh_diffres`: file collection composed of nine monolayered GeoTIFF files plus a GeoPackage with nine polygon layers. They provide the hierarchical levels 1 to 9 of the `GRTSmh_brick` data source at the corresponding spatial resolution, i.e. at lower resolutions than `GRTSmh_brick` (for more details see the [read_GRTSmh_diffres() documentation](../html/read_GRTSmh_diffres.html))
+    - `GRTSmh_diffres`: file collection composed of nine monolayered GeoTIFF files plus a GeoPackage with six polygon layers. They provide the hierarchical levels 1 to 9 of the `GRTSmh_brick` data source at the corresponding spatial resolution, i.e. at lower resolutions than `GRTSmh_brick` (for more details see the [read_GRTSmh_diffres() documentation](../html/read_GRTSmh_diffres.html))
     - `GRTSmh_base4frac`: is like a mirror to `GRTSmaster_habitats`, holding the ranking numbers as base 4 fractions (for more details see the [read_GRTSmh_base4frac() documentation](../html/read_GRTSmh_base4frac.html))
 
 For more information on data storage and locations, there is a [specific vignette](../doc/vign-020_datastorage.html).
@@ -115,7 +115,8 @@ read_GRTSmh_diffres(datapath, level = 5)
 #> values     : 1, 65529  (min, max)
 ```
 
-Alternatively, a dissolved, polygonized version of the corresponding `GRTSmh_brick` level can be returned as an `sf` object:
+Alternatively, a dissolved, polygonized variant of the corresponding `GRTSmh_brick` level can be returned as an `sf` object.
+In order not to inflate the data source, this was only made available for levels 4 to 9.
 
 ```{r eval=FALSE}
 read_GRTSmh_diffres(datapath, level = 5, polygon = TRUE)

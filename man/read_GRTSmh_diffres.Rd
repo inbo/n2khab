@@ -33,25 +33,30 @@ The \code{GRTSmh_diffres} data source is derived from
 \code{GRTSmh_brick}.
 It provides the hierarchical levels 1 to 9 of the
 GRTS cell addresses at the corresponding spatial resolution.
-The function returns one selected level, either as an \code{sf} polygon layer
-or as a RasterLayer.
+The function returns one selected level, either as a RasterLayer or as an
+\code{sf} polygon layer (in the latter case, only levels 4 to 9 are
+provided).
 }
 \details{
 The \code{GRTSmh_diffres} data source file is a file collection, composed of
 nine monolayered GeoTIFF files of the \code{INT4S} datatype plus a GeoPackage
-with nine polygon layers:
+with six polygon layers:
 \itemize{
 \item{The polygon layers in the GeoPackage are the dissolved, polygonized
-versions of levels 1 to 9 of the
+versions of levels 4 to 9 of the
 \code{GRTSmh_brick} data source (see \code{\link{read_GRTSmh}}).
 This means that they provide the decimal (i.e. base 10) integer values of
-the respective \emph{higher hierarchical levels} of the GRTS cell addresses
+these \emph{higher hierarchical levels} of the GRTS cell addresses
 of the raw data source \code{GRTSmaster_habitats}.
 Hence, the polygons are typically squares that correspond to the GRTS cell at
 the specified hierarchical level.
 The polygon layer is however restricted to the non-\code{NA} cells of the original
 \code{GRTSmaster_habitats} raster.
 Consequently, a part of the polygons is clipped along the Flemish border.
+Levels 1 to 3 are not provided for the whole of Flanders,
+because this would inflate the GPKG file.
+You can look at the \href{https://github.com/inbo/n2khab-inputs}{source code}
+to do such things.
 }
 \item{The GeoTIFF files provide the respective levels 1 to 9 of the
 \code{GRTSmh_brick} data source in a raster format, at the resolution that
