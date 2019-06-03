@@ -41,9 +41,9 @@ code	lang	name	shortname
 5130_hei	en	Juniperus communis formations on heaths	Juniperus communis on heaths
 5130_kalk	en	Juniperus communis formations on calcareous grasslands	Juniperus communis on calcareous grasslands
 6120	en	Xeric sand calcareous grasslands	Pioneer calcareous sand swards
-6210	en	Semi-natural dry grasslands and scrubland facies on calcareous substrates (Festuco-Brometalia) (* important orchid sites)	Calcareous grasslands
+6210	en	Semi-natural dry grasslands and scrubland facies on calcareous substrates (Festuco-Brometalia) (* important orchid sites)	Calcareous grasslands and scrubs
 6210_hk	en	Calcareous grasslands (Gentiano-Koelerietum)	Calcareous grasslands
-6210_sk	en	Calcareous grassland fringes and scrubs	Calcareous grassland fringes and scrubs
+6210_sk	en	Calcareous grassland fringes and scrubs	Calcareous fringes and scrubs
 6230	en	Species-rich Nardus grasslands, on silicious substrates in mountain areas (and submountain areas in Continental Europe)	Nardus grasslands
 6230_ha	en	Species-rich Agrostis grasslands	Species-rich Agrostis grasslands
 6230_hmo	en	Wet Nardus grasslands	Wet Nardus grasslands
@@ -266,7 +266,7 @@ terr	en	terrestrial	NA
 2190	nl	Vochtige duinvalleien	vochtige duinvalleien
 2190_a	nl	habitatwaardige plassen in vochtige duinvalleien  (als 2190 in de Habitatkaart; enkel via extra selectie in de BWK-velden te selecteren)	duinplassen
 2190_mp	nl	duinpannen met kalkminnende vegetaties	duinpannen (kalkrijk)
-2190_overig	nl	habitatwaardige plassen in vochtige duinvalleien  (als 2190 in de Habitatkaart; enkel via extra selectie in de BWK-velden te selecteren)	vochtige duinvalleien - overig
+2190_overig	nl	overige vegetaties in vochtige duinvalleien  (als 2190 in de Habitatkaart; enkel via extra selectie in de BWK-velden te selecteren)	vochtige duinvalleien - overige vegetaties
 2310	nl	Psammofiele heide met Calluna en Genista	droge heide op landduinen
 2330	nl	Open grasland met Corynephorus- en Agrostissoorten op landduinen	open grasland op landduinen
 2330_bu	nl	buntgrasverbond	buntgrasvegetatie
@@ -403,7 +403,7 @@ ep_09.1_explan	nl	Menselijke activiteit die een gedragswijziging veroorzaakt en/
 ep_09.2	nl	9.2 Licht en straling	09.2_licht
 ep_09.3	nl	9.3 Beweging en andere visuele verstoring	09.3_beweging
 ep_101	nl	101 Klimaatverandering in droge perioden	101_klim_droog
-ep_101_explan	nl	Een toename van temperatuur, wind en CO2 in de atmosfeer en een afname resp. toename van de neerslaghoeveelheden. Dit treedt op gedurende een voor de levensgemeenschap betekenisvolle periode (bv. maand / seizoen), in zodanige mate dat deze er negatief door wordt beïnvloed, en waarbij de effecten supplementair zijn boven die van milieudrukken, ontstaan op gebiedsniveau. Dit met uitsluiting van rechtstreekse invloeden van zeespiegelstijging.	NA
+ep_101_explan	nl	Een toename van temperatuur, wind en CO2 in de atmosfeer en een afname resp. toename van de neerslaghoeveelheden, inclusief extreme events. Dit treedt op gedurende een voor de levensgemeenschap betekenisvolle periode (bv. maand / seizoen), in zodanige mate dat deze er negatief door wordt beïnvloed, en waarbij de effecten supplementair zijn boven die van milieudrukken, ontstaan op gebiedsniveau. Dit met uitsluiting van rechtstreekse invloeden van zeespiegelstijging.	NA
 ep_102	nl	102 Klimaatverandering in natte perioden	102_klim_nat
 ep_103	nl	103 Klimaatverandering: zeespiegelstijging	103_klim_zee
 ep_103_explan	nl	De verhoging van de zeespiegel en de toename van het getijdenverschil als gevolg van klimaatverandering, in zodanige mate dat dit de beschouwde kust- of estuariene levensgemeenschap negatief beïnvloedt.	NA
@@ -472,7 +472,7 @@ MNE	nl	Monitoringprogramma natuurlijk milieu	NA
 rbbah	nl	brak tot zilt water	brak tot zilt water
 rbbha	nl	soortenrijk, niet habitatwaardig struisgrasvegetatie	soortenrijke struisgrasvegetatie
 rbbhc	nl	dotterbloemgrasland	dotterbloemgrasland
-rbbhf	nl	moerasspirearuigte met graslandkenmerken	moerasspirearuigte
+rbbhf	nl	moerasspirearuigte met graslandkenmerken	moerasspirearuigte met graslandkenmerken
 rbbhfl	nl	moerasspirearuigte met graslandkenmerken – zure variant (als rbbhf in de Habitatkaart; enkel via extra selectie in de BWK-velden te selecteren)	natte ruigte met grote wederik en hennegras
 rbbkam	nl	kamgrasland	kamgrasland
 rbbkam+	nl	soortenrijk kamgrasland	soortenrijk kamgrasland
