@@ -88,10 +88,8 @@ pressure-classes, and for textual explanations.
 }
 
 \examples{
-\dontrun{
 read_env_pressures()
 read_env_pressures(lang = "nl")
-}
 
 }
 \seealso{

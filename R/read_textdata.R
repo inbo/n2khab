@@ -44,10 +44,8 @@
 #' @family reading functions for n2khab-referencelists
 #'
 #' @examples
-#' \dontrun{
 #' read_namelist()
 #' read_namelist(lang = "nl")
-#' }
 #'
 #' @export
 #' @importFrom git2rdata read_vc
@@ -229,10 +227,8 @@ namelist_factor <-
 #' @family reading functions for n2khab-referencelists
 #'
 #' @examples
-#' \dontrun{
 #' read_types()
 #' read_types(lang = "nl")
-#' }
 #'
 #' @export
 #' @importFrom git2rdata read_vc
@@ -409,10 +405,8 @@ read_types <-
 #' @family reading functions for n2khab-referencelists
 #'
 #' @examples
-#' \dontrun{
 #' read_env_pressures()
 #' read_env_pressures(lang = "nl")
-#' }
 #'
 #' @export
 #' @importFrom git2rdata read_vc
@@ -585,10 +579,8 @@ read_env_pressures <-
 #' @family reading functions for n2khab-referencelists
 #'
 #' @examples
-#' \dontrun{
 #' read_schemes()
 #' read_schemes(lang = "nl")
-#' }
 #'
 #' @export
 #' @importFrom git2rdata read_vc
@@ -777,10 +769,8 @@ read_schemes <-
 #' @family reading functions for n2khab-referencelists
 #'
 #' @examples
-#' \dontrun{
 #' read_scheme_types()
 #' read_scheme_types(lang = "nl")
-#' }
 #'
 #' @export
 #' @importFrom git2rdata read_vc

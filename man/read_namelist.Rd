@@ -53,10 +53,8 @@ names (\code{lang = "en"}) are returned.
 }
 
 \examples{
-\dontrun{
 read_namelist()
 read_namelist(lang = "nl")
-}
 
 }
 \seealso{

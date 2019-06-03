@@ -79,10 +79,8 @@ names (\code{lang = "en"}) are returned for types, typeclasses and tags.
 }
 
 \examples{
-\dontrun{
 read_types()
 read_types(lang = "nl")
-}
 
 }
 \seealso{

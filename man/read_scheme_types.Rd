@@ -107,10 +107,8 @@ names (\code{lang = "en"}) are returned.
 }
 
 \examples{
-\dontrun{
 read_scheme_types()
 read_scheme_types(lang = "nl")
-}
 
 }
 \seealso{

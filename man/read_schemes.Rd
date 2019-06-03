@@ -90,10 +90,8 @@ and tags.
 }
 
 \examples{
-\dontrun{
 read_schemes()
 read_schemes(lang = "nl")
-}
 
 }
 \seealso{
