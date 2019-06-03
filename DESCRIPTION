@@ -61,6 +61,7 @@ Imports:
     dplyr,
     git2rdata (>= 0.0.4),
     jsonlite,
+    magrittr,
     plyr,
     purrr,
     raster,
