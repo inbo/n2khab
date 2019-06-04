@@ -36,7 +36,7 @@ GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
 }
 \details{
 The data source \code{GRTSmaster_habitats}, provided and documented in
-\href{https://zenodo.org/record/2611234}{Zenodo}, is a monolayered GeoTIFF
+\href{https://doi.org/10.5281/zenodo.2611233}{Zenodo}, is a monolayered GeoTIFF
 file covering the whole of Flanders and the Brussels Capital Region at a
 resolution of 32 m.
 Its values are unique decimal integer ranking numbers from the GRTS
