@@ -78,7 +78,7 @@ Imports:
     utils,
     withr
 Remotes:
-  inbo/git2rdata@0.0.5
+  ropensci/git2rdata@0.0.5
 License: GPL-3
 URL: https://github.com/inbo/n2khab-inputs
 Encoding: UTF-8
