@@ -41,7 +41,7 @@
 #'   of 2 or 3 possible types, separated with a ','. The different
 #'   possible vegetation types are split up and one row is created for
 #'   each of them. The variable \code{certain} will be \code{FALSE} if
-#'   a patch consists of 2 or possible vegetation types, and \code{TRUE}
+#'   a patch consists of 2 or 3 possible vegetation types, and \code{TRUE}
 #'   if only one vegetation type is provided.
 #'   \item For some patches the original vegetation code in the
 #'   \code{habitatmap} was not consistent with general coding syntax or
