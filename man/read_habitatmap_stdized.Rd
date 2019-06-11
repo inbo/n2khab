@@ -33,7 +33,7 @@ A list of two objects:
     \item \code{polygon_id}
     \item \code{patch_id}
     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
-    \item \code{phab}: proportion of polygon covered by patch.
+    \item \code{phab}: proportion of polygon covered by patch, as a percentage.
     \item \code{certain}: \code{TRUE} when vegetation type is certain and
      \code{FALSE} when vegetation type is uncertain.
     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
@@ -82,7 +82,7 @@ following steps:
   of 2 or 3 possible types, separated with a ','. The different
   possible vegetation types are split up and one row is created for
   each of them. The variable \code{certain} will be \code{FALSE} if
-  a patch consists of 2 or possible vegetation types, and \code{TRUE}
+  a patch consists of 2 or 3 possible vegetation types, and \code{TRUE}
   if only one vegetation type is provided.
   \item For some patches the original vegetation code in the
   \code{habitatmap} was not consistent with general coding syntax or
