@@ -1,5 +1,5 @@
 ..generic:
-  git2rdata: 0.0.4
+  git2rdata: 0.0.5
   optimize: no
   NA string: NA
   sorting: ep_code

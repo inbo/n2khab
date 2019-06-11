@@ -59,7 +59,7 @@ Imports:
     curl,
     DBI,
     dplyr,
-    git2rdata (>= 0.0.4),
+    git2rdata (>= 0.0.5),
     jsonlite,
     magrittr,
     plyr,
@@ -78,7 +78,7 @@ Imports:
     utils,
     withr
 Remotes:
-  inbo/git2rdata@v0.0.4
+  inbo/git2rdata@0.0.5
 License: GPL-3
 URL: https://github.com/inbo/n2khab-inputs
 Encoding: UTF-8
