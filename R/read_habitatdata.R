@@ -77,7 +77,7 @@
 #'     \item \code{polygon_id}
 #'     \item \code{patch_id}
 #'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
-#'     \item \code{phab}: proportion of polygon covered by patch.
+#'     \item \code{phab}: proportion of polygon covered by patch, as a percentage.
 #'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
 #'      \code{FALSE} when vegetation type is uncertain.
 #'     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
