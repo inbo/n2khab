@@ -1,4 +1,4 @@
-# Collecting 'schemes' and 'scheme_types' information and moving data into three n2khabutils data sources
+# Collecting 'schemes' and 'scheme_types' information and moving data into three n2khab data sources
 
 The concerned data sources are:
 
@@ -100,8 +100,8 @@ schemes_schemetypes <-
 Set path and filename of `schemes` and `scheme_types`:
 
 ```{r}
-schemes_path <- "../../n2khabutils/inst/textdata/schemes"
-scheme_types_path <- "../../n2khabutils/inst/textdata/scheme_types"
+schemes_path <- "../../inst/textdata/schemes"
+scheme_types_path <- "../../inst/textdata/scheme_types"
 ```
 
 Separately defining spatial restrictions for specific schemes:

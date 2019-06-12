@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(n2khabutils)
+library(n2khab)
 library(magrittr)
 library(knitr)
 datapath <- "../../data"
@@ -163,7 +163,7 @@ Note that the used options are necessary when treating these base-4-fraction GRT
 Also, be warned that R does not actually regard the values as base 4, but as base 10. [^base4]
 
 [^base4]: So, what really matters is only the notation with many digits, to be _regarded_ as a base 4 fraction (and hence, handling it as a character in conversions is often necessary).
-The `n2khabutils` package also exports a `dec_to_base4frac()` and a `base4frac_to_dec()` function in its namespace.
+The `n2khab` package also exports a `dec_to_base4frac()` and a `base4frac_to_dec()` function in its namespace.
 These functions will be relevant if you need to do such conversions yourself, and they are used in the code to generate the processed data sources.
 
 

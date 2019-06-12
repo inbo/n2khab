@@ -15,10 +15,10 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(n2khabutils)
+library(n2khab)
 ```
 
-## Data sources used by `n2khabutils` functions
+## Data sources used by `n2khab` functions
 
 Apart from a few textual datasets, provided directly with this package,
 most data sources are made available through some cloud-based infrastructure.
@@ -40,7 +40,7 @@ _XXX the latter is to be implemented and further referred here XXX_
 Data sources evolve, and hence, data source versions succeed one another.
 To ease reproducibility, this package therefore works with _locally stored_ data sources.
 
-The `n2khabutils` functions, aimed at reading these data and returning them in R in some kind of standardized way, always provide _arguments_ to specify the file's name and location -- so you can in fact freely choose these.
+The `n2khab` functions, aimed at reading these data and returning them in R in some kind of standardized way, always provide _arguments_ to specify the file's name and location -- so you can in fact freely choose these.
 However, to **ease collaboration in scripting**, it is highly recommended to follow specific [data management standards for N2KHAB scripting workflows](https://github.com/inbo/n2khab-inputs/blob/master/datamanagement.md), which are also applied in the cloud storage.
 Moreover, by default the _functions assume_ these locations and filenames to make your life easier.
 

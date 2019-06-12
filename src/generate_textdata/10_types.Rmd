@@ -1,11 +1,11 @@
-# Retrieving the list of current type codes from the reference googlesheet and splitting it in two n2khabutils data sources
+# Retrieving the list of current type codes from the reference googlesheet and splitting it in two n2khab data sources
 
 ## Initialize `namelist` with typeclasses
 
 Set path and filename of the namelist:
 
 ```{r}
-namelist_path <- "../../n2khabutils/inst/textdata/namelist"
+namelist_path <- "../../inst/textdata/namelist"
 ```
 
 
@@ -102,7 +102,7 @@ source_df %>%
 Set path and filename of `types`:
 
 ```{r}
-types_path <- "../../n2khabutils/inst/textdata/types"
+types_path <- "../../inst/textdata/types"
 ```
 
 Write the data source `types`:

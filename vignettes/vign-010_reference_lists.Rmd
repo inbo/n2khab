@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(n2khabutils)
+library(n2khab)
 ```
 
 
@@ -24,7 +24,7 @@ library(n2khabutils)
 With reference lists we mean complete and authorative lists of all items or categories that constitute some collection.
 Their purpose is typically to promote standardization and thereby to ease collaborative work.
 
-The `n2khabutils` package provides the following built-in reference lists, 
+The `n2khab` package provides the following built-in reference lists, 
 relevant to N2KHAB projects [^N2KHAB]:
 
 - [types](../html/types.html): checklist of types (habitat (sub)types and regionally important biotopes), 
@@ -46,7 +46,7 @@ Additionally, [namelist](../html/namelist.html) provides names and (optionally) 
 Beside enlisting all items, the reference lists provide additional information on them, sometimes in a generic way with variables like 'attribute_1', 'attribute_2', 'tag_1' and so on (explained in the **documentation files**).
 This information may be of a defining nature (and obligate), or may just provide useful categories and tags to filter by.
 
-Reading functions of the `n2khabutils` package return the reference lists as **tibbles**, with appropriate text from `namelist` added.
+Reading functions of the `n2khab` package return the reference lists as **tibbles**, with appropriate text from `namelist` added.
 A tibble is a dataframe that makes working in the tidyverse a little [easier](https://r4ds.had.co.nz/tibbles.html).
 
 

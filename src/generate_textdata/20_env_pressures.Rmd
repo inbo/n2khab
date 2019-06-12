@@ -1,4 +1,4 @@
-# Retrieving the current list of environmental pressures from the reference googlesheet and moving data to two n2khabutils data sources
+# Retrieving the current list of environmental pressures from the reference googlesheet and moving data to two n2khab data sources
 
 ## Append extra names to `namelist`
 
@@ -85,7 +85,7 @@ source_df %>%
 Set path and filename of `env_pressures`:
 
 ```{r}
-ep_path <- "../../n2khabutils/inst/textdata/env_pressures"
+ep_path <- "../../inst/textdata/env_pressures"
 ```
 
 We generate it manually because of the difficulties with cells spanning several rows in the googlesheet:

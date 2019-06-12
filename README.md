@@ -1,8 +1,8 @@
 ## Welcome
 
-### ... to the n2khabutils package
+### ... to the n2khab package
 
-This repo holds _the **n2khabutils** R package with data definitions and preprocessing functions_, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 habitats and regionally important biotopes (RIBs).
+This repo holds _the **n2khab** R package with data definitions and preprocessing functions_, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 habitats and regionally important biotopes (RIBs).
 Hence the package provides broad _utilities_ (**utils**) for Natura 2000 (**n2k**) habitats (**hab**) analyses in Flanders.
 It consequently supports other _N2KHAB_ projects, i.e. projects that focus on Natura 2000 habitat (and which may as well use the _n2khab_-prefix for their git repository name).
 
@@ -57,7 +57,7 @@ This is the structure of the repo:
     ├── 10_raw
     ├── 20_processed        <- Either copy from a source location, or generate yourself.
 ├── src                     <- Put scripts / R markdown files here.
-├── n2khabutils             <- R-package
+├── n2khab                  <- R-package
     ├── inst
         ├── textdata        <- Textual data delivered with the package (in vc-format).
                                They can be read into R by package functions or with
@@ -65,7 +65,7 @@ This is the structure of the repo:
     ├── man
     ├── R                   <- Package functions are to be made here.
     ├── DESCRIPTION
-    ├── n2khabutils.Rproj   <- RStudio project file for package contributing & management
+    ├── n2khab.Rproj        <- RStudio project file for package contributing & management
     ├── NAMESPACE
     ├── LICENSE
 ├── datamanagement.md       <- How data are organized and stored
@@ -75,22 +75,20 @@ This is the structure of the repo:
 └── LICENSE
 ```
 
-### Installing, testing and using the _n2khabutils_ package
+### Installing, testing and using the _n2khab_ package
 
 To install, run:
 
 ```r
-remotes::install_github("inbo/n2khab-inputs", 
-                        subdir = "n2khabutils",
-                        ref = "package_update", # omit after merge to master
+remotes::install_github("inbo/n2khab", 
                         build_opts = c("--no-resave-data", "--no-manual"))
 ```
 
 Have a look at the vignettes to quickly find your way!
 
 ```r
-help(package = "n2khabutils")
-# vignettes only: browseVignettes("n2khabutils")
+help(package = "n2khab")
+# vignettes only: browseVignettes("n2khab")
 ```
 
 
@@ -103,13 +101,13 @@ See the separate [document](datamanagement.md) on data management.
 
 See the separate [document](functionality.md) on intended functionality.
 
-Use the `n2khabutils.Rproj` RStudio project for package contributions and management.
+Use the `n2khab.Rproj` RStudio project for package contributions and management.
 You will want to open the file `src/manage_package.R` in this project to get some useful packaging commands and developing tips.
 
 
 ### Coding tools: it's never too late for learning!
 
-When writing functions for `n2khabutils` or writing workflows (in `src`):
+When writing functions for `n2khab` or writing workflows (in `src`):
 
 - please use `tidyverse`, `sf` and `raster` packages for data reading.
 Discover the human-friendly way of coding a data processing pipeline through the use of [pipes](https://r4ds.had.co.nz/pipes.html)!

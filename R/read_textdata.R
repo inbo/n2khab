@@ -96,7 +96,7 @@ read_namelist <-
 pkgdatasource_path <-
     function(file, extension = "") {
         system.file(str_c(file, extension),
-                    package = "n2khabutils"
+                    package = "n2khab"
         ) %>%
             dirname
     }

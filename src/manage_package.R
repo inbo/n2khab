@@ -1,12 +1,12 @@
 ## Use this script FROM WITHIN THE PACKAGE RSTUDIO PROJECT,
-## i.e. the n2khabutils.Rproj file in the subfolder n2khabutils.
+## i.e. the n2khab.Rproj file in the repository root.
 
 install.packages("devtools")
 
 # Some history:
 #
 # library(usethis)
-# usethis::create_package(path = "../n2khabutils")
+# usethis::create_package(path = "../n2khab")
 # use_gpl3_license(name = "Research Institute for Nature and Forest")
 # usethis::use_vignette("vign-010_reference_lists")
 
@@ -51,17 +51,10 @@ devtools::install()
 
 # Doing a github-based package installation (defaults to the master branch):
 
-remotes::install_github("inbo/n2khab-inputs", subdir = "n2khabutils")
-
-    # Referring to a specific branch:
-    remotes::install_github("inbo/n2khab-inputs",
-                            ref = "package_update",
-                            subdir = "n2khabutils")
+remotes::install_github("inbo/n2khab")
 
     # With vignettes:
-    remotes::install_github("inbo/n2khab-inputs",
-                            ref = "package_update",
-                            subdir = "n2khabutils",
+    remotes::install_github("inbo/n2khab",
                             build_opts = c("--no-resave-data", "--no-manual"))
 
 

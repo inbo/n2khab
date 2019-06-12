@@ -1,5 +1,5 @@
 ---
-title: "Generating textdata files for the n2khabutils package"
+title: "Generating textdata files for the n2khab package"
 subtitle: "Reference lists for scientific workflows regarding Natura 2000 habitat in Flanders"
 date: "`r lubridate::now()`"
 link-citations: true

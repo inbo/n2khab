@@ -1,4 +1,4 @@
-Package: n2khabutils
+Package: n2khab
 Title: Data preparation for Flemish Natura 2000 habitat analyses
 Version: 0.0.1
 Authors@R: c(
@@ -49,7 +49,7 @@ Authors@R: c(
     person("Research Institute for Nature and Forest", 
             email = "info@inbo.be", 
             role = c("cph", "fnd")))
-Description: The n2khabutils package is an R package with
+Description: The n2khab package is an R package with
     preprocessing functions and standard reference data, useful for 
     analyses regarding Flemish Natura 2000 habitats and regionally 
     important biotopes (RIBs).
