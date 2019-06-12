@@ -32,7 +32,9 @@ You can use the value returned by the function as the `path` argument of
 functions that read particular data.
 }
 \examples{
+\dontrun{
 filemanag_folders()
 datapath <- filemanag_folders(root = "git")
+}
 
 }

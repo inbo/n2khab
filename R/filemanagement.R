@@ -29,8 +29,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #'filemanag_folders()
 #'datapath <- filemanag_folders(root = "git")
+#' }
 #'
 filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
     # directory setup
