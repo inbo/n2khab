@@ -1,3 +1,4 @@
 ^LICENSE\.md$
 ^n2khabutils\.Rproj$
 ^\.Rproj\.user$
+^src$
