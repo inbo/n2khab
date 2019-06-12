@@ -1,0 +1,200 @@
+# Check textdata
+
+## namelist
+
+```{r}
+namelist_check <- 
+    read_vc(namelist_path)
+```
+
+Are all codes unique per language?
+
+```{r}
+namelist_check %>% 
+    count(code, lang) %>% 
+    filter(n > 1) %>% 
+    nrow == 0
+```
+
+No lines without names or shortname?
+
+```{r}
+namelist_check %>% 
+    filter(is.na(name), is.na(shortname)) %>% 
+    nrow == 0
+```
+
+All lines have a value for code and lang?
+
+```{r}
+namelist_check %>% 
+    filter(is.na(code) | is.na(lang)) %>% 
+    nrow == 0
+```
+
+
+Language statistics:
+
+```{r}
+namelist_check %>% 
+    mutate(name = !is.na(name),
+           shortname = !is.na(shortname)) %>% 
+    group_by(lang) %>% 
+    summarize(name = sum(name),
+              shortname = sum(shortname))
+```
+
+
+## types
+
+```{r}
+types_check <- read_vc(types_path)
+```
+
+Are all codes unique?
+
+```{r}
+types_check %>% 
+    count(type) %>% 
+    filter(n > 1) %>% 
+    nrow == 0
+```
+
+Are all main types correct?
+
+```{r}
+types_check %>% 
+    mutate(type = as.character(type),
+           main_type_2 = ifelse(str_detect(type, "_|\\+"),
+                                str_sub(type, 
+                                        end = str_locate(type, "_|\\+") - 1),
+                                type)
+    ) %>% 
+    filter(main_type != main_type_2) %>% 
+    nrow == 0
+```
+
+## env_pressures
+
+```{r}
+ep_check <- read_vc(ep_path)
+```
+
+
+Are all codes unique?
+
+```{r}
+ep_check %>% 
+    count(ep_code) %>% 
+    filter(n > 1) %>% 
+    nrow == 0
+```
+
+Do ep_classes coincide between ep_code and ep_class?
+
+```{r}
+ep_check %>% 
+    mutate(ep_class_c = str_c("ep_class_",
+                        str_match(ep_code, "ep_(..).*")[,2]
+                        ),
+           ep_class = as.character(ep_class)
+    ) %>% 
+    (function(df) {
+        all.equal(df$ep_class_c, df$ep_class)
+    })
+```
+
+Do ep_classes coincide between ep_code and explanation?
+
+```{r}
+ep_check %>% 
+    mutate(ep_class_c1 = str_match(ep_code, "ep_(..).*")[,2],
+           ep_class_c2 = str_match(explanation, "ep_(..).*")[,2],
+    ) %>% 
+    (function(df) {
+        all.equal(df$ep_class_c1, df$ep_class_c2)
+    })
+```
+
+## schemes
+
+```{r}
+schemes_check <- 
+    read_vc(schemes_path)
+```
+
+
+Are all scheme codes unique?
+
+```{r}
+schemes_check %>% 
+    count(scheme) %>% 
+    filter(n > 1) %>% 
+    nrow == 0
+```
+
+Which are the represented programmes (projects)?
+
+```{r}
+schemes_check %>% 
+    distinct(programme)
+```
+
+Are all `attribute_2` values of the MNE programme present in `env_pressures`?
+
+```{r}
+schemes_check %>% 
+    filter(programme == "MNE") %>% 
+    distinct(attribute_2) %>% 
+    .$attribute_2 %in% ep_check$ep_code %>% 
+    all
+```
+
+
+## scheme_types
+
+```{r}
+scheme_types_check <- 
+    read_vc(scheme_types_path)
+```
+
+
+No double combinations occur?
+
+```{r}
+scheme_types_check %>% 
+    count(scheme, type) %>% 
+    filter(n > 1) %>% 
+    nrow == 0
+```
+
+All occurring schemes are present in `schemes`?
+
+```{r}
+scheme_types_check %>% 
+    .$scheme %in% schemes_check$scheme %>% 
+    all
+```
+
+All occurring types are present in `types`?
+
+```{r}
+scheme_types_check %>% 
+    .$type %in% types_check$type %>% 
+    all
+```
+
+When a scheme-type combination has a typegroup, is this always the case for all types of the concerned scheme?
+
+```{r message=FALSE}
+scheme_types_check %>% 
+    group_by(scheme) %>% 
+    summarise(nr_entries = sum(!is.na(typegroup))) %>% 
+    filter(nr_entries > 0) %>% 
+    inner_join(scheme_types_check) %>% 
+    filter(is.na(typegroup)) %>% 
+    nrow == 0
+```
+
+
+

@@ -1,0 +1,140 @@
+# Retrieving the current list of environmental pressures from the reference googlesheet and moving data to two n2khabutils data sources
+
+## Append extra names to `namelist`
+
+Reading from the source googlesheet:
+
+```{r message=FALSE}
+ep_source <- gs_key("1PH6InqJk0ijQF_N7v7IZjarijlqHRBCKhTbDn44skZU")
+source_df <-
+    ep_source %>%
+    gs_read(ws = gs_ws_ls(ep_source) %>%
+                 tail(1), 
+            check.names = T,
+            verbose = FALSE)
+```
+
+Adding multilingual EP names and abbreviations to `namelist`:
+
+```{r}
+source_df %>% 
+    select(code = Environmental_pressure_code,
+           nl_name = Environmental_pressure_name_NL,
+           en_name = Environmental_pressure_name_EN,
+           nl_shortname = Environmental_pressure_abbrev_NL,
+           en_shortname = Environmental_pressure_abbrev_EN) %>% 
+    gather(key = "key", 
+           value = "value",
+           matches(".+name|.+explanation|.+epclass")) %>% 
+    separate(key, c("lang", "key")) %>% 
+    spread(key = key,
+           value = value) %>% 
+    bind_rows(read_vc(namelist_path),
+              .) %>% 
+    write_vc(namelist_path)
+```
+
+Adding explanations to `namelist`:
+
+```{r}
+source_df %>% 
+    select(code = Environmental_pressure_code,
+           nl_name = Explanation_NL,
+           en_name = Explanation_EN) %>% 
+    mutate(code = str_c(code, "_explan")) %>% 
+    gather(key = "key", 
+           value = "value",
+           contains("name")) %>% 
+    separate(key, c("lang", "key")) %>% 
+    spread(key = key,
+           value = value) %>% 
+    filter(!is.na(name)) %>% 
+    mutate(shortname = NA %>% as.character) %>% 
+    bind_rows(read_vc(namelist_path),
+              .) %>% 
+    write_vc(namelist_path)
+```
+
+Adding ep_classes to `namelist`:
+
+```{r}
+source_df %>% 
+    select(code = Environmental_pressure_code,
+           nl_name = Environmental_pressure_class_NL,
+           en_name = Environmental_pressure_class_EN) %>% 
+    gather(key = "key", 
+           value = "value",
+           contains("name")) %>% 
+    separate(key, c("lang", "key")) %>% 
+    spread(key = key,
+           value = value) %>% 
+    filter(!is.na(name)) %>% 
+    mutate(code = str_c("ep_class_",
+                        str_match(code, "ep_(..).*")[,2]
+                        )
+           ) %>% 
+    mutate(shortname = NA %>% as.character) %>% 
+    bind_rows(read_vc(namelist_path),
+              .) %>% 
+    write_vc(namelist_path)
+```
+
+
+## Generate the `env_pressures` data source
+
+Set path and filename of `env_pressures`:
+
+```{r}
+ep_path <- "../../n2khabutils/inst/textdata/env_pressures"
+```
+
+We generate it manually because of the difficulties with cells spanning several rows in the googlesheet:
+
+```{r}
+tribble(
+    ~ep_code, ~ep_class, ~explanation,
+    "ep_011", "ep_class_01", "ep_011_explan", 
+    "ep_012", "ep_class_01", "ep_012_explan", 
+    "ep_013", "ep_class_01", "ep_012_explan", 
+    "ep_014", "ep_class_01", "ep_014_explan", 
+    "ep_015", "ep_class_01", "ep_015_explan", 
+    "ep_03.1", "ep_class_03", "ep_03.1_explan", 
+    "ep_03.2", "ep_class_03", "ep_03.1_explan", 
+    "ep_03.3", "ep_class_03", "ep_03.1_explan", 
+    "ep_03.4", "ep_class_03", "ep_03.1_explan", 
+    "ep_04.1", "ep_class_04", "ep_04.1_explan", 
+    "ep_04.2", "ep_class_04", "ep_04.1_explan", 
+    "ep_04.3", "ep_class_04", "ep_04.1_explan", 
+    "ep_05.1", "ep_class_05", "ep_05.1_explan", 
+    "ep_05.2", "ep_class_05", "ep_05.1_explan", 
+    "ep_061", "ep_class_06", "ep_061_explan", 
+    "ep_062", "ep_class_06", "ep_061_explan", 
+    "ep_063", "ep_class_06", "ep_063_explan", 
+    "ep_064", "ep_class_06", "ep_063_explan", 
+    "ep_065", "ep_class_06", "ep_065_explan", 
+    "ep_066", "ep_class_06", "ep_065_explan", 
+    "ep_07.1", "ep_class_07", "ep_07.1_explan", 
+    "ep_07.2", "ep_class_07", "ep_07.1_explan", 
+    "ep_07.3", "ep_class_07", "ep_07.1_explan", 
+    "ep_07.4", "ep_class_07", "ep_07.1_explan", 
+    "ep_08.1", "ep_class_08", "ep_08.1_explan", 
+    "ep_08.2", "ep_class_08", "ep_08.1_explan", 
+    "ep_08.3", "ep_class_08", "ep_08.1_explan", 
+    "ep_08.4", "ep_class_08", "ep_08.1_explan", 
+    "ep_08.5", "ep_class_08", "ep_08.5_explan", 
+    "ep_09.1", "ep_class_09", "ep_09.1_explan", 
+    "ep_09.2", "ep_class_09", "ep_09.1_explan", 
+    "ep_09.3", "ep_class_09", "ep_09.1_explan", 
+    "ep_101", "ep_class_10", "ep_101_explan", 
+    "ep_102", "ep_class_10", "ep_101_explan", 
+    "ep_103", "ep_class_10", "ep_103_explan"
+) %>% 
+    mutate(ep_code = factor(ep_code),
+           ep_class = factor(ep_class)) %>% 
+    write_vc(ep_path,
+             sorting = "ep_code",
+             optimize = FALSE,
+             strict = FALSE)
+```
+
+

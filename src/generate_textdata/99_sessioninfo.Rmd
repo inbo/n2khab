@@ -1,0 +1,19 @@
+# Used environment
+
+```{r session-info, results = "asis", echo=FALSE}
+si <- devtools::session_info()
+p <- si$platform %>%
+  do.call(what = "c")
+sprintf("- **%s**:\n %s\n", names(p), p) %>%
+  cat()
+```
+
+```{r results = "asis", echo=FALSE}
+si$packages %>%
+    as_tibble %>%
+    select(package, loadedversion, date, source) %>%
+pander::pandoc.table(caption = "(\\#tab:sessioninfo)Loaded R packages",
+                     split.table = Inf)
+```
+
+

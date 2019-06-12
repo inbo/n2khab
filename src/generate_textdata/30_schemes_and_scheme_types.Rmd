@@ -1,0 +1,454 @@
+# Collecting 'schemes' and 'scheme_types' information and moving data into three n2khabutils data sources
+
+The concerned data sources are:
+
+- `schemes` and `scheme_types` (to be created, uses either codes or English-only text)
+- `namelist` (accommodates names in multiple languages, for variables of interest that are represented by codes)
+
+## Information from the monitoring programme for the natural environment (MNE)
+
+### Collecting information for `schemes` and `scheme_types`
+
+Reading dataframe coming from the [n2khab-mne-selections](https://gitlab.com/florisvdh/n2khab-mne-selections) repo (a git LFS repo on Gitlab):
+
+```{r}
+schemes_types_nl <- 
+    read_vc("rawraw_data/10_compmeetnet_types_milieudrukken")
+```
+
+Reading a link between older Dutch codes of environmental pressures and the current ep_codes:
+
+```{r message=FALSE}
+ws_list <- gs_ws_ls(ep_source)
+ep_codes <- 
+    ep_source %>%
+    gs_read(ws = ws_list[str_detect(ws_list, "\\ 1.0\\ ")], 
+            check.names = T,
+            verbose = FALSE) %>% 
+    select(ep_code = Environmental_pressure_code,
+           ep_code_nl = Environmental_pressure_code_NL_OLD) %>% 
+    mutate(ep_code = factor(ep_code,
+                            levels = 
+                                read_vc(ep_path) %>% 
+                                .$ep_code %>% 
+                                levels),
+           ep_code_nl = plyr::mapvalues(ep_code,
+                                        from = ep_code,
+                                        to = ep_code_nl)
+           )
+```
+
+Making a dataframe that combines the information of `schemes` and `scheme_types`:
+
+```{r}
+schemes_schemetypes <- 
+    schemes_types_nl %>% 
+    select(attribute_1 = Comp_meetnet,
+           attribute_2 = Druk,
+           attribute_3 = Waterhuishoudingsklasse_2,
+           tag_1 = MaxMilieudrukkengroep,
+           type = Vegcode) %>% 
+    mutate(
+        programme = "MNE" %>% factor,
+        attribute_1 = recode(attribute_1,
+                             "Atmosferisch meetnet" = "ATM",
+                             "Bodemmeetnet" = "SOIL",
+                             "Grondwatermeetnet" = "GW",
+                             "Oppervlaktewatermeetnet" = "SURF",
+                             "Inundatiemeetnet" = "INUN"),
+        attribute_2 = factor(attribute_2,
+                             levels = 
+                                 ep_codes %>% 
+                                 .$ep_code_nl %>% 
+                                 levels) %>% 
+                        plyr::mapvalues(.,
+                            from = levels(.),
+                            to = ep_codes %>% 
+                                 .$ep_code %>% 
+                                 levels
+                        ),
+        attribute_3 = ifelse(attribute_1 == "GW" & attribute_2 == "ep_05.1",
+                             ifelse(attribute_3 == "Oppervlaktewater",
+                                    "aq",
+                                    "terr"),
+                             NA) %>% 
+                      factor,
+        scheme = str_c(attribute_1, 
+                       str_match(attribute_2, "ep(_.+)")[,2],
+                       ifelse(is.na(attribute_3),
+                              "",
+                              str_c("_",
+                                    attribute_3))
+                       ) %>% 
+                 factor,
+        tag_1 = ifelse(tag_1 == "a",
+                       "focal",
+                       "secondary") %>% 
+                factor,
+        type = as.character(type) %>% 
+                factor(levels = 
+                           read_vc(types_path) %>% 
+                           .$type %>% 
+                           levels)
+    ) %>% 
+    arrange(programme, scheme)
+```
+
+
+### Make the `schemes` data source with MNE content
+
+Set path and filename of `schemes` and `scheme_types`:
+
+```{r}
+schemes_path <- "../../n2khabutils/inst/textdata/schemes"
+scheme_types_path <- "../../n2khabutils/inst/textdata/scheme_types"
+```
+
+Separately defining spatial restrictions for specific schemes:
+
+```{r}
+spat_restr <- 
+    tribble(
+        ~scheme, ~spatial_restriction,
+        "GW_05.1_terr", "zones with shallow groundwater (in reach of vegetation)"
+    ) %>% 
+    bind_rows(tibble(
+        scheme = c("INUN_03.4", 
+                   "INUN_061",
+                   "INUN_062",
+                   "INUN_07.2",
+                   "INUN_08.4"),
+        spatial_restriction = "areas susceptible to flooding"
+            )
+        ) %>% 
+    mutate(scheme = factor(scheme,
+                           levels = 
+                               schemes_schemetypes %>% 
+                               .$scheme %>% 
+                               levels))
+```
+
+Writing `schemes`:
+
+```{r message=FALSE}
+schemes_schemetypes %>% 
+    distinct(scheme,
+             programme,
+             attribute_1,
+             attribute_2,
+             attribute_3,
+             tag_1) %>% 
+    left_join(spat_restr) %>% 
+    mutate(notes = NA %>% as.character,
+           tag_2 = NA %>% as.character,
+           tag_3 = NA %>% as.character
+           ) %>% 
+    select(scheme,
+           programme,
+           attribute_1,
+           attribute_2,
+           attribute_3,
+           spatial_restriction,
+           notes,
+           tag_1,
+           tag_2,
+           tag_3) %>% 
+    arrange(programme, scheme) %>% 
+    write_vc(schemes_path,
+         sorting = c("programme", 
+                     "scheme"),
+         optimize = TRUE,
+         strict = FALSE)
+```
+
+### Make the `scheme_types` data source with MNE content
+
+Collecting typegroup information to join on type:
+
+```{r message=FALSE}
+tg_source <- gs_key("1n2ohvuLEK_anX37gxlanQXRGotweMVonFxKxtfTcuZI")
+ws_list <- gs_ws_ls(tg_source)
+
+typegroups <- 
+    
+    tg_source %>%
+    gs_read(ws = ws_list[str_detect(ws_list, "Eutrofiëring")], 
+            check.names = T,
+            verbose = FALSE) %>% 
+    slice(2:n()) %>% 
+    mutate(scheme = "GW_03.3") %>% 
+    select(scheme,
+           type = Type,
+           typegroup = Cluster.voedselrijkdom) %>% 
+    
+    bind_rows(
+        tg_source %>%
+        gs_read(ws = ws_list[str_detect(ws_list, "GW_05\\.1")], 
+                check.names = T,
+                verbose = FALSE) %>% 
+        filter(!Type %in% 
+                   (schemes_schemetypes %>% 
+                        filter(scheme == "GW_05.1_aq") %>% 
+                        .$type)
+               ) %>% 
+        mutate(scheme = "GW_05.1_terr") %>% 
+        select(scheme,
+               type = Type,
+               typegroup = Typegroep)
+    ) %>% 
+    
+    bind_rows(
+        tg_source %>%
+        gs_read(ws = ws_list[str_detect(ws_list, "ATM_03\\.1")], 
+                check.names = T,
+                verbose = FALSE) %>% 
+        mutate(scheme = "ATM_03.1") %>% 
+        select(scheme,
+               type = Type,
+               typegroup = Typegroep)
+    ) %>% 
+    
+    bind_rows(
+        tg_source %>%
+        gs_read(ws = ws_list[str_detect(ws_list, "ATM_04\\.1")], 
+                check.names = T,
+                verbose = FALSE) %>% 
+        mutate(scheme = "ATM_04.1") %>% 
+        select(scheme,
+               type = Type,
+               typegroup = Typegroep)
+    ) %>% 
+    
+    mutate(scheme = factor(scheme, 
+                           levels = 
+                             schemes_schemetypes$scheme %>% 
+                             levels),
+           type = factor(type, 
+                         levels = 
+                             schemes_schemetypes$type %>% 
+                             levels),
+           typegroup = str_c(scheme, 
+                             "_group", 
+                             typegroup) %>% 
+                        factor
+           )
+```
+
+Writing `scheme_types`:
+
+```{r message=FALSE}
+schemes_schemetypes %>% 
+    distinct(scheme,
+             type) %>% 
+    left_join(typegroups) %>% 
+    arrange(scheme, type) %>% 
+    write_vc(scheme_types_path,
+         sorting = c("scheme",
+                     "type"),
+         optimize = TRUE,
+         strict = FALSE)
+```
+
+
+### Append associated names (multi-language) to the `namelist` datasource
+
+Appending MNE names for `attribute_1`, `attribute_3`, `tag_1` and `programme`:
+
+```{r}
+cbind(code = c("ATM", "SOIL", "GW", "SURF", "INUN"),
+       lang = c(rep("en", 5), rep("nl", 5))
+       ) %>% 
+    cbind(name = c("Atmospheric monitoring",
+                   "Soil monitoring",
+                   "Groundwater monitoring",
+                   "Surfacewater monitoring",
+                   "Inundationwater monitoring",
+                   "Atmosferisch meetnet", 
+                   "Bodemmeetnet", 
+                   "Grondwatermeetnet", 
+                   "Oppervlaktewatermeetnet", 
+                   "Inundatiemeetnet")) %>% 
+    rbind(matrix(c("aq", "en", "aquatic",
+                   "terr", "en", "terrestrial",
+                   "aq", "nl", "aquatisch",
+                   "terr", "nl", "terrestrisch"),
+                 nrow = 4,
+                 byrow = TRUE)) %>% 
+    rbind(matrix(c("focal", "en", "Focal scheme",
+                   "secondary", "en", "Secondary scheme",
+                   "focal", "nl", "Hoofdmeetnet",
+                   "secondary", "nl", "Secundair meetnet"),
+                 nrow = 4,
+                 byrow = TRUE)) %>% 
+    rbind(matrix(c("MNE", "en", "Monitoring programme for the Natural Environment",
+                   "MHQ", "en", "Monitoring programme for biotic Habitat Quality",
+                   "MNE", "nl", "Monitoringprogramma natuurlijk milieu",
+                   "MHQ", "nl", "Monitoringprogramma biotische habitatkwaliteit"),
+                 nrow = 4,
+                 byrow = TRUE)) %>% 
+    as_tibble %>% 
+    mutate(shortname = NA %>% as.character) %>% 
+    bind_rows(read_vc(namelist_path),
+              .) %>% 
+    write_vc(namelist_path)
+```
+
+Appending MNE names and shortnames for `scheme`:
+
+```{r message=FALSE}
+namelist <- read_vc(namelist_path)
+read_vc(schemes_path) %>% 
+    filter(programme == "MNE") %>% 
+    distinct(scheme, attribute_1, attribute_2, attribute_3) %>% 
+    mutate_all(as.character) %>% 
+    rename(code = scheme) %>% 
+    mutate(code = as.character(code)) %>% 
+    crossing(lang = c("en", "nl")) %>% 
+    left_join(namelist %>% select(-shortname),
+              by = c("attribute_1" = "code", "lang")) %>% 
+    rename(name_1 = name) %>% 
+    left_join(tibble(lang = c("en", "nl"),
+                     name_2 = c("environmental pressure",
+                                "milieudruk"))) %>% 
+    left_join(namelist %>% select(-name),
+              by = c("attribute_2" = "code", "lang")) %>% 
+    rename(name_3 = shortname) %>% 
+    left_join(namelist %>% select(-shortname),
+              by = c("attribute_3" = "code", "lang")) %>% 
+    rename(name_4 = name) %>% 
+    mutate(name = str_c(name_1, 
+                        ": ",
+                        name_2,
+                        " ",
+                        name_3,
+                        ifelse(is.na(name_4),
+                                 "",
+                                 str_c(": partim ",
+                                       name_4)
+                                 )
+                    ),
+           shortname = str_c(attribute_1,
+                             ": ",
+                             name_3,
+                             ifelse(is.na(attribute_3),
+                                 "",
+                                 str_c(":  ",
+                                       attribute_3)
+                                 )
+                             )
+           ) %>% 
+    select(code, lang, name, shortname) %>% 
+    bind_rows(read_vc(namelist_path),
+              .) %>% 
+    write_vc(namelist_path)
+```
+
+
+
+## Appending records for the monitoring programme for biotic habitat quality (MHQ)
+
+Writing `schemes`.
+
+```{r message=FALSE}
+
+schemes_MHQ <- gs_key("1Lltpq1_OQENZKrCmfDLuBiaZQ0_YCoGkFAqcOtFRdHg") %>%
+  gs_read(ws = 1) %>%
+  mutate(attribute_1 = ifelse(attribute_1 == 91, 
+                              "91E0", 
+                              as.character(attribute_1)),
+         scheme = as.factor(scheme),
+         programme = as.factor(programme),
+         attribute_1 = as.factor(attribute_1),
+         tag_1 = as.factor(tag_1)) 
+
+schemes <- read_vc(schemes_path)
+
+schemes %>%
+  bind_rows(schemes_MHQ) %>%
+  mutate(scheme = factor(scheme,
+                            levels = c(
+                              levels(schemes$scheme),
+                              levels(schemes_MHQ$scheme)
+                              )
+                            ),
+         programme = factor(programme,
+                            levels = c(
+                              levels(schemes$programme),
+                              levels(schemes_MHQ$programme)
+                              )
+                            ),
+         attribute_1 = factor(attribute_1,
+                            levels = c(
+                              levels(schemes$attribute_1),
+                              levels(schemes_MHQ$attribute_1)
+                              )
+                            ),
+         tag_1 = factor(tag_1,
+                           levels = c(
+                              levels(schemes$tag_1),
+                              levels(schemes_MHQ$tag_1)
+                              )
+                           )
+         ) %>%
+  arrange(programme, scheme) %>% 
+    write_vc(schemes_path,
+         sorting = c("programme", 
+                     "scheme"),
+         optimize = TRUE,
+         strict = FALSE)
+
+```
+
+Writing `schemesTypes`.
+
+```{r}
+schemes_type <- read_vc(scheme_types_path)
+
+scheme_type_MHQ <- gs_key("1Lltpq1_OQENZKrCmfDLuBiaZQ0_YCoGkFAqcOtFRdHg") %>%
+  gs_read(ws = 2) %>%
+  mutate(scheme = factor(scheme))
+  
+schemes_type %>%
+  bind_rows(scheme_type_MHQ) %>%
+  mutate(scheme = factor(scheme,
+                            levels = c(
+                              levels(schemes_type$scheme),
+                              levels(scheme_type_MHQ$scheme)
+                              )),
+         type = factor(type,
+                       levels = levels(schemes_type$type))
+  ) %>% 
+  arrange(scheme, type) %>% 
+  write_vc(scheme_types_path,
+           sorting = c("scheme",
+                     "type"),
+           optimize = TRUE,
+           strict = FALSE)
+                         
+
+```
+
+Appending MHQ names for `scheme`.
+
+```{r message=FALSE}
+
+namelist <- read_vc(namelist_path)
+
+schemes_MHQ_names <- schemes_MHQ %>%
+  left_join(namelist, by = c("attribute_1" = "code")) %>%
+  mutate(name = paste(ifelse(lang == "en",
+                             "Habitat quality scheme:",
+                             "Meetnet habitatkwaliteit:"),
+                      shortname),
+         shortname = paste(ifelse(lang == "en",
+                             "Habitat quality scheme",
+                             "Meetnet habitatkwaliteit"),
+                      attribute_1)) %>%
+  select(code = scheme, lang, name, shortname)
+
+namelist %>%
+  bind_rows(schemes_MHQ_names) %>%
+  write_vc(namelist_path) 
+
+```
+

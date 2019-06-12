@@ -1,0 +1,25 @@
+% definition of INBO colours
+\RequirePackage{xcolor}
+\definecolor{box.colour}{RGB}{229, 229, 229}
+\definecolor{link.colour}{RGB}{192, 67, 132}
+
+% allow landscape pages and define commands that work with pandoc
+\RequirePackage{lscape}
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+
+% allow use of FloatBarrier
+\RequirePackage{placeins}
+
+% definition of block, alertblock and exampleblock
+\RequirePackage{mdframed}
+
+\newenvironment{block}[2][]{%
+  \begin{mdframed}[backgroundcolor=box.colour]
+  \textbf{#2}%
+
+}
+{
+  \end{mdframed}
+}
+

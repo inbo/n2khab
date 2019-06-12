@@ -1,0 +1,4 @@
+book_filename: "generating_textdata.Rmd"
+new_session: FALSE
+rmd_files: # specifies the order of Rmd files; NOT needed when you use index.Rmd and an alphabetical order for other Rmd files
+    # - index.Rmd
