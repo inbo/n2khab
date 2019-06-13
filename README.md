@@ -1,78 +1,39 @@
 ## Welcome
 
-### ... to the n2khab package
+The **n2khab** R package provides data definitions, standard checklists (reference data) and preprocessing functions, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 (**n2k**) habitats (**hab**) and regionally important biotopes (RIBs).
+It consequently supports various _N2KHAB_ projects, i.e. projects that focus on Natura 2000 habitat (and which may as well use the _n2khab_-prefix for their git repository name, such as [this one](https://github.com/inbo/n2khab-mne-design)).
 
-This repo holds _the **n2khab** R package with data definitions and preprocessing functions_, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 habitats and regionally important biotopes (RIBs).
-Hence the package provides broad _utilities_ (**utils**) for Natura 2000 (**n2k**) habitats (**hab**) analyses in Flanders.
-It consequently supports other _N2KHAB_ projects, i.e. projects that focus on Natura 2000 habitat (and which may as well use the _n2khab_-prefix for their git repository name).
+The package is a companion to the [n2khab-preprocessing](https://github.com/inbo/n2khab) repo.
+**n2khab** provides several functions that return datasets, generated in that repository, as standardized R-objects.
 
-You are welcome to **contribute** to reference data and to package functionality!
-It is wise to first think about the scope of your function (or your proposed enhancement of an exisiting one), and talk it through with other collaborators:
+The data definitions & standard checklists (reference data) provided by the package are textual files in the [vc-format](https://ropensci.github.io/git2rdata/index.html).
+Some of them come over from another repository.
+Others may be written as the result of a synchronization script to give them a start.
+The code to reproduce these files is inside the `src` folder.
 
-- functions that are of broader interest than Natura 2000, better go to the [inborutils](https://inbo.github.io/inborutils/) package;
-- functions that will only be relevant to a specific _N2KHAB_ project, are better developed in the project-specific repo.
+This package is the successor of the 'n2khabutils' package; more information [at the bottom](#history).
 
-As the package is under development, several functions are yet to be developed, and several of these are targeted to other packages or repositories.
-You will find inspiration for positioning your own function:
-
-- in the [document](functionality.md) on intended functionality;
-- in the [draft overview of functions per repository](https://docs.google.com/spreadsheets/d/18U4AmiMnnApbgQTnfWbeZ3dAH3_4ISxUob_SX-maKV8/edit#gid=924567109).
-
-### ... to this repo as a whole
-
-Apart from the package, this _n2khab-inputs_ repo provides some housekeeping and data-generating workflows as _scripts_ or _R markdown_, such as:
-
-- installing the package;
-- managing package development;
-- generating and updating text data;
-- datachecks for the workflows;
-- the creation of some of the (generated) binary data.
-
-The repo is set up with a special interest in the design, review and analysis of Natura 2000 habitat monitoring programmes at the Flemish scale (each is a combination of multiple monitoring schemes):
-
-- MNE: monitoring programme for the natural environment
-- MHQ: monitoring programme for biotic habitat quality
-
-But as stressed already, the repo's scope is not limited to these!
-
-_The ultimate aim is to achieve open and reproducible data workflows. That is a prerequisite for qualifiable science, for sharing and for broad cooperation._
-
-
-## Getting started
-
-The repo is meant to fit the draft principles and setup in [this googlesheet](https://docs.google.com/spreadsheets/d/18U4AmiMnnApbgQTnfWbeZ3dAH3_4ISxUob_SX-maKV8), for long-term N2KHAB projects.
-The googlesheet is partly in Dutch.
-
-Some summarizing schemes (in English):
-
-- relationships between possible, future [repositories](https://drive.google.com/open?id=1RQsjxch0YKdqJSPIDjCG_wEbYTlP3oDv);
-- data storage and versioning [workflows](https://drive.google.com/open?id=1xZz9f9n8zSUxBJvW6WEFLyDK7Ya0u4iN).
 
 ### Find your way: repository structure
 
 This is the structure of the repo:
 
 ```
-├── data                    <- Binary or large data! Copy needed data here. IGNORED by git.
-    ├── 10_raw
-    ├── 20_processed        <- Either copy from a source location, or generate yourself.
-├── src                     <- Put scripts / R markdown files here.
-├── n2khab                  <- R-package
-    ├── inst
-        ├── textdata        <- Textual data delivered with the package (in vc-format).
+├── src                 <- Package-related scripts / R markdown files. Rbuild-ignored!
+                           Contains a script on package management + a bookdown 
+                           project to reproduce the included textual data + a 
+                           script to upgrade vc-formatted files.
+├── inst
+    └── textdata        <- Textual data delivered with the package (in vc-format).
                                They can be read into R by package functions or with
                                git2rdata::read_vc().
-    ├── man
-    ├── R                   <- Package functions are to be made here.
-    ├── DESCRIPTION
-    ├── n2khab.Rproj        <- RStudio project file for package contributing & management
-    ├── NAMESPACE
-    ├── LICENSE
-├── datamanagement.md       <- How data are organized and stored
-├── functionality.md        <- Functionality needed in this and associated n2khab-repos
-├── n2khab-inputs.Rproj     <- Main RStudio project file
-├── README.md
-└── LICENSE
+├── man
+├── R                   <- Package functions are to be made here.
+├── DESCRIPTION
+├── LICENSE
+├── n2khab.Rproj        <- RStudio project file
+├── NAMESPACE
+└── README.md
 ```
 
 ### Installing, testing and using the _n2khab_ package
@@ -92,22 +53,21 @@ help(package = "n2khab")
 ```
 
 
-### Managing data
+### You are welcome to contribute!
 
-See the separate [document](datamanagement.md) on data management.
+It is wise to first think about the scope of your function (or your proposed enhancement of an exisiting one), and talk it through with other collaborators:
+
+- functions that are of broader interest than Natura 2000, better go to the [inborutils](https://inbo.github.io/inborutils/) or a separate package;
+- functions that will only be relevant to a specific _N2KHAB_ project, are better developed in the project-specific repo.
+
+You will find inspiration for positioning your own function in the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (which centralizes planning and workflow documentation in N2KHAB monitoring).
+
+You will want to look at the file `src/manage_package.R` to get some useful packaging commands and developing tips.
 
 
-### Writing functions and workflows
+#### Coding tools: it's never too late for learning!
 
-See the separate [document](functionality.md) on intended functionality.
-
-Use the `n2khab.Rproj` RStudio project for package contributions and management.
-You will want to open the file `src/manage_package.R` in this project to get some useful packaging commands and developing tips.
-
-
-### Coding tools: it's never too late for learning!
-
-When writing functions for `n2khab` or writing workflows (in `src`):
+When writing functions for `n2khab`:
 
 - please use `tidyverse`, `sf` and `raster` packages for data reading.
 Discover the human-friendly way of coding a data processing pipeline through the use of [pipes](https://r4ds.had.co.nz/pipes.html)!
@@ -121,15 +81,11 @@ Recommended resources to get started are:
 - have a quick look at the [tidyverse style guide](https://style.tidyverse.org/).
 There you see how to style object, variable and function names, as well as the documentation.
 At least keep in mind: **use lower case and 'snake_case'** for object, variable and function names.
-- preferrably use `git2rdata::write_vc()` when an R _dataframe_ needs to be written to disk for later use (see <https://inbo.github.io/git2rdata/>).
-Define the sorting order well (avoid ties) by using the `sorting` argument, in order to get meaningful _diffs_ when data are updated later.
-The function stores the object in a version-control + R friendly format (tab separated values (.tsv) plus metadata on sorting order and variables (.yml)).
-The R object can then be 100% recreated using `git2rdata::read_vc()`!!
 - if your function returns a dataframe, use `dplyr::as_tibble()` to return it as a tibble instead.
 A tibble is a dataframe that makes working in the tidyverse a little [easier](https://r4ds.had.co.nz/tibbles.html).
 
 
-### How can I contribute code?
+#### How can I contribute code?
 
 More detailed info on git workflows at INBO: <https://inbo.github.io/tutorials/tags/git/>.
 See also [these git workshop materials](https://inbo.github.io/git-course/index.html).
@@ -143,4 +99,12 @@ At this stage, you need to resolve any merge conflicts that may arise in your ow
 1. Propose to merge your commits into `master`: this starts with making a 'pull request' (PR; actually this is a merge request) and assign at least one reviewer before a merge can be decided. At that moment, open online discussion in the repo is possible on your changes (for other open discussion that you want to start, make an _issue_). As long as no merge is performed, more commits can be added to this PR with `git push`, e.g. to implement requested changes by others.
     - note that, if you branched off another (reference) branch than `master`, make sure to change the reference branch in the pull request (the default reference is `master`).
 1. After your PR is merged, pull the reference branch (usually `master`) and clean up your local repo in order to keep up with the remote.
+
+
+### Package history {#history}
+
+Previous to commit `c8608d9`, the code was part of the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (formerly 'n2khab-inputs'), where the original version history remains stored.
+At that time, the package was called 'n2khabutils'.
+As a convenience, the **n2khab** repo still holds the rewritten (shrinked) package history from before commit `c8608d9`, as defined by the related files and folders.
+See [this](https://github.com/inbo/n2khab-monitoring/issues/28) issue in the 'n2khab-monitoring' repo, where the migration is documented.
 
