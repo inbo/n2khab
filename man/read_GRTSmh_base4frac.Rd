@@ -16,7 +16,7 @@ in scripts to set the location of the folder '\strong{\code{data}}'.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{https://github.com/inbo/n2khab-inputs}{n2khab-inputs} repository.}
+\href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.}
 }
 \value{
 A RasterLayer with 21041043 cells.
@@ -44,8 +44,8 @@ Long base 4 fractions seem to be handled and stored easier than long
 This approach follows the one of Stevens & Olsen (2004) to represent
 the reverse hierarchical order in a GRTS sample as base-4-fraction addresses.
 
-See R-code in the \href{https://github.com/inbo/n2khab-inputs}{
-n2khab-inputs} repository for the creation from
+See R-code in the \href{https://github.com/inbo/n2khab-preprocessing}{
+n2khab-preprocessing} repository for the creation from
 the \code{GRTSmaster_habitats} data source.
 
 Beware that not all GRTS ranking numbers are present in the data source, as
@@ -60,11 +60,11 @@ So, what really matters is only the notation with many digits, to be
 \examples{
 \dontrun{
 # This example supposes that your working directory is a folder next to
-# the 'n2khab-inputs' repository AND that the
+# the 'n2khab-preprocessing' repository AND that the
 # 'GRTSmh_base4frac' data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can consider
 # what to do.
-r <- read_GRTSmh_base4frac("../n2khab-inputs/data")
+r <- read_GRTSmh_base4frac("../n2khab-preprocessing/data")
 r
 }
 

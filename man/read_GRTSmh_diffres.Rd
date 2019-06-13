@@ -16,7 +16,7 @@ in scripts to set the location of the folder '\strong{\code{data}}'.}
 \item{subdir}{The subdirectory path of the data source, as viewed from
 \code{path}.
 The default follows the data management advice in the
-\href{https://github.com/inbo/n2khab-inputs}{n2khab-inputs} repository.}
+\href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.}
 
 \item{level}{Integer in the range from 1 to 9; determines the spatial
 resolution. See the Details section.}
@@ -55,7 +55,7 @@ The polygon layer is however restricted to the non-\code{NA} cells of the origin
 Consequently, a part of the polygons is clipped along the Flemish border.
 Levels 1 to 3 are not provided for the whole of Flanders,
 because this would inflate the GPKG file.
-You can look at the \href{https://github.com/inbo/n2khab-inputs}{source code}
+You can look at the \href{https://github.com/inbo/n2khab-preprocessing}{source code}
 to do such things.
 }
 \item{The GeoTIFF files provide the respective levels 1 to 9 of the
@@ -91,8 +91,8 @@ level \tab    resolution (m)\cr
 9 \tab 16384
 }
 
-See R-code in the \href{https://github.com/inbo/n2khab-inputs}{
-n2khab-inputs} repository for the creation from
+See R-code in the \href{https://github.com/inbo/n2khab-preprocessing}{
+n2khab-preprocessing} repository for the creation from
 the \code{GRTSmh_brick} data source.
 
 Beware that not all GRTS ranking numbers at the specified level are
@@ -102,14 +102,14 @@ outer borders (i.e., not excluding the Brussels Capital Region).
 \examples{
 \dontrun{
 # This example supposes that your working directory is a folder next to
-# the 'n2khab-inputs' repository AND that the
+# the 'n2khab-preprocessing' repository AND that the
 # 'GRTSmh_diffres' data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can consider
 # what to do.
-r <- read_GRTSmh_diffres("../n2khab-inputs/data", level = 7)
+r <- read_GRTSmh_diffres("../n2khab-preprocessing/data", level = 7)
 r
 sp::spplot(r)
-p <- read_GRTSmh_diffres("../n2khab-inputs/data", level = 7, polygon = TRUE)
+p <- read_GRTSmh_diffres("../n2khab-preprocessing/data", level = 7, polygon = TRUE)
 p
 plot(p)
 }

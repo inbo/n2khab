@@ -65,7 +65,7 @@ read_GRTSmh(datapath)
 #> resolution  : 32, 32  (x, y)
 #> extent      : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
 #> coord. ref. : +proj=lcc +lat_1=49.8333339 +lat_2=51.16666723333333 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.01256 +y_0=5400088.4378 +ellps=intl +units=m +no_defs 
-#> data source : [...]/n2khab-inputs/data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif 
+#> data source : [...]/n2khab-preprocessing/data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif 
 #> names       : GRTSmaster_habitats 
 #> values      : 1, 67108857  (min, max)
 ```
@@ -79,7 +79,7 @@ read_GRTSmh(datapath, brick = TRUE)
 #> resolution  : 32, 32  (x, y)
 #> extent      : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
 #> coord. ref. : +proj=lcc +lat_1=49.8333339 +lat_2=51.16666723333333 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.01256 +y_0=5400088.4378 +ellps=intl +units=m +no_defs 
-#> data source : [...]/n2khab-inputs/data/20_processed/GRTSmh_brick/GRTSmh_brick.tif 
+#> data source : [...]/n2khab-preprocessing/data/20_processed/GRTSmh_brick/GRTSmh_brick.tif 
 #> names       :   level0,   level1,   level2,   level3,   level4,   level5,   level6,   level7,   level8,   level9 
 #> min values  :        1,        1,        1,        1,        1,        1,        1,        1,        1,        1 
 #> max values  : 67108857, 16777209,  4194297,  1048569,   262137,    65529,    16377,     4089,     1017,      253
@@ -110,7 +110,7 @@ read_GRTSmh_diffres(datapath, level = 5)
 #> resolution : 1024, 1024  (x, y)
 #> extent     : 22030, 259598, 153054, 244190  (xmin, xmax, ymin, ymax)
 #> crs        : +proj=lcc +lat_1=49.8333339 +lat_2=51.16666723333333 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.01256 +y_0=5400088.4378 +ellps=intl +units=m +no_defs 
-#> source     : /media/floris/DATA/PROJECTS/09685_NatuurlijkMilieu/160 Bewerkingen en resultaat/Repos_en_data/n2khab-inputs/data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif 
+#> source     : [...]/n2khab-preprocessing/data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif 
 #> names      : level5 
 #> values     : 1, 65529  (min, max)
 ```
@@ -153,7 +153,7 @@ read_GRTSmh_base4frac(datapath)
 #> resolution  : 32, 32  (x, y)
 #> extent      : 22029.591973471, 258861.591973471, 153054.113583292, 244030.113583292  (xmin, xmax, ymin, ymax)
 #> coord. ref. : +proj=lcc +lat_1=49.8333339 +lat_2=51.16666723333333 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.01256 +y_0=5400088.4378 +ellps=intl +units=m +no_defs 
-#> data source : [...]/n2khab-inputs/data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif 
+#> data source : [...]/n2khab-preprocessing/data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif 
 #> names       : GRTSmh_base4frac 
 #> values      : 0.0000000000001, 0.3333333333321  (min, max)
 ```

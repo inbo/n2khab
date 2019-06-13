@@ -17,7 +17,7 @@ in scripts to set the location of the folder '\strong{\code{data}}'.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{https://github.com/inbo/n2khab-inputs}{n2khab-inputs} repository.}
+\href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.}
 
 \item{brick}{Logical; determines whether the RasterLayer or RasterBrick data
 source is returned. See the Details section.}
@@ -68,8 +68,8 @@ GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
 The \code{GRTSmh_brick} data source is a processed dataset (10-layered
 GeoTIFF) and can only be
 returned by the function when it is already present as a file.
-See R-code in the \href{https://github.com/inbo/n2khab-inputs}{
-n2khab-inputs} repository for its creation from
+See R-code in the \href{https://github.com/inbo/n2khab-preprocessing}{
+n2khab-preprocessing} repository for its creation from
 the \code{GRTSmaster_habitats} data source.
 
 Both GeoTIFFs (\code{GRTSmaster_habitats}, \code{GRTSmh_brick}) use the
@@ -85,11 +85,11 @@ the corresponding RasterBrick layers named as \code{level0} to \code{level9}.
 \examples{
 \dontrun{
 # This example supposes that your working directory is a folder next to
-# the 'n2khab-inputs' repository AND that the
+# the 'n2khab-preprocessing' repository AND that the
 # 'GRTSmaster_habitats' data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can consider
 # what to do.
-r <- read_GRTSmh("../n2khab-inputs/data")
+r <- read_GRTSmh("../n2khab-preprocessing/data")
 r
 }
 

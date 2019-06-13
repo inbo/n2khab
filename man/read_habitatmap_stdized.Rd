@@ -16,7 +16,7 @@ argument in scripts to set the location of the folder '\strong{\code{data}}'.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{https://github.com/inbo/n2khab-inputs}{n2khab-inputs} repository.}
+\href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.}
 }
 \value{
 A list of two objects:
@@ -92,17 +92,17 @@ following steps:
 }
 
 The R-code for creating the \code{habitatmap_stdized} data source
-  can be found in the \href{https://github.com/inbo/n2khab-inputs}{n2khab-inputs} repository.
+  can be found in the \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.
 }
 \examples{
 \dontrun{
 # This example supposes that your working directory is a folder next
-# to the 'n2khab-inputs' repository AND that the 'habitatmap_stdized
+# to the 'n2khab-preprocessing' repository AND that the 'habitatmap_stdized
 # data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_habitatmap("../n2khab-inputs/data")
+r <- read_habitatmap("../n2khab-preprocessing/data")
 r_polygons <- r$habitatmap_polygons
 r_patches <- r$habitatmap_patches
 }

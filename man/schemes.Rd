@@ -88,8 +88,8 @@ a dataframe with 10 variables:
 \itemize{
     \item{For the MNE-schemes: a vc-formatted, Dutch-language data source
     which can be found in the
-    \href{https://github.com/inbo/n2khab-inputs}{
-    n2khab-inputs Github repository}:
+    \href{https://github.com/inbo/n2khab}{
+    n2khab Github repository}:
     \code{src/generate_textdata/rawraw_data/10_compmeetnet_types_milieudrukken}.
     This data source was originally generated in the
     \href{https://gitlab.com/florisvdh/n2khab-mne-selections}{
