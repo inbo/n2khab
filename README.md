@@ -1,15 +1,16 @@
 ## Welcome
 
 The **n2khab** R package provides data definitions, standard checklists (reference data) and preprocessing functions, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 (**n2k**) habitats (**hab**) and regionally important biotopes (RIBs).
-It consequently supports various _N2KHAB_ projects, i.e. projects that focus on Natura 2000 habitat (and which may as well use the _n2khab_-prefix for their git repository name, such as [this one](https://github.com/inbo/n2khab-mne-design)).
+It consequently supports various _N2KHAB_ projects, i.e. projects that focus on Natura 2000 habitat (and which may as well use the _n2khab_-prefix for their git repository name, such as [this one](https://github.com/inbo/n2khab-monitoring)).
 
-The package is a companion to the [n2khab-preprocessing](https://github.com/inbo/n2khab) repo.
+The package is a companion to the [n2khab-preprocessing](https://github.com/inbo/n2khab-preprocessing) repo.
 **n2khab** provides several functions that return datasets, generated in that repository, as standardized R-objects.
 
 The data definitions & standard checklists (reference data) provided by the package are textual files in the [vc-format](https://ropensci.github.io/git2rdata/index.html).
 Some of them come over from another repository.
 Others may be written as the result of a synchronization script to give them a start.
 The code to reproduce these files is inside the `src` folder.
+The package provides the necessary functions to return these as standardized tibbles (`vignette("vign-010_reference_lists"`)).
 
 This package is the successor of the 'n2khabutils' package; more information [at the bottom](#history).
 
@@ -25,8 +26,8 @@ This is the structure of the repo:
                            script to upgrade vc-formatted files.
 ├── inst
     └── textdata        <- Textual data delivered with the package (in vc-format).
-                               They can be read into R by package functions or with
-                               git2rdata::read_vc().
+                           They can be read into R by package functions or with
+                           git2rdata::read_vc().
 ├── man
 ├── R                   <- Package functions are to be made here.
 ├── DESCRIPTION
@@ -57,10 +58,10 @@ help(package = "n2khab")
 
 It is wise to first think about the scope of your function (or your proposed enhancement of an exisiting one), and talk it through with other collaborators:
 
-- functions that are of broader interest than Natura 2000, better go to the [inborutils](https://inbo.github.io/inborutils/) or a separate package;
+- functions that are of broader interest than Natura 2000, better go to [inborutils](https://inbo.github.io/inborutils/) or a separate package;
 - functions that will only be relevant to a specific _N2KHAB_ project, are better developed in the project-specific repo.
 
-You will find inspiration for positioning your own function in the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (which centralizes planning and workflow documentation in N2KHAB monitoring).
+For more inspiration on where to put your own function, look into the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (which centralizes planning and workflow documentation in N2KHAB monitoring).
 
 You will want to look at the file `src/manage_package.R` to get some useful packaging commands and developing tips.
 
@@ -75,9 +76,8 @@ Organise data in R in a [tidy](https://r4ds.had.co.nz/tidy-data.html#tidy-data-1
 Recommended resources to get started are:
     - [R for Data Science](https://r4ds.had.co.nz/)
     - [Geocomputation with R](https://geocompr.robinlovelace.net)
-    - interesting resources when contributing to the package:
-        - [R packages](http://r-pkgs.had.co.nz/) (by Hadley Wickham 2015; an extended/updated [version](https://r-pkgs.org/) is still under development)
-        - `vignette("formatting", package = "roxygen2")` for documentation syntax
+    - [R packages](http://r-pkgs.had.co.nz/) (by Hadley Wickham 2015; an extended/updated [version](https://r-pkgs.org/) is still under development)
+    - `vignette("formatting", package = "roxygen2")` for documentation syntax
 - have a quick look at the [tidyverse style guide](https://style.tidyverse.org/).
 There you see how to style object, variable and function names, as well as the documentation.
 At least keep in mind: **use lower case and 'snake_case'** for object, variable and function names.
