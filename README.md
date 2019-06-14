@@ -12,7 +12,7 @@ Others may be written as the result of a synchronization script to give them a s
 The code to reproduce these files is inside the `src` folder.
 The package provides the necessary functions to return these as standardized tibbles (`vignette("vign-010_reference_lists"`)).
 
-This package is the successor of the 'n2khabutils' package; more information [at the bottom](#history).
+This package is the successor of the 'n2khabutils' package; more information [at the bottom](#package-history).
 
 
 ### Find your way: repository structure
@@ -101,7 +101,7 @@ At this stage, you need to resolve any merge conflicts that may arise in your ow
 1. After your PR is merged, pull the reference branch (usually `master`) and clean up your local repo in order to keep up with the remote.
 
 
-### Package history {#history}
+### Package history
 
 Previous to commit `c8608d9`, the code was part of the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (formerly 'n2khab-inputs'), where the original version history remains stored.
 At that time, the package was called 'n2khabutils'.
