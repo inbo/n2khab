@@ -4,7 +4,8 @@ The **n2khab** R package provides data definitions, standard checklists (referen
 It consequently supports various _N2KHAB_ projects, i.e. projects that focus on Natura 2000 habitat (and which may as well use the _n2khab_-prefix for their git repository name, such as [this one](https://github.com/inbo/n2khab-monitoring)).
 
 The package is a companion to the [n2khab-preprocessing](https://github.com/inbo/n2khab-preprocessing) repo.
-**n2khab** provides several functions that return datasets, generated in that repository, as standardized R-objects.
+Beside direct preprocessing functions, **n2khab** provides several functions that return datasets, generated in `n2khab-preprocessing`, as standardized R-objects.
+This is done because such readily processed datasets are worth saving and distributing on their own in the case of time-consuming calculations.
 
 The data definitions & standard checklists (reference data) provided by the package are textual files in the [vc-format](https://ropensci.github.io/git2rdata/index.html).
 Some of them come over from another repository.
