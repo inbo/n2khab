@@ -65,7 +65,7 @@ in English by default.
 }
 \details{
 \code{\link{env_pressures}} is a data source in the
-\href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
+\href{https://ropensci.github.io/git2rdata}{vc-format} which provides
 a checklist of environmental pressures, represented by codes, together
 with the pressure-class and the textual explanation.
 

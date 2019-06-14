@@ -1,7 +1,7 @@
 #' Documentation of included data source 'namelist'
 #'
 #' 'namelist' is a data source in the
-#' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
+#' \href{https://ropensci.github.io/git2rdata}{vc-format} which provides
 #' names and (optionally) shortnames for IDs/codes used in other data sources.
 #' Multiple languages are supported.
 #'
@@ -45,7 +45,7 @@ NULL
 #' Documentation of included data source 'types'
 #'
 #' 'types' is a data source in the
-#' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
+#' \href{https://ropensci.github.io/git2rdata}{vc-format} which provides
 #' a checklist of types, represented by their \strong{current} codes, together
 #' with several attributes.
 #' A 'type' refers to either a (main) habitat type, a
@@ -114,7 +114,7 @@ NULL
 #' Documentation of included data source 'env_pressures'
 #'
 #' 'env_pressures' is a data source in the
-#' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
+#' \href{https://ropensci.github.io/git2rdata}{vc-format} which provides
 #' a checklist of environmental pressures, represented by codes, together
 #' with the pressure-class and the textual explanation.
 #' The codes of environmental pressures, pressure-classes and explanations
@@ -176,7 +176,7 @@ NULL
 #' Documentation of included data source 'schemes'
 #'
 #' 'schemes' is a data source in the
-#' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
+#' \href{https://ropensci.github.io/git2rdata}{vc-format} which provides
 #' a list of (monitoring) schemes for N2KHAB monitoring programmes or
 #' other N2KHAB projects, together
 #' with defining attributes and optional information.
@@ -317,7 +317,7 @@ NULL
 #' Documentation of included data source 'scheme_types'
 #'
 #' 'scheme_types' is a data source in the
-#' \href{https://inbo.github.io/git2rdata/index.html}{vc-format} which lists
+#' \href{https://ropensci.github.io/git2rdata}{vc-format} which lists
 #' the types (using the type-code from \code{\link{types}}) that belong to
 #' each N2KHAB (monitoring or research) scheme (using the scheme-code from
 #' \code{\link{schemes}}).

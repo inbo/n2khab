@@ -52,7 +52,7 @@ Each combination of \code{scheme} and \code{type} must be unique.}
 }
 \description{
 'scheme_types' is a data source in the
-\href{https://inbo.github.io/git2rdata/index.html}{vc-format} which lists
+\href{https://ropensci.github.io/git2rdata}{vc-format} which lists
 the types (using the type-code from \code{\link{types}}) that belong to
 each N2KHAB (monitoring or research) scheme (using the scheme-code from
 \code{\link{schemes}}).

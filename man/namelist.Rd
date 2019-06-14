@@ -19,7 +19,7 @@ several other n2khab-referencelists (see the source of those).
 }
 \description{
 'namelist' is a data source in the
-\href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
+\href{https://ropensci.github.io/git2rdata}{vc-format} which provides
 names and (optionally) shortnames for IDs/codes used in other data sources.
 Multiple languages are supported.
 }

@@ -64,7 +64,7 @@ in English by default.
 }
 \details{
 \code{\link{schemes}} is a data source in the
-\href{https://inbo.github.io/git2rdata/index.html}{vc-format} which provides
+\href{https://ropensci.github.io/git2rdata}{vc-format} which provides
 a list of (monitoring) schemes for N2KHAB monitoring programmes or
 other N2KHAB projects, together
 with defining attributes and optional information.
