@@ -44,17 +44,17 @@ The following data sources are available:
 - the raw data source `GRTSmaster_habitats`, discussed above and available at [Zenodo](https://doi.org/10.5281/zenodo.2611233)
 - processed data sources:
     - `GRTSmh_brick`: 10-layered GeoTIFF with the decimal integer ranking numbers of 10 hierarchical levels (0 - 9) of the GRTS cell addresses, including the one from `GRTSmaster_habitats` (i.e. level 0; for more details see the [read_GRTSmh() documentation](../html/read_GRTSmh.html))
-    - `GRTSmh_diffres`: file collection composed of nine monolayered GeoTIFF files plus a GeoPackage with six polygon layers. They provide the hierarchical levels 1 to 9 of the `GRTSmh_brick` data source at the corresponding spatial resolution, i.e. at lower resolutions than `GRTSmh_brick` (for more details see the [read_GRTSmh_diffres() documentation](../html/read_GRTSmh_diffres.html))
+    - `GRTSmh_diffres`: file collection composed of nine monolayered GeoTIFF files plus a GeoPackage with six polygon layers. They provide the hierarchical levels 1 to 9 of the `GRTSmh_brick` data source at the corresponding spatial resolution, i.e. at lower resolutions than `GRTSmaster_habitats` (for more details see the [read_GRTSmh_diffres() documentation](../html/read_GRTSmh_diffres.html))
     - `GRTSmh_base4frac`: is like a mirror to `GRTSmaster_habitats`, holding the ranking numbers as base 4 fractions (for more details see the [read_GRTSmh_base4frac() documentation](../html/read_GRTSmh_base4frac.html))
 
-For more information on data storage and locations, there is a [specific vignette](../doc/vign-020_datastorage.html).
+For more information on data storage and locations, there is a [specific vignette](../doc/v020_datastorage.html).
 
 ## Get the data in R
 
 ### read_GRTSmh()
-
+  
 In the below R code, the recommendation has been followed to set the location of the `data` folder by a variable **`datapath`**.
-See the [vignette on data storage](../doc/vign-020_datastorage.html) for more information.
+See the [vignette on data storage](../doc/v020_datastorage.html) for more information.
 
 `read_GRTSmh()` by default returns the `GRTSmaster_habitats` dataset:
 
