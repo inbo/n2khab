@@ -8,7 +8,7 @@ install.packages("devtools")
 # library(usethis)
 # usethis::create_package(path = "../n2khab")
 # use_gpl3_license(name = "Research Institute for Nature and Forest")
-# usethis::use_vignette("vign-010_reference_lists")
+# usethis::use_vignette("v010_reference_lists")
 
 
 

@@ -11,7 +11,7 @@ The data definitions & standard checklists (reference data) provided by the pack
 Some of them come over from another repository.
 Others may be written as the result of a synchronization script to give them a start.
 The code to reproduce these files is inside the `src` folder.
-The package provides the necessary functions to return these as standardized tibbles (`vignette("vign-010_reference_lists"`)).
+The package provides the necessary functions to return these as standardized tibbles (`vignette("v010_reference_lists"`)).
 
 This package is the successor of the 'n2khabutils' package; more information [at the bottom](#package-history).
 
