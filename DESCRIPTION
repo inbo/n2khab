@@ -59,7 +59,7 @@ Imports:
     curl,
     DBI,
     dplyr,
-    git2rdata (>= 0.0.5),
+    git2rdata (>= 0.1),
     jsonlite,
     magrittr,
     plyr,
@@ -77,8 +77,6 @@ Imports:
     tidyr,
     utils,
     withr
-Remotes:
-  ropensci/git2rdata@0.0.5
 License: GPL-3
 URL: https://github.com/inbo/n2khab
 Encoding: UTF-8
