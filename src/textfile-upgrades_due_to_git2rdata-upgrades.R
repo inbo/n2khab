@@ -42,3 +42,13 @@ git2rdata::upgrade_data(path = "inst/textdata")
 
 git2rdata::upgrade_data(path = "inst/textdata")
 
+# 2019-07-03
+# -------------------------------------------------------------------
+# Previous state of git2rdata: commit 796ba98 (tag 0.0.5)
+# Conversion to new state of git2rdata: version 0.1 from CRAN!
+
+git2rdata::upgrade_data(path = "src/generate_textdata/rawraw_data")
+git2rdata::upgrade_data(path = "inst/textdata")
+
+
+
