@@ -52,6 +52,7 @@ Have a look at the vignettes to quickly find your way!
 ```r
 help(package = "n2khab")
 # vignettes only: browseVignettes("n2khab")
+# documentation of whole package: package?n2khab
 ```
 
 
