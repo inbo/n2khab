@@ -12,7 +12,7 @@ getwd()
 # Previous state of git2rdata: commit 4b1f2fd
 # Conversion to new state of git2rdata: commit df1ba32 (tag v0.0.4)
 
-git2rdata::upgrade_data(path = "src/generate_textdata/rawraw_data")
+git2rdata::upgrade_data(path = "misc/generate_textdata/rawraw_data")
     # rawraw_data/10_compmeetnet_types_milieudrukken.yml updated
     # rawraw_data/10_compmeetnet_types_milieudrukken.yml
     # "rawraw_data/10_compmeetnet_types_milieudrukken"
@@ -47,7 +47,7 @@ git2rdata::upgrade_data(path = "inst/textdata")
 # Previous state of git2rdata: commit 796ba98 (tag 0.0.5)
 # Conversion to new state of git2rdata: version 0.1 from CRAN!
 
-git2rdata::upgrade_data(path = "src/generate_textdata/rawraw_data")
+git2rdata::upgrade_data(path = "misc/generate_textdata/rawraw_data")
 git2rdata::upgrade_data(path = "inst/textdata")
 
 
