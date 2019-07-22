@@ -8,7 +8,7 @@
 *.Rcheck/
 *.tar.gz
 .httr-oauth
-src/**/*.md
+misc/**/*.md
 _book*
 !_bookdown.yml
 inst/doc
