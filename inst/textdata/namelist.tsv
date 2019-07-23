@@ -98,6 +98,7 @@ ATM_08.1	en	Atmospheric monitoring: environmental pressure 08.1_poll_air	ATM: 08
 ATM_101	en	Atmospheric monitoring: environmental pressure 101_clim_dry	ATM: 101_clim_dry
 ATM_102	en	Atmospheric monitoring: environmental pressure 102_clim_wet	ATM: 102_clim_wet
 BMF	en	Bogs, mires and fens	NA
+caves	en	caves	NA
 CD	en	Coastal sand dunes	NA
 CH	en	Coastal and halophytic habitats	NA
 CT	en	Calcareous type	NA
@@ -159,6 +160,7 @@ GW	en	Groundwater monitoring	NA
 GW_03.3	en	Groundwater monitoring: environmental pressure 03.3_eutr_gw	GW: 03.3_eutr_gw
 GW_04.2	en	Groundwater monitoring: environmental pressure 04.2_acidif_gw	GW: 04.2_acidif_gw
 GW_05.1_aq	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim aquatic	GW: 05.1_des_gw:  aq
+GW_05.1_caves	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim caves	GW: 05.1_des_gw:  caves
 GW_05.1_terr	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim terrestrial	GW: 05.1_des_gw:  terr
 GW_05.2	en	Groundwater monitoring: environmental pressure 05.2_wet_gw	GW: 05.2_wet_gw
 GW_07.1	en	Groundwater monitoring: environmental pressure 07.1_desal_gw	GW: 07.1_desal_gw
@@ -343,6 +345,7 @@ ATM_08.1	nl	Atmosferisch meetnet: milieudruk 08.1_verontr_atm	ATM: 08.1_verontr_
 ATM_101	nl	Atmosferisch meetnet: milieudruk 101_klim_droog	ATM: 101_klim_droog
 ATM_102	nl	Atmosferisch meetnet: milieudruk 102_klim_nat	ATM: 102_klim_nat
 BMF	nl	Moerassen	NA
+caves	nl	grotten	NA
 CD	nl	Kustduinen	NA
 CH	nl	Kust- en zilte habitats	NA
 CT	nl	Kalkrijkere (sub)types	NA
@@ -424,6 +427,7 @@ GW	nl	Grondwatermeetnet	NA
 GW_03.3	nl	Grondwatermeetnet: milieudruk 03.3_eutr_gw	GW: 03.3_eutr_gw
 GW_04.2	nl	Grondwatermeetnet: milieudruk 04.2_verzu_gw	GW: 04.2_verzu_gw
 GW_05.1_aq	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim aquatisch	GW: 05.1_verdro_gw:  aq
+GW_05.1_caves	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim grotten	GW: 05.1_verdro_gw:  caves
 GW_05.1_terr	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim terrestrisch	GW: 05.1_verdro_gw:  terr
 GW_05.2	nl	Grondwatermeetnet: milieudruk 05.2_vernat_gw	GW: 05.2_vernat_gw
 GW_07.1	nl	Grondwatermeetnet: milieudruk 07.1_verzoet_gw	GW: 07.1_verzoet_gw

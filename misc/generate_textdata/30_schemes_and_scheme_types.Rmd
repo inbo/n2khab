@@ -70,7 +70,10 @@ schemes_schemetypes <-
         attribute_3 = ifelse(attribute_1 == "GW" & attribute_2 == "ep_05.1",
                              ifelse(attribute_3 == "Oppervlaktewater",
                                     "aq",
-                                    "terr"),
+                                    ifelse(type == "8310",
+                                           "caves",
+                                           "terr")
+                                    ),
                              NA) %>% 
                       factor,
         scheme = str_c(attribute_1, 
@@ -188,7 +191,9 @@ typegroups <-
                 verbose = FALSE) %>% 
         filter(!Type %in% 
                    (schemes_schemetypes %>% 
-                        filter(scheme == "GW_05.1_aq") %>% 
+                        filter(scheme %in% 
+                                 c("GW_05.1_aq", 
+                                   "GW_05.1_caves")) %>% 
                         .$type)
                ) %>% 
         mutate(scheme = "GW_05.1_terr") %>% 
@@ -270,9 +275,11 @@ cbind(code = c("ATM", "SOIL", "GW", "SURF", "INUN"),
                    "Inundatiemeetnet")) %>% 
     rbind(matrix(c("aq", "en", "aquatic",
                    "terr", "en", "terrestrial",
+                   "caves", "en", "caves",
                    "aq", "nl", "aquatisch",
-                   "terr", "nl", "terrestrisch"),
-                 nrow = 4,
+                   "terr", "nl", "terrestrisch",
+                   "caves", "nl", "grotten"),
+                 ncol = 3,
                  byrow = TRUE)) %>% 
     rbind(matrix(c("focal", "en", "Focal scheme",
                    "secondary", "en", "Secondary scheme",
