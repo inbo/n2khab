@@ -339,7 +339,7 @@ read_vc(schemes_path) %>%
                              name_3,
                              ifelse(is.na(attribute_3),
                                  "",
-                                 str_c(":  ",
+                                 str_c(": ",
                                        attribute_3)
                                  )
                              )
