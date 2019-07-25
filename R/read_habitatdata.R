@@ -110,7 +110,6 @@
 #' @export
 #' @importFrom sf
 #' st_read
-#' st_transform
 #' @importFrom dplyr %>% mutate
 #'
 read_habitatmap_stdized <-
@@ -122,8 +121,7 @@ read_habitatmap_stdized <-
                                    quiet = TRUE)
 
         habmap_polygons <- habmap_polygons %>%
-            mutate( description_orig = as.character( .data$description_orig)) %>%
-            st_transform(31370)
+            mutate( description_orig = as.character( .data$description_orig))
 
         habmap_patches <- suppressWarnings(
             st_read(file.path(path, file),
