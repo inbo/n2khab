@@ -124,7 +124,7 @@ read_habitatmap_stdized <-
         habmap_polygons <- habmap_polygons %>%
             mutate( description_orig = as.character( .data$description_orig))
 
-        st_crs(habmap_polygons) <- 31370
+        suppressWarnings(st_crs(habmap_polygons) <- 31370)
 
         habmap_patches <- suppressWarnings(
             st_read(file.path(path, file),
