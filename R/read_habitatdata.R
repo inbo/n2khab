@@ -110,7 +110,7 @@
 #' @export
 #' @importFrom sf
 #' st_read
-#' st_crs
+#' st_crs<-
 #' @importFrom dplyr %>% mutate
 #'
 read_habitatmap_stdized <-
