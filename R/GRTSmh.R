@@ -315,10 +315,13 @@ base4frac_to_dec <-
 #' }
 #'
 #' @export
+#' @importFrom gdalUtils
+#' gdalsrsinfo
 #' @importFrom raster
 #' raster
 #' brick
 #' nlayers
+#' crs<-
 #' @importFrom stringr str_c
 read_GRTSmh <-
     function(path,
@@ -332,13 +335,16 @@ read_GRTSmh <-
                     b <- brick(file.path(path, file))
                     }
             names(b) <- str_c("level", 0:(nlayers(b) - 1))
-            return(b)
+            result <- b
         } else {
             if (length(file) == 2) {
-                   raster(file.path(path, file[1]))} else {
-                   raster(file.path(path, file))
+                   r <- raster(file.path(path, file[1]))} else {
+                   r <- raster(file.path(path, file))
                    }
+            result <- r
         }
+        crs(result) <- gdalsrsinfo("+init=epsg:31370", as.CRS = TRUE)
+        return(result)
     }
 
 
