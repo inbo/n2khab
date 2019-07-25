@@ -59,6 +59,7 @@ Imports:
     curl,
     DBI,
     dplyr,
+    gdalUtils,
     git2rdata (>= 0.1),
     jsonlite,
     magrittr,
