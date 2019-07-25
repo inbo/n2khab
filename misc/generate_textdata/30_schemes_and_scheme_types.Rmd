@@ -70,7 +70,10 @@ schemes_schemetypes <-
         attribute_3 = ifelse(attribute_1 == "GW" & attribute_2 == "ep_05.1",
                              ifelse(attribute_3 == "Oppervlaktewater",
                                     "aq",
-                                    "terr"),
+                                    ifelse(type == "8310",
+                                           "caves",
+                                           "terr")
+                                    ),
                              NA) %>% 
                       factor,
         scheme = str_c(attribute_1, 
@@ -188,7 +191,9 @@ typegroups <-
                 verbose = FALSE) %>% 
         filter(!Type %in% 
                    (schemes_schemetypes %>% 
-                        filter(scheme == "GW_05.1_aq") %>% 
+                        filter(scheme %in% 
+                                 c("GW_05.1_aq", 
+                                   "GW_05.1_caves")) %>% 
                         .$type)
                ) %>% 
         mutate(scheme = "GW_05.1_terr") %>% 
@@ -270,9 +275,11 @@ cbind(code = c("ATM", "SOIL", "GW", "SURF", "INUN"),
                    "Inundatiemeetnet")) %>% 
     rbind(matrix(c("aq", "en", "aquatic",
                    "terr", "en", "terrestrial",
+                   "caves", "en", "caves",
                    "aq", "nl", "aquatisch",
-                   "terr", "nl", "terrestrisch"),
-                 nrow = 4,
+                   "terr", "nl", "terrestrisch",
+                   "caves", "nl", "grotten"),
+                 ncol = 3,
                  byrow = TRUE)) %>% 
     rbind(matrix(c("focal", "en", "Focal scheme",
                    "secondary", "en", "Secondary scheme",
@@ -332,7 +339,7 @@ read_vc(schemes_path) %>%
                              name_3,
                              ifelse(is.na(attribute_3),
                                  "",
-                                 str_c(":  ",
+                                 str_c(": ",
                                        attribute_3)
                                  )
                              )
@@ -341,6 +348,59 @@ read_vc(schemes_path) %>%
     bind_rows(read_vc(namelist_path),
               .) %>% 
     write_vc(namelist_path)
+```
+
+Appending names and shortnames for typegroups of MNE schemes:
+
+```{r}
+tribble(~nr, ~lang, ~name, ~shortname,
+        1, "en", "very sensitive non-forest types", "very sensitive non-forest",
+        1, "nl", "zeer gevoelige niet-bostypes", "zeer gevoelig niet-bos",
+        2, "en", "sensitive non-forest types", "sensitive non-forest",
+        2, "nl", "gevoelige niet-bostypes", "gevoelig niet-bos",
+        3, "en", "less to not sensitive non-forest types", "less/not sensitive non-forest",
+        3, "nl", "minder tot niet gevoelige niet-bostypes", "minder/niet gevoelig niet-bos",
+        4, "en", "very sensitive forest types", "very sensitive forest",
+        4, "nl", "zeer gevoelige bostypes", "zeer gevoelig bos",
+        5, "en", "sensitive forest types", "sensitive forest",
+        5, "nl", "gevoelige bostypes", "gevoelig bos",
+        6, "en", "less to not sensitive forest types", "less/not sensitive forest",
+        6, "nl", "minder tot niet gevoelige bostypes", "minder/niet gevoelig bos"
+        ) %>% 
+  crossing(prefix = c("ATM_03.1_group", "ATM_04.1_group")) %>% 
+  mutate(code = str_c(prefix, nr)) %>% 
+  select(code, lang, name, shortname) %>% 
+  bind_rows(
+    tribble(~code, ~lang, ~name, ~shortname,
+        1, "en", "types from oligotrophic environments", "oligotrophic",
+        1, "nl", "types van oligotroof milieu", "oligotroof",
+        2, "en", "types from mesotrophic environments", "mesotrophic",
+        2, "nl", "types van mesotroof milieu", "mesotroof",
+        3, "en", "types from weakly eutrophic environments", "weakly eutrophic",
+        3, "nl", "types van zwak eutroof milieu", "zwak eutroof",
+        4, "en", "types from moderately eutrophic to eutrophic environments", "(moderately) eutrophic",
+        4, "nl", "types van matig eutroof tot eutroof milieu", "(matig) eutroof"
+        ) %>% 
+      mutate(code = str_c("GW_03.3_group", code))
+  ) %>% 
+  bind_rows(
+        tribble(~code, ~lang, ~name, ~shortname,
+        1, "en", "types from very wet environments", "very wet",
+        1, "nl", "types van zeer nat milieu", "zeer nat",
+        2, "en", "types from wet environments", "wet",
+        2, "nl", "types van nat milieu", "nat",
+        3, "en", "types from moderately wet environments", "moderately wet",
+        3, "nl", "types van matig nat milieu", "matig nat",
+        4, "en", "types from moist environments", "moist",
+        4, "nl", "types van vochtig milieu", "vochtig",
+        5, "en", "types from dry environments", "dry",
+        5, "nl", "types van droog milieu", "droog"
+        ) %>% 
+      mutate(code = str_c("GW_05.1_terr_group", code))
+  ) %>% 
+  bind_rows(read_vc(namelist_path),
+              .) %>% 
+  write_vc(namelist_path)
 ```
 
 
