@@ -330,14 +330,14 @@ read_GRTSmh <-
              brick = FALSE) {
 
         if (brick) {
-            if (length(file) == 2) {
+            if (missing(file)) {
                     b <- brick(file.path(path, file[2]))} else {
                     b <- brick(file.path(path, file))
                     }
             names(b) <- str_c("level", 0:(nlayers(b) - 1))
             result <- b
         } else {
-            if (length(file) == 2) {
+            if (missing(file)) {
                    r <- raster(file.path(path, file[1]))} else {
                    r <- raster(file.path(path, file))
                    }
