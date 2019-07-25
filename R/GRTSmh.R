@@ -436,11 +436,17 @@ read_GRTSmh <-
 #' }
 #'
 #' @export
-#' @importFrom raster raster
+#' @importFrom gdalUtils
+#' gdalsrsinfo
+#' @importFrom raster
+#' raster
+#' crs<-
 read_GRTSmh_base4frac <-
     function(path,
              file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif") {
-        raster(file.path(path, file))
+        r <- raster(file.path(path, file))
+        crs(r) <- gdalsrsinfo("+init=epsg:31370", as.CRS = TRUE)
+        return(r)
     }
 
 
