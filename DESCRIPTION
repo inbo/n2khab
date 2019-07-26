@@ -48,7 +48,7 @@ Authors@R: c(
             comment = c(ORCID = "0000-0002-8813-1261")), 
     person("Research Institute for Nature and Forest", 
             email = "info@inbo.be", 
-            role = c("cph", "fnd")))
+            role = c("cph")))
 Description: The n2khab package is an R package with
     preprocessing functions and standard reference data, useful for 
     analyses regarding Flemish Natura 2000 habitats and regionally 
