@@ -315,10 +315,13 @@ base4frac_to_dec <-
 #' }
 #'
 #' @export
+#' @importFrom gdalUtils
+#' gdalsrsinfo
 #' @importFrom raster
 #' raster
 #' brick
 #' nlayers
+#' crs<-
 #' @importFrom stringr str_c
 read_GRTSmh <-
     function(path,
@@ -327,18 +330,21 @@ read_GRTSmh <-
              brick = FALSE) {
 
         if (brick) {
-            if (length(file) == 2) {
+            if (missing(file)) {
                     b <- brick(file.path(path, file[2]))} else {
                     b <- brick(file.path(path, file))
                     }
             names(b) <- str_c("level", 0:(nlayers(b) - 1))
-            return(b)
+            result <- b
         } else {
-            if (length(file) == 2) {
-                   raster(file.path(path, file[1]))} else {
-                   raster(file.path(path, file))
+            if (missing(file)) {
+                   r <- raster(file.path(path, file[1]))} else {
+                   r <- raster(file.path(path, file))
                    }
+            result <- r
         }
+        crs(result) <- gdalsrsinfo("+init=epsg:31370", as.CRS = TRUE)
+        return(result)
     }
 
 
@@ -430,11 +436,17 @@ read_GRTSmh <-
 #' }
 #'
 #' @export
-#' @importFrom raster raster
+#' @importFrom gdalUtils
+#' gdalsrsinfo
+#' @importFrom raster
+#' raster
+#' crs<-
 read_GRTSmh_base4frac <-
     function(path,
              file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif") {
-        raster(file.path(path, file))
+        r <- raster(file.path(path, file))
+        crs(r) <- gdalsrsinfo("+init=epsg:31370", as.CRS = TRUE)
+        return(r)
     }
 
 
@@ -571,8 +583,14 @@ read_GRTSmh_base4frac <-
 #'
 #' @export
 #' @importFrom stringr str_c
-#' @importFrom sf st_read
-#' @importFrom raster raster
+#' @importFrom gdalUtils
+#' gdalsrsinfo
+#' @importFrom sf
+#' st_read
+#' st_crs<-
+#' @importFrom raster
+#' raster
+#' crs<-
 read_GRTSmh_diffres <-
     function(path,
              subdir = "20_processed/GRTSmh_diffres",
@@ -589,10 +607,12 @@ read_GRTSmh_diffres <-
                 stop("When polygon = TRUE, level must be an integer in the range 4 to 9.")
             }
 
-            st_read(file.path(path, subdir,
+            p <- st_read(file.path(path, subdir,
                               "GRTSmh_diffres.gpkg"),
                     layer = str_c("GRTSmh_polygonized_level", level),
                     quiet = TRUE)
+            suppressWarnings(st_crs(p) <- 31370)
+            p
 
         } else {
 
@@ -600,6 +620,7 @@ read_GRTSmh_diffres <-
                              str_c("GRTSmh_diffres.",
                                    level, ".tif")))
             names(r) <- str_c("level", level)
+            crs(r) <- gdalsrsinfo("+init=epsg:31370", as.CRS = TRUE)
             r
 
         }

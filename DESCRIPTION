@@ -1,64 +1,33 @@
 Package: n2khab
 Title: Data preparation for Flemish Natura 2000 habitat analyses
-Version: 0.0.3.9010
+Version: 0.0.3.9011
 Authors@R: c(
-    person("Floris", "Vanderhaeghe", 
-            email = "floris.vanderhaeghe@inbo.be", 
-            role = c("aut", "cre"), 
-            comment = c(ORCID = "0000-0002-6378-6229")), 
-    person("Toon", "Westra", 
-            email = "toon.westra@inbo.be", 
-            role = c("aut", "ctb"), 
-            comment = c(ORCID = "0000-0003-2478-9459")), 
-    person("Hans", "Van Calster", 
-            email = "hans.vancalster@inbo.be", 
-            role = c("aut", "ctb"), 
-            comment = c(ORCID = "0000-0001-8595-8426")), 
-    person("Dries", "Adriaens", 
-            email = "dries.adriaens@inbo.be", 
-            role = c("ctb"), 
-            comment = c(ORCID = "0000-0002-7216-3111")), 
-    person("Cécile", "Herr", 
-            email = "cecile.herr@inbo.be", 
-            role = c("ctb"), 
-            comment = c(ORCID = "0000-0002-2833-6046")), 
-    person("Maud", "Raman", 
-            email = "maud.raman@inbo.be", 
-            role = c("ctb"), 
-            comment = c(ORCID = "0000-0003-2116-4963")), 
-    person("Jan", "Wouters", 
-            email = "jan.wouters@inbo.be", 
-            role = c("ctb"), 
-            comment = c(ORCID = "0000-0001-8200-9102")), 
-    person("Steven", "De Saeger", 
-            email = "steven.desaeger@inbo.be", 
-            role = c("ctb"), 
-            comment = c(ORCID = "0000-0002-5477-3063")), 
-    person("Nathalie", "Cools", 
-            email = "nathalie.cools@inbo.be", 
-            role = c("ctb"), 
-            comment = c(ORCID = "0000-0002-7059-2318")), 
-    person("Suzanna", "Lettens", 
-            email = "suzanna.lettens@inbo.be", 
-            role = c("ctb"), 
-            comment = c(ORCID = "0000-0001-5032-495X")), 
-    person("Arne", "Verstraeten", 
-            email = "arne.verstraeten@inbo.be", 
-            role = c("ctb"), 
-            comment = c(ORCID = "0000-0002-8813-1261")), 
-    person("Research Institute for Nature and Forest", 
-            email = "info@inbo.be", 
-            role = c("cph", "fnd")))
+    person("Floris", "Vanderhaeghe", email = "floris.vanderhaeghe@inbo.be", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6378-6229")), 
+    person("Toon", "Westra", email = "toon.westra@inbo.be", role = c("aut", "ctb"), comment = c(ORCID = "0000-0003-2478-9459")), 
+    person("Hans", "Van Calster", email = "hans.vancalster@inbo.be", role = c("aut", "ctb"), comment = c(ORCID = "0000-0001-8595-8426")), 
+    person("Dries", "Adriaens", email = "dries.adriaens@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-7216-3111")), 
+    person("Cécile", "Herr", email = "cecile.herr@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-2833-6046")), 
+    person("Maud", "Raman", email = "maud.raman@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0003-2116-4963")), 
+    person("Jan", "Wouters", email = "jan.wouters@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0001-8200-9102")), 
+    person("Steven", "De Saeger", email = "steven.desaeger@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-5477-3063")), 
+    person("Nathalie", "Cools", email = "nathalie.cools@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-7059-2318")), 
+    person("Suzanna", "Lettens", email = "suzanna.lettens@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0001-5032-495X")), 
+    person("Arne", "Verstraeten", email = "arne.verstraeten@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-8813-1261")), 
+    person("Research Institute for Nature and Forest", email = "info@inbo.be", role = c("cph")))
 Description: The n2khab package is an R package with
     preprocessing functions and standard reference data, useful for 
     analyses regarding Flemish Natura 2000 habitats and regionally 
     important biotopes (RIBs).
+License: GPL-3
+URL: https://github.com/inbo/n2khab
+BugReports: https://github.com/inbo/n2khab/issues
 Depends: 
     R (>= 3.5.0)
 Imports:
     curl,
     DBI,
     dplyr,
+    gdalUtils,
     git2rdata (>= 0.1),
     jsonlite,
     magrittr,
@@ -77,8 +46,6 @@ Imports:
     tidyr,
     utils,
     withr
-License: GPL-3
-URL: https://github.com/inbo/n2khab
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
