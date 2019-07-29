@@ -250,6 +250,7 @@ namelist_factor <-
 #' tibble
 #' left_join
 #' as_tibble
+#' pull
 #' @importFrom plyr mapvalues
 #' @importFrom rlang .data
 read_types <-
@@ -265,7 +266,7 @@ read_types <-
                           file = file_namelist,
                           lang = "all") %>%
             distinct(.data$lang) %>%
-            .$lang
+            pull(lang)
 
         assert_that(any(lang %in% langs),
                     msg = "Your setting of lang is not supported.")
@@ -445,6 +446,7 @@ read_types <-
 #' as_tibble
 #' distinct
 #' arrange
+#' pull
 #' @importFrom rlang .data
 read_env_pressures <-
     function(path = pkgdatasource_path("textdata/env_pressures", ".tsv"),
@@ -459,7 +461,7 @@ read_env_pressures <-
                           file = file_namelist,
                           lang = "all") %>%
             distinct(.data$lang) %>%
-            .$lang
+            pull(lang)
 
         assert_that(any(lang %in% langs),
                     msg = "Your setting of lang is not supported.")
@@ -633,6 +635,7 @@ read_env_pressures <-
 #' left_join
 #' as_tibble
 #' contains
+#' pull
 #' @importFrom rlang .data
 read_schemes <-
     function(path = pkgdatasource_path("textdata/schemes", ".tsv"),
@@ -647,7 +650,7 @@ read_schemes <-
                           file = file_namelist,
                           lang = "all") %>%
             distinct(.data$lang) %>%
-            .$lang
+            pull(lang)
 
         assert_that(any(lang %in% langs),
                     msg = "Your setting of lang is not supported.")
@@ -855,7 +858,7 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
                       file = file_namelist,
                       lang = "all") %>%
         distinct(.data$lang) %>%
-        .$lang
+        pull(lang)
 
     assert_that(any(lang %in% langs),
                 msg = "Your setting of lang is not supported.")
