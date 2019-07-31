@@ -104,8 +104,8 @@ Resources. Journal of the American Statistical Association 99 (465):
 262–278. DOI: 10.1198/016214504000000250.
 }
 \seealso{
-Other functions involved in processing the \code{GRTSmaster_habitats} data source: \code{\link{base4frac_to_dec}},
-  \code{\link{dec_to_base4frac}},
+Other functions involved in processing the \code{GRTSmaster_habitats} data source: \code{\link{convert_base4frac_to_dec}},
+  \code{\link{convert_dec_to_base4frac}},
   \code{\link{read_GRTSmh_base4frac}},
   \code{\link{read_GRTSmh_diffres}}
 }
