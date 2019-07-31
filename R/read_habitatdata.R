@@ -84,7 +84,7 @@
 #'     }
 #'     }
 #'
-#' @family functions involved in processing the \code{habitatdata} data source
+#' @family functions involved in processing the \code{habitatmap} data source
 #'
 #' @references
 #'
