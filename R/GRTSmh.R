@@ -41,12 +41,12 @@
 #' \dontrun{
 #' oldoption <- getOption("digits")
 #' options(digits = 15)
-#' dec_to_base4frac(c(14, 15, NA, 456))
+#' convert_dec_to_base4frac(c(14, 15, NA, 456))
 #' options(digits = oldoption)
 #' }
 #'
 #' @export
-dec_to_base4frac <-
+convert_dec_to_base4frac <-
     function(x) {
 
         sapply(x,
@@ -145,13 +145,13 @@ dec_to_base4frac <-
 #' \dontrun{
 #' oldoption <- options(list(digits = 15, scipen = 999))
 #' # one scalar:
-#' base4frac_to_dec(0.1010101010101, level = 0)
+#' convert_base4frac_to_dec(0.1010101010101, level = 0)
 #' # vector, level 0:
-#' base4frac_to_dec(c(NA, 0.1010101010101), level = 0)
+#' convert_base4frac_to_dec(c(NA, 0.1010101010101), level = 0)
 #' # vector, level 5:
-#' base4frac_to_dec(c(NA, 0.1010101010101), level = 5)
+#' convert_base4frac_to_dec(c(NA, 0.1010101010101), level = 5)
 #' # same vector, all sensible levels computed:
-#' sapply(0:12, function(i) base4frac_to_dec(c(NA, 0.1010101010101),
+#' sapply(0:12, function(i) convert_base4frac_to_dec(c(NA, 0.1010101010101),
 #'                                           level = i)
 #'       )
 #' options(oldoption)
@@ -161,7 +161,7 @@ dec_to_base4frac <-
 #' @importFrom dplyr %>%
 #' @importFrom withr with_options
 #' @importFrom stringr str_sub str_pad str_split
-base4frac_to_dec <-
+convert_base4frac_to_dec <-
     function(x, level) {
 
         with_options(
