@@ -39,10 +39,9 @@ The function is based on code from the \code{baseConvert()} function
 in Will Gray's \href{https://github.com/graywh/r-gmisc}{Gmisc} package.
 }
 \examples{
-oldoption <- getOption("digits")
-options(digits = 15)
+oldoption <- options(list(digits = 15, scipen = 999))
 convert_dec_to_base4frac(c(14, 15, NA, 456))
-options(digits = oldoption)
+options(oldoption)
 
 }
 \references{

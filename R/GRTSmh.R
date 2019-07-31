@@ -38,10 +38,9 @@
 #' 262–278. DOI: 10.1198/016214504000000250.
 #'
 #' @examples
-#' oldoption <- getOption("digits")
-#' options(digits = 15)
+#' oldoption <- options(list(digits = 15, scipen = 999))
 #' convert_dec_to_base4frac(c(14, 15, NA, 456))
-#' options(digits = oldoption)
+#' options(oldoption)
 #'
 #' @export
 convert_dec_to_base4frac <-
