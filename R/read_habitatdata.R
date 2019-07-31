@@ -4,7 +4,7 @@
 #' \code{read_habitatmap_stdized} returns the data source \code{habitatmap_stdized} as a list of two objects:
 #' \itemize{
 #'   \item \code{habitatmap_polygons}: an sf object with all polygons
-#'   of the \code{habitatmap} that contain habitat or a Regional
+#'   of the \code{habitatmap} that contain habitat or a Regionally
 #'   Important Biotope (RIB).
 #'   \item \code{habitatmap_patches}: a tibble with information on the
 #'   habitat and RIB patches (HAB1, HAB2,..., HAB5) that occur within
@@ -110,7 +110,7 @@
 #' @export
 #' @importFrom sf
 #' st_read
-#' st_transform
+#' st_crs<-
 #' @importFrom dplyr %>% mutate
 #'
 read_habitatmap_stdized <-
@@ -122,8 +122,9 @@ read_habitatmap_stdized <-
                                    quiet = TRUE)
 
         habmap_polygons <- habmap_polygons %>%
-            mutate( description_orig = as.character( .data$description_orig)) %>%
-            st_transform(31370)
+            mutate( description_orig = as.character( .data$description_orig))
+
+        suppressWarnings(st_crs(habmap_polygons) <- 31370)
 
         habmap_patches <- suppressWarnings(
             st_read(file.path(path, file),

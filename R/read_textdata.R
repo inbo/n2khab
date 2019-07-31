@@ -49,11 +49,16 @@
 #'
 #' @export
 #' @importFrom git2rdata read_vc
+#' @importFrom assertthat
+#' assert_that
+#' is.string
 #' @importFrom dplyr %>% filter as_tibble
 read_namelist <-
     function(path = pkgdatasource_path("textdata/namelist", ".tsv"),
              file = "namelist",
              lang = "en") {
+
+        assert_that(is.string(lang))
 
         if (lang == "all") {
             result <-
@@ -232,8 +237,12 @@ namelist_factor <-
 #'
 #' @export
 #' @importFrom git2rdata read_vc
+#' @importFrom assertthat
+#' assert_that
+#' is.string
 #' @importFrom dplyr
 #' %>%
+#' distinct
 #' filter
 #' select
 #' mutate
@@ -241,6 +250,7 @@ namelist_factor <-
 #' tibble
 #' left_join
 #' as_tibble
+#' pull
 #' @importFrom plyr mapvalues
 #' @importFrom rlang .data
 read_types <-
@@ -248,6 +258,18 @@ read_types <-
              file = "types",
              file_namelist = "namelist",
              lang = "en") {
+
+        assert_that(is.string(lang))
+
+        langs <-
+            read_namelist(path = path,
+                          file = file_namelist,
+                          lang = "all") %>%
+            distinct(.data$lang) %>%
+            pull(lang)
+
+        assert_that(any(lang %in% langs),
+                    msg = "Your setting of lang is not supported.")
 
         namelist <-
             read_namelist(path = path,
@@ -410,9 +432,13 @@ read_types <-
 #'
 #' @export
 #' @importFrom git2rdata read_vc
+#' @importFrom assertthat
+#' assert_that
+#' is.string
 #' @importFrom dplyr
 #' %>%
 #' select
+#' distinct
 #' mutate
 #' rename
 #' tibble
@@ -420,12 +446,25 @@ read_types <-
 #' as_tibble
 #' distinct
 #' arrange
+#' pull
 #' @importFrom rlang .data
 read_env_pressures <-
     function(path = pkgdatasource_path("textdata/env_pressures", ".tsv"),
              file = "env_pressures",
              file_namelist = "namelist",
              lang = "en") {
+
+        assert_that(is.string(lang))
+
+        langs <-
+            read_namelist(path = path,
+                          file = file_namelist,
+                          lang = "all") %>%
+            distinct(.data$lang) %>%
+            pull(lang)
+
+        assert_that(any(lang %in% langs),
+                    msg = "Your setting of lang is not supported.")
 
         namelist <-
             read_namelist(path = path,
@@ -584,20 +623,37 @@ read_env_pressures <-
 #'
 #' @export
 #' @importFrom git2rdata read_vc
+#' @importFrom assertthat
+#' assert_that
+#' is.string
 #' @importFrom dplyr
 #' %>%
 #' filter
 #' select
+#' distinct
 #' mutate
 #' left_join
 #' as_tibble
 #' contains
+#' pull
 #' @importFrom rlang .data
 read_schemes <-
     function(path = pkgdatasource_path("textdata/schemes", ".tsv"),
              file = "schemes",
              file_namelist = "namelist",
              lang = "en") {
+
+        assert_that(is.string(lang))
+
+        langs <-
+            read_namelist(path = path,
+                          file = file_namelist,
+                          lang = "all") %>%
+            distinct(.data$lang) %>%
+            pull(lang)
+
+        assert_that(any(lang %in% langs),
+                    msg = "Your setting of lang is not supported.")
 
         namelist <-
             read_namelist(path = path,
@@ -774,6 +830,9 @@ read_schemes <-
 #'
 #' @export
 #' @importFrom git2rdata read_vc
+#' @importFrom assertthat
+#' assert_that
+#' is.string
 #' @importFrom dplyr
 #' %>%
 #' select
@@ -782,6 +841,7 @@ read_schemes <-
 #' as_tibble
 #' contains
 #' pull
+#' distinct
 #' @importFrom tidyr gather spread
 #' @importFrom stringr str_c
 #' @importFrom rlang .data
@@ -790,6 +850,18 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
                               file_namelist = "namelist",
                               lang = "en",
                               extended = FALSE) {
+
+    assert_that(is.string(lang))
+
+    langs <-
+        read_namelist(path = path,
+                      file = file_namelist,
+                      lang = "all") %>%
+        distinct(.data$lang) %>%
+        pull(lang)
+
+    assert_that(any(lang %in% langs),
+                msg = "Your setting of lang is not supported.")
 
     namelist <-
         read_namelist(path = path,

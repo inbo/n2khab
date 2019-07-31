@@ -22,6 +22,7 @@ For contributing, see the README on
 Useful links:
 \itemize{
   \item \url{https://github.com/inbo/n2khab}
+  \item Report bugs at \url{https://github.com/inbo/n2khab/issues}
 }
 
 }
@@ -44,7 +45,7 @@ Other contributors:
   \item Nathalie Cools \email{nathalie.cools@inbo.be} (0000-0002-7059-2318) [contributor]
   \item Suzanna Lettens \email{suzanna.lettens@inbo.be} (0000-0001-5032-495X) [contributor]
   \item Arne Verstraeten \email{arne.verstraeten@inbo.be} (0000-0002-8813-1261) [contributor]
-  \item Research Institute for Nature and Forest \email{info@inbo.be} [copyright holder, funder]
+  \item Research Institute for Nature and Forest \email{info@inbo.be} [copyright holder]
 }
 
 }
