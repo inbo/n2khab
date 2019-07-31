@@ -44,7 +44,7 @@ A list of two objects:
 \code{read_habitatmap_stdized} returns the data source \code{habitatmap_stdized} as a list of two objects:
 \itemize{
   \item \code{habitatmap_polygons}: an sf object with all polygons
-  of the \code{habitatmap} that contain habitat or a Regional
+  of the \code{habitatmap} that contain habitat or a Regionally
   Important Biotope (RIB).
   \item \code{habitatmap_patches}: a tibble with information on the
   habitat and RIB patches (HAB1, HAB2,..., HAB5) that occur within
