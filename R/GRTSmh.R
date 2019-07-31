@@ -38,12 +38,10 @@
 #' 262–278. DOI: 10.1198/016214504000000250.
 #'
 #' @examples
-#' \dontrun{
 #' oldoption <- getOption("digits")
 #' options(digits = 15)
 #' convert_dec_to_base4frac(c(14, 15, NA, 456))
 #' options(digits = oldoption)
-#' }
 #'
 #' @export
 convert_dec_to_base4frac <-
@@ -142,7 +140,6 @@ convert_dec_to_base4frac <-
 #' 262–278. DOI: 10.1198/016214504000000250.
 #'
 #' @examples
-#' \dontrun{
 #' oldoption <- options(list(digits = 15, scipen = 999))
 #' # one scalar:
 #' convert_base4frac_to_dec(0.1010101010101, level = 0)
@@ -155,7 +152,6 @@ convert_dec_to_base4frac <-
 #'                                           level = i)
 #'       )
 #' options(oldoption)
-#' }
 #'
 #' @export
 #' @importFrom dplyr %>%

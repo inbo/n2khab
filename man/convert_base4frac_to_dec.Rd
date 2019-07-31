@@ -47,7 +47,6 @@ When writing such a raster to a file, it is recommended to use the
 \code{INT4U} data type (see \code{\link[raster]{dataType}}).
 }
 \examples{
-\dontrun{
 oldoption <- options(list(digits = 15, scipen = 999))
 # one scalar:
 convert_base4frac_to_dec(0.1010101010101, level = 0)
@@ -60,7 +59,6 @@ sapply(0:12, function(i) convert_base4frac_to_dec(c(NA, 0.1010101010101),
                                           level = i)
       )
 options(oldoption)
-}
 
 }
 \references{
