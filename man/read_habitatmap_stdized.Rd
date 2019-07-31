@@ -115,4 +115,4 @@ Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
 DOI: 10.21436/inbor.15138099.
 }
-\concept{functions involved in processing the \code{habitatdata} data source}
+\concept{functions involved in processing the \code{habitatmap} data source}
