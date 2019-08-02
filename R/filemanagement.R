@@ -83,7 +83,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 
 
 
-#' Get raw data from a Zenodo archive
+#' Get data from a Zenodo archive
 #'
 #' This function will download data from Zenodo (\url{https://zenodo.org}).
 #' It only works for Zenodo created DOI (not when the DOI is for

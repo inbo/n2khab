@@ -2,7 +2,7 @@
 % Please edit documentation in R/filemanagement.R
 \name{filemanag_zenodo}
 \alias{filemanag_zenodo}
-\title{Get raw data from a Zenodo archive}
+\title{Get data from a Zenodo archive}
 \usage{
 filemanag_zenodo(path, doi)
 }
