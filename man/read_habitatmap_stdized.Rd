@@ -113,6 +113,6 @@ De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin
 Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-DOI: 10.21436/inbor.15138099.
+DOI: https://doi.org/10.21436/inbor.15138099.
 }
 \concept{functions involved in processing the \code{habitatmap} data source}
