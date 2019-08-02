@@ -57,6 +57,6 @@ In a collaborative workflow it is recommended to **define a variable `datapath`*
 e.g.:
 
     ```
-    datapath <- "my/absolute-or-relative/path/to/data"
+    datapath <- "my/absolute-or-relative/path/to/n2khab_data"
     ```
     and feed the `datapath` variable to functions in the actual collaborative workflow.
