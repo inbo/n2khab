@@ -32,11 +32,11 @@
 #'
 #' @examples
 #' \dontrun{
-#'filemanag_folders()
-#'datapath <- filemanag_folders(root = "git")
+#'fileman_folders()
+#'datapath <- fileman_folders(root = "git")
 #' }
 #'
-filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
+fileman_folders <- function(root = c("rproj", "git"), path = NA) {
     # directory setup
     if (!is.na(path)) {
         if (dir.exists(path)) {
@@ -108,13 +108,13 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #' @examples
 #' \dontrun{
 #' # Single zip file deposition
-#' filemanag_zenodo(".", "10.5281/zenodo.1283345")
+#' fileman_zenodo(".", "10.5281/zenodo.1283345")
 #' # Multiple files deposition
-#' filemanag_zenodo(".", "10.5281/zenodo.1172801")
+#' fileman_zenodo(".", "10.5281/zenodo.1172801")
 #' # Single pdf file deposition
-#' filemanag_zenodo(".", "10.5281/zenodo.168478")
+#' fileman_zenodo(".", "10.5281/zenodo.168478")
 #' }
-filemanag_zenodo <- function(path, doi) {
+fileman_zenodo <- function(path, doi) {
     if (missing(path)) {
         stop("Please provide a path to which the data need to be downloaded")
     }
