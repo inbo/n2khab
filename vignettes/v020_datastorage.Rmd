@@ -1,10 +1,10 @@
 ---
-title: "Where to store data sources"
+title: "Where to store the N2KHAB input data sources"
 author: "Floris Vanderhaeghe"
-date: "2019-05-07"
+date: "2019-08-02"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{020. Where to store data sources}
+  %\VignetteIndexEntry{020. Where to store the input data sources}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,48 +15,71 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(n2khab)
 ```
 
-## Data sources used by `n2khab` functions
+## Introduction
 
-Apart from a few textual datasets, provided directly with this package,
-most data sources are made available through some cloud-based infrastructure.
-An overview is given [here](https://drive.google.com/file/d/1xZz9f9n8zSUxBJvW6WEFLyDK7Ya0u4iN/view).
+### Distribution of the data sources used by `n2khab` functions
+
+Apart from several textual datasets, provided directly with this package,
+other N2KHAB data sources [^N2KHAB] are binary or large data.
+Those are made available through cloud-based infrastructure, preserved for the future at least via [Zenodo](https://zenodo.org).^[
+This also means that several previously published ([open](https://opendefinition.org/licenses/)) data sources have been publicly redistributed at Zenodo.
+]
+An overview of data distribution pathways is given [here](https://drive.google.com/file/d/1xZz9f9n8zSUxBJvW6WEFLyDK7Ya0u4iN/view).
+
+[^N2KHAB]: N2KHAB data sources are a list of public, standard data sources, important to analytical workflows concerning Natura 2000 (n2k) habitats (hab) in Flanders.
+They are in a public repository in order to be easily findable and to be preserved in a durable way.
+
+### Local data storage
+
+Data sources evolve, and hence, data source versions succeed one another.
+To ease reproducibility of analytical workflows,
+this package assumes _locally stored_ data sources.
+
+The `n2khab` functions, aimed at reading these data and returning them in R in some kind of standardized way, always provide _arguments_ to specify the file's name and location -- so you can in fact freely choose these.
+However, to **ease collaboration in scripting**, it is highly recommended to follow the below standard locations and filenames (see: [Getting started](#getting-started)).
+Moreover, the _functions assume_ these conventions by default in order to make your life easier!
 
 There is a major distinction between:
 
-- raw data, residing in a folder `n2khab_data/10_raw`, publicly available and which you need to store locally to use them;
-- processed data, residing in a folder `n2khab_data/20_processed`.
+- **raw data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-raw)), to be stored in a folder `n2khab_data/10_raw`;
+- **processed data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-processed)), to be stored in a folder `n2khab_data/20_processed`.
+These data sources have been derived from the raw data sources, but are distributed themselves because of the time-consuming or intricate calculations to reproduce them.
 
-While you can reproduce the processed data sources from an [R script on Github](https://github.com/inbo/n2khab-preprocessing/blob/master/src/complete_reproducible_workflow.R), this may take a long computing time in specific cases.
-The processed data sources are currently shared in a private cloud storage for INBO personnel (the path on the Q-share in the referred overview).
-They will also be shared publicly.
-_XXX the latter is to be implemented and further referred here XXX_
+You can reproduce the processed data sources from an [R script on Github](https://github.com/inbo/n2khab-preprocessing/blob/master/src/complete_reproducible_workflow.R), but it will take hours.
+
+As you see, when storing these binary or large data, we avoid using a folder named as `data`:
+
+- the `n2khab_data` folder name is better fit when the folder does not sit inside one project or repository (see further) but instead delivers to several projects / repositories.
+- within a project or repository, the specific name keeps it separate from a project-specific `data` folder with locally generated or extra needed input data, part or all of which is to be version-controlled, and which may use its own substructure.
+`n2khab_data` should always be ignored by version control systems.
 
 
-## How to store the data sources
+## Getting started for your (collaborative) workflow {#getting-started}
 
-Data sources evolve, and hence, data source versions succeed one another.
-To ease reproducibility, this package therefore works with _locally stored_ data sources.
+Mind that, _if_ you store the `n2khab_data` folder inside a version controlled repository (e.g. using git), it must be **ignored by version control**!
 
-The `n2khab` functions, aimed at reading these data and returning them in R in some kind of standardized way, always provide _arguments_ to specify the file's name and location -- so you can in fact freely choose these.
-However, to **ease collaboration in scripting**, it is highly recommended to follow specific [data management standards for N2KHAB scripting workflows](https://github.com/inbo/n2khab-monitoring/blob/master/datamanagement.md), which are also applied in the cloud storage.
-Moreover, by default the _functions assume_ these locations and filenames to make your life easier.
+1. Decide **where** you want to store the `n2khab_data` folder:
+    - from the viewpoint of several projects / several git repositories, when these need the same data source versions, the location may be at a high level in your file system.
+    A convenient approach is to use the folder which holds the different project folders / repositories.
+    - from the viewpoint of one project / repository: the `n2khab_data` folder can be put inside the project / repository folder.
+    This approach has the advantage that you can store versions of data sources different from those in another repository (where you also have an `n2khab_data` folder).
+  
+    For the functions to succeed in finding the `n2khab_data` folder folder in each collaborator's file system, make sure that the folder is present _either in the working directory of your R scripts or in a path 1 up to 10 levels above this working directory_.
+    By default, the functions search the folder in that order and use the first encountered `n2khab_data` folder.
+    (Otherwise, you would need to actively set the path to the data folder with the `path` argument in each function call.)
+    
+1. From your working directory, use [fileman_folders()](../html/fileman_folders.html) for specifying the desired location (using the function's arguments).
+It will check the existence of the folders `n2khab_data`, `n2khab_data/10_raw` and `n2khab_data/20_processed` and create them if they don't exist.
+1. From the cloud storage, **download** the respective data files of a data source.
+You can also use the function [fileman_zenodo()](../html/fileman_zenodo.html) to do that, using the DOI of each data source version.
+For each data source, put its file(s) in an appropriate subfolder either below `n2khab_data/10_raw` or `n2khab_data/20_processed` (depending on the data source).
+Use the data source's default name for the subfolder.
+You get a list of the data source names with _XXX_.
+These names are version-agnostic!
+The reading function name of the `n2khab` package and their documentation make clear which data sources you will need.
 
-Summarizing, this means:
 
-- use the data source's default ID to name both the data source specific subfolder and the data source file(s) (before the extension).
-This name is version-agnostic!
-Versions can however be defined and checked for in a workflow, in a specific way.
-_XXX the latter is to be implemented and further referred here XXX_
-- depending on the data source, its own folder is to be stored either under `n2khab_data/10_raw` or under `n2khab_data/20_processed`.
-- the location of the `n2khab_data` folder is specific to your setup and always needs to be specified as a function argument.
-If you are a contributor to the [n2khab-preprocessing](https://github.com/inbo/n2khab-preprocessing) git repository, you can follow its organisation and create the `n2khab_data` folder at the root of the locally cloned repo (it is git-ignored).
-In a collaborative workflow it is recommended to **define a variable `datapath`** in a separate, user-specific script, 
-e.g.:
 
-    ```
-    datapath <- "my/absolute-or-relative/path/to/n2khab_data"
-    ```
-    and feed the `datapath` variable to functions in the actual collaborative workflow.
+
