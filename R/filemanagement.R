@@ -21,6 +21,8 @@
 #' @return A character string that gives the absolute path to the \code{n2khab_data/}
 #' folder.
 #'
+#' @family functions regarding file management for N2KHAB projects
+#'
 #' @importFrom rprojroot
 #' find_root
 #' is_git_root
