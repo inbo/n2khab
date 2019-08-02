@@ -102,14 +102,14 @@ outer borders (i.e., not excluding the Brussels Capital Region).
 \examples{
 \dontrun{
 # This example supposes that your working directory is a folder next to
-# the 'n2khab-preprocessing' repository AND that the
+# the 'n2khab_data' folder AND that the
 # 'GRTSmh_diffres' data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can consider
 # what to do.
-r <- read_GRTSmh_diffres("../n2khab-preprocessing/data", level = 7)
+r <- read_GRTSmh_diffres("../n2khab_data", level = 7)
 r
 sp::spplot(r)
-p <- read_GRTSmh_diffres("../n2khab-preprocessing/data", level = 7, polygon = TRUE)
+p <- read_GRTSmh_diffres("../n2khab_data", level = 7, polygon = TRUE)
 p
 plot(p)
 }
