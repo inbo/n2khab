@@ -300,12 +300,13 @@ convert_base4frac_to_dec <-
 #'
 #' @examples
 #' \dontrun{
-#' # This example supposes that your working directory is a folder next to
+#' # This example supposes that your working directory or a directory up to 10
+#' # levels above has
 #' # the 'n2khab_data' folder AND that the
 #' # 'GRTSmaster_habitats' data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can consider
 #' # what to do.
-#' r <- read_GRTSmh("../n2khab_data")
+#' r <- read_GRTSmh()
 #' r
 #' }
 #'
@@ -319,7 +320,7 @@ convert_base4frac_to_dec <-
 #' crs<-
 #' @importFrom stringr str_c
 read_GRTSmh <-
-    function(path,
+    function(path = fileman_up("n2khab_data"),
              file = c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
                       "20_processed/GRTSmh_brick/GRTSmh_brick.tif"),
              brick = FALSE) {
@@ -421,12 +422,13 @@ read_GRTSmh <-
 #'
 #' @examples
 #' \dontrun{
-#' # This example supposes that your working directory is a folder next to
+#' # This example supposes that your working directory or a directory up to 10
+#' # levels above has
 #' # the 'n2khab_data' folder AND that the
 #' # 'GRTSmh_base4frac' data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can consider
 #' # what to do.
-#' r <- read_GRTSmh_base4frac("../n2khab_data")
+#' r <- read_GRTSmh_base4frac()
 #' r
 #' }
 #'
@@ -437,7 +439,7 @@ read_GRTSmh <-
 #' raster
 #' crs<-
 read_GRTSmh_base4frac <-
-    function(path,
+    function(path = fileman_up("n2khab_data"),
              file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif") {
         r <- raster(file.path(path, file))
         crs(r) <- gdalsrsinfo("+init=epsg:31370", as.CRS = TRUE)
@@ -563,15 +565,16 @@ read_GRTSmh_base4frac <-
 #'
 #' @examples
 #' \dontrun{
-#' # This example supposes that your working directory is a folder next to
+#' # This example supposes that your working directory or a directory up to 10
+#' # levels above has
 #' # the 'n2khab_data' folder AND that the
 #' # 'GRTSmh_diffres' data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can consider
 #' # what to do.
-#' r <- read_GRTSmh_diffres("../n2khab_data", level = 7)
+#' r <- read_GRTSmh_diffres(level = 7)
 #' r
 #' sp::spplot(r)
-#' p <- read_GRTSmh_diffres("../n2khab_data", level = 7, polygon = TRUE)
+#' p <- read_GRTSmh_diffres(level = 7, polygon = TRUE)
 #' p
 #' plot(p)
 #' }
@@ -587,7 +590,7 @@ read_GRTSmh_base4frac <-
 #' raster
 #' crs<-
 read_GRTSmh_diffres <-
-    function(path,
+    function(path = fileman_up("n2khab_data"),
              subdir = "20_processed/GRTSmh_diffres",
              level,
              polygon = FALSE) {

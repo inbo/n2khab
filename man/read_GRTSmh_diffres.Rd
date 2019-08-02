@@ -5,8 +5,8 @@
 \title{Return a RasterLayer or an \code{sf} polygon layer from the processed data
 source \code{GRTSmh_diffres}}
 \usage{
-read_GRTSmh_diffres(path, subdir = "20_processed/GRTSmh_diffres", level,
-  polygon = FALSE)
+read_GRTSmh_diffres(path = fileman_up("n2khab_data"),
+  subdir = "20_processed/GRTSmh_diffres", level, polygon = FALSE)
 }
 \arguments{
 \item{path}{The directory of the data source.
@@ -101,15 +101,16 @@ outer borders (i.e., not excluding the Brussels Capital Region).
 }
 \examples{
 \dontrun{
-# This example supposes that your working directory is a folder next to
+# This example supposes that your working directory or a directory up to 10
+# levels above has
 # the 'n2khab_data' folder AND that the
 # 'GRTSmh_diffres' data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can consider
 # what to do.
-r <- read_GRTSmh_diffres("../n2khab_data", level = 7)
+r <- read_GRTSmh_diffres(level = 7)
 r
 sp::spplot(r)
-p <- read_GRTSmh_diffres("../n2khab_data", level = 7, polygon = TRUE)
+p <- read_GRTSmh_diffres(level = 7, polygon = TRUE)
 p
 plot(p)
 }

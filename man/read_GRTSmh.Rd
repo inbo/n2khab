@@ -5,7 +5,7 @@
 \title{Return the \code{GRTSmaster_habitats} data source as a RasterLayer or a
 10-layered variant as a RasterBrick}
 \usage{
-read_GRTSmh(path,
+read_GRTSmh(path = fileman_up("n2khab_data"),
   file = c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
   "20_processed/GRTSmh_brick/GRTSmh_brick.tif"), brick = FALSE)
 }
@@ -84,12 +84,13 @@ the corresponding RasterBrick layers named as \code{level0} to \code{level9}.
 }
 \examples{
 \dontrun{
-# This example supposes that your working directory is a folder next to
+# This example supposes that your working directory or a directory up to 10
+# levels above has
 # the 'n2khab_data' folder AND that the
 # 'GRTSmaster_habitats' data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can consider
 # what to do.
-r <- read_GRTSmh("../n2khab_data")
+r <- read_GRTSmh()
 r
 }
 

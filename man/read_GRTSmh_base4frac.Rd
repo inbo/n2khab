@@ -5,7 +5,7 @@
 \title{Return the processed data source \code{GRTSmh_base4frac} as a
 RasterLayer}
 \usage{
-read_GRTSmh_base4frac(path,
+read_GRTSmh_base4frac(path = fileman_up("n2khab_data"),
   file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif")
 }
 \arguments{
@@ -59,12 +59,13 @@ So, what really matters is only the notation with many digits, to be
 }
 \examples{
 \dontrun{
-# This example supposes that your working directory is a folder next to
+# This example supposes that your working directory or a directory up to 10
+# levels above has
 # the 'n2khab_data' folder AND that the
 # 'GRTSmh_base4frac' data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can consider
 # what to do.
-r <- read_GRTSmh_base4frac("../n2khab_data")
+r <- read_GRTSmh_base4frac()
 r
 }
 

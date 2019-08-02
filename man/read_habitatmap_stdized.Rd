@@ -5,7 +5,7 @@
 \title{Return the data source \code{habitatmap_stdized} as a list of two
 objects}
 \usage{
-read_habitatmap_stdized(path,
+read_habitatmap_stdized(path = fileman_up("n2khab_data"),
   file = "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg")
 }
 \arguments{
@@ -96,13 +96,13 @@ The R-code for creating the \code{habitatmap_stdized} data source
 }
 \examples{
 \dontrun{
-# This example supposes that your working directory is a folder next
-# to the 'n2khab_data' folder AND that the 'habitatmap_stdized
+# This example supposes that your working directory or a directory up to 10
+# levels above has the 'n2khab_data' folder AND that the 'habitatmap_stdized'
 # data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_habitatmap("../n2khab_data")
+r <- read_habitatmap()
 r_polygons <- r$habitatmap_polygons
 r_patches <- r$habitatmap_patches
 }
