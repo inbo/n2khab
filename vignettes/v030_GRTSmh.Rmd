@@ -53,7 +53,7 @@ For more information on data storage and locations, there is a [specific vignett
 
 ### read_GRTSmh()
   
-In the below R code, the recommendation has been followed to set the location of the `data` folder by a variable **`datapath`**.
+In the below R code, the recommendation has been followed to set the location of the `n2khab_data` folder by a variable **`datapath`**.
 See the [vignette on data storage](../doc/v020_datastorage.html) for more information.
 
 `read_GRTSmh()` by default returns the `GRTSmaster_habitats` dataset:

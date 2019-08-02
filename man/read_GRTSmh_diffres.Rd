@@ -11,7 +11,7 @@ read_GRTSmh_diffres(path, subdir = "20_processed/GRTSmh_diffres", level,
 \arguments{
 \item{path}{The directory of the data source.
 Considering the default value of the \code{subdir} argument, use this argument
-in scripts to set the location of the folder '\strong{\code{data}}'.}
+in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.}
 
 \item{subdir}{The subdirectory path of the data source, as viewed from
 \code{path}.

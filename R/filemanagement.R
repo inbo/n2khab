@@ -1,4 +1,4 @@
-#' @title Create a standard data folder structure and return the path to the \code{data} folder
+#' @title Create a standard data folder structure and return the path to the \code{n2khab_data} folder
 #'
 #' @description This function will check for the existence of default data folders,
 #' create them if necessary, and return the path to the data folder.
@@ -6,8 +6,8 @@
 #' @details In n2khab projects a standardized folder setup is used for binary
 #' data, as explained in the \href{doc/v020_datastorage.html}{vignette} on
 #' data storage.
-#' The functions creates the folders \code{data}, \code{data/10_raw}
-#' and \code{data/20_processed}, or prints a message if these already
+#' The functions creates the folders \code{n2khab_data}, \code{n2khab_data/10_raw}
+#' and \code{n2khab_data/20_processed}, or prints a message if these already
 #' exist.
 #' You can use the value returned by the function as the `path` argument of
 #' functions that read particular data.
@@ -18,7 +18,7 @@
 #'
 #' @param path An optional argument to specify a custom path to a folder where you want the data folder structure to be created. Default is \code{NA} (no custom path).
 #'
-#' @return A character string that gives the absolute path to the \code{data/}
+#' @return A character string that gives the absolute path to the \code{n2khab_data/}
 #' folder.
 #'
 #' @importFrom rprojroot

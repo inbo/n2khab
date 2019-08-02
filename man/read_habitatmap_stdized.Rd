@@ -11,7 +11,7 @@ read_habitatmap_stdized(path,
 \arguments{
 \item{path}{Location of the file.
 Considering the default value of the \code{file} argument, use this
-argument in scripts to set the location of the folder '\strong{\code{data}}'.}
+argument in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.}
 
 \item{file}{The filename of the data source.
 May include a path prefix.

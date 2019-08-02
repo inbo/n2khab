@@ -275,7 +275,7 @@ convert_base4frac_to_dec <-
 #'
 #' @param path Location of the file.
 #' Considering the default value of the \code{file} argument, use this argument
-#' in scripts to set the location of the folder '\strong{\code{data}}'.
+#' in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.
 #' @param file The filename of the data source.
 #' May include a path prefix.
 #' The default follows the data management advice in the
@@ -402,7 +402,7 @@ read_GRTSmh <-
 #'
 #' @param path Location of the file.
 #' Considering the default value of the \code{file} argument, use this argument
-#' in scripts to set the location of the folder '\strong{\code{data}}'.
+#' in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.
 #' @param file The filename of the data source.
 #' May include a path prefix.
 #' The default follows the data management advice in the
@@ -545,7 +545,7 @@ read_GRTSmh_base4frac <-
 #'
 #' @param path The directory of the data source.
 #' Considering the default value of the \code{subdir} argument, use this argument
-#' in scripts to set the location of the folder '\strong{\code{data}}'.
+#' in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.
 #' @param subdir The subdirectory path of the data source, as viewed from
 #' \code{path}.
 #' The default follows the data management advice in the

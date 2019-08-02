@@ -26,8 +26,8 @@ An overview is given [here](https://drive.google.com/file/d/1xZz9f9n8zSUxBJvW6WE
 
 There is a major distinction between:
 
-- raw data, residing in a folder `data/10_raw`, publicly available and which you need to store locally to use them;
-- processed data, residing in a folder `data/20_processed`.
+- raw data, residing in a folder `n2khab_data/10_raw`, publicly available and which you need to store locally to use them;
+- processed data, residing in a folder `n2khab_data/20_processed`.
 
 While you can reproduce the processed data sources from an [R script on Github](https://github.com/inbo/n2khab-preprocessing/blob/master/src/complete_reproducible_workflow.R), this may take a long computing time in specific cases.
 The processed data sources are currently shared in a private cloud storage for INBO personnel (the path on the Q-share in the referred overview).
@@ -50,9 +50,9 @@ Summarizing, this means:
 This name is version-agnostic!
 Versions can however be defined and checked for in a workflow, in a specific way.
 _XXX the latter is to be implemented and further referred here XXX_
-- depending on the data source, its own folder is to be stored either under `data/10_raw` or under `data/20_processed`.
-- the location of the `data` folder is specific to your setup and always needs to be specified as a function argument.
-If you are a contributor to the [n2khab-preprocessing](https://github.com/inbo/n2khab-preprocessing) git repository, you can follow its organisation and create the `data` folder at the root of the locally cloned repo (it is git-ignored).
+- depending on the data source, its own folder is to be stored either under `n2khab_data/10_raw` or under `n2khab_data/20_processed`.
+- the location of the `n2khab_data` folder is specific to your setup and always needs to be specified as a function argument.
+If you are a contributor to the [n2khab-preprocessing](https://github.com/inbo/n2khab-preprocessing) git repository, you can follow its organisation and create the `n2khab_data` folder at the root of the locally cloned repo (it is git-ignored).
 In a collaborative workflow it is recommended to **define a variable `datapath`** in a separate, user-specific script, 
 e.g.:
 
