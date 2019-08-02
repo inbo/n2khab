@@ -54,6 +54,7 @@ As you see, when storing these binary or large data, we avoid using a folder nam
 - the `n2khab_data` folder name is better fit when the folder does not sit inside one project or repository (see further) but instead delivers to several projects / repositories.
 - within a project or repository, the specific name keeps it separate from a project-specific `data` folder with locally generated or extra needed input data, part or all of which is to be version-controlled, and which may use its own substructure.
 `n2khab_data` should always be ignored by version control systems.
+- it will work better for the `n2khab` functions for finding the right location when using a more special name.
 
 
 ## Getting started for your (collaborative) workflow {#getting-started}
