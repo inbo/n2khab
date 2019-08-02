@@ -174,3 +174,71 @@ fileman_zenodo <- function(path, doi) {
 
 
 
+#' Climb up in the file system hierarchy to find a file or folder
+#'
+#' Searches for a specific file or folder, starting from the \code{start}
+#' directory and sequentially climbing up one directory level at a time.
+#' The first match causes this sequence to stop
+#' and the full path will be returned.
+#'
+#' Symbolic links are matched, and in the returned path they are converted.
+#'
+#' @param name Name of file or folder to search for.
+#' An exact match is needed.
+#' The matching is case sensitive.
+#' @param start String.
+#' Directory to start searching from.
+#' @param levels Integer.
+#' How many levels to sequentially climb up in the file hierarchy,
+#' if the file or folder is not found in the \code{start} directory?
+#'
+#' @return
+#' The path to the specified folder or file (string), or \code{NULL} if
+#' not found.
+#'
+#' @family functions regarding file management for N2KHAB projects
+#'
+#' @examples
+#' \dontrun{
+#' fileman_up("n2khab_data")
+#' }
+#'
+#' @importFrom assertthat
+#' assert_that
+#' is.string
+#' @importFrom dplyr
+#' %>%
+#' @export
+fileman_up <- function(name,
+                       start = ".",
+                       levels = 10) {
+
+    assert_that(is.string(name))
+    assert_that(dir.exists(start),
+                msg = "The start directory does not exist.")
+    assert_that(levels %% levels == 0 & levels >= 0,
+                msg = "levels must be a positive integer value.")
+
+    path <- start
+
+    for (i in 0:levels) {
+        ff <- list.files(path,
+                         all.files = TRUE,
+                         include.dirs = TRUE)
+        if (name %in% ff) break
+        path <- file.path(path, "..")
+    }
+
+    if (name %in% ff) {
+        file.path(path, name) %>%
+            normalizePath()
+    } else {
+        NULL
+    }
+
+}
+
+
+
+
+
