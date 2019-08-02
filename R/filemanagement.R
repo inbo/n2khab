@@ -38,7 +38,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
     # directory setup
     if (!is.na(path)) {
         if (dir.exists(path)) {
-            datapath <- file.path(path, "data")
+            datapath <- file.path(path, "n2khab_data")
         } else {
             stop("The specified path does not exist.")
         }
@@ -54,7 +54,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
             root <- find_root(is_rstudio_project)
         }
 
-        datapath <- file.path(root, "data")
+        datapath <- file.path(root, "n2khab_data")
     }
 
 
