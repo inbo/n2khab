@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
 library(n2khab)
 library(magrittr)
 library(knitr)
-datapath <- "../../n2khab-preprocessing/data"
 ```
 
 ## Intro
@@ -53,19 +52,19 @@ For more information on data storage and locations, there is a [specific vignett
 
 ### read_GRTSmh()
   
-In the below R code, the recommendation has been followed to set the location of the `data` folder by a variable **`datapath`**.
+In the below R code, it is supposed that a `n2khab_data` folder is present in the current directory or up to 10 levels higher.
 See the [vignette on data storage](../doc/v020_datastorage.html) for more information.
 
 `read_GRTSmh()` by default returns the `GRTSmaster_habitats` dataset:
 
 ```{r eval=FALSE}
-read_GRTSmh(datapath)
+read_GRTSmh()
 #> class      : RasterLayer 
 #> dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)
 #> resolution : 32, 32  (x, y)
 #> extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
 #> crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs 
-#> source     : [...]/n2khab-preprocessing/data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif 
+#> source     : [...]/n2khab_data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif 
 #> names      : GRTSmaster_habitats 
 #> values     : 1, 67108857  (min, max)
 ```
@@ -73,13 +72,13 @@ read_GRTSmh(datapath)
 With the argument `brick = TRUE` however, you will get the `GRTSmh_brick` data source, i.e. `GRTSmaster_habitats` plus 9 extra layers:
 
 ```{r eval=FALSE}
-read_GRTSmh(datapath, brick = TRUE)
+read_GRTSmh(brick = TRUE)
 #> class      : RasterBrick 
 #> dimensions : 2843, 7401, 21041043, 10  (nrow, ncol, ncell, nlayers)
 #> resolution : 32, 32  (x, y)
 #> extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
 #> crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs 
-#> source     : [...]/n2khab-preprocessing/data/20_processed/GRTSmh_brick/GRTSmh_brick.tif 
+#> source     : [...]/n2khab_data/20_processed/GRTSmh_brick/GRTSmh_brick.tif 
 #> names      :   level0,   level1,   level2,   level3,   level4,   level5,   level6,   level7,   level8,   level9 
 #> min values :        1,        1,        1,        1,        1,        1,        1,        1,        1,        1 
 #> max values : 67108857, 16777209,  4194297,  1048569,   262137,    65529,    16377,     4089,     1017,      253
@@ -104,13 +103,13 @@ data.frame(level = 1:9,
 An example with level 5:
 
 ```{r eval=FALSE}
-read_GRTSmh_diffres(datapath, level = 5)
+read_GRTSmh_diffres(level = 5)
 #> class      : RasterLayer 
 #> dimensions : 89, 232, 20648  (nrow, ncol, ncell)
 #> resolution : 1024, 1024  (x, y)
 #> extent     : 22030, 259598, 153054, 244190  (xmin, xmax, ymin, ymax)
 #> crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs 
-#> source     : [...]/n2khab-preprocessing/data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif 
+#> source     : [...]/n2khab_data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif 
 #> names      : level5 
 #> values     : 1, 65529  (min, max)
 ```
@@ -119,7 +118,7 @@ Alternatively, a dissolved, polygonized variant of the corresponding `GRTSmh_bri
 In order not to inflate the data source, this was only made available for levels 4 to 9.
 
 ```{r eval=FALSE}
-read_GRTSmh_diffres(datapath, level = 5, polygon = TRUE)
+read_GRTSmh_diffres(level = 5, polygon = TRUE)
 #> Simple feature collection with 13791 features and 1 field
 #> geometry type:  POLYGON
 #> dimension:      XY
@@ -147,13 +146,13 @@ Its use is just to return the base-4-fraction-converted `GRTSmaster_habitats` as
 
 ```{r eval=FALSE}
 options(scipen = 999, digits = 15)
-read_GRTSmh_base4frac(datapath)
+read_GRTSmh_base4frac()
 #> class      : RasterLayer 
 #> dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)
 #> resolution : 32, 32  (x, y)
 #> extent     : 22029.591973471, 258861.591973471, 153054.113583292, 244030.113583292  (xmin, xmax, ymin, ymax)
 #> crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs 
-#> source     : [...]/n2khab-preprocessing/data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif 
+#> source     : [...]/n2khab_data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif 
 #> names      : GRTSmh_base4frac 
 #> values     : 0.0000000000001, 0.3333333333321  (min, max)
 ```

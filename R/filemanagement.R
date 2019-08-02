@@ -1,4 +1,4 @@
-#' @title Create a standard data folder structure and return the path to the \code{data} folder
+#' @title Create a standard data folder structure and return the path to the \code{n2khab_data} folder
 #'
 #' @description This function will check for the existence of default data folders,
 #' create them if necessary, and return the path to the data folder.
@@ -6,8 +6,8 @@
 #' @details In n2khab projects a standardized folder setup is used for binary
 #' data, as explained in the \href{doc/v020_datastorage.html}{vignette} on
 #' data storage.
-#' The functions creates the folders \code{data}, \code{data/10_raw}
-#' and \code{data/20_processed}, or prints a message if these already
+#' The functions creates the folders \code{n2khab_data}, \code{n2khab_data/10_raw}
+#' and \code{n2khab_data/20_processed}, or prints a message if these already
 #' exist.
 #' You can use the value returned by the function as the `path` argument of
 #' functions that read particular data.
@@ -18,8 +18,10 @@
 #'
 #' @param path An optional argument to specify a custom path to a folder where you want the data folder structure to be created. Default is \code{NA} (no custom path).
 #'
-#' @return A character string that gives the absolute path to the \code{data/}
+#' @return A character string that gives the absolute path to the \code{n2khab_data/}
 #' folder.
+#'
+#' @family functions regarding file management for N2KHAB projects
 #'
 #' @importFrom rprojroot
 #' find_root
@@ -30,15 +32,15 @@
 #'
 #' @examples
 #' \dontrun{
-#'filemanag_folders()
-#'datapath <- filemanag_folders(root = "git")
+#'fileman_folders()
+#'datapath <- fileman_folders(root = "git")
 #' }
 #'
-filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
+fileman_folders <- function(root = c("rproj", "git"), path = NA) {
     # directory setup
     if (!is.na(path)) {
         if (dir.exists(path)) {
-            datapath <- file.path(path, "data")
+            datapath <- file.path(path, "n2khab_data")
         } else {
             stop("The specified path does not exist.")
         }
@@ -54,7 +56,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
             root <- find_root(is_rstudio_project)
         }
 
-        datapath <- file.path(root, "data")
+        datapath <- file.path(root, "n2khab_data")
     }
 
 
@@ -83,7 +85,7 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 
 
 
-#' Get raw data from a Zenodo archive
+#' Get data from a Zenodo archive
 #'
 #' This function will download data from Zenodo (\url{https://zenodo.org}).
 #' It only works for Zenodo created DOI (not when the DOI is for
@@ -106,13 +108,13 @@ filemanag_folders <- function(root = c("rproj", "git"), path = NA) {
 #' @examples
 #' \dontrun{
 #' # Single zip file deposition
-#' filemanag_zenodo(".", "10.5281/zenodo.1283345")
+#' fileman_zenodo(".", "10.5281/zenodo.1283345")
 #' # Multiple files deposition
-#' filemanag_zenodo(".", "10.5281/zenodo.1172801")
+#' fileman_zenodo(".", "10.5281/zenodo.1172801")
 #' # Single pdf file deposition
-#' filemanag_zenodo(".", "10.5281/zenodo.168478")
+#' fileman_zenodo(".", "10.5281/zenodo.168478")
 #' }
-filemanag_zenodo <- function(path, doi) {
+fileman_zenodo <- function(path, doi) {
     if (missing(path)) {
         stop("Please provide a path to which the data need to be downloaded")
     }
@@ -164,26 +166,77 @@ filemanag_zenodo <- function(path, doi) {
 
 
 
-#' @title Get processed data
-#'
-#' @description This function will download processed data so they become locally available
-#'
-#' @param path path to where the data need to be written
-#' @param filename character vector of filenames
-#'
-#' @return downloaded files in the specified folder
-#'
-#' @keywords internal
-#'
-filemanag_processed <- function(path, filename) {
 
 
+
+
+
+
+
+
+#' Climb up in the file system hierarchy to find a file or folder
+#'
+#' Searches for a specific file or folder, starting from the \code{start}
+#' directory and sequentially climbing up one directory level at a time.
+#' The first match causes this sequence to stop
+#' and the full path will be returned.
+#'
+#' Symbolic links are matched, and in the returned path they are converted.
+#'
+#' @param name Name of file or folder to search for.
+#' An exact match is needed.
+#' The matching is case sensitive.
+#' @param start String.
+#' Directory to start searching from.
+#' @param levels Integer.
+#' How many levels to sequentially climb up in the file hierarchy,
+#' if the file or folder is not found in the \code{start} directory?
+#'
+#' @return
+#' The path to the specified folder or file (string), or \code{NULL} if
+#' not found.
+#'
+#' @family functions regarding file management for N2KHAB projects
+#'
+#' @examples
+#' \dontrun{
+#' fileman_up("n2khab_data")
+#' }
+#'
+#' @importFrom assertthat
+#' assert_that
+#' is.string
+#' @importFrom dplyr
+#' %>%
+#' @export
+fileman_up <- function(name,
+                       start = ".",
+                       levels = 10) {
+
+    assert_that(is.string(name))
+    assert_that(dir.exists(start),
+                msg = "The start directory does not exist.")
+    assert_that(levels %% levels == 0 & levels >= 0,
+                msg = "levels must be a positive integer value.")
+
+    path <- start
+
+    for (i in 0:levels) {
+        ff <- list.files(path,
+                         all.files = TRUE,
+                         include.dirs = TRUE)
+        if (name %in% ff) break
+        path <- file.path(path, "..")
+    }
+
+    if (name %in% ff) {
+        file.path(path, name) %>%
+            normalizePath()
+    } else {
+        NULL
+    }
 
 }
-
-
-
-
 
 
 

@@ -5,13 +5,13 @@
 \title{Return the processed data source \code{GRTSmh_base4frac} as a
 RasterLayer}
 \usage{
-read_GRTSmh_base4frac(path,
+read_GRTSmh_base4frac(path = fileman_up("n2khab_data"),
   file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif")
 }
 \arguments{
 \item{path}{Location of the file.
 Considering the default value of the \code{file} argument, use this argument
-in scripts to set the location of the folder '\strong{\code{data}}'.}
+in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.}
 
 \item{file}{The filename of the data source.
 May include a path prefix.
@@ -59,12 +59,13 @@ So, what really matters is only the notation with many digits, to be
 }
 \examples{
 \dontrun{
-# This example supposes that your working directory is a folder next to
-# the 'n2khab-preprocessing' repository AND that the
+# This example supposes that your working directory or a directory up to 10
+# levels above has
+# the 'n2khab_data' folder AND that the
 # 'GRTSmh_base4frac' data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can consider
 # what to do.
-r <- read_GRTSmh_base4frac("../n2khab-preprocessing/data")
+r <- read_GRTSmh_base4frac()
 r
 }
 

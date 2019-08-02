@@ -5,14 +5,14 @@
 \title{Return the \code{GRTSmaster_habitats} data source as a RasterLayer or a
 10-layered variant as a RasterBrick}
 \usage{
-read_GRTSmh(path,
+read_GRTSmh(path = fileman_up("n2khab_data"),
   file = c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
   "20_processed/GRTSmh_brick/GRTSmh_brick.tif"), brick = FALSE)
 }
 \arguments{
 \item{path}{Location of the file.
 Considering the default value of the \code{file} argument, use this argument
-in scripts to set the location of the folder '\strong{\code{data}}'.}
+in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.}
 
 \item{file}{The filename of the data source.
 May include a path prefix.
@@ -84,12 +84,13 @@ the corresponding RasterBrick layers named as \code{level0} to \code{level9}.
 }
 \examples{
 \dontrun{
-# This example supposes that your working directory is a folder next to
-# the 'n2khab-preprocessing' repository AND that the
+# This example supposes that your working directory or a directory up to 10
+# levels above has
+# the 'n2khab_data' folder AND that the
 # 'GRTSmaster_habitats' data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can consider
 # what to do.
-r <- read_GRTSmh("../n2khab-preprocessing/data")
+r <- read_GRTSmh()
 r
 }
 
