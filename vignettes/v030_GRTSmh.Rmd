@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
 library(n2khab)
 library(magrittr)
 library(knitr)
-datapath <- "../../n2khab_data"
 ```
 
 ## Intro
@@ -53,13 +52,13 @@ For more information on data storage and locations, there is a [specific vignett
 
 ### read_GRTSmh()
   
-In the below R code, the recommendation has been followed to set the location of the `n2khab_data` folder by a variable **`datapath`**.
+In the below R code, it is supposed that a `n2khab_data` folder is present in the current directory or up to 10 levels higher.
 See the [vignette on data storage](../doc/v020_datastorage.html) for more information.
 
 `read_GRTSmh()` by default returns the `GRTSmaster_habitats` dataset:
 
 ```{r eval=FALSE}
-read_GRTSmh(datapath)
+read_GRTSmh()
 #> class      : RasterLayer 
 #> dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)
 #> resolution : 32, 32  (x, y)
@@ -73,7 +72,7 @@ read_GRTSmh(datapath)
 With the argument `brick = TRUE` however, you will get the `GRTSmh_brick` data source, i.e. `GRTSmaster_habitats` plus 9 extra layers:
 
 ```{r eval=FALSE}
-read_GRTSmh(datapath, brick = TRUE)
+read_GRTSmh(brick = TRUE)
 #> class      : RasterBrick 
 #> dimensions : 2843, 7401, 21041043, 10  (nrow, ncol, ncell, nlayers)
 #> resolution : 32, 32  (x, y)
@@ -104,7 +103,7 @@ data.frame(level = 1:9,
 An example with level 5:
 
 ```{r eval=FALSE}
-read_GRTSmh_diffres(datapath, level = 5)
+read_GRTSmh_diffres(level = 5)
 #> class      : RasterLayer 
 #> dimensions : 89, 232, 20648  (nrow, ncol, ncell)
 #> resolution : 1024, 1024  (x, y)
@@ -119,7 +118,7 @@ Alternatively, a dissolved, polygonized variant of the corresponding `GRTSmh_bri
 In order not to inflate the data source, this was only made available for levels 4 to 9.
 
 ```{r eval=FALSE}
-read_GRTSmh_diffres(datapath, level = 5, polygon = TRUE)
+read_GRTSmh_diffres(level = 5, polygon = TRUE)
 #> Simple feature collection with 13791 features and 1 field
 #> geometry type:  POLYGON
 #> dimension:      XY
@@ -147,7 +146,7 @@ Its use is just to return the base-4-fraction-converted `GRTSmaster_habitats` as
 
 ```{r eval=FALSE}
 options(scipen = 999, digits = 15)
-read_GRTSmh_base4frac(datapath)
+read_GRTSmh_base4frac()
 #> class      : RasterLayer 
 #> dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)
 #> resolution : 32, 32  (x, y)
