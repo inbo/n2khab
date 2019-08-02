@@ -164,23 +164,6 @@ filemanag_zenodo <- function(path, doi) {
 
 
 
-#' @title Get processed data
-#'
-#' @description This function will download processed data so they become locally available
-#'
-#' @param path path to where the data need to be written
-#' @param filename character vector of filenames
-#'
-#' @return downloaded files in the specified folder
-#'
-#' @keywords internal
-#'
-filemanag_processed <- function(path, filename) {
-
-
-
-}
-
 
 
 
