@@ -45,16 +45,16 @@ There is a major distinction between:
 
 - **raw data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-raw)), to be stored in a folder `n2khab_data/10_raw`;
 - **processed data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-processed)), to be stored in a folder `n2khab_data/20_processed`.
-These data sources have been derived from the raw data sources, but are distributed themselves because of the time-consuming or intricate calculations to reproduce them.
+These data sources have been derived from the raw data sources, but are distributed on their own because of the time-consuming or intricate calculations needed to reproduce them.
 
 You can reproduce the processed data sources from an [R script on Github](https://github.com/inbo/n2khab-preprocessing/blob/master/src/complete_reproducible_workflow.R), but it will take hours.
 
 As you see, when storing these binary or large data, we avoid using a folder named as `data`:
 
-- the `n2khab_data` folder name is better fit when the folder does not sit inside one project or repository (see further) but instead delivers to several projects / repositories.
+- the `n2khab_data` name is better fit when the folder does not sit inside one project or repository (see further) but instead delivers to several projects / repositories.
 - within a project or repository, the specific name keeps it separate from a project-specific `data` folder with locally generated or extra needed input data, part or all of which is to be version-controlled, and which may use its own substructure.
 `n2khab_data` should always be ignored by version control systems.
-- it will work better for the `n2khab` functions for finding the right location when using a more special name.
+- it works better for the `n2khab` functions to automatically detect the right location when using a more special name.
 
 
 ## Getting started for your (collaborative) workflow {#getting-started}
@@ -67,11 +67,11 @@ Mind that, _if_ you store the `n2khab_data` folder inside a version controlled r
     - from the viewpoint of one project / repository: the `n2khab_data` folder can be put inside the project / repository folder.
     This approach has the advantage that you can store versions of data sources different from those in another repository (where you also have an `n2khab_data` folder).
   
-    For the functions to succeed in finding the `n2khab_data` folder folder in each collaborator's file system, make sure that the folder is present _either in the working directory of your R scripts or in a path 1 up to 10 levels above this working directory_.
-    By default, the functions search the folder in that order and use the first encountered `n2khab_data` folder.
+    For the functions to succeed in finding the `n2khab_data` folder in each collaborator's file system, make sure that the folder is present _either in the working directory of your R scripts or in a path 1 up to 10 levels above this working directory_.
+    By default, the functions search the folder in that order and use the **first encountered** `n2khab_data` folder.
     (Otherwise, you would need to actively set the path to the data folder with the `path` argument in each function call.)
     
-1. From your working directory, use [fileman_folders()](../html/fileman_folders.html) for specifying the desired location (using the function's arguments).
+1. From your working directory, use [fileman_folders()](../html/fileman_folders.html) to specify the desired location (using the function's arguments).
 It will check the existence of the folders `n2khab_data`, `n2khab_data/10_raw` and `n2khab_data/20_processed` and create them if they don't exist.
 1. From the cloud storage, **download** the respective data files of a data source.
 You can also use the function [fileman_zenodo()](../html/fileman_zenodo.html) to do that, using the DOI of each data source version.
