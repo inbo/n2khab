@@ -39,7 +39,7 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
     # directory setup
     if (!is.na(path)) {
         if (dir.exists(path)) {
-            datapath <- file.path(path, "n2khab_data")
+            datapath <- normalizePath(file.path(path, "n2khab_data"))
         } else {
             stop("The specified path does not exist.")
         }
