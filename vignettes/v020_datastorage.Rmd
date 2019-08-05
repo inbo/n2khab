@@ -73,14 +73,34 @@ Mind that, _if_ you store the `n2khab_data` folder inside a version controlled r
     
 1. From your working directory, use [fileman_folders()](../html/fileman_folders.html) to specify the desired location (using the function's arguments).
 It will check the existence of the folders `n2khab_data`, `n2khab_data/10_raw` and `n2khab_data/20_processed` and create them if they don't exist.
-1. From the cloud storage, **download** the respective data files of a data source.
+
+```{r eval=FALSE}
+fileman_folders(root = "rproj")
+#> Created <clipped_path_prefix>/n2khab_data
+#> Created subfolder 10_raw
+#> Created subfolder 20_processed
+#> [1] "<clipped_path_prefix>/n2khab_data"
+```
+
+3. From the cloud storage, **download** the respective data files of a data source.
 You can also use the function [fileman_zenodo()](../html/fileman_zenodo.html) to do that, using the DOI of each data source version.
 For each data source, put its file(s) in an appropriate subfolder either below `n2khab_data/10_raw` or `n2khab_data/20_processed` (depending on the data source).
 Use the data source's default name for the subfolder.
 You get a list of the data source names with _XXX_.
 These names are version-agnostic!
-The reading function name of the `n2khab` package and their documentation make clear which data sources you will need.
+The names of the `n2khab` 'read' function and their documentation make clear which data sources you will need.
 
+    Below is an example of correctly organised N2KHAB data folders:
 
+```
+n2khab_data
+    ├── 10_raw
+          ├── habitatmap            -> contains habitatmat.shp, habitatmap.dbf etc.
+          ├── soilmap
+          └── GRTSmaster_habitats
+    └── 20_processed
+          ├── habitatmap_stdized
+          └── GRTSmh_diffres
+```
 
 
