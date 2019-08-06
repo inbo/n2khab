@@ -159,11 +159,9 @@ expand_types <- function(x,
 
 
 
-#' Translates a factor with levels mapped according to the namelist
+#' Expand a 'type' column in a dataframe (grouping not taken into account)
 #'
-#' Translates a factor, by default using the 'name' variable from the
-#' 'namelist' object to substitute the factor levels. The join on 'namelist' is
-#' by the variable 'code'.
+#' This is the workhorse for \code{\link{expand_types}}.
 #'
 #' @inheritParams expand_types
 #'

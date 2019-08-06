@@ -2,7 +2,7 @@
 % Please edit documentation in R/datawrangling.R
 \name{expand_types_plain}
 \alias{expand_types_plain}
-\title{Translates a factor with levels mapped according to the namelist}
+\title{Expand a 'type' column in a dataframe (grouping not taken into account)}
 \usage{
 expand_types_plain(x, type_var = "type", strict = TRUE)
 }
@@ -20,8 +20,6 @@ Apply conditions before expanding subtype codes to main type codes?}
 A dataframe.
 }
 \description{
-Translates a factor, by default using the 'name' variable from the
-'namelist' object to substitute the factor levels. The join on 'namelist' is
-by the variable 'code'.
+This is the workhorse for \code{\link{expand_types}}.
 }
 \keyword{internal}
