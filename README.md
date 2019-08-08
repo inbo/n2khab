@@ -43,8 +43,7 @@ This is the structure of the repo:
 To install, run:
 
 ```r
-remotes::install_github("inbo/n2khab", 
-                        build_opts = c("--no-resave-data", "--no-manual"))
+remotes::install_github("inbo/n2khab", build_vignettes = TRUE)
 ```
 
 Have a look at the vignettes to quickly find your way!

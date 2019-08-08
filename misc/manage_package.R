@@ -54,7 +54,6 @@ devtools::install()
 remotes::install_github("inbo/n2khab")
 
     # With vignettes:
-    remotes::install_github("inbo/n2khab",
-                            build_opts = c("--no-resave-data", "--no-manual"))
+    remotes::install_github("inbo/n2khab", build_vignettes = TRUE)
 
 
