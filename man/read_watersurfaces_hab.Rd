@@ -97,6 +97,7 @@ r_patches <- r$watersurfaces_hab_patches
 
 }
 \seealso{
-Other functions involved in processing the \code{habitatmap} data source: \code{\link{read_habitatmap_stdized}}
+Other functions involved in processing the \code{habitatmap} data source: \code{\link{read_habitatmap_stdized}},
+  \code{\link{read_habitatmap}}
 }
 \concept{functions involved in processing the \code{habitatmap} data source}
