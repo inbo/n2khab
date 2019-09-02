@@ -295,3 +295,72 @@ read_watersurfaces_hab <-
         return(result)
 
     }
+
+
+
+#' Return the data source \code{habitatmap}
+#'
+#' \code{read_habitatmap} returns all polygons of the \code{habitatmap} (De Saeger et al., 2018) that (partially)
+#' contain habitat or a Regional Important Biotope (RIB).
+#'
+#' @param path Location of the file.
+#' Considering the default value of the \code{file} argument, use this
+#' argument in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.
+#' @param file The filename of the data source.
+#' May include a path prefix.
+#' The default follows the data management advice in the
+#' \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.
+#'
+#' @return
+#' An sf object
+#'
+#' @family functions involved in processing the \code{habitatmap} data source
+#'
+#' @references
+#'
+#' De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
+#' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
+#' DOI: https://doi.org/10.21436/inbor.15138099.
+#'
+#' @examples
+#' \dontrun{
+#' # This example supposes that your working directory or a directory up to 10
+#' # levels above has the 'n2khab_data' folder AND that the 'habitatmapd'
+#' # data source is present in the default subdirectory.
+#' # In all other cases, this example won't work but at least you can
+#' # consider what to do.
+#'
+#' r <- read_habitatmap()
+#' }
+#'
+#' @export
+#' @importFrom sf
+#' st_read
+#' st_crs<-
+#' @importFrom dplyr %>% mutate
+#'
+read_habitatmap <-
+    function(path = fileman_up("n2khab_data"),
+             file = "10_raw/habitatmap"){
+
+        habitatmap <- st_read(file.path(path, file),
+                                   "habitatmap",
+                                   quiet = TRUE,
+                                   as_tibble = TRUE)
+
+        # we only select polygons with habitat or RIB, i.e. polygons in habitatmap_stdized data source
+        hab_stdized <- read_habitatmap_stdized()
+        hab_stdized <- hab_stdized$habitatmap_polygons
+
+        habitatmap_sel <- habitatmap %>%
+            filter(TAG %in% hab_stdized$polygon_id) %>%
+            mutate(TAG = factor(TAG, levels = hab_stdized$polygon_id))
+
+        suppressWarnings(st_crs(habitatmap_sel) <- 31370)
+
+        return(habitatmap_sel)
+
+    }
+
