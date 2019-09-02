@@ -102,7 +102,7 @@ The R-code for creating the \code{habitatmap_stdized} data source
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_habitatmap()
+r <- read_habitatmap_stdized()
 r_polygons <- r$habitatmap_polygons
 r_patches <- r$habitatmap_patches
 }
@@ -114,5 +114,8 @@ Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
 DOI: https://doi.org/10.21436/inbor.15138099.
+}
+\seealso{
+Other functions involved in processing the \code{habitatmap} data source: \code{\link{read_watersurfaces_hab}}
 }
 \concept{functions involved in processing the \code{habitatmap} data source}
