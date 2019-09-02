@@ -116,6 +116,7 @@ Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (
 DOI: https://doi.org/10.21436/inbor.15138099.
 }
 \seealso{
-Other functions involved in processing the \code{habitatmap} data source: \code{\link{read_watersurfaces_hab}}
+Other functions involved in processing the \code{habitatmap} data source: \code{\link{read_habitatmap}},
+  \code{\link{read_watersurfaces_hab}}
 }
 \concept{functions involved in processing the \code{habitatmap} data source}
