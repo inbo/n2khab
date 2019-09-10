@@ -5,7 +5,8 @@
 Set path and filename of the namelist:
 
 ```{r}
-namelist_path <- "../../inst/textdata/namelist"
+namelist_path <- "inst/textdata/namelist"
+root <- "../.."
 ```
 
 
@@ -25,7 +26,7 @@ Writing the namelist a first time:
 
 ```{r message=FALSE}
 dummy <- 
-    str_c(namelist_path, ".*") %>% 
+    str_c(root, "/", namelist_path, ".*") %>% 
     Sys.glob %>% 
     file.remove
 source_df %>% 
@@ -49,6 +50,7 @@ source_df %>%
     gather(key = "lang", value = "name", en:nl) %>% 
     mutate(shortname = NA %>% as.character) %>% 
     write_vc(namelist_path,
+             root,
              sorting = c("lang", "code"))
 ```
 
@@ -67,9 +69,9 @@ source_df %>%
     separate(key, c("lang", "key")) %>% 
     spread(key = key,
            value = value) %>% 
-    bind_rows(read_vc(namelist_path),
+    bind_rows(read_vc(namelist_path, root),
               .) %>% 
-    write_vc(namelist_path)
+    write_vc(namelist_path, root)
 ```
 
 ## Append extra tags to `namelist`
@@ -92,9 +94,9 @@ source_df %>%
     )) %>% 
     gather(key = "lang", value = "name", en:nl) %>% 
     mutate(shortname = NA %>% as.character) %>% 
-    bind_rows(read_vc(namelist_path),
+    bind_rows(read_vc(namelist_path, root),
               .) %>% 
-    write_vc(namelist_path)
+    write_vc(namelist_path, root)
 ```
 
 ## Make `types`
@@ -102,14 +104,14 @@ source_df %>%
 Set path and filename of `types`:
 
 ```{r}
-types_path <- "../../inst/textdata/types"
+types_path <- "inst/textdata/types"
 ```
 
 Write the data source `types`:
 
 ```{r}
 en_codelist <- 
-    read_vc(namelist_path) %>% 
+    read_vc(namelist_path, root) %>% 
     filter(lang == "en") %>% 
     select(code, name)
 source_df %>%
@@ -143,6 +145,7 @@ source_df %>%
                               levels = .$main_type %>% unique)
            ) %>% 
     write_vc(types_path,
+             root,
              sorting = c("typeclass",
                          "type"),
              optimize = FALSE,

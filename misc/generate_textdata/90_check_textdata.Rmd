@@ -4,7 +4,7 @@
 
 ```{r}
 namelist_check <- 
-    read_vc(namelist_path)
+    read_vc(namelist_path, root)
 ```
 
 Are all codes unique per language?
@@ -48,7 +48,7 @@ namelist_check %>%
 ## types
 
 ```{r}
-types_check <- read_vc(types_path)
+types_check <- read_vc(types_path, root)
 ```
 
 Are all codes unique?
@@ -77,7 +77,7 @@ types_check %>%
 ## env_pressures
 
 ```{r}
-ep_check <- read_vc(ep_path)
+ep_check <- read_vc(ep_path, root)
 ```
 
 
@@ -120,7 +120,7 @@ ep_check %>%
 
 ```{r}
 schemes_check <- 
-    read_vc(schemes_path)
+    read_vc(schemes_path, root)
 ```
 
 
@@ -155,7 +155,7 @@ schemes_check %>%
 
 ```{r}
 scheme_types_check <- 
-    read_vc(scheme_types_path)
+    read_vc(scheme_types_path, root)
 ```
 
 
