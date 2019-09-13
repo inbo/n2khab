@@ -25,7 +25,7 @@ An sf object
 }
 \description{
 \code{read_habitatmap} returns all polygons of the \code{habitatmap} (De Saeger et al., 2018) that (partially)
-contain habitat or a Regional Important Biotope (RIB).
+contain habitat or a regionally important biotope (RIB).
 }
 \examples{
 \dontrun{

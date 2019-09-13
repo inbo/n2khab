@@ -4,8 +4,8 @@
 #' \code{read_habitatmap_stdized} returns the data source \code{habitatmap_stdized} as a list of two objects:
 #' \itemize{
 #'   \item \code{habitatmap_polygons}: an sf object with all polygons
-#'   of the \code{habitatmap} that contain habitat or a Regionally
-#'   Important Biotope (RIB).
+#'   of the \code{habitatmap} that contain habitat or a regionally
+#'   important biotope (RIB).
 #'   \item \code{habitatmap_patches}: a tibble with information on the
 #'   habitat and RIB patches (HAB1, HAB2,..., HAB5) that occur within
 #'   the \code{habitatmap_polygons}, each row corresponding with one
@@ -300,7 +300,7 @@ read_watersurfaces_hab <-
 #' Return the data source \code{habitatmap}
 #'
 #' \code{read_habitatmap} returns all polygons of the \code{habitatmap} (De Saeger et al., 2018) that (partially)
-#' contain habitat or a Regional Important Biotope (RIB).
+#' contain habitat or a regionally important biotope (RIB).
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
