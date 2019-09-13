@@ -273,15 +273,10 @@ convert_base4frac_to_dec <-
 #' \code{32 * 2^(0:9)} (minimum: 32 meters, maximum: 16384 meters), with
 #' the corresponding RasterBrick layers named as \code{level0} to \code{level9}.
 #'
-#' @param path Location of the file.
-#' Considering the default value of the \code{file} argument, use this argument
-#' in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.
-#' @param file The filename of the data source.
-#' May include a path prefix.
-#' The default follows the data management advice in the
-#' \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.
 #' @param brick Logical; determines whether the RasterLayer or RasterBrick data
 #' source is returned. See the Details section.
+#'
+#' @inheritParams read_habitatmap_stdized
 #'
 #' @return
 #' Either a RasterLayer or a 10-layered RasterBrick, always with 21041043 cells.
@@ -401,13 +396,7 @@ read_GRTSmh <-
 #' So, what really matters is only the notation with many digits, to be
 #' \emph{regarded} as a base 4 fraction.
 #'
-#' @param path Location of the file.
-#' Considering the default value of the \code{file} argument, use this argument
-#' in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.
-#' @param file The filename of the data source.
-#' May include a path prefix.
-#' The default follows the data management advice in the
-#' \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.
+#' @inheritParams read_habitatmap_stdized
 #'
 #' @return
 #' A RasterLayer with 21041043 cells.
@@ -545,17 +534,16 @@ read_GRTSmh_base4frac <-
 #' provided, as the original GRTS raster has been clipped with the Flemish
 #' outer borders (i.e., not excluding the Brussels Capital Region).
 #'
-#' @param path The directory of the data source.
-#' Considering the default value of the \code{subdir} argument, use this argument
-#' in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.
 #' @param subdir The subdirectory path of the data source, as viewed from
 #' \code{path}.
 #' The default follows the data management advice in the
-#' \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.
+#' \href{../doc/v020_datastorage.html}{vignette} on data storage.
 #' @param level Integer in the range from 1 to 9; determines the spatial
 #' resolution. See the Details section.
 #' @param polygon Logical; determines whether a polygon layer or a
 #' RasterLayer is returned. See the Details section.
+#'
+#' @inheritParams read_habitatmap_stdized
 #'
 #' @return
 #' Either a RasterLayer or a Simple feature collection of geometry type
