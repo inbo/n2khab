@@ -199,15 +199,10 @@ read_habitatmap_stdized <-
 #'repository.
 #'
 #'
-#' @param path Location of the file.
-#' Considering the default value of the \code{file} argument, use this
-#' argument in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.
-#' @param file The filename of the data source.
-#' May include a path prefix.
-#' The default follows the data management advice in the
-#' \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.
 #' @param interpreted If \code{TRUE}, the interpreted subtype is provided when the subtype is missing. This only
 #' applies to type 3130. When the subtype is missing for 3130, we interpret it as 3130_aom.
+#'
+#' @inheritParams read_habitatmap_stdized
 #'
 #' @return
 #' A list of two objects:
@@ -306,13 +301,7 @@ read_watersurfaces_hab <-
 #' \code{read_habitatmap} returns all polygons of the \code{habitatmap} (De Saeger et al., 2018) that (partially)
 #' contain habitat or a Regional Important Biotope (RIB).
 #'
-#' @param path Location of the file.
-#' Considering the default value of the \code{file} argument, use this
-#' argument in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.
-#' @param file The filename of the data source.
-#' May include a path prefix.
-#' The default follows the data management advice in the
-#' \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.
+#' @inheritParams read_habitatmap_stdized
 #'
 #' @return
 #' An sf object
