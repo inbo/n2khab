@@ -10,13 +10,16 @@ read_habitatmap_stdized(path = fileman_up("n2khab_data"),
 }
 \arguments{
 \item{path}{Location of the file.
-Considering the default value of the \code{file} argument, use this
-argument in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.}
+Considering the default value of the \code{file} argument, this should be
+the location of the folder '\strong{\code{n2khab_data}}'.
+By default, the first \code{n2khab_data} folder is used that is found when
+sequentially climbing up 0 to 10 levels in the file system hierarchy,
+starting from the working directory.}
 
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.}
+\href{../doc/v020_datastorage.html}{vignette} on data storage.}
 }
 \value{
 A list of two objects:
@@ -44,8 +47,8 @@ A list of two objects:
 \code{read_habitatmap_stdized} returns the data source \code{habitatmap_stdized} as a list of two objects:
 \itemize{
   \item \code{habitatmap_polygons}: an sf object with all polygons
-  of the \code{habitatmap} that contain habitat or a Regionally
-  Important Biotope (RIB).
+  of the \code{habitatmap} that contain habitat or a regionally
+  important biotope (RIB).
   \item \code{habitatmap_patches}: a tibble with information on the
   habitat and RIB patches (HAB1, HAB2,..., HAB5) that occur within
   the \code{habitatmap_polygons}, each row corresponding with one
