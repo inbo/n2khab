@@ -5,7 +5,7 @@
 \title{Return the data source \code{habitatmap}}
 \usage{
 read_habitatmap(path = fileman_up("n2khab_data"),
-  file = "10_raw/habitatmap")
+  file = "10_raw/habitatmap", select_hab = FALSE)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -19,13 +19,15 @@ starting from the working directory.}
 May include a path prefix.
 The default follows the data management advice in the
 \href{../doc/v020_datastorage.html}{vignette} on data storage.}
+
+\item{select_hab}{If \code{TRUE} only polygons that (partially) contain habitat or a regionally
+important biotope (RIB) are returned. The default value is \code{FALSE}.}
 }
 \value{
 An sf object
 }
 \description{
-\code{read_habitatmap} returns all polygons of the \code{habitatmap} (De Saeger et al., 2018) that (partially)
-contain habitat or a regionally important biotope (RIB).
+\code{read_habitatmap} returns the \code{habitatmap} (De Saeger et al., 2018).
 }
 \examples{
 \dontrun{

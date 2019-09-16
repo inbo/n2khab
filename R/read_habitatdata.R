@@ -299,8 +299,10 @@ read_watersurfaces_hab <-
 
 #' Return the data source \code{habitatmap}
 #'
-#' \code{read_habitatmap} returns all polygons of the \code{habitatmap} (De Saeger et al., 2018) that (partially)
-#' contain habitat or a regionally important biotope (RIB).
+#' \code{read_habitatmap} returns the \code{habitatmap} (De Saeger et al., 2018).
+#'
+#' @param select_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
+#' important biotope (RIB) are returned. The default value is \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -336,24 +338,36 @@ read_watersurfaces_hab <-
 #'
 read_habitatmap <-
     function(path = fileman_up("n2khab_data"),
-             file = "10_raw/habitatmap"){
+             file = "10_raw/habitatmap",
+             select_hab = FALSE){
 
         habitatmap <- st_read(file.path(path, file),
                                    "habitatmap",
                                    quiet = TRUE,
                                    as_tibble = TRUE)
 
-        # we only select polygons with habitat or RIB, i.e. polygons in habitatmap_stdized data source
-        hab_stdized <- read_habitatmap_stdized()
-        hab_stdized <- hab_stdized$habitatmap_polygons
+        colnames(habitatmap) <- tolower(colnames(habitatmap))
 
-        habitatmap_sel <- habitatmap %>%
-            filter(TAG %in% hab_stdized$polygon_id) %>%
-            mutate(TAG = factor(TAG, levels = hab_stdized$polygon_id))
+        habitatmap <- habitatmap %>%
+            select(tag, eval, starts_with("eenh"), v1, v2, v3, source = herk, info, bwk_label = bwklabel,
+                   hab1, phab1, hab2, phab2, hab3, phab3, hab4, phab4, hab5, phab5, source_hab = herkhab,
+                   source_phab = herkphab, hab_legend = hablegende, area_m2 = oppervl)
 
-        suppressWarnings(st_crs(habitatmap_sel) <- 31370)
+        if(select_hab){
 
-        return(habitatmap_sel)
+            # we only select polygons with habitat or RIB, i.e. polygons in habitatmap_stdized data source
+            hab_stdized <- read_habitatmap_stdized()
+            hab_stdized <- hab_stdized$habitatmap_polygons
+
+            habitatmap <- habitatmap %>%
+            filter(tag %in% hab_stdized$polygon_id) %>%
+            mutate(tag = factor(tag, levels = hab_stdized$polygon_id))
+
+        }
+
+        suppressWarnings(st_crs(habitatmap) <- 31370)
+
+        return(habitatmap)
 
     }
 
