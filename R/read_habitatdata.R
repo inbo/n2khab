@@ -114,6 +114,7 @@
 #' @importFrom sf
 #' st_read
 #' st_crs<-
+#' @importFrom rlang .data
 #' @importFrom dplyr %>% mutate
 #'
 read_habitatmap_stdized <-
@@ -248,6 +249,7 @@ read_habitatmap_stdized <-
 #' @importFrom sf
 #' st_read
 #' st_crs<-
+#' @importFrom rlang .data
 #' @importFrom dplyr %>% mutate
 #'
 read_watersurfaces_hab <-
@@ -334,7 +336,13 @@ read_watersurfaces_hab <-
 #' @importFrom sf
 #' st_read
 #' st_crs<-
-#' @importFrom dplyr %>% mutate
+#' @importFrom rlang .data
+#' @importFrom dplyr
+#' %>%
+#' mutate
+#' select
+#' filter
+#' starts_with
 #'
 read_habitatmap <-
     function(path = fileman_up("n2khab_data"),
