@@ -349,7 +349,7 @@ read_habitatmap <-
         colnames(habitatmap) <- tolower(colnames(habitatmap))
 
         habitatmap <- habitatmap %>%
-            select(tag, eval, starts_with("eenh"), v1, v2, v3, source = herk, info, bwk_label = bwklabel,
+            select(polygon_id = tag, eval, starts_with("eenh"), v1, v2, v3, source = herk, info, bwk_label = bwklabel,
                    hab1, phab1, hab2, phab2, hab3, phab3, hab4, phab4, hab5, phab5, source_hab = herkhab,
                    source_phab = herkphab, hab_legend = hablegende, area_m2 = oppervl)
 
@@ -360,8 +360,8 @@ read_habitatmap <-
             hab_stdized <- hab_stdized$habitatmap_polygons
 
             habitatmap <- habitatmap %>%
-            filter(tag %in% hab_stdized$polygon_id) %>%
-            mutate(tag = factor(tag, levels = hab_stdized$polygon_id))
+            filter(polygon_id %in% hab_stdized$polygon_id) %>%
+            mutate(polygon_id = factor(polygon_id, levels = hab_stdized$polygon_id))
 
         }
 
