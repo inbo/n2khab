@@ -276,7 +276,7 @@ read_watersurfaces_hab <-
 
         if (interpreted){
           watersurfaces_patches <- watersurfaces_patches %>%
-              mutate(type = ifelse(type == "3130", "3130_aom", type))
+              mutate(type = ifelse(.data$type == "3130", "3130_aom", .data$type))
         }
 
         types <- suppressWarnings(read_types())
