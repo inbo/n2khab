@@ -343,6 +343,7 @@ read_watersurfaces_hab <-
 #' select
 #' filter
 #' starts_with
+#' mutate_if
 #'
 read_habitatmap <-
     function(path = fileman_up("n2khab_data"),
@@ -380,6 +381,17 @@ read_habitatmap <-
                    source_phab = .data$herkphab,
                    hab_legend = .data$hablegende,
                    area_m2 = .data$oppervl)
+
+        make_char <- function(x){as.character(x)}
+
+        habitatmap <- habitatmap %>%
+            mutate_if(is.factor, make_char) %>%
+            mutate(eval = factor(.data$eval),
+                   source = factor(.data$source),
+                   source_hab = factor(.data$source_hab),
+                   source_phab = factor(.data$source_phab),
+                   hab_legend = factor(.data$hab_legend)
+                   )
 
         if(select_hab){
 
