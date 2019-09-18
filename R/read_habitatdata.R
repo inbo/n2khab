@@ -114,6 +114,7 @@
 #' @importFrom sf
 #' st_read
 #' st_crs<-
+#' @importFrom rlang .data
 #' @importFrom dplyr %>% mutate
 #'
 read_habitatmap_stdized <-
@@ -248,6 +249,7 @@ read_habitatmap_stdized <-
 #' @importFrom sf
 #' st_read
 #' st_crs<-
+#' @importFrom rlang .data
 #' @importFrom dplyr %>% mutate
 #'
 read_watersurfaces_hab <-
@@ -274,7 +276,7 @@ read_watersurfaces_hab <-
 
         if (interpreted){
           watersurfaces_patches <- watersurfaces_patches %>%
-              mutate(type = ifelse(type == "3130", "3130_aom", type))
+              mutate(type = ifelse(.data$type == "3130", "3130_aom", .data$type))
         }
 
         types <- suppressWarnings(read_types())
@@ -334,7 +336,13 @@ read_watersurfaces_hab <-
 #' @importFrom sf
 #' st_read
 #' st_crs<-
-#' @importFrom dplyr %>% mutate
+#' @importFrom rlang .data
+#' @importFrom dplyr
+#' %>%
+#' mutate
+#' select
+#' filter
+#' starts_with
 #'
 read_habitatmap <-
     function(path = fileman_up("n2khab_data"),
@@ -349,9 +357,29 @@ read_habitatmap <-
         colnames(habitatmap) <- tolower(colnames(habitatmap))
 
         habitatmap <- habitatmap %>%
-            select(tag, eval, starts_with("eenh"), v1, v2, v3, source = herk, info, bwk_label = bwklabel,
-                   hab1, phab1, hab2, phab2, hab3, phab3, hab4, phab4, hab5, phab5, source_hab = herkhab,
-                   source_phab = herkphab, hab_legend = hablegende, area_m2 = oppervl)
+            select(polygon_id = .data$tag,
+                   .data$eval,
+                   starts_with("eenh"),
+                   .data$v1,
+                   .data$v2,
+                   .data$v3,
+                   source = .data$herk,
+                   .data$info,
+                   bwk_label = .data$bwklabel,
+                   .data$hab1,
+                   .data$phab1,
+                   .data$hab2,
+                   .data$phab2,
+                   .data$hab3,
+                   .data$phab3,
+                   .data$hab4,
+                   .data$phab4,
+                   .data$hab5,
+                   .data$phab5,
+                   source_hab = .data$herkhab,
+                   source_phab = .data$herkphab,
+                   hab_legend = .data$hablegende,
+                   area_m2 = .data$oppervl)
 
         if(select_hab){
 
@@ -360,8 +388,8 @@ read_habitatmap <-
             hab_stdized <- hab_stdized$habitatmap_polygons
 
             habitatmap <- habitatmap %>%
-            filter(tag %in% hab_stdized$polygon_id) %>%
-            mutate(tag = factor(tag, levels = hab_stdized$polygon_id))
+            filter(.data$polygon_id %in% hab_stdized$polygon_id) %>%
+            mutate(polygon_id = factor(.data$polygon_id, levels = hab_stdized$polygon_id))
 
         }
 
