@@ -335,6 +335,7 @@ read_watersurfaces_hab <-
 #' @export
 #' @importFrom sf
 #' st_read
+#' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
 #' @importFrom dplyr
@@ -343,17 +344,16 @@ read_watersurfaces_hab <-
 #' select
 #' filter
 #' starts_with
-#' mutate_if
 #'
 read_habitatmap <-
     function(path = fileman_up("n2khab_data"),
              file = "10_raw/habitatmap",
              select_hab = FALSE){
 
-        habitatmap <- st_read(file.path(path, file),
+        habitatmap <- read_sf(file.path(path, file),
                                    "habitatmap",
                                    quiet = TRUE,
-                                   as_tibble = TRUE)
+                              stringsAsFactors = FALSE)
 
         colnames(habitatmap) <- tolower(colnames(habitatmap))
 
@@ -382,14 +382,8 @@ read_habitatmap <-
                    hab_legend = .data$hablegende,
                    area_m2 = .data$oppervl)
 
-        make_char <- function(x){as.character(x)}
-
         habitatmap <- habitatmap %>%
-            mutate_if(is.factor, make_char) %>%
             mutate(eval = factor(.data$eval),
-                   source = factor(.data$source),
-                   source_hab = factor(.data$source_hab),
-                   source_phab = factor(.data$source_phab),
                    hab_legend = factor(.data$hab_legend)
                    )
 
