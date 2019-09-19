@@ -31,8 +31,8 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Toon Westra \email{toon.westra@inbo.be} (0000-0003-2478-9459) [contributor]
-  \item Hans Van Calster \email{hans.vancalster@inbo.be} (0000-0001-8595-8426) [contributor]
+  \item Toon Westra \email{toon.westra@inbo.be} (0000-0003-2478-9459)
+  \item Hans Van Calster \email{hans.vancalster@inbo.be} (0000-0001-8595-8426)
 }
 
 Other contributors:
