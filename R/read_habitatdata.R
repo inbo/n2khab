@@ -121,21 +121,17 @@ read_habitatmap_stdized <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"){
 
-        habmap_polygons <- st_read(file.path(path, file),
-                                   "habitatmap_polygons",
-                                   quiet = TRUE,
-                                   as_tibble = TRUE)
+        habmap_polygons <- read_sf(file.path(path, file),
+                                   "habitatmap_polygons")
 
         habmap_polygons <- habmap_polygons %>%
-            mutate( description_orig = as.character( .data$description_orig))
+            mutate(polygon_id = factor(.data$polygon_id))
 
         suppressWarnings(st_crs(habmap_polygons) <- 31370)
 
         habmap_patches <- suppressWarnings(
-            st_read(file.path(path, file),
-                    "habitatmap_patches",
-                    as_tibble = TRUE,
-                    quiet = TRUE)
+            read_sf(file.path(path, file),
+                    "habitatmap_patches")
             )
 
         types <- suppressWarnings(read_types())
@@ -250,28 +246,29 @@ read_habitatmap_stdized <-
 #' st_read
 #' st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr %>% mutate
+#' @importFrom dplyr
+#' %>%
+#' mutate
+#' mutate_at
+#' vars
 #'
 read_watersurfaces_hab <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg",
              interpreted = FALSE){
 
-        watersurfaces_polygons <- st_read(file.path(path, file),
-                                   "watersurfaces_hab_polygons",
-                                   quiet = TRUE,
-                                   as_tibble = TRUE)
+        watersurfaces_polygons <- read_sf(file.path(path, file),
+                                   "watersurfaces_hab_polygons")
 
         watersurfaces_polygons <- watersurfaces_polygons %>%
-            mutate( description_orig = as.character( .data$description_orig))
+            mutate_at(.vars = vars(starts_with("polygon_id")),
+                      .funs = factor)
 
         suppressWarnings(st_crs(watersurfaces_polygons) <- 31370)
 
         watersurfaces_patches <- suppressWarnings(
-            st_read(file.path(path, file),
-                    "watersurfaces_hab_patches",
-                    as_tibble = TRUE,
-                    quiet = TRUE)
+            read_sf(file.path(path, file),
+                    "watersurfaces_hab_patches")
             )
 
         if (interpreted){
@@ -283,7 +280,6 @@ read_watersurfaces_hab <-
 
         watersurfaces_patches <- watersurfaces_patches %>%
             mutate( polygon_id = factor(.data$polygon_id, levels = levels(watersurfaces_polygons$polygon_id)),
-                    patch_id = as.numeric(.data$patch_id),
                     certain = .data$certain == 1,
                     type = factor(.data$type,
                                   levels = levels(types$type)
@@ -351,9 +347,7 @@ read_habitatmap <-
              select_hab = FALSE){
 
         habitatmap <- read_sf(file.path(path, file),
-                                   "habitatmap",
-                                   quiet = TRUE,
-                              stringsAsFactors = FALSE)
+                                   "habitatmap")
 
         colnames(habitatmap) <- tolower(colnames(habitatmap))
 
