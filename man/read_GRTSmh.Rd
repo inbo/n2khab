@@ -69,7 +69,8 @@ with the decimal integer ranking numbers of 10 hierarchical levels of the
 GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
 (with GRTS cell addresses at the resolution level).
 The \code{GRTSmh_brick} data source is a processed dataset (10-layered
-GeoTIFF) and can only be
+GeoTIFF), available at
+\href{https://doi.org/10.5281/zenodo.3354403}{Zenodo}, and can only be
 returned by the function when it is already present as a file.
 See R-code in the \href{https://github.com/inbo/n2khab-preprocessing}{
 n2khab-preprocessing} repository for its creation from

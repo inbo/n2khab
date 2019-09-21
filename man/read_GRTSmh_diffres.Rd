@@ -41,7 +41,8 @@ The function returns one selected level, either as a RasterLayer or as an
 provided).
 }
 \details{
-The \code{GRTSmh_diffres} data source file is a file collection, composed of
+The \code{GRTSmh_diffres} data source file is a file collection (available
+at \href{https://doi.org/10.5281/zenodo.3354405}{Zenodo}), composed of
 nine monolayered GeoTIFF files of the \code{INT4S} datatype plus a GeoPackage
 with six polygon layers:
 \itemize{

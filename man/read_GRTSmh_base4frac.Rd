@@ -31,7 +31,8 @@ The function returns it as a RasterLayer.
 }
 \details{
 The data source file, read by the function, is a monolayered GeoTIFF in the
-\code{FLT8S} datatype.
+\code{FLT8S} datatype and is available at
+\href{https://doi.org/10.5281/zenodo.3354401}{Zenodo}.
 In \code{GRTSmh_base4frac}, the decimal (i.e. base 10) integer values from
 the raster data source \code{GRTSmaster_habitats} (see
 \code{\link{read_GRTSmh}}) have been converted into base 4 fractions,

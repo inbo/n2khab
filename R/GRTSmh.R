@@ -257,7 +257,8 @@ convert_base4frac_to_dec <-
 #' GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
 #' (with GRTS cell addresses at the resolution level).
 #' The \code{GRTSmh_brick} data source is a processed dataset (10-layered
-#' GeoTIFF) and can only be
+#' GeoTIFF), available at
+#' \href{https://doi.org/10.5281/zenodo.3354403}{Zenodo}, and can only be
 #' returned by the function when it is already present as a file.
 #' See R-code in the \href{https://github.com/inbo/n2khab-preprocessing}{
 #' n2khab-preprocessing} repository for its creation from
@@ -367,7 +368,8 @@ read_GRTSmh <-
 #' The function returns it as a RasterLayer.
 #'
 #' The data source file, read by the function, is a monolayered GeoTIFF in the
-#' \code{FLT8S} datatype.
+#' \code{FLT8S} datatype and is available at
+#' \href{https://doi.org/10.5281/zenodo.3354401}{Zenodo}.
 #' In \code{GRTSmh_base4frac}, the decimal (i.e. base 10) integer values from
 #' the raster data source \code{GRTSmaster_habitats} (see
 #' \code{\link{read_GRTSmh}}) have been converted into base 4 fractions,
@@ -473,7 +475,8 @@ read_GRTSmh_base4frac <-
 #' \code{sf} polygon layer (in the latter case, only levels 4 to 9 are
 #' provided).
 #'
-#' The \code{GRTSmh_diffres} data source file is a file collection, composed of
+#' The \code{GRTSmh_diffres} data source file is a file collection (available
+#' at \href{https://doi.org/10.5281/zenodo.3354405}{Zenodo}), composed of
 #' nine monolayered GeoTIFF files of the \code{INT4S} datatype plus a GeoPackage
 #' with six polygon layers:
 #' \itemize{
