@@ -399,3 +399,138 @@ read_habitatmap <-
 
     }
 
+
+
+
+
+
+
+
+
+
+#' Return the data source \code{habitatmap_terr} as a list of two
+#' objects
+#'
+#' \code{read_habitatmap_terr()} returns the data source \code{habitatmap_terr}
+#' as a list of two objects: \code{habitatmap_terr_polygons} and
+#' \code{habitatmap_terr_patches}.
+#' \code{habitatmap_terr} is the further interpreted, terrestrial part of
+#' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}).
+#'
+#' \code{habitatmap_terr} was derived from \code{habitatmap_stdized} as
+#' follows:
+#' \itemize{
+#' \item{it excludes all polygons
+#' that are most probably aquatic habitat or RIB.
+#' In this process, it also makes a distinction between \code{2190_a} and
+#' \code{2190_overig};}
+#' \item{it excludes patches which most probably are \emph{no}
+#' habitat or RIB at all.
+#' Those are the patches where \code{code_orig} contains \code{"bos"} or is
+#' equal to \code{“6510,gh”} or \code{“9120,gh”};}
+#' \item{it translates several main type codes into a corresponding
+#' subtype which they almost always represent;}
+#' \item{it distinguishes types \code{rbbhfl} and \code{rbbhf}.}
+#' }
+#'
+#' The data source \code{habitatmap_terr} is a GeoPackage, available at
+#' \href{https://xxxxx}{Zenodo}, that contains:
+#' \itemize{
+#'   \item{\code{habitatmap_terr_polygons}: a spatial polygon layer}
+#'   \item{\code{habitatmap_terr_patches}: a table in which every row
+#'   corresponds with one patch.}
+#'   }
+#'
+#' The R-code for creating the \code{habitatmap_terr} data source
+#' can be found in the
+#' \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
+#' repository.
+#'
+#' @inheritParams read_habitatmap_stdized
+#'
+#' @return
+#' A list of two objects:
+#'   \itemize{
+#'   \item \code{habitatmap_terr_polygons}: a Simple feature collection of
+#'   geometry type \code{POLYGON} with four attribute variables:
+#'   \itemize{
+#'     \item \code{polygon_id}
+#'     \item \code{description_orig}: polygon description based on the
+#'     original vegetation codes in the \code{habitatmap} data source
+#'     \item \code{description}: based on \code{description_orig} but with the
+#'     interpreted type codes
+#'     \item \code{source}: states where \code{description} comes from: either
+#'     \code{habitatmap_stdized} or \code{habitatmap_stdized + interpretation}
+#'   }
+#'   \item \code{habitatmap_terr_patches}: a tibble with the following
+#'   variables (the first 5 being identical to those in
+#'   \code{habitatmap_stdized}):
+#'   \itemize{
+#'     \item \code{polygon_id}
+#'     \item \code{patch_id}
+#'     \item \code{code_orig}
+#'     \item \code{phab}
+#'     \item \code{certain}
+#'     \item \code{type}: the interpreted habitat or RIB type
+#'     \item \code{source}: states where \code{type} comes from: either
+#'     \code{habitatmap_stdized} or \code{habitatmap_stdized + interpretation}
+#'     }
+#'     }
+#'
+#' @family functions involved in processing the \code{habitatmap} data source
+#'
+#' @examples
+#' \dontrun{
+#' # This example supposes that your working directory or a directory up to 10
+#' # levels above has the 'n2khab_data' folder AND that the 'habitatmap_terr'
+#' # data source is present in the default subdirectory.
+#' # In all other cases, this example won't work but at least you can
+#' # consider what to do.
+#'
+#' r <- read_habitatmap_terr()
+#' r_polygons <- r$habitatmap_terr_polygons
+#' r_patches <- r$habitatmap_terr_patches
+#' }
+#'
+#' @export
+#' @importFrom sf
+#' read_sf
+#' st_crs<-
+#' @importFrom rlang .data
+#' @importFrom dplyr %>% mutate
+read_habitatmap_terr <-
+    function(path = fileman_up("n2khab_data"),
+             file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg"){
+
+        habmap_terr_polygons <- read_sf(file.path(path, file),
+                                   "habitatmap_terr_polygons")
+
+        habmap_terr_polygons <- habmap_terr_polygons %>%
+            mutate(polygon_id = factor(.data$polygon_id),
+                   source = factor(.data$source))
+
+        suppressWarnings(st_crs(habmap_terr_polygons) <- 31370)
+
+        habmap_terr_patches <- suppressWarnings(
+            read_sf(file.path(path, file),
+                    "habitatmap_terr_patches")
+        )
+
+        types <- read_types()
+
+        habmap_terr_patches <- habmap_terr_patches %>%
+             mutate(polygon_id = factor(.data$polygon_id,
+                                        levels = levels(habmap_terr_polygons$polygon_id)),
+                    certain = .data$certain == 1,
+                    type = factor(.data$type,
+                                  levels = levels(types$type)
+                    ),
+                    source = factor(.data$source)
+            )
+
+        result <- list(habitatmap_terr_polygons = habmap_terr_polygons,
+                       habitatmap_terr_patches = habmap_terr_patches)
+
+        return(result)
+
+    }
