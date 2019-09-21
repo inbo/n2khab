@@ -21,7 +21,8 @@
 #' the columns 'PHAB1', 'PHAB2', ..., 'PHAB5'. The different parts of
 #' the polygons are called 'patches'.
 #'
-#' The data source \code{habitatmap_stdized} is a GeoPackage that
+#' The data source \code{habitatmap_stdized} is a GeoPackage, available at
+#' \href{https://doi.org/10.5281/zenodo.3355192}{Zenodo}, that
 #' contains:
 #' \itemize{
 #'   \item \code{habitatmap_polygons}: a spatial layer with every
@@ -112,7 +113,7 @@
 #'
 #' @export
 #' @importFrom sf
-#' st_read
+#' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
 #' @importFrom dplyr %>% mutate
@@ -177,8 +178,8 @@ read_habitatmap_stdized <-
 #' but excluding habitat 3260.
 #'
 #'
-#' The data source \code{watersurfaces_hab} is a GeoPackage that
-#' contains:
+#' The data source \code{watersurfaces_hab} is a GeoPackage, available at
+#' \href{https://doi.org/10.5281/zenodo.3374645}{Zenodo}, that contains:
 #' \itemize{
 #'   \item \code{watersurfaces_hab_polygons}: a spatial layer with all polygons that contain aquatic habitat
 #'   or RIB type listed in \code{\link{types}}, except type 3260.
@@ -243,7 +244,7 @@ read_habitatmap_stdized <-
 #'
 #' @export
 #' @importFrom sf
-#' st_read
+#' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
 #' @importFrom dplyr
@@ -330,7 +331,6 @@ read_watersurfaces_hab <-
 #'
 #' @export
 #' @importFrom sf
-#' st_read
 #' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
