@@ -65,7 +65,8 @@ fraction of each vegetation type within the polygons is stored in
 the columns 'PHAB1', 'PHAB2', ..., 'PHAB5'. The different parts of
 the polygons are called 'patches'.
 
-The data source \code{habitatmap_stdized} is a GeoPackage that
+The data source \code{habitatmap_stdized} is a GeoPackage, available at
+\href{https://doi.org/10.5281/zenodo.3355192}{Zenodo}, that
 contains:
 \itemize{
   \item \code{habitatmap_polygons}: a spatial layer with every
