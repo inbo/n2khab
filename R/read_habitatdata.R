@@ -112,7 +112,7 @@
 #'
 #' @export
 #' @importFrom sf
-#' st_read
+#' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
 #' @importFrom dplyr %>% mutate
@@ -243,7 +243,7 @@ read_habitatmap_stdized <-
 #'
 #' @export
 #' @importFrom sf
-#' st_read
+#' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
 #' @importFrom dplyr
@@ -330,7 +330,6 @@ read_watersurfaces_hab <-
 #'
 #' @export
 #' @importFrom sf
-#' st_read
 #' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
