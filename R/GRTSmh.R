@@ -572,7 +572,7 @@ read_GRTSmh_base4frac <-
 #' @importFrom gdalUtils
 #' gdalsrsinfo
 #' @importFrom sf
-#' st_read
+#' read_sf
 #' st_crs<-
 #' @importFrom raster
 #' raster
@@ -593,10 +593,9 @@ read_GRTSmh_diffres <-
                 stop("When polygon = TRUE, level must be an integer in the range 4 to 9.")
             }
 
-            p <- st_read(file.path(path, subdir,
+            p <- read_sf(file.path(path, subdir,
                               "GRTSmh_diffres.gpkg"),
-                    layer = str_c("GRTSmh_polygonized_level", level),
-                    quiet = TRUE)
+                    layer = str_c("GRTSmh_polygonized_level", level))
             suppressWarnings(st_crs(p) <- 31370)
             p
 
