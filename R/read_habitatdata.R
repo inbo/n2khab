@@ -21,7 +21,8 @@
 #' the columns 'PHAB1', 'PHAB2', ..., 'PHAB5'. The different parts of
 #' the polygons are called 'patches'.
 #'
-#' The data source \code{habitatmap_stdized} is a GeoPackage that
+#' The data source \code{habitatmap_stdized} is a GeoPackage, available at
+#' \href{https://doi.org/10.5281/zenodo.3355192}{Zenodo}, that
 #' contains:
 #' \itemize{
 #'   \item \code{habitatmap_polygons}: a spatial layer with every
@@ -112,7 +113,7 @@
 #'
 #' @export
 #' @importFrom sf
-#' st_read
+#' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
 #' @importFrom dplyr %>% mutate
@@ -121,21 +122,17 @@ read_habitatmap_stdized <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"){
 
-        habmap_polygons <- st_read(file.path(path, file),
-                                   "habitatmap_polygons",
-                                   quiet = TRUE,
-                                   as_tibble = TRUE)
+        habmap_polygons <- read_sf(file.path(path, file),
+                                   "habitatmap_polygons")
 
         habmap_polygons <- habmap_polygons %>%
-            mutate( description_orig = as.character( .data$description_orig))
+            mutate(polygon_id = factor(.data$polygon_id))
 
         suppressWarnings(st_crs(habmap_polygons) <- 31370)
 
         habmap_patches <- suppressWarnings(
-            st_read(file.path(path, file),
-                    "habitatmap_patches",
-                    as_tibble = TRUE,
-                    quiet = TRUE)
+            read_sf(file.path(path, file),
+                    "habitatmap_patches")
             )
 
         types <- suppressWarnings(read_types())
@@ -181,8 +178,8 @@ read_habitatmap_stdized <-
 #' but excluding habitat 3260.
 #'
 #'
-#' The data source \code{watersurfaces_hab} is a GeoPackage that
-#' contains:
+#' The data source \code{watersurfaces_hab} is a GeoPackage, available at
+#' \href{https://doi.org/10.5281/zenodo.3374645}{Zenodo}, that contains:
 #' \itemize{
 #'   \item \code{watersurfaces_hab_polygons}: a spatial layer with all polygons that contain aquatic habitat
 #'   or RIB type listed in \code{\link{types}}, except type 3260.
@@ -247,31 +244,32 @@ read_habitatmap_stdized <-
 #'
 #' @export
 #' @importFrom sf
-#' st_read
+#' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr %>% mutate
+#' @importFrom dplyr
+#' %>%
+#' mutate
+#' mutate_at
+#' vars
 #'
 read_watersurfaces_hab <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg",
              interpreted = FALSE){
 
-        watersurfaces_polygons <- st_read(file.path(path, file),
-                                   "watersurfaces_hab_polygons",
-                                   quiet = TRUE,
-                                   as_tibble = TRUE)
+        watersurfaces_polygons <- read_sf(file.path(path, file),
+                                   "watersurfaces_hab_polygons")
 
         watersurfaces_polygons <- watersurfaces_polygons %>%
-            mutate( description_orig = as.character( .data$description_orig))
+            mutate_at(.vars = vars(starts_with("polygon_id")),
+                      .funs = factor)
 
         suppressWarnings(st_crs(watersurfaces_polygons) <- 31370)
 
         watersurfaces_patches <- suppressWarnings(
-            st_read(file.path(path, file),
-                    "watersurfaces_hab_patches",
-                    as_tibble = TRUE,
-                    quiet = TRUE)
+            read_sf(file.path(path, file),
+                    "watersurfaces_hab_patches")
             )
 
         if (interpreted){
@@ -283,7 +281,6 @@ read_watersurfaces_hab <-
 
         watersurfaces_patches <- watersurfaces_patches %>%
             mutate( polygon_id = factor(.data$polygon_id, levels = levels(watersurfaces_polygons$polygon_id)),
-                    patch_id = as.numeric(.data$patch_id),
                     certain = .data$certain == 1,
                     type = factor(.data$type,
                                   levels = levels(types$type)
@@ -334,7 +331,6 @@ read_watersurfaces_hab <-
 #'
 #' @export
 #' @importFrom sf
-#' st_read
 #' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
@@ -351,9 +347,7 @@ read_habitatmap <-
              select_hab = FALSE){
 
         habitatmap <- read_sf(file.path(path, file),
-                                   "habitatmap",
-                                   quiet = TRUE,
-                              stringsAsFactors = FALSE)
+                                   "habitatmap")
 
         colnames(habitatmap) <- tolower(colnames(habitatmap))
 

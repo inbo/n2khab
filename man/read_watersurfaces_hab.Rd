@@ -67,8 +67,8 @@ The data source \code{watersurfaces_hab} is a combination of \code{habitatmap_st
 It contains all aquatic habitat types and RIB in Flanders,
 but excluding habitat 3260.
 
-The data source \code{watersurfaces_hab} is a GeoPackage that
-contains:
+The data source \code{watersurfaces_hab} is a GeoPackage, available at
+\href{https://doi.org/10.5281/zenodo.3374645}{Zenodo}, that contains:
 \itemize{
   \item \code{watersurfaces_hab_polygons}: a spatial layer with all polygons that contain aquatic habitat
   or RIB type listed in \code{\link{types}}, except type 3260.
