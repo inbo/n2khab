@@ -2,8 +2,7 @@
 % Please edit documentation in R/read_ecoregions.R
 \name{read_ecoregions}
 \alias{read_ecoregions}
-\title{Return the \code{ecoregions} data source as a Simple feature collection of
-geometry type \code{POLYGON}}
+\title{Return the \code{ecoregions} data source as an \code{sf} object}
 \usage{
 read_ecoregions(path = fileman_up("n2khab_data"),
   file = "10_raw/ecoregions")
@@ -22,7 +21,7 @@ The default follows the data management advice in the
 \href{../doc/v020_datastorage.html}{vignette} on data storage.}
 }
 \value{
-A Simple feature collection of geometry type \code{POLYGON}.
+A Simple feature collection of geometry type \code{MULTIPOLYGON}.
 }
 \description{
 Returns the raw data source \code{ecoregions}, with unique polygon

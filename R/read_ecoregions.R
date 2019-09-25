@@ -1,5 +1,4 @@
-#' Return the \code{ecoregions} data source as a Simple feature collection of
-#' geometry type \code{POLYGON}
+#' Return the \code{ecoregions} data source as an \code{sf} object
 #'
 #' Returns the raw data source \code{ecoregions}, with unique polygon
 #' identifiers \code{polygon_code} and \code{polygon_id}.
@@ -19,7 +18,7 @@
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
-#' A Simple feature collection of geometry type \code{POLYGON}.
+#' A Simple feature collection of geometry type \code{MULTIPOLYGON}.
 #'
 #' @importFrom sf
 #' read_sf
