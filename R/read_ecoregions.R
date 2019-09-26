@@ -24,6 +24,7 @@
 #' read_sf
 #' st_drop_geometry
 #' @importFrom dplyr
+#' %>%
 #' select
 #' mutate
 #' arrange
