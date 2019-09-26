@@ -40,3 +40,10 @@ Original columns of the raw data source were mapped as:
 Apart from the label, there is no complementary information between
 \code{polygon_code} and \code{polygon_id}.
 }
+\examples{
+\dontrun{
+ecoregions <- read_ecoregions()
+ecoregions
+}
+
+}

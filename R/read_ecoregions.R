@@ -20,6 +20,12 @@
 #' @return
 #' A Simple feature collection of geometry type \code{MULTIPOLYGON}.
 #'
+#' @examples
+#' \dontrun{
+#' ecoregions <- read_ecoregions()
+#' ecoregions
+#' }
+#'
 #' @importFrom sf
 #' read_sf
 #' st_drop_geometry
