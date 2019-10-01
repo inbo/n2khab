@@ -4,6 +4,9 @@
 ## in case it has the arguments use_processed = FALSE and
 ## standardize_polders = TRUE
 
+## The script is to be run from the root of the git repository, i.e. this must
+## be the working directory.
+
 library(git2rdata)
 library(dplyr)
 library(readxl)
