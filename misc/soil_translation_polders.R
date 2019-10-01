@@ -1,3 +1,9 @@
+## This script allows to reproduce the vc-formatted data source
+## 'soil_translation_polders' which is delivered with the
+## n2khab package and used internally by the read_soilmap() function,
+## in case it has the arguments use_processed = FALSE and
+## standardize_polders = TRUE
+
 library(git2rdata)
 library(dplyr)
 library(readxl)
