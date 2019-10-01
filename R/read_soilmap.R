@@ -33,15 +33,21 @@
 #' @return
 #' A Simple feature collection of geometry type \code{MULTIPOLYGON}.
 #'
+#' @importFrom assertthat
+#' assert_that
+#' is.flag
 #' @importFrom sf
 #' read_sf
 #' @importFrom git2rdata
 #' read_vc
 #' @importFrom dplyr
+#' %>%
 #' select
 #' mutate
 #' mutate_at
 #' left_join
+#' vars
+#' contains
 #' @importFrom rlang .data
 #' @export
 read_soilmap <-
