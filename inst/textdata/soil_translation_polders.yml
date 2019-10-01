@@ -1,0 +1,15 @@
+..generic:
+  git2rdata: '0.1'
+  optimize: yes
+  NA string: NA
+  sorting: soiltype_orig
+  hash: e20531970c7549dd538a4f21f8eaefe5da5e488e
+  data_hash: 7fec66011b2bbfd37074c01b00762b5aefdb5bf2
+soiltype_orig:
+  class: character
+soiltype_unified_transl:
+  class: character
+texture_transl:
+  class: character
+moisture_transl:
+  class: character
