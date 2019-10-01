@@ -10,13 +10,16 @@ read_GRTSmh_base4frac(path = fileman_up("n2khab_data"),
 }
 \arguments{
 \item{path}{Location of the file.
-Considering the default value of the \code{file} argument, use this argument
-in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.}
+Considering the default value of the \code{file} argument, this should be
+the location of the folder '\strong{\code{n2khab_data}}'.
+By default, the first \code{n2khab_data} folder is used that is found when
+sequentially climbing up 0 to 10 levels in the file system hierarchy,
+starting from the working directory.}
 
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.}
+\href{../doc/v020_datastorage.html}{vignette} on data storage.}
 }
 \value{
 A RasterLayer with 21041043 cells.
@@ -28,7 +31,8 @@ The function returns it as a RasterLayer.
 }
 \details{
 The data source file, read by the function, is a monolayered GeoTIFF in the
-\code{FLT8S} datatype.
+\code{FLT8S} datatype and is available at
+\href{https://doi.org/10.5281/zenodo.3354401}{Zenodo}.
 In \code{GRTSmh_base4frac}, the decimal (i.e. base 10) integer values from
 the raster data source \code{GRTSmaster_habitats} (see
 \code{\link{read_GRTSmh}}) have been converted into base 4 fractions,
