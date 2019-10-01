@@ -32,10 +32,9 @@ Takes a dataframe with a column of type codes
 and, under certain conditions, adds new rows with codes of the associated
 \emph{subtypes} and \emph{main types}, respectively.
 It allows to do sensible selections and joins with interpreted forms of the
-\code{habitatmap} data source at version \code{habitatmap_2018}:
+\code{habitatmap_stdized} and \code{watersurfaces} data sources:
 \code{habitatmap_terr},
-\code{watersurfaces_interpr},
-\code{habitatmap_integr}
+\code{read_watersurfaces_hab(interpreted = TRUE)}
 .
 If the dataframe has one or more grouping variables, by default the
 operation is done independently for each group in turn.
@@ -110,6 +109,5 @@ expand_types(x, type_var = "mycode", strict = FALSE)
 \code{\link{read_scheme_types}},
 \code{\link{read_types}},
 \code{read_habitatmap_terr},
-\code{read_watersurfaces_interpr},
-\code{read_habitatmap_integr}
+\code{\link{read_watersurfaces_hab}}
 }
