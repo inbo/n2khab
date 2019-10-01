@@ -28,6 +28,7 @@ Imports:
     curl,
     DBI,
     dplyr,
+    forcats,
     gdalUtils,
     git2rdata (>= 0.1),
     jsonlite,
