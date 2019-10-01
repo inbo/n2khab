@@ -11,13 +11,16 @@ read_GRTSmh(path = fileman_up("n2khab_data"),
 }
 \arguments{
 \item{path}{Location of the file.
-Considering the default value of the \code{file} argument, use this argument
-in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.}
+Considering the default value of the \code{file} argument, this should be
+the location of the folder '\strong{\code{n2khab_data}}'.
+By default, the first \code{n2khab_data} folder is used that is found when
+sequentially climbing up 0 to 10 levels in the file system hierarchy,
+starting from the working directory.}
 
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.}
+\href{../doc/v020_datastorage.html}{vignette} on data storage.}
 
 \item{brick}{Logical; determines whether the RasterLayer or RasterBrick data
 source is returned. See the Details section.}
@@ -66,7 +69,8 @@ with the decimal integer ranking numbers of 10 hierarchical levels of the
 GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
 (with GRTS cell addresses at the resolution level).
 The \code{GRTSmh_brick} data source is a processed dataset (10-layered
-GeoTIFF) and can only be
+GeoTIFF), available at
+\href{https://doi.org/10.5281/zenodo.3354403}{Zenodo}, and can only be
 returned by the function when it is already present as a file.
 See R-code in the \href{https://github.com/inbo/n2khab-preprocessing}{
 n2khab-preprocessing} repository for its creation from
