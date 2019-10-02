@@ -63,6 +63,7 @@ follows:
 \itemize{
 \item{it excludes all polygons
 that are most probably aquatic habitat or RIB.
+Also \code{1130} is excluded.
 In this process, it also makes a distinction between \code{2190_a} and
 \code{2190_overig};}
 \item{it excludes patches which most probably are \emph{no}
@@ -70,7 +71,12 @@ habitat or RIB at all.
 Those are the patches where \code{code_orig} contains \code{"bos"} or is
 equal to \code{“6510,gh”} or \code{“9120,gh”};}
 \item{it translates several main type codes into a corresponding
-subtype which they almost always represent;}
+subtype which they almost always represent:
+\code{6410} -> \code{6410_mo},
+\code{6430} -> \code{6430_hf},
+\code{6510} -> \code{6510_hu},
+\code{7140} -> \code{7140_meso},
+\code{9130} -> \code{9130_end};}
 \item{it distinguishes types \code{rbbhfl} and \code{rbbhf}.}
 }
 
