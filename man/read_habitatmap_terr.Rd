@@ -81,7 +81,7 @@ subtype which they almost always represent:
 }
 
 The data source \code{habitatmap_terr} is a GeoPackage, available at
-\href{https://xxxxx}{Zenodo}, that contains:
+\href{https://doi.org/10.5281/zenodo.3468948}{Zenodo}, that contains:
 \itemize{
   \item{\code{habitatmap_terr_polygons}: a spatial polygon layer}
   \item{\code{habitatmap_terr_patches}: a table in which every row
