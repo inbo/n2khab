@@ -45,7 +45,7 @@ Imports:
     stats,
     stringr,
     tibble,
-    tidyr,
+    tidyr (>= 1.0.0),
     utils,
     withr
 Encoding: UTF-8
