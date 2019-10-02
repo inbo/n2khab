@@ -458,7 +458,7 @@ read_habitatmap <-
 #' A list of two objects:
 #'   \itemize{
 #'   \item \code{habitatmap_terr_polygons}: a Simple feature collection of
-#'   geometry type \code{POLYGON} with four attribute variables:
+#'   geometry type \code{MULTIPOLYGON} with four attribute variables:
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{description_orig}: polygon description based on the
