@@ -423,7 +423,7 @@ read_habitatmap <-
 #' \item{it excludes all polygons
 #' that are most probably aquatic habitat or RIB.
 #' Also \code{1130} is excluded.
-#' In this process, it also makes a distinction between \code{2190_a} and
+#' In the process, a distinction is also made between \code{2190_a} and
 #' \code{2190_overig};}
 #' \item{it excludes patches which most probably are \emph{no}
 #' habitat or RIB at all.
