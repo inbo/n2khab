@@ -73,9 +73,11 @@ NULL
 #'   corresponding to the typeclass.
 #'   Is a factor.}
 #'   \item{tag_1}{Optional tag, e.g. a categorization ID explained
-#'   by \code{\link{namelist}}.}
+#'   by \code{\link{namelist}}.
+#'   Currently used to indicate subcategories within a few typeclasses.}
 #'   \item{tag_2}{Optional tag, e.g. a categorization ID explained
-#'   by \code{\link{namelist}}.}
+#'   by \code{\link{namelist}}.
+#'   Currently used to indicate the hydrological class.}
 #'   \item{tag_3}{Optional tag, e.g. a categorization ID explained
 #'   by \code{\link{namelist}}.} }
 #'
