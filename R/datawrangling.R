@@ -136,14 +136,14 @@ expand_types <- function(x,
         } else {
 
     x %>%
-        nest() %>%
+        nest(data = -!!(group_vars(x))) %>%
         mutate(newdata = map(.data$data,
                              expand_types_plain,
                              type_var = type_var,
                              strict = strict)
         ) %>%
         select(-.data$data) %>%
-        unnest %>%
+        unnest(cols = .data$newdata) %>%
         group_by_at(x %>% group_vars()) %>%
         select(colnames(x))
 
