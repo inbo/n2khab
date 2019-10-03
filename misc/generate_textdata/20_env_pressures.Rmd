@@ -29,9 +29,9 @@ source_df %>%
     separate(key, c("lang", "key")) %>% 
     spread(key = key,
            value = value) %>% 
-    bind_rows(read_vc(namelist_path),
+    bind_rows(read_vc(namelist_path, root),
               .) %>% 
-    write_vc(namelist_path)
+    write_vc(namelist_path, root)
 ```
 
 Adding explanations to `namelist`:
@@ -50,9 +50,9 @@ source_df %>%
            value = value) %>% 
     filter(!is.na(name)) %>% 
     mutate(shortname = NA %>% as.character) %>% 
-    bind_rows(read_vc(namelist_path),
+    bind_rows(read_vc(namelist_path, root),
               .) %>% 
-    write_vc(namelist_path)
+    write_vc(namelist_path, root)
 ```
 
 Adding ep_classes to `namelist`:
@@ -74,9 +74,9 @@ source_df %>%
                         )
            ) %>% 
     mutate(shortname = NA %>% as.character) %>% 
-    bind_rows(read_vc(namelist_path),
+    bind_rows(read_vc(namelist_path, root),
               .) %>% 
-    write_vc(namelist_path)
+    write_vc(namelist_path, root)
 ```
 
 
@@ -85,7 +85,7 @@ source_df %>%
 Set path and filename of `env_pressures`:
 
 ```{r}
-ep_path <- "../../inst/textdata/env_pressures"
+ep_path <- "inst/textdata/env_pressures"
 ```
 
 We generate it manually because of the difficulties with cells spanning several rows in the googlesheet:
@@ -132,6 +132,7 @@ tribble(
     mutate(ep_code = factor(ep_code),
            ep_class = factor(ep_class)) %>% 
     write_vc(ep_path,
+             root,
              sorting = "ep_code",
              optimize = FALSE,
              strict = FALSE)

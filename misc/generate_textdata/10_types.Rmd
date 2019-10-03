@@ -5,11 +5,12 @@
 Set path and filename of the namelist:
 
 ```{r}
-namelist_path <- "../../inst/textdata/namelist"
+namelist_path <- "inst/textdata/namelist"
+root <- "../.."
 ```
 
 
-Reading from the source googlesheet (maintained by the MNE and [HabNorm](https://github.com/inbo/habnorm) projects):
+Reading from the source googlesheet (maintained by Steven De Saeger):
 
 ```{r message=FALSE}
 types_source <- gs_key("1dK0S1Tt3RlVEh4WrNF5N_-hn0OXiTUVOvsL2JRhSl78")
@@ -25,7 +26,7 @@ Writing the namelist a first time:
 
 ```{r message=FALSE}
 dummy <- 
-    str_c(namelist_path, ".*") %>% 
+    str_c(root, "/", namelist_path, ".*") %>% 
     Sys.glob %>% 
     file.remove
 source_df %>% 
@@ -49,6 +50,7 @@ source_df %>%
     gather(key = "lang", value = "name", en:nl) %>% 
     mutate(shortname = NA %>% as.character) %>% 
     write_vc(namelist_path,
+             root,
              sorting = c("lang", "code"))
 ```
 
@@ -67,12 +69,14 @@ source_df %>%
     separate(key, c("lang", "key")) %>% 
     spread(key = key,
            value = value) %>% 
-    bind_rows(read_vc(namelist_path),
+    bind_rows(read_vc(namelist_path, root),
               .) %>% 
-    write_vc(namelist_path)
+    write_vc(namelist_path, root)
 ```
 
 ## Append extra tags to `namelist`
+
+Information for tag 1:
 
 ```{r message=FALSE}
 source_df %>% 
@@ -92,24 +96,87 @@ source_df %>%
     )) %>% 
     gather(key = "lang", value = "name", en:nl) %>% 
     mutate(shortname = NA %>% as.character) %>% 
-    bind_rows(read_vc(namelist_path),
+    bind_rows(read_vc(namelist_path, root),
               .) %>% 
-    write_vc(namelist_path)
+    write_vc(namelist_path, root)
 ```
+
+Hydrological classes go in tag 2:
+
+```{r}
+type_hydroclass <- 
+    read_vc("rawraw_data/vegwhh") %>% 
+    rename(type = Vegcode,
+           hydroclass = Waterhuishouding) %>% 
+    group_by(type) %>% 
+    mutate(count_hydrocl = n(),
+           hydroclass = as.character(hydroclass)) %>% 
+    ungroup %>% 
+    spread(key = hydroclass, value = hydroclass) %>% 
+    rename(L1 = "Droog tot vochtig",
+           L2 = "Tijdelijk tot permanent nat",
+           L3 = "Oppervlaktewater") %>% 
+    unite(nl, L1, L2, L3, sep = " + ", na.rm = TRUE) %>% 
+    select(-count_hydrocl)
+# type_hydroclass %>% 
+#     distinct(nl)
+hc_names <- 
+    tribble(
+        ~code, ~nl_name, ~en_name, ~nl_shortname, ~en_shortname,
+        "HC1", "Droog tot vochtig", "Dry to moist",
+                "Droog", "Dry",
+        "HC12", "Droog tot vochtig + Tijdelijk tot permanent nat", 
+                "Dry to moist + temporarily to permanently wet",
+                "Droog + nat", "Dry + wet",
+        "HC2", "Tijdelijk tot permanent nat", "Temporarily to permanently wet",
+                "Nat", "Wet",
+        "HC23", "Tijdelijk tot permanent nat + Oppervlaktewater", 
+                "Temporarily to permanently wet + surface water",
+                "Nat + Oppervlaktewater", "Wet + surface water",
+        "HC3", "Oppervlaktewater", "Surface water",
+        "Oppervlaktewater", "Surface water"
+    )
+type_hydroclass <- 
+    type_hydroclass %>% 
+    inner_join(hc_names %>% select(code, 
+                                   nl_name),
+               by = c("nl" = "nl_name")) %>% 
+    select(type, code)
+    
+hc_names %>% 
+    select(1:3) %>% 
+    pivot_longer(cols = -code,
+                 names_to = "lang",
+                 names_pattern = "(..)_.+",
+                 values_to = "name") %>% 
+    inner_join(
+        hc_names %>% 
+        select(1, 4:5) %>% 
+        pivot_longer(cols = -code,
+                     names_to = "lang",
+                     names_pattern = "(..)_.+",
+                     values_to = "shortname")
+    ) %>% 
+    bind_rows(read_vc(namelist_path, root),
+              .) %>% 
+    write_vc(namelist_path, root)
+```
+
+
 
 ## Make `types`
 
 Set path and filename of `types`:
 
 ```{r}
-types_path <- "../../inst/textdata/types"
+types_path <- "inst/textdata/types"
 ```
 
 Write the data source `types`:
 
 ```{r}
 en_codelist <- 
-    read_vc(namelist_path) %>% 
+    read_vc(namelist_path, root) %>% 
     filter(lang == "en") %>% 
     select(code, name)
 source_df %>%
@@ -131,9 +198,11 @@ source_df %>%
            main_type,
            typeclass,
            tag_1 = code) %>% 
+    left_join(type_hydroclass %>% 
+                  rename(tag_2 = code),
+              by = "type") %>% 
     mutate(typeclass = factor(typeclass, 
                               levels = (.$typeclass %>% unique)),
-           tag_2 = NA %>% as.character,
            tag_3 = NA %>% as.character
            ) %>% 
     arrange(typeclass, 
@@ -143,6 +212,7 @@ source_df %>%
                               levels = .$main_type %>% unique)
            ) %>% 
     write_vc(types_path,
+             root,
              sorting = c("typeclass",
                          "type"),
              optimize = FALSE,

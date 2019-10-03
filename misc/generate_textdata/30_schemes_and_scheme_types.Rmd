@@ -29,7 +29,7 @@ ep_codes <-
            ep_code_nl = Environmental_pressure_code_NL_OLD) %>% 
     mutate(ep_code = factor(ep_code,
                             levels = 
-                                read_vc(ep_path) %>% 
+                                read_vc(ep_path, root) %>% 
                                 .$ep_code %>% 
                                 levels),
            ep_code_nl = plyr::mapvalues(ep_code,
@@ -90,7 +90,7 @@ schemes_schemetypes <-
                 factor,
         type = as.character(type) %>% 
                 factor(levels = 
-                           read_vc(types_path) %>% 
+                           read_vc(types_path, root) %>% 
                            .$type %>% 
                            levels)
     ) %>% 
@@ -103,8 +103,8 @@ schemes_schemetypes <-
 Set path and filename of `schemes` and `scheme_types`:
 
 ```{r}
-schemes_path <- "../../inst/textdata/schemes"
-scheme_types_path <- "../../inst/textdata/scheme_types"
+schemes_path <- "inst/textdata/schemes"
+scheme_types_path <- "inst/textdata/scheme_types"
 ```
 
 Separately defining spatial restrictions for specific schemes:
@@ -158,6 +158,7 @@ schemes_schemetypes %>%
            tag_3) %>% 
     arrange(programme, scheme) %>% 
     write_vc(schemes_path,
+             root,
          sorting = c("programme", 
                      "scheme"),
          optimize = TRUE,
@@ -248,6 +249,7 @@ schemes_schemetypes %>%
     left_join(typegroups) %>% 
     arrange(scheme, type) %>% 
     write_vc(scheme_types_path,
+             root,
          sorting = c("scheme",
                      "type"),
          optimize = TRUE,
@@ -295,16 +297,16 @@ cbind(code = c("ATM", "SOIL", "GW", "SURF", "INUN"),
                  byrow = TRUE)) %>% 
     as_tibble %>% 
     mutate(shortname = NA %>% as.character) %>% 
-    bind_rows(read_vc(namelist_path),
+    bind_rows(read_vc(namelist_path, root),
               .) %>% 
-    write_vc(namelist_path)
+    write_vc(namelist_path, root)
 ```
 
 Appending MNE names and shortnames for `scheme`:
 
 ```{r message=FALSE}
-namelist <- read_vc(namelist_path)
-read_vc(schemes_path) %>% 
+namelist <- read_vc(namelist_path, root)
+read_vc(schemes_path, root) %>% 
     filter(programme == "MNE") %>% 
     distinct(scheme, attribute_1, attribute_2, attribute_3) %>% 
     mutate_all(as.character) %>% 
@@ -345,9 +347,9 @@ read_vc(schemes_path) %>%
                              )
            ) %>% 
     select(code, lang, name, shortname) %>% 
-    bind_rows(read_vc(namelist_path),
+    bind_rows(read_vc(namelist_path, root),
               .) %>% 
-    write_vc(namelist_path)
+    write_vc(namelist_path, root)
 ```
 
 Appending names and shortnames for typegroups of MNE schemes:
@@ -398,9 +400,9 @@ tribble(~nr, ~lang, ~name, ~shortname,
         ) %>% 
       mutate(code = str_c("GW_05.1_terr_group", code))
   ) %>% 
-  bind_rows(read_vc(namelist_path),
+  bind_rows(read_vc(namelist_path, root),
               .) %>% 
-  write_vc(namelist_path)
+  write_vc(namelist_path, root)
 ```
 
 
@@ -421,7 +423,7 @@ schemes_MHQ <- gs_key("1Lltpq1_OQENZKrCmfDLuBiaZQ0_YCoGkFAqcOtFRdHg") %>%
          attribute_1 = as.factor(attribute_1),
          tag_1 = as.factor(tag_1)) 
 
-schemes <- read_vc(schemes_path)
+schemes <- read_vc(schemes_path, root)
 
 schemes %>%
   bind_rows(schemes_MHQ) %>%
@@ -452,6 +454,7 @@ schemes %>%
          ) %>%
   arrange(programme, scheme) %>% 
     write_vc(schemes_path,
+             root,
          sorting = c("programme", 
                      "scheme"),
          optimize = TRUE,
@@ -462,7 +465,7 @@ schemes %>%
 Writing `schemesTypes`.
 
 ```{r}
-schemes_type <- read_vc(scheme_types_path)
+schemes_type <- read_vc(scheme_types_path, root)
 
 scheme_type_MHQ <- gs_key("1Lltpq1_OQENZKrCmfDLuBiaZQ0_YCoGkFAqcOtFRdHg") %>%
   gs_read(ws = 2) %>%
@@ -480,6 +483,7 @@ schemes_type %>%
   ) %>% 
   arrange(scheme, type) %>% 
   write_vc(scheme_types_path,
+           root,
            sorting = c("scheme",
                      "type"),
            optimize = TRUE,
@@ -492,7 +496,7 @@ Appending MHQ names for `scheme`.
 
 ```{r message=FALSE}
 
-namelist <- read_vc(namelist_path)
+namelist <- read_vc(namelist_path, root)
 
 schemes_MHQ_names <- schemes_MHQ %>%
   left_join(namelist, by = c("attribute_1" = "code")) %>%
@@ -508,7 +512,7 @@ schemes_MHQ_names <- schemes_MHQ %>%
 
 namelist %>%
   bind_rows(schemes_MHQ_names) %>%
-  write_vc(namelist_path) 
+  write_vc(namelist_path, root) 
 
 ```
 
