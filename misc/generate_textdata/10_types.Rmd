@@ -76,6 +76,8 @@ source_df %>%
 
 ## Append extra tags to `namelist`
 
+Information for tag 1:
+
 ```{r message=FALSE}
 source_df %>% 
     distinct(nl = Groepering.niveau.2,
@@ -98,6 +100,69 @@ source_df %>%
               .) %>% 
     write_vc(namelist_path, root)
 ```
+
+Hydrological classes go in tag 2:
+
+```{r}
+type_hydroclass <- 
+    read_vc("rawraw_data/vegwhh") %>% 
+    rename(type = Vegcode,
+           hydroclass = Waterhuishouding) %>% 
+    group_by(type) %>% 
+    mutate(count_hydrocl = n(),
+           hydroclass = as.character(hydroclass)) %>% 
+    ungroup %>% 
+    spread(key = hydroclass, value = hydroclass) %>% 
+    rename(L1 = "Droog tot vochtig",
+           L2 = "Tijdelijk tot permanent nat",
+           L3 = "Oppervlaktewater") %>% 
+    unite(nl, L1, L2, L3, sep = " + ", na.rm = TRUE) %>% 
+    select(-count_hydrocl)
+# type_hydroclass %>% 
+#     distinct(nl)
+hc_names <- 
+    tribble(
+        ~code, ~nl_name, ~en_name, ~nl_shortname, ~en_shortname,
+        "HC1", "Droog tot vochtig", "Dry to moist",
+                "Droog", "Dry",
+        "HC12", "Droog tot vochtig + Tijdelijk tot permanent nat", 
+                "Dry to moist + temporarily to permanently wet",
+                "Droog + nat", "Dry + wet",
+        "HC2", "Tijdelijk tot permanent nat", "Temporarily to permanently wet",
+                "Nat", "Wet",
+        "HC23", "Tijdelijk tot permanent nat + Oppervlaktewater", 
+                "Temporarily to permanently wet + surface water",
+                "Nat + Oppervlaktewater", "Wet + surface water",
+        "HC3", "Oppervlaktewater", "Surface water",
+        "Oppervlaktewater", "Surface water"
+    )
+type_hydroclass <- 
+    type_hydroclass %>% 
+    inner_join(hc_names %>% select(code, 
+                                   nl_name),
+               by = c("nl" = "nl_name")) %>% 
+    select(type, code)
+    
+hc_names %>% 
+    select(1:3) %>% 
+    pivot_longer(cols = -code,
+                 names_to = "lang",
+                 names_pattern = "(..)_.+",
+                 values_to = "name") %>% 
+    inner_join(
+        hc_names %>% 
+        select(1, 4:5) %>% 
+        pivot_longer(cols = -code,
+                     names_to = "lang",
+                     names_pattern = "(..)_.+",
+                     values_to = "shortname")
+    ) %>% 
+    bind_rows(read_vc(namelist_path, root),
+              .) %>% 
+    write_vc(namelist_path, root)
+```
+
+
 
 ## Make `types`
 
@@ -133,9 +198,11 @@ source_df %>%
            main_type,
            typeclass,
            tag_1 = code) %>% 
+    left_join(type_hydroclass %>% 
+                  rename(tag_2 = code),
+              by = "type") %>% 
     mutate(typeclass = factor(typeclass, 
                               levels = (.$typeclass %>% unique)),
-           tag_2 = NA %>% as.character,
            tag_3 = NA %>% as.character
            ) %>% 
     arrange(typeclass, 
