@@ -10,13 +10,16 @@ read_habitatmap_stdized(path = fileman_up("n2khab_data"),
 }
 \arguments{
 \item{path}{Location of the file.
-Considering the default value of the \code{file} argument, use this
-argument in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.}
+Considering the default value of the \code{file} argument, this should be
+the location of the folder '\strong{\code{n2khab_data}}'.
+By default, the first \code{n2khab_data} folder is used that is found when
+sequentially climbing up 0 to 10 levels in the file system hierarchy,
+starting from the working directory.}
 
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.}
+\href{../doc/v020_datastorage.html}{vignette} on data storage.}
 }
 \value{
 A list of two objects:
@@ -44,8 +47,8 @@ A list of two objects:
 \code{read_habitatmap_stdized} returns the data source \code{habitatmap_stdized} as a list of two objects:
 \itemize{
   \item \code{habitatmap_polygons}: an sf object with all polygons
-  of the \code{habitatmap} that contain habitat or a Regionally
-  Important Biotope (RIB).
+  of the \code{habitatmap} that contain habitat or a regionally
+  important biotope (RIB).
   \item \code{habitatmap_patches}: a tibble with information on the
   habitat and RIB patches (HAB1, HAB2,..., HAB5) that occur within
   the \code{habitatmap_polygons}, each row corresponding with one
@@ -62,7 +65,8 @@ fraction of each vegetation type within the polygons is stored in
 the columns 'PHAB1', 'PHAB2', ..., 'PHAB5'. The different parts of
 the polygons are called 'patches'.
 
-The data source \code{habitatmap_stdized} is a GeoPackage that
+The data source \code{habitatmap_stdized} is a GeoPackage, available at
+\href{https://doi.org/10.5281/zenodo.3355192}{Zenodo}, that
 contains:
 \itemize{
   \item \code{habitatmap_polygons}: a spatial layer with every
@@ -102,7 +106,7 @@ The R-code for creating the \code{habitatmap_stdized} data source
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_habitatmap()
+r <- read_habitatmap_stdized()
 r_polygons <- r$habitatmap_polygons
 r_patches <- r$habitatmap_patches
 }
@@ -114,5 +118,10 @@ Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
 DOI: https://doi.org/10.21436/inbor.15138099.
+}
+\seealso{
+Other functions involved in processing the \code{habitatmap} data source: \code{\link{read_habitatmap_terr}},
+  \code{\link{read_habitatmap}},
+  \code{\link{read_watersurfaces_hab}}
 }
 \concept{functions involved in processing the \code{habitatmap} data source}
