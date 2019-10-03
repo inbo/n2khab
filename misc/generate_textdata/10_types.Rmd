@@ -10,7 +10,7 @@ root <- "../.."
 ```
 
 
-Reading from the source googlesheet (maintained by the MNE and [HabNorm](https://github.com/inbo/habnorm) projects):
+Reading from the source googlesheet (maintained by Steven De Saeger):
 
 ```{r message=FALSE}
 types_source <- gs_key("1dK0S1Tt3RlVEh4WrNF5N_-hn0OXiTUVOvsL2JRhSl78")
