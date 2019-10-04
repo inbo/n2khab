@@ -4,7 +4,7 @@
 \name{n2khab-package}
 \alias{n2khab}
 \alias{n2khab-package}
-\title{n2khab: Data preparation for Flemish Natura 2000 habitat analyses}
+\title{n2khab: Providing preprocessed reference data for Flemish Natura 2000 habitat analyses}
 \description{
 The n2khab package is an R package with
     preprocessing functions and standard reference data, useful for 
@@ -42,6 +42,7 @@ Other contributors:
   \item Maud Raman \email{maud.raman@inbo.be} (0000-0003-2116-4963) [contributor]
   \item Jan Wouters \email{jan.wouters@inbo.be} (0000-0001-8200-9102) [contributor]
   \item Steven De Saeger \email{steven.desaeger@inbo.be} (0000-0002-5477-3063) [contributor]
+  \item An Leyssen \email{an.leyssen@inbo.be} (0000-0003-3537-286X) [contributor]
   \item Nathalie Cools \email{nathalie.cools@inbo.be} (0000-0002-7059-2318) [contributor]
   \item Suzanna Lettens \email{suzanna.lettens@inbo.be} (0000-0001-5032-495X) [contributor]
   \item Arne Verstraeten \email{arne.verstraeten@inbo.be} (0000-0002-8813-1261) [contributor]
