@@ -577,7 +577,8 @@ read_habitatmap_terr <-
 #' @references
 #' Leyssen A., Denys L. De Saeger S. (2018). Indicatieve situering van het
 #' Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
-#' behorend tot het Ranunculion fluitantis en het Callitricho-Batrachion.
+#' behorend tot het \emph{Ranunculion fluitantis} en het
+#' \emph{Callitricho-Batrachion}.
 #' Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
 #' Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
 #' DOI: https://doi.org/10.21436/inbor.15138370
