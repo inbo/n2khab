@@ -591,6 +591,8 @@ read_habitatmap_terr <-
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
 #'
+#' library(magrittr)
+#' library(sf)
 #' hs <- read_habitatstreams()
 #' hs
 #' hs2 <- read_habitatstreams(source_text = TRUE)
