@@ -599,6 +599,9 @@ read_habitatmap_terr <-
 #'           hs2$lines %>% st_drop_geometry)
 #' }
 #'
+#' @importFrom assertthat
+#' assert_that
+#' is.flag
 #' @importFrom sf
 #' read_sf
 #' st_drop_geometry
@@ -616,9 +619,14 @@ read_habitatstreams <-
              file = "10_raw/habitatstreams",
              source_text = FALSE){
 
+        filepath <- file.path(path, file)
+        assert_that(file.exists(filepath))
+
+        assert_that(is.flag(source_text))
+
         habitatstreams <-
             suppressWarnings(
-                read_sf(file.path(path, file),
+                read_sf(filepath,
                         crs = 31370)
             )
 
