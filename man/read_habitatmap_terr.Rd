@@ -6,7 +6,8 @@
 objects}
 \usage{
 read_habitatmap_terr(path = fileman_up("n2khab_data"),
-  file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg")
+  file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
+  keep_aq_patches = TRUE)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -20,6 +21,19 @@ starting from the working directory.}
 May include a path prefix.
 The default follows the data management advice in the
 \href{../doc/v020_datastorage.html}{vignette} on data storage.}
+
+\item{keep_aq_patches}{Logical; \code{TRUE} by default.
+The data source \code{habitatmap_terr} aims at delineating all
+polygons with at least one (semi-)terrestrial type (i.e. patch).
+For those polygons, it returns all known habitat types and RIBs as patches.
+Hence, in several cases polygons do occur with a combination of terrestrial
+and aquatic patches (see \emph{Details} for a definition of 'aquatic').
+Setting \code{keep_aq_patches = FALSE} is convenient for use cases where one
+only wants to look at the (semi-)terrestrial patches: this setting will
+discard all aquatic patches in 'mixed' aquatic/terrestrial polygons.
+As each polygon always has at least one (semi-)terrestrial type,
+this will not affect the number of polygons returned,
+only the number of patches.}
 }
 \value{
 A list of two objects:
@@ -63,9 +77,15 @@ follows:
 \itemize{
 \item{it excludes all polygons
 that are most probably aquatic habitat or RIB.
-Also \code{1130} is excluded.
-In the process, a distinction is also made between \code{2190_a} and
-\code{2190_overig};}
+These are the polygons for which
+\strong{all} habitat or RIB patches are aquatic.
+In the process, a distinction was also made between \code{2190_a} and
+\code{2190_overig}.
+There is no exclusion of aquatic patches when these coexist with
+terrestrial patches in the same polygon.
+The aquatic types are the types for which \code{tag_2 == "HC3"}
+in the \code{\link{types}} data source (\code{tag_2} is the hydrological
+class; cf. the output of \code{\link[=read_types]{read_types()}});}
 \item{it excludes patches which most probably are \emph{no}
 habitat or RIB at all.
 Those are the patches where \code{code_orig} contains \code{"bos"} or is
@@ -101,9 +121,13 @@ repository.
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_habitatmap_terr()
-r_polygons <- r$habitatmap_terr_polygons
-r_patches <- r$habitatmap_terr_patches
+habmap_terr <- read_habitatmap_terr()
+habmap_terr$habitatmap_terr_polygons
+habmap_terr$habitatmap_terr_patches
+
+habmap_terr_noaq <- read_habitatmap_terr(keep_aq_patches = FALSE)
+habmap_terr_noaq$habitatmap_terr_polygons
+habmap_terr_noaq$habitatmap_terr_patches
 }
 
 }
