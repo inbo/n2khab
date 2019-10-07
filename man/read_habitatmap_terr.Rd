@@ -27,12 +27,13 @@ The data source \code{habitatmap_terr} aims at delineating all
 polygons with at least one (semi-)terrestrial type (i.e. patch).
 For those polygons, it returns all known habitat types and RIBs as patches.
 Hence, in several cases polygons do occur with a combination of terrestrial
-and aquatic patches.
+and aquatic patches (see \emph{Details} for a definition of 'aquatic').
 Setting \code{keep_aq_patches = FALSE} is convenient for use cases where one
 only wants to look at the (semi-)terrestrial patches: this setting will
 discard all aquatic patches in 'mixed' aquatic/terrestrial polygons.
-The aquatic types are defined as those with hydrological class \code{"HC3"}
-(see \code{tag_2}) in the \code{\link{types}} data source.}
+As each polygon always has at least one (semi-)terrestrial type,
+this will not affect the number of polygons returned,
+only the number of patches.}
 }
 \value{
 A list of two objects:
@@ -76,9 +77,15 @@ follows:
 \itemize{
 \item{it excludes all polygons
 that are most probably aquatic habitat or RIB.
-Also \code{1130} is excluded.
-In the process, a distinction is also made between \code{2190_a} and
-\code{2190_overig};}
+These are the polygons for which
+\strong{all} habitat or RIB patches are aquatic.
+In the process, a distinction was also made between \code{2190_a} and
+\code{2190_overig}.
+There is no exclusion of aquatic patches when these coexist with
+terrestrial patches in the same polygon.
+The aquatic types are the types for which \code{tag_2 == "HC3"}
+in the \code{\link{types}} data source (\code{tag_2} is the hydrological
+class; cf. the output of \code{\link[=read_types]{read_types()}});}
 \item{it excludes patches which most probably are \emph{no}
 habitat or RIB at all.
 Those are the patches where \code{code_orig} contains \code{"bos"} or is
