@@ -452,6 +452,18 @@ read_habitatmap <-
 #' \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
 #' repository.
 #'
+#' @param keep_aq_patches Logical; \code{TRUE} by default.
+#' The data source \code{habitatmap_terr} aims at delineating all
+#' polygons with at least one (semi-)terrestrial type (i.e. patch).
+#' For those polygons, it returns all known habitat types and RIBs as patches.
+#' Hence, in several cases polygons do occur with a combination of terrestrial
+#' and aquatic patches.
+#' Setting \code{keep_aq_patches = FALSE} is convenient for use cases where one
+#' only wants to look at the (semi-)terrestrial patches: this setting will
+#' discard all aquatic patches in 'mixed' aquatic/terrestrial polygons.
+#' The aquatic types are defined as those with hydrological class \code{"HC3"}
+#' (see \code{tag_2}) in the \code{\link{types}} data source.
+#'
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
@@ -493,20 +505,33 @@ read_habitatmap <-
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
 #'
-#' r <- read_habitatmap_terr()
-#' r_polygons <- r$habitatmap_terr_polygons
-#' r_patches <- r$habitatmap_terr_patches
+#' habmap_terr <- read_habitatmap_terr()
+#' habmap_terr$habitatmap_terr_polygons
+#' habmap_terr$habitatmap_terr_patches
+#'
+#' habmap_terr_noaq <- read_habitatmap_terr(keep_aq_patches = FALSE)
+#' habmap_terr_noaq$habitatmap_terr_polygons
+#' habmap_terr_noaq$habitatmap_terr_patches
 #' }
 #'
 #' @export
+#' @importFrom assertthat
+#' assert_that
+#' is.flag
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr %>% mutate
+#' @importFrom dplyr
+#' %>%
+#' mutate
+#' filter
 read_habitatmap_terr <-
     function(path = fileman_up("n2khab_data"),
-             file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg"){
+             file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
+             keep_aq_patches = TRUE){
+
+        assert_that(is.flag(keep_aq_patches))
 
         habmap_terr_polygons <- read_sf(file.path(path, file),
                                    "habitatmap_terr_polygons")
@@ -533,6 +558,22 @@ read_habitatmap_terr <-
                     ),
                     source = factor(.data$source)
             )
+
+        if (!keep_aq_patches) {
+            habmap_terr_patches <-
+                habmap_terr_patches %>%
+                filter(!(.data$type %in% (types %>%
+                                          filter(.data$tag_2 == "HC3") %>%
+                                          .$type)
+                         ))
+            # The below step is unneeded (and takes several seconds),
+            # because polygons with _no_ terrestrial patches were already
+            # excluded in the data source.
+            #
+            # habmap_terr_polygons %>%
+            #     dplyr::semi_join(habmap_terr_patches,
+            #                      by = "polygon_id")
+        }
 
         result <- list(habitatmap_terr_polygons = habmap_terr_polygons,
                        habitatmap_terr_patches = habmap_terr_patches)

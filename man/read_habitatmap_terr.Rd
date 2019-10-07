@@ -6,7 +6,8 @@
 objects}
 \usage{
 read_habitatmap_terr(path = fileman_up("n2khab_data"),
-  file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg")
+  file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
+  keep_aq_patches = TRUE)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -20,6 +21,18 @@ starting from the working directory.}
 May include a path prefix.
 The default follows the data management advice in the
 \href{../doc/v020_datastorage.html}{vignette} on data storage.}
+
+\item{keep_aq_patches}{Logical; \code{TRUE} by default.
+The data source \code{habitatmap_terr} aims at delineating all
+polygons with at least one (semi-)terrestrial type (i.e. patch).
+For those polygons, it returns all known habitat types and RIBs as patches.
+Hence, in several cases polygons do occur with a combination of terrestrial
+and aquatic patches.
+Setting \code{keep_aq_patches = FALSE} is convenient for use cases where one
+only wants to look at the (semi-)terrestrial patches: this setting will
+discard all aquatic patches in 'mixed' aquatic/terrestrial polygons.
+The aquatic types are defined as those with hydrological class \code{"HC3"}
+(see \code{tag_2}) in the \code{\link{types}} data source.}
 }
 \value{
 A list of two objects:
@@ -101,9 +114,13 @@ repository.
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_habitatmap_terr()
-r_polygons <- r$habitatmap_terr_polygons
-r_patches <- r$habitatmap_terr_patches
+habmap_terr <- read_habitatmap_terr()
+habmap_terr$habitatmap_terr_polygons
+habmap_terr$habitatmap_terr_patches
+
+habmap_terr_noaq <- read_habitatmap_terr(keep_aq_patches = FALSE)
+habmap_terr_noaq$habitatmap_terr_polygons
+habmap_terr_noaq$habitatmap_terr_patches
 }
 
 }
