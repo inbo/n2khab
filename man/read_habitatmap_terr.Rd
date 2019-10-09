@@ -89,7 +89,7 @@ class; cf. the output of \code{\link[=read_types]{read_types()}});}
 \item{it excludes patches which most probably are \emph{no}
 habitat or RIB at all.
 Those are the patches where \code{code_orig} contains \code{"bos"} or is
-equal to \code{“6510,gh”} or \code{“9120,gh”};}
+equal to \code{"6510,gh"} or \code{"9120,gh"};}
 \item{it translates several main type codes into a corresponding
 subtype which they almost always represent:
 \code{6410} -> \code{6410_mo},
