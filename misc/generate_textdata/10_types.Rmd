@@ -126,13 +126,13 @@ hc_names <-
         "HC1", "Droog tot vochtig", "Dry to moist",
                 "Droog", "Dry",
         "HC12", "Droog tot vochtig + Tijdelijk tot permanent nat", 
-                "Dry to moist + temporarily to permanently wet",
-                "Droog + nat", "Dry + wet",
+                "Dry to moist + Temporarily to permanently wet",
+                "Droog + Nat", "Dry + Wet",
         "HC2", "Tijdelijk tot permanent nat", "Temporarily to permanently wet",
                 "Nat", "Wet",
         "HC23", "Tijdelijk tot permanent nat + Oppervlaktewater", 
-                "Temporarily to permanently wet + surface water",
-                "Nat + Oppervlaktewater", "Wet + surface water",
+                "Temporarily to permanently wet + Surface water",
+                "Nat + Oppervlaktewater", "Wet + Surface water",
         "HC3", "Oppervlaktewater", "Surface water",
         "Oppervlaktewater", "Surface water"
     )

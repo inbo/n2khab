@@ -187,9 +187,9 @@ GW_05.2	en	Groundwater monitoring: environmental pressure 05.2_wet_gw	GW: 05.2_w
 GW_07.1	en	Groundwater monitoring: environmental pressure 07.1_desal_gw	GW: 07.1_desal_gw
 GW_08.3	en	Groundwater monitoring: environmental pressure 08.3_poll_gw	GW: 08.3_poll_gw
 HC1	en	Dry to moist	Dry
-HC12	en	Dry to moist + temporarily to permanently wet	Dry + wet
+HC12	en	Dry to moist + Temporarily to permanently wet	Dry + Wet
 HC2	en	Temporarily to permanently wet	Wet
-HC23	en	Temporarily to permanently wet + surface water	Wet + surface water
+HC23	en	Temporarily to permanently wet + Surface water	Wet + Surface water
 HC3	en	Surface water	Surface water
 HQ1330	en	Habitat quality scheme: Atlantic salt meadows	Habitat quality scheme 1330
 HQ2130	en	Habitat quality scheme: Grey dunes	Habitat quality scheme 2130
@@ -480,7 +480,7 @@ GW_05.2	nl	Grondwatermeetnet: milieudruk 05.2_vernat_gw	GW: 05.2_vernat_gw
 GW_07.1	nl	Grondwatermeetnet: milieudruk 07.1_verzoet_gw	GW: 07.1_verzoet_gw
 GW_08.3	nl	Grondwatermeetnet: milieudruk 08.3_verontr_gw	GW: 08.3_verontr_gw
 HC1	nl	Droog tot vochtig	Droog
-HC12	nl	Droog tot vochtig + Tijdelijk tot permanent nat	Droog + nat
+HC12	nl	Droog tot vochtig + Tijdelijk tot permanent nat	Droog + Nat
 HC2	nl	Tijdelijk tot permanent nat	Nat
 HC23	nl	Tijdelijk tot permanent nat + Oppervlaktewater	Nat + Oppervlaktewater
 HC3	nl	Oppervlaktewater	Oppervlaktewater
