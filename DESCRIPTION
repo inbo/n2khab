@@ -1,6 +1,6 @@
 Package: n2khab
 Title: Providing preprocessed reference data for Flemish Natura 2000 habitat analyses
-Version: 0.0.3.9035
+Version: 0.0.3.9036
 Authors@R: c(
     person("Floris", "Vanderhaeghe", email = "floris.vanderhaeghe@inbo.be", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6378-6229")), 
     person("Toon", "Westra", email = "toon.westra@inbo.be", role = c("aut"), comment = c(ORCID = "0000-0003-2478-9459")), 
@@ -31,7 +31,7 @@ Imports:
     dplyr,
     forcats,
     gdalUtils,
-    git2rdata (>= 0.1),
+    git2rdata (== 0.1),
     jsonlite,
     magrittr,
     plyr,

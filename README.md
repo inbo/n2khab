@@ -5,7 +5,7 @@ It consequently supports various _N2KHAB_ projects, i.e. projects that focus on 
 
 The package is a companion to the [n2khab-preprocessing](https://github.com/inbo/n2khab-preprocessing) repo.
 Beside direct preprocessing functions, **n2khab** provides several functions that return datasets, generated in `n2khab-preprocessing`, as standardized R-objects.
-This is done because such readily processed datasets are worth saving and distributing on their own in the case of time-consuming calculations.
+Having processed datasets readily available is useful in the case of time-consuming calculations to produce them.
 
 The data definitions & standard checklists (reference data) provided by the package are textual files in the [vc-format](https://ropensci.github.io/git2rdata/index.html).
 Some of them come over from another repository.

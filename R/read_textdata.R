@@ -900,7 +900,6 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
     scheme_types %>%
         left_join(schemes,
                   by = "scheme") %>%
-        mutate(type = .data$type %>% as.character) %>%
         left_join(types,
                   by = "type") %>%
         mutate(type = .data$type %>%
