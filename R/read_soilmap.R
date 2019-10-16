@@ -122,13 +122,13 @@ read_soilmap <-
                                   "textdata/soil_translation_polders", ".tsv")) %>%
                 mutate(soiltype_orig = factor(.data$soiltype_orig,
                                               levels = levels(soilmap$soiltype))
-                       )
+                       ) %>%
+                filter(!is.na(texture_transl))
 
             soilmap <-
                 soilmap %>%
                 left_join(transl, by = c("soiltype" = "soiltype_orig")) %>%
-                mutate(soiltype_unified = as.character(.data$soiltype_unified),
-                       substrate = as.character(.data$substrate),
+                mutate(substrate = as.character(.data$substrate),
                        texture = as.character(.data$texture),
                        moisture = as.character(.data$moisture),
                        substrate = ifelse(is.na(.data$substrate) &
@@ -145,15 +145,7 @@ read_soilmap <-
                                              !is.na(.data$moisture_transl),
                                          .data$moisture_transl,
                                          .data$moisture) %>%
-                           factor(levels = levels(soilmap$moisture)),
-                       # for polder soiltypes OA and OC,
-                       # the unified type can be improved:
-                       soiltype_unified =
-                           ifelse(.data$soiltype_unified !=
-                                      .data$soiltype_unified_transl,
-                                  .data$soiltype_unified_transl,
-                                  .data$soiltype_unified) %>%
-                           factor
+                           factor(levels = levels(soilmap$moisture))
                        ) %>%
                 select(-contains("transl"))
 
