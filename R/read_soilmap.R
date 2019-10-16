@@ -129,7 +129,7 @@ read_soilmap <-
                 mutate(soiltype_orig = factor(.data$soiltype_orig,
                                               levels = levels(soilmap$soiltype))
                        ) %>%
-                filter(!is.na(texture_transl))
+                filter(!is.na(.data$texture_transl))
 
             soilmap <-
                 soilmap %>%
