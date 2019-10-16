@@ -21,9 +21,9 @@
 #' @param standardize_polders Logical.
 #' Only applied with \code{use_processed = FALSE}.
 #' If \code{TRUE}, fill empty values of substrate,
-#' texture and moisture in the 'Polders' area with translated values from
-#' De Vos et al XXXX.
-#' Also, use the value of \code{soiltype_unified} provided by this source.
+#' texture and moisture in the 'Polders' area.
+#' For texture and moisture, a translation table by Bruno De Vos & Carole Ampe
+#' is applied (for earlier work on this, see Ampe 2013).
 #' @param simplify Logical.
 #' Only applied with \code{use_processed = FALSE}.
 #' If \code{TRUE}, only return a limited number of variables.
@@ -32,6 +32,11 @@
 #'
 #' @return
 #' A Simple feature collection of geometry type \code{MULTIPOLYGON}.
+#'
+#' @references
+#' Ampe C. (2013). Databank aardewerk Vlaanderen 2010.
+#' Omzetten (zeer) oude legende bodemkartering naar legende bodemkaart
+#' Kuststreek. Vlaamse Landmaatschappij Regio West, Bruges, 45 p.
 #'
 #' @importFrom assertthat
 #' assert_that
