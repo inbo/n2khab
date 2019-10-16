@@ -16,7 +16,8 @@
 #' TO BE ADDED: explanation on the variables in the result.
 #'
 #'
-#' @param use_processed Load and return the processed data source
+#' @param use_processed Logical.
+#' If \code{TRUE}, load and return the processed data source
 #' \code{soilmap_simple}, instead of the raw data source \code{soilmap}.
 #' @param standardize_polders Logical.
 #' Only applied with \code{use_processed = FALSE}.

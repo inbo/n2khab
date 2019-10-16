@@ -22,7 +22,8 @@ May include a path prefix.
 The default follows the data management advice in the
 \href{../doc/v020_datastorage.html}{vignette} on data storage.}
 
-\item{use_processed}{Load and return the processed data source
+\item{use_processed}{Logical.
+If \code{TRUE}, load and return the processed data source
 \code{soilmap_simple}, instead of the raw data source \code{soilmap}.}
 
 \item{standardize_polders}{Logical.
