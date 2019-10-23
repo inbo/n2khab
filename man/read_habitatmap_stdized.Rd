@@ -31,12 +31,11 @@ A list of two objects:
     orginal vegetation codes in the raw \code{habitatmap}}
   }
   \itemize{
-  \item \code{habitatmap_patches}: a tibble with following variables
+  \item \code{habitatmap_types}: a tibble with following variables
   \itemize{
     \item \code{polygon_id}
-    \item \code{patch_id}
     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
-    \item \code{phab}: proportion of polygon covered by patch, as a percentage.
+    \item \code{phab}: proportion of polygon covered by type, as a percentage.
     \item \code{certain}: \code{TRUE} when vegetation type is certain and
      \code{FALSE} when vegetation type is uncertain.
     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
@@ -49,10 +48,9 @@ A list of two objects:
   \item \code{habitatmap_polygons}: an sf object with all polygons
   of the \code{habitatmap} that contain habitat or a regionally
   important biotope (RIB).
-  \item \code{habitatmap_patches}: a tibble with information on the
-  habitat and RIB patches (HAB1, HAB2,..., HAB5) that occur within
-  the \code{habitatmap_polygons}, each row corresponding with one
-  patch.
+  \item \code{habitatmap_types}: a tibble with information on the
+  habitat and RIB types (HAB1, HAB2,..., HAB5) that occur within
+  the \code{habitatmap_polygons}.
   }
 }
 \details{
@@ -62,8 +60,7 @@ Every polygon in the \code{habitatmap} can consist of maximum 5
 different vegetation types. This information is stored in the
 columns 'HAB1', HAB2',..., 'HAB5' of the attribute table. The
 fraction of each vegetation type within the polygons is stored in
-the columns 'PHAB1', 'PHAB2', ..., 'PHAB5'. The different parts of
-the polygons are called 'patches'.
+the columns 'PHAB1', 'PHAB2', ..., 'PHAB5'.
 
 The data source \code{habitatmap_stdized} is a GeoPackage, available at
 \href{https://doi.org/10.5281/zenodo.3355192}{Zenodo}, that
@@ -72,23 +69,20 @@ contains:
   \item \code{habitatmap_polygons}: a spatial layer with every
   \code{habitatmap} polygon that contains a habitat or RIB type
   listed in \code{\link{types}}.
-  \item \code{habitatmap_patches}: a table in which every row
-  corresponds with one patch.
+  \item \code{habitatmap_types}: a table with the types that occur in each polygon.
   }
 
-The processing of the \code{habitatmap_patches} tibble included
+The processing of the \code{habitatmap_types} tibble included
 following steps:
 \itemize{
-  \item A new variable was created to provide the
-  patch number (1 to 5): 'patch_id'.
-  \item For some patches the vegetation type is uncertain, and the
+  \item For some types the vegetation type is uncertain, and the
   vegetation code in the raw \code{habitatmap} data source consists
   of 2 or 3 possible types, separated with a ','. The different
   possible vegetation types are split up and one row is created for
   each of them. The variable \code{certain} will be \code{FALSE} if
-  a patch consists of 2 or 3 possible vegetation types, and \code{TRUE}
+  a original code consists of 2 or 3 possible vegetation types, and \code{TRUE}
   if only one vegetation type is provided.
-  \item For some patches the original vegetation code in the
+  \item For some types the original vegetation code in the
   \code{habitatmap} was not consistent with general coding syntax or
   with the type codes from the \code{\link{types}}. In that case the
   code was adjusted.
@@ -108,7 +102,7 @@ The R-code for creating the \code{habitatmap_stdized} data source
 
 r <- read_habitatmap_stdized()
 r_polygons <- r$habitatmap_polygons
-r_patches <- r$habitatmap_patches
+r_types <- r$habitatmap_types
 }
 
 }
