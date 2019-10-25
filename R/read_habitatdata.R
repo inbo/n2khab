@@ -161,7 +161,7 @@ read_habitatmap_stdized <-
 #'   important biotope (RIB).
 #'   \item \code{watersurfaces_hab_types}: a tibble with information on the
 #'   aquatic habitat and RIB types (HAB1, HAB2,..., HAB5) that occur within
-#'   the \code{watersurfaces_hab_polygons}.
+#'   each polygon of \code{watersurfaces_hab_polygons}.
 #'   }
 #'
 #' The data source \code{watersurfaces_hab} is a combination of \code{habitatmap_stdized} (see
