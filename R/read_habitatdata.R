@@ -451,7 +451,7 @@ read_habitatmap <-
 #'
 #' @param keep_aq_types Logical; \code{TRUE} by default.
 #' The data source \code{habitatmap_terr} aims at delineating all
-#' polygons with at least one (semi-)terrestrial type (i.e. patch).
+#' polygons with at least one (semi-)terrestrial type.
 #' For those polygons, it returns all known habitat types and RIBs as types.
 #' Hence, in several cases polygons do occur with a combination of terrestrial
 #' and aquatic types (see \emph{Details} for a definition of 'aquatic').
