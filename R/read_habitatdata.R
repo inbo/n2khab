@@ -8,7 +8,7 @@
 #'   important biotope (RIB).
 #'   \item \code{habitatmap_types}: a tibble with information on the
 #'   habitat and RIB types (HAB1, HAB2,..., HAB5) that occur within
-#'   the \code{habitatmap_polygons}.
+#'   each polygon of \code{habitatmap_polygons}.
 #'   }
 #'
 #' The data source \code{habitatmap_stdized} is the processed version
