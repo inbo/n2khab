@@ -479,7 +479,7 @@ read_habitatmap <-
 #'     \code{habitatmap_stdized} or \code{habitatmap_stdized + interpretation}
 #'   }
 #'   \item \code{habitatmap_terr_types}: a tibble with the following
-#'   variables (the first 5 being identical to those in
+#'   variables (the first 4 being identical to those in
 #'   \code{habitatmap_stdized}):
 #'   \itemize{
 #'     \item \code{polygon_id}
