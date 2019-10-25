@@ -208,7 +208,7 @@ read_habitatmap_stdized <-
 #'     contain standing water habitat. The different descriptions are separated by '+'.}
 #'   }
 #'   \itemize{
-#'   \item \code{habitatmap_types}: a tibble with following variables:
+#'   \item \code{watersurfaces_hab_types}: a tibble with following variables:
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
