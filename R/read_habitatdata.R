@@ -441,7 +441,7 @@ read_habitatmap <-
 #' \itemize{
 #'   \item{\code{habitatmap_terr_polygons}: a spatial polygon layer}
 #'   \item{\code{habitatmap_terr_types}: a table in which every row
-#'   corresponds with one patch.}
+#'   corresponds with one type.}
 #'   }
 #'
 #' The R-code for creating the \code{habitatmap_terr} data source
@@ -483,7 +483,6 @@ read_habitatmap <-
 #'   \code{habitatmap_stdized}):
 #'   \itemize{
 #'     \item \code{polygon_id}
-#'     \item \code{patch_id}
 #'     \item \code{code_orig}
 #'     \item \code{phab}
 #'     \item \code{certain}

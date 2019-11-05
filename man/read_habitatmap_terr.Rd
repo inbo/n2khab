@@ -7,7 +7,7 @@ objects}
 \usage{
 read_habitatmap_terr(path = fileman_up("n2khab_data"),
   file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
-  keep_aq_patches = TRUE)
+  keep_aq_types = TRUE)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -22,18 +22,18 @@ May include a path prefix.
 The default follows the data management advice in the
 \href{../doc/v020_datastorage.html}{vignette} on data storage.}
 
-\item{keep_aq_patches}{Logical; \code{TRUE} by default.
+\item{keep_aq_types}{Logical; \code{TRUE} by default.
 The data source \code{habitatmap_terr} aims at delineating all
-polygons with at least one (semi-)terrestrial type (i.e. patch).
-For those polygons, it returns all known habitat types and RIBs as patches.
+polygons with at least one (semi-)terrestrial type.
+For those polygons, it returns all known habitat types and RIBs as types.
 Hence, in several cases polygons do occur with a combination of terrestrial
-and aquatic patches (see \emph{Details} for a definition of 'aquatic').
-Setting \code{keep_aq_patches = FALSE} is convenient for use cases where one
-only wants to look at the (semi-)terrestrial patches: this setting will
-discard all aquatic patches in 'mixed' aquatic/terrestrial polygons.
+and aquatic types (see \emph{Details} for a definition of 'aquatic').
+Setting \code{keep_aq_types = FALSE} is convenient for use cases where one
+only wants to look at the (semi-)terrestrial types: this setting will
+discard all aquatic types in 'mixed' aquatic/terrestrial polygons.
 As each polygon always has at least one (semi-)terrestrial type,
 this will not affect the number of polygons returned,
-only the number of patches.}
+only the number of types.}
 }
 \value{
 A list of two objects:
@@ -49,12 +49,11 @@ A list of two objects:
     \item \code{source}: states where \code{description} comes from: either
     \code{habitatmap_stdized} or \code{habitatmap_stdized + interpretation}
   }
-  \item \code{habitatmap_terr_patches}: a tibble with the following
-  variables (the first 5 being identical to those in
+  \item \code{habitatmap_terr_types}: a tibble with the following
+  variables (the first 4 being identical to those in
   \code{habitatmap_stdized}):
   \itemize{
     \item \code{polygon_id}
-    \item \code{patch_id}
     \item \code{code_orig}
     \item \code{phab}
     \item \code{certain}
@@ -67,7 +66,7 @@ A list of two objects:
 \description{
 \code{read_habitatmap_terr()} returns the data source \code{habitatmap_terr}
 as a list of two objects: \code{habitatmap_terr_polygons} and
-\code{habitatmap_terr_patches}.
+\code{habitatmap_terr_types}.
 \code{habitatmap_terr} is the further interpreted, terrestrial part of
 \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}).
 }
@@ -78,17 +77,17 @@ follows:
 \item{it excludes all polygons
 that are most probably aquatic habitat or RIB.
 These are the polygons for which
-\strong{all} habitat or RIB patches are aquatic.
+\strong{all} habitat or RIB types are aquatic.
 In the process, a distinction was also made between \code{2190_a} and
 \code{2190_overig}.
-There is no exclusion of aquatic patches when these coexist with
-terrestrial patches in the same polygon.
+There is no exclusion of aquatic types when these coexist with
+terrestrial types in the same polygon.
 The aquatic types are the types for which \code{tag_2 == "HC3"}
 in the \code{\link{types}} data source (\code{tag_2} is the hydrological
 class; cf. the output of \code{\link[=read_types]{read_types()}});}
-\item{it excludes patches which most probably are \emph{no}
+\item{it excludes types which most probably are \emph{no}
 habitat or RIB at all.
-Those are the patches where \code{code_orig} contains \code{"bos"} or is
+Those are the types where \code{code_orig} contains \code{"bos"} or is
 equal to \code{"6510,gh"} or \code{"9120,gh"};}
 \item{it translates several main type codes into a corresponding
 subtype which they almost always represent:
@@ -104,8 +103,8 @@ The data source \code{habitatmap_terr} is a GeoPackage, available at
 \href{https://doi.org/10.5281/zenodo.3468948}{Zenodo}, that contains:
 \itemize{
   \item{\code{habitatmap_terr_polygons}: a spatial polygon layer}
-  \item{\code{habitatmap_terr_patches}: a table in which every row
-  corresponds with one patch.}
+  \item{\code{habitatmap_terr_types}: a table in which every row
+  corresponds with one type.}
   }
 
 The R-code for creating the \code{habitatmap_terr} data source
@@ -123,11 +122,11 @@ repository.
 
 habmap_terr <- read_habitatmap_terr()
 habmap_terr$habitatmap_terr_polygons
-habmap_terr$habitatmap_terr_patches
+habmap_terr$habitatmap_terr_types
 
-habmap_terr_noaq <- read_habitatmap_terr(keep_aq_patches = FALSE)
+habmap_terr_noaq <- read_habitatmap_terr(keep_aq_types = FALSE)
 habmap_terr_noaq$habitatmap_terr_polygons
-habmap_terr_noaq$habitatmap_terr_patches
+habmap_terr_noaq$habitatmap_terr_types
 }
 
 }
