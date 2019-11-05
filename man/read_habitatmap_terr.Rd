@@ -103,8 +103,8 @@ The data source \code{habitatmap_terr} is a GeoPackage, available at
 \href{https://doi.org/10.5281/zenodo.3468948}{Zenodo}, that contains:
 \itemize{
   \item{\code{habitatmap_terr_polygons}: a spatial polygon layer}
-  \item{\code{habitatmap_terr_types}: a table in which every row
-  corresponds with one type.}
+  \item{\code{habitatmap_terr_types}: a table with the types that occur
+  in each polygon.}
   }
 
 The R-code for creating the \code{habitatmap_terr} data source
