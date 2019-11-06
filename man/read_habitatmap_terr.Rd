@@ -7,7 +7,7 @@ objects}
 \usage{
 read_habitatmap_terr(path = fileman_up("n2khab_data"),
   file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
-  keep_aq_types = TRUE)
+  keep_aq_types = TRUE, version = "habitatmap_terr_2018_v2")
 }
 \arguments{
 \item{path}{Location of the file.
@@ -34,6 +34,9 @@ discard all aquatic types in 'mixed' aquatic/terrestrial polygons.
 As each polygon always has at least one (semi-)terrestrial type,
 this will not affect the number of polygons returned,
 only the number of types.}
+
+\item{version}{Version ID of the data source.
+Defaults to the latest available version defined by the package.}
 }
 \value{
 A list of two objects:
@@ -103,8 +106,8 @@ The data source \code{habitatmap_terr} is a GeoPackage, available at
 \href{https://doi.org/10.5281/zenodo.3468948}{Zenodo}, that contains:
 \itemize{
   \item{\code{habitatmap_terr_polygons}: a spatial polygon layer}
-  \item{\code{habitatmap_terr_types}: a table in which every row
-  corresponds with one type.}
+  \item{\code{habitatmap_terr_types}: a table with the types that occur
+  in each polygon.}
   }
 
 The R-code for creating the \code{habitatmap_terr} data source

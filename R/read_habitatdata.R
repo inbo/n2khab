@@ -440,8 +440,8 @@ read_habitatmap <-
 #' \href{https://doi.org/10.5281/zenodo.3468948}{Zenodo}, that contains:
 #' \itemize{
 #'   \item{\code{habitatmap_terr_polygons}: a spatial polygon layer}
-#'   \item{\code{habitatmap_terr_types}: a table in which every row
-#'   corresponds with one type.}
+#'   \item{\code{habitatmap_terr_types}: a table with the types that occur
+#'   in each polygon.}
 #'   }
 #'
 #' The R-code for creating the \code{habitatmap_terr} data source
@@ -461,6 +461,8 @@ read_habitatmap <-
 #' As each polygon always has at least one (semi-)terrestrial type,
 #' this will not affect the number of polygons returned,
 #' only the number of types.
+#' @param version Version ID of the data source.
+#' Defaults to the latest available version defined by the package.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -515,6 +517,7 @@ read_habitatmap <-
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' is.string
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
@@ -526,9 +529,11 @@ read_habitatmap <-
 read_habitatmap_terr <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
-             keep_aq_types = TRUE){
+             keep_aq_types = TRUE,
+             version = "habitatmap_terr_2018_v2"){
 
         assert_that(is.flag(keep_aq_types))
+        assert_that(is.string(version))
 
         habmap_terr_polygons <- read_sf(file.path(path, file),
                                    "habitatmap_terr_polygons")
@@ -539,10 +544,17 @@ read_habitatmap_terr <-
 
         suppressWarnings(st_crs(habmap_terr_polygons) <- 31370)
 
-        habmap_terr_types <- suppressWarnings(
-            read_sf(file.path(path, file),
-                    "habitatmap_terr_types")
-        )
+        if (version == "habitatmap_terr_2018_v1") {
+            habmap_terr_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "habitatmap_terr_patches")
+            )
+        } else {
+            habmap_terr_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "habitatmap_terr_types")
+            )
+        }
 
         types <- read_types()
 
@@ -572,8 +584,13 @@ read_habitatmap_terr <-
             #                      by = "polygon_id")
         }
 
-        result <- list(habitatmap_terr_polygons = habmap_terr_polygons,
-                       habitatmap_terr_types = habmap_terr_types)
+        if (version == "habitatmap_terr_2018_v1") {
+            result <- list(habitatmap_terr_polygons = habmap_terr_polygons,
+                           habitatmap_terr_patches = habmap_terr_types)
+        } else {
+            result <- list(habitatmap_terr_polygons = habmap_terr_polygons,
+                           habitatmap_terr_types = habmap_terr_types)
+        }
 
         return(result)
 
