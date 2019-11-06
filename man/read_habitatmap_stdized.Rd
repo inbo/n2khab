@@ -6,7 +6,8 @@
 objects}
 \usage{
 read_habitatmap_stdized(path = fileman_up("n2khab_data"),
-  file = "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg")
+  file = "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg",
+  version = "habitatmap_stdized_2018_v2")
 }
 \arguments{
 \item{path}{Location of the file.
@@ -20,6 +21,9 @@ starting from the working directory.}
 May include a path prefix.
 The default follows the data management advice in the
 \href{../doc/v020_datastorage.html}{vignette} on data storage.}
+
+\item{version}{Version ID of the data source.
+Defaults to the latest available version defined by the package.}
 }
 \value{
 A list of two objects:

@@ -7,7 +7,7 @@ objects}
 \usage{
 read_watersurfaces_hab(path = fileman_up("n2khab_data"),
   file = "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg",
-  interpreted = FALSE)
+  interpreted = FALSE, version = "watersurfaces_hab_v3")
 }
 \arguments{
 \item{path}{Location of the file.
@@ -24,6 +24,9 @@ The default follows the data management advice in the
 
 \item{interpreted}{If \code{TRUE}, the interpreted subtype is provided when the subtype is missing. This only
 applies to type 3130. When the subtype is missing for 3130, we interpret it as 3130_aom.}
+
+\item{version}{Version ID of the data source.
+Defaults to the latest available version defined by the package.}
 }
 \value{
 A list of two objects:

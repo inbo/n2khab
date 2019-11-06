@@ -60,6 +60,8 @@
 #' May include a path prefix.
 #' The default follows the data management advice in the
 #' \href{../doc/v020_datastorage.html}{vignette} on data storage.
+#' @param version Version ID of the data source.
+#' Defaults to the latest available version defined by the package.
 #'
 #' @return
 #' A list of two objects:
@@ -111,10 +113,15 @@
 #' st_crs<-
 #' @importFrom rlang .data
 #' @importFrom dplyr %>% mutate
+#' @importFrom assertthat
+#' assert_that
 #'
 read_habitatmap_stdized <-
     function(path = fileman_up("n2khab_data"),
-             file = "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"){
+             file = "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg",
+             version = "habitatmap_stdized_2018_v2"){
+
+        assert_that(is.string(version))
 
         habmap_polygons <- read_sf(file.path(path, file),
                                    "habitatmap_polygons")
@@ -128,6 +135,18 @@ read_habitatmap_stdized <-
             read_sf(file.path(path, file),
                     "habitatmap_types")
             )
+
+        if (version == "habitatmap_stdized_2018_v1") {
+            habmap_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "habitatmap_patches")
+            )
+        } else {
+            habmap_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "habitatmap_types")
+            )
+        }
 
         types <- suppressWarnings(read_types())
 
@@ -243,11 +262,16 @@ read_habitatmap_stdized <-
 #' mutate
 #' mutate_at
 #' vars
+#' @importFrom assertthat
+#' assert_that
 #'
 read_watersurfaces_hab <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg",
-             interpreted = FALSE){
+             interpreted = FALSE,
+             version = "watersurfaces_hab_v3"){
+
+        assert_that(is.string(version))
 
         watersurfaces_polygons <- read_sf(file.path(path, file),
                                    "watersurfaces_hab_polygons")
@@ -262,6 +286,18 @@ read_watersurfaces_hab <-
             read_sf(file.path(path, file),
                     "watersurfaces_hab_types")
             )
+
+        if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
+            habmap_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "watersurfaces_hab_patches")
+            )
+        } else {
+            habmap_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "watersurfaces_hab_types")
+            )
+        }
 
         if (interpreted){
           watersurfaces_types <- watersurfaces_types %>%
