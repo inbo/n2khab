@@ -115,6 +115,7 @@
 #' @importFrom dplyr %>% mutate
 #' @importFrom assertthat
 #' assert_that
+#' is.string
 #'
 read_habitatmap_stdized <-
     function(path = fileman_up("n2khab_data"),
@@ -130,11 +131,6 @@ read_habitatmap_stdized <-
             mutate(polygon_id = factor(.data$polygon_id))
 
         suppressWarnings(st_crs(habmap_polygons) <- 31370)
-
-        habmap_types <- suppressWarnings(
-            read_sf(file.path(path, file),
-                    "habitatmap_types")
-            )
 
         if (version == "habitatmap_stdized_2018_v1") {
             habmap_types <- suppressWarnings(
@@ -159,8 +155,17 @@ read_habitatmap_stdized <-
                                   )
                     )
 
-        result <- list(habitatmap_polygons = habmap_polygons,
+        if (version == "habitatmap_stdized_2018_v1") {
+
+            result <- list(habitatmap_polygons = habmap_polygons,
+                       habitatmap_patches = habmap_types)
+
+        } else {
+
+           result <- list(habitatmap_polygons = habmap_polygons,
                        habitatmap_types = habmap_types)
+
+        }
 
         return(result)
 
@@ -264,6 +269,7 @@ read_habitatmap_stdized <-
 #' vars
 #' @importFrom assertthat
 #' assert_that
+#' is.string
 #'
 read_watersurfaces_hab <-
     function(path = fileman_up("n2khab_data"),
@@ -282,18 +288,13 @@ read_watersurfaces_hab <-
 
         suppressWarnings(st_crs(watersurfaces_polygons) <- 31370)
 
-        watersurfaces_types <- suppressWarnings(
-            read_sf(file.path(path, file),
-                    "watersurfaces_hab_types")
-            )
-
         if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
-            habmap_types <- suppressWarnings(
+            watersurfaces_types <- suppressWarnings(
                 read_sf(file.path(path, file),
                         "watersurfaces_hab_patches")
             )
         } else {
-            habmap_types <- suppressWarnings(
+            watersurfaces_types <- suppressWarnings(
                 read_sf(file.path(path, file),
                         "watersurfaces_hab_types")
             )
@@ -314,8 +315,17 @@ read_watersurfaces_hab <-
                                   )
                     )
 
-        result <- list(watersurfaces_polygons = watersurfaces_polygons,
+        if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
+
+          result <- list(watersurfaces_polygons = watersurfaces_polygons,
+                       watersurfaces_patches = watersurfaces_types)
+
+        } else {
+
+           result <- list(watersurfaces_polygons = watersurfaces_polygons,
                        watersurfaces_types = watersurfaces_types)
+
+        }
 
         return(result)
 
