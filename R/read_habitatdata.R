@@ -497,8 +497,6 @@ read_habitatmap <-
 #' As each polygon always has at least one (semi-)terrestrial type,
 #' this will not affect the number of polygons returned,
 #' only the number of types.
-#' @param version Version ID of the data source.
-#' Defaults to the latest available version defined by the package.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
