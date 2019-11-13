@@ -6,10 +6,9 @@
 #'   \item \code{habitatmap_polygons}: an sf object with all polygons
 #'   of the \code{habitatmap} that contain habitat or a regionally
 #'   important biotope (RIB).
-#'   \item \code{habitatmap_patches}: a tibble with information on the
-#'   habitat and RIB patches (HAB1, HAB2,..., HAB5) that occur within
-#'   the \code{habitatmap_polygons}, each row corresponding with one
-#'   patch.
+#'   \item \code{habitatmap_types}: a tibble with information on the
+#'   habitat and RIB types (HAB1, HAB2,..., HAB5) that occur within
+#'   each polygon of \code{habitatmap_polygons}.
 #'   }
 #'
 #' The data source \code{habitatmap_stdized} is the processed version
@@ -18,8 +17,7 @@
 #' different vegetation types. This information is stored in the
 #' columns 'HAB1', HAB2',..., 'HAB5' of the attribute table. The
 #' fraction of each vegetation type within the polygons is stored in
-#' the columns 'PHAB1', 'PHAB2', ..., 'PHAB5'. The different parts of
-#' the polygons are called 'patches'.
+#' the columns 'PHAB1', 'PHAB2', ..., 'PHAB5'.
 #'
 #' The data source \code{habitatmap_stdized} is a GeoPackage, available at
 #' \href{https://doi.org/10.5281/zenodo.3355192}{Zenodo}, that
@@ -28,23 +26,20 @@
 #'   \item \code{habitatmap_polygons}: a spatial layer with every
 #'   \code{habitatmap} polygon that contains a habitat or RIB type
 #'   listed in \code{\link{types}}.
-#'   \item \code{habitatmap_patches}: a table in which every row
-#'   corresponds with one patch.
+#'   \item \code{habitatmap_types}: a table with the types that occur in each polygon.
 #'   }
 #'
-#' The processing of the \code{habitatmap_patches} tibble included
+#' The processing of the \code{habitatmap_types} tibble included
 #' following steps:
 #' \itemize{
-#'   \item A new variable was created to provide the
-#'   patch number (1 to 5): 'patch_id'.
-#'   \item For some patches the vegetation type is uncertain, and the
+#'   \item For some polygons the vegetation type is uncertain, and the
 #'   vegetation code in the raw \code{habitatmap} data source consists
 #'   of 2 or 3 possible types, separated with a ','. The different
 #'   possible vegetation types are split up and one row is created for
 #'   each of them. The variable \code{certain} will be \code{FALSE} if
-#'   a patch consists of 2 or 3 possible vegetation types, and \code{TRUE}
+#'   the original code consists of 2 or 3 possible vegetation types, and \code{TRUE}
 #'   if only one vegetation type is provided.
-#'   \item For some patches the original vegetation code in the
+#'   \item For some polygons the original vegetation code in the
 #'   \code{habitatmap} was not consistent with general coding syntax or
 #'   with the type codes from the \code{\link{types}}. In that case the
 #'   code was adjusted.
@@ -65,6 +60,8 @@
 #' May include a path prefix.
 #' The default follows the data management advice in the
 #' \href{../doc/v020_datastorage.html}{vignette} on data storage.
+#' @param version Version ID of the data source.
+#' Defaults to the latest available version defined by the package.
 #'
 #' @return
 #' A list of two objects:
@@ -76,12 +73,11 @@
 #'     orginal vegetation codes in the raw \code{habitatmap}}
 #'   }
 #'   \itemize{
-#'   \item \code{habitatmap_patches}: a tibble with following variables
+#'   \item \code{habitatmap_types}: a tibble with following variables
 #'   \itemize{
 #'     \item \code{polygon_id}
-#'     \item \code{patch_id}
 #'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
-#'     \item \code{phab}: proportion of polygon covered by patch, as a percentage.
+#'     \item \code{phab}: proportion of polygon covered by type, as a percentage.
 #'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
 #'      \code{FALSE} when vegetation type is uncertain.
 #'     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
@@ -108,7 +104,7 @@
 #'
 #' r <- read_habitatmap_stdized()
 #' r_polygons <- r$habitatmap_polygons
-#' r_patches <- r$habitatmap_patches
+#' r_types <- r$habitatmap_types
 #' }
 #'
 #' @export
@@ -117,10 +113,16 @@
 #' st_crs<-
 #' @importFrom rlang .data
 #' @importFrom dplyr %>% mutate
+#' @importFrom assertthat
+#' assert_that
+#' is.string
 #'
 read_habitatmap_stdized <-
     function(path = fileman_up("n2khab_data"),
-             file = "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"){
+             file = "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg",
+             version = "habitatmap_stdized_2018_v2"){
+
+        assert_that(is.string(version))
 
         habmap_polygons <- read_sf(file.path(path, file),
                                    "habitatmap_polygons")
@@ -130,25 +132,40 @@ read_habitatmap_stdized <-
 
         suppressWarnings(st_crs(habmap_polygons) <- 31370)
 
-        habmap_patches <- suppressWarnings(
-            read_sf(file.path(path, file),
-                    "habitatmap_patches")
+        if (version == "habitatmap_stdized_2018_v1") {
+            habmap_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "habitatmap_patches")
             )
+        } else {
+            habmap_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "habitatmap_types")
+            )
+        }
 
         types <- suppressWarnings(read_types())
 
-        habmap_patches <- habmap_patches %>%
+        habmap_types <- habmap_types %>%
             mutate( polygon_id = factor(.data$polygon_id,
                                         levels = levels(habmap_polygons$polygon_id)),
-                    patch_id = as.numeric(.data$patch_id),
                     certain = .data$certain == 1,
                     type = factor(.data$type,
                                   levels = levels(types$type)
                                   )
                     )
 
-        result <- list(habitatmap_polygons = habmap_polygons,
-                       habitatmap_patches = habmap_patches)
+        if (version == "habitatmap_stdized_2018_v1") {
+
+            result <- list(habitatmap_polygons = habmap_polygons,
+                       habitatmap_patches = habmap_types)
+
+        } else {
+
+           result <- list(habitatmap_polygons = habmap_polygons,
+                       habitatmap_types = habmap_types)
+
+        }
 
         return(result)
 
@@ -164,34 +181,30 @@ read_habitatmap_stdized <-
 #' \code{read_watersurfaces_hab} returns the data source \code{watersurfaces_hab} as a list of two objects:
 #' \itemize{
 #'   \item \code{watersurfaces_hab_polygons}: an sf object with all polygons
-#'   that contain aquatic habitat or regionally
-#'   important biotope (RIB).
-#'   \item \code{watersurfaces_hab_patches}: a tibble with information on the
-#'   aquatic habitat and RIB patches (HAB1, HAB2,..., HAB5) that occur within
-#'   the \code{watersurfaces_hab_polygons}, each row corresponding with one
-#'   patch.
+#'   that contain standing water types (habitat or RIB).
+#'   \item \code{watersurfaces_hab_types}: a tibble with information on the
+#'   standing water types (HAB1, HAB2,..., HAB5) that occur within
+#'   each polygon of \code{watersurfaces_hab_polygons}.
 #'   }
 #'
 #' The data source \code{watersurfaces_hab} is a combination of \code{habitatmap_stdized} (see
 #' \code{\link{read_habitatmap_stdized}}) and the \href{https://http://www.geopunt.be/catalogus/datasetfolder/10e87ad3-8235-40e0-8269-42c3c96a884d}{watersurface map of Flanders}.
-#' It contains all aquatic habitat types and RIB in Flanders,
-#' but excluding habitat 3260.
+#' It contains all standing water types in Flanders.
 #'
 #'
 #' The data source \code{watersurfaces_hab} is a GeoPackage, available at
 #' \href{https://doi.org/10.5281/zenodo.3374645}{Zenodo}, that contains:
 #' \itemize{
-#'   \item \code{watersurfaces_hab_polygons}: a spatial layer with all polygons that contain aquatic habitat
-#'   or RIB type listed in \code{\link{types}}, except type 3260.
-#'   \item \code{watersurfaces_hab_patches}: a table in which every row corresponds with one patch.
+#'   \item \code{watersurfaces_hab_polygons}: a spatial layer with all polygons that contain standing water types listed in \code{\link{types}}.
+#'   \item \code{watersurfaces_hab_types}: a table in which every row corresponds with a combination of polygon and type.
 #'   }
 #'
 #'The polygons with 2190_a habitat (dune slack ponds) are generated by selecting all watersurface polygons that
 #'overlap with dune habitat polygons (21xx) of the standardized habitat map.
 #'
-#'For each of the other considered habitat types (31xx, 7220 and rbbah) we select the watersurface polygons that
+#'For each of the other considered habitat types (31xx and rbbah) we select the watersurface polygons that
 #'overlap with the selected habitat type polygons of the standardized habitat map. We also select polygons of the
-#'standardized habitat map that contain these aquatic habitat types but do not overlap with any watersurface polygon of the
+#'standardized habitat map that contain standing water types but do not overlap with any watersurface polygon of the
 #'watersurface map.
 #'
 #'The R-code for creating the \code{watersurfaces_hab_polygons} data source can be found in the \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
@@ -206,20 +219,19 @@ read_habitatmap_stdized <-
 #' @return
 #' A list of two objects:
 #'   \itemize{
-#'   \item \code{watersurfaces_hab_polygons}: an sf object of aquatic habitat and RIB polygons with four attribute variables:
+#'   \item \code{watersurfaces_hab_polygons}: an sf object of standing water polygons with four attribute variables:
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{polygon_id_ws}: id for the polygon in the \code{watersurface map}
 #'     \item \code{polygon_id_habitatmap}: id's of all overlapping polygons of \code{habitatmap_stdized} that
-#'     contain aquatic habitat. The different id's are separated by '+'.
+#'     contain standing water habitat. The different id's are separated by '+'.
 #'     \item \code{description_orig}: descriptions of all overlapping polygons of \code{habitatmap_stdized} that
 #'     contain standing water habitat. The different descriptions are separated by '+'.}
 #'   }
 #'   \itemize{
-#'   \item \code{habitatmap_patches}: a tibble with following variables:
+#'   \item \code{watersurfaces_hab_types}: a tibble with following variables:
 #'   \itemize{
 #'     \item \code{polygon_id}
-#'     \item \code{patch_id}
 #'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
 #'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
 #'      \code{FALSE} when vegetation type is uncertain.
@@ -239,7 +251,7 @@ read_habitatmap_stdized <-
 #'
 #' r <- read_watersurfaces_hab()
 #' r_polygons <- r$watersurfaces_hab_polygons
-#' r_patches <- r$watersurfaces_hab_patches
+#' r_types <- r$watersurfaces_hab_types
 #' }
 #'
 #' @export
@@ -252,11 +264,17 @@ read_habitatmap_stdized <-
 #' mutate
 #' mutate_at
 #' vars
+#' @importFrom assertthat
+#' assert_that
+#' is.string
 #'
 read_watersurfaces_hab <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg",
-             interpreted = FALSE){
+             interpreted = FALSE,
+             version = "watersurfaces_hab_v3"){
+
+        assert_that(is.string(version))
 
         watersurfaces_polygons <- read_sf(file.path(path, file),
                                    "watersurfaces_hab_polygons")
@@ -267,19 +285,26 @@ read_watersurfaces_hab <-
 
         suppressWarnings(st_crs(watersurfaces_polygons) <- 31370)
 
-        watersurfaces_patches <- suppressWarnings(
-            read_sf(file.path(path, file),
-                    "watersurfaces_hab_patches")
+        if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
+            watersurfaces_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "watersurfaces_hab_patches")
             )
+        } else {
+            watersurfaces_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "watersurfaces_hab_types")
+            )
+        }
 
         if (interpreted){
-          watersurfaces_patches <- watersurfaces_patches %>%
+          watersurfaces_types <- watersurfaces_types %>%
               mutate(type = ifelse(.data$type == "3130", "3130_aom", .data$type))
         }
 
         types <- suppressWarnings(read_types())
 
-        watersurfaces_patches <- watersurfaces_patches %>%
+        watersurfaces_types <- watersurfaces_types %>%
             mutate( polygon_id = factor(.data$polygon_id, levels = levels(watersurfaces_polygons$polygon_id)),
                     certain = .data$certain == 1,
                     type = factor(.data$type,
@@ -287,8 +312,17 @@ read_watersurfaces_hab <-
                                   )
                     )
 
-        result <- list(watersurfaces_polygons = watersurfaces_polygons,
-                       watersurfaces_patches = watersurfaces_patches)
+        if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
+
+          result <- list(watersurfaces_polygons = watersurfaces_polygons,
+                       watersurfaces_patches = watersurfaces_types)
+
+        } else {
+
+           result <- list(watersurfaces_polygons = watersurfaces_polygons,
+                       watersurfaces_types = watersurfaces_types)
+
+        }
 
         return(result)
 
@@ -413,7 +447,7 @@ read_habitatmap <-
 #'
 #' \code{read_habitatmap_terr()} returns the data source \code{habitatmap_terr}
 #' as a list of two objects: \code{habitatmap_terr_polygons} and
-#' \code{habitatmap_terr_patches}.
+#' \code{habitatmap_terr_types}.
 #' \code{habitatmap_terr} is the further interpreted, terrestrial part of
 #' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}).
 #'
@@ -423,17 +457,17 @@ read_habitatmap <-
 #' \item{it excludes all polygons
 #' that are most probably aquatic habitat or RIB.
 #' These are the polygons for which
-#' \strong{all} habitat or RIB patches are aquatic.
+#' \strong{all} habitat or RIB types are aquatic.
 #' In the process, a distinction was also made between \code{2190_a} and
 #' \code{2190_overig}.
-#' There is no exclusion of aquatic patches when these coexist with
-#' terrestrial patches in the same polygon.
+#' There is no exclusion of aquatic types when these coexist with
+#' terrestrial types in the same polygon.
 #' The aquatic types are the types for which \code{tag_2 == "HC3"}
 #' in the \code{\link{types}} data source (\code{tag_2} is the hydrological
 #' class; cf. the output of \code{\link[=read_types]{read_types()}});}
-#' \item{it excludes patches which most probably are \emph{no}
+#' \item{it excludes types which most probably are \emph{no}
 #' habitat or RIB at all.
-#' Those are the patches where \code{code_orig} contains \code{"bos"} or is
+#' Those are the types where \code{code_orig} contains \code{"bos"} or is
 #' equal to \code{"6510,gh"} or \code{"9120,gh"};}
 #' \item{it translates several main type codes into a corresponding
 #' subtype which they almost always represent:
@@ -449,8 +483,8 @@ read_habitatmap <-
 #' \href{https://doi.org/10.5281/zenodo.3468948}{Zenodo}, that contains:
 #' \itemize{
 #'   \item{\code{habitatmap_terr_polygons}: a spatial polygon layer}
-#'   \item{\code{habitatmap_terr_patches}: a table in which every row
-#'   corresponds with one patch.}
+#'   \item{\code{habitatmap_terr_types}: a table with the types that occur
+#'   in each polygon.}
 #'   }
 #'
 #' The R-code for creating the \code{habitatmap_terr} data source
@@ -458,18 +492,18 @@ read_habitatmap <-
 #' \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
 #' repository.
 #'
-#' @param keep_aq_patches Logical; \code{TRUE} by default.
+#' @param keep_aq_types Logical; \code{TRUE} by default.
 #' The data source \code{habitatmap_terr} aims at delineating all
-#' polygons with at least one (semi-)terrestrial type (i.e. patch).
-#' For those polygons, it returns all known habitat types and RIBs as patches.
+#' polygons with at least one (semi-)terrestrial type.
+#' For those polygons, it returns all known habitat types and RIBs as types.
 #' Hence, in several cases polygons do occur with a combination of terrestrial
-#' and aquatic patches (see \emph{Details} for a definition of 'aquatic').
-#' Setting \code{keep_aq_patches = FALSE} is convenient for use cases where one
-#' only wants to look at the (semi-)terrestrial patches: this setting will
-#' discard all aquatic patches in 'mixed' aquatic/terrestrial polygons.
+#' and aquatic types (see \emph{Details} for a definition of 'aquatic').
+#' Setting \code{keep_aq_types = FALSE} is convenient for use cases where one
+#' only wants to look at the (semi-)terrestrial types: this setting will
+#' discard all aquatic types in 'mixed' aquatic/terrestrial polygons.
 #' As each polygon always has at least one (semi-)terrestrial type,
 #' this will not affect the number of polygons returned,
-#' only the number of patches.
+#' only the number of types.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -487,12 +521,11 @@ read_habitatmap <-
 #'     \item \code{source}: states where \code{description} comes from: either
 #'     \code{habitatmap_stdized} or \code{habitatmap_stdized + interpretation}
 #'   }
-#'   \item \code{habitatmap_terr_patches}: a tibble with the following
-#'   variables (the first 5 being identical to those in
+#'   \item \code{habitatmap_terr_types}: a tibble with the following
+#'   variables (the first 4 being identical to those in
 #'   \code{habitatmap_stdized}):
 #'   \itemize{
 #'     \item \code{polygon_id}
-#'     \item \code{patch_id}
 #'     \item \code{code_orig}
 #'     \item \code{phab}
 #'     \item \code{certain}
@@ -514,17 +547,18 @@ read_habitatmap <-
 #'
 #' habmap_terr <- read_habitatmap_terr()
 #' habmap_terr$habitatmap_terr_polygons
-#' habmap_terr$habitatmap_terr_patches
+#' habmap_terr$habitatmap_terr_types
 #'
-#' habmap_terr_noaq <- read_habitatmap_terr(keep_aq_patches = FALSE)
+#' habmap_terr_noaq <- read_habitatmap_terr(keep_aq_types = FALSE)
 #' habmap_terr_noaq$habitatmap_terr_polygons
-#' habmap_terr_noaq$habitatmap_terr_patches
+#' habmap_terr_noaq$habitatmap_terr_types
 #' }
 #'
 #' @export
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' is.string
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
@@ -536,9 +570,11 @@ read_habitatmap <-
 read_habitatmap_terr <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
-             keep_aq_patches = TRUE){
+             keep_aq_types = TRUE,
+             version = "habitatmap_terr_2018_v2"){
 
-        assert_that(is.flag(keep_aq_patches))
+        assert_that(is.flag(keep_aq_types))
+        assert_that(is.string(version))
 
         habmap_terr_polygons <- read_sf(file.path(path, file),
                                    "habitatmap_terr_polygons")
@@ -549,14 +585,21 @@ read_habitatmap_terr <-
 
         suppressWarnings(st_crs(habmap_terr_polygons) <- 31370)
 
-        habmap_terr_patches <- suppressWarnings(
-            read_sf(file.path(path, file),
-                    "habitatmap_terr_patches")
-        )
+        if (version == "habitatmap_terr_2018_v1") {
+            habmap_terr_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "habitatmap_terr_patches")
+            )
+        } else {
+            habmap_terr_types <- suppressWarnings(
+                read_sf(file.path(path, file),
+                        "habitatmap_terr_types")
+            )
+        }
 
         types <- read_types()
 
-        habmap_terr_patches <- habmap_terr_patches %>%
+        habmap_terr_types <- habmap_terr_types %>%
              mutate(polygon_id = factor(.data$polygon_id,
                                         levels = levels(habmap_terr_polygons$polygon_id)),
                     certain = .data$certain == 1,
@@ -566,24 +609,29 @@ read_habitatmap_terr <-
                     source = factor(.data$source)
             )
 
-        if (!keep_aq_patches) {
-            habmap_terr_patches <-
-                habmap_terr_patches %>%
+        if (!keep_aq_types) {
+            habmap_terr_types <-
+                habmap_terr_types %>%
                 filter(!(.data$type %in% (types %>%
                                           filter(.data$tag_2 == "HC3") %>%
                                           .$type)
                          ))
             # The below step is unneeded (and takes several seconds),
-            # because polygons with _no_ terrestrial patches were already
+            # because polygons with _no_ terrestrial types were already
             # excluded in the data source.
             #
             # habmap_terr_polygons %>%
-            #     dplyr::semi_join(habmap_terr_patches,
+            #     dplyr::semi_join(habmap_terr_types,
             #                      by = "polygon_id")
         }
 
-        result <- list(habitatmap_terr_polygons = habmap_terr_polygons,
-                       habitatmap_terr_patches = habmap_terr_patches)
+        if (version == "habitatmap_terr_2018_v1") {
+            result <- list(habitatmap_terr_polygons = habmap_terr_polygons,
+                           habitatmap_terr_patches = habmap_terr_types)
+        } else {
+            result <- list(habitatmap_terr_polygons = habmap_terr_polygons,
+                           habitatmap_terr_types = habmap_terr_types)
+        }
 
         return(result)
 
