@@ -32,14 +32,14 @@
 #' The processing of the \code{habitatmap_types} tibble included
 #' following steps:
 #' \itemize{
-#'   \item For some types the vegetation type is uncertain, and the
+#'   \item For some polygons the vegetation type is uncertain, and the
 #'   vegetation code in the raw \code{habitatmap} data source consists
 #'   of 2 or 3 possible types, separated with a ','. The different
 #'   possible vegetation types are split up and one row is created for
 #'   each of them. The variable \code{certain} will be \code{FALSE} if
 #'   the original code consists of 2 or 3 possible vegetation types, and \code{TRUE}
 #'   if only one vegetation type is provided.
-#'   \item For some types the original vegetation code in the
+#'   \item For some polygons the original vegetation code in the
 #'   \code{habitatmap} was not consistent with general coding syntax or
 #'   with the type codes from the \code{\link{types}}. In that case the
 #'   code was adjusted.
