@@ -1,12 +1,12 @@
 ..generic:
-  git2rdata: '0.1'
+  git2rdata: 0.2.0
   optimize: yes
   NA string: NA
   sorting:
   - scheme
   - type
   hash: 2f61c9a6380a10942c134a13068e0088c5407942
-  data_hash: aa88cae4d2ef3012b9c37ea323e8fd86f164a4c1
+  data_hash: b93699b14a03dedc4e4f4f036a3309125e381af2
 scheme:
   class: factor
   labels:
