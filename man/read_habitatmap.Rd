@@ -4,8 +4,11 @@
 \alias{read_habitatmap}
 \title{Return the data source \code{habitatmap}}
 \usage{
-read_habitatmap(path = fileman_up("n2khab_data"),
-  file = "10_raw/habitatmap", select_hab = FALSE)
+read_habitatmap(
+  path = fileman_up("n2khab_data"),
+  file = "10_raw/habitatmap",
+  select_hab = FALSE
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -49,8 +52,9 @@ Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (
 DOI: https://doi.org/10.21436/inbor.15138099.
 }
 \seealso{
-Other functions involved in processing the \code{habitatmap} data source: \code{\link{read_habitatmap_stdized}},
-  \code{\link{read_habitatmap_terr}},
-  \code{\link{read_watersurfaces_hab}}
+Other functions involved in processing the \code{habitatmap} data source: 
+\code{\link{read_habitatmap_stdized}()},
+\code{\link{read_habitatmap_terr}()},
+\code{\link{read_watersurfaces_hab}()}
 }
 \concept{functions involved in processing the \code{habitatmap} data source}

@@ -38,6 +38,7 @@ datapath <- fileman_folders(root = "git")
 
 }
 \seealso{
-Other functions regarding file management for N2KHAB projects: \code{\link{fileman_up}}
+Other functions regarding file management for N2KHAB projects: 
+\code{\link{fileman_up}()}
 }
 \concept{functions regarding file management for N2KHAB projects}

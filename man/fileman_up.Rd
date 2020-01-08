@@ -38,6 +38,7 @@ fileman_up("n2khab_data")
 
 }
 \seealso{
-Other functions regarding file management for N2KHAB projects: \code{\link{fileman_folders}}
+Other functions regarding file management for N2KHAB projects: 
+\code{\link{fileman_folders}()}
 }
 \concept{functions regarding file management for N2KHAB projects}

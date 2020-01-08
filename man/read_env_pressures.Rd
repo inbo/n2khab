@@ -5,9 +5,12 @@
 \title{Return the 'env_pressures' data source as a tibble with human-readable
 attributes}
 \usage{
-read_env_pressures(path = pkgdatasource_path("textdata/env_pressures",
-  ".tsv"), file = "env_pressures", file_namelist = "namelist",
-  lang = "en")
+read_env_pressures(
+  path = pkgdatasource_path("textdata/env_pressures", ".tsv"),
+  file = "env_pressures",
+  file_namelist = "namelist",
+  lang = "en"
+)
 }
 \arguments{
 \item{path}{Location of the data sources \code{env_pressures} and
@@ -95,8 +98,10 @@ read_env_pressures(lang = "nl")
 \seealso{
 \code{\link{env_pressures}}
 
-Other reading functions for n2khab-referencelists: \code{\link{read_namelist}},
-  \code{\link{read_scheme_types}},
-  \code{\link{read_schemes}}, \code{\link{read_types}}
+Other reading functions for n2khab-referencelists: 
+\code{\link{read_namelist}()},
+\code{\link{read_scheme_types}()},
+\code{\link{read_schemes}()},
+\code{\link{read_types}()}
 }
 \concept{reading functions for n2khab-referencelists}

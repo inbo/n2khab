@@ -5,9 +5,12 @@
 \title{Return the data source \code{watersurfaces_hab} as a list of two
 objects}
 \usage{
-read_watersurfaces_hab(path = fileman_up("n2khab_data"),
+read_watersurfaces_hab(
+  path = fileman_up("n2khab_data"),
   file = "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg",
-  interpreted = FALSE, version = "watersurfaces_hab_v3")
+  interpreted = FALSE,
+  version = "watersurfaces_hab_v3"
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -66,6 +69,7 @@ The data source \code{watersurfaces_hab} is a combination of \code{habitatmap_st
 \code{\link{read_habitatmap_stdized}}) and the \href{https://http://www.geopunt.be/catalogus/datasetfolder/10e87ad3-8235-40e0-8269-42c3c96a884d}{watersurface map of Flanders}.
 It contains all standing water types in Flanders.
 
+
 The data source \code{watersurfaces_hab} is a GeoPackage, available at
 \href{https://doi.org/10.5281/zenodo.3374645}{Zenodo}, that contains:
 \itemize{
@@ -99,8 +103,9 @@ r_types <- r$watersurfaces_hab_types
 
 }
 \seealso{
-Other functions involved in processing the \code{habitatmap} data source: \code{\link{read_habitatmap_stdized}},
-  \code{\link{read_habitatmap_terr}},
-  \code{\link{read_habitatmap}}
+Other functions involved in processing the \code{habitatmap} data source: 
+\code{\link{read_habitatmap_stdized}()},
+\code{\link{read_habitatmap_terr}()},
+\code{\link{read_habitatmap}()}
 }
 \concept{functions involved in processing the \code{habitatmap} data source}

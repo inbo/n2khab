@@ -5,9 +5,11 @@
 \title{Return one of the available geospatial data sources representing
 administrative areas}
 \usage{
-read_admin_areas(path = fileman_up("n2khab_data"),
+read_admin_areas(
+  path = fileman_up("n2khab_data"),
   file = c("10_raw/flanders", "10_raw/provinces", "10_raw/sac"),
-  dsn = c("flanders", "provinces", "sac"))
+  dsn = c("flanders", "provinces", "sac")
+)
 }
 \arguments{
 \item{path}{Location of the file.

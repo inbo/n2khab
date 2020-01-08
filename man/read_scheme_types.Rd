@@ -4,9 +4,13 @@
 \alias{read_scheme_types}
 \title{Return the 'scheme_types' data source as a tibble}
 \usage{
-read_scheme_types(path = pkgdatasource_path("textdata/scheme_types",
-  ".tsv"), file = "scheme_types", file_namelist = "namelist",
-  lang = "en", extended = FALSE)
+read_scheme_types(
+  path = pkgdatasource_path("textdata/scheme_types", ".tsv"),
+  file = "scheme_types",
+  file_namelist = "namelist",
+  lang = "en",
+  extended = FALSE
+)
 }
 \arguments{
 \item{path}{Location of the data sources \code{scheme_types},
@@ -114,8 +118,10 @@ read_scheme_types(lang = "nl")
 \seealso{
 \code{\link{scheme_types}}
 
-Other reading functions for n2khab-referencelists: \code{\link{read_env_pressures}},
-  \code{\link{read_namelist}}, \code{\link{read_schemes}},
-  \code{\link{read_types}}
+Other reading functions for n2khab-referencelists: 
+\code{\link{read_env_pressures}()},
+\code{\link{read_namelist}()},
+\code{\link{read_schemes}()},
+\code{\link{read_types}()}
 }
 \concept{reading functions for n2khab-referencelists}

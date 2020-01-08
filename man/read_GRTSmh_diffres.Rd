@@ -5,8 +5,12 @@
 \title{Return a RasterLayer or an \code{sf} polygon layer from the processed data
 source \code{GRTSmh_diffres}}
 \usage{
-read_GRTSmh_diffres(path = fileman_up("n2khab_data"),
-  subdir = "20_processed/GRTSmh_diffres", level, polygon = FALSE)
+read_GRTSmh_diffres(
+  path = fileman_up("n2khab_data"),
+  subdir = "20_processed/GRTSmh_diffres",
+  level,
+  polygon = FALSE
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -121,9 +125,10 @@ plot(p)
 
 }
 \seealso{
-Other functions involved in processing the \code{GRTSmaster_habitats} data source: \code{\link{convert_base4frac_to_dec}},
-  \code{\link{convert_dec_to_base4frac}},
-  \code{\link{read_GRTSmh_base4frac}},
-  \code{\link{read_GRTSmh}}
+Other functions involved in processing the \code{GRTSmaster_habitats} data source: 
+\code{\link{convert_base4frac_to_dec}()},
+\code{\link{convert_dec_to_base4frac}()},
+\code{\link{read_GRTSmh_base4frac}()},
+\code{\link{read_GRTSmh}()}
 }
 \concept{functions involved in processing the \code{GRTSmaster_habitats} data source}
