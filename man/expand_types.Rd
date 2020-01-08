@@ -4,8 +4,7 @@
 \alias{expand_types}
 \title{Expand a 'type' column in a dataframe}
 \usage{
-expand_types(x, type_var = "type", use_grouping = TRUE,
-  strict = TRUE)
+expand_types(x, type_var = "type", use_grouping = TRUE, strict = TRUE)
 }
 \arguments{
 \item{x}{An object of class \code{data.frame}.}

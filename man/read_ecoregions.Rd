@@ -4,8 +4,7 @@
 \alias{read_ecoregions}
 \title{Return the \code{ecoregions} data source as an \code{sf} object}
 \usage{
-read_ecoregions(path = fileman_up("n2khab_data"),
-  file = "10_raw/ecoregions")
+read_ecoregions(path = fileman_up("n2khab_data"), file = "10_raw/ecoregions")
 }
 \arguments{
 \item{path}{Location of the file.

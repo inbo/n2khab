@@ -1,5 +1,5 @@
 ..generic:
-  git2rdata: '0.1'
+  git2rdata: 0.2.0
   optimize: yes
   NA string: NA
   sorting:
@@ -11,7 +11,7 @@
   - Milieudruk
   - MaxMilieudrukkengroep
   hash: 9723bf1048f08c074c68b85b2a16560235fa063f
-  data_hash: fbd0c0630e949d40ef2eff3a347ab9b24219191f
+  data_hash: 083e302bac6523720ce7bb4ef027d1a58dad2aed
 Comp_meetnet:
   class: factor
   labels:

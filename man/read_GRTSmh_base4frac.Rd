@@ -5,8 +5,10 @@
 \title{Return the processed data source \code{GRTSmh_base4frac} as a
 RasterLayer}
 \usage{
-read_GRTSmh_base4frac(path = fileman_up("n2khab_data"),
-  file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif")
+read_GRTSmh_base4frac(
+  path = fileman_up("n2khab_data"),
+  file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif"
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -80,9 +82,10 @@ Resources. Journal of the American Statistical Association 99 (465):
 262–278. DOI: https://doi.org/10.1198/016214504000000250.
 }
 \seealso{
-Other functions involved in processing the \code{GRTSmaster_habitats} data source: \code{\link{convert_base4frac_to_dec}},
-  \code{\link{convert_dec_to_base4frac}},
-  \code{\link{read_GRTSmh_diffres}},
-  \code{\link{read_GRTSmh}}
+Other functions involved in processing the \code{GRTSmaster_habitats} data source: 
+\code{\link{convert_base4frac_to_dec}()},
+\code{\link{convert_dec_to_base4frac}()},
+\code{\link{read_GRTSmh_diffres}()},
+\code{\link{read_GRTSmh}()}
 }
 \concept{functions involved in processing the \code{GRTSmaster_habitats} data source}

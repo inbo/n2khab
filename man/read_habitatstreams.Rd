@@ -5,8 +5,11 @@
 \title{Return the data source \code{habitatstreams} as an \code{sf} linestring
 layer or as a list}
 \usage{
-read_habitatstreams(path = fileman_up("n2khab_data"),
-  file = "10_raw/habitatstreams", source_text = FALSE)
+read_habitatstreams(
+  path = fileman_up("n2khab_data"),
+  file = "10_raw/habitatstreams",
+  source_text = FALSE
+)
 }
 \arguments{
 \item{path}{Location of the file.

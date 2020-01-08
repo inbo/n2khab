@@ -5,9 +5,12 @@
 \title{Return the data source \code{habitatmap_terr} as a list of two
 objects}
 \usage{
-read_habitatmap_terr(path = fileman_up("n2khab_data"),
+read_habitatmap_terr(
+  path = fileman_up("n2khab_data"),
   file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
-  keep_aq_types = TRUE, version = "habitatmap_terr_2018_v2")
+  keep_aq_types = TRUE,
+  version = "habitatmap_terr_2018_v2"
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -134,8 +137,9 @@ habmap_terr_noaq$habitatmap_terr_types
 
 }
 \seealso{
-Other functions involved in processing the \code{habitatmap} data source: \code{\link{read_habitatmap_stdized}},
-  \code{\link{read_habitatmap}},
-  \code{\link{read_watersurfaces_hab}}
+Other functions involved in processing the \code{habitatmap} data source: 
+\code{\link{read_habitatmap_stdized}()},
+\code{\link{read_habitatmap}()},
+\code{\link{read_watersurfaces_hab}()}
 }
 \concept{functions involved in processing the \code{habitatmap} data source}

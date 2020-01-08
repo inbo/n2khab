@@ -4,8 +4,12 @@
 \alias{read_types}
 \title{Return the 'types' data source as a tibble with names & shortnames}
 \usage{
-read_types(path = pkgdatasource_path("textdata/types", ".tsv"),
-  file = "types", file_namelist = "namelist", lang = "en")
+read_types(
+  path = pkgdatasource_path("textdata/types", ".tsv"),
+  file = "types",
+  file_namelist = "namelist",
+  lang = "en"
+)
 }
 \arguments{
 \item{path}{Location of the data sources \code{types} and \code{namelist}.
@@ -86,9 +90,10 @@ read_types(lang = "nl")
 \seealso{
 \code{\link{types}}
 
-Other reading functions for n2khab-referencelists: \code{\link{read_env_pressures}},
-  \code{\link{read_namelist}},
-  \code{\link{read_scheme_types}},
-  \code{\link{read_schemes}}
+Other reading functions for n2khab-referencelists: 
+\code{\link{read_env_pressures}()},
+\code{\link{read_namelist}()},
+\code{\link{read_scheme_types}()},
+\code{\link{read_schemes}()}
 }
 \concept{reading functions for n2khab-referencelists}

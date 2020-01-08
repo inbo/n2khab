@@ -4,8 +4,12 @@
 \alias{read_schemes}
 \title{Return the 'schemes' data source as a tibble with names & shortnames}
 \usage{
-read_schemes(path = pkgdatasource_path("textdata/schemes", ".tsv"),
-  file = "schemes", file_namelist = "namelist", lang = "en")
+read_schemes(
+  path = pkgdatasource_path("textdata/schemes", ".tsv"),
+  file = "schemes",
+  file_namelist = "namelist",
+  lang = "en"
+)
 }
 \arguments{
 \item{path}{Location of the data sources \code{schemes} and \code{namelist}.
@@ -97,8 +101,10 @@ read_schemes(lang = "nl")
 \seealso{
 \code{\link{schemes}}
 
-Other reading functions for n2khab-referencelists: \code{\link{read_env_pressures}},
-  \code{\link{read_namelist}},
-  \code{\link{read_scheme_types}}, \code{\link{read_types}}
+Other reading functions for n2khab-referencelists: 
+\code{\link{read_env_pressures}()},
+\code{\link{read_namelist}()},
+\code{\link{read_scheme_types}()},
+\code{\link{read_types}()}
 }
 \concept{reading functions for n2khab-referencelists}

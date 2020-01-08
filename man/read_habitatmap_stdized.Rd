@@ -5,9 +5,11 @@
 \title{Return the data source \code{habitatmap_stdized} as a list of two
 objects}
 \usage{
-read_habitatmap_stdized(path = fileman_up("n2khab_data"),
+read_habitatmap_stdized(
+  path = fileman_up("n2khab_data"),
   file = "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg",
-  version = "habitatmap_stdized_2018_v2")
+  version = "habitatmap_stdized_2018_v2"
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -91,9 +93,9 @@ following steps:
   with the type codes from the \code{\link{types}}. In that case the
   code was adjusted.
 
-}
+  }
 
-The R-code for creating the \code{habitatmap_stdized} data source
+  The R-code for creating the \code{habitatmap_stdized} data source
   can be found in the \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.
 }
 \examples{
@@ -118,8 +120,9 @@ Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (
 DOI: https://doi.org/10.21436/inbor.15138099.
 }
 \seealso{
-Other functions involved in processing the \code{habitatmap} data source: \code{\link{read_habitatmap_terr}},
-  \code{\link{read_habitatmap}},
-  \code{\link{read_watersurfaces_hab}}
+Other functions involved in processing the \code{habitatmap} data source: 
+\code{\link{read_habitatmap_terr}()},
+\code{\link{read_habitatmap}()},
+\code{\link{read_watersurfaces_hab}()}
 }
 \concept{functions involved in processing the \code{habitatmap} data source}

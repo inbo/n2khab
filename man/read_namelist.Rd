@@ -4,8 +4,11 @@
 \alias{read_namelist}
 \title{Return the 'namelist' data source as a tibble}
 \usage{
-read_namelist(path = pkgdatasource_path("textdata/namelist", ".tsv"),
-  file = "namelist", lang = "en")
+read_namelist(
+  path = pkgdatasource_path("textdata/namelist", ".tsv"),
+  file = "namelist",
+  lang = "en"
+)
 }
 \arguments{
 \item{path}{Location of the data source.
@@ -60,8 +63,10 @@ read_namelist(lang = "nl")
 \seealso{
 \code{\link{namelist}}
 
-Other reading functions for n2khab-referencelists: \code{\link{read_env_pressures}},
-  \code{\link{read_scheme_types}},
-  \code{\link{read_schemes}}, \code{\link{read_types}}
+Other reading functions for n2khab-referencelists: 
+\code{\link{read_env_pressures}()},
+\code{\link{read_scheme_types}()},
+\code{\link{read_schemes}()},
+\code{\link{read_types}()}
 }
 \concept{reading functions for n2khab-referencelists}

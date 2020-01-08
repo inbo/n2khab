@@ -51,4 +51,13 @@ git2rdata::upgrade_data(path = "misc/generate_textdata/rawraw_data")
 git2rdata::upgrade_data(path = "inst/textdata")
 
 
+# 2020-01-07 and later
+# -------------------------------------------------------------------
+# Previous state of git2rdata: previous version from CRAN
+# Conversion to new state of git2rdata: current version from CRAN
+
+git2rdata::upgrade_data(path = "misc/generate_textdata/rawraw_data")
+git2rdata::upgrade_data(path = "inst/textdata")
+
+
 
