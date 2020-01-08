@@ -5,8 +5,8 @@
   sorting:
   - typeclass
   - type
-  hash: 1b6d1c2a70797685dcea441abeb708cce6c2026a
-  data_hash: 5be6bf7b04a81a1c5023b3e549eb3b793f2fae73
+  hash: aef5eb0b7174fddf5f625305e88d19cd6f2aceff
+  data_hash: 6b58627a9850cce915616abca006c8b3e9e59d3a
 type:
   class: factor
   labels:
@@ -398,6 +398,21 @@ typeclass:
   - 8
   - 9
   - 10
+  ordered: no
+hydr_class:
+  class: factor
+  labels:
+  - HC1
+  - HC12
+  - HC2
+  - HC23
+  - HC3
+  index:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
   ordered: no
 tag_1:
   class: character

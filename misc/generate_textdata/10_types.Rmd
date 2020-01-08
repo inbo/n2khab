@@ -101,7 +101,7 @@ source_df %>%
     write_vc(namelist_path, root)
 ```
 
-Hydrological classes go in tag 2:
+Hydrological classes:
 
 ```{r}
 type_hydroclass <- 
@@ -191,18 +191,21 @@ source_df %>%
     inner_join(en_codelist,
                by = c("typeclass_en" = "name")) %>% 
     rename(typeclass = code) %>% 
+    left_join(type_hydroclass %>% 
+                  mutate(code = factor(code)) %>% 
+                  rename(hydr_class = code),
+              by = "type") %>% 
     left_join(en_codelist,
               by = c("tag_1_en" = "name")) %>% 
     select(type,
            typelevel,
            main_type,
            typeclass,
+           hydr_class,
            tag_1 = code) %>% 
-    left_join(type_hydroclass %>% 
-                  rename(tag_2 = code),
-              by = "type") %>% 
     mutate(typeclass = factor(typeclass, 
                               levels = (.$typeclass %>% unique)),
+           tag_2 = NA %>% as.character,
            tag_3 = NA %>% as.character
            ) %>% 
     arrange(typeclass, 
