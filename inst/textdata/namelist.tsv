@@ -193,7 +193,8 @@ SS	en	Sclerophyllous scrub	NA
 SURF	en	Surfacewater monitoring	NA
 SURF_012	en	Surfacewater monitoring: environmental pressure 012_soildyn_incr	SURF: 012_soildyn_incr
 SURF_03.2	en	Surfacewater monitoring: environmental pressure 03.2_eutr_soil	SURF: 03.2_eutr_soil
-SURF_03.4	en	Surfacewater monitoring: environmental pressure 03.4_eutr_sw	SURF: 03.4_eutr_sw
+SURF_03.4_lentic	en	Surfacewater monitoring: environmental pressure 03.4_eutr_sw: partim lentic waters	SURF: 03.4_eutr_sw: lentic
+SURF_03.4_lotic	en	Surfacewater monitoring: environmental pressure 03.4_eutr_sw: partim lotic waters	SURF: 03.4_eutr_sw: lotic
 SURF_064	en	Surfacewater monitoring: environmental pressure 064_swlevel_decr	SURF: 064_swlevel_decr
 SURF_066	en	Surfacewater monitoring: environmental pressure 066_wave_decr	SURF: 066_wave_decr
 SURF_07.2	en	Surfacewater monitoring: environmental pressure 07.2_desal_sw	SURF: 07.2_desal_sw
@@ -250,6 +251,8 @@ ep_class_08	en	8 Pollution	NA
 ep_class_09	en	9 Disturbance	NA
 ep_class_10	en	10 Climate change	NA
 focal	en	Focal scheme	NA
+lentic	en	lentic waters	NA
+lotic	en	lotic waters	NA
 rbbah	en	Brackish to saltish standing waters	Brackish to salty standing waters
 rbbha	en	Species-rich Agrostis grasslands (no 6230 habitat type)	Species-rich Agrostis grasslands (not 6230)
 rbbhc	en	Calthion grasslands	Calthion grasslands
@@ -466,7 +469,8 @@ SS	nl	Thermofiel struikgewas	NA
 SURF	nl	Oppervlaktewatermeetnet	NA
 SURF_012	nl	Oppervlaktewatermeetnet: milieudruk 012_boddyn_plus	SURF: 012_boddyn_plus
 SURF_03.2	nl	Oppervlaktewatermeetnet: milieudruk 03.2_eutr_bod	SURF: 03.2_eutr_bod
-SURF_03.4	nl	Oppervlaktewatermeetnet: milieudruk 03.4_eutr_ow	SURF: 03.4_eutr_ow
+SURF_03.4_lentic	nl	Oppervlaktewatermeetnet: milieudruk 03.4_eutr_ow: partim stilstaande wateren	SURF: 03.4_eutr_ow: lentic
+SURF_03.4_lotic	nl	Oppervlaktewatermeetnet: milieudruk 03.4_eutr_ow: partim stromende wateren	SURF: 03.4_eutr_ow: lotic
 SURF_064	nl	Oppervlaktewatermeetnet: milieudruk 064_owpeil_min	SURF: 064_owpeil_min
 SURF_066	nl	Oppervlaktewatermeetnet: milieudruk 066_golf_min	SURF: 066_golf_min
 SURF_07.2	nl	Oppervlaktewatermeetnet: milieudruk 07.2_verzoet_ow	SURF: 07.2_verzoet_ow
@@ -543,6 +547,8 @@ ep_class_08	nl	8 Verontreiniging	NA
 ep_class_09	nl	9 Verstoring	NA
 ep_class_10	nl	10 Klimaatverandering	NA
 focal	nl	Hoofdmeetnet	NA
+lentic	nl	stilstaande wateren	NA
+lotic	nl	stromende wateren	NA
 rbbah	nl	brak tot zilt water	brak tot zilt water
 rbbha	nl	soortenrijk, niet habitatwaardig struisgrasvegetatie	soortenrijke struisgrasvegetatie
 rbbhc	nl	dotterbloemgrasland	dotterbloemgrasland

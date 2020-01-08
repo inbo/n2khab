@@ -74,7 +74,13 @@ schemes_schemetypes <-
                                            "caves",
                                            "terr")
                                     ),
-                             NA) %>% 
+                             ifelse(attribute_1 == "SURF" & 
+                                      attribute_2 == "ep_03.4",
+                                    ifelse(type %in% c("3260", "7220"),
+                                           "lotic",
+                                           "lentic"),
+                                    NA)
+                             ) %>% 
                       factor,
         scheme = str_c(attribute_1, 
                        str_match(attribute_2, "ep(_.+)")[,2],
@@ -131,10 +137,11 @@ spat_restr <-
                                levels))
 ```
 
-Writing `schemes`:
+Preparing `schemes` with MNE content:
 
 ```{r message=FALSE}
-schemes_schemetypes %>% 
+schemes <- 
+  schemes_schemetypes %>% 
     distinct(scheme,
              programme,
              attribute_1,
@@ -156,13 +163,7 @@ schemes_schemetypes %>%
            tag_1,
            tag_2,
            tag_3) %>% 
-    arrange(programme, scheme) %>% 
-    write_vc(schemes_path,
-             root,
-         sorting = c("programme", 
-                     "scheme"),
-         optimize = TRUE,
-         strict = FALSE)
+    arrange(programme, scheme)
 ```
 
 ### Make the `scheme_types` data source with MNE content
@@ -180,7 +181,9 @@ typegroups <-
             check.names = T,
             verbose = FALSE) %>% 
     slice(2:n()) %>% 
-    mutate(scheme = "GW_03.3") %>% 
+    expand_grid(scheme = c("GW_03.3",
+                           "SURF_03.4_lentic")
+                ) %>% 
     select(scheme,
            type = Type,
            typegroup = Cluster.voedselrijkdom) %>% 
@@ -240,20 +243,15 @@ typegroups <-
            )
 ```
 
-Writing `scheme_types`:
+Preparing `scheme_types` with MNE content:
 
 ```{r message=FALSE}
-schemes_schemetypes %>% 
+scheme_types <- 
+  schemes_schemetypes %>% 
     distinct(scheme,
              type) %>% 
     left_join(typegroups) %>% 
-    arrange(scheme, type) %>% 
-    write_vc(scheme_types_path,
-             root,
-         sorting = c("scheme",
-                     "type"),
-         optimize = TRUE,
-         strict = FALSE)
+    arrange(scheme, type)
 ```
 
 
@@ -280,7 +278,11 @@ cbind(code = c("ATM", "SOIL", "GW", "SURF", "INUN"),
                    "caves", "en", "caves",
                    "aq", "nl", "aquatisch",
                    "terr", "nl", "terrestrisch",
-                   "caves", "nl", "grotten"),
+                   "caves", "nl", "grotten",
+                   "lotic", "en", "lotic waters",
+                   "lentic", "en", "lentic waters",
+                   "lotic", "nl", "stromende wateren",
+                   "lentic", "nl", "stilstaande wateren"),
                  ncol = 3,
                  byrow = TRUE)) %>% 
     rbind(matrix(c("focal", "en", "Focal scheme",
@@ -306,7 +308,7 @@ Appending MNE names and shortnames for `scheme`:
 
 ```{r message=FALSE}
 namelist <- read_vc(namelist_path, root)
-read_vc(schemes_path, root) %>% 
+schemes %>% 
     filter(programme == "MNE") %>% 
     distinct(scheme, attribute_1, attribute_2, attribute_3) %>% 
     mutate_all(as.character) %>% 
@@ -412,7 +414,6 @@ tribble(~nr, ~lang, ~name, ~shortname,
 Writing `schemes`.
 
 ```{r message=FALSE}
-
 schemes_MHQ <- gs_key("1Lltpq1_OQENZKrCmfDLuBiaZQ0_YCoGkFAqcOtFRdHg") %>%
   gs_read(ws = 1) %>%
   mutate(attribute_1 = ifelse(attribute_1 == 91, 
@@ -422,8 +423,6 @@ schemes_MHQ <- gs_key("1Lltpq1_OQENZKrCmfDLuBiaZQ0_YCoGkFAqcOtFRdHg") %>%
          programme = as.factor(programme),
          attribute_1 = as.factor(attribute_1),
          tag_1 = as.factor(tag_1)) 
-
-schemes <- read_vc(schemes_path, root)
 
 schemes %>%
   bind_rows(schemes_MHQ) %>%
@@ -462,24 +461,22 @@ schemes %>%
 
 ```
 
-Writing `schemesTypes`.
+Writing `scheme_types`.
 
 ```{r}
-schemes_type <- read_vc(scheme_types_path, root)
-
 scheme_type_MHQ <- gs_key("1Lltpq1_OQENZKrCmfDLuBiaZQ0_YCoGkFAqcOtFRdHg") %>%
   gs_read(ws = 2) %>%
   mutate(scheme = factor(scheme))
   
-schemes_type %>%
+scheme_types %>%
   bind_rows(scheme_type_MHQ) %>%
   mutate(scheme = factor(scheme,
                             levels = c(
-                              levels(schemes_type$scheme),
+                              levels(scheme_types$scheme),
                               levels(scheme_type_MHQ$scheme)
                               )),
          type = factor(type,
-                       levels = levels(schemes_type$type))
+                       levels = levels(scheme_types$type))
   ) %>% 
   arrange(scheme, type) %>% 
   write_vc(scheme_types_path,
