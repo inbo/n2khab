@@ -19,7 +19,7 @@ type	typelevel	main_type	typeclass	hydr_class	tag_1	tag_2	tag_3
 2170	main_type	2170	CD	HC2	NA	NA	NA
 2180	main_type	2180	CD	HC12	NA	NA	NA
 2190	main_type	2190	CD	HC23	NA	NA	NA
-2190_a	subtype	2190	CD	HC3	NA	NA	NA
+2190_a	subtype	2190	CD	HC3	SW	NA	NA
 2190_mp	subtype	2190	CD	HC2	NA	NA	NA
 2190_overig	subtype	2190	CD	HC2	NA	NA	NA
 2310	main_type	2310	ID	HC1	NA	NA	NA
@@ -34,7 +34,7 @@ type	typelevel	main_type	typeclass	hydr_class	tag_1	tag_2	tag_3
 3150	main_type	3150	FW	HC3	SW	NA	NA
 3160	main_type	3160	FW	HC3	SW	NA	NA
 3260	main_type	3260	FW	HC3	RW	NA	NA
-3270	main_type	3270	FW	HC2	RW	NA	NA
+3270	main_type	3270	FW	HC2	NA	NA	NA
 rbbah	main_type	rbbah	FW	HC3	SW	NA	NA
 4010	main_type	4010	HS	HC2	NA	NA	NA
 4030	main_type	4030	HS	HC1	NA	NA	NA
@@ -83,7 +83,7 @@ rbbzil+	subtype	rbbzil	GR	HC2	NA	NA	NA
 7140_oli	subtype	7140	BMF	HC2	NA	NA	NA
 7150	main_type	7150	BMF	HC2	NA	NA	NA
 7210	main_type	7210	BMF	HC2	NA	NA	NA
-7220	main_type	7220	BMF	HC3	NA	NA	NA
+7220	main_type	7220	BMF	HC3	RW	NA	NA
 7230	main_type	7230	BMF	HC2	NA	NA	NA
 rbbmc	main_type	rbbmc	BMF	HC2	NA	NA	NA
 rbbmr	main_type	rbbmr	BMF	HC2	NA	NA	NA
