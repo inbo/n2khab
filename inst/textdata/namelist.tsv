@@ -115,8 +115,14 @@ CT	en	Calcareous type	NA
 DI	en	Dike inward	NA
 DIO	en	Dike in-/outward	NA
 DO	en	Dike outward	NA
+FD0	en	flood independent	flood independent
+FD1	en	flood dependent on a part of the locations	locally flood dependent
+FD2	en	flood dependent on (almost) all locations	(almost) everywhere flood dependent
 FS	en	Forest and scrub	NA
 FW	en	Fresh and brackish water	NA
+GD0	en	groundwater independent	groundwater independent
+GD1	en	groundwater dependent on a part of the locations	locally groundwater dependent
+GD2	en	groundwater dependent on (almost) all locations	(almost) everywhere groundwater dependent
 GR	en	Natural and semi-natural grassland	NA
 GW	en	Groundwater monitoring	NA
 GW_03.3	en	Groundwater monitoring: environmental pressure 03.3_eutr_gw	GW: 03.3_eutr_gw
@@ -391,8 +397,14 @@ CT	nl	Kalkrijkere (sub)types	NA
 DI	nl	Binnendijks	NA
 DIO	nl	Binnen- en buitendijks	NA
 DO	nl	Buitendijks	NA
+FD0	nl	niet overstromingsafhankelijk	niet overstromingsafhankelijk
+FD1	nl	overstromingsafhankelijk op een deel van de locaties	plaatselijk overstromingsafhankelijk
+FD2	nl	overstromingsafhankelijk op (bijna) alle locaties	(bijna) overal overstromingsafhankelijk
 FS	nl	Bossen en struwelen	NA
 FW	nl	Zoete en brakke wateren	NA
+GD0	nl	niet grondwaterafhankelijk	niet grondwaterafhankelijk
+GD1	nl	grondwaterafhankelijk op een deel van de locaties	plaatselijk grondwaterafhankelijk
+GD2	nl	grondwaterafhankelijk op (bijna) alle locaties	(bijna) overal grondwaterafhankelijk
 GR	nl	(Half-)natuurlijke graslanden	NA
 GW	nl	Grondwatermeetnet	NA
 GW_03.3	nl	Grondwatermeetnet: milieudruk 03.3_eutr_gw	GW: 03.3_eutr_gw
