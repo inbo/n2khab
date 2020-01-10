@@ -780,3 +780,104 @@ read_habitatstreams <-
 
 
 
+#' Return the data source \code{habitatsprings} as an \code{sf} point
+#' layer
+#'
+#' Returns the raw data source \code{habitatsprings} as an \code{sf} point
+#' layer.
+#'
+#' The data source \code{habitatsprings} is a GeoJSON file (conforming to
+#' the RFC7946 specifications), available at
+#' \href{https://doi.org/10.5281/zenodo.3550994}{Zenodo}.
+#' It represents sites that correspond with presence or absence
+#' of the Natura 2000 habitat type \code{7220} (Petrifying springs with tufa
+#' formation (\emph{Cratoneurion})) in springs and streaming water segments in
+#' the Flemish Region, Belgium.
+#'
+#' @inheritParams read_habitatmap_stdized
+#'
+#' @return
+#' A Simple feature collection of
+#' type \code{POINT}, with attribute variables:
+#'   \itemize{
+#'     \item \code{point_id}
+#'     \item \code{name}: site name.
+#'     \item \code{code_orig}: original vegetation code in raw
+#'     \code{habitatsprings}.
+#'     \item \code{type}: habitat type listed in \code{\link{types}}.
+#'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
+#'      \code{FALSE} when vegetation type is uncertain.
+#'     \item \code{area_m2}: area as square meters.
+#'     \item \code{year}: year of field inventory.
+#'     \item \code{in_sac}: logical.
+#'     Is the site situated within a Special Area of Conservation?
+#'     \item \code{source}: original data source of the record.
+
+#'   }
+#'
+#'
+#' @examples
+#' \dontrun{
+#' # This example supposes that your working directory or a directory up to 10
+#' # levels above has the 'n2khab_data' folder AND that the 'habitatsprings'
+#' # data source is present in the default subdirectory.
+#' # In all other cases, this example won't work but at least you can
+#' # consider what to do.
+#'
+#' library(magrittr)
+#' library(sf)
+#' hs <- read_habitatsprings()
+#' hs
+#' }
+#'
+#' @importFrom assertthat
+#' assert_that
+#' @importFrom stringr
+#' str_sub
+#' @importFrom sf
+#' read_sf
+#' st_transform
+#' @importFrom rlang .data
+#' @importFrom dplyr
+#' %>%
+#' mutate
+#' select
+#' @export
+read_habitatsprings <-
+    function(path = fileman_up("n2khab_data"),
+             file = "10_raw/habitatsprings/habitatsprings.geojson"){
+
+        filepath <- file.path(path, file)
+        assert_that(file.exists(filepath))
+
+        habitatsprings <-
+            read_sf(filepath) %>%
+            st_transform(31370) %>%
+            mutate(
+                area_m2 = ifelse(.data$area_m2 > 0,
+                                 .data$area_m2,
+                                 NA),
+                year = ifelse(.data$year > 0,
+                              .data$year,
+                              NA),
+                in_sac = (.data$sbz == 1),
+                type = str_sub(.data$habitattype, end = 4) %>%
+                        factor(levels = read_types() %>%
+                                   .$type %>%
+                                   levels),
+                certain = (.data$validity_status == "gecontroleerd")
+            ) %>%
+            select(point_id = .data$id,
+                   .data$name,
+                   code_orig = .data$habitattype,
+                   .data$type,
+                   .data$certain,
+                   .data$area_m2,
+                   .data$year,
+                   .data$in_sac,
+                   .data$source)
+
+        return(habitatsprings)
+
+    }
+
