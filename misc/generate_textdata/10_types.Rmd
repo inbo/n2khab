@@ -13,8 +13,10 @@ root <- "../.."
 Reading from the source googlesheet (maintained by Steven De Saeger):
 
 ```{r message=FALSE}
+# the first time, run:
+# gs_auth()
 types_source <- gs_key("1dK0S1Tt3RlVEh4WrNF5N_-hn0OXiTUVOvsL2JRhSl78")
-# gs_browse(types_gs)
+# gs_browse(types_source)
 source_df <-
     types_source %>%
     gs_read(ws = 1, 
@@ -74,7 +76,7 @@ source_df %>%
     write_vc(namelist_path, root)
 ```
 
-## Append extra tags to `namelist`
+## Append extra labels to `namelist`
 
 Information for tag 1:
 
