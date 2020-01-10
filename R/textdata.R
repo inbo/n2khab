@@ -50,12 +50,13 @@ NULL
 #' with several attributes.
 #' A 'type' refers to either a (main) habitat type, a
 #' habitat subtype or a regionally important biotope (RIB).
-#' The codes of types, typeclasses and tags are explained in the
+#' The codes of types, typeclasses and further attributes and tags are
+#' explained in the
 #' data source \code{\link{namelist}} (which can accommodate multiple
 #' languages).
 #'
 #' @format A vc-formatted data source. As such, it corresponds to
-#' a dataframe with 7 variables:
+#' a dataframe with several variables:
 #' \describe{
 #'   \item{type}{Code of the type, as a factor.
 #'   This is the ID for use in diverse workflows and datasets.
@@ -72,12 +73,24 @@ NULL
 #'   \item{typeclass}{A code explained by \code{\link{namelist}},
 #'   corresponding to the typeclass.
 #'   Is a factor.}
+#'   \item{hydr_class}{A code explained by \code{\link{namelist}},
+#'   corresponding to the hydrological class.
+#'   Is a factor.}
+#'   \item{ground_dep}{A code explained by \code{\link{namelist}},
+#'   corresponding to the groundwater dependency category.
+#'   Is a factor.}
+#'   \item{flood_dep}{A code explained by \code{\link{namelist}},
+#'   corresponding to the flood dependency category.
+#'   Is a factor.
+#'   Note that flood dependency is only defined for (semi-)terrestrial types,
+#'   hence for aquatic types (hydrological class \code{HC3})
+#'   it is \code{NA}.}
 #'   \item{tag_1}{Optional tag, e.g. a categorization ID explained
 #'   by \code{\link{namelist}}.
-#'   Currently used to indicate subcategories within a few typeclasses.}
+#'   Currently used to indicate subcategories within a few typeclasses,
+#'   or to differentiate between lotic and lentic aquatic types.}
 #'   \item{tag_2}{Optional tag, e.g. a categorization ID explained
-#'   by \code{\link{namelist}}.
-#'   Currently used to indicate the hydrological class.}
+#'   by \code{\link{namelist}}.}
 #'   \item{tag_3}{Optional tag, e.g. a categorization ID explained
 #'   by \code{\link{namelist}}.} }
 #'
@@ -95,8 +108,24 @@ NULL
 #'
 #' @source
 #'
-#' \href{https://docs.google.com/spreadsheets/d/1dK0S1Tt3RlVEh4WrNF5N_-hn0OXiTUVOvsL2JRhSl78}{This googlesheet}.
+#' Most information comes from
+#' \href{https://docs.google.com/spreadsheets/d/1dK0S1Tt3RlVEh4WrNF5N_-hn0OXiTUVOvsL2JRhSl78}{this googlesheet}.
 #' Currently, the googlesheet and the data source are both kept up-to-date.
+#' However only the 'types' data source is under version control.
+#'
+#' The source for the hydrological class attribute is a vc-formatted file
+#' stored in the package source code.
+#' It is read by the 'generate_textdata' bookdown project which generates the
+#' 'types' data source.
+#' The referred vc-formatted file was derived from a yet unpublished database
+#' on the interrelations
+#' between types, hydrological classes, environmental compartments and their
+#' characteristics, and environmental pressures.
+#'
+#' The source for the groundwater and flood dependency attributes is
+#' \href{https://docs.google.com/spreadsheets/d/1bhXgamK28K--MSWF7goKNOWtWPEI149_QCpU-3V_k_E}{this googlesheet}.
+#' Currently, the googlesheet and the data source are both kept up-to-date.
+#' However only the 'types' data source is under version control.
 #'
 #' @seealso \code{\link{read_types}}
 #'
