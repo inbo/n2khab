@@ -784,7 +784,8 @@ read_habitatstreams <-
 #' layer
 #'
 #' Returns the raw data source \code{habitatsprings} as an \code{sf} point
-#' layer.
+#' layer, in the Belgian Lambert 72 CRS (EPSG-code
+#' \href{https://epsg.io/31370}{31370}).
 #'
 #' The data source \code{habitatsprings} is a GeoJSON file (conforming to
 #' the RFC7946 specifications), available at
