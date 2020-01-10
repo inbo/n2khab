@@ -5,8 +5,8 @@
   sorting:
   - typeclass
   - type
-  hash: aef5eb0b7174fddf5f625305e88d19cd6f2aceff
-  data_hash: 63a3e5ab925cb31d50efebfe953c8b67c78a8efc
+  hash: 3716361494fa7d0742afaf7cb987f8ad91e0fb52
+  data_hash: 7c8f5cf99897554cd6ef821c5aeb2e22d381c3f4
 type:
   class: factor
   labels:
@@ -413,6 +413,28 @@ hydr_class:
   - 3
   - 4
   - 5
+  ordered: no
+groundw_dep:
+  class: factor
+  labels:
+  - GD0
+  - GD1
+  - GD2
+  index:
+  - 1
+  - 2
+  - 3
+  ordered: no
+flood_dep:
+  class: factor
+  labels:
+  - FD0
+  - FD1
+  - FD2
+  index:
+  - 1
+  - 2
+  - 3
   ordered: no
 tag_1:
   class: character

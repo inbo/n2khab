@@ -164,7 +164,62 @@ hc_names %>%
     write_vc(namelist_path, root)
 ```
 
+Groundwater and flood dependency:
 
+```{r}
+wdep_ss <- gs_key("1bhXgamK28K--MSWF7goKNOWtWPEI149_QCpU-3V_k_E")
+# gs_browse(wdep_ss)
+type_wdep <-
+    wdep_ss %>%
+    gs_read(ws = "Waterafhankelijke HT en RBB",
+            verbose = FALSE,
+            skip = 2,
+            col_names = FALSE) %>%  
+    select(type = X1, 
+           groundw_dep = X9,
+           flood_dep = X10) %>% 
+    mutate(groundw_dep = case_when(str_detect(groundw_dep, "alle") ~ "GD2",
+                                    str_detect(groundw_dep, "niet") ~ "GD0",
+                                    TRUE ~ "GD1") %>% 
+                        factor,
+           flood_dep = case_when(type %in% subset(type_hydroclass, code == "HC3")$type ~ NA_character_,
+                                 str_detect(flood_dep, "\\(.+\\)") ~ "FD2",
+                                    str_detect(flood_dep, "niet") ~ "FD0",
+                                    TRUE ~ "FD1") %>% 
+                        factor)
+
+wdep_names <- 
+    tribble(
+        ~code, ~nl_name, ~nl_shortname, ~en_name, ~en_shortname,
+        "GD0", "niet grondwaterafhankelijk", "niet grondwaterafhankelijk", "groundwater independent", "groundwater independent",
+        "GD1", "grondwaterafhankelijk op een deel van de locaties", "plaatselijk grondwaterafhankelijk", "groundwater dependent on a part of the locations", "locally groundwater dependent", 
+        "GD2", "grondwaterafhankelijk op (bijna) alle locaties", "(bijna) overal grondwaterafhankelijk", "groundwater dependent on (almost) all locations", "(almost) everywhere groundwater dependent", 
+        "FD0", "niet overstromingsafhankelijk", "niet overstromingsafhankelijk", "flood independent", "flood independent", 
+        "FD1", "overstromingsafhankelijk op een deel van de locaties", "plaatselijk overstromingsafhankelijk", "flood dependent on a part of the locations", "locally flood dependent", 
+        "FD2", "overstromingsafhankelijk op (bijna) alle locaties", "(bijna) overal overstromingsafhankelijk", "flood dependent on (almost) all locations", "(almost) everywhere flood dependent"
+)
+
+wdep_names %>% 
+    select(1, 2, 4) %>% 
+    pivot_longer(cols = -code,
+                 names_to = "lang",
+                 names_pattern = "(..)_.+",
+                 values_to = "name") %>% 
+    inner_join(
+        wdep_names %>% 
+        select(1, 3, 5) %>% 
+        pivot_longer(cols = -code,
+                     names_to = "lang",
+                     names_pattern = "(..)_.+",
+                     values_to = "shortname"),
+        by = c("code", "lang")
+    ) %>% 
+    bind_rows(read_vc(namelist_path, root),
+              .) %>% 
+    write_vc(namelist_path, root)
+```
+
+Note that we have deliberately set flood dependency as `NA` for aquatic types, i.e. from hydrological class 'surface water' (code HC3).
 
 ## Make `types`
 
@@ -197,6 +252,8 @@ source_df %>%
                   mutate(code = factor(code)) %>% 
                   rename(hydr_class = code),
               by = "type") %>% 
+    left_join(type_wdep,
+              by = "type") %>% 
     left_join(en_codelist,
               by = c("tag_1_en" = "name")) %>% 
     select(type,
@@ -204,6 +261,8 @@ source_df %>%
            main_type,
            typeclass,
            hydr_class,
+           groundw_dep,
+           flood_dep,
            tag_1 = code) %>% 
     mutate(typeclass = factor(typeclass, 
                               levels = (.$typeclass %>% unique)),

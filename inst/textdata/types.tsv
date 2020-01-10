@@ -1,112 +1,112 @@
-type	typelevel	main_type	typeclass	hydr_class	tag_1	tag_2	tag_3
-1130	main_type	1130	CH	HC3	DO	NA	NA
-1140	main_type	1140	CH	HC2	DO	NA	NA
-1310	main_type	1310	CH	HC2	DIO	NA	NA
-1310_pol	subtype	1310	CH	HC2	DI	NA	NA
-1310_zk	subtype	1310	CH	HC2	DO	NA	NA
-1310_zv	subtype	1310	CH	HC2	DO	NA	NA
-1320	main_type	1320	CH	HC2	DO	NA	NA
-1330	main_type	1330	CH	HC2	DIO	NA	NA
-1330_da	subtype	1330	CH	HC2	DO	NA	NA
-1330_hpr	subtype	1330	CH	HC2	DI	NA	NA
-2110	main_type	2110	CD	HC12	NA	NA	NA
-2120	main_type	2120	CD	HC1	NA	NA	NA
-2130	main_type	2130	CD	HC12	NA	NA	NA
-2130_had	subtype	2130	CD	HC12	NA	NA	NA
-2130_hd	subtype	2130	CD	HC12	NA	NA	NA
-2150	main_type	2150	CD	HC1	NA	NA	NA
-2160	main_type	2160	CD	HC12	NA	NA	NA
-2170	main_type	2170	CD	HC2	NA	NA	NA
-2180	main_type	2180	CD	HC12	NA	NA	NA
-2190	main_type	2190	CD	HC23	NA	NA	NA
-2190_a	subtype	2190	CD	HC3	SW	NA	NA
-2190_mp	subtype	2190	CD	HC2	NA	NA	NA
-2190_overig	subtype	2190	CD	HC2	NA	NA	NA
-2310	main_type	2310	ID	HC1	NA	NA	NA
-2330	main_type	2330	ID	HC1	NA	NA	NA
-2330_bu	subtype	2330	ID	HC1	NA	NA	NA
-2330_dw	subtype	2330	ID	HC1	NA	NA	NA
-3110	main_type	3110	FW	HC3	SW	NA	NA
-3130	main_type	3130	FW	HC3	SW	NA	NA
-3130_aom	subtype	3130	FW	HC3	SW	NA	NA
-3130_na	subtype	3130	FW	HC3	SW	NA	NA
-3140	main_type	3140	FW	HC3	SW	NA	NA
-3150	main_type	3150	FW	HC3	SW	NA	NA
-3160	main_type	3160	FW	HC3	SW	NA	NA
-3260	main_type	3260	FW	HC3	RW	NA	NA
-3270	main_type	3270	FW	HC2	NA	NA	NA
-rbbah	main_type	rbbah	FW	HC3	SW	NA	NA
-4010	main_type	4010	HS	HC2	NA	NA	NA
-4030	main_type	4030	HS	HC1	NA	NA	NA
-rbbsg	main_type	rbbsg	HS	HC1	NA	NA	NA
-rbbsm	main_type	rbbsm	HS	HC2	NA	NA	NA
-5130	main_type	5130	SS	HC1	NA	NA	NA
-5130_hei	subtype	5130	SS	HC1	NA	NA	NA
-5130_kalk	subtype	5130	SS	HC1	CT	NA	NA
-6120	main_type	6120	GR	HC2	CT	NA	NA
-6210	main_type	6210	GR	HC1	CT	NA	NA
-6210_hk	subtype	6210	GR	HC1	CT	NA	NA
-6210_sk	subtype	6210	GR	HC1	CT	NA	NA
-6230	main_type	6230	GR	HC12	NA	NA	NA
-6230_ha	subtype	6230	GR	HC1	NA	NA	NA
-6230_hmo	subtype	6230	GR	HC2	NA	NA	NA
-6230_hn	subtype	6230	GR	HC1	NA	NA	NA
-6230_hnk	subtype	6230	GR	HC1	CT	NA	NA
-6410	main_type	6410	GR	HC2	NA	NA	NA
-6410_mo	subtype	6410	GR	HC2	NA	NA	NA
-6410_ve	subtype	6410	GR	HC2	NA	NA	NA
-6430	main_type	6430	GR	HC12	NA	NA	NA
-6430_bz	subtype	6430	GR	HC12	NA	NA	NA
-6430_hf	subtype	6430	GR	HC2	NA	NA	NA
-6430_hw	subtype	6430	GR	HC2	NA	NA	NA
-6430_mr	subtype	6430	GR	HC2	NA	NA	NA
-6510	main_type	6510	GR	HC12	NA	NA	NA
-6510_hu	subtype	6510	GR	HC12	NA	NA	NA
-6510_hua	subtype	6510	GR	HC2	NA	NA	NA
-6510_huk	subtype	6510	GR	HC1	CT	NA	NA
-6510_hus	subtype	6510	GR	HC2	NA	NA	NA
-rbbha	main_type	rbbha	GR	HC1	NA	NA	NA
-rbbhc	main_type	rbbhc	GR	HC2	NA	NA	NA
-rbbhf	main_type	rbbhf	GR	HC2	NA	NA	NA
-rbbhfl	main_type	rbbhfl	GR	HC2	NA	NA	NA
-rbbkam	main_type	rbbkam	GR	HC12	NA	NA	NA
-rbbkam+	subtype	rbbkam	GR	HC12	NA	NA	NA
-rbbvos	main_type	rbbvos	GR	HC2	NA	NA	NA
-rbbvos+	subtype	rbbvos	GR	HC2	NA	NA	NA
-rbbzil	main_type	rbbzil	GR	HC2	NA	NA	NA
-rbbzil+	subtype	rbbzil	GR	HC2	NA	NA	NA
-7110	main_type	7110	BMF	HC2	NA	NA	NA
-7140	main_type	7140	BMF	HC2	NA	NA	NA
-7140_base	subtype	7140	BMF	HC2	NA	NA	NA
-7140_meso	subtype	7140	BMF	HC2	NA	NA	NA
-7140_mrd	subtype	7140	BMF	HC2	NA	NA	NA
-7140_oli	subtype	7140	BMF	HC2	NA	NA	NA
-7150	main_type	7150	BMF	HC2	NA	NA	NA
-7210	main_type	7210	BMF	HC2	NA	NA	NA
-7220	main_type	7220	BMF	HC3	RW	NA	NA
-7230	main_type	7230	BMF	HC2	NA	NA	NA
-rbbmc	main_type	rbbmc	BMF	HC2	NA	NA	NA
-rbbmr	main_type	rbbmr	BMF	HC2	NA	NA	NA
-rbbms	main_type	rbbms	BMF	HC2	NA	NA	NA
-8310	main_type	8310	RC	HC12	NA	NA	NA
-9110	main_type	9110	FS	HC1	NA	NA	NA
-9120	main_type	9120	FS	HC12	NA	NA	NA
-9120_qb	subtype	9120	FS	HC12	NA	NA	NA
-9130	main_type	9130	FS	HC12	NA	NA	NA
-9130_end	subtype	9130	FS	HC12	NA	NA	NA
-9130_fm	subtype	9130	FS	HC12	NA	NA	NA
-9150	main_type	9150	FS	HC1	NA	NA	NA
-9160	main_type	9160	FS	HC12	NA	NA	NA
-9190	main_type	9190	FS	HC12	NA	NA	NA
-91E0	main_type	91E0	FS	HC2	NA	NA	NA
-91E0_sf	subtype	91E0	FS	HC2	NA	NA	NA
-91E0_va	subtype	91E0	FS	HC2	NA	NA	NA
-91E0_vc	subtype	91E0	FS	HC2	NA	NA	NA
-91E0_vm	subtype	91E0	FS	HC2	NA	NA	NA
-91E0_vn	subtype	91E0	FS	HC2	NA	NA	NA
-91E0_vo	subtype	91E0	FS	HC2	NA	NA	NA
-91F0	main_type	91F0	FS	HC2	NA	NA	NA
-rbbppm	main_type	rbbppm	FS	HC12	NA	NA	NA
-rbbsf	main_type	rbbsf	FS	HC2	NA	NA	NA
-rbbso	main_type	rbbso	FS	HC2	NA	NA	NA
-rbbsp	main_type	rbbsp	FS	HC1	NA	NA	NA
+type	typelevel	main_type	typeclass	hydr_class	groundw_dep	flood_dep	tag_1	tag_2	tag_3
+1130	main_type	1130	CH	HC3	GD1	NA	DO	NA	NA
+1140	main_type	1140	CH	HC2	GD0	FD2	DO	NA	NA
+1310	main_type	1310	CH	HC2	NA	NA	DIO	NA	NA
+1310_pol	subtype	1310	CH	HC2	GD2	FD2	DI	NA	NA
+1310_zk	subtype	1310	CH	HC2	GD2	FD2	DO	NA	NA
+1310_zv	subtype	1310	CH	HC2	GD2	FD2	DO	NA	NA
+1320	main_type	1320	CH	HC2	GD2	FD2	DO	NA	NA
+1330	main_type	1330	CH	HC2	NA	NA	DIO	NA	NA
+1330_da	subtype	1330	CH	HC2	GD2	FD2	DO	NA	NA
+1330_hpr	subtype	1330	CH	HC2	GD2	FD2	DI	NA	NA
+2110	main_type	2110	CD	HC12	GD0	FD2	NA	NA	NA
+2120	main_type	2120	CD	HC1	GD0	FD0	NA	NA	NA
+2130	main_type	2130	CD	HC12	NA	NA	NA	NA	NA
+2130_had	subtype	2130	CD	HC12	GD1	FD0	NA	NA	NA
+2130_hd	subtype	2130	CD	HC12	GD1	FD0	NA	NA	NA
+2150	main_type	2150	CD	HC1	GD0	FD0	NA	NA	NA
+2160	main_type	2160	CD	HC12	GD1	FD0	NA	NA	NA
+2170	main_type	2170	CD	HC2	GD2	FD0	NA	NA	NA
+2180	main_type	2180	CD	HC12	GD1	FD0	NA	NA	NA
+2190	main_type	2190	CD	HC23	GD2	FD1	NA	NA	NA
+2190_a	subtype	2190	CD	HC3	GD2	NA	SW	NA	NA
+2190_mp	subtype	2190	CD	HC2	GD2	FD0	NA	NA	NA
+2190_overig	subtype	2190	CD	HC2	GD2	FD1	NA	NA	NA
+2310	main_type	2310	ID	HC1	GD0	FD0	NA	NA	NA
+2330	main_type	2330	ID	HC1	GD0	FD0	NA	NA	NA
+2330_bu	subtype	2330	ID	HC1	GD0	FD0	NA	NA	NA
+2330_dw	subtype	2330	ID	HC1	GD0	FD0	NA	NA	NA
+3110	main_type	3110	FW	HC3	GD2	NA	SW	NA	NA
+3130	main_type	3130	FW	HC3	GD2	NA	SW	NA	NA
+3130_aom	subtype	3130	FW	HC3	GD2	NA	SW	NA	NA
+3130_na	subtype	3130	FW	HC3	GD2	NA	SW	NA	NA
+3140	main_type	3140	FW	HC3	GD2	NA	SW	NA	NA
+3150	main_type	3150	FW	HC3	GD2	NA	SW	NA	NA
+3160	main_type	3160	FW	HC3	GD2	NA	SW	NA	NA
+3260	main_type	3260	FW	HC3	GD1	NA	RW	NA	NA
+3270	main_type	3270	FW	HC2	GD1	FD2	NA	NA	NA
+rbbah	main_type	rbbah	FW	HC3	GD2	NA	SW	NA	NA
+4010	main_type	4010	HS	HC2	GD2	FD0	NA	NA	NA
+4030	main_type	4030	HS	HC1	GD0	FD0	NA	NA	NA
+rbbsg	main_type	rbbsg	HS	HC1	GD0	FD0	NA	NA	NA
+rbbsm	main_type	rbbsm	HS	HC2	GD2	FD0	NA	NA	NA
+5130	main_type	5130	SS	HC1	GD0	FD0	NA	NA	NA
+5130_hei	subtype	5130	SS	HC1	GD0	FD0	NA	NA	NA
+5130_kalk	subtype	5130	SS	HC1	GD0	FD0	CT	NA	NA
+6120	main_type	6120	GR	HC2	GD0	FD2	CT	NA	NA
+6210	main_type	6210	GR	HC1	GD0	FD0	CT	NA	NA
+6210_hk	subtype	6210	GR	HC1	GD0	FD0	CT	NA	NA
+6210_sk	subtype	6210	GR	HC1	GD0	FD0	CT	NA	NA
+6230	main_type	6230	GR	HC12	GD1	FD0	NA	NA	NA
+6230_ha	subtype	6230	GR	HC1	GD0	FD0	NA	NA	NA
+6230_hmo	subtype	6230	GR	HC2	GD2	FD0	NA	NA	NA
+6230_hn	subtype	6230	GR	HC1	GD0	FD0	NA	NA	NA
+6230_hnk	subtype	6230	GR	HC1	GD0	FD0	CT	NA	NA
+6410	main_type	6410	GR	HC2	GD2	FD0	NA	NA	NA
+6410_mo	subtype	6410	GR	HC2	GD2	FD0	NA	NA	NA
+6410_ve	subtype	6410	GR	HC2	GD2	FD0	NA	NA	NA
+6430	main_type	6430	GR	HC12	GD1	FD1	NA	NA	NA
+6430_bz	subtype	6430	GR	HC12	GD1	FD1	NA	NA	NA
+6430_hf	subtype	6430	GR	HC2	GD2	FD1	NA	NA	NA
+6430_hw	subtype	6430	GR	HC2	GD2	FD2	NA	NA	NA
+6430_mr	subtype	6430	GR	HC2	GD2	FD2	NA	NA	NA
+6510	main_type	6510	GR	HC12	NA	NA	NA	NA	NA
+6510_hu	subtype	6510	GR	HC12	GD0	FD0	NA	NA	NA
+6510_hua	subtype	6510	GR	HC2	GD2	FD2	NA	NA	NA
+6510_huk	subtype	6510	GR	HC1	GD0	FD0	CT	NA	NA
+6510_hus	subtype	6510	GR	HC2	GD2	FD1	NA	NA	NA
+rbbha	main_type	rbbha	GR	HC1	GD0	FD0	NA	NA	NA
+rbbhc	main_type	rbbhc	GR	HC2	GD2	FD1	NA	NA	NA
+rbbhf	main_type	rbbhf	GR	HC2	GD2	FD1	NA	NA	NA
+rbbhfl	main_type	rbbhfl	GR	HC2	GD2	FD1	NA	NA	NA
+rbbkam	main_type	rbbkam	GR	HC12	GD1	FD0	NA	NA	NA
+rbbkam+	subtype	rbbkam	GR	HC12	NA	NA	NA	NA	NA
+rbbvos	main_type	rbbvos	GR	HC2	GD2	FD1	NA	NA	NA
+rbbvos+	subtype	rbbvos	GR	HC2	NA	NA	NA	NA	NA
+rbbzil	main_type	rbbzil	GR	HC2	GD2	FD2	NA	NA	NA
+rbbzil+	subtype	rbbzil	GR	HC2	NA	NA	NA	NA	NA
+7110	main_type	7110	BMF	HC2	GD2	FD0	NA	NA	NA
+7140	main_type	7140	BMF	HC2	GD2	FD1	NA	NA	NA
+7140_base	subtype	7140	BMF	HC2	GD2	FD1	NA	NA	NA
+7140_meso	subtype	7140	BMF	HC2	GD2	FD1	NA	NA	NA
+7140_mrd	subtype	7140	BMF	HC2	GD2	FD2	NA	NA	NA
+7140_oli	subtype	7140	BMF	HC2	GD2	FD1	NA	NA	NA
+7150	main_type	7150	BMF	HC2	GD2	FD1	NA	NA	NA
+7210	main_type	7210	BMF	HC2	GD2	FD2	NA	NA	NA
+7220	main_type	7220	BMF	HC3	GD2	NA	RW	NA	NA
+7230	main_type	7230	BMF	HC2	GD2	FD0	NA	NA	NA
+rbbmc	main_type	rbbmc	BMF	HC2	GD2	FD1	NA	NA	NA
+rbbmr	main_type	rbbmr	BMF	HC2	GD2	FD1	NA	NA	NA
+rbbms	main_type	rbbms	BMF	HC2	GD2	FD0	NA	NA	NA
+8310	main_type	8310	RC	HC12	GD1	FD0	NA	NA	NA
+9110	main_type	9110	FS	HC1	GD0	FD0	NA	NA	NA
+9120	main_type	9120	FS	HC12	GD0	FD0	NA	NA	NA
+9120_qb	subtype	9120	FS	HC12	GD0	FD0	NA	NA	NA
+9130	main_type	9130	FS	HC12	GD1	FD0	NA	NA	NA
+9130_end	subtype	9130	FS	HC12	GD1	FD0	NA	NA	NA
+9130_fm	subtype	9130	FS	HC12	GD1	FD0	NA	NA	NA
+9150	main_type	9150	FS	HC1	GD0	FD0	NA	NA	NA
+9160	main_type	9160	FS	HC12	GD1	FD0	NA	NA	NA
+9190	main_type	9190	FS	HC12	GD1	FD0	NA	NA	NA
+91E0	main_type	91E0	FS	HC2	GD2	FD1	NA	NA	NA
+91E0_sf	subtype	91E0	FS	HC2	GD2	FD2	NA	NA	NA
+91E0_va	subtype	91E0	FS	HC2	GD2	FD0	NA	NA	NA
+91E0_vc	subtype	91E0	FS	HC2	GD2	FD0	NA	NA	NA
+91E0_vm	subtype	91E0	FS	HC2	GD2	FD1	NA	NA	NA
+91E0_vn	subtype	91E0	FS	HC2	GD2	FD2	NA	NA	NA
+91E0_vo	subtype	91E0	FS	HC2	GD2	FD0	NA	NA	NA
+91F0	main_type	91F0	FS	HC2	GD1	FD2	NA	NA	NA
+rbbppm	main_type	rbbppm	FS	HC12	GD1	FD0	NA	NA	NA
+rbbsf	main_type	rbbsf	FS	HC2	GD2	FD2	NA	NA	NA
+rbbso	main_type	rbbso	FS	HC2	GD2	FD0	NA	NA	NA
+rbbsp	main_type	rbbsp	FS	HC1	GD0	FD0	NA	NA	NA
