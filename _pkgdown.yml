@@ -1,6 +1,6 @@
 template:
   params:
-    bootswatch: yeti
+    bootswatch: united
 
 navbar:
     type: inverse
