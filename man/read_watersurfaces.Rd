@@ -32,7 +32,7 @@ Defaults to \code{FALSE}.}
 }
 \value{
 A Simple feature collection of
-type \code{POLYGON}, with the following
+type \code{POLYGON}, sorted by \code{polygon_id}, with the following
 variables (not mentioning extra 'name' variables for
 \code{extended = TRUE}):
 \itemize{

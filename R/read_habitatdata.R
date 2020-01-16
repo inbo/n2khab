@@ -383,7 +383,7 @@ read_watersurfaces_hab <-
 #'
 #' @return
 #' A Simple feature collection of
-#' type \code{POLYGON}, with the following
+#' type \code{POLYGON}, sorted by \code{polygon_id}, with the following
 #' variables (not mentioning extra 'name' variables for
 #' \code{extended = TRUE}):
 #' \itemize{
@@ -443,6 +443,7 @@ read_watersurfaces_hab <-
 #' na_lgl
 #' @importFrom dplyr
 #' %>%
+#' arrange
 #' mutate
 #' mutate_at
 #' select
@@ -523,7 +524,8 @@ read_watersurfaces <-
                 hyla_code = ifelse(.data$hyla_code == 0,
                                    NA,
                                    .data$hyla_code)
-            )
+            ) %>%
+            arrange(.data$polygon_id)
 
         if (extended) {
             watersurfaces <-
