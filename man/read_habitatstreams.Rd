@@ -39,7 +39,8 @@ variable in the \code{sf} object.
 }
 }
 \description{
-Returns the raw data source \code{habitatstreams} as an \code{sf} linestring
+Returns the raw data source \code{habitatstreams} (Leyssen et al., 2018)
+as an \code{sf} linestring
 layer or as a list of two objects: the \code{sf} object plus a data frame
 with textual explanation of the values of the \code{source_id} variable.
 }
