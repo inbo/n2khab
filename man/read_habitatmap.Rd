@@ -27,10 +27,13 @@ The default follows the data management advice in the
 important biotope (RIB) are returned. The default value is \code{FALSE}.}
 }
 \value{
-An sf object
+A Simple feature collection of
+type \code{MULTIPOLYGON}.
 }
 \description{
-\code{read_habitatmap} returns the \code{habitatmap} (De Saeger et al., 2018).
+Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
+as a standardized \code{sf} multipolygon layer
+(tidyverse-styled, internationalized).
 }
 \examples{
 \dontrun{
@@ -40,7 +43,8 @@ An sf object
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_habitatmap()
+hm <- read_habitatmap()
+hm
 }
 
 }
