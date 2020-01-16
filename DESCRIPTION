@@ -1,6 +1,6 @@
 Package: n2khab
 Title: Providing preprocessed reference data for Flemish Natura 2000 habitat analyses
-Version: 0.0.3.9046
+Version: 0.0.3.9046-2
 Authors@R: c(
     person("Floris", "Vanderhaeghe", email = "floris.vanderhaeghe@inbo.be", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6378-6229")), 
     person("Toon", "Westra", email = "toon.westra@inbo.be", role = c("aut"), comment = c(ORCID = "0000-0003-2478-9459")), 
@@ -11,6 +11,7 @@ Authors@R: c(
     person("Jan", "Wouters", email = "jan.wouters@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0001-8200-9102")), 
     person("Steven", "De Saeger", email = "steven.desaeger@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-5477-3063")), 
     person("An", "Leyssen", email = "an.leyssen@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0003-3537-286X")), 
+    person("Patrik", "Oosterlynck", email = "patrik.oosterlynck@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-5712-0770")), 
     person("Nathalie", "Cools", email = "nathalie.cools@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-7059-2318")), 
     person("Suzanna", "Lettens", email = "suzanna.lettens@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0001-5032-495X")), 
     person("Arne", "Verstraeten", email = "arne.verstraeten@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-8813-1261")), 
