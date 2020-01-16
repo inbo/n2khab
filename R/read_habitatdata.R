@@ -102,9 +102,11 @@
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
 #'
-#' r <- read_habitatmap_stdized()
-#' r_polygons <- r$habitatmap_polygons
-#' r_types <- r$habitatmap_types
+#' hms <- read_habitatmap_stdized()
+#' hms_polygons <- hms$habitatmap_polygons
+#' hms_types <- hms$habitatmap_types
+#' hms_polygons
+#' hms_types
 #' }
 #'
 #' @export
@@ -249,9 +251,11 @@ read_habitatmap_stdized <-
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
 #'
-#' r <- read_watersurfaces_hab()
-#' r_polygons <- r$watersurfaces_hab_polygons
-#' r_types <- r$watersurfaces_hab_types
+#' wsh <- read_watersurfaces_hab()
+#' wsh_polygons <- wsh$watersurfaces_hab_polygons
+#' wsh_types <- wsh$watersurfaces_hab_types
+#' wsh_polygons
+#' wsh_types
 #' }
 #'
 #' @export
@@ -332,7 +336,9 @@ read_watersurfaces_hab <-
 
 #' Return the data source \code{habitatmap}
 #'
-#' \code{read_habitatmap} returns the \code{habitatmap} (De Saeger et al., 2018).
+#' Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
+#' as a standardized \code{sf} multipolygon layer
+#' (tidyverse-styled, internationalized).
 #'
 #' @param select_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 #' important biotope (RIB) are returned. The default value is \code{FALSE}.
@@ -340,7 +346,8 @@ read_watersurfaces_hab <-
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
-#' An sf object
+#' A Simple feature collection of
+#' type \code{MULTIPOLYGON}.
 #'
 #' @family functions involved in processing the \code{habitatmap} data source
 #'
@@ -360,7 +367,8 @@ read_watersurfaces_hab <-
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
 #'
-#' r <- read_habitatmap()
+#' hm <- read_habitatmap()
+#' hm
 #' }
 #'
 #' @export
@@ -650,7 +658,8 @@ read_habitatmap_terr <-
 #' Return the data source \code{habitatstreams} as an \code{sf} linestring
 #' layer or as a list
 #'
-#' Returns the raw data source \code{habitatstreams} as an \code{sf} linestring
+#' Returns the raw data source \code{habitatstreams} (Leyssen et al., 2018)
+#' as an \code{sf} linestring
 #' layer or as a list of two objects: the \code{sf} object plus a data frame
 #' with textual explanation of the values of the \code{source_id} variable.
 #'
