@@ -102,9 +102,11 @@
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
 #'
-#' r <- read_habitatmap_stdized()
-#' r_polygons <- r$habitatmap_polygons
-#' r_types <- r$habitatmap_types
+#' hms <- read_habitatmap_stdized()
+#' hms_polygons <- hms$habitatmap_polygons
+#' hms_types <- hms$habitatmap_types
+#' hms_polygons
+#' hms_types
 #' }
 #'
 #' @export
@@ -241,6 +243,23 @@ read_habitatmap_stdized <-
 #'
 #' @family functions involved in processing the \code{habitatmap} data source
 #'
+#' @family functions involved in processing the \code{watersurfaces} data source
+#'
+#' @references
+#' \itemize{
+#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C., Denys L. (2018).
+#' Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
+#' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
+#' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
+#' Instituut voor Natuur- en Bosonderzoek, Brussel.
+#' DOI: https://doi.org/10.21436/inbor.14178464
+#' \item De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
+#' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
+#' DOI: https://doi.org/10.21436/inbor.15138099.
+#' }
+#'
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
@@ -249,9 +268,11 @@ read_habitatmap_stdized <-
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
 #'
-#' r <- read_watersurfaces_hab()
-#' r_polygons <- r$watersurfaces_hab_polygons
-#' r_types <- r$watersurfaces_hab_types
+#' wsh <- read_watersurfaces_hab()
+#' wsh_polygons <- wsh$watersurfaces_hab_polygons
+#' wsh_types <- wsh$watersurfaces_hab_types
+#' wsh_polygons
+#' wsh_types
 #' }
 #'
 #' @export
@@ -330,9 +351,229 @@ read_watersurfaces_hab <-
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+#' Return the data source \code{watersurfaces}
+#'
+#' Returns the raw data source \code{watersurfaces} (Packet et al., 2018)
+#' as a standardized \code{sf} polygon layer
+#' (tidyverse-styled, internationalized).
+#'
+#' See Packet et al. (2018) for an elaborate explanation of the data source
+#' and its attributes.
+#'
+#' @param extended Logical.
+#' Should names or explanations of codes be added as extra
+#' variables in the result?
+#' Currently only applies to \code{wfd_type}; if \code{TRUE}, a variable
+#' \code{wfd_type_name} is added.
+#' Defaults to \code{FALSE}.
+#'
+#' @inheritParams read_habitatmap_stdized
+#'
+#' @return
+#' A Simple feature collection of
+#' type \code{POLYGON}, with the following
+#' variables (not mentioning extra 'name' variables for
+#' \code{extended = TRUE}):
+#' \itemize{
+#'   \item \code{polygon_id}: code of the polygon;
+#'   \item \code{wfd_code}: optional; Flemish code of the water body with
+#'   regard to the Water Framework Directive (WFD);
+#'   \item \code{hyla_code}: optional; code of the watersurface according to the
+#'   Flemish working group 'Hyla', a working group on amphibians & reptiles;
+#'   \item \code{name}: name of the watersurface;
+#'   \item \code{area_name}: name of the area;
+#'   \item \code{wfd_type}: type code according to the Flemish WFD typology
+#'   (Denys, 2009);
+#'   \item \code{wfd_type_certain}: Logical.
+#'   Is there high confidence about the \code{wfd_type} determination?
+#'   \item \code{depth_class}: class of water depth;
+#'   \item \code{connectivity}: connectivity class;
+#'   \item \code{usage}: usage class.
+#' }
+#'
+#' @family functions involved in processing the \code{watersurfaces} data source
+#'
+#' @references
+#'
+#' \itemize{
+#' \item Denys L. (2009). Een a posteriori typologie van stilstaande, zoete
+#' wateren in Vlaanderen.
+#' Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
+#' Instituut voor Natuur- en Bosonderzoek, Brussel.
+#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C., Denys L.
+#' (2018).
+#' Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
+#' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
+#' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
+#' Instituut voor Natuur- en Bosonderzoek, Brussel.
+#' DOI: https://doi.org/10.21436/inbor.14178464
+#' }
+#'
+#' @examples
+#' \dontrun{
+#' # This example supposes that your working directory or a directory up to 10
+#' # levels above has the 'n2khab_data' folder AND that the 'watersurfaces'
+#' # data source is present in the default subdirectory.
+#' # In all other cases, this example won't work but at least you can
+#' # consider what to do.
+#'
+#' ws <- read_watersurfaces()
+#' ws
+#' summary(ws)
+#' }
+#'
+#' @importFrom sf
+#' read_sf
+#' @importFrom plyr
+#' mapvalues
+#' @importFrom rlang
+#' .data
+#' na_lgl
+#' @importFrom dplyr
+#' %>%
+#' mutate
+#' mutate_at
+#' select
+#' left_join
+#' everything
+#' tribble
+#' @importFrom assertthat
+#' assert_that
+#' @export
+read_watersurfaces <-
+    function(path = fileman_up("n2khab_data"),
+             file = "10_raw/watersurfaces",
+             extended = FALSE){
+
+        filepath <- file.path(path, file)
+        assert_that(file.exists(filepath))
+
+        suppressWarnings(
+            watersurfaces <- read_sf(filepath,
+                                     crs = 31370)
+        )
+
+        wfd_typetransl <-
+            tribble(~wfd_type, ~wfd_type_name,
+                    "B", "sterk brak",
+                    "Bzl", "zeer licht brak",
+                    "Ad", "alkalisch duinwater",
+                    "Ai", "ondiep, alkalisch, ionenrijk",
+                    "Ami", "ondiep, alkalisch, matig ionenrijk",
+                    "Ami-e", "ondiep, alkalisch, matig ionenrijk, eutroof",
+                    "Ami-om", "ondiep, alkalisch, matig ionenrijk, oligo-mesotroof",
+                    "Aw", "groot-diep, alkalisch",
+                    "Aw-e", "groot-diep, alkalisch, eutroof",
+                    "Aw-om", "groot-diep, alkalisch, oligo-mesotroof",
+                    "C", "circumneutraal",
+                    "Cb", "circumneutraal, sterk gebufferd",
+                    "CbFe", "circumneutraal, sterk gebufferd, ijzerrijk",
+                    "Czb", "circumneutraal, zwak gebufferd",
+                    "Z", "zuur",
+                    "Zm", "zwak zuur",
+                    "Zs", "sterk zuur"
+            ) %>%
+            mutate(
+                wfd_type = factor(.data$wfd_type,
+                                  levels = .$wfd_type)
+            )
+
+        watersurfaces <-
+            watersurfaces %>%
+            select(polygon_id = .data$WVLC,
+                   wfd_code = .data$WTRLICHC,
+                   hyla_code = .data$HYLAC,
+                   name = .data$NAAM,
+                   area_name = .data$GEBIED,
+                   wfd_type = .data$KRWTYPE,
+                   wfd_type_certain = .data$KRWTYPES,
+                   depth_class = .data$DIEPKL,
+                   connectivity = .data$CONNECT,
+                   usage = .data$FUNCTIE) %>%
+            mutate_at(.vars = c("wfd_code", "name"),
+                      .funs = function(x) {
+                          ifelse(x == "<Null>", NA, x)
+                      }) %>%
+            mutate_at(.vars = c("area_name",
+                                "depth_class",
+                                "connectivity",
+                                "usage"),
+                      .funs = factor) %>%
+            mutate(
+                wfd_type = .data$wfd_type %>%
+                    factor(levels =
+                               levels(wfd_typetransl$wfd_type)),
+                wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+                                                na_lgl,
+                                                .data$wfd_type_certain %in%
+                                                    c("zeker",
+                                                      "definitief")),
+                hyla_code = ifelse(.data$hyla_code == 0,
+                                   NA,
+                                   .data$hyla_code)
+            )
+
+        if (extended) {
+            watersurfaces <-
+                watersurfaces %>%
+                left_join(wfd_typetransl, by = "wfd_type") %>%
+                mutate(
+                    wfd_type_name =
+                        .data$wfd_type %>%
+                        mapvalues(from = wfd_typetransl$wfd_type,
+                                  to = wfd_typetransl$wfd_type_name)
+                ) %>%
+                select(1:6,
+                       .data$wfd_type_name,
+                       everything())
+        }
+
+        return(watersurfaces)
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #' Return the data source \code{habitatmap}
 #'
-#' \code{read_habitatmap} returns the \code{habitatmap} (De Saeger et al., 2018).
+#' Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
+#' as a standardized \code{sf} multipolygon layer
+#' (tidyverse-styled, internationalized).
 #'
 #' @param select_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 #' important biotope (RIB) are returned. The default value is \code{FALSE}.
@@ -340,7 +581,8 @@ read_watersurfaces_hab <-
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
-#' An sf object
+#' A Simple feature collection of
+#' type \code{MULTIPOLYGON}.
 #'
 #' @family functions involved in processing the \code{habitatmap} data source
 #'
@@ -360,7 +602,8 @@ read_watersurfaces_hab <-
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
 #'
-#' r <- read_habitatmap()
+#' hm <- read_habitatmap()
+#' hm
 #' }
 #'
 #' @export
@@ -650,7 +893,8 @@ read_habitatmap_terr <-
 #' Return the data source \code{habitatstreams} as an \code{sf} linestring
 #' layer or as a list
 #'
-#' Returns the raw data source \code{habitatstreams} as an \code{sf} linestring
+#' Returns the raw data source \code{habitatstreams} (Leyssen et al., 2018)
+#' as an \code{sf} linestring
 #' layer or as a list of two objects: the \code{sf} object plus a data frame
 #' with textual explanation of the values of the \code{source_id} variable.
 #'

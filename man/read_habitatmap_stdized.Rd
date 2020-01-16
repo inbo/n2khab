@@ -106,9 +106,11 @@ following steps:
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_habitatmap_stdized()
-r_polygons <- r$habitatmap_polygons
-r_types <- r$habitatmap_types
+hms <- read_habitatmap_stdized()
+hms_polygons <- hms$habitatmap_polygons
+hms_types <- hms$habitatmap_types
+hms_polygons
+hms_types
 }
 
 }
