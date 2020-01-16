@@ -71,7 +71,7 @@ Mind that, _if_ you store the `n2khab_data` folder inside a version controlled r
     By default, the functions search the folder in that order and use the **first encountered** `n2khab_data` folder.
     (Otherwise, you would need to actively set the path to the data folder with the `path` argument in each function call.)
     
-1. From your working directory, use [fileman_folders()](../html/fileman_folders.html) to specify the desired location (using the function's arguments).
+1. From your working directory, use `fileman_folders()` to specify the desired location (using the function's arguments).
 It will check the existence of the folders `n2khab_data`, `n2khab_data/10_raw` and `n2khab_data/20_processed` and create them if they don't exist.
 
 ```{r eval=FALSE}
@@ -83,7 +83,7 @@ fileman_folders(root = "rproj")
 ```
 
 3. From the cloud storage, **download** the respective data files of a data source.
-You can also use the function [fileman_zenodo()](../html/fileman_zenodo.html) to do that, using the DOI of each data source version.
+You can also use the function `fileman_zenodo()` to do that, using the DOI of each data source version.
 For each data source, put its file(s) in an appropriate subfolder either below `n2khab_data/10_raw` or `n2khab_data/20_processed` (depending on the data source).
 Use the data source's default name for the subfolder.
 You get a list of the data source names with _XXX_.
