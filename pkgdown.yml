@@ -1,0 +1,8 @@
+pandoc: '2.2'
+pkgdown: 1.4.1.9000
+pkgdown_sha: 134033d9d744c548c6fbe297bc0fbd1a2f498e83
+articles:
+  v010_reference_lists: v010_reference_lists.html
+  v020_datastorage: v020_datastorage.html
+  v030_GRTSmh: v030_GRTSmh.html
+
