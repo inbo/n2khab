@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/inbo/n2khab.svg?branch=master)](https://travis-ci.com/inbo/n2khab)
 
-The **n2khab** R package provides data definitions, standard checklists (reference data) and preprocessing functions, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 (**n2k**) habitats (**hab**) and regionally important biotopes (RIBs).
+The **n2khab** R package provides standard checklists (reference data) and preprocessing functions, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 (**n2k**) habitats (**hab**) and regionally important biotopes (RIBs).
 
 The package's core aim is to **provide readily standardized (preprocessed) data** in your R environment.
 This facilitates collaboration and reproducibility.
