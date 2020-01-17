@@ -45,7 +45,7 @@ The data definitions & standard checklists (reference data) provided by the pack
 Some of them come over from another repository.
 Others may be written as the result of a synchronization script to give them a start.
 The code to reproduce these files is inside the `src` folder.
-The package provides the necessary functions to return these as standardized tibbles (`vignette("v010_reference_lists"`)).
+The package provides the necessary functions to return these as standardized tibbles (`vignette("v010_reference_lists")`).
 
 This package is the successor of the 'n2khabutils' package.
 Previous to commit `c8608d9`, the code was part of the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (formerly 'n2khab-inputs'), where the original version history remains stored.
