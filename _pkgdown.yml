@@ -47,7 +47,7 @@ reference:
   - title: "Managing files and directories"
     contents:
       - fileman_folders
-      - fileman_zenodo
+      - download_zenodo
   - title: "Utilities and helpers"
     contents:
       - read_namelist

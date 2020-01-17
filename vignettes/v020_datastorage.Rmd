@@ -92,7 +92,7 @@ fileman_folders(root = "rproj")
 ```
 
 3. From the cloud storage, **download** the respective data files of a data source.
-You can also use the function `fileman_zenodo()` to do that, using the DOI of each data source version.
+You can also use the function `download_zenodo()` to do that, using the DOI of each data source version.
 For each data source, put its file(s) in an appropriate subfolder either below `n2khab_data/10_raw` or `n2khab_data/20_processed` (depending on the data source).
 Use the data source's default name for the subfolder.
 You get a list of the data source names with _XXX_.
