@@ -363,7 +363,7 @@ read_watersurfaces_hab <-
 
 
 
-#' Return the data source \code{watersurfaces}
+#' Return the data source \code{watersurfaces} as an \code{sf} polygon layer
 #'
 #' Returns the raw data source \code{watersurfaces} (Packet et al., 2018)
 #' as a standardized \code{sf} polygon layer
@@ -571,7 +571,7 @@ read_watersurfaces <-
 
 
 
-#' Return the data source \code{habitatmap}
+#' Return the data source \code{habitatmap} as an \code{sf} multipolygon layer
 #'
 #' Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
 #' as a standardized \code{sf} multipolygon layer

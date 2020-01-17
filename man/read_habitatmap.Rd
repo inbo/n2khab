@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_habitatdata.R
 \name{read_habitatmap}
 \alias{read_habitatmap}
-\title{Return the data source \code{habitatmap}}
+\title{Return the data source \code{habitatmap} as an \code{sf} multipolygon layer}
 \usage{
 read_habitatmap(
   path = fileman_up("n2khab_data"),
