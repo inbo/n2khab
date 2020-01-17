@@ -27,13 +27,13 @@ Their purpose is typically to promote standardization and thereby to ease collab
 The `n2khab` package provides the following built-in reference lists, 
 relevant to N2KHAB projects [^N2KHAB]:
 
-- [types](../html/types.html): checklist of types (habitat (sub)types and regionally important biotopes), 
+- `types`: checklist of types (habitat (sub)types and regionally important biotopes) (documentation links: [this website](../reference/types.html) / [installed package](../html/types.html)), 
 represented by their *current* codes
-- [env_pressures](../html/env_pressures.html): checklist of environmental pressures, represented by codes
-- [schemes](../html/schemes.html): list of schemes [^scheme] for N2KHAB monitoring programmes or other N2KHAB projects
-- [scheme_types](../html/scheme_types.html): lists the types that belong to each N2KHAB scheme, and optionally defines typegroups within a scheme
+- `env_pressures`: checklist of environmental pressures, represented by codes (documentation links: [this website](../reference/env_pressures.html) / [installed package](../html/env_pressures.html))
+- `schemes`: list of schemes [^scheme] for N2KHAB monitoring programmes or other N2KHAB projects (documentation links: [this website](../reference/schemes.html) / [installed package](../html/schemes.html))
+- `scheme_types`: lists the types that belong to each N2KHAB scheme, and optionally defines typegroups within a scheme (documentation links: [this website](../reference/scheme_types.html) / [installed package](../html/scheme_types.html))
 
-Additionally, [namelist](../html/namelist.html) provides names and (optionally) shortnames for IDs/codes used in the above lists.
+Additionally, `namelist` provides names and (optionally) shortnames for IDs/codes used in the above lists (documentation links: [this website](../reference/namelist.html) / [installed package](../html/namelist.html)).
 
 [^N2KHAB]: With N2KHAB projects, we mean scientific monitoring programmes and research projects regarding Flemish Natura 2000 habitats and regionally important biotopes (RIBs).
 
