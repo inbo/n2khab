@@ -432,6 +432,9 @@ read_watersurfaces_hab <-
 #' ws <- read_watersurfaces()
 #' ws
 #' summary(ws)
+#'
+#' ws2 <- read_watersurfaces(extended = TRUE)
+#' ws2
 #' }
 #'
 #' @importFrom sf

@@ -72,6 +72,9 @@ and its attributes.
 ws <- read_watersurfaces()
 ws
 summary(ws)
+
+ws2 <- read_watersurfaces(extended = TRUE)
+ws2
 }
 
 }
