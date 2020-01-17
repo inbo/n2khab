@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9047</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9048</span>
       </span>
     </div>
 
@@ -140,24 +140,49 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-using-the-reference-lists" class="hasAnchor"><a href="#section-using-the-reference-lists" class="anchor"></a>Using the reference lists</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="convert_base4frac_to_dec.html">convert_base4frac_to_dec()</a></code> </p>
+          <p><code><a href="read_types.html">read_types()</a></code> </p>
         </td>
-        <td><p>Convert a vector of base 4 fractions into (truncated) decimal integer
-values</p></td>
+        <td><p>Return the 'types' data source as a tibble with names &amp; shortnames</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="convert_dec_to_base4frac.html">convert_dec_to_base4frac()</a></code> </p>
+          <p><code><a href="read_env_pressures.html">read_env_pressures()</a></code> </p>
         </td>
-        <td><p>Convert a vector of values from the <code>GRTSmaster_habitats</code> data source to
-base 4 fractions</p></td>
+        <td><p>Return the 'env_pressures' data source as a tibble with human-readable
+attributes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read_schemes.html">read_schemes()</a></code> </p>
+        </td>
+        <td><p>Return the 'schemes' data source as a tibble with names &amp; shortnames</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read_scheme_types.html">read_scheme_types()</a></code> </p>
+        </td>
+        <td><p>Return the 'scheme_types' data source as a tibble</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-documentation-of-included-data-sources" class="hasAnchor"><a href="#section-documentation-of-included-data-sources" class="anchor"></a>Documentation of included data sources</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="types.html">types</a></code> </p>
+        </td>
+        <td><p>Documentation of included data source 'types'</p></td>
       </tr><tr>
         
         <td>
@@ -167,34 +192,120 @@ base 4 fractions</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="expand_types.html">expand_types()</a></code> </p>
+          <p><code><a href="schemes.html">schemes</a></code> </p>
         </td>
-        <td><p>Expand a 'type' column in a dataframe</p></td>
+        <td><p>Documentation of included data source 'schemes'</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="fileman_folders.html">fileman_folders()</a></code> </p>
+          <p><code><a href="scheme_types.html">scheme_types</a></code> </p>
         </td>
-        <td><p>Create a standard data folder structure and return the path to the <code>n2khab_data</code> folder</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fileman_up.html">fileman_up()</a></code> </p>
-        </td>
-        <td><p>Climb up in the file system hierarchy to find a file or folder</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fileman_zenodo.html">fileman_zenodo()</a></code> </p>
-        </td>
-        <td><p>Get data from a Zenodo archive</p></td>
+        <td><p>Documentation of included data source 'scheme_types'</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="namelist.html">namelist</a></code> </p>
         </td>
         <td><p>Documentation of included data source 'namelist'</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-using-the-raw-spatial-data-sources-of-habitats-ribs" class="hasAnchor"><a href="#section-using-the-raw-spatial-data-sources-of-habitats-ribs" class="anchor"></a>Using the raw spatial data sources of habitats/RIBs</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="read_habitatmap.html">read_habitatmap()</a></code> </p>
+        </td>
+        <td><p>Return the data source <code>habitatmap</code></p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="read_habitatstreams.html">read_habitatstreams()</a></code> </p>
+        </td>
+        <td><p>Return the data source <code>habitatstreams</code> as an <code>sf</code> linestring
+layer or as a list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read_watersurfaces.html">read_watersurfaces()</a></code> </p>
+        </td>
+        <td><p>Return the data source <code>watersurfaces</code></p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read_habitatsprings.html">read_habitatsprings()</a></code> </p>
+        </td>
+        <td><p>Return the data source <code>habitatsprings</code> as an <code>sf</code> point
+layer</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-using-the-processed-spatial-data-sources-of-habitats-ribs" class="hasAnchor"><a href="#section-using-the-processed-spatial-data-sources-of-habitats-ribs" class="anchor"></a>Using the processed spatial data sources of habitats/RIBs</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code> </p>
+        </td>
+        <td><p>Return the data source <code>habitatmap_stdized</code> as a list of two
+objects</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read_habitatmap_terr.html">read_habitatmap_terr()</a></code> </p>
+        </td>
+        <td><p>Return the data source <code>habitatmap_terr</code> as a list of two
+objects</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code> </p>
+        </td>
+        <td><p>Return the data source <code>watersurfaces_hab</code> as a list of two
+objects</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="expand_types.html">expand_types()</a></code> </p>
+        </td>
+        <td><p>Expand a 'type' column in a dataframe</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-using-the-raw-administrative-environmental-data-sources" class="hasAnchor"><a href="#section-using-the-raw-administrative-environmental-data-sources" class="anchor"></a>Using the raw administrative &amp; environmental data sources</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="read_ecoregions.html">read_ecoregions()</a></code> </p>
+        </td>
+        <td><p>Return the <code>ecoregions</code> data source as an <code>sf</code> object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read_admin_areas.html">read_admin_areas()</a></code> </p>
+        </td>
+        <td><p>Return one of the available geospatial data sources representing
+administrative areas</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-using-the-grtsmaster-data-sources-raw-processed-" class="hasAnchor"><a href="#section-using-the-grtsmaster-data-sources-raw-processed-" class="anchor"></a>Using the GRTSmaster data sources (raw + processed)</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="read_GRTSmh.html">read_GRTSmh()</a></code> </p>
@@ -215,61 +326,35 @@ RasterLayer</p></td>
         </td>
         <td><p>Return a RasterLayer or an <code>sf</code> polygon layer from the processed data
 source <code>GRTSmh_diffres</code></p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-managing-files-and-directories" class="hasAnchor"><a href="#section-managing-files-and-directories" class="anchor"></a>Managing files and directories</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="fileman_folders.html">fileman_folders()</a></code> </p>
+        </td>
+        <td><p>Create a standard data folder structure and return the path to the <code>n2khab_data</code> folder</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="read_admin_areas.html">read_admin_areas()</a></code> </p>
+          <p><code><a href="fileman_zenodo.html">fileman_zenodo()</a></code> </p>
         </td>
-        <td><p>Return one of the available geospatial data sources representing
-administrative areas</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_ecoregions.html">read_ecoregions()</a></code> </p>
-        </td>
-        <td><p>Return the <code>ecoregions</code> data source as an <code>sf</code> object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_env_pressures.html">read_env_pressures()</a></code> </p>
-        </td>
-        <td><p>Return the 'env_pressures' data source as a tibble with human-readable
-attributes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_habitatmap.html">read_habitatmap()</a></code> </p>
-        </td>
-        <td><p>Return the data source <code>habitatmap</code></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code> </p>
-        </td>
-        <td><p>Return the data source <code>habitatmap_stdized</code> as a list of two
-objects</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_habitatmap_terr.html">read_habitatmap_terr()</a></code> </p>
-        </td>
-        <td><p>Return the data source <code>habitatmap_terr</code> as a list of two
-objects</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_habitatsprings.html">read_habitatsprings()</a></code> </p>
-        </td>
-        <td><p>Return the data source <code>habitatsprings</code> as an <code>sf</code> point
-layer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_habitatstreams.html">read_habitatstreams()</a></code> </p>
-        </td>
-        <td><p>Return the data source <code>habitatstreams</code> as an <code>sf</code> linestring
-layer or as a list</p></td>
-      </tr><tr>
+        <td><p>Get data from a Zenodo archive</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-utilities-and-helpers" class="hasAnchor"><a href="#section-utilities-and-helpers" class="anchor"></a>Utilities and helpers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="read_namelist.html">read_namelist()</a></code> </p>
@@ -278,52 +363,23 @@ layer or as a list</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="read_scheme_types.html">read_scheme_types()</a></code> </p>
+          <p><code><a href="fileman_up.html">fileman_up()</a></code> </p>
         </td>
-        <td><p>Return the 'scheme_types' data source as a tibble</p></td>
+        <td><p>Climb up in the file system hierarchy to find a file or folder</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="read_schemes.html">read_schemes()</a></code> </p>
+          <p><code><a href="convert_dec_to_base4frac.html">convert_dec_to_base4frac()</a></code> </p>
         </td>
-        <td><p>Return the 'schemes' data source as a tibble with names &amp; shortnames</p></td>
+        <td><p>Convert a vector of values from the <code>GRTSmaster_habitats</code> data source to
+base 4 fractions</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="read_types.html">read_types()</a></code> </p>
+          <p><code><a href="convert_base4frac_to_dec.html">convert_base4frac_to_dec()</a></code> </p>
         </td>
-        <td><p>Return the 'types' data source as a tibble with names &amp; shortnames</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_watersurfaces.html">read_watersurfaces()</a></code> </p>
-        </td>
-        <td><p>Return the data source <code>watersurfaces</code></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code> </p>
-        </td>
-        <td><p>Return the data source <code>watersurfaces_hab</code> as a list of two
-objects</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="scheme_types.html">scheme_types</a></code> </p>
-        </td>
-        <td><p>Documentation of included data source 'scheme_types'</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="schemes.html">schemes</a></code> </p>
-        </td>
-        <td><p>Documentation of included data source 'schemes'</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="types.html">types</a></code> </p>
-        </td>
-        <td><p>Documentation of included data source 'types'</p></td>
+        <td><p>Convert a vector of base 4 fractions into (truncated) decimal integer
+values</p></td>
       </tr>
     </tbody>
     </table>
@@ -332,7 +388,14 @@ objects</p></td>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-using-the-reference-lists">Using the reference lists</a></li>
+      <li><a href="#section-documentation-of-included-data-sources">Documentation of included data sources</a></li>
+      <li><a href="#section-using-the-raw-spatial-data-sources-of-habitats-ribs">Using the raw spatial data sources of habitats/RIBs</a></li>
+      <li><a href="#section-using-the-processed-spatial-data-sources-of-habitats-ribs">Using the processed spatial data sources of habitats/RIBs</a></li>
+      <li><a href="#section-using-the-raw-administrative-environmental-data-sources">Using the raw administrative &amp; environmental data sources</a></li>
+      <li><a href="#section-using-the-grtsmaster-data-sources-raw-processed-">Using the GRTSmaster data sources (raw + processed)</a></li>
+      <li><a href="#section-managing-files-and-directories">Managing files and directories</a></li>
+      <li><a href="#section-utilities-and-helpers">Utilities and helpers</a></li>
     </ul>
   </div>
 </div>
