@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get data from a Zenodo archive — fileman_zenodo • n2khab</title>
+<title>Get data from a Zenodo archive — download_zenodo • n2khab</title>
 
 
 <!-- jquery -->
@@ -37,10 +37,13 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Get data from a Zenodo archive — fileman_zenodo" />
-<meta property="og:description" content="This function will download data from Zenodo (https://zenodo.org).
-It only works for Zenodo created DOI (not when the DOI is for
-example derived from Zookeys.)" />
+<meta property="og:title" content="Get data from a Zenodo archive — download_zenodo" />
+<meta property="og:description" content="These objects are imported from other packages. Follow the links
+below to see their documentation.
+
+  inborutilsdownload_zenodo
+
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -73,7 +76,7 @@ example derived from Zookeys.)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9049</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9050</span>
       </span>
     </div>
 
@@ -132,50 +135,25 @@ example derived from Zookeys.)" />
     <div class="page-header">
     <h1>Get data from a Zenodo archive</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/filemanagement.R'><code>R/filemanagement.R</code></a></small>
-    <div class="hidden name"><code>fileman_zenodo.Rd</code></div>
+    <div class="hidden name"><code>download_zenodo.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function will download data from Zenodo (<a href='https://zenodo.org'>https://zenodo.org</a>).
-It only works for Zenodo created DOI (not when the DOI is for
-example derived from Zookeys.)</p>
+    <p>These objects are imported from other packages. Follow the links
+below to see their documentation.</p>
+<dl class='dl-horizontal'>
+  <dt>inborutils</dt><dd><p><code><a href='https://rdrr.io/pkg/inborutils/man/download_zenodo.html'>download_zenodo</a></code></p></dd>
+
+</dl>
     </div>
 
-    <pre class="usage"><span class='fu'>fileman_zenodo</span>(<span class='no'>path</span>, <span class='no'>doi</span>)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>path</th>
-      <td><p>local path to where the data need to be written</p></td>
-    </tr>
-    <tr>
-      <th>doi</th>
-      <td><p>a doi pointer to the Zenodo archive starting with '10.5281/zenodo.'. See examples.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Downloaded file(s) in the specified folder.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Single zip file deposition</span>
-<span class='fu'>fileman_zenodo</span>(<span class='st'>"."</span>, <span class='st'>"10.5281/zenodo.1283345"</span>)
-<span class='co'># Multiple files deposition</span>
-<span class='fu'>fileman_zenodo</span>(<span class='st'>"."</span>, <span class='st'>"10.5281/zenodo.1172801"</span>)
-<span class='co'># Single pdf file deposition</span>
-<span class='fu'>fileman_zenodo</span>(<span class='st'>"."</span>, <span class='st'>"10.5281/zenodo.168478"</span>)
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
