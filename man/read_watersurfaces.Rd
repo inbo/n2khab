@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_habitatdata.R
 \name{read_watersurfaces}
 \alias{read_watersurfaces}
-\title{Return the data source \code{watersurfaces}}
+\title{Return the data source \code{watersurfaces} as an \code{sf} polygon layer}
 \usage{
 read_watersurfaces(
   path = fileman_up("n2khab_data"),
@@ -32,7 +32,7 @@ Defaults to \code{FALSE}.}
 }
 \value{
 A Simple feature collection of
-type \code{POLYGON}, with the following
+type \code{POLYGON}, sorted by \code{polygon_id}, with the following
 variables (not mentioning extra 'name' variables for
 \code{extended = TRUE}):
 \itemize{
@@ -72,6 +72,9 @@ and its attributes.
 ws <- read_watersurfaces()
 ws
 summary(ws)
+
+ws2 <- read_watersurfaces(extended = TRUE)
+ws2
 }
 
 }

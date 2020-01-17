@@ -363,7 +363,7 @@ read_watersurfaces_hab <-
 
 
 
-#' Return the data source \code{watersurfaces}
+#' Return the data source \code{watersurfaces} as an \code{sf} polygon layer
 #'
 #' Returns the raw data source \code{watersurfaces} (Packet et al., 2018)
 #' as a standardized \code{sf} polygon layer
@@ -383,7 +383,7 @@ read_watersurfaces_hab <-
 #'
 #' @return
 #' A Simple feature collection of
-#' type \code{POLYGON}, with the following
+#' type \code{POLYGON}, sorted by \code{polygon_id}, with the following
 #' variables (not mentioning extra 'name' variables for
 #' \code{extended = TRUE}):
 #' \itemize{
@@ -432,6 +432,9 @@ read_watersurfaces_hab <-
 #' ws <- read_watersurfaces()
 #' ws
 #' summary(ws)
+#'
+#' ws2 <- read_watersurfaces(extended = TRUE)
+#' ws2
 #' }
 #'
 #' @importFrom sf
@@ -443,6 +446,7 @@ read_watersurfaces_hab <-
 #' na_lgl
 #' @importFrom dplyr
 #' %>%
+#' arrange
 #' mutate
 #' mutate_at
 #' select
@@ -523,7 +527,8 @@ read_watersurfaces <-
                 hyla_code = ifelse(.data$hyla_code == 0,
                                    NA,
                                    .data$hyla_code)
-            )
+            ) %>%
+            arrange(.data$polygon_id)
 
         if (extended) {
             watersurfaces <-
@@ -569,7 +574,7 @@ read_watersurfaces <-
 
 
 
-#' Return the data source \code{habitatmap}
+#' Return the data source \code{habitatmap} as an \code{sf} multipolygon layer
 #'
 #' Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
 #' as a standardized \code{sf} multipolygon layer
