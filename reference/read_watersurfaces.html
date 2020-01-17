@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the data source <code>watersurfaces</code> — read_watersurfaces • n2khab</title>
+<title>Return the data source <code>watersurfaces</code> as an <code>sf</code> polygon layer — read_watersurfaces • n2khab</title>
 
 
 <!-- jquery -->
@@ -37,7 +37,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return the data source <code>watersurfaces</code> — read_watersurfaces" />
+<meta property="og:title" content="Return the data source <code>watersurfaces</code> as an <code>sf</code> polygon layer — read_watersurfaces" />
 <meta property="og:description" content="Returns the raw data source watersurfaces (Packet et al., 2018)
 as a standardized sf polygon layer
 (tidyverse-styled, internationalized)." />
@@ -73,7 +73,7 @@ as a standardized sf polygon layer
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9048</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9049</span>
       </span>
     </div>
 
@@ -130,7 +130,7 @@ as a standardized sf polygon layer
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the data source <code>watersurfaces</code></h1>
+    <h1>Return the data source <code>watersurfaces</code> as an <code>sf</code> polygon layer</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_habitatdata.R'><code>R/read_habitatdata.R</code></a></small>
     <div class="hidden name"><code>read_watersurfaces.Rd</code></div>
     </div>
@@ -180,7 +180,7 @@ Defaults to <code>FALSE</code>.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A Simple feature collection of
-type <code>POLYGON</code>, with the following
+type <code>POLYGON</code>, sorted by <code>polygon_id</code>, with the following
 variables (not mentioning extra 'name' variables for
 <code>extended = TRUE</code>):</p><ul>
 <li><p><code>polygon_id</code>: code of the polygon;</p></li>
@@ -236,6 +236,9 @@ DOI: https://doi.org/10.21436/inbor.14178464</p></li>
 <span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>read_watersurfaces</span>()
 <span class='no'>ws</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>ws</span>)
+
+<span class='no'>ws2</span> <span class='kw'>&lt;-</span> <span class='fu'>read_watersurfaces</span>(<span class='kw'>extended</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>ws2</span>
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
