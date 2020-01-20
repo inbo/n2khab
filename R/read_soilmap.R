@@ -77,48 +77,48 @@ read_soilmap <-
 
         soilmap <-
             soilmap %>%
-            select(polygon_id = .data$gid,
-                   map_id = .data$Kaartbldnr,
-                   region = .data$Streek,
-                   in_polders = .data$Type_class,
-                   soiltype_general = .data$Grove_leg,
-                   soiltype_legend_title = .data$Uitleg_tit,
-                   soiltype_legend_explan = .data$Uitleg,
-                   soiltype_id = .data$codeid,
-                   soiltype = .data$Bodemtype,
-                   soiltype_unified = .data$Unitype,
-                   soiltype_region = .data$Bodtypstr,
-                   soil_series = .data$Bodemser_c,
-                   soil_series_text = .data$Bodemserie,
-                   substrate = .data$Substr_V_c,
-                   substrate_text = .data$SubstraatV,
-                   texture = .data$Textuur_c,
-                   texture_text = .data$Textuur,
-                   moisture = .data$Drainage_c,
-                   moisture_text = .data$Drainage,
-                   profile = .data$Profontw_c,
-                   profile_text = .data$Profontw,
-                   traits_code = .data$Fase_c,
-                   mother_material = .data$Varimoma_c,
-                   mother_material_text = .data$Varimoma,
-                   profile_variant = .data$Variprof_c,
-                   profile_variant_text = .data$Variprof,
-                   polders_substrate = .data$Substr_p_c,
-                   polders_substrate_text = .data$Substr_pol,
-                   polders_series = .data$Serie_c,
-                   polders_series_text = .data$Serie,
-                   polders_subseries = .data$Subserie_c,
-                   polders_subseries_text = .data$Subserie,
-                   scanned_file_map = .data$Scan_kbl,
-                   scanned_file_book = .data$Scan_boek,
-                   scanned_file_detailedmap = .data$Scan_5000,
-                   scanned_file_points = .data$Scan_stip
+            select(bsm_poly_id = .data$gid,
+                   bsm_map_id = .data$Kaartbldnr,
+                   bsm_region = .data$Streek,
+                   bsm_ge_coastalplain = .data$Type_class,
+                   bsm_ge_region = .data$Streek_c,
+                   bsm_mo_legend = .data$Grove_leg,
+                   bsm_mo_legend_title = .data$Uitleg_tit,
+                   bsm_mo_legend_explan = .data$Uitleg,
+                   bsm_mo_soiltype_id = .data$codeid,
+                   bsm_mo_soiltype = .data$Bodemtype,
+                   bsm_mo_soilunitype = .data$Unitype,
+                   bsm_mo_soiltype_region = .data$Bodtypstr,
+                   bsm_mo_soilseries = .data$Bodemser_c,
+                   bsm_mo_soilseries_explan = .data$Bodemserie,
+                   bsm_mo_substr = .data$Substr_V_c,
+                   bsm_mo_substr_explan = .data$SubstraatV,
+                   bsm_mo_tex = .data$Textuur_c,
+                   bsm_mo_tex_explan = .data$Textuur,
+                   bsm_mo_drain = .data$Drainage_c,
+                   bsm_mo_drain_explan = .data$Drainage,
+                   bsm_mo_prof = .data$Profontw_c,
+                   bsm_mo_prof_explan = .data$Profontw,
+                   bsm_mo_phase = .data$Fase_c,
+                   bsm_mo_parentmat = .data$Varimoma_c,
+                   bsm_mo_parentmat_explan = .data$Varimoma,
+                   bsm_mo_profvar = .data$Variprof_c,
+                   bsm_mo_profvar_explan = .data$Variprof,
+                   bsm_ge_substr = .data$Substr_p_c,
+                   bsm_ge_substr_explan = .data$Substr_pol,
+                   bsm_ge_series = .data$Serie_c,
+                   bsm_ge_series_explan = .data$Serie,
+                   bsm_ge_subseries = .data$Subserie_c,
+                   bsm_ge_subseries_explan = .data$Subserie,
+                   bsm_map_url = .data$Scan_kbl,
+                   bsm_book_url = .data$Scan_boek,
+                   bsm_detailmap_url = .data$Scan_5000,
+                   bsm_profloc_url = .data$Scan_stip
                    ) %>%
-            mutate(in_polders = .data$in_polders == "Zeepolders") %>%
-            mutate_at(.vars = vars(-.data$polygon_id,
-                                   -.data$in_polders,
-                                   -.data$soiltype_id,
-                                   -.data$traits_code,
+            mutate(bsm_ge_coastalplain = .data$bsm_ge_coastalplain == "Zeepolders") %>%
+            mutate_at(.vars = vars(-.data$bsm_poly_id,
+                                   -.data$bsm_ge_coastalplain,
+                                   -.data$bsm_mo_soiltype_id,
                                    -.data$geometry),
                       .funs = factor)
 
@@ -127,31 +127,32 @@ read_soilmap <-
                               root = pkgdatasource_path(
                                   "textdata/soil_translation_coastalplain", ".tsv")) %>%
                 mutate(soiltype_orig = factor(.data$soiltype_orig,
-                                              levels = levels(soilmap$soiltype))
+                                              levels =
+                                                  levels(soilmap$bsm_mo_soiltype))
                        ) %>%
                 filter(!is.na(.data$texture_transl))
 
             soilmap <-
                 soilmap %>%
-                left_join(transl, by = c("soiltype" = "soiltype_orig")) %>%
-                mutate(substrate = as.character(.data$substrate),
-                       texture = as.character(.data$texture),
-                       moisture = as.character(.data$moisture),
-                       substrate = ifelse(is.na(.data$substrate) &
-                                              !is.na(.data$polders_substrate),
-                                          as.character(.data$polders_substrate),
-                                          .data$substrate) %>%
-                           factor(levels = levels(soilmap$substrate)),
-                       texture = ifelse(is.na(.data$texture) &
+                left_join(transl, by = c("bsm_mo_soiltype" = "soiltype_orig")) %>%
+                mutate(bsm_mo_substr = as.character(.data$bsm_mo_substr),
+                       bsm_mo_tex = as.character(.data$bsm_mo_tex),
+                       bsm_mo_drain = as.character(.data$bsm_mo_drain),
+                       bsm_mo_substr = ifelse(is.na(.data$bsm_mo_substr) &
+                                              !is.na(.data$bsm_ge_substr),
+                                          as.character(.data$bsm_ge_substr),
+                                          .data$bsm_mo_substr) %>%
+                           factor(levels = levels(soilmap$bsm_mo_substr)),
+                       bsm_mo_tex = ifelse(is.na(.data$bsm_mo_tex) &
                                             !is.na(.data$texture_transl),
                                         .data$texture_transl,
-                                        .data$texture) %>%
-                           factor(levels = levels(soilmap$texture)),
-                       moisture = ifelse(is.na(.data$moisture) &
-                                             !is.na(.data$moisture_transl),
-                                         .data$moisture_transl,
-                                         .data$moisture) %>%
-                           factor(levels = levels(soilmap$moisture))
+                                        .data$bsm_mo_tex) %>%
+                           factor(levels = levels(soilmap$bsm_mo_tex)),
+                       bsm_mo_drain = ifelse(is.na(.data$bsm_mo_drain) &
+                                             !is.na(.data$drainage_transl),
+                                         .data$drainage_transl,
+                                         .data$bsm_mo_drain) %>%
+                           factor(levels = levels(soilmap$bsm_mo_drain))
                        ) %>%
                 select(-contains("transl"))
 
@@ -160,16 +161,16 @@ read_soilmap <-
         if (simplify) {
             soilmap <-
                 soilmap %>%
-                select(.data$polygon_id,
-                       .data$region,
-                       .data$in_polders,
-                       .data$soiltype_unified,
-                       .data$substrate,
-                       .data$texture,
-                       .data$moisture,
-                       .data$profile,
-                       .data$mother_material,
-                       .data$profile_variant
+                select(.data$bsm_poly_id,
+                       .data$bsm_region,
+                       .data$bsm_ge_coastalplain,
+                       .data$bsm_mo_soilunitype,
+                       .data$bsm_mo_substr,
+                       .data$bsm_mo_tex,
+                       .data$bsm_mo_drain,
+                       .data$bsm_mo_prof,
+                       .data$bsm_mo_parentmat,
+                       .data$bsm_mo_profvar
                        )
         }
 
