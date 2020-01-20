@@ -1,10 +1,10 @@
 ..generic:
-  git2rdata: '0.1'
+  git2rdata: 0.2.0
   optimize: yes
   NA string: NA
   sorting: soiltype_orig
   hash: e20531970c7549dd538a4f21f8eaefe5da5e488e
-  data_hash: ce540aca4f91045ab45601b1c3a68ffd6371b491
+  data_hash: 3eb3141d9847156e96413e8643d5c730d3035cf8
 soiltype_orig:
   class: character
 soiltype_unified_transl:
