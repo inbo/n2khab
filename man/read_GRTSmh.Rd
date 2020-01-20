@@ -23,7 +23,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{brick}{Logical; determines whether the RasterLayer or RasterBrick data
 source is returned. See the Details section.}

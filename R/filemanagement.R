@@ -4,8 +4,8 @@
 #' create them if necessary, and return the path to the \code{n2khab_data} folder.
 #'
 #' @details In n2khab projects a standardized folder setup is used for binary
-#' data, as explained in the \href{../doc/v020_datastorage.html}{vignette} on
-#' data storage.
+#' data, as explained in the
+#' vignette on data storage (run \code{vignette("v020_datastorage")}).
 #' The functions creates the folders \code{n2khab_data}, \code{n2khab_data/10_raw}
 #' and \code{n2khab_data/20_processed}, or prints a message if these already
 #' exist.

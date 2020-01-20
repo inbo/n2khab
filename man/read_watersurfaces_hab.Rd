@@ -23,7 +23,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{interpreted}{If \code{TRUE}, the interpreted subtype is provided when the subtype is missing. This only
 applies to type 3130. When the subtype is missing for 3130, we interpret it as 3130_aom.}

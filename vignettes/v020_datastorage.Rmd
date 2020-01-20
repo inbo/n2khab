@@ -91,7 +91,7 @@ fileman_folders(root = "rproj")
 #> [1] "<clipped_path_prefix>/n2khab_data"
 ```
 
-3. From the cloud storage, **download** the respective data files of a data source.
+3. From the cloud storage (links: [raw data](https://zenodo.org/communities/n2khab-data-raw) | [processed data](https://zenodo.org/communities/n2khab-data-processed)), **download** the respective data files of a data source.
 You can also use the function `download_zenodo()` to do that, using the DOI of each data source version.
 For each data source, put its file(s) in an appropriate subfolder either below `n2khab_data/10_raw` or `n2khab_data/20_processed` (depending on the data source).
 Use the data source's default name for the subfolder.

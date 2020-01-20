@@ -25,6 +25,11 @@ Think n2khab is useful? Let others discover it, by telling them in person, via T
 
 Using n2khab for a paper you are writing? Consider [citing it][citation].
 
+```r
+# with the n2khab package installed, this will return a bibliography entry:
+citation("n2khab")
+```
+
 ### Ask a question ⁉️
 
 Using n2khab and got stuck? Browse the [documentation][website] to see if you can find a solution. Still stuck? Post your question as an [issue on GitHub][new_issue]. While we cannot offer user support, we'll try to do our best to address it, as questions often lead to better documentation or the discovery of bugs.
@@ -75,16 +80,17 @@ Care to fix bugs or implement new functionality for n2khab? Awesome! 👏 Have a
 This is the structure of the [repo]:
 
 ```
-├── src                 <- Package-related scripts / R markdown files. Rbuild-ignored!
-                           Contains a script on package management + a bookdown 
-                           project to reproduce the included textual data + a 
-                           script to upgrade vc-formatted files.
 ├── inst
     └── textdata        <- Textual data delivered with the package (in vc-format).
                            They can be read into R by package functions or with
                            git2rdata::read_vc().
 ├── man
+├── misc                <- Package-related scripts / R markdown files. Rbuild-ignored!
+                           Contains a script on package management + a bookdown 
+                           project to reproduce the included textual data + a 
+                           script to upgrade vc-formatted files.
 ├── R                   <- Package functions are to be made here.
+├── vignettes           <- Vignettes are to be made here.
 ├── DESCRIPTION
 ├── LICENSE
 ├── n2khab.Rproj        <- RStudio project file

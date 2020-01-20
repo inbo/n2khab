@@ -22,7 +22,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{source_text}{Logical, defaults to \code{FALSE}.
 If \code{TRUE}, the list version is returned (see \emph{Value}).}

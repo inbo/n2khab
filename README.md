@@ -44,7 +44,7 @@ Having processed datasets readily available is useful in the case of time-consum
 The data definitions & standard checklists (reference data) provided by the package are textual files in the [vc-format](https://ropensci.github.io/git2rdata/index.html).
 Some of them come over from another repository.
 Others may be written as the result of a synchronization script to give them a start.
-The code to reproduce these files is inside the `src` folder.
+The code to reproduce these files is inside the `misc` folder of the [source code](https://github.com/inbo/n2khab).
 The package provides the necessary functions to return these as standardized tibbles (`vignette("v010_reference_lists")`).
 
 This package is the successor of the 'n2khabutils' package.
