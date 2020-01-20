@@ -1,8 +1,8 @@
 ## This script allows to reproduce the vc-formatted data source
-## 'soil_translation_polders' which is delivered with the
+## 'soil_translation_coastalplain' which is delivered with the
 ## n2khab package and used internally by the read_soilmap() function,
 ## in case it has the arguments use_processed = FALSE and
-## standardize_polders = TRUE
+## standardize_coastalplain = TRUE
 
 ## The script is to be run from the root of the git repository, i.e. this must
 ## be the working directory.
@@ -29,7 +29,7 @@ transl <-
     )
 
 transl %>%
-    write_vc("inst/textdata/soil_translation_polders",
+    write_vc("inst/textdata/soil_translation_coastalplain",
              sorting = c("soiltype_orig"),
              strict = FALSE)
 
