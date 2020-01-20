@@ -90,7 +90,6 @@ code	lang	name	shortname
 91E0_vn	en	Eutrophic alder carrs (Filipendulo-Alnetum, Macrophorbio-Alnetum, Cirsio-Alnetum)	Eutrophic alder carrs
 91E0_vo	en	Oligotrophic (alder-)birch carrs (Carici laevigata-Alnetum)	Oligotrophic (alder-)birch carrs
 91F0	en	Riparian mixed forests of Quercus robur, Ulmus laevis and Ulmus minor, Fraxinus excelsior or Fraxinus angustifolia, along the great rivers (Ulmenion minoris)	Dry riparian hardwood forests
-aq	en	aquatic	NA
 ATM	en	Atmospheric monitoring	NA
 ATM_03.1	en	Atmospheric monitoring: environmental pressure 03.1_eutr_air	ATM: 03.1_eutr_air
 ATM_03.1_group1	en	very sensitive non-forest types	very sensitive non-forest
@@ -110,13 +109,106 @@ ATM_08.1	en	Atmospheric monitoring: environmental pressure 08.1_poll_air	ATM: 08
 ATM_101	en	Atmospheric monitoring: environmental pressure 101_clim_dry	ATM: 101_clim_dry
 ATM_102	en	Atmospheric monitoring: environmental pressure 102_clim_wet	ATM: 102_clim_wet
 BMF	en	Bogs, mires and fens	NA
-caves	en	caves	NA
 CD	en	Coastal sand dunes	NA
 CH	en	Coastal and halophytic habitats	NA
 CT	en	Calcareous type	NA
 DI	en	Dike inward	NA
 DIO	en	Dike in-/outward	NA
 DO	en	Dike outward	NA
+FD0	en	flood independent	flood independent
+FD1	en	flood dependent on a part of the locations	locally flood dependent
+FD2	en	flood dependent on (almost) all locations	(almost) everywhere flood dependent
+FS	en	Forest and scrub	NA
+FW	en	Fresh and brackish water	NA
+GD0	en	groundwater independent	groundwater independent
+GD1	en	groundwater dependent on a part of the locations	locally groundwater dependent
+GD2	en	groundwater dependent on (almost) all locations	(almost) everywhere groundwater dependent
+GR	en	Natural and semi-natural grassland	NA
+GW	en	Groundwater monitoring	NA
+GW_03.3	en	Groundwater monitoring: environmental pressure 03.3_eutr_gw	GW: 03.3_eutr_gw
+GW_03.3_group1	en	types from oligotrophic environments	oligotrophic
+GW_03.3_group2	en	types from mesotrophic environments	mesotrophic
+GW_03.3_group3	en	types from weakly eutrophic environments	weakly eutrophic
+GW_03.3_group4	en	types from moderately eutrophic to eutrophic environments	(moderately) eutrophic
+GW_04.2	en	Groundwater monitoring: environmental pressure 04.2_acidif_gw	GW: 04.2_acidif_gw
+GW_05.1_aq	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim aquatic	GW: 05.1_des_gw: aq
+GW_05.1_caves	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim caves	GW: 05.1_des_gw: caves
+GW_05.1_terr	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim terrestrial	GW: 05.1_des_gw: terr
+GW_05.1_terr_group1	en	types from very wet environments	very wet
+GW_05.1_terr_group2	en	types from wet environments	wet
+GW_05.1_terr_group3	en	types from moderately wet environments	moderately wet
+GW_05.1_terr_group4	en	types from moist environments	moist
+GW_05.1_terr_group5	en	types from dry environments	dry
+GW_05.2	en	Groundwater monitoring: environmental pressure 05.2_wet_gw	GW: 05.2_wet_gw
+GW_07.1	en	Groundwater monitoring: environmental pressure 07.1_desal_gw	GW: 07.1_desal_gw
+GW_08.3	en	Groundwater monitoring: environmental pressure 08.3_poll_gw	GW: 08.3_poll_gw
+HC1	en	Dry to moist	Dry
+HC12	en	Dry to moist + Temporarily to permanently wet	Dry + Wet
+HC2	en	Temporarily to permanently wet	Wet
+HC23	en	Temporarily to permanently wet + Surface water	Wet + Surface water
+HC3	en	Surface water	Surface water
+HQ1330	en	Habitat quality scheme: Atlantic salt meadows	Habitat quality scheme 1330
+HQ2130	en	Habitat quality scheme: Grey dunes	Habitat quality scheme 2130
+HQ2160	en	Habitat quality scheme: Hippophae rhamnoides dunes	Habitat quality scheme 2160
+HQ2170	en	Habitat quality scheme: Salix repens dunes	Habitat quality scheme 2170
+HQ2180	en	Habitat quality scheme: Wooded dunes	Habitat quality scheme 2180
+HQ2190	en	Habitat quality scheme: Humid dune slacks	Habitat quality scheme 2190
+HQ2310	en	Habitat quality scheme: Psammophylic heath	Habitat quality scheme 2310
+HQ2330	en	Habitat quality scheme: Inland shifting dunes	Habitat quality scheme 2330
+HQ3110	en	Habitat quality scheme: Barely buffered standing waters	Habitat quality scheme 3110
+HQ3130	en	Habitat quality scheme: Poorly buffered standing waters	Habitat quality scheme 3130
+HQ3140	en	Habitat quality scheme: Standing waters with Chara	Habitat quality scheme 3140
+HQ3150	en	Habitat quality scheme: Lakes with Stratiotes and Potamogeton	Habitat quality scheme 3150
+HQ3160	en	Habitat quality scheme: Dystrophic standing waters	Habitat quality scheme 3160
+HQ3270	en	Habitat quality scheme: Rivers with muddy banks	Habitat quality scheme 3270
+HQ4010	en	Habitat quality scheme: Wet heaths	Habitat quality scheme 4010
+HQ4030	en	Habitat quality scheme: Dry heaths	Habitat quality scheme 4030
+HQ6120	en	Habitat quality scheme: Pioneer calcareous sand swards	Habitat quality scheme 6120
+HQ6230	en	Habitat quality scheme: Nardus grasslands	Habitat quality scheme 6230
+HQ6410	en	Habitat quality scheme: Molinion grasslands	Habitat quality scheme 6410
+HQ6510	en	Habitat quality scheme: Arrhenaterion and Alopecurion grasslands	Habitat quality scheme 6510
+HQ7140	en	Habitat quality scheme: Transition mires and quaking bogs	Habitat quality scheme 7140
+HQ9120	en	Habitat quality scheme: Beech-oak forests with Ilex	Habitat quality scheme 9120
+HQ9130	en	Habitat quality scheme: Neutrophilic beech forest	Habitat quality scheme 9130
+HQ9160	en	Habitat quality scheme: Oak-hornbeam forests	Habitat quality scheme 9160
+HQ9190	en	Habitat quality scheme: Old oak forests	Habitat quality scheme 9190
+HQ91E0	en	Habitat quality scheme: Alluvial forests	Habitat quality scheme 91E0
+HS	en	Temperate heath and scrub	NA
+ID	en	Inland dunes	NA
+INUN	en	Inundationwater monitoring	NA
+INUN_03.4	en	Inundationwater monitoring: environmental pressure 03.4_eutr_sw	INUN: 03.4_eutr_sw
+INUN_061	en	Inundationwater monitoring: environmental pressure 061_flood_incr	INUN: 061_flood_incr
+INUN_062	en	Inundationwater monitoring: environmental pressure 062_flood_decr	INUN: 062_flood_decr
+INUN_063	en	Inundationwater monitoring: environmental pressure 063_swlevel_incr	INUN: 063_swlevel_incr
+INUN_064	en	Inundationwater monitoring: environmental pressure 064_swlevel_decr	INUN: 064_swlevel_decr
+INUN_065	en	Inundationwater monitoring: environmental pressure 065_wave_incr	INUN: 065_wave_incr
+INUN_066	en	Inundationwater monitoring: environmental pressure 066_wave_decr	INUN: 066_wave_decr
+INUN_07.2	en	Inundationwater monitoring: environmental pressure 07.2_desal_sw	INUN: 07.2_desal_sw
+INUN_08.4	en	Inundationwater monitoring: environmental pressure 08.4_poll_sw	INUN: 08.4_poll_sw
+INUN_103	en	Inundationwater monitoring: environmental pressure 103_clim_sea	INUN: 103_clim_sea
+MHQ	en	Monitoring programme for biotic Habitat Quality	NA
+MNE	en	Monitoring programme for the Natural Environment	NA
+RC	en	Rocky habitats and caves	NA
+RW	en	Running water	NA
+SOIL	en	Soil monitoring	NA
+SOIL_012	en	Soil monitoring: environmental pressure 012_soildyn_incr	SOIL: 012_soildyn_incr
+SOIL_013	en	Soil monitoring: environmental pressure 013_soildyn_decr	SOIL: 013_soildyn_decr
+SOIL_03.2	en	Soil monitoring: environmental pressure 03.2_eutr_soil	SOIL: 03.2_eutr_soil
+SOIL_08.2	en	Soil monitoring: environmental pressure 08.2_poll_soil	SOIL: 08.2_poll_soil
+SS	en	Sclerophyllous scrub	NA
+SURF	en	Surfacewater monitoring	NA
+SURF_012	en	Surfacewater monitoring: environmental pressure 012_soildyn_incr	SURF: 012_soildyn_incr
+SURF_03.2	en	Surfacewater monitoring: environmental pressure 03.2_eutr_soil	SURF: 03.2_eutr_soil
+SURF_03.4_lentic	en	Surfacewater monitoring: environmental pressure 03.4_eutr_sw: partim lentic waters	SURF: 03.4_eutr_sw: lentic
+SURF_03.4_lotic	en	Surfacewater monitoring: environmental pressure 03.4_eutr_sw: partim lotic waters	SURF: 03.4_eutr_sw: lotic
+SURF_064	en	Surfacewater monitoring: environmental pressure 064_swlevel_decr	SURF: 064_swlevel_decr
+SURF_066	en	Surfacewater monitoring: environmental pressure 066_wave_decr	SURF: 066_wave_decr
+SURF_07.2	en	Surfacewater monitoring: environmental pressure 07.2_desal_sw	SURF: 07.2_desal_sw
+SURF_08.2	en	Surfacewater monitoring: environmental pressure 08.2_poll_soil	SURF: 08.2_poll_soil
+SURF_08.4	en	Surfacewater monitoring: environmental pressure 08.4_poll_sw	SURF: 08.4_poll_sw
+SW	en	Standing water	NA
+aq	en	aquatic	NA
+caves	en	caves	NA
 ep_011	en	11 Change of physical structure to a permanent new state (soil compaction, infrastructure, reprofiling, new substrate, soil transport, ...)	011_struct
 ep_012	en	12 Soil dynamics increase (erosion, soil turbation, sand drift)	012_soildyn_incr
 ep_013	en	13 Soil dynamics decrease (erosion, soil turbation, sand drift)	013_soildyn_decr
@@ -165,68 +257,8 @@ ep_class_08	en	8 Pollution	NA
 ep_class_09	en	9 Disturbance	NA
 ep_class_10	en	10 Climate change	NA
 focal	en	Focal scheme	NA
-FS	en	Forest and scrub	NA
-FW	en	Fresh and brackish water	NA
-GR	en	Natural and semi-natural grassland	NA
-GW	en	Groundwater monitoring	NA
-GW_03.3	en	Groundwater monitoring: environmental pressure 03.3_eutr_gw	GW: 03.3_eutr_gw
-GW_03.3_group1	en	types from oligotrophic environments	oligotrophic
-GW_03.3_group2	en	types from mesotrophic environments	mesotrophic
-GW_03.3_group3	en	types from weakly eutrophic environments	weakly eutrophic
-GW_03.3_group4	en	types from moderately eutrophic to eutrophic environments	(moderately) eutrophic
-GW_04.2	en	Groundwater monitoring: environmental pressure 04.2_acidif_gw	GW: 04.2_acidif_gw
-GW_05.1_aq	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim aquatic	GW: 05.1_des_gw: aq
-GW_05.1_caves	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim caves	GW: 05.1_des_gw: caves
-GW_05.1_terr	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim terrestrial	GW: 05.1_des_gw: terr
-GW_05.1_terr_group1	en	types from very wet environments	very wet
-GW_05.1_terr_group2	en	types from wet environments	wet
-GW_05.1_terr_group3	en	types from moderately wet environments	moderately wet
-GW_05.1_terr_group4	en	types from moist environments	moist
-GW_05.1_terr_group5	en	types from dry environments	dry
-GW_05.2	en	Groundwater monitoring: environmental pressure 05.2_wet_gw	GW: 05.2_wet_gw
-GW_07.1	en	Groundwater monitoring: environmental pressure 07.1_desal_gw	GW: 07.1_desal_gw
-GW_08.3	en	Groundwater monitoring: environmental pressure 08.3_poll_gw	GW: 08.3_poll_gw
-HQ1330	en	Habitat quality scheme: Atlantic salt meadows	Habitat quality scheme 1330
-HQ2130	en	Habitat quality scheme: Grey dunes	Habitat quality scheme 2130
-HQ2160	en	Habitat quality scheme: Hippophae rhamnoides dunes	Habitat quality scheme 2160
-HQ2170	en	Habitat quality scheme: Salix repens dunes	Habitat quality scheme 2170
-HQ2180	en	Habitat quality scheme: Wooded dunes	Habitat quality scheme 2180
-HQ2190	en	Habitat quality scheme: Humid dune slacks	Habitat quality scheme 2190
-HQ2310	en	Habitat quality scheme: Psammophylic heath	Habitat quality scheme 2310
-HQ2330	en	Habitat quality scheme: Inland shifting dunes	Habitat quality scheme 2330
-HQ3110	en	Habitat quality scheme: Barely buffered standing waters	Habitat quality scheme 3110
-HQ3130	en	Habitat quality scheme: Poorly buffered standing waters	Habitat quality scheme 3130
-HQ3140	en	Habitat quality scheme: Standing waters with Chara	Habitat quality scheme 3140
-HQ3150	en	Habitat quality scheme: Lakes with Stratiotes and Potamogeton	Habitat quality scheme 3150
-HQ3160	en	Habitat quality scheme: Dystrophic standing waters	Habitat quality scheme 3160
-HQ3270	en	Habitat quality scheme: Rivers with muddy banks	Habitat quality scheme 3270
-HQ4010	en	Habitat quality scheme: Wet heaths	Habitat quality scheme 4010
-HQ4030	en	Habitat quality scheme: Dry heaths	Habitat quality scheme 4030
-HQ6120	en	Habitat quality scheme: Pioneer calcareous sand swards	Habitat quality scheme 6120
-HQ6230	en	Habitat quality scheme: Nardus grasslands	Habitat quality scheme 6230
-HQ6410	en	Habitat quality scheme: Molinion grasslands	Habitat quality scheme 6410
-HQ6510	en	Habitat quality scheme: Arrhenaterion and Alopecurion grasslands	Habitat quality scheme 6510
-HQ7140	en	Habitat quality scheme: Transition mires and quaking bogs	Habitat quality scheme 7140
-HQ9120	en	Habitat quality scheme: Beech-oak forests with Ilex	Habitat quality scheme 9120
-HQ9130	en	Habitat quality scheme: Neutrophilic beech forest	Habitat quality scheme 9130
-HQ9160	en	Habitat quality scheme: Oak-hornbeam forests	Habitat quality scheme 9160
-HQ9190	en	Habitat quality scheme: Old oak forests	Habitat quality scheme 9190
-HQ91E0	en	Habitat quality scheme: Alluvial forests	Habitat quality scheme 91E0
-HS	en	Temperate heath and scrub	NA
-ID	en	Inland dunes	NA
-INUN	en	Inundationwater monitoring	NA
-INUN_03.4	en	Inundationwater monitoring: environmental pressure 03.4_eutr_sw	INUN: 03.4_eutr_sw
-INUN_061	en	Inundationwater monitoring: environmental pressure 061_flood_incr	INUN: 061_flood_incr
-INUN_062	en	Inundationwater monitoring: environmental pressure 062_flood_decr	INUN: 062_flood_decr
-INUN_063	en	Inundationwater monitoring: environmental pressure 063_swlevel_incr	INUN: 063_swlevel_incr
-INUN_064	en	Inundationwater monitoring: environmental pressure 064_swlevel_decr	INUN: 064_swlevel_decr
-INUN_065	en	Inundationwater monitoring: environmental pressure 065_wave_incr	INUN: 065_wave_incr
-INUN_066	en	Inundationwater monitoring: environmental pressure 066_wave_decr	INUN: 066_wave_decr
-INUN_07.2	en	Inundationwater monitoring: environmental pressure 07.2_desal_sw	INUN: 07.2_desal_sw
-INUN_08.4	en	Inundationwater monitoring: environmental pressure 08.4_poll_sw	INUN: 08.4_poll_sw
-INUN_103	en	Inundationwater monitoring: environmental pressure 103_clim_sea	INUN: 103_clim_sea
-MHQ	en	Monitoring programme for biotic Habitat Quality	NA
-MNE	en	Monitoring programme for the Natural Environment	NA
+lentic	en	lentic waters	NA
+lotic	en	lotic waters	NA
 rbbah	en	Brackish to saltish standing waters	Brackish to salty standing waters
 rbbha	en	Species-rich Agrostis grasslands (no 6230 habitat type)	Species-rich Agrostis grasslands (not 6230)
 rbbhc	en	Calthion grasslands	Calthion grasslands
@@ -247,25 +279,7 @@ rbbvos	en	Alopecurion grasslands (no 6510 habitat type)	Alopecurion grasslands (
 rbbvos+	en	Species-rich Alopecurion grasslands (no 6510 habitat type)	Species-rich Alopecurion grasslands (not 6510)
 rbbzil	en	Potentilla anserina grasslands	Potentilla anserina grasslands
 rbbzil+	en	Species-rich Potentilla anserina grasslands	Species-rich Potentilla anserina grasslands
-RC	en	Rocky habitats and caves	NA
-RW	en	Running water	NA
 secondary	en	Secondary scheme	NA
-SOIL	en	Soil monitoring	NA
-SOIL_012	en	Soil monitoring: environmental pressure 012_soildyn_incr	SOIL: 012_soildyn_incr
-SOIL_013	en	Soil monitoring: environmental pressure 013_soildyn_decr	SOIL: 013_soildyn_decr
-SOIL_03.2	en	Soil monitoring: environmental pressure 03.2_eutr_soil	SOIL: 03.2_eutr_soil
-SOIL_08.2	en	Soil monitoring: environmental pressure 08.2_poll_soil	SOIL: 08.2_poll_soil
-SS	en	Sclerophyllous scrub	NA
-SURF	en	Surfacewater monitoring	NA
-SURF_012	en	Surfacewater monitoring: environmental pressure 012_soildyn_incr	SURF: 012_soildyn_incr
-SURF_03.2	en	Surfacewater monitoring: environmental pressure 03.2_eutr_soil	SURF: 03.2_eutr_soil
-SURF_03.4	en	Surfacewater monitoring: environmental pressure 03.4_eutr_sw	SURF: 03.4_eutr_sw
-SURF_064	en	Surfacewater monitoring: environmental pressure 064_swlevel_decr	SURF: 064_swlevel_decr
-SURF_066	en	Surfacewater monitoring: environmental pressure 066_wave_decr	SURF: 066_wave_decr
-SURF_07.2	en	Surfacewater monitoring: environmental pressure 07.2_desal_sw	SURF: 07.2_desal_sw
-SURF_08.2	en	Surfacewater monitoring: environmental pressure 08.2_poll_soil	SURF: 08.2_poll_soil
-SURF_08.4	en	Surfacewater monitoring: environmental pressure 08.4_poll_sw	SURF: 08.4_poll_sw
-SW	en	Standing water	NA
 terr	en	terrestrial	NA
 1130	nl	Estuaria	estuaria
 1140	nl	Bij eb droogvallende slikwadden en zandplaten	bij eb droogvallend zand en slik
@@ -358,7 +372,6 @@ terr	en	terrestrial	NA
 91E0_vn	nl	ruigt-elzenbos (Filipendulo-Alnetum, Macrophorbio-Alnetum, Cirsio-Alnetum)	ruigt-elzenbos
 91E0_vo	nl	oligotroof broekbos, inclusief elzen-berkenbroekbos en berkenbroekbos (Carici laevigata-Alnetum)	oligotroof broekbos
 91F0	nl	Gemengde oeverformaties met Quercus robur, Ulmus laevis en Ulmus minor, Fraxinus excelsior of Fraxinus angustifolia, langs de grote rivieren (Ulmenion minoris)	hardhoutooibossen
-aq	nl	aquatisch	NA
 ATM	nl	Atmosferisch meetnet	NA
 ATM_03.1	nl	Atmosferisch meetnet: milieudruk 03.1_eutr_atm	ATM: 03.1_eutr_atm
 ATM_03.1_group1	nl	zeer gevoelige niet-bostypes	zeer gevoelig niet-bos
@@ -378,13 +391,106 @@ ATM_08.1	nl	Atmosferisch meetnet: milieudruk 08.1_verontr_atm	ATM: 08.1_verontr_
 ATM_101	nl	Atmosferisch meetnet: milieudruk 101_klim_droog	ATM: 101_klim_droog
 ATM_102	nl	Atmosferisch meetnet: milieudruk 102_klim_nat	ATM: 102_klim_nat
 BMF	nl	Moerassen	NA
-caves	nl	grotten	NA
 CD	nl	Kustduinen	NA
 CH	nl	Kust- en zilte habitats	NA
 CT	nl	Kalkrijkere (sub)types	NA
 DI	nl	Binnendijks	NA
 DIO	nl	Binnen- en buitendijks	NA
 DO	nl	Buitendijks	NA
+FD0	nl	niet overstromingsafhankelijk	niet overstromingsafhankelijk
+FD1	nl	overstromingsafhankelijk op een deel van de locaties	plaatselijk overstromingsafhankelijk
+FD2	nl	overstromingsafhankelijk op (bijna) alle locaties	(bijna) overal overstromingsafhankelijk
+FS	nl	Bossen en struwelen	NA
+FW	nl	Zoete en brakke wateren	NA
+GD0	nl	niet grondwaterafhankelijk	niet grondwaterafhankelijk
+GD1	nl	grondwaterafhankelijk op een deel van de locaties	plaatselijk grondwaterafhankelijk
+GD2	nl	grondwaterafhankelijk op (bijna) alle locaties	(bijna) overal grondwaterafhankelijk
+GR	nl	(Half-)natuurlijke graslanden	NA
+GW	nl	Grondwatermeetnet	NA
+GW_03.3	nl	Grondwatermeetnet: milieudruk 03.3_eutr_gw	GW: 03.3_eutr_gw
+GW_03.3_group1	nl	types van oligotroof milieu	oligotroof
+GW_03.3_group2	nl	types van mesotroof milieu	mesotroof
+GW_03.3_group3	nl	types van zwak eutroof milieu	zwak eutroof
+GW_03.3_group4	nl	types van matig eutroof tot eutroof milieu	(matig) eutroof
+GW_04.2	nl	Grondwatermeetnet: milieudruk 04.2_verzu_gw	GW: 04.2_verzu_gw
+GW_05.1_aq	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim aquatisch	GW: 05.1_verdro_gw: aq
+GW_05.1_caves	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim grotten	GW: 05.1_verdro_gw: caves
+GW_05.1_terr	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim terrestrisch	GW: 05.1_verdro_gw: terr
+GW_05.1_terr_group1	nl	types van zeer nat milieu	zeer nat
+GW_05.1_terr_group2	nl	types van nat milieu	nat
+GW_05.1_terr_group3	nl	types van matig nat milieu	matig nat
+GW_05.1_terr_group4	nl	types van vochtig milieu	vochtig
+GW_05.1_terr_group5	nl	types van droog milieu	droog
+GW_05.2	nl	Grondwatermeetnet: milieudruk 05.2_vernat_gw	GW: 05.2_vernat_gw
+GW_07.1	nl	Grondwatermeetnet: milieudruk 07.1_verzoet_gw	GW: 07.1_verzoet_gw
+GW_08.3	nl	Grondwatermeetnet: milieudruk 08.3_verontr_gw	GW: 08.3_verontr_gw
+HC1	nl	Droog tot vochtig	Droog
+HC12	nl	Droog tot vochtig + Tijdelijk tot permanent nat	Droog + Nat
+HC2	nl	Tijdelijk tot permanent nat	Nat
+HC23	nl	Tijdelijk tot permanent nat + Oppervlaktewater	Nat + Oppervlaktewater
+HC3	nl	Oppervlaktewater	Oppervlaktewater
+HQ1330	nl	Meetnet habitatkwaliteit: Atlantische schorren	Meetnet habitatkwaliteit 1330
+HQ2130	nl	Meetnet habitatkwaliteit: vastgelegde duinen	Meetnet habitatkwaliteit 2130
+HQ2160	nl	Meetnet habitatkwaliteit: duindoornstruwelen	Meetnet habitatkwaliteit 2160
+HQ2170	nl	Meetnet habitatkwaliteit: kruipwilgstruwelen	Meetnet habitatkwaliteit 2170
+HQ2180	nl	Meetnet habitatkwaliteit: duinbossen	Meetnet habitatkwaliteit 2180
+HQ2190	nl	Meetnet habitatkwaliteit: vochtige duinvalleien	Meetnet habitatkwaliteit 2190
+HQ2310	nl	Meetnet habitatkwaliteit: droge heide op landduinen	Meetnet habitatkwaliteit 2310
+HQ2330	nl	Meetnet habitatkwaliteit: open grasland op landduinen	Meetnet habitatkwaliteit 2330
+HQ3110	nl	Meetnet habitatkwaliteit: zeer zwakgebufferde vennen	Meetnet habitatkwaliteit 3110
+HQ3130	nl	Meetnet habitatkwaliteit: zwakgebufferde vennen	Meetnet habitatkwaliteit 3130
+HQ3140	nl	Meetnet habitatkwaliteit: kranswierwateren	Meetnet habitatkwaliteit 3140
+HQ3150	nl	Meetnet habitatkwaliteit: van nature eutrofe wateren	Meetnet habitatkwaliteit 3150
+HQ3160	nl	Meetnet habitatkwaliteit: dystrofe vennen	Meetnet habitatkwaliteit 3160
+HQ3270	nl	Meetnet habitatkwaliteit: voedselrijke slikoevers met bepaalde eenjarige planten	Meetnet habitatkwaliteit 3270
+HQ4010	nl	Meetnet habitatkwaliteit: vochtige heide	Meetnet habitatkwaliteit 4010
+HQ4030	nl	Meetnet habitatkwaliteit: droge heide	Meetnet habitatkwaliteit 4030
+HQ6120	nl	Meetnet habitatkwaliteit: stroomdalgraslanden	Meetnet habitatkwaliteit 6120
+HQ6230	nl	Meetnet habitatkwaliteit: heischrale graslanden	Meetnet habitatkwaliteit 6230
+HQ6410	nl	Meetnet habitatkwaliteit: blauwgraslanden	Meetnet habitatkwaliteit 6410
+HQ6510	nl	Meetnet habitatkwaliteit: soortenrijke glanshavergraslanden	Meetnet habitatkwaliteit 6510
+HQ7140	nl	Meetnet habitatkwaliteit: overgangs- en trilveen	Meetnet habitatkwaliteit 7140
+HQ9120	nl	Meetnet habitatkwaliteit: beuken-eikenbossen op zure bodem	Meetnet habitatkwaliteit 9120
+HQ9130	nl	Meetnet habitatkwaliteit: eiken-beukenbossen met wilde hyacint en parelgras-beukenbossen	Meetnet habitatkwaliteit 9130
+HQ9160	nl	Meetnet habitatkwaliteit: eiken-haagbeukenbossen	Meetnet habitatkwaliteit 9160
+HQ9190	nl	Meetnet habitatkwaliteit: oude eiken-berkenbossen	Meetnet habitatkwaliteit 9190
+HQ91E0	nl	Meetnet habitatkwaliteit: vochtige alluviale bossen	Meetnet habitatkwaliteit 91E0
+HS	nl	Heiden	NA
+ID	nl	Binnenlandse duinen	NA
+INUN	nl	Inundatiemeetnet	NA
+INUN_03.4	nl	Inundatiemeetnet: milieudruk 03.4_eutr_ow	INUN: 03.4_eutr_ow
+INUN_061	nl	Inundatiemeetnet: milieudruk 061_overstr_plus	INUN: 061_overstr_plus
+INUN_062	nl	Inundatiemeetnet: milieudruk 062_overstr_min	INUN: 062_overstr_min
+INUN_063	nl	Inundatiemeetnet: milieudruk 063_owpeil_plus	INUN: 063_owpeil_plus
+INUN_064	nl	Inundatiemeetnet: milieudruk 064_owpeil_min	INUN: 064_owpeil_min
+INUN_065	nl	Inundatiemeetnet: milieudruk 065_golf_plus	INUN: 065_golf_plus
+INUN_066	nl	Inundatiemeetnet: milieudruk 066_golf_min	INUN: 066_golf_min
+INUN_07.2	nl	Inundatiemeetnet: milieudruk 07.2_verzoet_ow	INUN: 07.2_verzoet_ow
+INUN_08.4	nl	Inundatiemeetnet: milieudruk 08.4_verontr_ow	INUN: 08.4_verontr_ow
+INUN_103	nl	Inundatiemeetnet: milieudruk 103_klim_zee	INUN: 103_klim_zee
+MHQ	nl	Monitoringprogramma biotische habitatkwaliteit	NA
+MNE	nl	Monitoringprogramma natuurlijk milieu	NA
+RC	nl	Rotsachtige habitats en grotten	NA
+RW	nl	Stromende wateren	NA
+SOIL	nl	Bodemmeetnet	NA
+SOIL_012	nl	Bodemmeetnet: milieudruk 012_boddyn_plus	SOIL: 012_boddyn_plus
+SOIL_013	nl	Bodemmeetnet: milieudruk 013_boddyn_min	SOIL: 013_boddyn_min
+SOIL_03.2	nl	Bodemmeetnet: milieudruk 03.2_eutr_bod	SOIL: 03.2_eutr_bod
+SOIL_08.2	nl	Bodemmeetnet: milieudruk 08.2_verontr_bod	SOIL: 08.2_verontr_bod
+SS	nl	Thermofiel struikgewas	NA
+SURF	nl	Oppervlaktewatermeetnet	NA
+SURF_012	nl	Oppervlaktewatermeetnet: milieudruk 012_boddyn_plus	SURF: 012_boddyn_plus
+SURF_03.2	nl	Oppervlaktewatermeetnet: milieudruk 03.2_eutr_bod	SURF: 03.2_eutr_bod
+SURF_03.4_lentic	nl	Oppervlaktewatermeetnet: milieudruk 03.4_eutr_ow: partim stilstaande wateren	SURF: 03.4_eutr_ow: lentic
+SURF_03.4_lotic	nl	Oppervlaktewatermeetnet: milieudruk 03.4_eutr_ow: partim stromende wateren	SURF: 03.4_eutr_ow: lotic
+SURF_064	nl	Oppervlaktewatermeetnet: milieudruk 064_owpeil_min	SURF: 064_owpeil_min
+SURF_066	nl	Oppervlaktewatermeetnet: milieudruk 066_golf_min	SURF: 066_golf_min
+SURF_07.2	nl	Oppervlaktewatermeetnet: milieudruk 07.2_verzoet_ow	SURF: 07.2_verzoet_ow
+SURF_08.2	nl	Oppervlaktewatermeetnet: milieudruk 08.2_verontr_bod	SURF: 08.2_verontr_bod
+SURF_08.4	nl	Oppervlaktewatermeetnet: milieudruk 08.4_verontr_ow	SURF: 08.4_verontr_ow
+SW	nl	Stilstaande wateren	NA
+aq	nl	aquatisch	NA
+caves	nl	grotten	NA
 ep_011	nl	11 Aanpassing van de fysische structuur naar een blijvende nieuwe toestand (bodemcompactie, verharding, herprofilering, nieuw substraat, grondverzet, ...)	011_struct
 ep_011_explan	nl	Aard van het substraat of de ruimtelijke vorm van de fysische standplaats worden veranderd naar een blijvende nieuwe toestand, in zodanige mate dat dit de levensgemeenschap negatief beïnvloedt	NA
 ep_012	nl	12 Toename bodemdynamiek (erosie, omwoeling, verstuiving)	012_boddyn_plus
@@ -453,68 +559,8 @@ ep_class_08	nl	8 Verontreiniging	NA
 ep_class_09	nl	9 Verstoring	NA
 ep_class_10	nl	10 Klimaatverandering	NA
 focal	nl	Hoofdmeetnet	NA
-FS	nl	Bossen en struwelen	NA
-FW	nl	Zoete en brakke wateren	NA
-GR	nl	(Half-)natuurlijke graslanden	NA
-GW	nl	Grondwatermeetnet	NA
-GW_03.3	nl	Grondwatermeetnet: milieudruk 03.3_eutr_gw	GW: 03.3_eutr_gw
-GW_03.3_group1	nl	types van oligotroof milieu	oligotroof
-GW_03.3_group2	nl	types van mesotroof milieu	mesotroof
-GW_03.3_group3	nl	types van zwak eutroof milieu	zwak eutroof
-GW_03.3_group4	nl	types van matig eutroof tot eutroof milieu	(matig) eutroof
-GW_04.2	nl	Grondwatermeetnet: milieudruk 04.2_verzu_gw	GW: 04.2_verzu_gw
-GW_05.1_aq	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim aquatisch	GW: 05.1_verdro_gw: aq
-GW_05.1_caves	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim grotten	GW: 05.1_verdro_gw: caves
-GW_05.1_terr	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim terrestrisch	GW: 05.1_verdro_gw: terr
-GW_05.1_terr_group1	nl	types van zeer nat milieu	zeer nat
-GW_05.1_terr_group2	nl	types van nat milieu	nat
-GW_05.1_terr_group3	nl	types van matig nat milieu	matig nat
-GW_05.1_terr_group4	nl	types van vochtig milieu	vochtig
-GW_05.1_terr_group5	nl	types van droog milieu	droog
-GW_05.2	nl	Grondwatermeetnet: milieudruk 05.2_vernat_gw	GW: 05.2_vernat_gw
-GW_07.1	nl	Grondwatermeetnet: milieudruk 07.1_verzoet_gw	GW: 07.1_verzoet_gw
-GW_08.3	nl	Grondwatermeetnet: milieudruk 08.3_verontr_gw	GW: 08.3_verontr_gw
-HQ1330	nl	Meetnet habitatkwaliteit: Atlantische schorren	Meetnet habitatkwaliteit 1330
-HQ2130	nl	Meetnet habitatkwaliteit: vastgelegde duinen	Meetnet habitatkwaliteit 2130
-HQ2160	nl	Meetnet habitatkwaliteit: duindoornstruwelen	Meetnet habitatkwaliteit 2160
-HQ2170	nl	Meetnet habitatkwaliteit: kruipwilgstruwelen	Meetnet habitatkwaliteit 2170
-HQ2180	nl	Meetnet habitatkwaliteit: duinbossen	Meetnet habitatkwaliteit 2180
-HQ2190	nl	Meetnet habitatkwaliteit: vochtige duinvalleien	Meetnet habitatkwaliteit 2190
-HQ2310	nl	Meetnet habitatkwaliteit: droge heide op landduinen	Meetnet habitatkwaliteit 2310
-HQ2330	nl	Meetnet habitatkwaliteit: open grasland op landduinen	Meetnet habitatkwaliteit 2330
-HQ3110	nl	Meetnet habitatkwaliteit: zeer zwakgebufferde vennen	Meetnet habitatkwaliteit 3110
-HQ3130	nl	Meetnet habitatkwaliteit: zwakgebufferde vennen	Meetnet habitatkwaliteit 3130
-HQ3140	nl	Meetnet habitatkwaliteit: kranswierwateren	Meetnet habitatkwaliteit 3140
-HQ3150	nl	Meetnet habitatkwaliteit: van nature eutrofe wateren	Meetnet habitatkwaliteit 3150
-HQ3160	nl	Meetnet habitatkwaliteit: dystrofe vennen	Meetnet habitatkwaliteit 3160
-HQ3270	nl	Meetnet habitatkwaliteit: voedselrijke slikoevers met bepaalde eenjarige planten	Meetnet habitatkwaliteit 3270
-HQ4010	nl	Meetnet habitatkwaliteit: vochtige heide	Meetnet habitatkwaliteit 4010
-HQ4030	nl	Meetnet habitatkwaliteit: droge heide	Meetnet habitatkwaliteit 4030
-HQ6120	nl	Meetnet habitatkwaliteit: stroomdalgraslanden	Meetnet habitatkwaliteit 6120
-HQ6230	nl	Meetnet habitatkwaliteit: heischrale graslanden	Meetnet habitatkwaliteit 6230
-HQ6410	nl	Meetnet habitatkwaliteit: blauwgraslanden	Meetnet habitatkwaliteit 6410
-HQ6510	nl	Meetnet habitatkwaliteit: soortenrijke glanshavergraslanden	Meetnet habitatkwaliteit 6510
-HQ7140	nl	Meetnet habitatkwaliteit: overgangs- en trilveen	Meetnet habitatkwaliteit 7140
-HQ9120	nl	Meetnet habitatkwaliteit: beuken-eikenbossen op zure bodem	Meetnet habitatkwaliteit 9120
-HQ9130	nl	Meetnet habitatkwaliteit: eiken-beukenbossen met wilde hyacint en parelgras-beukenbossen	Meetnet habitatkwaliteit 9130
-HQ9160	nl	Meetnet habitatkwaliteit: eiken-haagbeukenbossen	Meetnet habitatkwaliteit 9160
-HQ9190	nl	Meetnet habitatkwaliteit: oude eiken-berkenbossen	Meetnet habitatkwaliteit 9190
-HQ91E0	nl	Meetnet habitatkwaliteit: vochtige alluviale bossen	Meetnet habitatkwaliteit 91E0
-HS	nl	Heiden	NA
-ID	nl	Binnenlandse duinen	NA
-INUN	nl	Inundatiemeetnet	NA
-INUN_03.4	nl	Inundatiemeetnet: milieudruk 03.4_eutr_ow	INUN: 03.4_eutr_ow
-INUN_061	nl	Inundatiemeetnet: milieudruk 061_overstr_plus	INUN: 061_overstr_plus
-INUN_062	nl	Inundatiemeetnet: milieudruk 062_overstr_min	INUN: 062_overstr_min
-INUN_063	nl	Inundatiemeetnet: milieudruk 063_owpeil_plus	INUN: 063_owpeil_plus
-INUN_064	nl	Inundatiemeetnet: milieudruk 064_owpeil_min	INUN: 064_owpeil_min
-INUN_065	nl	Inundatiemeetnet: milieudruk 065_golf_plus	INUN: 065_golf_plus
-INUN_066	nl	Inundatiemeetnet: milieudruk 066_golf_min	INUN: 066_golf_min
-INUN_07.2	nl	Inundatiemeetnet: milieudruk 07.2_verzoet_ow	INUN: 07.2_verzoet_ow
-INUN_08.4	nl	Inundatiemeetnet: milieudruk 08.4_verontr_ow	INUN: 08.4_verontr_ow
-INUN_103	nl	Inundatiemeetnet: milieudruk 103_klim_zee	INUN: 103_klim_zee
-MHQ	nl	Monitoringprogramma biotische habitatkwaliteit	NA
-MNE	nl	Monitoringprogramma natuurlijk milieu	NA
+lentic	nl	stilstaande wateren	NA
+lotic	nl	stromende wateren	NA
 rbbah	nl	brak tot zilt water	brak tot zilt water
 rbbha	nl	soortenrijk, niet habitatwaardig struisgrasvegetatie	soortenrijke struisgrasvegetatie
 rbbhc	nl	dotterbloemgrasland	dotterbloemgrasland
@@ -535,23 +581,5 @@ rbbvos	nl	grote vossenstaartgrasland niet vervat in 6510	grote vossenstaartgrasl
 rbbvos+	nl	soortenrijk grote vossenstaartgrasland	soortenrijk grote vossenstaartgrasland
 rbbzil	nl	zilverschoongrasland	zilverschoongrasland
 rbbzil+	nl	soortenrijk zilverschoongrasland	soortenrijk zilverschoongrasland
-RC	nl	Rotsachtige habitats en grotten	NA
-RW	nl	Stromende wateren	NA
 secondary	nl	Secundair meetnet	NA
-SOIL	nl	Bodemmeetnet	NA
-SOIL_012	nl	Bodemmeetnet: milieudruk 012_boddyn_plus	SOIL: 012_boddyn_plus
-SOIL_013	nl	Bodemmeetnet: milieudruk 013_boddyn_min	SOIL: 013_boddyn_min
-SOIL_03.2	nl	Bodemmeetnet: milieudruk 03.2_eutr_bod	SOIL: 03.2_eutr_bod
-SOIL_08.2	nl	Bodemmeetnet: milieudruk 08.2_verontr_bod	SOIL: 08.2_verontr_bod
-SS	nl	Thermofiel struikgewas	NA
-SURF	nl	Oppervlaktewatermeetnet	NA
-SURF_012	nl	Oppervlaktewatermeetnet: milieudruk 012_boddyn_plus	SURF: 012_boddyn_plus
-SURF_03.2	nl	Oppervlaktewatermeetnet: milieudruk 03.2_eutr_bod	SURF: 03.2_eutr_bod
-SURF_03.4	nl	Oppervlaktewatermeetnet: milieudruk 03.4_eutr_ow	SURF: 03.4_eutr_ow
-SURF_064	nl	Oppervlaktewatermeetnet: milieudruk 064_owpeil_min	SURF: 064_owpeil_min
-SURF_066	nl	Oppervlaktewatermeetnet: milieudruk 066_golf_min	SURF: 066_golf_min
-SURF_07.2	nl	Oppervlaktewatermeetnet: milieudruk 07.2_verzoet_ow	SURF: 07.2_verzoet_ow
-SURF_08.2	nl	Oppervlaktewatermeetnet: milieudruk 08.2_verontr_bod	SURF: 08.2_verontr_bod
-SURF_08.4	nl	Oppervlaktewatermeetnet: milieudruk 08.4_verontr_ow	SURF: 08.4_verontr_ow
-SW	nl	Stilstaande wateren	NA
 terr	nl	terrestrisch	NA

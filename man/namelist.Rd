@@ -42,8 +42,10 @@ Multiple languages are supported.
 \seealso{
 \code{\link{read_namelist}}
 
-Other n2khab-referencelists: \code{\link{env_pressures}},
-  \code{\link{scheme_types}}, \code{\link{schemes}},
-  \code{\link{types}}
+Other n2khab-referencelists: 
+\code{\link{env_pressures}},
+\code{\link{scheme_types}},
+\code{\link{schemes}},
+\code{\link{types}}
 }
 \concept{n2khab-referencelists}

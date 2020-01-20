@@ -2,10 +2,13 @@
 % Please edit documentation in R/read_habitatdata.R
 \name{read_habitatmap}
 \alias{read_habitatmap}
-\title{Return the data source \code{habitatmap}}
+\title{Return the data source \code{habitatmap} as an \code{sf} multipolygon layer}
 \usage{
-read_habitatmap(path = fileman_up("n2khab_data"),
-  file = "10_raw/habitatmap", select_hab = FALSE)
+read_habitatmap(
+  path = fileman_up("n2khab_data"),
+  file = "10_raw/habitatmap",
+  select_hab = FALSE
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -18,26 +21,30 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{select_hab}{If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 important biotope (RIB) are returned. The default value is \code{FALSE}.}
 }
 \value{
-An sf object
+A Simple feature collection of
+type \code{MULTIPOLYGON}.
 }
 \description{
-\code{read_habitatmap} returns the \code{habitatmap} (De Saeger et al., 2018).
+Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
+as a standardized \code{sf} multipolygon layer
+(tidyverse-styled, internationalized).
 }
 \examples{
 \dontrun{
 # This example supposes that your working directory or a directory up to 10
-# levels above has the 'n2khab_data' folder AND that the 'habitatmapd'
+# levels above has the 'n2khab_data' folder AND that the 'habitatmap'
 # data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_habitatmap()
+hm <- read_habitatmap()
+hm
 }
 
 }
@@ -49,7 +56,9 @@ Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (
 DOI: https://doi.org/10.21436/inbor.15138099.
 }
 \seealso{
-Other functions involved in processing the \code{habitatmap} data source: \code{\link{read_habitatmap_stdized}},
-  \code{\link{read_watersurfaces_hab}}
+Other functions involved in processing the \code{habitatmap} data source: 
+\code{\link{read_habitatmap_stdized}()},
+\code{\link{read_habitatmap_terr}()},
+\code{\link{read_watersurfaces_hab}()}
 }
 \concept{functions involved in processing the \code{habitatmap} data source}

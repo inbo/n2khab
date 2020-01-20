@@ -1,12 +1,12 @@
 ..generic:
-  git2rdata: '0.1'
+  git2rdata: 0.2.0
   optimize: no
   NA string: NA
   sorting:
   - typeclass
   - type
-  hash: 1b6d1c2a70797685dcea441abeb708cce6c2026a
-  data_hash: dc57d8153a0eef175c4ad365b7299341dba7e872
+  hash: 3716361494fa7d0742afaf7cb987f8ad91e0fb52
+  data_hash: 7c8f5cf99897554cd6ef821c5aeb2e22d381c3f4
 type:
   class: factor
   labels:
@@ -398,6 +398,43 @@ typeclass:
   - 8
   - 9
   - 10
+  ordered: no
+hydr_class:
+  class: factor
+  labels:
+  - HC1
+  - HC12
+  - HC2
+  - HC23
+  - HC3
+  index:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  ordered: no
+groundw_dep:
+  class: factor
+  labels:
+  - GD0
+  - GD1
+  - GD2
+  index:
+  - 1
+  - 2
+  - 3
+  ordered: no
+flood_dep:
+  class: factor
+  labels:
+  - FD0
+  - FD1
+  - FD2
+  index:
+  - 1
+  - 2
+  - 3
   ordered: no
 tag_1:
   class: character

@@ -5,15 +5,18 @@
 Set path and filename of the namelist:
 
 ```{r}
-namelist_path <- "../../inst/textdata/namelist"
+namelist_path <- "inst/textdata/namelist"
+root <- "../.."
 ```
 
 
-Reading from the source googlesheet (maintained by the MNE and [HabNorm](https://github.com/inbo/habnorm) projects):
+Reading from the source googlesheet (maintained by Steven De Saeger):
 
 ```{r message=FALSE}
+# the first time, run:
+# gs_auth()
 types_source <- gs_key("1dK0S1Tt3RlVEh4WrNF5N_-hn0OXiTUVOvsL2JRhSl78")
-# gs_browse(types_gs)
+# gs_browse(types_source)
 source_df <-
     types_source %>%
     gs_read(ws = 1, 
@@ -25,7 +28,7 @@ Writing the namelist a first time:
 
 ```{r message=FALSE}
 dummy <- 
-    str_c(namelist_path, ".*") %>% 
+    str_c(root, "/", namelist_path, ".*") %>% 
     Sys.glob %>% 
     file.remove
 source_df %>% 
@@ -49,6 +52,7 @@ source_df %>%
     gather(key = "lang", value = "name", en:nl) %>% 
     mutate(shortname = NA %>% as.character) %>% 
     write_vc(namelist_path,
+             root,
              sorting = c("lang", "code"))
 ```
 
@@ -67,12 +71,14 @@ source_df %>%
     separate(key, c("lang", "key")) %>% 
     spread(key = key,
            value = value) %>% 
-    bind_rows(read_vc(namelist_path),
+    bind_rows(read_vc(namelist_path, root),
               .) %>% 
-    write_vc(namelist_path)
+    write_vc(namelist_path, root)
 ```
 
-## Append extra tags to `namelist`
+## Append extra labels to `namelist`
+
+Information for tag 1:
 
 ```{r message=FALSE}
 source_df %>% 
@@ -92,24 +98,142 @@ source_df %>%
     )) %>% 
     gather(key = "lang", value = "name", en:nl) %>% 
     mutate(shortname = NA %>% as.character) %>% 
-    bind_rows(read_vc(namelist_path),
+    bind_rows(read_vc(namelist_path, root),
               .) %>% 
-    write_vc(namelist_path)
+    write_vc(namelist_path, root)
 ```
+
+Hydrological classes:
+
+```{r}
+type_hydroclass <- 
+    read_vc("rawraw_data/vegwhh") %>% 
+    rename(type = Vegcode,
+           hydroclass = Waterhuishouding) %>% 
+    group_by(type) %>% 
+    mutate(count_hydrocl = n(),
+           hydroclass = as.character(hydroclass)) %>% 
+    ungroup %>% 
+    spread(key = hydroclass, value = hydroclass) %>% 
+    rename(L1 = "Droog tot vochtig",
+           L2 = "Tijdelijk tot permanent nat",
+           L3 = "Oppervlaktewater") %>% 
+    unite(nl, L1, L2, L3, sep = " + ", na.rm = TRUE) %>% 
+    select(-count_hydrocl)
+# type_hydroclass %>% 
+#     distinct(nl)
+hc_names <- 
+    tribble(
+        ~code, ~nl_name, ~en_name, ~nl_shortname, ~en_shortname,
+        "HC1", "Droog tot vochtig", "Dry to moist",
+                "Droog", "Dry",
+        "HC12", "Droog tot vochtig + Tijdelijk tot permanent nat", 
+                "Dry to moist + Temporarily to permanently wet",
+                "Droog + Nat", "Dry + Wet",
+        "HC2", "Tijdelijk tot permanent nat", "Temporarily to permanently wet",
+                "Nat", "Wet",
+        "HC23", "Tijdelijk tot permanent nat + Oppervlaktewater", 
+                "Temporarily to permanently wet + Surface water",
+                "Nat + Oppervlaktewater", "Wet + Surface water",
+        "HC3", "Oppervlaktewater", "Surface water",
+        "Oppervlaktewater", "Surface water"
+    )
+type_hydroclass <- 
+    type_hydroclass %>% 
+    inner_join(hc_names %>% select(code, 
+                                   nl_name),
+               by = c("nl" = "nl_name")) %>% 
+    select(type, code)
+    
+hc_names %>% 
+    select(1:3) %>% 
+    pivot_longer(cols = -code,
+                 names_to = "lang",
+                 names_pattern = "(..)_.+",
+                 values_to = "name") %>% 
+    inner_join(
+        hc_names %>% 
+        select(1, 4:5) %>% 
+        pivot_longer(cols = -code,
+                     names_to = "lang",
+                     names_pattern = "(..)_.+",
+                     values_to = "shortname")
+    ) %>% 
+    bind_rows(read_vc(namelist_path, root),
+              .) %>% 
+    write_vc(namelist_path, root)
+```
+
+Groundwater and flood dependency:
+
+```{r}
+wdep_ss <- gs_key("1bhXgamK28K--MSWF7goKNOWtWPEI149_QCpU-3V_k_E")
+# gs_browse(wdep_ss)
+type_wdep <-
+    wdep_ss %>%
+    gs_read(ws = "Waterafhankelijke HT en RBB",
+            verbose = FALSE,
+            skip = 2,
+            col_names = FALSE) %>%  
+    select(type = X1, 
+           groundw_dep = X9,
+           flood_dep = X10) %>% 
+    mutate(groundw_dep = case_when(str_detect(groundw_dep, "alle") ~ "GD2",
+                                    str_detect(groundw_dep, "niet") ~ "GD0",
+                                    TRUE ~ "GD1") %>% 
+                        factor,
+           flood_dep = case_when(type %in% subset(type_hydroclass, code == "HC3")$type ~ NA_character_,
+                                 str_detect(flood_dep, "\\(.+\\)") ~ "FD2",
+                                    str_detect(flood_dep, "niet") ~ "FD0",
+                                    TRUE ~ "FD1") %>% 
+                        factor)
+
+wdep_names <- 
+    tribble(
+        ~code, ~nl_name, ~nl_shortname, ~en_name, ~en_shortname,
+        "GD0", "niet grondwaterafhankelijk", "niet grondwaterafhankelijk", "groundwater independent", "groundwater independent",
+        "GD1", "grondwaterafhankelijk op een deel van de locaties", "plaatselijk grondwaterafhankelijk", "groundwater dependent on a part of the locations", "locally groundwater dependent", 
+        "GD2", "grondwaterafhankelijk op (bijna) alle locaties", "(bijna) overal grondwaterafhankelijk", "groundwater dependent on (almost) all locations", "(almost) everywhere groundwater dependent", 
+        "FD0", "niet overstromingsafhankelijk", "niet overstromingsafhankelijk", "flood independent", "flood independent", 
+        "FD1", "overstromingsafhankelijk op een deel van de locaties", "plaatselijk overstromingsafhankelijk", "flood dependent on a part of the locations", "locally flood dependent", 
+        "FD2", "overstromingsafhankelijk op (bijna) alle locaties", "(bijna) overal overstromingsafhankelijk", "flood dependent on (almost) all locations", "(almost) everywhere flood dependent"
+)
+
+wdep_names %>% 
+    select(1, 2, 4) %>% 
+    pivot_longer(cols = -code,
+                 names_to = "lang",
+                 names_pattern = "(..)_.+",
+                 values_to = "name") %>% 
+    inner_join(
+        wdep_names %>% 
+        select(1, 3, 5) %>% 
+        pivot_longer(cols = -code,
+                     names_to = "lang",
+                     names_pattern = "(..)_.+",
+                     values_to = "shortname"),
+        by = c("code", "lang")
+    ) %>% 
+    bind_rows(read_vc(namelist_path, root),
+              .) %>% 
+    write_vc(namelist_path, root)
+```
+
+Note that we have deliberately set flood dependency as `NA` for aquatic types, i.e. from hydrological class 'surface water' (code HC3).
 
 ## Make `types`
 
 Set path and filename of `types`:
 
 ```{r}
-types_path <- "../../inst/textdata/types"
+types_path <- "inst/textdata/types"
 ```
 
 Write the data source `types`:
 
 ```{r}
 en_codelist <- 
-    read_vc(namelist_path) %>% 
+    read_vc(namelist_path, root) %>% 
     filter(lang == "en") %>% 
     select(code, name)
 source_df %>%
@@ -124,12 +248,21 @@ source_df %>%
     inner_join(en_codelist,
                by = c("typeclass_en" = "name")) %>% 
     rename(typeclass = code) %>% 
+    left_join(type_hydroclass %>% 
+                  mutate(code = factor(code)) %>% 
+                  rename(hydr_class = code),
+              by = "type") %>% 
+    left_join(type_wdep,
+              by = "type") %>% 
     left_join(en_codelist,
               by = c("tag_1_en" = "name")) %>% 
     select(type,
            typelevel,
            main_type,
            typeclass,
+           hydr_class,
+           groundw_dep,
+           flood_dep,
            tag_1 = code) %>% 
     mutate(typeclass = factor(typeclass, 
                               levels = (.$typeclass %>% unique)),
@@ -143,6 +276,7 @@ source_df %>%
                               levels = .$main_type %>% unique)
            ) %>% 
     write_vc(types_path,
+             root,
              sorting = c("typeclass",
                          "type"),
              optimize = FALSE,

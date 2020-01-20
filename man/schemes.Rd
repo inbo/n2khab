@@ -132,8 +132,10 @@ languages).
 \seealso{
 \code{\link{read_schemes}}
 
-Other n2khab-referencelists: \code{\link{env_pressures}},
-  \code{\link{namelist}}, \code{\link{scheme_types}},
-  \code{\link{types}}
+Other n2khab-referencelists: 
+\code{\link{env_pressures}},
+\code{\link{namelist}},
+\code{\link{scheme_types}},
+\code{\link{types}}
 }
 \concept{n2khab-referencelists}

@@ -4,7 +4,7 @@
 \name{n2khab-package}
 \alias{n2khab}
 \alias{n2khab-package}
-\title{n2khab: Data preparation for Flemish Natura 2000 habitat analyses}
+\title{n2khab: Providing preprocessed reference data for Flemish Natura 2000 habitat analyses}
 \description{
 The n2khab package is an R package with
     preprocessing functions and standard reference data, useful for 
@@ -21,30 +21,34 @@ For contributing, see the README on
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://inbo.github.io/n2khab}
   \item \url{https://github.com/inbo/n2khab}
   \item Report bugs at \url{https://github.com/inbo/n2khab/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Floris Vanderhaeghe \email{floris.vanderhaeghe@inbo.be} (0000-0002-6378-6229)
+\strong{Maintainer}: Floris Vanderhaeghe \email{floris.vanderhaeghe@inbo.be} (\href{https://orcid.org/0000-0002-6378-6229}{ORCID})
 
 Authors:
 \itemize{
-  \item Toon Westra \email{toon.westra@inbo.be} (0000-0003-2478-9459)
-  \item Hans Van Calster \email{hans.vancalster@inbo.be} (0000-0001-8595-8426)
+  \item Toon Westra \email{toon.westra@inbo.be} (\href{https://orcid.org/0000-0003-2478-9459}{ORCID})
+  \item Hans Van Calster \email{hans.vancalster@inbo.be} (\href{https://orcid.org/0000-0001-8595-8426}{ORCID})
 }
 
 Other contributors:
 \itemize{
-  \item Dries Adriaens \email{dries.adriaens@inbo.be} (0000-0002-7216-3111) [contributor]
-  \item Cécile Herr \email{cecile.herr@inbo.be} (0000-0002-2833-6046) [contributor]
-  \item Maud Raman \email{maud.raman@inbo.be} (0000-0003-2116-4963) [contributor]
-  \item Jan Wouters \email{jan.wouters@inbo.be} (0000-0001-8200-9102) [contributor]
-  \item Steven De Saeger \email{steven.desaeger@inbo.be} (0000-0002-5477-3063) [contributor]
-  \item Nathalie Cools \email{nathalie.cools@inbo.be} (0000-0002-7059-2318) [contributor]
-  \item Suzanna Lettens \email{suzanna.lettens@inbo.be} (0000-0001-5032-495X) [contributor]
-  \item Arne Verstraeten \email{arne.verstraeten@inbo.be} (0000-0002-8813-1261) [contributor]
+  \item Dries Adriaens \email{dries.adriaens@inbo.be} (\href{https://orcid.org/0000-0002-7216-3111}{ORCID}) [contributor]
+  \item Cécile Herr \email{cecile.herr@inbo.be} (\href{https://orcid.org/0000-0002-2833-6046}{ORCID}) [contributor]
+  \item Maud Raman \email{maud.raman@inbo.be} (\href{https://orcid.org/0000-0003-2116-4963}{ORCID}) [contributor]
+  \item Jan Wouters \email{jan.wouters@inbo.be} (\href{https://orcid.org/0000-0001-8200-9102}{ORCID}) [contributor]
+  \item Steven De Saeger \email{steven.desaeger@inbo.be} (\href{https://orcid.org/0000-0002-5477-3063}{ORCID}) [contributor]
+  \item Luc Denys \email{luc.denys@inbo.be} (\href{https://orcid.org/0000-0002-1841-6579}{ORCID}) [contributor]
+  \item An Leyssen \email{an.leyssen@inbo.be} (\href{https://orcid.org/0000-0003-3537-286X}{ORCID}) [contributor]
+  \item Patrik Oosterlynck \email{patrik.oosterlynck@inbo.be} (\href{https://orcid.org/0000-0002-5712-0770}{ORCID}) [contributor]
+  \item Nathalie Cools \email{nathalie.cools@inbo.be} (\href{https://orcid.org/0000-0002-7059-2318}{ORCID}) [contributor]
+  \item Suzanna Lettens \email{suzanna.lettens@inbo.be} (\href{https://orcid.org/0000-0001-5032-495X}{ORCID}) [contributor]
+  \item Arne Verstraeten \email{arne.verstraeten@inbo.be} (\href{https://orcid.org/0000-0002-8813-1261}{ORCID}) [contributor]
   \item Research Institute for Nature and Forest \email{info@inbo.be} [copyright holder]
 }
 

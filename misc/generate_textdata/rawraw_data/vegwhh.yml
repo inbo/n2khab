@@ -1,0 +1,22 @@
+..generic:
+  git2rdata: 0.2.0
+  optimize: yes
+  NA string: NA
+  sorting:
+  - Vegcode
+  - Waterhuishouding
+  hash: 2b6452f3ac66d8525c48f7e0bfafb683d4c07150
+  data_hash: 5de758b2a46c15bc9b4ae2cd9e35305a48928c4d
+Vegcode:
+  class: character
+Waterhuishouding:
+  class: factor
+  labels:
+  - Droog tot vochtig
+  - Oppervlaktewater
+  - Tijdelijk tot permanent nat
+  index:
+  - 1
+  - 2
+  - 3
+  ordered: no

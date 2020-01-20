@@ -5,18 +5,23 @@
 \title{Return the processed data source \code{GRTSmh_base4frac} as a
 RasterLayer}
 \usage{
-read_GRTSmh_base4frac(path = fileman_up("n2khab_data"),
-  file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif")
+read_GRTSmh_base4frac(
+  path = fileman_up("n2khab_data"),
+  file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif"
+)
 }
 \arguments{
 \item{path}{Location of the file.
-Considering the default value of the \code{file} argument, use this argument
-in scripts to set the location of the folder '\strong{\code{n2khab_data}}'.}
+Considering the default value of the \code{file} argument, this should be
+the location of the folder '\strong{\code{n2khab_data}}'.
+By default, the first \code{n2khab_data} folder is used that is found when
+sequentially climbing up 0 to 10 levels in the file system hierarchy,
+starting from the working directory.}
 
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 }
 \value{
 A RasterLayer with 21041043 cells.
@@ -28,7 +33,8 @@ The function returns it as a RasterLayer.
 }
 \details{
 The data source file, read by the function, is a monolayered GeoTIFF in the
-\code{FLT8S} datatype.
+\code{FLT8S} datatype and is available at
+\href{https://doi.org/10.5281/zenodo.3354401}{Zenodo}.
 In \code{GRTSmh_base4frac}, the decimal (i.e. base 10) integer values from
 the raster data source \code{GRTSmaster_habitats} (see
 \code{\link{read_GRTSmh}}) have been converted into base 4 fractions,
@@ -76,9 +82,10 @@ Resources. Journal of the American Statistical Association 99 (465):
 262–278. DOI: https://doi.org/10.1198/016214504000000250.
 }
 \seealso{
-Other functions involved in processing the \code{GRTSmaster_habitats} data source: \code{\link{convert_base4frac_to_dec}},
-  \code{\link{convert_dec_to_base4frac}},
-  \code{\link{read_GRTSmh_diffres}},
-  \code{\link{read_GRTSmh}}
+Other functions involved in processing the \code{GRTSmaster_habitats} data source: 
+\code{\link{convert_base4frac_to_dec}()},
+\code{\link{convert_dec_to_base4frac}()},
+\code{\link{read_GRTSmh_diffres}()},
+\code{\link{read_GRTSmh}()}
 }
 \concept{functions involved in processing the \code{GRTSmaster_habitats} data source}

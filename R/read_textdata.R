@@ -182,7 +182,7 @@ namelist_factor <-
 #' A tibble is a dataframe that makes working in the tidyverse a little
 #' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 #' By default, the data version delivered with the package is used and English
-#' names (\code{lang = "en"}) are returned for types, typeclasses and tags.
+#' names (\code{lang = "en"}) are returned for types, attributes and tags.
 #'
 #' @param path Location of the data sources \code{types} and \code{namelist}.
 #' The default is to use the location of the data sources as delivered by
@@ -199,9 +199,8 @@ namelist_factor <-
 #'
 #' @return
 #' The \code{types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
-#' with names & shortnames added for types, typeclasses and tags
+#' with names & shortnames added for types, attributes and tags
 #' according to the \code{lang} argument.
-#' The tibble has 108 rows and 16 variables.
 #' See \code{\link{types}} for documentation of the data-source's contents.
 #' See \code{\link{namelist}} for the link between codes or other identifiers
 #' and the corresponding names (and shortnames).
@@ -210,8 +209,13 @@ namelist_factor <-
 #' \itemize{
 #'   \item \code{type_name}
 #'   \item \code{type_shortname}
-#'   \item \code{typeclass_name}: a factor with the level order
-#'   according to that of \code{typeclass}.
+#'   \item \code{typeclass_name}
+#'   \item \code{hydr_class_name}
+#'   \item \code{hydr_class_shortname}
+#'   \item \code{groundw_dep_name}
+#'   \item \code{groundw_dep_shortname}
+#'   \item \code{flood_dep_name}
+#'   \item \code{flood_dep_shortname}
 #'   \item \code{tag_1_name}
 #'   \item \code{tag_1_shortname}
 #'   \item \code{tag_2_name}
@@ -219,6 +223,9 @@ namelist_factor <-
 #'   \item \code{tag_3_name}
 #'   \item \code{tag_3_shortname}
 #' }
+#' Except for the tags, the names and shortnames are factors with their level
+#' order according to that of the corresponding attribute.
+
 #'
 #' @section Recommended usage:
 #'
@@ -282,7 +289,7 @@ read_types <-
         types_base <-
             read_vc(file = file, root = path)
 
-        suppressWarnings({
+        suppressMessages(suppressWarnings({
         type_levels <-
             tibble(codelevel = types_base$type %>% levels) %>%
             left_join(namelist,
@@ -290,7 +297,7 @@ read_types <-
             rename(namelevel = .data$name,
                    shortnamelevel = .data$shortname)
 
-                typeclass_levels <-
+        typeclass_levels <-
             tibble(codelevel = types_base$typeclass %>% levels) %>%
             left_join(namelist %>% select(-.data$shortname),
                        by = c("codelevel" = "code")) %>%
@@ -314,8 +321,32 @@ read_types <-
                    typeclass_name =
                        .data$typeclass %>%
                        mapvalues(from = typeclass_levels$codelevel,
-                                 to = typeclass_levels$namelevel)
-                  ) %>%
+                                 to = typeclass_levels$namelevel),
+                   hydr_class_name =
+                       .data$hydr_class %>%
+                       mapvalues(from = namelist$code,
+                                 to = namelist$name),
+                   hydr_class_shortname =
+                       .data$hydr_class %>%
+                       mapvalues(from = namelist$code,
+                                 to = namelist$shortname),
+                   groundw_dep_name =
+                       .data$groundw_dep %>%
+                       mapvalues(from = namelist$code,
+                                 to = namelist$name),
+                   groundw_dep_shortname =
+                       .data$groundw_dep %>%
+                       mapvalues(from = namelist$code,
+                                 to = namelist$shortname),
+                   flood_dep_name =
+                       .data$flood_dep %>%
+                       mapvalues(from = namelist$code,
+                                 to = namelist$name),
+                   flood_dep_shortname =
+                       .data$flood_dep %>%
+                       mapvalues(from = namelist$code,
+                                 to = namelist$shortname)
+            ) %>%
             left_join(namelist,
                       by = c("tag_1" = "code")) %>%
             rename(tag_1_name = .data$name,
@@ -328,13 +359,16 @@ read_types <-
                       by = c("tag_3" = "code")) %>%
             rename(tag_3_name = .data$name,
                    tag_3_shortname = .data$shortname) %>%
-            select(1:3, 8:9,
-                   4, 10,
-                   5, 11:12,
-                   6, 13:14,
-                   7, 15:16) %>%
+            select(1:3, 11:12,
+                   4, 13,
+                   5, 14:15,
+                   6, 16:17,
+                   7, 18:19,
+                   8, 20:21,
+                   9, 22:23,
+                   10, 24:25) %>%
             as_tibble
-        })
+        }))
     }
 
 
@@ -900,7 +934,6 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
     scheme_types %>%
         left_join(schemes,
                   by = "scheme") %>%
-        mutate(type = .data$type %>% as.character) %>%
         left_join(types,
                   by = "type") %>%
         mutate(type = .data$type %>%

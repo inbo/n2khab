@@ -42,18 +42,18 @@ The following data sources are available:
 
 - the raw data source `GRTSmaster_habitats`, discussed above and available at [Zenodo](https://doi.org/10.5281/zenodo.2611233)
 - processed data sources:
-    - `GRTSmh_brick`: 10-layered GeoTIFF with the decimal integer ranking numbers of 10 hierarchical levels (0 - 9) of the GRTS cell addresses, including the one from `GRTSmaster_habitats` (i.e. level 0; for more details see the [read_GRTSmh() documentation](../html/read_GRTSmh.html))
-    - `GRTSmh_diffres`: file collection composed of nine monolayered GeoTIFF files plus a GeoPackage with six polygon layers. They provide the hierarchical levels 1 to 9 of the `GRTSmh_brick` data source at the corresponding spatial resolution, i.e. at lower resolutions than `GRTSmaster_habitats` (for more details see the [read_GRTSmh_diffres() documentation](../html/read_GRTSmh_diffres.html))
-    - `GRTSmh_base4frac`: is like a mirror to `GRTSmaster_habitats`, holding the ranking numbers as base 4 fractions (for more details see the [read_GRTSmh_base4frac() documentation](../html/read_GRTSmh_base4frac.html))
+    - `GRTSmh_brick` ([Zenodo-link](https://doi.org/10.5281/zenodo.3354403)): 10-layered GeoTIFF with the decimal integer ranking numbers of 10 hierarchical levels (0 - 9) of the GRTS cell addresses, including the one from `GRTSmaster_habitats` (i.e. level 0; for more details see the `read_GRTSmh()` documentation)
+    - `GRTSmh_diffres` ([Zenodo-link](https://doi.org/10.5281/zenodo.3354405)): file collection composed of nine monolayered GeoTIFF files plus a GeoPackage with six polygon layers. They provide the hierarchical levels 1 to 9 of the `GRTSmh_brick` data source at the corresponding spatial resolution, i.e. at lower resolutions than `GRTSmaster_habitats` (for more details see the `read_GRTSmh_diffres()` documentation)
+    - `GRTSmh_base4frac` ([Zenodo-link](https://doi.org/10.5281/zenodo.3354401)): is like a mirror to `GRTSmaster_habitats`, holding the ranking numbers as base 4 fractions (for more details see the `read_GRTSmh_base4frac()` documentation)
 
-For more information on data storage and locations, there is a [specific vignette](../doc/v020_datastorage.html).
+For more information on data storage and locations, see `vignette("v020_datastorage")`.
 
 ## Get the data in R
 
 ### read_GRTSmh()
   
 In the below R code, it is supposed that a `n2khab_data` folder is present in the current directory or up to 10 levels higher.
-See the [vignette on data storage](../doc/v020_datastorage.html) for more information.
+See the `vignette("v020_datastorage")` for more information.
 
 `read_GRTSmh()` by default returns the `GRTSmaster_habitats` dataset:
 
