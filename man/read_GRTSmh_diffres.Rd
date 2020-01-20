@@ -23,7 +23,7 @@ starting from the working directory.}
 \item{subdir}{The subdirectory path of the data source, as viewed from
 \code{path}.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{level}{Integer in the range from 1 to 9; determines the spatial
 resolution. See the Details section.}

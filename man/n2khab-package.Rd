@@ -21,6 +21,7 @@ For contributing, see the README on
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://inbo.github.io/n2khab}
   \item \url{https://github.com/inbo/n2khab}
   \item Report bugs at \url{https://github.com/inbo/n2khab/issues}
 }
