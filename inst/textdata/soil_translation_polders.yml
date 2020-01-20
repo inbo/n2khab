@@ -3,13 +3,13 @@
   optimize: yes
   NA string: NA
   sorting: soiltype_orig
-  hash: e20531970c7549dd538a4f21f8eaefe5da5e488e
-  data_hash: ab94d6fc4ca458e669a12b2ca44258b4dad1195d
+  hash: 0f7bf487026cba8d42ce22e29bb3b82d2f21cfe7
+  data_hash: 95999c96751f47909d9273edc5ef94d94e1ead81
 soiltype_orig:
   class: character
 soiltype_unified_transl:
   class: character
 texture_transl:
   class: character
-moisture_transl:
+drainage_transl:
   class: character

@@ -25,10 +25,11 @@ transl <-
         soiltype_orig = Code,
         soiltype_unified_transl = Unibodemtype,
         texture_transl = hoofdtextuur,
-        moisture_transl = vochttrap
+        drainage_transl = vochttrap
     )
 
 transl %>%
     write_vc("inst/textdata/soil_translation_polders",
-             sorting = c("soiltype_orig"))
+             sorting = c("soiltype_orig"),
+             strict = FALSE)
 
