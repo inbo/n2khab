@@ -5,7 +5,7 @@
 #' processed data source \code{soilmap_simple}.
 #'
 #' In case the raw data source \code{soilmap} is used, it is possible to
-#' manually perform the standardization (for polders) and/or the simplification,
+#' manually perform the standardization (for coastalplain) and/or the simplification,
 #' which were both applied in the \code{soilmap_simple} data source.
 #'
 #' See R-code in the \href{https://github.com/inbo/n2khab-preprocessing}{
@@ -19,12 +19,12 @@
 #' @param use_processed Logical.
 #' If \code{TRUE}, load and return the processed data source
 #' \code{soilmap_simple}, instead of the raw data source \code{soilmap}.
-#' @param standardize_polders Logical.
+#' @param standardize_coastalplain Logical.
 #' Only applied with \code{use_processed = FALSE}.
 #' If \code{TRUE}, fill empty values of substrate,
-#' texture and moisture in the 'Polders' area.
-#' For texture and moisture, a translation table by Bruno De Vos & Carole Ampe
-#' is applied (for earlier work on this, see Ampe 2013).
+#' texture and drainage classes in the 'coastalplain' area.
+#' For texture and drainage classes, a translation table by Bruno De Vos &
+#' Carole Ampe is applied (for earlier work on this, see Ampe 2013).
 #' @param simplify Logical.
 #' Only applied with \code{use_processed = FALSE}.
 #' If \code{TRUE}, only return a limited number of variables.
@@ -60,11 +60,11 @@ read_soilmap <-
     function(path = fileman_up("n2khab_data"),
              file = "10_raw/soilmap",
              use_processed = TRUE,
-             standardize_polders = FALSE,
+             standardize_coastalplain = FALSE,
              simplify = FALSE) {
 
         assert_that(is.flag(simplify))
-        assert_that(is.flag(standardize_polders))
+        assert_that(is.flag(standardize_coastalplain))
         assert_that(is.flag(use_processed))
 
         soilmap_path <- file.path(path, file)
@@ -122,10 +122,10 @@ read_soilmap <-
                                    -.data$geometry),
                       .funs = factor)
 
-        if (standardize_polders) {
-            transl <- read_vc(file = "soil_translation_polders",
+        if (standardize_coastalplain) {
+            transl <- read_vc(file = "soil_translation_coastalplain",
                               root = pkgdatasource_path(
-                                  "textdata/soil_translation_polders", ".tsv")) %>%
+                                  "textdata/soil_translation_coastalplain", ".tsv")) %>%
                 mutate(soiltype_orig = factor(.data$soiltype_orig,
                                               levels = levels(soilmap$soiltype))
                        ) %>%

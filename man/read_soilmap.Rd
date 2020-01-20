@@ -5,9 +5,13 @@
 \title{Return the \code{soilmap} or \code{soilmap_simple} data source as an
 \code{sf} object}
 \usage{
-read_soilmap(path = fileman_up("n2khab_data"), file = "10_raw/soilmap",
-  use_processed = TRUE, standardize_polders = FALSE,
-  simplify = FALSE)
+read_soilmap(
+  path = fileman_up("n2khab_data"),
+  file = "10_raw/soilmap",
+  use_processed = TRUE,
+  standardize_coastalplain = FALSE,
+  simplify = FALSE
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -20,18 +24,18 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{use_processed}{Logical.
 If \code{TRUE}, load and return the processed data source
 \code{soilmap_simple}, instead of the raw data source \code{soilmap}.}
 
-\item{standardize_polders}{Logical.
+\item{standardize_coastalplain}{Logical.
 Only applied with \code{use_processed = FALSE}.
 If \code{TRUE}, fill empty values of substrate,
-texture and moisture in the 'Polders' area.
-For texture and moisture, a translation table by Bruno De Vos & Carole Ampe
-is applied (for earlier work on this, see Ampe 2013).}
+texture and drainage classes in the 'coastalplain' area.
+For texture and drainage classes, a translation table by Bruno De Vos &
+Carole Ampe is applied (for earlier work on this, see Ampe 2013).}
 
 \item{simplify}{Logical.
 Only applied with \code{use_processed = FALSE}.
@@ -46,7 +50,7 @@ processed data source \code{soilmap_simple}.
 }
 \details{
 In case the raw data source \code{soilmap} is used, it is possible to
-manually perform the standardization (for polders) and/or the simplification,
+manually perform the standardization (for coastalplain) and/or the simplification,
 which were both applied in the \code{soilmap_simple} data source.
 
 See R-code in the \href{https://github.com/inbo/n2khab-preprocessing}{
