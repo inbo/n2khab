@@ -86,9 +86,17 @@
 #' select
 #' mutate
 #' mutate_at
+#' filter
+#' filter_at
 #' left_join
 #' vars
 #' contains
+#' recode
+#' matches
+#' distinct
+#' pull
+#' @importFrom stats
+#' setNames
 #' @importFrom rlang .data
 #' @export
 read_soilmap <-
@@ -153,9 +161,54 @@ read_soilmap <-
             mutate(bsm_ge_coastalplain = .data$bsm_ge_coastalplain == "Zeepolders") %>%
             mutate_at(.vars = vars(-.data$bsm_poly_id,
                                    -.data$bsm_ge_coastalplain,
-                                   -.data$bsm_mo_soiltype_id,
-                                   -.data$geometry),
+                                   -.data$bsm_soiltype_id,
+                                   -.data$geometry,
+                                   -matches(".+_mo_.+_explan")),
                       .funs = factor)
+
+        # setting factor levels of mo_*_explan variables in the same
+        # order as mo_*
+
+        keyvars <- c("bsm_mo_substr",
+                     "bsm_mo_tex",
+                     "bsm_mo_drain",
+                     "bsm_mo_prof",
+                     "bsm_mo_parentmat",
+                     "bsm_mo_profvar")
+        keys <- list()
+        soilmap_df <-
+            soilmap %>%
+            st_drop_geometry
+        for (i in keyvars) {
+            temp_df <-
+                soilmap_df %>%
+                select(matches(str_c(i, ".*"))) %>%
+                select(1:2) %>%
+                filter_at(1, function(x) !is.na(x)) %>%
+                distinct
+            keys[[i]] <-
+                setNames(temp_df %>% pull(2),
+                         temp_df %>% pull(1))
+        }
+
+        soilmap <-
+            soilmap %>%
+            mutate(
+                bsm_mo_substr_explan = recode(.data$bsm_mo_substr,
+                                              !!!keys[["bsm_mo_substr"]]),
+                bsm_mo_tex_explan = recode(.data$bsm_mo_tex,
+                                              !!!keys[["bsm_mo_tex"]]),
+                bsm_mo_drain_explan = recode(.data$bsm_mo_drain,
+                                              !!!keys[["bsm_mo_drain"]]),
+                bsm_mo_prof_explan = recode(.data$bsm_mo_prof,
+                                              !!!keys[["bsm_mo_prof"]]),
+                bsm_mo_parentmat_explan = recode(.data$bsm_mo_parentmat,
+                                              !!!keys[["bsm_mo_parentmat"]]),
+                bsm_mo_profvar_explan = recode(.data$bsm_mo_profvar,
+                                              !!!keys[["bsm_mo_profvar"]]),
+            )
+
+        ####### STANDARDIZATION FOR COASTAL PLAIN FEATURES ################
 
         if (standardize_coastalplain) {
             transl <- read_vc(file = "soil_translation_coastalplain",
@@ -163,35 +216,58 @@ read_soilmap <-
                                   "textdata/soil_translation_coastalplain", ".tsv")) %>%
                 mutate(soiltype_orig = factor(.data$soiltype_orig,
                                               levels =
-                                                  levels(soilmap$bsm_mo_soiltype))
+                                                  levels(soilmap$bsm_soiltype))
                        ) %>%
-                filter(!is.na(.data$texture_transl))
+                filter(!is.na(.data$texture_transl)) %>%
+                mutate(tex_explan_transl = recode(.data$texture_transl,
+                                                  !!!keys[["bsm_mo_tex"]]),
+                       drain_explan_transl = recode(.data$drainage_transl,
+                                                    !!!keys[["bsm_mo_drain"]]))
 
+            stand_vars <- c("bsm_mo_substr",
+                            "bsm_mo_tex",
+                            "bsm_mo_drain")
             soilmap <-
                 soilmap %>%
-                left_join(transl, by = c("bsm_mo_soiltype" = "soiltype_orig")) %>%
-                mutate(bsm_mo_substr = as.character(.data$bsm_mo_substr),
-                       bsm_mo_tex = as.character(.data$bsm_mo_tex),
-                       bsm_mo_drain = as.character(.data$bsm_mo_drain),
-                       bsm_mo_substr = ifelse(is.na(.data$bsm_mo_substr) &
+                left_join(transl, by = c("bsm_soiltype" = "soiltype_orig")) %>%
+                mutate_at(c(stand_vars, paste0(stand_vars, "_explan")),
+                            as.character) %>%
+                mutate(bsm_mo_substr = ifelse(is.na(.data$bsm_mo_substr) &
                                               !is.na(.data$bsm_ge_substr),
                                           as.character(.data$bsm_ge_substr),
                                           .data$bsm_mo_substr) %>%
                            factor(levels = levels(soilmap$bsm_mo_substr)),
+                       bsm_mo_substr_explan = ifelse(is.na(.data$bsm_mo_substr_explan) &
+                                                  !is.na(.data$bsm_ge_substr_explan),
+                                           as.character(.data$bsm_ge_substr_explan),
+                                           .data$bsm_mo_substr_explan) %>%
+                           factor(levels = levels(soilmap$bsm_mo_substr_explan)),
                        bsm_mo_tex = ifelse(is.na(.data$bsm_mo_tex) &
                                             !is.na(.data$texture_transl),
                                         .data$texture_transl,
                                         .data$bsm_mo_tex) %>%
                            factor(levels = levels(soilmap$bsm_mo_tex)),
+                       bsm_mo_tex_explan = ifelse(is.na(.data$bsm_mo_tex_explan) &
+                                               !is.na(.data$tex_explan_transl),
+                                           .data$tex_explan_transl,
+                                           .data$bsm_mo_tex_explan) %>%
+                           factor(levels = levels(soilmap$bsm_mo_tex_explan)),
                        bsm_mo_drain = ifelse(is.na(.data$bsm_mo_drain) &
                                              !is.na(.data$drainage_transl),
                                          .data$drainage_transl,
                                          .data$bsm_mo_drain) %>%
-                           factor(levels = levels(soilmap$bsm_mo_drain))
+                           factor(levels = levels(soilmap$bsm_mo_drain)),
+                       bsm_mo_drain_explan = ifelse(is.na(.data$bsm_mo_drain_explan) &
+                                                 !is.na(.data$drain_explan_transl),
+                                             .data$drain_explan_transl,
+                                             .data$bsm_mo_drain_explan) %>%
+                           factor(levels = levels(soilmap$bsm_mo_drain_explan))
                        ) %>%
                 select(-contains("transl"))
 
         }
+
+        ########## SIMPLIFICATION ############
 
         if (simplify) {
             soilmap <-
