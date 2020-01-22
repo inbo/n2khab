@@ -43,7 +43,7 @@ To derive morphogenetic texture and drainage levels from the geomorphological
 ones, a translation table by Bruno De Vos &
 Carole Ampe is applied (for earlier work on this, see Ampe 2013).
 Substrate classes are copied over from \code{bsm_ge_substr} into \code{bsm_mo_substr}
-(hence, the resulting \code{bsm_mo_substr} is actually hybrid: 'mo' + 'ge').
+(\code{bsm_ge_substr} already followed the categories of \code{bsm_mo_substr}).
 These steps coincide with the approach that was taken to construct
 \code{bsm_mo_soilunitype} in the raw data source.}
 
