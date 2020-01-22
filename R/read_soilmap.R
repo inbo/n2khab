@@ -4,6 +4,11 @@
 #' Returns either the raw data source \code{soilmap} or (by default) the
 #' processed data source \code{soilmap_simple}.
 #'
+#' Note that factors are generated with implicit \code{NA} values (i.e. there is
+#' no factor level to represent the missing values).
+#' If you want this category to appear in certain results, you can convert with
+#' [forcats::fct_explicit_na()].
+#'
 #' In case the raw data source \code{soilmap} is used, it is possible to
 #' manually perform the standardization (for coastalplain) and/or the simplification,
 #' which were both applied in the \code{soilmap_simple} data source.
@@ -15,6 +20,7 @@
 #'
 #' TO BE ADDED: explanation on the variables in the result.
 #'
+#' @md
 #'
 #' @param use_processed Logical.
 #' If \code{TRUE}, load and return the processed data source
