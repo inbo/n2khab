@@ -1,7 +1,9 @@
 #' Return the \code{soilmap} or \code{soilmap_simple} data source as an
 #' \code{sf} object
 #'
-#' Returns either the raw data source \code{soilmap} or (by default) the
+#' Returns either the raw data source \code{soilmap}
+#' (Dudal et al., 2005; Van Ranst & Sys, 2000)
+#' or (by default) the
 #' processed data source \code{soilmap_simple}.
 #'
 #' Note that factors are generated with implicit \code{NA} values (i.e. there is
@@ -19,7 +21,6 @@
 #' n2khab-preprocessing} repository for the creation of the
 #' \code{soilmap_simple} data source from
 #' the \code{soilmap} data source.
-#'
 #'
 #' @md
 #'
@@ -52,9 +53,17 @@
 #' A Simple feature collection of geometry type \code{MULTIPOLYGON}.
 #'
 #' @references
-#' Ampe C. (2013). Databank aardewerk Vlaanderen 2010.
+#' - Ampe C. (2013). Databank aardewerk Vlaanderen 2010.
 #' Omzetten (zeer) oude legende bodemkartering naar legende bodemkaart
 #' Kuststreek. Vlaamse Landmaatschappij Regio West, Bruges, 45 p.
+#' - Dudal R., Deckers J., Van Orshoven J. & Van Ranst E. (2005). Soil survey
+#' in Belgium and its applications. In: Bullock P., Jones R.J.A., Montanarella
+#' L. (editors). Soil Resources of Europe. Office for Official Publications of
+#' the European Communities, Luxembourg, p. 63–71.
+#' URL: http://hdl.handle.net/1854/LU-368514.
+#' - Van Ranst E. & Sys C. (2000). Eenduidige legende van de digitale
+#' bodemkaart van Vlaanderen (schaal 1: 20000). Universiteit Gent, Laboratorium
+#' voor Bodemkunde, Ghent, 361 p. URL: http://hdl.handle.net/1854/LU-125899.
 #'
 #' @importFrom assertthat
 #' assert_that
