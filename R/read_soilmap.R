@@ -33,6 +33,14 @@
 #'
 #' @md
 #'
+#' @param file The filename of the _processed_ data source `soilmap_simple`.
+#' May include a path prefix.
+#' Used only if \code{use_processed = TRUE} (= default).
+#' The default value follows the data management advice in the
+#' vignette on data storage (run \code{vignette("v020_datastorage")}).
+#' @param file_raw Same as `file`, to define the name (subpath) of the _raw_
+#' datasource `soilmap`.
+#' Used only if \code{use_processed = FALSE}.
 #' @param use_processed Logical.
 #' If \code{TRUE} (the default), load and return the processed data source
 #' \code{soilmap_simple}, instead of the raw data source \code{soilmap}.
@@ -86,6 +94,7 @@
 #' select
 #' mutate
 #' mutate_at
+#' mutate_if
 #' filter
 #' filter_at
 #' left_join
@@ -101,7 +110,8 @@
 #' @export
 read_soilmap <-
     function(path = fileman_up("n2khab_data"),
-             file = "10_raw/soilmap",
+             file = "20_processed/soilmap_simple/soilmap_simple.gpkg",
+             file_raw = "10_raw/soilmap",
              use_processed = TRUE,
              standardize_coastalplain = FALSE,
              simplify = FALSE) {
@@ -110,7 +120,31 @@ read_soilmap <-
         assert_that(is.flag(standardize_coastalplain))
         assert_that(is.flag(use_processed))
 
-        soilmap_path <- file.path(path, file)
+        ####### 1. Reading soilmap_simple ####
+        ######################################
+
+        if (use_processed) {
+
+            soilmap_simple_path <- file.path(path, file)
+            assert_that(file.exists(soilmap_simple_path))
+
+            suppressWarnings(
+                soilmap_simple <- read_sf(soilmap_simple_path,
+                                          crs = 31370)
+            )
+
+            soilmap_simple <-
+                soilmap_simple %>%
+                mutate_if(is.character, factor)
+
+            return(soilmap_simple)
+
+        } else {
+
+        ####### 2. Reading soilmap        ####
+        ######################################
+
+        soilmap_path <- file.path(path, file_raw)
         assert_that(file.exists(soilmap_path))
 
         suppressWarnings(
@@ -286,5 +320,7 @@ read_soilmap <-
         }
 
         return(soilmap)
+
+        }
 
     }

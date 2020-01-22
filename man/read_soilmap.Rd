@@ -7,7 +7,8 @@
 \usage{
 read_soilmap(
   path = fileman_up("n2khab_data"),
-  file = "10_raw/soilmap",
+  file = "20_processed/soilmap_simple/soilmap_simple.gpkg",
+  file_raw = "10_raw/soilmap",
   use_processed = TRUE,
   standardize_coastalplain = FALSE,
   simplify = FALSE
@@ -21,10 +22,15 @@ By default, the first \code{n2khab_data} folder is used that is found when
 sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
 
-\item{file}{The filename of the data source.
+\item{file}{The filename of the \emph{processed} data source \code{soilmap_simple}.
 May include a path prefix.
-The default follows the data management advice in the
+Used only if \code{use_processed = TRUE} (= default).
+The default value follows the data management advice in the
 vignette on data storage (run \code{vignette("v020_datastorage")}).}
+
+\item{file_raw}{Same as \code{file}, to define the name (subpath) of the \emph{raw}
+datasource \code{soilmap}.
+Used only if \code{use_processed = FALSE}.}
 
 \item{use_processed}{Logical.
 If \code{TRUE} (the default), load and return the processed data source
