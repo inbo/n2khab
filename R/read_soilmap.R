@@ -11,19 +11,22 @@
 #' is discussed by Van Ranst & Sys (2000) and Dudal et al. (2005).
 #' A 'pure' (single) dataformat of the raw data source (no metadatafiles etc.)
 #' has also been stored (with versioning) at
-#' Zenodo (<https://doi.org/10.5281/zenodo.3387007>), in order
+#' Zenodo (<https://doi.org/10.5281/zenodo.3387007>) - which we refer to as the
+#' `soilmap` data source - in order
 #' to support the `read_soilmap()` function and to sustain long-term workflow
 #' reproducibility.
 #'
 #' Note that factors are generated with implicit \code{NA} values (i.e. there is
 #' no factor level to represent the missing values).
-#' If you want this category to appear in certain results, you can convert with
+#' If you want this category to appear in certain results, you can convert
+#' such variables with
 #' [forcats::fct_explicit_na()].
 #'
-#' In case the raw data source \code{soilmap} is used, it is possible to
+#' In case the raw data source \code{soilmap} is used
+#' (\code{use_processed = FALSE}), it is possible to
 #' manually perform the standardization for coastal plain features and/or the
 #' simplification,
-#' both of which were applied in the \code{soilmap_simple} data source
+#' both of which were applied in the \code{soilmap_simple} data source.
 #' See \emph{Arguments} for more information.
 #'
 #' See R-code in the \href{https://github.com/inbo/n2khab-preprocessing}{
@@ -52,12 +55,13 @@
 #' If \code{TRUE}, fill the values of the morphogenetic substrate,
 #' texture and drainage variables (`bsm_mo_substr`, `bsm_mo_tex` and
 #' `bsm_mo_drain` + their `_explan` counterparts) _for features in the
-#' 'coastalplain' area_ (where these are missing).
-#' To derive morphogenetic texture and drainage levels from the geomorphological
+#' 'coastalplain' area_.
+#' - To derive morphogenetic texture and drainage levels from the geomorphological
 #' ones, a translation table by Bruno De Vos &
 #' Carole Ampe is applied (for earlier work on this, see Ampe 2013).
-#' Substrate classes are copied over from `bsm_ge_substr` into `bsm_mo_substr`
+#' - Substrate classes are copied over from `bsm_ge_substr` into `bsm_mo_substr`
 #' (`bsm_ge_substr` already followed the categories of `bsm_mo_substr`).
+#'
 #' These steps coincide with the approach that was taken to construct
 #' `bsm_mo_soilunitype` in the raw data source.
 #' @param simplify Logical.
