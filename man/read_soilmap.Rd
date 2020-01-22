@@ -56,11 +56,20 @@ A Simple feature collection of geometry type \code{MULTIPOLYGON}.
 }
 \description{
 Returns either the raw data source \code{soilmap}
-(Dudal et al., 2005; Van Ranst & Sys, 2000)
 or (by default) the
 processed data source \code{soilmap_simple}.
 }
 \details{
+The raw data source is published
+\href{https://www.dov.vlaanderen.be/geonetwork/srv/dut/catalog.search#/metadata/5c129f2d-4498-4bc3-8860-01cb2d513f8f}{at DOV}
+(Databank Ondergrond Vlaanderen) and
+is discussed by Van Ranst & Sys (2000) and Dudal et al. (2005).
+A 'pure' (single) dataformat of the raw data source (no metadatafiles etc.)
+has also been stored (with versioning) at
+Zenodo (\url{https://doi.org/10.5281/zenodo.3387007}), in order
+to support the \code{read_soilmap()} function and to sustain long-term workflow
+reproducibility.
+
 Note that factors are generated with implicit \code{NA} values (i.e. there is
 no factor level to represent the missing values).
 If you want this category to appear in certain results, you can convert with

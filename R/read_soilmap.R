@@ -2,9 +2,18 @@
 #' \code{sf} object
 #'
 #' Returns either the raw data source \code{soilmap}
-#' (Dudal et al., 2005; Van Ranst & Sys, 2000)
 #' or (by default) the
 #' processed data source \code{soilmap_simple}.
+#'
+#' The raw data source is published
+#' [at DOV](https://www.dov.vlaanderen.be/geonetwork/srv/dut/catalog.search#/metadata/5c129f2d-4498-4bc3-8860-01cb2d513f8f)
+#' (Databank Ondergrond Vlaanderen) and
+#' is discussed by Van Ranst & Sys (2000) and Dudal et al. (2005).
+#' A 'pure' (single) dataformat of the raw data source (no metadatafiles etc.)
+#' has also been stored (with versioning) at
+#' Zenodo (<https://doi.org/10.5281/zenodo.3387007>), in order
+#' to support the `read_soilmap()` function and to sustain long-term workflow
+#' reproducibility.
 #'
 #' Note that factors are generated with implicit \code{NA} values (i.e. there is
 #' no factor level to represent the missing values).
