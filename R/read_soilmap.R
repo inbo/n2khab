@@ -217,6 +217,7 @@ read_soilmap <-
                    ) %>%
             mutate(bsm_ge_coastalplain = .data$bsm_ge_coastalplain == "Zeepolders") %>%
             mutate_at(.vars = vars(-.data$bsm_poly_id,
+                                   -.data$bsm_soiltype_id,
                                    -.data$bsm_ge_coastalplain,
                                    -.data$bsm_soiltype_id,
                                    -.data$geometry,
