@@ -98,6 +98,26 @@ n2khab-preprocessing} repository for the creation of the
 \code{soilmap_simple} data source from
 the \code{soilmap} data source.
 }
+\examples{
+\dontrun{
+# This example supposes that your working directory or a directory up to 10
+# levels above has the 'n2khab_data' folder AND that the 'soilmap_simple'
+# data source is present in the default subdirectory.
+# In all other cases, this example won't work but at least you can
+# consider what to do.
+
+library(dplyr)
+soilmap_simple <- read_soilmap()
+soilmap_simple
+soilmap_simple \%>\%
+  filter(!is.na(bsm_mo_substr)) \%>\%
+  glimpse
+soilmap_simple \%>\%
+  filter(bsm_ge_coastalplain) \%>\%
+  glimpse
+}
+
+}
 \references{
 \itemize{
 \item Ampe C. (2013). Databank aardewerk Vlaanderen 2010.

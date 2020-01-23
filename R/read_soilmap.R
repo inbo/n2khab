@@ -86,6 +86,25 @@
 #' bodemkaart van Vlaanderen (schaal 1: 20000). Universiteit Gent, Laboratorium
 #' voor Bodemkunde, Ghent, 361 p. URL: http://hdl.handle.net/1854/LU-125899.
 #'
+#' @examples
+#' \dontrun{
+#' # This example supposes that your working directory or a directory up to 10
+#' # levels above has the 'n2khab_data' folder AND that the 'soilmap_simple'
+#' # data source is present in the default subdirectory.
+#' # In all other cases, this example won't work but at least you can
+#' # consider what to do.
+#'
+#' library(dplyr)
+#' soilmap_simple <- read_soilmap()
+#' soilmap_simple
+#' soilmap_simple %>%
+#'   filter(!is.na(bsm_mo_substr)) %>%
+#'   glimpse
+#' soilmap_simple %>%
+#'   filter(bsm_ge_coastalplain) %>%
+#'   glimpse
+#' }
+#'
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
