@@ -3,7 +3,7 @@
 \name{read_soilmap}
 \alias{read_soilmap}
 \title{Return the \code{soilmap} or \code{soilmap_simple} data source as an
-\code{sf} object}
+\code{sf} multipolygon layer}
 \usage{
 read_soilmap(
   path = fileman_up("n2khab_data"),
@@ -58,7 +58,8 @@ These steps coincide with the approach that was taken to construct
 
 \item{simplify}{Logical.
 Only applied with \code{use_processed = FALSE}.
-If \code{TRUE}, only return a limited number of variables.}
+If \code{TRUE}, only return a limited number of variables that are most
+useful for analytical work.}
 }
 \value{
 A Simple feature collection of geometry type \code{MULTIPOLYGON}.
@@ -66,7 +67,11 @@ A Simple feature collection of geometry type \code{MULTIPOLYGON}.
 \description{
 Returns either the raw data source \code{soilmap}
 or (by default) the
-processed data source \code{soilmap_simple}.
+processed data source \code{soilmap_simple}
+as a standardized \code{sf} multipolygon layer (tidyverse-styled,
+internationalized).
+Given the size of these data sources (especially the raw one), this function
+takes a bit longer than usual to run.
 }
 \details{
 The raw data source is published

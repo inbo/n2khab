@@ -1,9 +1,13 @@
 #' Return the \code{soilmap} or \code{soilmap_simple} data source as an
-#' \code{sf} object
+#' \code{sf} multipolygon layer
 #'
 #' Returns either the raw data source \code{soilmap}
 #' or (by default) the
-#' processed data source \code{soilmap_simple}.
+#' processed data source \code{soilmap_simple}
+#' as a standardized \code{sf} multipolygon layer (tidyverse-styled,
+#' internationalized).
+#' Given the size of these data sources (especially the raw one), this function
+#' takes a bit longer than usual to run.
 #'
 #' The raw data source is published
 #' [at DOV](https://www.dov.vlaanderen.be/geonetwork/srv/dut/catalog.search#/metadata/5c129f2d-4498-4bc3-8860-01cb2d513f8f)
@@ -66,7 +70,8 @@
 #' `bsm_mo_soilunitype` in the raw data source.
 #' @param simplify Logical.
 #' Only applied with \code{use_processed = FALSE}.
-#' If \code{TRUE}, only return a limited number of variables.
+#' If \code{TRUE}, only return a limited number of variables that are most
+#' useful for analytical work.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
