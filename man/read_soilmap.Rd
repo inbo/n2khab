@@ -62,7 +62,115 @@ If \code{TRUE}, only return a limited number of variables that are most
 useful for analytical work.}
 }
 \value{
-A Simple feature collection of geometry type \code{MULTIPOLYGON}.
+A Simple feature collection of geometry type \code{MULTIPOLYGON},
+representing either the processed data source \code{soilmap_simple} (default) or
+the raw data source \code{soilmap}.
+
+Beside the standardization for coastalplain areas, \code{soilmap_simple} contains
+only a subset of the \code{soilmap} variables (marked with an asterisk below).
+
+The \code{soilmap} attribute variables all start with prefix \code{bsm_} (referring
+to the 'Belgian soil map').
+
+Most attributes represent categories and are returned as
+factors.
+When a variable is a one-to-one translation of another (e.g. code vs.
+explanation), the order of factor levels is aligned.
+
+Three types of dataframe variables are returned when reading \code{soilmap}:
+\itemize{
+\item \strong{variables with \code{mo_} in their name}: their categories follow the
+Belgian Morphogenetic System.
+\itemize{
+\item With \code{standardize_coastalplain = FALSE}, these are only available \emph{outside
+the coastalplain areas} except for \code{bsm_mo_soilunitype} (which is
+standardized already in the raw data source).
+}
+\item \strong{variables with \code{ge_} in their name}: their categories follow the
+Belgian Geomorphological System.
+(Note however, that \code{bsm_ge_substr} does follow the Belgian Morphogenetic
+System as well.)
+\itemize{
+\item These variables are only available \emph{within the coastalplain areas}.
+\item They are \emph{not} included in \code{soilmap_simple}.
+\item A special variable is \code{bsm_ge_coastalplain}, which is \code{TRUE} inside
+coastalplain areas, and \code{FALSE} elsewhere.
+}
+\item \strong{variables without \code{mo_} or \code{ge_} in their name} are:
+\itemize{
+\item either \emph{system-agnostic} metadata (first two + last four variables:
+\code{bsm_poly_id}, \code{bsm_map_id}, \code{bsm_map_url}, \code{bsm_book_url},
+\code{bsm_detailmap_url}, \code{bsm_profloc_url}),
+\item or \emph{mixed} (representing \code{mo_} categories within and \code{ge_} categories
+outside coastal plains): the other ones, like \code{bsm_region}, \code{bsm_legend},
+\code{bsm_soiltype} and \code{bsm_soilseries}.
+}
+}
+
+Many variables have a 'counterpart variable' with suffix \verb{_explan}:
+they provide a more elaborate textual explanation.
+They are not listed below.
+
+Short explanation of attributes is given below.
+More elaborate explanations can be found in the references and in metadata
+\href{https://www.dov.vlaanderen.be/geonetwork/srv/dut/catalog.search#/metadata/5c129f2d-4498-4bc3-8860-01cb2d513f8f}{at DOV}.
+\enumerate{
+\item Meaning of the main non-metadata variables:
+\itemize{
+\item \code{bsm_region} (*): name of the region
+\item \code{bsm_ge_coastalplain} (*): Logical.
+Is the polygon situated in the coastalplain area?
+\item \code{bsm_ge_region}: code of the region (within the coastalplain area)
+\item \code{bsm_legend}: generalised (simplified) legend key (37 levels)
+\item \code{bsm_legend_title} and \code{bsm_legend_explan}:
+the legend keys and text of Van Ranst & Sys (2000) (833 and 622 levels,
+respectively)
+\item \code{bsm_soiltype}: the soiltype of the Belgian soil map (mixed nature:
+morphogenetic & geomorphological codes).
+\code{bsm_soiltype_id} represents a numeric code for each level.
+\item \code{bsm_soiltype_region}: \code{bsm_soiltype}, followed by a code representing
+\code{bsm_region}
+\item \code{bsm_soilseries}: the morphogenetic soil series (outside coastalplain
+areas),
+which is the three core characters of \code{bsm_soiltype},
+or just \code{bsm_soiltype} within coastalplain areas
+\item \code{bsm_mo_soilunitype} (*): as \code{bsm_soiltype}, but applying morphogenetic
+codes within coastalplain areas (see the \code{standardize_coastalplain}
+argument for more information about this translation)
+\item \code{bsm_mo_substr} (*), \code{bsm_ge_substr}: code of the soil substrate
+\item \code{bsm_mo_tex} (*): code of the soil texture category
+\item \code{bsm_mo_drain} (*): code of the soil drainage category
+\item \code{bsm_mo_prof} (*): code of the soil profile category
+\item \code{bsm_mo_parentmat} (*): code of a variant regarding the parent material
+\item \code{bsm_mo_profvar} (*): code of a variant regarding the soil profile
+\item \code{bsm_mo_phase}: code of the soil phase (i.e. additional soil
+properties).
+They are explained in the book that accompanies the specific analog map
+identified by \code{bsm_map_id}.
+\item \code{bsm_ge_series}: the geomorphological soil series (inside coastalplain
+areas)
+\item \code{bsm_ge_subseries}: the geomorphological soil subseries (inside
+coastalplain areas)
+}
+\item Meaning of the metadata variables:
+\itemize{
+\item \code{bsm_poly_id} (*): unique polygon ID (numeric)
+\item \code{bsm_map_id}: code of the analog map covering this area
+\item \code{bsm_map_url}: hyperlink to the scanned analog map scale 1:20000 (pdf),
+identified by \code{bsm_map_id}
+\item \code{bsm_bookurl}: hyperlink to the scanned book (pdf), accompanying the
+analog map identified by \code{bsm_map_id}
+\item \code{bsm_detailmap_url}: hyperlink to the scanned maps at scale 1:5000
+(zip-file with jpg files) belonging to the map identified by
+\code{bsm_map_id}
+\item \code{bsm_profloc_url}: hyperlink to the scanned maps with the profile
+locations
+(zip-file with jpg files) belonging to the map identified by
+\code{bsm_map_id}
+}
+}
+
+(*) Included in the \code{soilmap_simple} data source.
 }
 \description{
 Returns either the raw data source \code{soilmap}

@@ -76,7 +76,101 @@
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
-#' A Simple feature collection of geometry type \code{MULTIPOLYGON}.
+#' A Simple feature collection of geometry type \code{MULTIPOLYGON},
+#' representing either the processed data source `soilmap_simple` (default) or
+#' the raw data source `soilmap`.
+#'
+#' Beside the standardization for coastalplain areas, `soilmap_simple` contains
+#' only a subset of the `soilmap` variables (marked with an asterisk below).
+#'
+#' The `soilmap` attribute variables all start with prefix `bsm_` (referring
+#' to the 'Belgian soil map').
+#'
+#' Most attributes represent categories and are returned as
+#' factors.
+#' When a variable is a one-to-one translation of another (e.g. code vs.
+#' explanation), the order of factor levels is aligned.
+#'
+#' Three types of dataframe variables are returned when reading `soilmap`:
+#' - **variables with `mo_` in their name**: their categories follow the
+#' Belgian Morphogenetic System.
+#'   - With `standardize_coastalplain = FALSE`, these are only available _outside
+#' the coastalplain areas_ except for `bsm_mo_soilunitype` (which is
+#' standardized already in the raw data source).
+#' - **variables with `ge_` in their name**: their categories follow the
+#' Belgian Geomorphological System.
+#' (Note however, that `bsm_ge_substr` does follow the Belgian Morphogenetic
+#' System as well.)
+#'   - These variables are only available _within the coastalplain areas_.
+#'   - They are _not_ included in `soilmap_simple`.
+#'   - A special variable is `bsm_ge_coastalplain`, which is `TRUE` inside
+#' coastalplain areas, and `FALSE` elsewhere.
+#' - **variables without `mo_` or `ge_` in their name** are:
+#'   - either _system-agnostic_ metadata (first two + last four variables:
+#'   `bsm_poly_id`, `bsm_map_id`, `bsm_map_url`, `bsm_book_url`,
+#'   `bsm_detailmap_url`, `bsm_profloc_url`),
+#'   - or _mixed_ (representing `mo_` categories within and `ge_` categories
+#'   outside coastal plains): the other ones, like `bsm_region`, `bsm_legend`,
+#'   `bsm_soiltype` and `bsm_soilseries`.
+#'
+#' Many variables have a 'counterpart variable' with suffix `_explan`:
+#' they provide a more elaborate textual explanation.
+#' They are not listed below.
+#'
+#' Short explanation of attributes is given below.
+#' More elaborate explanations can be found in the references and in metadata
+#' [at DOV](https://www.dov.vlaanderen.be/geonetwork/srv/dut/catalog.search#/metadata/5c129f2d-4498-4bc3-8860-01cb2d513f8f).
+#' 1. Meaning of the main non-metadata variables:
+#'     - `bsm_region` (*): name of the region
+#'     - `bsm_ge_coastalplain` (*): Logical.
+#'     Is the polygon situated in the coastalplain area?
+#'     - `bsm_ge_region`: code of the region (within the coastalplain area)
+#'     - `bsm_legend`: generalised (simplified) legend key (37 levels)
+#'     - `bsm_legend_title` and `bsm_legend_explan`:
+#'     the legend keys and text of Van Ranst & Sys (2000) (833 and 622 levels,
+#'     respectively)
+#'     - `bsm_soiltype`: the soiltype of the Belgian soil map (mixed nature:
+#'     morphogenetic & geomorphological codes).
+#'     `bsm_soiltype_id` represents a numeric code for each level.
+#'     - `bsm_soiltype_region`: `bsm_soiltype`, followed by a code representing
+#'     `bsm_region`
+#'     - `bsm_soilseries`: the morphogenetic soil series (outside coastalplain
+#'     areas),
+#'     which is the three core characters of `bsm_soiltype`,
+#'     or just `bsm_soiltype` within coastalplain areas
+#'     - `bsm_mo_soilunitype` (*): as `bsm_soiltype`, but applying morphogenetic
+#'     codes within coastalplain areas (see the `standardize_coastalplain`
+#'     argument for more information about this translation)
+#'     - `bsm_mo_substr` (*), `bsm_ge_substr`: code of the soil substrate
+#'     - `bsm_mo_tex` (*): code of the soil texture category
+#'     - `bsm_mo_drain` (*): code of the soil drainage category
+#'     - `bsm_mo_prof` (*): code of the soil profile category
+#'     - `bsm_mo_parentmat` (*): code of a variant regarding the parent material
+#'     - `bsm_mo_profvar` (*): code of a variant regarding the soil profile
+#'     - `bsm_mo_phase`: code of the soil phase (i.e. additional soil
+#'     properties).
+#'     They are explained in the book that accompanies the specific analog map
+#'     identified by `bsm_map_id`.
+#'     - `bsm_ge_series`: the geomorphological soil series (inside coastalplain
+#'     areas)
+#'     - `bsm_ge_subseries`: the geomorphological soil subseries (inside
+#'     coastalplain areas)
+#' 1. Meaning of the metadata variables:
+#'     - `bsm_poly_id` (*): unique polygon ID (numeric)
+#'     - `bsm_map_id`: code of the analog map covering this area
+#'     - `bsm_map_url`: hyperlink to the scanned analog map scale 1:20000 (pdf),
+#'     identified by `bsm_map_id`
+#'     - `bsm_bookurl`: hyperlink to the scanned book (pdf), accompanying the
+#'     analog map identified by `bsm_map_id`
+#'     - `bsm_detailmap_url`: hyperlink to the scanned maps at scale 1:5000
+#'     (zip-file with jpg files) belonging to the map identified by
+#'     `bsm_map_id`
+#'     - `bsm_profloc_url`: hyperlink to the scanned maps with the profile
+#'     locations
+#'     (zip-file with jpg files) belonging to the map identified by
+#'     `bsm_map_id`
+#'
+#' (*) Included in the `soilmap_simple` data source.
 #'
 #' @references
 #' - Ampe C. (2013). Databank aardewerk Vlaanderen 2010.
