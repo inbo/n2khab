@@ -172,8 +172,6 @@
 #'
 #' (*) Included in the `soilmap_simple` data source.
 #'
-#' @family functions returning important environmental data sets
-#'
 #' @references
 #' - Ampe C. (2013). Databank aardewerk Vlaanderen 2010.
 #' Omzetten (zeer) oude legende bodemkartering naar legende bodemkaart
@@ -213,6 +211,8 @@
 #' read_sf
 #' @importFrom git2rdata
 #' read_vc
+#' @importFrom inborutils
+#' convertdf_enc
 #' @importFrom dplyr
 #' %>%
 #' select
@@ -278,6 +278,7 @@ read_soilmap <-
 
         soilmap <-
             soilmap %>%
+            convertdf_enc(from = "latin1", to = "UTF-8") %>%
             select(bsm_poly_id = .data$gid,
                    bsm_map_id = .data$Kaartbldnr,
                    bsm_region = .data$Streek,

@@ -246,4 +246,3 @@ bodemkaart van Vlaanderen (schaal 1: 20000). Universiteit Gent, Laboratorium
 voor Bodemkunde, Ghent, 361 p. URL: http://hdl.handle.net/1854/LU-125899.
 }
 }
-\concept{functions returning important environmental data sets}
