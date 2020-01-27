@@ -74,6 +74,20 @@ types_check %>%
     nrow == 0
 ```
 
+Which are the frequencies of different combinations of hydrological class, groundwater and flood dependency?
+
+```{r warning=FALSE}
+types_check %>% 
+    count(hydr_class, groundw_dep, flood_dep)
+```
+
+Inspecting the `types` data source, sorted according to the above three variables:
+
+```{r}
+types_check %>% 
+    arrange(hydr_class, groundw_dep, flood_dep)
+```
+
 ## env_pressures
 
 ```{r}

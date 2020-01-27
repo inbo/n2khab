@@ -4,8 +4,7 @@
 \alias{read_ecoregions}
 \title{Return the \code{ecoregions} data source as an \code{sf} object}
 \usage{
-read_ecoregions(path = fileman_up("n2khab_data"),
-  file = "10_raw/ecoregions")
+read_ecoregions(path = fileman_up("n2khab_data"), file = "10_raw/ecoregions")
 }
 \arguments{
 \item{path}{Location of the file.
@@ -18,7 +17,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 }
 \value{
 A Simple feature collection of geometry type \code{MULTIPOLYGON}.

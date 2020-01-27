@@ -5,9 +5,11 @@
 \title{Return one of the available geospatial data sources representing
 administrative areas}
 \usage{
-read_admin_areas(path = fileman_up("n2khab_data"),
+read_admin_areas(
+  path = fileman_up("n2khab_data"),
   file = c("10_raw/flanders", "10_raw/provinces", "10_raw/sac"),
-  dsn = c("flanders", "provinces", "sac"))
+  dsn = c("flanders", "provinces", "sac")
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -20,7 +22,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{dsn}{A string, conforming to one of the data source names listed under
 \emph{Usage}.

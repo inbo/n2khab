@@ -5,8 +5,12 @@
 \title{Return a RasterLayer or an \code{sf} polygon layer from the processed data
 source \code{GRTSmh_diffres}}
 \usage{
-read_GRTSmh_diffres(path = fileman_up("n2khab_data"),
-  subdir = "20_processed/GRTSmh_diffres", level, polygon = FALSE)
+read_GRTSmh_diffres(
+  path = fileman_up("n2khab_data"),
+  subdir = "20_processed/GRTSmh_diffres",
+  level,
+  polygon = FALSE
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -19,7 +23,7 @@ starting from the working directory.}
 \item{subdir}{The subdirectory path of the data source, as viewed from
 \code{path}.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{level}{Integer in the range from 1 to 9; determines the spatial
 resolution. See the Details section.}
@@ -121,9 +125,10 @@ plot(p)
 
 }
 \seealso{
-Other functions involved in processing the \code{GRTSmaster_habitats} data source: \code{\link{convert_base4frac_to_dec}},
-  \code{\link{convert_dec_to_base4frac}},
-  \code{\link{read_GRTSmh_base4frac}},
-  \code{\link{read_GRTSmh}}
+Other functions involved in processing the \code{GRTSmaster_habitats} data source: 
+\code{\link{convert_base4frac_to_dec}()},
+\code{\link{convert_dec_to_base4frac}()},
+\code{\link{read_GRTSmh_base4frac}()},
+\code{\link{read_GRTSmh}()}
 }
 \concept{functions involved in processing the \code{GRTSmaster_habitats} data source}

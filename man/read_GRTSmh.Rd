@@ -5,9 +5,12 @@
 \title{Return the \code{GRTSmaster_habitats} data source as a RasterLayer or a
 10-layered variant as a RasterBrick}
 \usage{
-read_GRTSmh(path = fileman_up("n2khab_data"),
+read_GRTSmh(
+  path = fileman_up("n2khab_data"),
   file = c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
-  "20_processed/GRTSmh_brick/GRTSmh_brick.tif"), brick = FALSE)
+    "20_processed/GRTSmh_brick/GRTSmh_brick.tif"),
+  brick = FALSE
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -20,7 +23,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{brick}{Logical; determines whether the RasterLayer or RasterBrick data
 source is returned. See the Details section.}
@@ -109,9 +112,10 @@ Resources. Journal of the American Statistical Association 99 (465):
 262–278. DOI: https://doi.org/10.1198/016214504000000250.
 }
 \seealso{
-Other functions involved in processing the \code{GRTSmaster_habitats} data source: \code{\link{convert_base4frac_to_dec}},
-  \code{\link{convert_dec_to_base4frac}},
-  \code{\link{read_GRTSmh_base4frac}},
-  \code{\link{read_GRTSmh_diffres}}
+Other functions involved in processing the \code{GRTSmaster_habitats} data source: 
+\code{\link{convert_base4frac_to_dec}()},
+\code{\link{convert_dec_to_base4frac}()},
+\code{\link{read_GRTSmh_base4frac}()},
+\code{\link{read_GRTSmh_diffres}()}
 }
 \concept{functions involved in processing the \code{GRTSmaster_habitats} data source}

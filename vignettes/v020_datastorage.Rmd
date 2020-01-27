@@ -23,13 +23,22 @@ knitr::opts_chunk$set(
 
 Apart from several textual datasets, provided directly with this package,
 other N2KHAB data sources [^N2KHAB] are binary or large data.
-Those are made available through cloud-based infrastructure, preserved for the future at least via [Zenodo](https://zenodo.org).^[
+Those are made available through cloud-based infrastructure, preserved for the future at least via Zenodo (see below).^[
 This also means that several previously published ([open](https://opendefinition.org/licenses/)) data sources have been publicly redistributed at Zenodo.
 ]
 An overview of data distribution pathways is given [here](https://drive.google.com/file/d/1xZz9f9n8zSUxBJvW6WEFLyDK7Ya0u4iN/view).
 
 [^N2KHAB]: N2KHAB data sources are a list of public, standard data sources, important to analytical workflows concerning Natura 2000 (n2k) habitats (hab) in Flanders.
 They are in a public repository in order to be easily findable and to be preserved in a durable way.
+
+### More about Zenodo
+
+**[Zenodo](https://zenodo.org)** is a scientific repository funded by the European Commission and hosted at CERN.
+
+- We prefer Zenodo for its straightforward, easy approach of preserving data sources for the **long term** -- needed for reproducibility -- while providing a stable **DOI** link for each version and for each record as whole.
+- Managing the N2KHAB data sources at Zenodo allowed us to apply _a uniform and pure representation_ of each data source: we made _one_ data version correspond to _one_ data set following _one_ fileformat (not zipped); we add no other files (e.g. metadata files like pdf's, alternative fileformats etc.).
+The filenames in these Zenodo records follow the codes of the data sources that are used in the `n2khab` package.
+- Zenodo storage nicely fits with an internationalized approach of reproducible N2KHAB workflows in R, as its website is in English.
 
 ### Local data storage
 
@@ -71,7 +80,7 @@ Mind that, _if_ you store the `n2khab_data` folder inside a version controlled r
     By default, the functions search the folder in that order and use the **first encountered** `n2khab_data` folder.
     (Otherwise, you would need to actively set the path to the data folder with the `path` argument in each function call.)
     
-1. From your working directory, use [fileman_folders()](../html/fileman_folders.html) to specify the desired location (using the function's arguments).
+1. From your working directory, use `fileman_folders()` to specify the desired location (using the function's arguments).
 It will check the existence of the folders `n2khab_data`, `n2khab_data/10_raw` and `n2khab_data/20_processed` and create them if they don't exist.
 
 ```{r eval=FALSE}
@@ -82,8 +91,8 @@ fileman_folders(root = "rproj")
 #> [1] "<clipped_path_prefix>/n2khab_data"
 ```
 
-3. From the cloud storage, **download** the respective data files of a data source.
-You can also use the function [fileman_zenodo()](../html/fileman_zenodo.html) to do that, using the DOI of each data source version.
+3. From the cloud storage (links: [raw data](https://zenodo.org/communities/n2khab-data-raw) | [processed data](https://zenodo.org/communities/n2khab-data-processed)), **download** the respective data files of a data source.
+You can also use the function `download_zenodo()` to do that, using the DOI of each data source version.
 For each data source, put its file(s) in an appropriate subfolder either below `n2khab_data/10_raw` or `n2khab_data/20_processed` (depending on the data source).
 Use the data source's default name for the subfolder.
 You get a list of the data source names with _XXX_.

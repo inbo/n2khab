@@ -1,12 +1,12 @@
 ..generic:
-  git2rdata: '0.1'
+  git2rdata: 0.2.0
   optimize: yes
   NA string: NA
   sorting:
   - programme
   - scheme
-  hash: bed5a9d0597f17537f28793acd131dcf0ff3be42
-  data_hash: 19a86a644852da61b20435a21d9784f509bcbe62
+  hash: 1be8fd70ab32860d1755588365ca7e63964437e1
+  data_hash: 31fd80206ac440fabfa773dd8589984a05de3beb
 scheme:
   class: factor
   labels:
@@ -39,7 +39,8 @@ scheme:
   - SOIL_08.2
   - SURF_012
   - SURF_03.2
-  - SURF_03.4
+  - SURF_03.4_lentic
+  - SURF_03.4_lotic
   - SURF_064
   - SURF_066
   - SURF_07.2
@@ -101,7 +102,8 @@ scheme:
   - 26
   - 27
   - 28
-  - 29
+  - 62
+  - 63
   - 30
   - 31
   - 32
@@ -290,10 +292,14 @@ attribute_3:
   labels:
   - aq
   - caves
+  - lentic
+  - lotic
   - terr
   index:
   - 1
   - 3
+  - 4
+  - 5
   - 2
   ordered: no
 spatial_restriction:

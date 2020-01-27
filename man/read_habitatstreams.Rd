@@ -5,8 +5,11 @@
 \title{Return the data source \code{habitatstreams} as an \code{sf} linestring
 layer or as a list}
 \usage{
-read_habitatstreams(path = fileman_up("n2khab_data"),
-  file = "10_raw/habitatstreams", source_text = FALSE)
+read_habitatstreams(
+  path = fileman_up("n2khab_data"),
+  file = "10_raw/habitatstreams",
+  source_text = FALSE
+)
 }
 \arguments{
 \item{path}{Location of the file.
@@ -19,7 +22,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{source_text}{Logical, defaults to \code{FALSE}.
 If \code{TRUE}, the list version is returned (see \emph{Value}).}
@@ -36,7 +39,8 @@ variable in the \code{sf} object.
 }
 }
 \description{
-Returns the raw data source \code{habitatstreams} as an \code{sf} linestring
+Returns the raw data source \code{habitatstreams} (Leyssen et al., 2018)
+as an \code{sf} linestring
 layer or as a list of two objects: the \code{sf} object plus a data frame
 with textual explanation of the values of the \code{source_id} variable.
 }

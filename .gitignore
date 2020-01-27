@@ -12,3 +12,4 @@ misc/**/*.md
 _book*
 !_bookdown.yml
 inst/doc
+docs/

@@ -4,8 +4,12 @@
 \alias{read_types}
 \title{Return the 'types' data source as a tibble with names & shortnames}
 \usage{
-read_types(path = pkgdatasource_path("textdata/types", ".tsv"),
-  file = "types", file_namelist = "namelist", lang = "en")
+read_types(
+  path = pkgdatasource_path("textdata/types", ".tsv"),
+  file = "types",
+  file_namelist = "namelist",
+  lang = "en"
+)
 }
 \arguments{
 \item{path}{Location of the data sources \code{types} and \code{namelist}.
@@ -26,9 +30,8 @@ the language of names & shortnames to be returned in the tibble.}
 }
 \value{
 The \code{types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
-with names & shortnames added for types, typeclasses and tags
+with names & shortnames added for types, attributes and tags
 according to the \code{lang} argument.
-The tibble has 108 rows and 16 variables.
 See \code{\link{types}} for documentation of the data-source's contents.
 See \code{\link{namelist}} for the link between codes or other identifiers
 and the corresponding names (and shortnames).
@@ -37,8 +40,13 @@ The added names and shortnames are represented by the following variables:
 \itemize{
   \item \code{type_name}
   \item \code{type_shortname}
-  \item \code{typeclass_name}: a factor with the level order
-  according to that of \code{typeclass}.
+  \item \code{typeclass_name}
+  \item \code{hydr_class_name}
+  \item \code{hydr_class_shortname}
+  \item \code{groundw_dep_name}
+  \item \code{groundw_dep_shortname}
+  \item \code{flood_dep_name}
+  \item \code{flood_dep_shortname}
   \item \code{tag_1_name}
   \item \code{tag_1_shortname}
   \item \code{tag_2_name}
@@ -46,6 +54,8 @@ The added names and shortnames are represented by the following variables:
   \item \code{tag_3_name}
   \item \code{tag_3_shortname}
 }
+Except for the tags, the names and shortnames are factors with their level
+order according to that of the corresponding attribute.
 }
 \description{
 Returns the included data source \code{\link{types}} as a
@@ -68,7 +78,7 @@ and returns it as a
 A tibble is a dataframe that makes working in the tidyverse a little
 \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 By default, the data version delivered with the package is used and English
-names (\code{lang = "en"}) are returned for types, typeclasses and tags.
+names (\code{lang = "en"}) are returned for types, attributes and tags.
 }
 \section{Recommended usage}{
 
@@ -86,9 +96,10 @@ read_types(lang = "nl")
 \seealso{
 \code{\link{types}}
 
-Other reading functions for n2khab-referencelists: \code{\link{read_env_pressures}},
-  \code{\link{read_namelist}},
-  \code{\link{read_scheme_types}},
-  \code{\link{read_schemes}}
+Other reading functions for n2khab-referencelists: 
+\code{\link{read_env_pressures}()},
+\code{\link{read_namelist}()},
+\code{\link{read_scheme_types}()},
+\code{\link{read_schemes}()}
 }
 \concept{reading functions for n2khab-referencelists}
