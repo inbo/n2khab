@@ -180,10 +180,10 @@
 #' in Belgium and its applications. In: Bullock P., Jones R.J.A., Montanarella
 #' L. (editors). Soil Resources of Europe. Office for Official Publications of
 #' the European Communities, Luxembourg, p. 63–71.
-#' URL: http://hdl.handle.net/1854/LU-368514.
+#' URL: <http://hdl.handle.net/1854/LU-368514>.
 #' - Van Ranst E. & Sys C. (2000). Eenduidige legende van de digitale
 #' bodemkaart van Vlaanderen (schaal 1: 20000). Universiteit Gent, Laboratorium
-#' voor Bodemkunde, Ghent, 361 p. URL: http://hdl.handle.net/1854/LU-125899.
+#' voor Bodemkunde, Ghent, 361 p. URL: <http://hdl.handle.net/1854/LU-125899>.
 #'
 #' @examples
 #' \dontrun{
