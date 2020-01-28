@@ -1044,6 +1044,7 @@ read_habitatstreams <-
 #' formation (\emph{Cratoneurion})) in springs and streaming water segments in
 #' the Flemish Region, Belgium.
 #'
+#'
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
@@ -1062,9 +1063,17 @@ read_habitatstreams <-
 #'     \item \code{in_sac}: logical.
 #'     Is the site situated within a Special Area of Conservation?
 #'     \item \code{source}: original data source of the record.
-
 #'   }
 #'
+#' Note that the \code{type} variable has implicit \code{NA} values in this
+#' case
+#' (i.e. there is
+#' no factor level to represent the missing values).
+#' If you want this category to appear in certain results, you can add
+#' it as a level with
+#' [forcats::fct_explicit_na()].
+#'
+#' @md
 #'
 #' @examples
 #' \dontrun{
