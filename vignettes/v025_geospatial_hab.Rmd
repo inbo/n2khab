@@ -32,6 +32,9 @@ library(dplyr)
 library(units)
 ```
 
+_General note: the below vignette contains frozen output of 27 Jan 2020._
+_This makes it possible to build the package with vignettes without access to the data sources._
+
 ## Intro
 
 This vignette learns you:
