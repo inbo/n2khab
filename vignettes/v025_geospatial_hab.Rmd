@@ -9,7 +9,7 @@ output:
         - --csl
         - research-institute-for-nature-and-forest.csl
 vignette: >
-  %\VignetteIndexEntry{040. Working with geospatial data sources of habitat (sub)types and RIBs}
+  %\VignetteIndexEntry{025. Working with geospatial data sources of habitat (sub)types and RIBs}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
