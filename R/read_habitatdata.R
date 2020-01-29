@@ -405,6 +405,7 @@ read_watersurfaces_hab <-
 #' }
 #'
 #' @family functions involved in processing the \code{watersurfaces} data source
+#' @family functions returning important environmental data sets
 #'
 #' @references
 #'

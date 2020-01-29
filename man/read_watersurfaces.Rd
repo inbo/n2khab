@@ -98,3 +98,4 @@ Other functions involved in processing the \code{watersurfaces} data source:
 \code{\link{read_watersurfaces_hab}()}
 }
 \concept{functions involved in processing the \code{watersurfaces} data source}
+\concept{functions returning important environmental data sets}

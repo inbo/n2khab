@@ -25,7 +25,6 @@ reference:
     contents:
       - read_habitatmap
       - read_habitatstreams
-      - read_watersurfaces
       - read_habitatsprings
   - title: "Using the processed spatial data sources of habitats/RIBs"
     contents:
@@ -33,14 +32,12 @@ reference:
       - read_habitatmap_terr
       - read_watersurfaces_hab
       - expand_types
-  - title: "Using the raw administrative & environmental data sources"
+  - title: "Using the administrative & environmental data sources"
     contents:
-      - read_ecoregions
       - read_admin_areas
+      - read_ecoregions
+      - read_watersurfaces
       #- read_soilmap
-  #- title: "Using the processed environmental data sources"
-    #contents:
-      #- read_soilmap_simple
   - title: "Using the GRTSmaster data sources (raw + processed)"
     contents:
       - read_GRTSmh
