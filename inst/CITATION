@@ -1,0 +1,14 @@
+citHeader("To cite n2khab in publications use:")
+
+citEntry(
+  entry    = "Manual",
+  title    = "R package n2khab: providing preprocessed reference data for Flemish Natura 2000 habitat analyses",
+  author   = "Floris Vanderhaeghe and Toon Westra and Hans Van Calster",
+  year     = "2020",
+  url      = "https://inbo.github.io/n2khab",
+
+  textVersion = paste("Vanderhaeghe F, Westra T, Van Calster H (2020).",
+  "R package n2khab: providing preprocessed reference data for Flemish Natura 2000 habitat analyses.",
+  "https://inbo.github.io/n2khab."
+  )
+)

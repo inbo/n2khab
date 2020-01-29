@@ -55,7 +55,8 @@ variables (not mentioning extra 'name' variables for
 \description{
 Returns the raw data source \code{watersurfaces} (Packet et al., 2018)
 as a standardized \code{sf} polygon layer
-(tidyverse-styled, internationalized).
+(tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
+(EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
 See Packet et al. (2018) for an elaborate explanation of the data source
@@ -84,13 +85,13 @@ ws2
 wateren in Vlaanderen.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 Instituut voor Natuur- en Bosonderzoek, Brussel.
-\item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C., Denys L.
+\item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
 (2018).
 Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
 Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
 Instituut voor Natuur- en Bosonderzoek, Brussel.
-DOI: https://doi.org/10.21436/inbor.14178464
+DOI: \url{https://doi.org/10.21436/inbor.14178464}.
 }
 }
 \seealso{
@@ -98,3 +99,4 @@ Other functions involved in processing the \code{watersurfaces} data source:
 \code{\link{read_watersurfaces_hab}()}
 }
 \concept{functions involved in processing the \code{watersurfaces} data source}
+\concept{functions returning important environmental data sets}

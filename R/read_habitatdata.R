@@ -3,7 +3,8 @@
 #'
 #' \code{read_habitatmap_stdized} returns the data source \code{habitatmap_stdized} as a list of two objects:
 #' \itemize{
-#'   \item \code{habitatmap_polygons}: an sf object with all polygons
+#'   \item \code{habitatmap_polygons}: an sf object in the Belgian Lambert 72
+#'   CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
 #'   of the \code{habitatmap} that contain habitat or a regionally
 #'   important biotope (RIB).
 #'   \item \code{habitatmap_types}: a tibble with information on the
@@ -92,7 +93,7 @@
 #' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 #' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 #' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' DOI: https://doi.org/10.21436/inbor.15138099.
+#' DOI: \url{https://doi.org/10.21436/inbor.15138099}.
 #'
 #' @examples
 #' \dontrun{
@@ -182,11 +183,12 @@ read_habitatmap_stdized <-
 #'
 #' \code{read_watersurfaces_hab} returns the data source \code{watersurfaces_hab} as a list of two objects:
 #' \itemize{
-#'   \item \code{watersurfaces_hab_polygons}: an sf object with all polygons
+#'   \item \code{watersurfaces_polygons}: an sf object in the Belgian Lambert 72
+#'   CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
 #'   that contain standing water types (habitat or RIB).
-#'   \item \code{watersurfaces_hab_types}: a tibble with information on the
+#'   \item \code{watersurfaces_types}: a tibble with information on the
 #'   standing water types (HAB1, HAB2,..., HAB5) that occur within
-#'   each polygon of \code{watersurfaces_hab_polygons}.
+#'   each polygon of \code{watersurfaces_polygons}.
 #'   }
 #'
 #' The data source \code{watersurfaces_hab} is a combination of \code{habitatmap_stdized} (see
@@ -209,7 +211,7 @@ read_habitatmap_stdized <-
 #'standardized habitat map that contain standing water types but do not overlap with any watersurface polygon of the
 #'watersurface map.
 #'
-#'The R-code for creating the \code{watersurfaces_hab_polygons} data source can be found in the \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
+#'The R-code for creating the \code{watersurfaces_hab} data source can be found in the \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
 #'repository.
 #'
 #'
@@ -221,7 +223,7 @@ read_habitatmap_stdized <-
 #' @return
 #' A list of two objects:
 #'   \itemize{
-#'   \item \code{watersurfaces_hab_polygons}: an sf object of standing water polygons with four attribute variables:
+#'   \item \code{watersurfaces_polygons}: an sf object of standing water polygons with four attribute variables:
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{polygon_id_ws}: id for the polygon in the \code{watersurface map}
@@ -231,7 +233,7 @@ read_habitatmap_stdized <-
 #'     contain standing water habitat. The different descriptions are separated by '+'.}
 #'   }
 #'   \itemize{
-#'   \item \code{watersurfaces_hab_types}: a tibble with following variables:
+#'   \item \code{watersurfaces_types}: a tibble with following variables:
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
@@ -247,17 +249,18 @@ read_habitatmap_stdized <-
 #'
 #' @references
 #' \itemize{
-#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C., Denys L. (2018).
+#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
+#' (2018).
 #' Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
 #' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' DOI: https://doi.org/10.21436/inbor.14178464
+#' DOI: \url{https://doi.org/10.21436/inbor.14178464}.
 #' \item De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
 #' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 #' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 #' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' DOI: https://doi.org/10.21436/inbor.15138099.
+#' DOI: \url{https://doi.org/10.21436/inbor.15138099}.
 #' }
 #'
 #' @examples
@@ -269,8 +272,8 @@ read_habitatmap_stdized <-
 #' # consider what to do.
 #'
 #' wsh <- read_watersurfaces_hab()
-#' wsh_polygons <- wsh$watersurfaces_hab_polygons
-#' wsh_types <- wsh$watersurfaces_hab_types
+#' wsh_polygons <- wsh$watersurfaces_polygons
+#' wsh_types <- wsh$watersurfaces_types
 #' wsh_polygons
 #' wsh_types
 #' }
@@ -367,7 +370,8 @@ read_watersurfaces_hab <-
 #'
 #' Returns the raw data source \code{watersurfaces} (Packet et al., 2018)
 #' as a standardized \code{sf} polygon layer
-#' (tidyverse-styled, internationalized).
+#' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
+#' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
 #' See Packet et al. (2018) for an elaborate explanation of the data source
 #' and its attributes.
@@ -404,6 +408,7 @@ read_watersurfaces_hab <-
 #' }
 #'
 #' @family functions involved in processing the \code{watersurfaces} data source
+#' @family functions returning important environmental data sets
 #'
 #' @references
 #'
@@ -412,13 +417,13 @@ read_watersurfaces_hab <-
 #' wateren in Vlaanderen.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C., Denys L.
+#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
 #' (2018).
 #' Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
 #' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' DOI: https://doi.org/10.21436/inbor.14178464
+#' DOI: \url{https://doi.org/10.21436/inbor.14178464}.
 #' }
 #'
 #' @examples
@@ -578,7 +583,10 @@ read_watersurfaces <-
 #'
 #' Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
 #' as a standardized \code{sf} multipolygon layer
-#' (tidyverse-styled, internationalized).
+#' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
+#' (EPSG-code \href{https://epsg.io/31370}{31370}).
+#' Given the size of the data source, this function
+#' takes a bit longer than usual to run.
 #'
 #' @param select_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 #' important biotope (RIB) are returned. The default value is \code{FALSE}.
@@ -597,7 +605,7 @@ read_watersurfaces <-
 #' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 #' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 #' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' DOI: https://doi.org/10.21436/inbor.15138099.
+#' DOI: \url{https://doi.org/10.21436/inbor.15138099}.
 #'
 #' @examples
 #' \dontrun{
@@ -694,7 +702,8 @@ read_habitatmap <-
 #' objects
 #'
 #' \code{read_habitatmap_terr()} returns the data source \code{habitatmap_terr}
-#' as a list of two objects: \code{habitatmap_terr_polygons} and
+#' as a list of two objects: \code{habitatmap_terr_polygons}, having the Belgian
+#' Lambert 72 CRS (EPSG-code \href{https://epsg.io/31370}{31370}), and
 #' \code{habitatmap_terr_types}.
 #' \code{habitatmap_terr} is the further interpreted, terrestrial part of
 #' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}).
@@ -900,7 +909,9 @@ read_habitatmap_terr <-
 #'
 #' Returns the raw data source \code{habitatstreams} (Leyssen et al., 2018)
 #' as an \code{sf} linestring
-#' layer or as a list of two objects: the \code{sf} object plus a data frame
+#' layer or as a list of two objects: the \code{sf} object (CRS:
+#' Belgian Lambert 72 (EPSG-code \href{https://epsg.io/31370}{31370}))
+#' plus a data frame
 #' with textual explanation of the values of the \code{source_id} variable.
 #'
 #' @param source_text Logical, defaults to \code{FALSE}.
@@ -920,13 +931,13 @@ read_habitatmap_terr <-
 #' }
 #'
 #' @references
-#' Leyssen A., Denys L. De Saeger S. (2018). Indicatieve situering van het
+#' Leyssen A., Denys L. & De Saeger S. (2018). Indicatieve situering van het
 #' Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 #' behorend tot het \emph{Ranunculion fluitantis} en het
 #' \emph{Callitricho-Batrachion}.
 #' Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
 #' Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
-#' DOI: https://doi.org/10.21436/inbor.15138370
+#' DOI: \url{https://doi.org/10.21436/inbor.15138370}.
 #'
 #' @examples
 #' \dontrun{
@@ -1033,7 +1044,7 @@ read_habitatstreams <-
 #' layer
 #'
 #' Returns the raw data source \code{habitatsprings} as an \code{sf} point
-#' layer, in the Belgian Lambert 72 CRS (EPSG-code
+#' layer in the Belgian Lambert 72 CRS (EPSG-code
 #' \href{https://epsg.io/31370}{31370}).
 #'
 #' The data source \code{habitatsprings} is a GeoJSON file (conforming to
@@ -1043,6 +1054,7 @@ read_habitatstreams <-
 #' of the Natura 2000 habitat type \code{7220} (Petrifying springs with tufa
 #' formation (\emph{Cratoneurion})) in springs and streaming water segments in
 #' the Flemish Region, Belgium.
+#'
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -1062,9 +1074,17 @@ read_habitatstreams <-
 #'     \item \code{in_sac}: logical.
 #'     Is the site situated within a Special Area of Conservation?
 #'     \item \code{source}: original data source of the record.
-
 #'   }
 #'
+#' Note that the \code{type} variable has implicit \code{NA} values in this
+#' case
+#' (i.e. there is
+#' no factor level to represent the missing values).
+#' If you want this category to appear in certain results, you can add
+#' it as a level with
+#' [forcats::fct_explicit_na()].
+#'
+#' @md
 #'
 #' @examples
 #' \dontrun{

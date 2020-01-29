@@ -51,7 +51,8 @@ A list of two objects:
 \description{
 \code{read_habitatmap_stdized} returns the data source \code{habitatmap_stdized} as a list of two objects:
 \itemize{
-  \item \code{habitatmap_polygons}: an sf object with all polygons
+  \item \code{habitatmap_polygons}: an sf object in the Belgian Lambert 72
+  CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
   of the \code{habitatmap} that contain habitat or a regionally
   important biotope (RIB).
   \item \code{habitatmap_types}: a tibble with information on the
@@ -119,7 +120,7 @@ De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin
 Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-DOI: https://doi.org/10.21436/inbor.15138099.
+DOI: \url{https://doi.org/10.21436/inbor.15138099}.
 }
 \seealso{
 Other functions involved in processing the \code{habitatmap} data source: 

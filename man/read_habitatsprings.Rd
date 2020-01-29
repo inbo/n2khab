@@ -26,24 +26,32 @@ vignette on data storage (run \code{vignette("v020_datastorage")}).}
 \value{
 A Simple feature collection of
 type \code{POINT}, with attribute variables:
-  \itemize{
-    \item \code{point_id}
-    \item \code{name}: site name.
-    \item \code{code_orig}: original vegetation code in raw
-    \code{habitatsprings}.
-    \item \code{type}: habitat type listed in \code{\link{types}}.
-    \item \code{certain}: \code{TRUE} when vegetation type is certain and
-     \code{FALSE} when vegetation type is uncertain.
-    \item \code{area_m2}: area as square meters.
-    \item \code{year}: year of field inventory.
-    \item \code{in_sac}: logical.
-    Is the site situated within a Special Area of Conservation?
-    \item \code{source}: original data source of the record.
-  }
+\itemize{
+\item \code{point_id}
+\item \code{name}: site name.
+\item \code{code_orig}: original vegetation code in raw
+\code{habitatsprings}.
+\item \code{type}: habitat type listed in \code{\link{types}}.
+\item \code{certain}: \code{TRUE} when vegetation type is certain and
+\code{FALSE} when vegetation type is uncertain.
+\item \code{area_m2}: area as square meters.
+\item \code{year}: year of field inventory.
+\item \code{in_sac}: logical.
+Is the site situated within a Special Area of Conservation?
+\item \code{source}: original data source of the record.
+}
+
+Note that the \code{type} variable has implicit \code{NA} values in this
+case
+(i.e. there is
+no factor level to represent the missing values).
+If you want this category to appear in certain results, you can add
+it as a level with
+\code{\link[forcats:fct_explicit_na]{forcats::fct_explicit_na()}}.
 }
 \description{
 Returns the raw data source \code{habitatsprings} as an \code{sf} point
-layer, in the Belgian Lambert 72 CRS (EPSG-code
+layer in the Belgian Lambert 72 CRS (EPSG-code
 \href{https://epsg.io/31370}{31370}).
 }
 \details{

@@ -71,7 +71,8 @@ A list of two objects:
 }
 \description{
 \code{read_habitatmap_terr()} returns the data source \code{habitatmap_terr}
-as a list of two objects: \code{habitatmap_terr_polygons} and
+as a list of two objects: \code{habitatmap_terr_polygons}, having the Belgian
+Lambert 72 CRS (EPSG-code \href{https://epsg.io/31370}{31370}), and
 \code{habitatmap_terr_types}.
 \code{habitatmap_terr} is the further interpreted, terrestrial part of
 \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}).
