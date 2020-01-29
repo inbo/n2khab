@@ -5,7 +5,8 @@
 #' or (by default) the
 #' processed data source \code{soilmap_simple}
 #' as a standardized \code{sf} multipolygon layer (tidyverse-styled,
-#' internationalized).
+#' internationalized) in the Belgian Lambert 72 CRS (EPSG-code
+#' \href{https://epsg.io/31370}{31370}).
 #' Given the size of these data sources (especially the raw one), this function
 #' takes a bit longer than usual to run.
 #'
