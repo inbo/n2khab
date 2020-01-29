@@ -33,7 +33,8 @@ type \code{MULTIPOLYGON}.
 \description{
 Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
 as a standardized \code{sf} multipolygon layer
-(tidyverse-styled, internationalized).
+(tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
+(EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \examples{
 \dontrun{

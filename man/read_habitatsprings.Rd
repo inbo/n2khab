@@ -51,7 +51,7 @@ it as a level with
 }
 \description{
 Returns the raw data source \code{habitatsprings} as an \code{sf} point
-layer, in the Belgian Lambert 72 CRS (EPSG-code
+layer in the Belgian Lambert 72 CRS (EPSG-code
 \href{https://epsg.io/31370}{31370}).
 }
 \details{

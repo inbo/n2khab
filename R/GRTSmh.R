@@ -225,6 +225,8 @@ convert_base4frac_to_dec <-
 #' with the decimal integer ranking numbers of 10 hierarchical levels of the
 #' GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
 #' (with GRTS cell addresses at the resolution level).
+#' The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+#' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
 #' The data source \code{GRTSmaster_habitats}, provided and documented in
 #' \href{https://doi.org/10.5281/zenodo.2611233}{Zenodo}, is a monolayered GeoTIFF
@@ -365,7 +367,8 @@ read_GRTSmh <-
 #'
 #' The \code{GRTSmh_base4frac} data source is like a mirror to
 #' \code{GRTSmaster_habitats}, holding the ranking numbers as base 4 fractions.
-#' The function returns it as a RasterLayer.
+#' The function returns it as a RasterLayer in the Belgian Lambert 72 CRS
+#' (EPSG-code \href{https://epsg.io/31370}{31370})..
 #'
 #' The data source file, read by the function, is a monolayered GeoTIFF in the
 #' \code{FLT8S} datatype and is available at
@@ -474,6 +477,8 @@ read_GRTSmh_base4frac <-
 #' The function returns one selected level, either as a RasterLayer or as an
 #' \code{sf} polygon layer (in the latter case, only levels 4 to 9 are
 #' provided).
+#' The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+#' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
 #' The \code{GRTSmh_diffres} data source file is a file collection (available
 #' at \href{https://doi.org/10.5281/zenodo.3354405}{Zenodo}), composed of

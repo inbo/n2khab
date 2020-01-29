@@ -39,6 +39,8 @@ returned (data source \code{GRTSmh_brick}; resolution 32 m)
 with the decimal integer ranking numbers of 10 hierarchical levels of the
 GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
 (with GRTS cell addresses at the resolution level).
+The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+(EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
 The data source \code{GRTSmaster_habitats}, provided and documented in

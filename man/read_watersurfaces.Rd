@@ -55,7 +55,8 @@ variables (not mentioning extra 'name' variables for
 \description{
 Returns the raw data source \code{watersurfaces} (Packet et al., 2018)
 as a standardized \code{sf} polygon layer
-(tidyverse-styled, internationalized).
+(tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
+(EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
 See Packet et al. (2018) for an elaborate explanation of the data source

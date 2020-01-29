@@ -51,7 +51,8 @@ A list of two objects:
 \description{
 \code{read_habitatmap_stdized} returns the data source \code{habitatmap_stdized} as a list of two objects:
 \itemize{
-  \item \code{habitatmap_polygons}: an sf object with all polygons
+  \item \code{habitatmap_polygons}: an sf object in the Belgian Lambert 72
+  CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
   of the \code{habitatmap} that contain habitat or a regionally
   important biotope (RIB).
   \item \code{habitatmap_types}: a tibble with information on the

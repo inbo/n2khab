@@ -3,7 +3,8 @@
 #'
 #' \code{read_habitatmap_stdized} returns the data source \code{habitatmap_stdized} as a list of two objects:
 #' \itemize{
-#'   \item \code{habitatmap_polygons}: an sf object with all polygons
+#'   \item \code{habitatmap_polygons}: an sf object in the Belgian Lambert 72
+#'   CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
 #'   of the \code{habitatmap} that contain habitat or a regionally
 #'   important biotope (RIB).
 #'   \item \code{habitatmap_types}: a tibble with information on the
@@ -182,7 +183,8 @@ read_habitatmap_stdized <-
 #'
 #' \code{read_watersurfaces_hab} returns the data source \code{watersurfaces_hab} as a list of two objects:
 #' \itemize{
-#'   \item \code{watersurfaces_polygons}: an sf object with all polygons
+#'   \item \code{watersurfaces_polygons}: an sf object in the Belgian Lambert 72
+#'   CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
 #'   that contain standing water types (habitat or RIB).
 #'   \item \code{watersurfaces_types}: a tibble with information on the
 #'   standing water types (HAB1, HAB2,..., HAB5) that occur within
@@ -368,7 +370,8 @@ read_watersurfaces_hab <-
 #'
 #' Returns the raw data source \code{watersurfaces} (Packet et al., 2018)
 #' as a standardized \code{sf} polygon layer
-#' (tidyverse-styled, internationalized).
+#' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
+#' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
 #' See Packet et al. (2018) for an elaborate explanation of the data source
 #' and its attributes.
@@ -580,7 +583,8 @@ read_watersurfaces <-
 #'
 #' Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
 #' as a standardized \code{sf} multipolygon layer
-#' (tidyverse-styled, internationalized).
+#' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
+#' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
 #' @param select_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 #' important biotope (RIB) are returned. The default value is \code{FALSE}.
@@ -696,7 +700,8 @@ read_habitatmap <-
 #' objects
 #'
 #' \code{read_habitatmap_terr()} returns the data source \code{habitatmap_terr}
-#' as a list of two objects: \code{habitatmap_terr_polygons} and
+#' as a list of two objects: \code{habitatmap_terr_polygons}, having the Belgian
+#' Lambert 72 CRS (EPSG-code \href{https://epsg.io/31370}{31370}), and
 #' \code{habitatmap_terr_types}.
 #' \code{habitatmap_terr} is the further interpreted, terrestrial part of
 #' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}).
@@ -902,7 +907,9 @@ read_habitatmap_terr <-
 #'
 #' Returns the raw data source \code{habitatstreams} (Leyssen et al., 2018)
 #' as an \code{sf} linestring
-#' layer or as a list of two objects: the \code{sf} object plus a data frame
+#' layer or as a list of two objects: the \code{sf} object (CRS:
+#' Belgian Lambert 72 (EPSG-code \href{https://epsg.io/31370}{31370}))
+#' plus a data frame
 #' with textual explanation of the values of the \code{source_id} variable.
 #'
 #' @param source_text Logical, defaults to \code{FALSE}.
@@ -1035,7 +1042,7 @@ read_habitatstreams <-
 #' layer
 #'
 #' Returns the raw data source \code{habitatsprings} as an \code{sf} point
-#' layer, in the Belgian Lambert 72 CRS (EPSG-code
+#' layer in the Belgian Lambert 72 CRS (EPSG-code
 #' \href{https://epsg.io/31370}{31370}).
 #'
 #' The data source \code{habitatsprings} is a GeoJSON file (conforming to

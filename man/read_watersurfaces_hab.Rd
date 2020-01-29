@@ -57,7 +57,8 @@ A list of two objects:
 \description{
 \code{read_watersurfaces_hab} returns the data source \code{watersurfaces_hab} as a list of two objects:
 \itemize{
-  \item \code{watersurfaces_polygons}: an sf object with all polygons
+  \item \code{watersurfaces_polygons}: an sf object in the Belgian Lambert 72
+  CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
   that contain standing water types (habitat or RIB).
   \item \code{watersurfaces_types}: a tibble with information on the
   standing water types (HAB1, HAB2,..., HAB5) that occur within
