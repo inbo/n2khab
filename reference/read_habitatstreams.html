@@ -42,7 +42,9 @@ layer or as a list — read_habitatstreams • n2khab</title>
 layer or as a list — read_habitatstreams" />
 <meta property="og:description" content="Returns the raw data source habitatstreams (Leyssen et al., 2018)
 as an sf linestring
-layer or as a list of two objects: the sf object plus a data frame
+layer or as a list of two objects: the sf object (CRS:
+Belgian Lambert 72 (EPSG-code 31370))
+plus a data frame
 with textual explanation of the values of the source_id variable." />
 <meta name="twitter:card" content="summary" />
 
@@ -76,7 +78,7 @@ with textual explanation of the values of the source_id variable." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9051</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9053</span>
       </span>
     </div>
 
@@ -142,7 +144,9 @@ layer or as a list</h1>
     <div class="ref-description">
     <p>Returns the raw data source <code>habitatstreams</code> (Leyssen et al., 2018)
 as an <code>sf</code> linestring
-layer or as a list of two objects: the <code>sf</code> object plus a data frame
+layer or as a list of two objects: the <code>sf</code> object (CRS:
+Belgian Lambert 72 (EPSG-code <a href='https://epsg.io/31370'>31370</a>))
+plus a data frame
 with textual explanation of the values of the <code>source_id</code> variable.</p>
     </div>
 
@@ -190,13 +194,13 @@ variable in the <code>sf</code> object.</p></li>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Leyssen A., Denys L. De Saeger S. (2018). Indicatieve situering van het
+    <p>Leyssen A., Denys L. &amp; De Saeger S. (2018). Indicatieve situering van het
 Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 behorend tot het <em>Ranunculion fluitantis</em> en het
 <em>Callitricho-Batrachion</em>.
 Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
 Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
-DOI: https://doi.org/10.21436/inbor.15138370</p>
+DOI: <a href='https://doi.org/10.21436/inbor.15138370'>https://doi.org/10.21436/inbor.15138370</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

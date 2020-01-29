@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9051</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9053</span>
       </span>
     </div>
 
@@ -101,6 +101,7 @@
 
     
     
+<p><em>General note: the below vignette contains frozen output of 29 May 2019.</em> <em>This makes it possible to build the package with vignettes without access to the data sources.</em></p>
 <div id="intro" class="section level2">
 <h2 class="hasAnchor">
 <a href="#intro" class="anchor"></a>Intro</h2>
@@ -127,7 +128,7 @@
 <li>
 <code>GRTSmh_diffres</code> (<a href="https://doi.org/10.5281/zenodo.3354405">Zenodo-link</a>): file collection composed of nine monolayered GeoTIFF files plus a GeoPackage with six polygon layers. They provide the hierarchical levels 1 to 9 of the <code>GRTSmh_brick</code> data source at the corresponding spatial resolution, i.e. at lower resolutions than <code>GRTSmaster_habitats</code> (for more details see the <code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code> documentation)</li>
 <li>
-<code>GRTSmh_base4frac</code> (<a href="https://doi.org/10.5281/zenodo.3354401">Zenodo-link</a>): is like a mirror to <code>GRTSmaster_habitats</code>, holding the ranking numbers as base 4 fractions (for more details see the <code><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac()</a></code> documentation)</li>
+<code>GRTSmh_base4frac</code> (<a href="https://doi.org/10.5281/zenodo.3354401">Zenodo-link</a>): is like a mirror to <code>GRTSmaster_habitats</code>, holding the ranking numbers as base 4 fractions. These are numbers like <code>0.3213210231312</code>, representing the reverse-ordered base-4 GRTS address behind the decimal mark: the digit for level 0 is 2, for level 1 it is 1, …, for level 13 it is 3). Hence, it is a direct representation of the hierarchical GRTS addresses, allowing the derivation of other datasets. More details are in the <code><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac()</a></code> documentation.</li>
 </ul>
 </li>
 </ul>

@@ -41,7 +41,7 @@ layer — read_habitatsprings • n2khab</title>
 <meta property="og:title" content="Return the data source <code>habitatsprings</code> as an <code>sf</code> point
 layer — read_habitatsprings" />
 <meta property="og:description" content="Returns the raw data source habitatsprings as an sf point
-layer, in the Belgian Lambert 72 CRS (EPSG-code
+layer in the Belgian Lambert 72 CRS (EPSG-code
 31370)." />
 <meta name="twitter:card" content="summary" />
 
@@ -75,7 +75,7 @@ layer, in the Belgian Lambert 72 CRS (EPSG-code
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9051</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9053</span>
       </span>
     </div>
 
@@ -140,7 +140,7 @@ layer</h1>
 
     <div class="ref-description">
     <p>Returns the raw data source <code>habitatsprings</code> as an <code>sf</code> point
-layer, in the Belgian Lambert 72 CRS (EPSG-code
+layer in the Belgian Lambert 72 CRS (EPSG-code
 <a href='https://epsg.io/31370'>31370</a>).</p>
     </div>
 
@@ -177,17 +177,24 @@ type <code>POINT</code>, with attribute variables:</p><ul>
 <li><p><code>point_id</code></p></li>
 <li><p><code>name</code>: site name.</p></li>
 <li><p><code>code_orig</code>: original vegetation code in raw
-    <code>habitatsprings</code>.</p></li>
+<code>habitatsprings</code>.</p></li>
 <li><p><code>type</code>: habitat type listed in <code><a href='types.html'>types</a></code>.</p></li>
 <li><p><code>certain</code>: <code>TRUE</code> when vegetation type is certain and
-     <code>FALSE</code> when vegetation type is uncertain.</p></li>
+<code>FALSE</code> when vegetation type is uncertain.</p></li>
 <li><p><code>area_m2</code>: area as square meters.</p></li>
 <li><p><code>year</code>: year of field inventory.</p></li>
 <li><p><code>in_sac</code>: logical.
-    Is the site situated within a Special Area of Conservation?</p></li>
+Is the site situated within a Special Area of Conservation?</p></li>
 <li><p><code>source</code>: original data source of the record.</p></li>
 </ul>
 
+<p>Note that the <code>type</code> variable has implicit <code>NA</code> values in this
+case
+(i.e. there is
+no factor level to represent the missing values).
+If you want this category to appear in certain results, you can add
+it as a level with
+<code><a href='https://forcats.tidyverse.org/reference/fct_explicit_na.html'>forcats::fct_explicit_na()</a></code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The data source <code>habitatsprings</code> is a GeoJSON file (conforming to

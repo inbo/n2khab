@@ -40,7 +40,8 @@
 <meta property="og:title" content="Return the data source <code>watersurfaces</code> as an <code>sf</code> polygon layer — read_watersurfaces" />
 <meta property="og:description" content="Returns the raw data source watersurfaces (Packet et al., 2018)
 as a standardized sf polygon layer
-(tidyverse-styled, internationalized)." />
+(tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
+(EPSG-code 31370)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -73,7 +74,7 @@ as a standardized sf polygon layer
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9051</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9053</span>
       </span>
     </div>
 
@@ -138,7 +139,8 @@ as a standardized sf polygon layer
     <div class="ref-description">
     <p>Returns the raw data source <code>watersurfaces</code> (Packet et al., 2018)
 as a standardized <code>sf</code> polygon layer
-(tidyverse-styled, internationalized).</p>
+(tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
+(EPSG-code <a href='https://epsg.io/31370'>31370</a>).</p>
     </div>
 
     <pre class="usage"><span class='fu'>read_watersurfaces</span>(
@@ -211,13 +213,13 @@ and its attributes.</p>
 wateren in Vlaanderen.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 Instituut voor Natuur- en Bosonderzoek, Brussel.</p></li>
-<li><p>Packet J., Scheers K., Smeekens V., Leyssen A., Wils C., Denys L.
+<li><p>Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. &amp; Denys L.
 (2018).
 Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
 Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
 Instituut voor Natuur- en Bosonderzoek, Brussel.
-DOI: https://doi.org/10.21436/inbor.14178464</p></li>
+DOI: <a href='https://doi.org/10.21436/inbor.14178464'>https://doi.org/10.21436/inbor.14178464</a>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>

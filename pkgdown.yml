@@ -5,4 +5,7 @@ articles:
   v010_reference_lists: v010_reference_lists.html
   v020_datastorage: v020_datastorage.html
   v030_GRTSmh: v030_GRTSmh.html
+urls:
+  reference: https://inbo.github.io/n2khab/reference
+  article: https://inbo.github.io/n2khab/articles
 

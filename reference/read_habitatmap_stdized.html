@@ -41,7 +41,8 @@ objects — read_habitatmap_stdized • n2khab</title>
 <meta property="og:title" content="Return the data source <code>habitatmap_stdized</code> as a list of two
 objects — read_habitatmap_stdized" />
 <meta property="og:description" content="read_habitatmap_stdized returns the data source habitatmap_stdized as a list of two objects:
-habitatmap_polygons: an sf object with all polygons
+habitatmap_polygons: an sf object in the Belgian Lambert 72
+  CRS (EPSG-code 31370) with all polygons
   of the habitatmap that contain habitat or a regionally
   important biotope (RIB).
 habitatmap_types: a tibble with information on the
@@ -81,7 +82,7 @@ habitatmap_types: a tibble with information on the
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9051</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9053</span>
       </span>
     </div>
 
@@ -146,7 +147,8 @@ objects</h1>
 
     <div class="ref-description">
     <p><code>read_habitatmap_stdized</code> returns the data source <code>habitatmap_stdized</code> as a list of two objects:</p><ul>
-<li><p><code>habitatmap_polygons</code>: an sf object with all polygons
+<li><p><code>habitatmap_polygons</code>: an sf object in the Belgian Lambert 72
+  CRS (EPSG-code <a href='https://epsg.io/31370'>31370</a>) with all polygons
   of the <code>habitatmap</code> that contain habitat or a regionally
   important biotope (RIB).</p></li>
 <li><p><code>habitatmap_types</code>: a tibble with information on the
@@ -248,7 +250,7 @@ following steps:</p><ul>
 Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-DOI: https://doi.org/10.21436/inbor.15138099.</p>
+DOI: <a href='https://doi.org/10.21436/inbor.15138099'>https://doi.org/10.21436/inbor.15138099</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other functions involved in processing the <code>habitatmap</code> data source: 
