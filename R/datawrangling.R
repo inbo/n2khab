@@ -113,6 +113,7 @@
 #' select
 #' group_by_at
 #' group_vars
+#' ungroup
 #' @importFrom rlang .data
 #' @export
 expand_types <- function(x,
@@ -137,6 +138,7 @@ expand_types <- function(x,
 
     x %>%
         nest(data = -!!(group_vars(x))) %>%
+        ungroup %>%
         mutate(newdata = map(.data$data,
                              expand_types_plain,
                              type_var = type_var,
