@@ -51,7 +51,10 @@ The following data sources are available:
 - processed data sources:
     - `GRTSmh_brick` ([Zenodo-link](https://doi.org/10.5281/zenodo.3354403)): 10-layered GeoTIFF with the decimal integer ranking numbers of 10 hierarchical levels (0 - 9) of the GRTS cell addresses, including the one from `GRTSmaster_habitats` (i.e. level 0; for more details see the `read_GRTSmh()` documentation)
     - `GRTSmh_diffres` ([Zenodo-link](https://doi.org/10.5281/zenodo.3354405)): file collection composed of nine monolayered GeoTIFF files plus a GeoPackage with six polygon layers. They provide the hierarchical levels 1 to 9 of the `GRTSmh_brick` data source at the corresponding spatial resolution, i.e. at lower resolutions than `GRTSmaster_habitats` (for more details see the `read_GRTSmh_diffres()` documentation)
-    - `GRTSmh_base4frac` ([Zenodo-link](https://doi.org/10.5281/zenodo.3354401)): is like a mirror to `GRTSmaster_habitats`, holding the ranking numbers as base 4 fractions (for more details see the `read_GRTSmh_base4frac()` documentation)
+    - `GRTSmh_base4frac` ([Zenodo-link](https://doi.org/10.5281/zenodo.3354401)): is like a mirror to `GRTSmaster_habitats`, holding the ranking numbers as base 4 fractions.
+    These are numbers like `0.3213210231312`, representing the reverse-ordered base-4 GRTS address behind the decimal mark: the digit for level 0 is 2, for level 1 it is 1, ..., for level 13 it is 3).
+    Hence, it is a direct representation of the hierarchical GRTS addresses, allowing the derivation of other datasets.
+    More details are in the `read_GRTSmh_base4frac()` documentation.
 
 For more information on data storage and locations, see `vignette("v020_datastorage")`.
 
