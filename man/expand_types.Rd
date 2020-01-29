@@ -107,6 +107,6 @@ expand_types(x, type_var = "mycode", strict = FALSE)
 \seealso{
 \code{\link{read_scheme_types}},
 \code{\link{read_types}},
-\code{read_habitatmap_terr},
+\code{\link{read_habitatmap_terr}},
 \code{\link{read_watersurfaces_hab}}
 }
