@@ -21,6 +21,9 @@ library(magrittr)
 library(knitr)
 ```
 
+_General note: the below vignette contains frozen output of 29 May 2019._
+_This makes it possible to build the package with vignettes without access to the data sources._
+
 ## Intro
 
 With this vignette, you get acquainted with three functions that usually return a RasterLayer or a RasterBrick:
