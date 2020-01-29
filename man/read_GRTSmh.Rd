@@ -105,11 +105,11 @@ r
 \references{
 Stevens D.L. & Olsen A.R. (2003). Variance estimation for spatially balanced
 samples of environmental resources. Environmetrics 14 (6): 593–610.
-DOI: https://doi.org/10.1002/env.606.
+DOI: \url{https://doi.org/10.1002/env.606}.
 
 Stevens D.L. & Olsen A.R. (2004). Spatially Balanced Sampling of Natural
 Resources. Journal of the American Statistical Association 99 (465):
-262–278. DOI: https://doi.org/10.1198/016214504000000250.
+262–278. DOI: \url{https://doi.org/10.1198/016214504000000250}.
 }
 \seealso{
 Other functions involved in processing the \code{GRTSmaster_habitats} data source: 

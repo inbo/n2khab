@@ -84,13 +84,13 @@ ws2
 wateren in Vlaanderen.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 Instituut voor Natuur- en Bosonderzoek, Brussel.
-\item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C., Denys L.
+\item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
 (2018).
 Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
 Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
 Instituut voor Natuur- en Bosonderzoek, Brussel.
-DOI: https://doi.org/10.21436/inbor.14178464
+DOI: \url{https://doi.org/10.21436/inbor.14178464}.
 }
 }
 \seealso{

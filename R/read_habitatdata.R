@@ -92,7 +92,7 @@
 #' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 #' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 #' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' DOI: https://doi.org/10.21436/inbor.15138099.
+#' DOI: \url{https://doi.org/10.21436/inbor.15138099}.
 #'
 #' @examples
 #' \dontrun{
@@ -247,17 +247,18 @@ read_habitatmap_stdized <-
 #'
 #' @references
 #' \itemize{
-#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C., Denys L. (2018).
+#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
+#' (2018).
 #' Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
 #' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' DOI: https://doi.org/10.21436/inbor.14178464
+#' DOI: \url{https://doi.org/10.21436/inbor.14178464}.
 #' \item De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
 #' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 #' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 #' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' DOI: https://doi.org/10.21436/inbor.15138099.
+#' DOI: \url{https://doi.org/10.21436/inbor.15138099}.
 #' }
 #'
 #' @examples
@@ -412,13 +413,13 @@ read_watersurfaces_hab <-
 #' wateren in Vlaanderen.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C., Denys L.
+#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
 #' (2018).
 #' Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
 #' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' DOI: https://doi.org/10.21436/inbor.14178464
+#' DOI: \url{https://doi.org/10.21436/inbor.14178464}.
 #' }
 #'
 #' @examples
@@ -597,7 +598,7 @@ read_watersurfaces <-
 #' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 #' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 #' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' DOI: https://doi.org/10.21436/inbor.15138099.
+#' DOI: \url{https://doi.org/10.21436/inbor.15138099}.
 #'
 #' @examples
 #' \dontrun{
@@ -920,13 +921,13 @@ read_habitatmap_terr <-
 #' }
 #'
 #' @references
-#' Leyssen A., Denys L. De Saeger S. (2018). Indicatieve situering van het
+#' Leyssen A., Denys L. & De Saeger S. (2018). Indicatieve situering van het
 #' Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 #' behorend tot het \emph{Ranunculion fluitantis} en het
 #' \emph{Callitricho-Batrachion}.
 #' Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
 #' Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
-#' DOI: https://doi.org/10.21436/inbor.15138370
+#' DOI: \url{https://doi.org/10.21436/inbor.15138370}.
 #'
 #' @examples
 #' \dontrun{
