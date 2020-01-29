@@ -34,7 +34,7 @@ Defaults to the latest available version defined by the package.}
 \value{
 A list of two objects:
   \itemize{
-  \item \code{watersurfaces_hab_polygons}: an sf object of standing water polygons with four attribute variables:
+  \item \code{watersurfaces_polygons}: an sf object of standing water polygons with four attribute variables:
   \itemize{
     \item \code{polygon_id}
     \item \code{polygon_id_ws}: id for the polygon in the \code{watersurface map}
@@ -44,7 +44,7 @@ A list of two objects:
     contain standing water habitat. The different descriptions are separated by '+'.}
   }
   \itemize{
-  \item \code{watersurfaces_hab_types}: a tibble with following variables:
+  \item \code{watersurfaces_types}: a tibble with following variables:
   \itemize{
     \item \code{polygon_id}
     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
@@ -57,11 +57,11 @@ A list of two objects:
 \description{
 \code{read_watersurfaces_hab} returns the data source \code{watersurfaces_hab} as a list of two objects:
 \itemize{
-  \item \code{watersurfaces_hab_polygons}: an sf object with all polygons
+  \item \code{watersurfaces_polygons}: an sf object with all polygons
   that contain standing water types (habitat or RIB).
-  \item \code{watersurfaces_hab_types}: a tibble with information on the
+  \item \code{watersurfaces_types}: a tibble with information on the
   standing water types (HAB1, HAB2,..., HAB5) that occur within
-  each polygon of \code{watersurfaces_hab_polygons}.
+  each polygon of \code{watersurfaces_polygons}.
   }
 }
 \details{
@@ -85,7 +85,7 @@ overlap with the selected habitat type polygons of the standardized habitat map.
 standardized habitat map that contain standing water types but do not overlap with any watersurface polygon of the
 watersurface map.
 
-The R-code for creating the \code{watersurfaces_hab_polygons} data source can be found in the \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
+The R-code for creating the \code{watersurfaces_hab} data source can be found in the \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
 repository.
 }
 \examples{
@@ -97,8 +97,8 @@ repository.
 # consider what to do.
 
 wsh <- read_watersurfaces_hab()
-wsh_polygons <- wsh$watersurfaces_hab_polygons
-wsh_types <- wsh$watersurfaces_hab_types
+wsh_polygons <- wsh$watersurfaces_polygons
+wsh_types <- wsh$watersurfaces_types
 wsh_polygons
 wsh_types
 }
