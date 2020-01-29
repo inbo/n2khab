@@ -3,7 +3,11 @@ title: "Using the GRTS data sources"
 author: "Floris Vanderhaeghe"
 date: "2019-05-29"
 bibliography: references.bib
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    pandoc_args:
+        - --csl
+        - research-institute-for-nature-and-forest.csl
 vignette: >
   %\VignetteIndexEntry{030. Using the GRTS data sources}
   %\VignetteEngine{knitr::rmarkdown}
