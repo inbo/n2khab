@@ -7,8 +7,7 @@
 #' It allows to do sensible selections and joins with interpreted forms of the
 #' \code{habitatmap_stdized} and \code{watersurfaces} data sources:
 #' \code{habitatmap_terr},
-#' \code{read_watersurfaces_hab(interpreted = TRUE)}
-#' .
+#' \code{read_watersurfaces_hab(interpreted = TRUE)}.
 #' If the dataframe has one or more grouping variables, by default the
 #' operation is done independently for each group in turn.
 #'
