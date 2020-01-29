@@ -585,6 +585,8 @@ read_watersurfaces <-
 #' as a standardized \code{sf} multipolygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
+#' Given the size of the data source, this function
+#' takes a bit longer than usual to run.
 #'
 #' @param select_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 #' important biotope (RIB) are returned. The default value is \code{FALSE}.
