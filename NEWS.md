@@ -1,4 +1,4 @@
-# n2khab 0.0.3.52
+# n2khab 0.0.3.53
 
 - fixed bug in handling grouping variables in `expand_types()` (commit 6321af0)
 - various documentation & vignette updates
