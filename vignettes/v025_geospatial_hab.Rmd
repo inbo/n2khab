@@ -87,7 +87,7 @@ The advantage of using the `read_...()` functions is the uniform approach to rea
 - The `type` variable (if present) is a factor with the same levels as the `type` variable of the `types` reference list (see `read_types()`).
 - Some variables may be discarded that should normally have no added value, e.g. values that duplicate already existing information.
 
-### Raw data sources
+### Returning raw data sources
 
 The functions do just basic preprocessing, in order to return (by default) an object that well reflects the structure of the raw data source and returns all its records.
 
@@ -198,7 +198,7 @@ habitatsprings
 
 The meaning of each column is described in the function documentation.
 
-### Processed data sources
+### Returning processed data sources
 
 The reading functions for the three processed data sources will always return a **list**:
 
@@ -511,7 +511,7 @@ df_exp
 
 More examples and features are explained in the documentation of `expand_types()`.
 
-Obviously, more rows of habitatmap_terr will be retained by joining `df_exp`:
+Obviously, more rows of `habitatmap_terr` will be retained by joining `df_exp`:
 
 ```{r warning=FALSE}
 hmt$habitatmap_terr_types %>% 
