@@ -1,6 +1,8 @@
-## Welcome
-
+<!-- badges: start -->
 [![Build Status](https://travis-ci.com/inbo/n2khab.svg?branch=master)](https://travis-ci.com/inbo/n2khab)
+<!-- badges: end -->
+
+## Welcome
 
 The **n2khab** R package provides standard checklists (reference data) and preprocessing functions, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 (**n2k**) habitats (**hab**) and regionally important biotopes (RIBs).
 

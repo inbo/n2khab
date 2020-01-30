@@ -40,8 +40,9 @@ A Simple feature collection of geometry type \code{MULTIPOLYGON} or
 \code{POLYGON}.
 }
 \description{
-Return one of the available geospatial data sources representing
-administrative areas
+Returns an administrative geospatial data source.
+The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+(EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
 See section \emph{Usage} to see which N2KHAB data sources are

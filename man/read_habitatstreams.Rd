@@ -41,7 +41,9 @@ variable in the \code{sf} object.
 \description{
 Returns the raw data source \code{habitatstreams} (Leyssen et al., 2018)
 as an \code{sf} linestring
-layer or as a list of two objects: the \code{sf} object plus a data frame
+layer or as a list of two objects: the \code{sf} object (CRS:
+Belgian Lambert 72 (EPSG-code \href{https://epsg.io/31370}{31370}))
+plus a data frame
 with textual explanation of the values of the \code{source_id} variable.
 }
 \examples{
@@ -64,11 +66,11 @@ all.equal(hs \%>\% st_drop_geometry,
 
 }
 \references{
-Leyssen A., Denys L. De Saeger S. (2018). Indicatieve situering van het
+Leyssen A., Denys L. & De Saeger S. (2018). Indicatieve situering van het
 Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 behorend tot het \emph{Ranunculion fluitantis} en het
 \emph{Callitricho-Batrachion}.
 Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
 Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
-DOI: https://doi.org/10.21436/inbor.15138370
+DOI: \url{https://doi.org/10.21436/inbor.15138370}.
 }
