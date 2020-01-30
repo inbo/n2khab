@@ -32,7 +32,7 @@ Imports:
     forcats,
     gdalUtils,
     git2rdata (>= 0.2.0),
-    inborutils (>= 0.1.0.9065),
+    inborutils (>= 0.1.0.9069),
     magrittr,
     plyr,
     purrr,
