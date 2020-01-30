@@ -1,6 +1,6 @@
 Package: n2khab
-Title: Providing preprocessed reference data for Flemish Natura 2000 habitat analyses
-Version: 0.0.3.9051
+Title: Providing Preprocessed Reference Data For Flemish Natura 2000 Habitat Analyses
+Version: 0.0.3.9054
 Authors@R: c(
     person("Floris", "Vanderhaeghe", email = "floris.vanderhaeghe@inbo.be", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6378-6229")), 
     person("Toon", "Westra", email = "toon.westra@inbo.be", role = c("aut"), comment = c(ORCID = "0000-0003-2478-9459")), 
@@ -29,7 +29,6 @@ Depends:
     R (>= 3.5.0)
 Imports:
     assertthat,
-    DBI,
     dplyr,
     forcats,
     gdalUtils,
@@ -40,12 +39,9 @@ Imports:
     purrr,
     raster,
     readr,
-    rgdal,
     rlang,
     rprojroot,
-    sp,
     sf,
-    stats,
     stringr,
     tibble,
     tidyr (>= 1.0.0),
@@ -59,5 +55,6 @@ Suggests:
     googledrive,
     knitr,
     readxl,
-    rmarkdown
+    rmarkdown,
+    units
 VignetteBuilder: knitr
