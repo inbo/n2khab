@@ -1,4 +1,5 @@
 <!-- badges: start -->
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Build Status](https://travis-ci.com/inbo/n2khab.svg?branch=master)](https://travis-ci.com/inbo/n2khab)
 <!-- badges: end -->
 
