@@ -1,0 +1,559 @@
+---
+title: "Working with geospatial data sources of habitat (sub)types and RIBs"
+author: "Floris Vanderhaeghe, Toon Westra, Jan Wouters"
+date: "2020-01-27"
+bibliography: references.bib
+output: 
+  rmarkdown::html_vignette:
+    pandoc_args:
+        - --csl
+        - research-institute-for-nature-and-forest.csl
+vignette: >
+  %\VignetteIndexEntry{025. Working with geospatial data sources of habitat (sub)types and RIBs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+options(stringsAsFactors = FALSE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  paged.print = FALSE,
+  eval = FALSE
+)
+```
+
+_General note: the below vignette contains frozen output of 27 Jan 2020._
+_This makes it possible to build the package with vignettes without access to the data sources._
+
+
+```{r eval=TRUE, results='hide', message=FALSE, warning=FALSE}
+library(n2khab)
+library(sf)
+library(dplyr)
+library(units)
+```
+
+## Intro
+
+This vignette learns you:
+
+- the difference between various geospatial N2KHAB data sources on the occurrence of types in Flanders (types being habitat (sub)types or regionally important biotopes (RIBs); see `read_types()`);
+- how to load these data sources into R;
+- how to optimally match an interpreted data source with a 'types' column in your own dataframe.
+
+## Data sources
+
+The below N2KHAB data sources are available.
+For practical information on data storage and locations, see `vignette("v020_datastorage")`.
+
+- **raw data sources**:
+    - **`habitatmap`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3354381)): geospatial polygons of BWK and Natura 2000 habitat types in the Flemish Region, originally published by the Research Institute for Nature and Forest (INBO) [@de_saeger_biologische_2018] and distributed by 'Informatie Vlaanderen'.
+    - **`habitatstreams`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3386245)): geospatial lines of the Natura 2000 habitat type `3260` that correspond with its presence in streaming water segments in the Flemish Region, originally published by INBO [@leyssen_indicatieve_2018] and distributed by 'Informatie Vlaanderen'.
+    - **`habitatsprings`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3550994)): geospatial points hat correspond with the presence or absence of the Natura 2000 habitat type `7220` in springs and streaming water segments in the Flemish Region.
+    The data source is produced, owned and administered by INBO.
+- **processed data sources**:
+    - **`habitatmap_stdized`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3355192)):
+derived from `habitatmap`.
+This datasource only contains polygons with habitat (sub)type or RIB codes.
+All codes conform to the `types` reference list (see `read_types()`).
+The datasource is a GeoPackage with essentially two objects: 1) the geospatial polygons; 2) a long-formatted table with the associated types (multiple records can occur per `polygon_id`).
+For more details see `read_habitatmap_stdized()`.
+    - **`habitatmap_terr`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3468948)):
+the further interpreted, terrestrial part of `habitatmap_stdized` ('terrestrial' includes 'semi-terrestrial').
+Amongst other properties, it excludes polygons _without_ terrestrial types, it excludes rows which most probably are no habitat or RIB at all, and several main type codes were translated to a corresponding subtype which they almost always represent.
+The datasource is a GeoPackage, organized in the same way as `habitatmap_stdized`.
+For more details see `read_habitatmap_terr()`.
+    - **`watersurfaces_hab`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3374645)): 
+a combination of the environmental data source `watersurfaces` (@packet_watervlakken_2018; see `read_watersurfaces()`) and the above data source `habitatmap_stdized`.
+It represents polygons (from `watersurfaces` or `habitatmap_stdized`) that completely or partly contain standing water habitat types or RIBs (i.e. `2190_a`, '`31..`' types or `rbbah`; 
+types `3260` and `7220` are not included).
+The datasource is a GeoPackage, organized in the same way as `habitatmap_stdized`.
+For more details see `read_watersurfaces_hab()`.
+
+
+
+## Using the `read_...()` functions
+
+In the below R code, it is supposed that a `n2khab_data` folder is present in your working directory or a directory up to 10 levels higher, with the relevant data sources in the right place.
+See `vignette("v020_datastorage")` for the setup.
+
+The advantage of using the `read_...()` functions is the uniform approach to read the above data sources in R, enhancing collaboration and speeding up your work.
+
+- Geospatial layers are represented as an `sf` object, in the coordinate reference system (CRS) 'Belge 1972 / Belgian Lambert 72' (EPSG-code [31370](https://epsg.io/31370)).
+- Dataframes are presented as tibbles. ^[A tibble is a dataframe that makes working in the tidyverse a little [easier](https://r4ds.had.co.nz/tibbles.html).]
+- English & [tidyverse-styled](https://style.tidyverse.org/) names of variables stimulate you to always produce internationalized code, tables and figures.
+- The `type` variable (if present) is a factor with the same levels as the `type` variable of the `types` reference list (see `read_types()`).
+- Some variables may be discarded that should normally have no added value, e.g. values that duplicate already existing information.
+
+### Returning raw data sources
+
+The functions do just basic preprocessing, in order to return (by default) an object that well reflects the structure of the raw data source and returns all its records.
+
+```{r}
+habitatmap <- read_habitatmap()
+habitatmap
+#> Simple feature collection with 618147 features and 30 fields
+#> geometry type:  MULTIPOLYGON
+#> dimension:      XY
+#> bbox:           xmin: 21991.38 ymin: 153058.3 xmax: 258871.8 ymax: 244027.3
+#> epsg (SRID):    31370
+#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
+#> # A tibble: 618,147 x 31
+#>    polygon_id eval  eenh1 eenh2 eenh3 eenh4 eenh5 eenh6 eenh7 eenh8 v1    v2   
+#>  * <chr>      <fct> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>
+#>  1 000098_v2… m     b     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  2 000132_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  3 000135_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  4 000136_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  5 000142_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  6 000150_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  7 000152_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  8 000154_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  9 000297_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#> 10 000805_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#> # … with 618,137 more rows, and 19 more variables: v3 <chr>, source <chr>,
+#> #   info <chr>, bwk_label <chr>, hab1 <chr>, phab1 <int>, hab2 <chr>,
+#> #   phab2 <int>, hab3 <chr>, phab3 <int>, hab4 <chr>, phab4 <int>, hab5 <chr>,
+#> #   phab5 <int>, source_hab <chr>, source_phab <chr>, hab_legend <fct>,
+#> #   area_m2 <dbl>, geometry <MULTIPOLYGON [m]>
+```
+
+The `habitatmap` object is a very wide dataframe which is not so easy to handle in R.
+For analytical work on habitat types and RIBs, you're advised to use the tidied data source `habitatmap_stdized`; see [below](#processed-data-sources).
+
+`read_habitatmap(select_hab = TRUE)` will only retain the polygons that occur in `habitatmap_stdized`, i.e. those that contain habitat types or RIBs.
+
+Both `habitatstreams` and `habitatsprings` have a straightforward data structure.
+There was no need to generate derived data sources.
+
+```{r}
+habitatstreams <- read_habitatstreams()
+habitatstreams
+#> Simple feature collection with 560 features and 3 fields
+#> geometry type:  LINESTRING
+#> dimension:      XY
+#> bbox:           xmin: 33097.92 ymin: 157529.6 xmax: 254039 ymax: 243444.6
+#> epsg (SRID):    31370
+#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
+#> # A tibble: 560 x 4
+#>    river_name   source_id type                                          geometry
+#>  * <fct>        <fct>     <fct>                                 <LINESTRING [m]>
+#>  1 WOLFPUTBEEK  VMM       3260  (127857.1 167681.2, 127854.9 167684.5, 127844 1…
+#>  2 OUDE KALE    VMM       3260  (95737.01 196912.9, 95732.82 196912.4, 95710.38…
+#>  3 VENLOOP      EcoInv    3260  (169352.7 209314.9, 169358.8 209290.5, 169326.2…
+#>  4 VENLOOP      EcoInv    3260  (169633.6 209293.5, 169625 209289.2, 169594.4 2…
+#>  5 KLEINE NETE  EcoInv    3260  (181087.1 208607.2, 181088.6 208608.1, 181089 2…
+#>  6 KLEINE NETE  EcoInv    3260  (180037.4 208360.4, 180038.3 208377.5, 180038.3…
+#>  7 KLEINE NETE  EcoInv    3260  (180520 208595.7, 180540.5 208607.4, 180541.2 2…
+#>  8 KLEINE NETE  EcoInv    3260  (187379.9 209998.8, 187381.3 209998.5, 187381.6…
+#>  9 RAAMDONKSEB… extrapol  3260  (183545.5 192409, 183541.9 192406.7, 183541.9 1…
+#> 10 KLEINE NETE  EcoInv    3260  (183516.4 208261.7, 183567.3 208279.2, 183567.3…
+#> # … with 550 more rows
+```
+
+With `read_habitatstreams(source_text = TRUE)` a second object `sources` is returned with the meaning of the `source_id` codes:
+
+```{r}
+read_habitatstreams(source_text = TRUE) %>% 
+  .$sources
+#> # A tibble: 7 x 2
+#>   source_id          source_text                                                
+#>   <fct>              <fct>                                                      
+#> 1 VMM                "Gegevens afgeleid van macrofyteninventarisaties uitgevoer…
+#> 2 EcoInv             "Tijdens ecologische inventarisatiestudies uitgevoerd in o…
+#> 3 extrapol           "De conclusie van het nabijgelegen geïnventariseerde segme…
+#> 4 Van Belleghem (20… "Macrofytengegevens afgeleid van Van Belleghem S., Bal K.,…
+#> 5 Leyssen ea (2005)  "Macrofytengegevens afgeleid van Leyssen A., Adriaens P., …
+#> 6 WrnBe              "Waarnemingen afkomstig van Waarnemingen.be, de website vo…
+#> 7 INBO               "Tijdens veldbezoeken werd de aan- of afwezigheid van het …
+```
+
+
+```{r}
+habitatsprings <- read_habitatsprings()
+habitatsprings
+#> Simple feature collection with 102 features and 9 fields
+#> geometry type:  POINT
+#> dimension:      XY
+#> bbox:           xmin: 36407.84 ymin: 155249.7 xmax: 258371.1 ymax: 179732
+#> epsg (SRID):    31370
+#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
+#> # A tibble: 102 x 10
+#>    point_id name  code_orig type  certain area_m2  year in_sac source
+#>  *    <dbl> <chr> <chr>     <fct> <lgl>     <dbl> <dbl> <lgl>  <chr> 
+#>  1        1 Stee… 7220      7220  TRUE         50  2014 TRUE   kalkt…
+#>  2        2 Stee… 7220      7220  TRUE         20  2014 TRUE   kalkt…
+#>  3        3 Duli… 7230      7230  TRUE         NA  2014 TRUE   kalkt…
+#>  4        4 Kapi… gh        <NA>  TRUE         NA  2014 TRUE   kalkt…
+#>  5        5 Reme… 7220      7220  TRUE        200  2014 TRUE   kalkt…
+#>  6        6 Reme… 7220      7220  TRUE        500  2014 TRUE   kalkt…
+#>  7        7 Kest… 7220,gh   7220  FALSE        NA    NA TRUE   anb   
+#>  8        8 Krin… 7220      7220  TRUE        800  2014 TRUE   kalkt…
+#>  9        9 Bois… 7220      7220  TRUE         50  2014 TRUE   kalkt…
+#> 10       10 Kwin… 7220      7220  TRUE         10  2014 TRUE   kalkt…
+#> # … with 92 more rows, and 1 more variable: geometry <POINT [m]>
+```
+
+The meaning of each column is described in the function documentation.
+
+### Returning processed data sources
+
+The reading functions for the three processed data sources will always return a **list**:
+
+- the first element holds the geospatial information as an **sf object**.
+It has unique feature IDs that can be joined with rows of the second element;
+- the second element is a **tibble** that presents attributes of the features as _**[tidy](https://r4ds.had.co.nz/tidy-data.html#tidy-data-1) data**_.
+
+Let's see how this works!
+
+#### read_habitatmap_stdized()
+
+A tidy representation of the `habitatmap` data, restricted to the polygons that contain habitat types or RIBs, is returned by `read_habitatmap_stdized()`:
+
+```{r}
+hms <- read_habitatmap_stdized()
+```
+
+
+```{r}
+hms_pol <- hms$habitatmap_polygons
+hms_pol
+#> Simple feature collection with 77048 features and 2 fields
+#> geometry type:  MULTIPOLYGON
+#> dimension:      XY
+#> bbox:           xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243351.8
+#> epsg (SRID):    31370
+#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
+#> # A tibble: 77,048 x 3
+#>    polygon_id  description_orig                                             geom
+#>  * <fct>       <chr>                                          <MULTIPOLYGON [m]>
+#>  1 129420_v20… 60% x; 40% 6430_hf (((242838.5 161337.3, 242842.8 161324.7, 2428…
+#>  2 130153_v20… 70% 9120_qb; 30% … (((150669.4 227248.6, 150668.1 227242.9, 1505…
+#>  3 130815_v20… 70% gh; 30% 9160   (((258338.4 158696.1, 258336.5 158693.5, 2583…
+#>  4 137826_v20… 100% 6430,rbbhf    (((181587.2 234938, 181613.1 234933.1, 181646…
+#>  5 170624_v20… 100% rbbmr         (((145876.8 229686.8, 145701.7 229680.6, 1456…
+#>  6 203261_v20… 70% gh; 30% rbbmr  (((117137.2 210307.9, 117136.3 210288.3, 1171…
+#>  7 204352_v20… 80% gh; 20% rbbsp  (((116357.3 159278.3, 116340.5 159259.8, 1163…
+#>  8 204376_v20… 90% gh; 10% rbbsg  (((116110.1 210545.5, 116102.4 210541.1, 1160…
+#>  9 205188_v20… 60% rbbsp; 40% gh  (((232114.7 161594.5, 232122.7 161590.5, 2321…
+#> 10 205291_v20… 70% gh; 30% rbbsp  (((191253.5 160641.5, 191254.8 160636.1, 1912…
+#> # … with 77,038 more rows
+```
+
+```{r}
+hms_occ <- hms$habitatmap_types
+hms_occ
+#> # A tibble: 98,737 x 5
+#>    polygon_id   code_orig  phab certain type    
+#>    <fct>        <chr>     <dbl> <lgl>   <fct>   
+#>  1 000038_v2016 91E0_va     100 TRUE    91E0_va 
+#>  2 000043_v2016 9130_end    100 TRUE    9130_end
+#>  3 000132_v2016 9130_end    100 TRUE    9130_end
+#>  4 000204_v2016 91E0_vn     100 TRUE    91E0_vn 
+#>  5 000255_v2016 91E0_vc     100 TRUE    91E0_vc 
+#>  6 000297_v2016 rbbsp        10 TRUE    rbbsp   
+#>  7 000311_v2016 9130_end     70 TRUE    9130_end
+#>  8 000311_v2016 rbbsp        30 TRUE    rbbsp   
+#>  9 000390_v2016 91E0_vn      70 TRUE    91E0_vn 
+#> 10 000390_v2016 91E0_va      30 TRUE    91E0_va 
+#> # … with 98,727 more rows
+```
+
+Let's estimate the surface area per type, including uncertain occurrences of types and taking into account cover percentage per polygon (`phab`):
+
+```{r}
+hms_pol %>% 
+  mutate(area = st_area(.)) %>% 
+  st_drop_geometry %>% 
+  inner_join(hms_occ, by = "polygon_id") %>% 
+    # area of type within polygon:
+  mutate(area_type = area * phab / 100) %>% 
+  group_by(type) %>% 
+  summarise(area = sum(area_type) %>% 
+                    set_units("ha") %>% 
+                    round(2)
+            )
+#> # A tibble: 101 x 2
+#>    type        area
+#>    <fct>       [ha]
+#>  1 1130     5353.85
+#>  2 1140     2096.20
+#>  3 1310_pol   17.39
+#>  4 1310_zk    43.08
+#>  5 1310_zv    10.62
+#>  6 1320        1.55
+#>  7 1330_da   110.23
+#>  8 1330_hpr  136.40
+#>  9 2110       26.84
+#> 10 2120      481.62
+#> # … with 91 more rows
+```
+
+#### read_habitatmap_terr()
+
+`read_habitatmap_terr()` behaves exactly the same way:
+
+```{r}
+hmt <- read_habitatmap_terr()
+```
+
+```{r}
+hmt$habitatmap_terr_polygons
+#> Simple feature collection with 68300 features and 4 fields
+#> geometry type:  MULTIPOLYGON
+#> dimension:      XY
+#> bbox:           xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243351.8
+#> epsg (SRID):    31370
+#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
+#> # A tibble: 68,300 x 5
+#>    polygon_id  description_orig  description source                         geom
+#>  * <fct>       <chr>             <chr>       <fct>            <MULTIPOLYGON [m]>
+#>  1 129420_v20… 60% x; 40% 6430_… 60% x; 40%… habita… (((242838.5 161337.3, 2428…
+#>  2 130153_v20… 70% 9120_qb; 30%… 70% 9120_q… habita… (((150669.4 227248.6, 1506…
+#>  3 130815_v20… 70% gh; 30% 9160  70% gh; 30… habita… (((258338.4 158696.1, 2583…
+#>  4 137826_v20… 100% 6430,rbbhf   100% 6430_… habita… (((181587.2 234938, 181613…
+#>  5 170624_v20… 100% rbbmr        100% rbbmr  habita… (((145876.8 229686.8, 1457…
+#>  6 203261_v20… 70% gh; 30% rbbmr 70% gh; 30… habita… (((117137.2 210307.9, 1171…
+#>  7 204352_v20… 80% gh; 20% rbbsp 80% gh; 20… habita… (((116357.3 159278.3, 1163…
+#>  8 204376_v20… 90% gh; 10% rbbsg 90% gh; 10… habita… (((116110.1 210545.5, 1161…
+#>  9 205188_v20… 60% rbbsp; 40% gh 60% rbbsp;… habita… (((232114.7 161594.5, 2321…
+#> 10 205291_v20… 70% gh; 30% rbbsp 70% gh; 30… habita… (((191253.5 160641.5, 1912…
+#> # … with 68,290 more rows
+```
+
+```{r}
+hmt$habitatmap_terr_types
+#> # A tibble: 87,513 x 6
+#>    polygon_id   code_orig  phab certain type     source            
+#>    <fct>        <chr>     <dbl> <lgl>   <fct>    <fct>             
+#>  1 000038_v2016 91E0_va     100 TRUE    91E0_va  habitatmap_stdized
+#>  2 000043_v2016 9130_end    100 TRUE    9130_end habitatmap_stdized
+#>  3 000132_v2016 9130_end    100 TRUE    9130_end habitatmap_stdized
+#>  4 000204_v2016 91E0_vn     100 TRUE    91E0_vn  habitatmap_stdized
+#>  5 000255_v2016 91E0_vc     100 TRUE    91E0_vc  habitatmap_stdized
+#>  6 000297_v2016 rbbsp        10 TRUE    rbbsp    habitatmap_stdized
+#>  7 000311_v2016 9130_end     70 TRUE    9130_end habitatmap_stdized
+#>  8 000311_v2016 rbbsp        30 TRUE    rbbsp    habitatmap_stdized
+#>  9 000390_v2016 91E0_vn      70 TRUE    91E0_vn  habitatmap_stdized
+#> 10 000390_v2016 91E0_va      30 TRUE    91E0_va  habitatmap_stdized
+#> # … with 87,503 more rows
+```
+
+Compared to `habitatmap_stdized`, _purely_ aquatic or non-habitat/RIB polygons were omitted, and a part of the type data were interpreted in a more specific way.
+
+As a consequence, some type codes are completely absent from `habitatmap_terr_types`:
+
+```{r}
+hms_occ %>% 
+  distinct(type) %>% 
+  anti_join(hmt$habitatmap_terr_types %>% 
+              distinct(type), 
+            by = "type") %>% 
+  arrange(type)
+#> # A tibble: 7 x 1
+#>   type 
+#>   <fct>
+#> 1 2190 
+#> 2 3110 
+#> 3 6410 
+#> 4 6430 
+#> 5 6510 
+#> 6 7140 
+#> 7 9130
+```
+
+About 4% of all type occurrences received a new type code:
+
+```{r}
+hmt$habitatmap_terr_types %>%  
+  count(source) %>% 
+  mutate(pct = (n / sum(n) * 100) %>% round(0))
+#> # A tibble: 2 x 3
+#>   source                                  n   pct
+#>   <fct>                               <int> <dbl>
+#> 1 habitatmap_stdized                  83667    96
+#> 2 habitatmap_stdized + interpretation  3846     4
+```
+
+#### read_watersurfaces_hab()
+
+A similar story, this time for polygons that (could) have aquatic types:
+
+```{r}
+wsh <- read_watersurfaces_hab()
+```
+
+```{r}
+wsh$watersurfaces_polygons
+#> Simple feature collection with 2947 features and 4 fields
+#> geometry type:  MULTIPOLYGON
+#> dimension:      XY
+#> bbox:           xmin: 22546.57 ymin: 159273.1 xmax: 253928.1 ymax: 242960.1
+#> epsg (SRID):    31370
+#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
+#> # A tibble: 2,947 x 5
+#>    polygon_id polygon_id_ws polygon_id_habi… description_orig
+#>  * <fct>      <fct>         <fct>            <chr>           
+#>  1 ANTANT0082 ANTANT0082    596466_v2014     60% 3150; 20% r…
+#>  2 ANTANT0251 ANTANT0251    113978_v2014     100% 3150       
+#>  3 ANTANT0253 ANTANT0253    111606_v2014     100% 3150       
+#>  4 ANTANT0297 ANTANT0297    409153_v2014+40… 85% 3140; 15% 3…
+#>  5 ANTANT0315 ANTANT0315    519082_v2018     100% 3140       
+#>  6 ANTANT0319 ANTANT0319    601958_v2014     100% 3150,gh    
+#>  7 ANTANT0381 ANTANT0381    644003_v2014     85% gh; 15% 3140
+#>  8 ANTANT0383 ANTANT0383    631879_v2014+59… 50% 3150; 40% r…
+#>  9 ANTANT0384 ANTANT0384    644003_v2014     85% gh; 15% 3140
+#> 10 ANTANT0434 ANTANT0434    537902_v2018     100% 3140       
+#> # … with 2,937 more rows, and 1 more variable: geom <MULTIPOLYGON [m]>
+```
+
+```{r}
+wsh$watersurfaces_types
+#> # A tibble: 3,302 x 4
+#>    polygon_id code_orig certain type 
+#>    <fct>      <chr>     <lgl>   <fct>
+#>  1 ANTANT0082 3150      TRUE    3150 
+#>  2 ANTANT0251 3150      TRUE    3150 
+#>  3 ANTANT0253 3150      TRUE    3150 
+#>  4 ANTANT0297 3140      TRUE    3140 
+#>  5 ANTANT0297 3150      TRUE    3150 
+#>  6 ANTANT0315 3140      TRUE    3140 
+#>  7 ANTANT0319 3150,gh   FALSE   3150 
+#>  8 ANTANT0381 3140      TRUE    3140 
+#>  9 ANTANT0383 3150      TRUE    3150 
+#> 10 ANTANT0384 3140      TRUE    3140 
+#> # … with 3,292 more rows
+```
+
+Let's compute some statistics of standing water types (ignoring the value `certain`):
+
+```{r}
+wsh$watersurfaces_polygons %>% 
+  mutate(area = st_area(.)) %>% 
+  st_drop_geometry %>% 
+  inner_join(wsh$watersurfaces_types,
+             by = "polygon_id") %>% 
+  group_by(type) %>% 
+  summarise(nr_watersurfaces = n_distinct(polygon_id),
+            total_area = sum(area),
+            area_min = min(area),
+            area_Q1 = quantile(area, 0.25),
+            area_Q2 = quantile(area, 0.5),
+            area_Q3 = quantile(area, 0.75),
+            max = max(area)
+            ) %>% 
+  mutate_at(vars(matches("area|max")), 
+            function(x) {set_units(x, "a") %>% round(1)})
+#> # A tibble: 9 x 8
+#>   type     nr_watersurfaces total_area area_min area_Q1 area_Q2 area_Q3     max
+#>   <fct>               <int>        [a]      [a]     [a]     [a]     [a]     [a]
+#> 1 2190_a                308     3547.4      0.0     0.9     2.0     5.6   317.5
+#> 2 3110                    5     1642.6    111.7   119.8   199.5   362.3   849.3
+#> 3 3130                  271    37433.4      0.8    11.1    36.2   124.3  2807.2
+#> 4 3130_aom             1022    88380.7      0.1     2.1     9.0    43.1  7062.7
+#> 5 3130_na               226    85942.7      0.6    37.6   111.9   266.5 13668.2
+#> 6 3140                  105    66531.9      0.8    11.8    46.6   230.4 13668.2
+#> 7 3150                  500   113617.5      0.1     6.4    17.1    86.5 13668.2
+#> 8 3160                  297    25137.0      0.1     6.4    21.8    64.3  4179.1
+#> 9 rbbah                 528    40830.2      0.1     4.2    12.8    55.2  3748.6
+```
+
+An strong point of `sf` objects is that the geometry has explicit units.
+Consequently we can make use of tools like `set_units()` to convert units (e.g. surface area as _are_ (a)).
+
+Because the main type code `3130` will mostly boil down to `3130_aom` in the field, a further interpreted flavour can be generated with `read_watersurfaces_hab(interpreted = TRUE)`.
+
+```{r}
+read_watersurfaces_hab(interpreted = TRUE) %>% 
+  .$watersurfaces_types %>% 
+  filter(type == "3130") %>% 
+  nrow
+#> [1] 0
+```
+
+
+## Matching interpreted data sources with a dataframe column of types
+
+The `expand_types()` function helps us to join a type column of your own dataframe with the results of `read_habitatmap_terr()` or `read_watersurfaces_hab()`.
+
+For both of these datasets, the following conversions of your dataframe are supported in order to create optimal joins:
+
+- adding extra _subtype_ rows when main type codes occur for which subtypes exist;
+- adding extra _main type_ rows when certain subtypes of that main type are present (the conditions can be relaxed; see the function documentation).
+This is supported for 2330, 6230 and 91E0, for which this makes sense with the two mentioned data sources.
+
+An example (`df` is our dataframe):
+
+```{r eval=TRUE}
+df <-
+    tribble(
+        ~mycode, ~obs,
+        "2130", 5,
+        "2190", 45,
+        "2330_bu", 8,
+        "2330_dw", 8,
+        "6410_mo", 78,
+        "6410_ve", 4,
+        "91E0_vn", 10
+    )
+df
+```
+
+With the `type_var` argument you specify which variable of your dataframe represents type codes:
+
+```{r eval=TRUE}
+df_exp <- 
+    expand_types(df, type_var = "mycode")
+df_exp
+```
+
+More examples and features are explained in the documentation of `expand_types()`.
+
+Obviously, more rows of `habitatmap_terr` will be retained by joining `df_exp`:
+
+```{r warning=FALSE}
+hmt$habitatmap_terr_types %>% 
+  semi_join(df_exp, by = c(type = "mycode")) %>% 
+  nrow
+#> [1] 5885
+```
+
+When joining with `df`:
+
+```{r warning=FALSE}
+hmt$habitatmap_terr_types %>% 
+  semi_join(df, by = c(type = "mycode")) %>% 
+  nrow
+#> [1] 4447
+```
+
+
+
+
+## References
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
