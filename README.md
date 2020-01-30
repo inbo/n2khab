@@ -20,6 +20,7 @@ remotes::install_github("inbo/n2khab", build_vignettes = TRUE)
 ```
 
 Note that this will install the package from the `master` branch.
+In case of an installation error because existing dependencies (already installed packages) are too old, add the argument `upgrade = TRUE`.
 If you need a version from another branch, add the `ref` argument in the above function to provide the branch name.
 
 Have a look at the vignettes to quickly find your way!
