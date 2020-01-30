@@ -1,20 +1,10 @@
-# n2khab 0.0.3.54
+# n2khab 0.1.0
 
-- added a vignette on habitat data sources
+## Features of the first stable release
 
-# n2khab 0.0.3.53
-
-- fixed bug in handling grouping variables in `expand_types()` (commit 6321af0)
-- various documentation & vignette updates
-- dropped unneeded dependencies
-- pkgdown site & repo metadata updates
-
-# n2khab 0.0.3.50
-
-- reexported `inborutils::download_zenodo()`
-- dropped `fileman_zenodo()`
-
-# n2khab 0.0.3.49
-
-- core reading and preprocessing functions available
-- 3 vignettes are available
+- core reading and preprocessing functions
+- several built-in checklists (among which: `types` and `env_pressures`)
+- function documentation
+- 4 tutorials (vignettes / articles)
+- a reexport of `download_zenodo()` from `inborutils`
+- website built with `pkgdown`
