@@ -11,6 +11,7 @@ The **n2khab** R package provides preprocessing functions and standard reference
 The package's core aim is to **provide readily standardized (preprocessed) data** in your R environment.
 This facilitates collaboration and reproducibility.
 
+The standard reference data include: checklists, spatial habitat distribution, administrative & environmental layers, GRTSmaster_habitats.
 
 ## Installing, testing and using the _n2khab_ package
 
