@@ -23,7 +23,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{brick}{Logical; determines whether the RasterLayer or RasterBrick data
 source is returned. See the Details section.}
@@ -39,6 +39,8 @@ returned (data source \code{GRTSmh_brick}; resolution 32 m)
 with the decimal integer ranking numbers of 10 hierarchical levels of the
 GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
 (with GRTS cell addresses at the resolution level).
+The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+(EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
 The data source \code{GRTSmaster_habitats}, provided and documented in
@@ -105,11 +107,11 @@ r
 \references{
 Stevens D.L. & Olsen A.R. (2003). Variance estimation for spatially balanced
 samples of environmental resources. Environmetrics 14 (6): 593–610.
-DOI: https://doi.org/10.1002/env.606.
+DOI: \url{https://doi.org/10.1002/env.606}.
 
 Stevens D.L. & Olsen A.R. (2004). Spatially Balanced Sampling of Natural
 Resources. Journal of the American Statistical Association 99 (465):
-262–278. DOI: https://doi.org/10.1198/016214504000000250.
+262–278. DOI: \url{https://doi.org/10.1198/016214504000000250}.
 }
 \seealso{
 Other functions involved in processing the \code{GRTSmaster_habitats} data source: 

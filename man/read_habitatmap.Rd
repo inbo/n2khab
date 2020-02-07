@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_habitatdata.R
 \name{read_habitatmap}
 \alias{read_habitatmap}
-\title{Return the data source \code{habitatmap}}
+\title{Return the data source \code{habitatmap} as an \code{sf} multipolygon layer}
 \usage{
 read_habitatmap(
   path = fileman_up("n2khab_data"),
@@ -21,16 +21,22 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{select_hab}{If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 important biotope (RIB) are returned. The default value is \code{FALSE}.}
 }
 \value{
-An sf object
+A Simple feature collection of
+type \code{MULTIPOLYGON}.
 }
 \description{
-\code{read_habitatmap} returns the \code{habitatmap} (De Saeger et al., 2018).
+Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
+as a standardized \code{sf} multipolygon layer
+(tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
+(EPSG-code \href{https://epsg.io/31370}{31370}).
+Given the size of the data source, this function
+takes a bit longer than usual to run.
 }
 \examples{
 \dontrun{
@@ -40,7 +46,8 @@ An sf object
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_habitatmap()
+hm <- read_habitatmap()
+hm
 }
 
 }
@@ -49,7 +56,7 @@ De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin
 Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-DOI: https://doi.org/10.21436/inbor.15138099.
+DOI: \url{https://doi.org/10.21436/inbor.15138099}.
 }
 \seealso{
 Other functions involved in processing the \code{habitatmap} data source: 

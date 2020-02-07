@@ -1,0 +1,55 @@
+template:
+  params:
+    bootswatch: united
+
+navbar:
+    type: inverse
+
+url: https://inbo.github.io/n2khab
+
+reference:
+  - title: "Using the reference lists"
+    contents:
+      - read_types
+      - read_env_pressures
+      - read_schemes
+      - read_scheme_types
+  - title: "Documentation of included data sources"
+    contents:
+      - types
+      - env_pressures
+      - schemes
+      - scheme_types
+      - namelist
+  - title: "Using the raw spatial data sources of habitats/RIBs"
+    contents:
+      - read_habitatmap
+      - read_habitatstreams
+      - read_habitatsprings
+  - title: "Using the processed spatial data sources of habitats/RIBs"
+    contents:
+      - read_habitatmap_stdized
+      - read_habitatmap_terr
+      - read_watersurfaces_hab
+      - expand_types
+  - title: "Using the administrative & environmental data sources"
+    contents:
+      - read_admin_areas
+      - read_ecoregions
+      - read_watersurfaces
+      #- read_soilmap
+  - title: "Using the GRTSmaster data sources (raw + processed)"
+    contents:
+      - read_GRTSmh
+      - read_GRTSmh_base4frac
+      - read_GRTSmh_diffres
+  - title: "Managing files and directories"
+    contents:
+      - fileman_folders
+      - download_zenodo
+  - title: "Utilities and helpers"
+    contents:
+      - read_namelist
+      - fileman_up
+      - convert_dec_to_base4frac
+      - convert_base4frac_to_dec

@@ -21,7 +21,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 }
 \value{
 A RasterLayer with 21041043 cells.
@@ -29,7 +29,8 @@ A RasterLayer with 21041043 cells.
 \description{
 The \code{GRTSmh_base4frac} data source is like a mirror to
 \code{GRTSmaster_habitats}, holding the ranking numbers as base 4 fractions.
-The function returns it as a RasterLayer.
+The function returns it as a RasterLayer in the Belgian Lambert 72 CRS
+(EPSG-code \href{https://epsg.io/31370}{31370})..
 }
 \details{
 The data source file, read by the function, is a monolayered GeoTIFF in the
@@ -79,7 +80,7 @@ r
 \references{
 Stevens D.L. & Olsen A.R. (2004). Spatially Balanced Sampling of Natural
 Resources. Journal of the American Statistical Association 99 (465):
-262–278. DOI: https://doi.org/10.1198/016214504000000250.
+262–278. DOI: \url{https://doi.org/10.1198/016214504000000250}.
 }
 \seealso{
 Other functions involved in processing the \code{GRTSmaster_habitats} data source: 

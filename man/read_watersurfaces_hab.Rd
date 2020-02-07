@@ -23,7 +23,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{interpreted}{If \code{TRUE}, the interpreted subtype is provided when the subtype is missing. This only
 applies to type 3130. When the subtype is missing for 3130, we interpret it as 3130_aom.}
@@ -34,7 +34,7 @@ Defaults to the latest available version defined by the package.}
 \value{
 A list of two objects:
   \itemize{
-  \item \code{watersurfaces_hab_polygons}: an sf object of standing water polygons with four attribute variables:
+  \item \code{watersurfaces_polygons}: an sf object of standing water polygons with four attribute variables:
   \itemize{
     \item \code{polygon_id}
     \item \code{polygon_id_ws}: id for the polygon in the \code{watersurface map}
@@ -44,7 +44,7 @@ A list of two objects:
     contain standing water habitat. The different descriptions are separated by '+'.}
   }
   \itemize{
-  \item \code{watersurfaces_hab_types}: a tibble with following variables:
+  \item \code{watersurfaces_types}: a tibble with following variables:
   \itemize{
     \item \code{polygon_id}
     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
@@ -57,11 +57,12 @@ A list of two objects:
 \description{
 \code{read_watersurfaces_hab} returns the data source \code{watersurfaces_hab} as a list of two objects:
 \itemize{
-  \item \code{watersurfaces_hab_polygons}: an sf object with all polygons
+  \item \code{watersurfaces_polygons}: an sf object in the Belgian Lambert 72
+  CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
   that contain standing water types (habitat or RIB).
-  \item \code{watersurfaces_hab_types}: a tibble with information on the
+  \item \code{watersurfaces_types}: a tibble with information on the
   standing water types (HAB1, HAB2,..., HAB5) that occur within
-  each polygon of \code{watersurfaces_hab_polygons}.
+  each polygon of \code{watersurfaces_polygons}.
   }
 }
 \details{
@@ -85,7 +86,7 @@ overlap with the selected habitat type polygons of the standardized habitat map.
 standardized habitat map that contain standing water types but do not overlap with any watersurface polygon of the
 watersurface map.
 
-The R-code for creating the \code{watersurfaces_hab_polygons} data source can be found in the \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
+The R-code for creating the \code{watersurfaces_hab} data source can be found in the \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
 repository.
 }
 \examples{
@@ -96,16 +97,38 @@ repository.
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_watersurfaces_hab()
-r_polygons <- r$watersurfaces_hab_polygons
-r_types <- r$watersurfaces_hab_types
+wsh <- read_watersurfaces_hab()
+wsh_polygons <- wsh$watersurfaces_polygons
+wsh_types <- wsh$watersurfaces_types
+wsh_polygons
+wsh_types
 }
 
+}
+\references{
+\itemize{
+\item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
+(2018).
+Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
+Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
+Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
+Instituut voor Natuur- en Bosonderzoek, Brussel.
+DOI: \url{https://doi.org/10.21436/inbor.14178464}.
+\item De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
+Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
+Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
+Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
+DOI: \url{https://doi.org/10.21436/inbor.15138099}.
+}
 }
 \seealso{
 Other functions involved in processing the \code{habitatmap} data source: 
 \code{\link{read_habitatmap_stdized}()},
 \code{\link{read_habitatmap_terr}()},
 \code{\link{read_habitatmap}()}
+
+Other functions involved in processing the \code{watersurfaces} data source: 
+\code{\link{read_watersurfaces}()}
 }
 \concept{functions involved in processing the \code{habitatmap} data source}
+\concept{functions involved in processing the \code{watersurfaces} data source}

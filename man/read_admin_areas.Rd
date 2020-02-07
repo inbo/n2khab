@@ -22,7 +22,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{dsn}{A string, conforming to one of the data source names listed under
 \emph{Usage}.
@@ -40,8 +40,9 @@ A Simple feature collection of geometry type \code{MULTIPOLYGON} or
 \code{POLYGON}.
 }
 \description{
-Return one of the available geospatial data sources representing
-administrative areas
+Returns an administrative geospatial data source.
+The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+(EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
 See section \emph{Usage} to see which N2KHAB data sources are

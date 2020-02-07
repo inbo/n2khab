@@ -22,7 +22,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{version}{Version ID of the data source.
 Defaults to the latest available version defined by the package.}
@@ -51,7 +51,8 @@ A list of two objects:
 \description{
 \code{read_habitatmap_stdized} returns the data source \code{habitatmap_stdized} as a list of two objects:
 \itemize{
-  \item \code{habitatmap_polygons}: an sf object with all polygons
+  \item \code{habitatmap_polygons}: an sf object in the Belgian Lambert 72
+  CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
   of the \code{habitatmap} that contain habitat or a regionally
   important biotope (RIB).
   \item \code{habitatmap_types}: a tibble with information on the
@@ -106,9 +107,11 @@ following steps:
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-r <- read_habitatmap_stdized()
-r_polygons <- r$habitatmap_polygons
-r_types <- r$habitatmap_types
+hms <- read_habitatmap_stdized()
+hms_polygons <- hms$habitatmap_polygons
+hms_types <- hms$habitatmap_types
+hms_polygons
+hms_types
 }
 
 }
@@ -117,7 +120,7 @@ De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin
 Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-DOI: https://doi.org/10.21436/inbor.15138099.
+DOI: \url{https://doi.org/10.21436/inbor.15138099}.
 }
 \seealso{
 Other functions involved in processing the \code{habitatmap} data source: 

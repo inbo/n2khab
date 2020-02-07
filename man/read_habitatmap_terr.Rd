@@ -23,7 +23,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{keep_aq_types}{Logical; \code{TRUE} by default.
 The data source \code{habitatmap_terr} aims at delineating all
@@ -71,7 +71,8 @@ A list of two objects:
 }
 \description{
 \code{read_habitatmap_terr()} returns the data source \code{habitatmap_terr}
-as a list of two objects: \code{habitatmap_terr_polygons} and
+as a list of two objects: \code{habitatmap_terr_polygons}, having the Belgian
+Lambert 72 CRS (EPSG-code \href{https://epsg.io/31370}{31370}), and
 \code{habitatmap_terr_types}.
 \code{habitatmap_terr} is the further interpreted, terrestrial part of
 \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}).

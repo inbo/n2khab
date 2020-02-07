@@ -17,7 +17,7 @@ starting from the working directory.}
 \item{file}{The filename of the data source.
 May include a path prefix.
 The default follows the data management advice in the
-\href{../doc/v020_datastorage.html}{vignette} on data storage.}
+vignette on data storage (run \code{vignette("v020_datastorage")}).}
 }
 \value{
 A Simple feature collection of geometry type \code{MULTIPOLYGON}.
@@ -26,6 +26,8 @@ A Simple feature collection of geometry type \code{MULTIPOLYGON}.
 Returns the raw data source \code{ecoregions}, with unique polygon
 identifiers \code{polygon_code} and \code{polygon_id}.
 Multiple polygons can have the same \code{region_name}.
+The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+(EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
 Original columns of the raw data source were mapped as:
