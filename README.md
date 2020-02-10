@@ -1,15 +1,17 @@
 <!-- badges: start -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3631579.svg)](https://doi.org/10.5281/zenodo.3631579)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Build Status](https://travis-ci.com/inbo/n2khab.svg?branch=master)](https://travis-ci.com/inbo/n2khab)
 <!-- badges: end -->
 
 ## Welcome
 
-The **n2khab** R package provides standard checklists (reference data) and preprocessing functions, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 (**n2k**) habitats (**hab**) and regionally important biotopes (RIBs).
+The **n2khab** R package provides preprocessing functions and standard reference data, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 (**n2k**) habitats (**hab**) and regionally important biotopes (RIBs).
 
 The package's core aim is to **provide readily standardized (preprocessed) data** in your R environment.
 This facilitates collaboration and reproducibility.
 
+The standard reference data include: checklists, spatial habitat distribution, administrative & environmental layers, GRTSmaster_habitats.
 
 ## Installing, testing and using the _n2khab_ package
 
@@ -20,6 +22,7 @@ remotes::install_github("inbo/n2khab", build_vignettes = TRUE)
 ```
 
 Note that this will install the package from the `master` branch.
+In case of an installation error because existing dependencies (already installed packages) are too old, add the argument `upgrade = TRUE`.
 If you need a version from another branch, add the `ref` argument in the above function to provide the branch name.
 
 Have a look at the vignettes to quickly find your way!
