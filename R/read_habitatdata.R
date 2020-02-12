@@ -620,6 +620,9 @@ read_watersurfaces <-
 #' }
 #'
 #' @export
+#' @importFrom assertthat
+#' assert_that
+#' is.flag
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
@@ -636,8 +639,12 @@ read_habitatmap <-
              file = "10_raw/habitatmap",
              filter_hab = FALSE){
 
-        habitatmap <- read_sf(file.path(path, file),
-                                   "habitatmap")
+        filepath <- file.path(path, file)
+        assert_that(file.exists(filepath))
+        assert_that(is.flag(filter_hab))
+
+        habitatmap <- read_sf(filepath,
+                              "habitatmap")
 
         colnames(habitatmap) <- tolower(colnames(habitatmap))
 
