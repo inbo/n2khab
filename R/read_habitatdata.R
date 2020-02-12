@@ -588,7 +588,7 @@ read_watersurfaces <-
 #' Given the size of the data source, this function
 #' takes a bit longer than usual to run.
 #'
-#' @param select_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
+#' @param filter_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 #' important biotope (RIB) are returned. The default value is \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized
@@ -634,7 +634,7 @@ read_watersurfaces <-
 read_habitatmap <-
     function(path = fileman_up("n2khab_data"),
              file = "10_raw/habitatmap",
-             select_hab = FALSE){
+             filter_hab = FALSE){
 
         habitatmap <- read_sf(file.path(path, file),
                                    "habitatmap")
@@ -671,7 +671,7 @@ read_habitatmap <-
                    hab_legend = factor(.data$hab_legend)
                    )
 
-        if(select_hab){
+        if (filter_hab) {
 
             # we only select polygons with habitat or RIB, i.e. polygons in habitatmap_stdized data source
             hab_stdized <- read_habitatmap_stdized()

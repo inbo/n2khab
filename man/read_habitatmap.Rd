@@ -7,7 +7,7 @@
 read_habitatmap(
   path = fileman_up("n2khab_data"),
   file = "10_raw/habitatmap",
-  select_hab = FALSE
+  filter_hab = FALSE
 )
 }
 \arguments{
@@ -23,7 +23,7 @@ May include a path prefix.
 The default follows the data management advice in the
 vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
-\item{select_hab}{If \code{TRUE} only polygons that (partially) contain habitat or a regionally
+\item{filter_hab}{If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 important biotope (RIB) are returned. The default value is \code{FALSE}.}
 }
 \value{
