@@ -1063,6 +1063,9 @@ read_habitatstreams <-
 #' the Flemish Region, Belgium.
 #'
 #'
+#' @param filter_hab If \code{TRUE}, only points with (potential) habitat
+#' are returned. The default value is \code{FALSE}.
+#'
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
@@ -1083,8 +1086,8 @@ read_habitatstreams <-
 #'     \item \code{source}: original data source of the record.
 #'   }
 #'
-#' Note that the \code{type} variable has implicit \code{NA} values in this
-#' case
+#' Note that, unless \code{filter_hab = TRUE}, the \code{type} variable has
+#' implicit \code{NA} values
 #' (i.e. there is
 #' no factor level to represent the missing values).
 #' If you want this category to appear in certain results, you can add
@@ -1107,6 +1110,7 @@ read_habitatstreams <-
 #'
 #' @importFrom assertthat
 #' assert_that
+#' is.flag
 #' @importFrom stringr
 #' str_sub
 #' @importFrom sf
@@ -1117,13 +1121,16 @@ read_habitatstreams <-
 #' %>%
 #' mutate
 #' select
+#' filter
 #' @export
 read_habitatsprings <-
     function(path = fileman_up("n2khab_data"),
-             file = "10_raw/habitatsprings/habitatsprings.geojson"){
+             file = "10_raw/habitatsprings/habitatsprings.geojson",
+             filter_hab = FALSE){
 
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
+        assert_that(is.flag(filter_hab))
 
         habitatsprings <-
             read_sf(filepath) %>%
@@ -1142,6 +1149,7 @@ read_habitatsprings <-
                                    levels),
                 certain = (.data$validity_status == "gecontroleerd")
             ) %>%
+            {if (filter_hab) filter(., !is.na(.$type)) else .} %>%
             select(point_id = .data$id,
                    .data$name,
                    code_orig = .data$habitattype,
