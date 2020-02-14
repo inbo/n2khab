@@ -60,9 +60,9 @@
 #' If \code{TRUE}, fill the values of the morphogenetic substrate,
 #' texture and drainage variables (`bsm_mo_substr`, `bsm_mo_tex` and
 #' `bsm_mo_drain` + their `_explan` counterparts) _for features in the
-#' 'coastalplain' area_.
+#' 'coastal plain' area_.
 #' - To derive morphogenetic texture and drainage levels from the geomorphological
-#' ones, a translation table by Bruno De Vos &
+#' ones, a conversion table by Bruno De Vos &
 #' Carole Ampe is applied (for earlier work on this, see Ampe 2013).
 #' - Substrate classes are copied over from `bsm_ge_substr` into `bsm_mo_substr`
 #' (`bsm_ge_substr` already followed the categories of `bsm_mo_substr`).
@@ -81,7 +81,8 @@
 #' representing either the processed data source `soilmap_simple` (default) or
 #' the raw data source `soilmap`.
 #'
-#' Beside the standardization for coastalplain areas, `soilmap_simple` contains
+#' Beside the standardization for the coastal plain areas, `soilmap_simple`
+#' contains
 #' only a subset of the `soilmap` variables (marked with an asterisk below).
 #'
 #' The `soilmap` attribute variables all start with prefix `bsm_` (referring
@@ -96,16 +97,16 @@
 #' - **variables with `mo_` in their name**: their categories follow the
 #' Belgian Morphogenetic System.
 #'   - With `standardize_coastalplain = FALSE`, these are only available _outside
-#' the coastalplain areas_ except for `bsm_mo_soilunitype` (which is
+#' the coastal plain areas_ except for `bsm_mo_soilunitype` (which is
 #' standardized already in the raw data source).
 #' - **variables with `ge_` in their name**: their categories follow the
 #' Belgian Geomorphological System.
 #' (Note however, that `bsm_ge_substr` does follow the Belgian Morphogenetic
 #' System as well.)
-#'   - These variables are only available _within the coastalplain areas_.
+#'   - These variables are only available _within the coastal plain areas_.
 #'   - They are _not_ included in `soilmap_simple`.
 #'   - A special variable is `bsm_ge_coastalplain`, which is `TRUE` inside
-#' coastalplain areas, and `FALSE` elsewhere.
+#' the coastal plain areas, and `FALSE` elsewhere.
 #' - **variables without `mo_` or `ge_` in their name** are:
 #'   - either _system-agnostic_ metadata (first two + last four variables:
 #'   `bsm_poly_id`, `bsm_map_id`, `bsm_map_url`, `bsm_book_url`,
@@ -124,24 +125,24 @@
 #' 1. Meaning of the main non-metadata variables:
 #'     - `bsm_region` (*): name of the region
 #'     - `bsm_ge_coastalplain` (*): Logical.
-#'     Is the polygon situated in the coastalplain area?
-#'     - `bsm_ge_region`: code of the region (within the coastalplain area)
+#'     Is the polygon situated in the coastal plain area?
+#'     - `bsm_ge_region`: code of the region (within the coastal plain area)
 #'     - `bsm_legend`: generalised (simplified) legend key (37 levels)
 #'     - `bsm_legend_title` and `bsm_legend_explan`:
 #'     the legend keys and text of Van Ranst & Sys (2000) (833 and 622 levels,
 #'     respectively)
-#'     - `bsm_soiltype`: the soiltype of the Belgian soil map (mixed nature:
+#'     - `bsm_soiltype`: the soil type of the Belgian soil map (mixed nature:
 #'     morphogenetic & geomorphological codes).
 #'     `bsm_soiltype_id` represents a numeric code for each level.
 #'     - `bsm_soiltype_region`: `bsm_soiltype`, followed by a code representing
 #'     `bsm_region`
-#'     - `bsm_soilseries`: the morphogenetic soil series (outside coastalplain
-#'     areas),
+#'     - `bsm_soilseries`: the morphogenetic soil series (outside the coastal
+#'     plain areas),
 #'     which is the three core characters of `bsm_soiltype`,
-#'     or just `bsm_soiltype` within coastalplain areas
+#'     or just `bsm_soiltype` within the coastal plain areas
 #'     - `bsm_mo_soilunitype` (*): as `bsm_soiltype`, but applying morphogenetic
-#'     codes within coastalplain areas (see the `standardize_coastalplain`
-#'     argument for more information about this translation)
+#'     codes within the coastal plain areas (see the `standardize_coastalplain`
+#'     argument for more information about this conversion)
 #'     - `bsm_mo_substr` (*), `bsm_ge_substr`: code of the soil substrate
 #'     - `bsm_mo_tex` (*): code of the soil texture category
 #'     - `bsm_mo_drain` (*): code of the soil drainage category
@@ -152,10 +153,10 @@
 #'     properties).
 #'     They are explained in the book that accompanies the specific analog map
 #'     identified by `bsm_map_id`.
-#'     - `bsm_ge_series`: the geomorphological soil series (inside coastalplain
-#'     areas)
-#'     - `bsm_ge_subseries`: the geomorphological soil subseries (inside
-#'     coastalplain areas)
+#'     - `bsm_ge_series`: the geomorphological soil series (inside the coastal
+#'     plain areas)
+#'     - `bsm_ge_subseries`: the geomorphological soil subseries (inside the
+#'     coastal plain areas)
 #' 1. Meaning of the metadata variables:
 #'     - `bsm_poly_id` (*): unique polygon ID (numeric)
 #'     - `bsm_map_id`: code of the analog map covering this area
