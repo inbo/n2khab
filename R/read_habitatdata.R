@@ -588,7 +588,7 @@ read_watersurfaces <-
 #' Given the size of the data source, this function
 #' takes a bit longer than usual to run.
 #'
-#' @param select_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
+#' @param filter_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 #' important biotope (RIB) are returned. The default value is \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized
@@ -620,6 +620,9 @@ read_watersurfaces <-
 #' }
 #'
 #' @export
+#' @importFrom assertthat
+#' assert_that
+#' is.flag
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
@@ -634,10 +637,14 @@ read_watersurfaces <-
 read_habitatmap <-
     function(path = fileman_up("n2khab_data"),
              file = "10_raw/habitatmap",
-             select_hab = FALSE){
+             filter_hab = FALSE){
 
-        habitatmap <- read_sf(file.path(path, file),
-                                   "habitatmap")
+        filepath <- file.path(path, file)
+        assert_that(file.exists(filepath))
+        assert_that(is.flag(filter_hab))
+
+        habitatmap <- read_sf(filepath,
+                              "habitatmap")
 
         colnames(habitatmap) <- tolower(colnames(habitatmap))
 
@@ -671,7 +678,7 @@ read_habitatmap <-
                    hab_legend = factor(.data$hab_legend)
                    )
 
-        if(select_hab){
+        if (filter_hab) {
 
             # we only select polygons with habitat or RIB, i.e. polygons in habitatmap_stdized data source
             hab_stdized <- read_habitatmap_stdized()
@@ -1056,6 +1063,9 @@ read_habitatstreams <-
 #' the Flemish Region, Belgium.
 #'
 #'
+#' @param filter_hab If \code{TRUE}, only points with (potential) habitat
+#' are returned. The default value is \code{FALSE}.
+#'
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
@@ -1076,8 +1086,8 @@ read_habitatstreams <-
 #'     \item \code{source}: original data source of the record.
 #'   }
 #'
-#' Note that the \code{type} variable has implicit \code{NA} values in this
-#' case
+#' Note that, unless \code{filter_hab = TRUE}, the \code{type} variable has
+#' implicit \code{NA} values
 #' (i.e. there is
 #' no factor level to represent the missing values).
 #' If you want this category to appear in certain results, you can add
@@ -1100,6 +1110,7 @@ read_habitatstreams <-
 #'
 #' @importFrom assertthat
 #' assert_that
+#' is.flag
 #' @importFrom stringr
 #' str_sub
 #' @importFrom sf
@@ -1110,13 +1121,16 @@ read_habitatstreams <-
 #' %>%
 #' mutate
 #' select
+#' filter
 #' @export
 read_habitatsprings <-
     function(path = fileman_up("n2khab_data"),
-             file = "10_raw/habitatsprings/habitatsprings.geojson"){
+             file = "10_raw/habitatsprings/habitatsprings.geojson",
+             filter_hab = FALSE){
 
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
+        assert_that(is.flag(filter_hab))
 
         habitatsprings <-
             read_sf(filepath) %>%
@@ -1135,6 +1149,7 @@ read_habitatsprings <-
                                    levels),
                 certain = (.data$validity_status == "gecontroleerd")
             ) %>%
+            {if (filter_hab) filter(., !is.na(.$type)) else .} %>%
             select(point_id = .data$id,
                    .data$name,
                    code_orig = .data$habitattype,
