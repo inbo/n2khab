@@ -101,6 +101,7 @@
 #' assert_that
 #' is.string
 #' is.flag
+#' noNA
 #' @importFrom tidyr
 #' nest
 #' unnest
@@ -124,8 +125,8 @@ expand_types <- function(x,
     assert_that(is.string(type_var))
     assert_that(type_var %in% colnames(x),
                 msg = "type_var must be a variable name in x.")
-    assert_that(is.flag(use_grouping))
-    assert_that(is.flag(strict))
+    assert_that(is.flag(use_grouping), noNA(use_grouping))
+    assert_that(is.flag(strict), noNA(strict))
 
     if (!use_grouping) {
 

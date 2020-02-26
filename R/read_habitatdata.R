@@ -623,6 +623,7 @@ read_watersurfaces <-
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' noNA
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
@@ -641,7 +642,7 @@ read_habitatmap <-
 
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
-        assert_that(is.flag(filter_hab))
+        assert_that(is.flag(filter_hab), noNA(filter_hab))
 
         habitatmap <- read_sf(filepath,
                               "habitatmap")
@@ -822,6 +823,7 @@ read_habitatmap <-
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' noNA
 #' is.string
 #' @importFrom sf
 #' read_sf
@@ -837,7 +839,7 @@ read_habitatmap_terr <-
              keep_aq_types = TRUE,
              version = "habitatmap_terr_2018_v2"){
 
-        assert_that(is.flag(keep_aq_types))
+        assert_that(is.flag(keep_aq_types), noNA(keep_aq_types))
         assert_that(is.string(version))
 
         habmap_terr_polygons <- read_sf(file.path(path, file),
@@ -967,6 +969,7 @@ read_habitatmap_terr <-
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' noNA
 #' @importFrom sf
 #' read_sf
 #' st_drop_geometry
@@ -987,7 +990,7 @@ read_habitatstreams <-
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
 
-        assert_that(is.flag(source_text))
+        assert_that(is.flag(source_text), noNA(source_text))
 
         habitatstreams <-
             suppressWarnings(
@@ -1111,6 +1114,7 @@ read_habitatstreams <-
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' noNA
 #' @importFrom stringr
 #' str_sub
 #' @importFrom sf
@@ -1130,7 +1134,7 @@ read_habitatsprings <-
 
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
-        assert_that(is.flag(filter_hab))
+        assert_that(is.flag(filter_hab), noNA(filter_hab))
 
         habitatsprings <-
             read_sf(filepath) %>%
