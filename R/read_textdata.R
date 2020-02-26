@@ -812,9 +812,9 @@ read_schemes <-
 #' The \code{scheme_types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
 #' with names & shortnames added for the typegroup variable and optionally for
 #' scheme, programme,
-#' scheme attributes, type, typeclass and tags of scheme and type, all
+#' scheme attributes, type and attributes & tags of scheme and type, all
 #' according to the \code{lang} argument.
-#' The tibble has either 5 or 44 variables, depending on the \code{extended}
+#' The tibble has either 5 or many variables, depending on the \code{extended}
 #' argument.
 #' See \code{\link{scheme_types}} for documentation of the data-source's contents.
 #' See \code{\link{namelist}} for the link between codes or other identifiers
@@ -841,6 +841,12 @@ read_schemes <-
 #'   \item \code{type_name}
 #'   \item \code{type_shortname}
 #'   \item \code{typeclass_name}
+#'   \item \code{hydr_class_name}
+#'   \item \code{hydr_class_shortname}
+#'   \item \code{groundw_dep_name}
+#'   \item \code{groundw_dep_shortname}
+#'   \item \code{flood_dep_name}
+#'   \item \code{flood_dep_shortname}
 #'   \item \code{typetag_1_name}
 #'   \item \code{typetag_1_shortname}
 #'   \item \code{typetag_2_name}
@@ -849,9 +855,9 @@ read_schemes <-
 #'   \item \code{typetag_3_shortname}
 #' }
 #'
-#' The added names and shortnames for scheme, programme, typeclass,
+#' The added names and shortnames for scheme, programme,
 #' attributes and typegroup are \emph{factors} with their level order according
-#' to that of the scheme, programme, typeclass, attribute or typegroup variable.
+#' to that of the scheme, programme, attribute or typegroup variable.
 #'
 #' @section Recommended usage:
 #'
