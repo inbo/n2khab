@@ -719,8 +719,8 @@ read_habitatmap <-
 #' \code{2190_overig}.
 #' There is no exclusion of aquatic types when these coexist with
 #' terrestrial types in the same polygon.
-#' The aquatic types are the types for which \code{tag_2 == "HC3"}
-#' in the \code{\link{types}} data source (\code{tag_2} is the hydrological
+#' The aquatic types are the types for which \code{hydr_class == "HC3"}
+#' in the \code{\link{types}} data source (\code{hydr_class} is the hydrological
 #' class; cf. the output of \code{\link[=read_types]{read_types()}});}
 #' \item{it excludes types which most probably are \emph{no}
 #' habitat or RIB at all.
@@ -870,7 +870,7 @@ read_habitatmap_terr <-
             habmap_terr_types <-
                 habmap_terr_types %>%
                 filter(!(.data$type %in% (types %>%
-                                          filter(.data$tag_2 == "HC3") %>%
+                                          filter(.data$hydr_class == "HC3") %>%
                                           .$type)
                          ))
             # The below step is unneeded (and takes several seconds),
