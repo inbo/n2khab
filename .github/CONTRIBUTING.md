@@ -9,7 +9,7 @@ n2khab is an open source project, maintained by people who care. We are not dire
 [new_issue]: https://github.com/inbo/n2khab/issues/new
 [website]: https://inbo.github.io/n2khab
 [citation]: https://inbo.github.io/n2khab/authors.html
-[email]: floris.vanderhaeghe@inbo.be
+[email]: mailto:floris.vanderhaeghe@inbo.be
 
 ## Code of conduct
 
