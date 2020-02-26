@@ -78,7 +78,7 @@ habitatmap_stdized (see read_habitatmap_stdized)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -239,8 +239,8 @@ In the process, a distinction was also made between <code>2190_a</code> and
 <code>2190_overig</code>.
 There is no exclusion of aquatic types when these coexist with
 terrestrial types in the same polygon.
-The aquatic types are the types for which <code>tag_2 == "HC3"</code>
-in the <code><a href='types.html'>types</a></code> data source (<code>tag_2</code> is the hydrological
+The aquatic types are the types for which <code>hydr_class == "HC3"</code>
+in the <code><a href='types.html'>types</a></code> data source (<code>hydr_class</code> is the hydrological
 class; cf. the output of <code><a href='read_types.html'>read_types()</a></code>);</p></li>
 <li><p>it excludes types which most probably are <em>no</em>
 habitat or RIB at all.
