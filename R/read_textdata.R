@@ -938,6 +938,11 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
         spread(key = .data$key, value = .data$value)
 
     scheme_types %>%
+        mutate(typegroup_name = namelist_factor(.data$typegroup,
+                                                codelist = namelist),
+               typegroup_shortname = namelist_factor(.data$typegroup,
+                                                     "shortname",
+                                                     codelist = namelist)) %>%
         left_join(schemes,
                   by = "scheme") %>%
         left_join(types,
@@ -948,11 +953,6 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
                                    pull(.data$type) %>%
                                    levels
                                    )) %>%
-        mutate(typegroup_name = namelist_factor(.data$typegroup,
-                                                codelist = namelist),
-               typegroup_shortname = namelist_factor(.data$typegroup,
-                                                     "shortname",
-                                                     codelist = namelist)) %>%
         as_tibble
 
     } else {
