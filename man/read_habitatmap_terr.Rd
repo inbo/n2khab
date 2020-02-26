@@ -89,8 +89,8 @@ In the process, a distinction was also made between \code{2190_a} and
 \code{2190_overig}.
 There is no exclusion of aquatic types when these coexist with
 terrestrial types in the same polygon.
-The aquatic types are the types for which \code{tag_2 == "HC3"}
-in the \code{\link{types}} data source (\code{tag_2} is the hydrological
+The aquatic types are the types for which \code{hydr_class == "HC3"}
+in the \code{\link{types}} data source (\code{hydr_class} is the hydrological
 class; cf. the output of \code{\link[=read_types]{read_types()}});}
 \item{it excludes types which most probably are \emph{no}
 habitat or RIB at all.
