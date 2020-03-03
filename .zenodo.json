@@ -1,7 +1,7 @@
 {
     "title": "R package n2khab: providing preprocessed reference data for Flemish Natura 2000 habitat analyses",
     "description": "The n2khab package is an R package with preprocessing functions and standard reference data, useful for analyses regarding Flemish Natura 2000 habitats and regionally important biotopes (RIBs). URL: <a href=\"https://inbo.github.io/n2khab\">https://inbo.github.io/n2khab</a>.",
-    "license": "other-open",
+    "license": "GPL-3.0",
     "upload_type": "software",
     "access_right": "open",
     "version": "0.2.0",
