@@ -309,8 +309,6 @@ convert_base4frac_to_dec <-
 #' }
 #'
 #' @export
-#' @importFrom gdalUtils
-#' gdalsrsinfo
 #' @importFrom raster
 #' raster
 #' brick
@@ -337,7 +335,7 @@ read_GRTSmh <-
                    }
             result <- r
         }
-        crs(result) <- gdalsrsinfo("+init=epsg:31370", as.CRS = TRUE)
+        crs(result) <- "+init=epsg:31370"
         return(result)
     }
 
