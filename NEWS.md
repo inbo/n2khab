@@ -1,3 +1,9 @@
+## n2khab 0.1.2
+
+#### Hotfix
+
+- `read_GRTSmh()`, `read_GRTSmh_base4frac()`, `read_GRTSmh_diffres()`: avoided CRS error with more recent GDAL/PROJ.4 installations (#61)
+
 ## n2khab 0.1.1
 
 #### Hotfix
