@@ -1094,7 +1094,7 @@ read_habitatstreams <-
 #'     \item \code{source}: original data source of the record.
 #'   }
 #'
-#' Note that, unless \code{filter_hab = TRUE}, the \code{type} variable has
+#' Note that the \code{type} and \code{system_type} variables have
 #' implicit \code{NA} values
 #' (i.e. there is
 #' no factor level to represent the missing values).
