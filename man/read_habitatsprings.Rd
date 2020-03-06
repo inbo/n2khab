@@ -8,7 +8,8 @@ layer}
 read_habitatsprings(
   path = fileman_up("n2khab_data"),
   file = "10_raw/habitatsprings/habitatsprings.geojson",
-  filter_hab = FALSE
+  filter_hab = FALSE,
+  version = "habitatsprings_2020v1"
 )
 }
 \arguments{
@@ -26,6 +27,9 @@ vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{filter_hab}{If \code{TRUE}, only points with (potential) habitat
 are returned. The default value is \code{FALSE}.}
+
+\item{version}{Version ID of the data source.
+Defaults to the latest available version defined by the package.}
 }
 \value{
 A Simple feature collection of
@@ -33,11 +37,16 @@ type \code{POINT}, with attribute variables:
 \itemize{
 \item \code{point_id}
 \item \code{name}: site name.
+\item \code{system_type}: environmental typology of \code{7220}: \code{mire},
+\code{rivulet} or \code{unknown} (non-\code{7220} types are \code{NA})
 \item \code{code_orig}: original vegetation code in raw
 \code{habitatsprings}.
 \item \code{type}: habitat type listed in \code{\link{types}}.
 \item \code{certain}: \code{TRUE} when vegetation type is certain and
 \code{FALSE} when vegetation type is uncertain.
+\item \code{unit_id}: population unit id for large scale sampling
+events.
+Spatially close points have the same value.
 \item \code{area_m2}: area as square meters.
 \item \code{year}: year of field inventory.
 \item \code{in_sac}: logical.
@@ -45,7 +54,7 @@ Is the site situated within a Special Area of Conservation?
 \item \code{source}: original data source of the record.
 }
 
-Note that, unless \code{filter_hab = TRUE}, the \code{type} variable has
+Note that the \code{type} and \code{system_type} variables have
 implicit \code{NA} values
 (i.e. there is
 no factor level to represent the missing values).
