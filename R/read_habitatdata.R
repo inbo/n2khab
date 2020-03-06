@@ -1077,11 +1077,16 @@ read_habitatstreams <-
 #'   \itemize{
 #'     \item \code{point_id}
 #'     \item \code{name}: site name.
+#'     \item \code{system_type}: environmental typology of `7220`: `mire`,
+#'     `rivulet` or `unknown` (non-`7220` types are `NA`)
 #'     \item \code{code_orig}: original vegetation code in raw
 #'     \code{habitatsprings}.
 #'     \item \code{type}: habitat type listed in \code{\link{types}}.
 #'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
 #'      \code{FALSE} when vegetation type is uncertain.
+#'     \item \code{unit_id}: population unit id for large scale sampling
+#'     events.
+#'     Spatially close points have the same value.
 #'     \item \code{area_m2}: area as square meters.
 #'     \item \code{year}: year of field inventory.
 #'     \item \code{in_sac}: logical.
@@ -1115,6 +1120,7 @@ read_habitatstreams <-
 #' assert_that
 #' is.flag
 #' noNA
+#' is.string
 #' @importFrom stringr
 #' str_sub
 #' @importFrom sf
@@ -1126,15 +1132,18 @@ read_habitatstreams <-
 #' mutate
 #' select
 #' filter
+#' everything
 #' @export
 read_habitatsprings <-
     function(path = fileman_up("n2khab_data"),
              file = "10_raw/habitatsprings/habitatsprings.geojson",
-             filter_hab = FALSE){
+             filter_hab = FALSE,
+             version = "habitatsprings_2020v1"){
 
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
         assert_that(is.flag(filter_hab), noNA(filter_hab))
+        assert_that(is.string(version))
 
         habitatsprings <-
             read_sf(filepath) %>%
@@ -1162,7 +1171,20 @@ read_habitatsprings <-
                    .data$area_m2,
                    .data$year,
                    .data$in_sac,
-                   .data$source)
+                   everything(),
+                   -.data$validity_status,
+                   -.data$sbz)
+
+        if (version != "habitatsprings_2019v1") {
+            habitatsprings <-
+                habitatsprings %>%
+                mutate(system_type = factor(.data$system_type)) %>%
+                select(1:2,
+                       .data$system_type,
+                       3:5,
+                       .data$unit_id,
+                       everything())
+        }
 
         return(habitatsprings)
 
