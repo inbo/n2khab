@@ -1,6 +1,18 @@
-# n2khab 0.1.0
+## n2khab 0.1.2
 
-## Features of the first stable release
+#### Hotfix
+
+- `read_GRTSmh()`, `read_GRTSmh_base4frac()`, `read_GRTSmh_diffres()`: avoided CRS error with more recent GDAL/PROJ.4 installations (#61)
+
+## n2khab 0.1.1
+
+#### Hotfix
+
+- `read_habitatmap_terr()`: fixed non-functioning argument `keep_aq_types=FALSE` (#60)
+
+## n2khab 0.1.0
+
+#### Features of the first stable release
 
 - core reading and preprocessing functions
 - several built-in checklists (among which: `types` and `env_pressures`)

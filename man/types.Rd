@@ -24,7 +24,7 @@ a dataframe with several variables:
   \item{hydr_class}{A code explained by \code{\link{namelist}},
   corresponding to the hydrological class.
   Is a factor.}
-  \item{ground_dep}{A code explained by \code{\link{namelist}},
+  \item{groundw_dep}{A code explained by \code{\link{namelist}},
   corresponding to the groundwater dependency category.
   Is a factor.}
   \item{flood_dep}{A code explained by \code{\link{namelist}},

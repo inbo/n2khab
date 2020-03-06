@@ -142,7 +142,7 @@ fileman_up <- function(name,
     assert_that(is.string(name))
     assert_that(dir.exists(start),
                 msg = "The start directory does not exist.")
-    assert_that(levels %% levels == 0 & levels >= 0,
+    assert_that(levels %% 1 == 0 & levels >= 0,
                 msg = "levels must be a positive integer value.")
 
     path <- start

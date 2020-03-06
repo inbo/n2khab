@@ -588,7 +588,7 @@ read_watersurfaces <-
 #' Given the size of the data source, this function
 #' takes a bit longer than usual to run.
 #'
-#' @param select_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
+#' @param filter_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 #' important biotope (RIB) are returned. The default value is \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized
@@ -620,6 +620,10 @@ read_watersurfaces <-
 #' }
 #'
 #' @export
+#' @importFrom assertthat
+#' assert_that
+#' is.flag
+#' noNA
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
@@ -634,10 +638,14 @@ read_watersurfaces <-
 read_habitatmap <-
     function(path = fileman_up("n2khab_data"),
              file = "10_raw/habitatmap",
-             select_hab = FALSE){
+             filter_hab = FALSE){
 
-        habitatmap <- read_sf(file.path(path, file),
-                                   "habitatmap")
+        filepath <- file.path(path, file)
+        assert_that(file.exists(filepath))
+        assert_that(is.flag(filter_hab), noNA(filter_hab))
+
+        habitatmap <- read_sf(filepath,
+                              "habitatmap")
 
         colnames(habitatmap) <- tolower(colnames(habitatmap))
 
@@ -671,7 +679,7 @@ read_habitatmap <-
                    hab_legend = factor(.data$hab_legend)
                    )
 
-        if(select_hab){
+        if (filter_hab) {
 
             # we only select polygons with habitat or RIB, i.e. polygons in habitatmap_stdized data source
             hab_stdized <- read_habitatmap_stdized()
@@ -719,8 +727,8 @@ read_habitatmap <-
 #' \code{2190_overig}.
 #' There is no exclusion of aquatic types when these coexist with
 #' terrestrial types in the same polygon.
-#' The aquatic types are the types for which \code{tag_2 == "HC3"}
-#' in the \code{\link{types}} data source (\code{tag_2} is the hydrological
+#' The aquatic types are the types for which \code{hydr_class == "HC3"}
+#' in the \code{\link{types}} data source (\code{hydr_class} is the hydrological
 #' class; cf. the output of \code{\link[=read_types]{read_types()}});}
 #' \item{it excludes types which most probably are \emph{no}
 #' habitat or RIB at all.
@@ -815,6 +823,7 @@ read_habitatmap <-
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' noNA
 #' is.string
 #' @importFrom sf
 #' read_sf
@@ -830,7 +839,7 @@ read_habitatmap_terr <-
              keep_aq_types = TRUE,
              version = "habitatmap_terr_2018_v2"){
 
-        assert_that(is.flag(keep_aq_types))
+        assert_that(is.flag(keep_aq_types), noNA(keep_aq_types))
         assert_that(is.string(version))
 
         habmap_terr_polygons <- read_sf(file.path(path, file),
@@ -870,7 +879,7 @@ read_habitatmap_terr <-
             habmap_terr_types <-
                 habmap_terr_types %>%
                 filter(!(.data$type %in% (types %>%
-                                          filter(.data$tag_2 == "HC3") %>%
+                                          filter(.data$hydr_class == "HC3") %>%
                                           .$type)
                          ))
             # The below step is unneeded (and takes several seconds),
@@ -960,6 +969,7 @@ read_habitatmap_terr <-
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' noNA
 #' @importFrom sf
 #' read_sf
 #' st_drop_geometry
@@ -980,7 +990,7 @@ read_habitatstreams <-
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
 
-        assert_that(is.flag(source_text))
+        assert_that(is.flag(source_text), noNA(source_text))
 
         habitatstreams <-
             suppressWarnings(
@@ -1056,6 +1066,9 @@ read_habitatstreams <-
 #' the Flemish Region, Belgium.
 #'
 #'
+#' @param filter_hab If \code{TRUE}, only points with (potential) habitat
+#' are returned. The default value is \code{FALSE}.
+#'
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
@@ -1076,8 +1089,8 @@ read_habitatstreams <-
 #'     \item \code{source}: original data source of the record.
 #'   }
 #'
-#' Note that the \code{type} variable has implicit \code{NA} values in this
-#' case
+#' Note that, unless \code{filter_hab = TRUE}, the \code{type} variable has
+#' implicit \code{NA} values
 #' (i.e. there is
 #' no factor level to represent the missing values).
 #' If you want this category to appear in certain results, you can add
@@ -1100,6 +1113,8 @@ read_habitatstreams <-
 #'
 #' @importFrom assertthat
 #' assert_that
+#' is.flag
+#' noNA
 #' @importFrom stringr
 #' str_sub
 #' @importFrom sf
@@ -1110,13 +1125,16 @@ read_habitatstreams <-
 #' %>%
 #' mutate
 #' select
+#' filter
 #' @export
 read_habitatsprings <-
     function(path = fileman_up("n2khab_data"),
-             file = "10_raw/habitatsprings/habitatsprings.geojson"){
+             file = "10_raw/habitatsprings/habitatsprings.geojson",
+             filter_hab = FALSE){
 
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
+        assert_that(is.flag(filter_hab), noNA(filter_hab))
 
         habitatsprings <-
             read_sf(filepath) %>%
@@ -1135,6 +1153,7 @@ read_habitatsprings <-
                                    levels),
                 certain = (.data$validity_status == "gecontroleerd")
             ) %>%
+            {if (filter_hab) filter(., !is.na(.$type)) else .} %>%
             select(point_id = .data$id,
                    .data$name,
                    code_orig = .data$habitattype,

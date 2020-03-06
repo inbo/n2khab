@@ -309,8 +309,6 @@ convert_base4frac_to_dec <-
 #' }
 #'
 #' @export
-#' @importFrom gdalUtils
-#' gdalsrsinfo
 #' @importFrom raster
 #' raster
 #' brick
@@ -337,7 +335,7 @@ read_GRTSmh <-
                    }
             result <- r
         }
-        crs(result) <- gdalsrsinfo("+init=epsg:31370", as.CRS = TRUE)
+        crs(result) <- "+init=epsg:31370"
         return(result)
     }
 
@@ -427,8 +425,6 @@ read_GRTSmh <-
 #' }
 #'
 #' @export
-#' @importFrom gdalUtils
-#' gdalsrsinfo
 #' @importFrom raster
 #' raster
 #' crs<-
@@ -436,7 +432,7 @@ read_GRTSmh_base4frac <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif") {
         r <- raster(file.path(path, file))
-        crs(r) <- gdalsrsinfo("+init=epsg:31370", as.CRS = TRUE)
+        crs(r) <- "+init=epsg:31370"
         return(r)
     }
 
@@ -577,8 +573,6 @@ read_GRTSmh_base4frac <-
 #'
 #' @export
 #' @importFrom stringr str_c
-#' @importFrom gdalUtils
-#' gdalsrsinfo
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
@@ -613,7 +607,7 @@ read_GRTSmh_diffres <-
                              str_c("GRTSmh_diffres.",
                                    level, ".tif")))
             names(r) <- str_c("level", level)
-            crs(r) <- gdalsrsinfo("+init=epsg:31370", as.CRS = TRUE)
+            crs(r) <- "+init=epsg:31370"
             r
 
         }

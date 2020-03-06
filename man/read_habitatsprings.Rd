@@ -7,7 +7,8 @@ layer}
 \usage{
 read_habitatsprings(
   path = fileman_up("n2khab_data"),
-  file = "10_raw/habitatsprings/habitatsprings.geojson"
+  file = "10_raw/habitatsprings/habitatsprings.geojson",
+  filter_hab = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,9 @@ starting from the working directory.}
 May include a path prefix.
 The default follows the data management advice in the
 vignette on data storage (run \code{vignette("v020_datastorage")}).}
+
+\item{filter_hab}{If \code{TRUE}, only points with (potential) habitat
+are returned. The default value is \code{FALSE}.}
 }
 \value{
 A Simple feature collection of
@@ -41,8 +45,8 @@ Is the site situated within a Special Area of Conservation?
 \item \code{source}: original data source of the record.
 }
 
-Note that the \code{type} variable has implicit \code{NA} values in this
-case
+Note that, unless \code{filter_hab = TRUE}, the \code{type} variable has
+implicit \code{NA} values
 (i.e. there is
 no factor level to represent the missing values).
 If you want this category to appear in certain results, you can add
