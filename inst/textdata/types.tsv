@@ -83,7 +83,7 @@ rbbzil+	subtype	rbbzil	GR	HC2	GD2	FD2	NA	NA	NA
 7140_oli	subtype	7140	BMF	HC2	GD2	FD0	NA	NA	NA
 7150	main_type	7150	BMF	HC2	GD2	FD0	NA	NA	NA
 7210	main_type	7210	BMF	HC2	GD2	FD0	NA	NA	NA
-7220	main_type	7220	BMF	HC3	GD2	NA	RW	NA	NA
+7220	main_type	7220	BMF	HC23	GD2	FD0	RW	NA	NA
 7230	main_type	7230	BMF	HC2	GD2	FD0	NA	NA	NA
 rbbmc	main_type	rbbmc	BMF	HC2	GD2	FD1	NA	NA	NA
 rbbmr	main_type	rbbmr	BMF	HC2	GD2	FD1	NA	NA	NA
