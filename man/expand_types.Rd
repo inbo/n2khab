@@ -31,7 +31,7 @@ Takes a dataframe with a column of type codes
 and, under certain conditions, adds new rows with codes of the associated
 \emph{subtypes} and \emph{main types}, respectively.
 It allows to do sensible selections and joins with interpreted forms of the
-\code{habitatmap_stdized} and \code{watersurfaces} data sources:
+\code{habitatmap_stdized} and \code{watersurfaces_hab} data sources:
 \code{habitatmap_terr},
 \code{read_watersurfaces_hab(interpreted = TRUE)}.
 If the dataframe has one or more grouping variables, by default the
