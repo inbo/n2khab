@@ -109,4 +109,4 @@ rbbms	main_type	rbbms	BMF	HC2	GD2	FD0	NA	NA	NA
 rbbppm	main_type	rbbppm	FS	HC12	GD1	FD0	NA	NA	NA
 rbbsf	main_type	rbbsf	FS	HC2	GD2	FD1	NA	NA	NA
 rbbso	main_type	rbbso	FS	HC2	GD2	FD0	NA	NA	NA
-rbbsp	main_type	rbbsp	FS	HC1	GD0	FD0	NA	NA	NA
+rbbsp	main_type	rbbsp	FS	HC12	GD0	FD0	NA	NA	NA
