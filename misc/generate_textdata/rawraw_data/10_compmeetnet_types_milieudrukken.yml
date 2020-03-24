@@ -10,8 +10,8 @@
   - Druk
   - Milieudruk
   - MaxMilieudrukkengroep
-  hash: 9723bf1048f08c074c68b85b2a16560235fa063f
-  data_hash: 083e302bac6523720ce7bb4ef027d1a58dad2aed
+  hash: fb27a2545de4c7334c143554fbdaed07b26b5799
+  data_hash: 49572fd386eb3bf27a7c2e15295893f7cac0a091
 Comp_meetnet:
   class: factor
   labels:
@@ -241,11 +241,13 @@ Waterhuishoudingsklasse_2:
   - Droog tot vochtig
   - Droog tot vochtig + Tijdelijk tot permanent nat
   - Tijdelijk tot permanent nat
+  - Tijdelijk tot permanent nat + Oppervlaktewater
   - Oppervlaktewater
   index:
   - 1
   - 2
   - 3
+  - 5
   - 4
   ordered: no
 Druk:
