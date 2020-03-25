@@ -136,17 +136,64 @@ Separately defining spatial restrictions for specific schemes:
 
 ```{r}
 spat_restr <- 
-    tribble(
-        ~scheme, ~spatial_restriction,
-        "GW_05.1_terr", "zones with shallow groundwater (in reach of vegetation)"
+    tibble(
+      scheme = c("GW_05.1_terr"),
+      spatial_restriction = 
+        paste("Restrict to zones with shallow groundwater",
+              "(in reach of vegetation).",
+              "Exclude aquatic (i.e. rivulet) forms of type 7220.",
+              "Don't exclude locations with types that are",
+              "'(almost) everywhere groundwater dependent' (GD2).")
     ) %>% 
+    bind_rows(tibble(
+      scheme = c("GW_03.3",
+                 "GW_04.2", 
+                 "GW_05.2", 
+                 "GW_07.1", 
+                 "GW_08.3"),
+      spatial_restriction = 
+        paste("For terrestrial types: restrict to zones with shallow groundwater",
+              "(in reach of vegetation).",
+              "Don't exclude locations with types that are",
+              "'(almost) everywhere groundwater dependent' (GD2).")
+    )
+    ) %>% 
+    bind_rows(tibble(
+        scheme = c("INUN_062",
+                   "INUN_07.2"),
+        spatial_restriction = "Restrict to areas susceptible to flooding."
+            )
+        ) %>% 
     bind_rows(tibble(
         scheme = c("INUN_03.4", 
                    "INUN_061",
-                   "INUN_062",
-                   "INUN_07.2",
                    "INUN_08.4"),
-        spatial_restriction = "areas susceptible to flooding"
+        spatial_restriction = 
+          paste("Restrict to areas susceptible to flooding.",
+                "Exclude aquatic (i.e. rivulet) forms of type 7220, if applicable."
+                )
+            )
+        ) %>% 
+    bind_rows(tibble(
+        scheme = c("INUN_063",
+                   "INUN_064",
+                   "INUN_065",
+                   "INUN_066"),
+        spatial_restriction = 
+          "Exclude aquatic (i.e. rivulet) forms of type 7220, if applicable."
+            )
+        ) %>% 
+    bind_rows(tibble(
+        scheme = c("GW_05.1_aq",
+                   "SURF_012", 
+                   "SURF_03.2", 
+                   "SURF_03.4_lotic", 
+                   "SURF_064", 
+                   "SURF_066", 
+                   "SURF_08.2", 
+                   "SURF_08.4"),
+        spatial_restriction = 
+          "Exclude terrestrial (i.e. mire) forms of type 7220, if applicable."
             )
         ) %>% 
     mutate(scheme = factor(scheme,
