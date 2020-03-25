@@ -62,7 +62,6 @@ schemes_schemetypes <-
     schemes_types_nl %>% 
     select(attribute_1 = Comp_meetnet,
            attribute_2 = Druk,
-           # attribute_3 = Waterhuishoudingsklasse_2,
            tag_1 = MaxMilieudrukkengroep,
            type = Vegcode) %>% 
     inner_join(types_hc, by = "type") %>% 
