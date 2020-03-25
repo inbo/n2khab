@@ -266,6 +266,7 @@ scheme	type	typegroup
 6	84	13
 6	87	15
 6	88	14
+6	89	15
 7	27	NA
 7	40	NA
 7	43	NA
@@ -319,6 +320,7 @@ scheme	type	typegroup
 9	63	16
 9	64	18
 9	65	16
+9	66	16
 9	67	16
 9	68	17
 9	69	17
@@ -426,6 +428,7 @@ scheme	type	typegroup
 13	63	NA
 13	64	NA
 13	65	NA
+13	66	NA
 13	67	NA
 13	68	NA
 13	69	NA
@@ -445,6 +448,7 @@ scheme	type	typegroup
 13	86	NA
 13	87	NA
 13	88	NA
+13	89	NA
 14	1	NA
 14	2	NA
 14	3	NA
@@ -496,12 +500,10 @@ scheme	type	typegroup
 15	48	NA
 15	50	NA
 15	52	NA
-15	54	NA
 15	58	NA
 15	59	NA
 15	68	NA
 15	79	NA
-15	80	NA
 15	85	NA
 16	1	NA
 16	3	NA
@@ -513,6 +515,7 @@ scheme	type	typegroup
 16	79	NA
 17	4	NA
 17	65	NA
+17	66	NA
 18	1	NA
 18	3	NA
 18	5	NA

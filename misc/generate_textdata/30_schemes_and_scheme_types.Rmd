@@ -41,13 +41,31 @@ ep_codes <-
 Making a dataframe that combines the information of `schemes` and `scheme_types`:
 
 ```{r}
+types <- read_vc(types_path, root)
+# for 5.1, types with HC23 must be doubled:
+types_hc <-
+  types %>% 
+  select(type, hydr_class) %>% 
+  mutate(type = as.character(type),
+         second_class = ifelse(hydr_class == "HC23",
+                               "HC2", 
+                               NA),
+         hydr_class = ifelse(hydr_class == "HC23",
+                             "HC3", 
+                             as.character(hydr_class))) %>% 
+  pivot_longer(cols = contains("class"),
+               names_to = "dummy",
+               values_to = "hydr_class_expand",
+               values_drop_na = TRUE) %>% 
+  select(-dummy)
 schemes_schemetypes <- 
     schemes_types_nl %>% 
     select(attribute_1 = Comp_meetnet,
            attribute_2 = Druk,
-           attribute_3 = Waterhuishoudingsklasse_2,
+           # attribute_3 = Waterhuishoudingsklasse_2,
            tag_1 = MaxMilieudrukkengroep,
            type = Vegcode) %>% 
+    inner_join(types_hc, by = "type") %>% 
     mutate(
         programme = "MNE" %>% factor,
         attribute_1 = recode(attribute_1,
@@ -68,7 +86,7 @@ schemes_schemetypes <-
                                  levels
                         ),
         attribute_3 = ifelse(attribute_1 == "GW" & attribute_2 == "ep_05.1",
-                             ifelse(attribute_3 == "Oppervlaktewater",
+                             ifelse(hydr_class_expand == "HC3",
                                     "aq",
                                     ifelse(type == "8310",
                                            "caves",
@@ -96,10 +114,12 @@ schemes_schemetypes <-
                 factor,
         type = as.character(type) %>% 
                 factor(levels = 
-                           read_vc(types_path, root) %>% 
+                           types %>% 
                            .$type %>% 
                            levels)
     ) %>% 
+    select(-hydr_class_expand) %>% 
+    distinct() %>% 
     arrange(programme, scheme)
 ```
 
@@ -193,12 +213,10 @@ typegroups <-
         gs_read(ws = ws_list[str_detect(ws_list, "GW_05\\.1")], 
                 check.names = T,
                 verbose = FALSE) %>% 
-        filter(!Type %in% 
-                   (schemes_schemetypes %>% 
-                        filter(scheme %in% 
-                                 c("GW_05.1_aq", 
-                                   "GW_05.1_caves")) %>% 
-                        .$type)
+        filter(Type %in% 
+                 (schemes_schemetypes %>% 
+                    filter(scheme == "GW_05.1_terr") %>% 
+                    .$type)
                ) %>% 
         mutate(scheme = "GW_05.1_terr") %>% 
         select(scheme,
