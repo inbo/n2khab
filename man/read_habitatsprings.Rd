@@ -9,6 +9,7 @@ read_habitatsprings(
   path = fileman_up("n2khab_data"),
   file = "10_raw/habitatsprings/habitatsprings.geojson",
   filter_hab = FALSE,
+  units_7220 = FALSE,
   version = "habitatsprings_2020v1"
 )
 }
@@ -27,6 +28,13 @@ vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{filter_hab}{If \code{TRUE}, only points with (potential) habitat
 are returned. The default value is \code{FALSE}.}
+
+\item{units_7220}{If \code{TRUE}, an \code{sf} object of type-\code{7220}-locations is
+returned at the population unit level.
+Tho accomplish this, the data source is aggregated by \code{unit_id}.
+Multiple points belonging to the same unit are replaced by their
+centroid, their area attribute is summed (if all values are known)
+and for other attributes the maximum value is returned.}
 
 \item{version}{Version ID of the data source.
 Defaults to the latest available version defined by the package.}
@@ -61,11 +69,17 @@ no factor level to represent the missing values).
 If you want this category to appear in certain results, you can add
 it as a level with
 \code{\link[forcats:fct_explicit_na]{forcats::fct_explicit_na()}}.
+
+With \code{units_7220 = TRUE}, an extra attribute variable \code{nr_of_points} is
+added.
+It represents the number of points that belong to each unit.
 }
 \description{
 Returns the raw data source \code{habitatsprings} as an \code{sf} point
 layer in the Belgian Lambert 72 CRS (EPSG-code
 \href{https://epsg.io/31370}{31370}).
+Optionally, a derived \code{sf} object of type-\code{7220}-locations can be
+returned at the population unit level, through aggregation by \code{unit_id}.
 }
 \details{
 The data source \code{habitatsprings} is a GeoJSON file (conforming to

@@ -1056,6 +1056,8 @@ read_habitatstreams <-
 #' Returns the raw data source \code{habitatsprings} as an \code{sf} point
 #' layer in the Belgian Lambert 72 CRS (EPSG-code
 #' \href{https://epsg.io/31370}{31370}).
+#' Optionally, a derived `sf` object of type-`7220`-locations can be
+#' returned at the population unit level, through aggregation by `unit_id`.
 #'
 #' The data source \code{habitatsprings} is a GeoJSON file (conforming to
 #' the RFC7946 specifications), available at
@@ -1068,6 +1070,12 @@ read_habitatstreams <-
 #'
 #' @param filter_hab If \code{TRUE}, only points with (potential) habitat
 #' are returned. The default value is \code{FALSE}.
+#' @param units_7220 If \code{TRUE}, an `sf` object of type-`7220`-locations is
+#' returned at the population unit level.
+#' Tho accomplish this, the data source is aggregated by `unit_id`.
+#' Multiple points belonging to the same unit are replaced by their
+#' centroid, their area attribute is summed (if all values are known)
+#' and for other attributes the maximum value is returned.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -1102,6 +1110,10 @@ read_habitatstreams <-
 #' it as a level with
 #' [forcats::fct_explicit_na()].
 #'
+#' With `units_7220 = TRUE`, an extra attribute variable `nr_of_points` is
+#' added.
+#' It represents the number of points that belong to each unit.
+#'
 #' @md
 #'
 #' @examples
@@ -1126,6 +1138,7 @@ read_habitatstreams <-
 #' @importFrom sf
 #' read_sf
 #' st_transform
+#' st_centroid
 #' @importFrom rlang .data
 #' @importFrom dplyr
 #' %>%
@@ -1133,17 +1146,28 @@ read_habitatstreams <-
 #' select
 #' filter
 #' everything
+#' group_by
+#' summarise_if
+#' mutate_at
+#' n
+#' vars
 #' @export
 read_habitatsprings <-
     function(path = fileman_up("n2khab_data"),
              file = "10_raw/habitatsprings/habitatsprings.geojson",
              filter_hab = FALSE,
+             units_7220 = FALSE,
              version = "habitatsprings_2020v1"){
 
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
         assert_that(is.flag(filter_hab), noNA(filter_hab))
         assert_that(is.string(version))
+
+        typelevels <-
+            read_types() %>%
+            .$type %>%
+            levels
 
         habitatsprings <-
             read_sf(filepath) %>%
@@ -1157,9 +1181,7 @@ read_habitatsprings <-
                               NA),
                 in_sac = (.data$sbz == 1),
                 type = str_sub(.data$habitattype, end = 4) %>%
-                        factor(levels = read_types() %>%
-                                   .$type %>%
-                                   levels),
+                        factor(levels = typelevels),
                 certain = (.data$validity_status == "gecontroleerd")
             ) %>%
             {if (filter_hab) filter(., !is.na(.$type)) else .} %>%
@@ -1184,6 +1206,34 @@ read_habitatsprings <-
                        3:5,
                        .data$unit_id,
                        everything())
+        }
+
+        if (units_7220) {
+            assert_that(version != "habitatsprings_2019v1",
+                        msg = paste("'units_7220 = TRUE' is not supported for",
+                                    "version habitatsprings_2019v1."))
+            suppressWarnings(
+            habitatsprings <-
+                habitatsprings %>%
+                filter(.data$type == "7220") %>%
+                select(-.data$point_id) %>%
+                group_by(.data$unit_id) %>%
+                mutate(area_m2 = sum(.data$area_m2),
+                       system_type = as.character(.data$system_type),
+                       type = as.character(.data$type),
+                       nr_of_points = n()) %>%
+                summarise_if(function(x) {!inherits(x, "sfc")},
+                             max) %>%
+                mutate(type = .data$type %>% factor(levels = typelevels),
+                       system_type = factor(.data$system_type)) %>%
+                mutate_at(vars(.data$certain,
+                               .data$in_sac),
+                          as.logical) %>%
+                st_centroid() %>%
+                select(.data$unit_id,
+                       .data$nr_of_points,
+                       everything())
+            )
         }
 
         return(habitatsprings)
