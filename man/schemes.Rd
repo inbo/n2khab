@@ -3,7 +3,8 @@
 \name{schemes}
 \alias{schemes}
 \title{Documentation of included data source 'schemes'}
-\format{A vc-formatted data source. As such, it corresponds to
+\format{
+A vc-formatted data source. As such, it corresponds to
 a dataframe with 10 variables:
 \describe{
   \item{scheme}{Code of the scheme, as a factor.
@@ -83,7 +84,8 @@ a dataframe with 10 variables:
   by \code{\link{namelist}}.}
   \item{tag_3}{Optional tag, e.g. a categorization ID explained
   by \code{\link{namelist}}.}
-}}
+}
+}
 \source{
 \itemize{
     \item{For the MNE-schemes: a vc-formatted, Dutch-language data source

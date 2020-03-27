@@ -3,7 +3,8 @@
 \name{types}
 \alias{types}
 \title{Documentation of included data source 'types'}
-\format{A vc-formatted data source. As such, it corresponds to
+\format{
+A vc-formatted data source. As such, it corresponds to
 a dataframe with several variables:
 \describe{
   \item{type}{Code of the type, as a factor.
@@ -40,7 +41,8 @@ a dataframe with several variables:
   \item{tag_2}{Optional tag, e.g. a categorization ID explained
   by \code{\link{namelist}}.}
   \item{tag_3}{Optional tag, e.g. a categorization ID explained
-  by \code{\link{namelist}}.} }}
+  by \code{\link{namelist}}.} }
+}
 \source{
 Most information comes from
 \href{https://docs.google.com/spreadsheets/d/1dK0S1Tt3RlVEh4WrNF5N_-hn0OXiTUVOvsL2JRhSl78}{this googlesheet}.
