@@ -10,3 +10,4 @@
 pkgdown/
 ^\.travis\.yml$
 ^appveyor\.yml$
+^\.zenodo\.json$

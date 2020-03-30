@@ -155,7 +155,7 @@ Comp_meetnet	Typeklasse	Vegcode	Waterhuishoudingsklasse_2	Druk	Milieudruk	MaxMil
 1	8	55	3	1	1	2
 1	8	55	3	6	6	1
 1	8	55	3	22	22	3
-1	8	56	4	6	6	1
+1	8	56	5	6	6	1
 1	8	57	3	1	1	2
 1	8	57	3	6	6	1
 1	8	57	3	22	22	3
@@ -211,8 +211,8 @@ Comp_meetnet	Typeklasse	Vegcode	Waterhuishoudingsklasse_2	Druk	Milieudruk	MaxMil
 1	10	81	3	6	6	1
 1	10	84	3	6	6	1
 1	10	84	3	10	10	1
-1	10	85	1	6	6	1
-1	10	85	1	10	10	1
+1	10	85	2	6	6	1
+1	10	85	2	10	10	1
 2	1	1	3	4	4	3
 2	1	2	3	7	7	1
 2	1	2	3	23	23	3
@@ -330,7 +330,7 @@ Comp_meetnet	Typeklasse	Vegcode	Waterhuishoudingsklasse_2	Druk	Milieudruk	MaxMil
 2	10	81	3	7	7	1
 2	10	81	3	23	23	3
 2	10	84	3	7	7	1
-2	10	85	1	7	7	1
+2	10	85	2	7	7	1
 3	1	2	3	8	8	1
 3	1	2	3	12	12	1
 3	1	2	3	13	13	3
@@ -450,9 +450,9 @@ Comp_meetnet	Typeklasse	Vegcode	Waterhuishoudingsklasse_2	Druk	Milieudruk	MaxMil
 3	8	55	3	8	8	1
 3	8	55	3	12	12	1
 3	8	55	3	24	24	3
-3	8	56	4	8	8	1
-3	8	56	4	12	12	1
-3	8	56	4	24	24	3
+3	8	56	5	8	8	1
+3	8	56	5	12	12	1
+3	8	56	5	24	24	3
 3	8	57	3	8	8	1
 3	8	57	3	12	12	1
 3	8	57	3	24	24	3
@@ -502,6 +502,7 @@ Comp_meetnet	Typeklasse	Vegcode	Waterhuishoudingsklasse_2	Druk	Milieudruk	MaxMil
 3	10	81	3	12	12	1
 3	10	84	3	8	8	1
 3	10	84	3	12	12	1
+3	10	85	2	8	8	1
 4	2	16	4	7	7	2
 4	2	16	4	9	9	1
 4	4	22	4	7	7	2
@@ -541,8 +542,8 @@ Comp_meetnet	Typeklasse	Vegcode	Waterhuishoudingsklasse_2	Druk	Milieudruk	MaxMil
 4	4	73	4	21	21	4
 4	4	73	4	23	23	3
 4	4	73	4	25	25	2
-4	8	56	4	9	9	1
-4	8	56	4	17	17	2
+4	8	56	5	9	9	1
+4	8	56	5	17	17	2
 5	1	1	3	3	3	4
 5	1	1	3	9	9	1
 5	1	1	3	14	14	2
@@ -645,7 +646,6 @@ Comp_meetnet	Typeklasse	Vegcode	Waterhuishoudingsklasse_2	Druk	Milieudruk	MaxMil
 5	7	49	3	25	25	3
 5	7	74	3	9	9	1
 5	7	74	3	14	14	2
-5	7	74	3	15	15	2
 5	7	74	3	25	25	3
 5	7	75	3	9	9	1
 5	7	75	3	14	14	2
@@ -676,6 +676,8 @@ Comp_meetnet	Typeklasse	Vegcode	Waterhuishoudingsklasse_2	Druk	Milieudruk	MaxMil
 5	8	55	3	9	9	1
 5	8	55	3	17	17	4
 5	8	55	3	25	25	3
+5	8	56	5	9	9	1
+5	8	56	5	17	17	4
 5	8	57	3	9	9	1
 5	8	57	3	14	14	2
 5	8	57	3	25	25	3
@@ -699,7 +701,6 @@ Comp_meetnet	Typeklasse	Vegcode	Waterhuishoudingsklasse_2	Druk	Milieudruk	MaxMil
 5	10	66	3	16	16	4
 5	10	67	3	9	9	1
 5	10	67	3	14	14	2
-5	10	67	3	15	15	2
 5	10	68	3	9	9	1
 5	10	69	3	9	9	1
 5	10	69	3	14	14	2
@@ -715,3 +716,4 @@ Comp_meetnet	Typeklasse	Vegcode	Waterhuishoudingsklasse_2	Druk	Milieudruk	MaxMil
 5	10	81	3	14	14	2
 5	10	84	3	9	9	1
 5	10	84	3	14	14	2
+5	10	85	2	9	9	1

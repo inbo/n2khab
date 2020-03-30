@@ -3,7 +3,8 @@
 \name{env_pressures}
 \alias{env_pressures}
 \title{Documentation of included data source 'env_pressures'}
-\format{A vc-formatted data source. As such, it corresponds to
+\format{
+A vc-formatted data source. As such, it corresponds to
 a dataframe with 35 rows and 3 variables:
 \describe{
   \item{ep_code}{Code of the environmental pressure, as a factor.
@@ -18,7 +19,8 @@ a dataframe with 35 rows and 3 variables:
   Is a factor.}
   \item{explanation}{A code explained by \code{\link{namelist}},
   corresponding to the explanation on the environmental pressure.}
-}}
+}
+}
 \source{
 The latest worksheet of
 \href{https://docs.google.com/spreadsheets/d/1PH6InqJk0ijQF_N7v7IZjarijlqHRBCKhTbDn44skZU}{
