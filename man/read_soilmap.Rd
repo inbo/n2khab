@@ -50,7 +50,7 @@ texture and drainage variables (\code{bsm_mo_substr}, \code{bsm_mo_tex} and
 ones, a conversion table by Bruno De Vos &
 Carole Ampe is applied (for earlier work on this, see Ampe 2013).
 \item Substrate classes are copied over from \code{bsm_ge_substr} into \code{bsm_mo_substr}
-(\code{bsm_ge_substr} already followed the categories of \code{bsm_mo_substr}).
+(\code{bsm_ge_substr} already follows the categories of \code{bsm_mo_substr}).
 }
 
 These steps coincide with the approach that was taken to construct
@@ -58,20 +58,21 @@ These steps coincide with the approach that was taken to construct
 
 \item{simplify}{Logical.
 Only applied with \code{use_processed = FALSE}.
-If \code{TRUE}, only return a limited number of variables that are most
-useful for analytical work.}
+If \code{TRUE}, only a limited number of variables that are most
+useful for analytical work are returned.}
 }
 \value{
 A Simple feature collection of geometry type \code{MULTIPOLYGON},
 representing either the processed data source \code{soilmap_simple} (default) or
 the raw data source \code{soilmap}.
 
-Beside the standardization for the coastal plain areas, \code{soilmap_simple}
+Besides the standardization for the coastal plain areas, \code{soilmap_simple}
 contains
 only a subset of the \code{soilmap} variables (marked with an asterisk below).
 
 The \code{soilmap} attribute variables all start with prefix \code{bsm_} (referring
-to the 'Belgian soil map').
+to the 'Belgian soil map'), in order to distinguish from similar attributes
+derived from other maps or field observations.
 
 Most attributes represent categories and are returned as
 factors.

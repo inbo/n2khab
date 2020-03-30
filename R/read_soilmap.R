@@ -65,14 +65,14 @@
 #' ones, a conversion table by Bruno De Vos &
 #' Carole Ampe is applied (for earlier work on this, see Ampe 2013).
 #' - Substrate classes are copied over from `bsm_ge_substr` into `bsm_mo_substr`
-#' (`bsm_ge_substr` already followed the categories of `bsm_mo_substr`).
+#' (`bsm_ge_substr` already follows the categories of `bsm_mo_substr`).
 #'
 #' These steps coincide with the approach that was taken to construct
 #' `bsm_mo_soilunitype` in the raw data source.
 #' @param simplify Logical.
 #' Only applied with \code{use_processed = FALSE}.
-#' If \code{TRUE}, only return a limited number of variables that are most
-#' useful for analytical work.
+#' If \code{TRUE}, only a limited number of variables that are most
+#' useful for analytical work are returned.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -81,12 +81,13 @@
 #' representing either the processed data source `soilmap_simple` (default) or
 #' the raw data source `soilmap`.
 #'
-#' Beside the standardization for the coastal plain areas, `soilmap_simple`
+#' Besides the standardization for the coastal plain areas, `soilmap_simple`
 #' contains
 #' only a subset of the `soilmap` variables (marked with an asterisk below).
 #'
 #' The `soilmap` attribute variables all start with prefix `bsm_` (referring
-#' to the 'Belgian soil map').
+#' to the 'Belgian soil map'), in order to distinguish from similar attributes
+#' derived from other maps or field observations.
 #'
 #' Most attributes represent categories and are returned as
 #' factors.
