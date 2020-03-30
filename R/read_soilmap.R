@@ -21,6 +21,9 @@
 #' to support the `read_soilmap()` function and to sustain long-term workflow
 #' reproducibility.
 #'
+#' The processed data source `soilmap_simple` is a GeoPackage, available at
+#' [Zenodo](https://doi.org/10.5281/zenodo.3732903).
+#'
 #' Note that factors are generated with implicit \code{NA} values (i.e. there is
 #' no factor level to represent the missing values).
 #' If you want this category to appear in certain results, you can convert

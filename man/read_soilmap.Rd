@@ -196,6 +196,9 @@ Zenodo (\url{https://doi.org/10.5281/zenodo.3387007}) - which we refer to as the
 to support the \code{read_soilmap()} function and to sustain long-term workflow
 reproducibility.
 
+The processed data source \code{soilmap_simple} is a GeoPackage, available at
+\href{https://doi.org/10.5281/zenodo.3732903}{Zenodo}.
+
 Note that factors are generated with implicit \code{NA} values (i.e. there is
 no factor level to represent the missing values).
 If you want this category to appear in certain results, you can convert
