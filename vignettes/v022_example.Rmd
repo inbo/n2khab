@@ -21,6 +21,14 @@ knitr::opts_chunk$set(
   comment = "#>",
   eval = FALSE
 )
+```
+
+_Note: for more information on data storage and locations, see `vignette("v020_datastorage")`._
+_The below workflow is an application and demonstrates current setup from R (output is mostly not included)._
+
+## Minimal setup for using `read_soilmap()`
+
+```{r}
 library(remotes)
 library(knitr)
 library(tidyverse)
@@ -29,11 +37,6 @@ library(mapview)
 library(plotly)
 library(units)
 ```
-
-_Note: for more information on data storage and locations, see `vignette("v020_datastorage")`._
-_The below workflow is an application and demonstrates current setup from R (output is mostly not included)._
-
-## Minimal setup for using `read_soilmap()`
 
 ### Install and load `n2khab`
 
