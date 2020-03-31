@@ -30,12 +30,6 @@ _The below workflow is an application and demonstrates current setup from R (out
 
 ```{r}
 library(remotes)
-library(knitr)
-library(tidyverse)
-library(sf)
-library(mapview)
-library(plotly)
-library(units)
 ```
 
 ### Install and load `n2khab`
@@ -75,6 +69,15 @@ download_zenodo(doi = "10.5281/zenodo.3732903",
 At some time in future, the download will be performed automatically by `read_soilmap()` (if the `soilmap_simple` data source is missing).
 
 ## Explore the `soilmap_simple` data source!
+
+```{r}
+library(knitr)
+library(tidyverse)
+library(sf)
+library(mapview)
+library(plotly)
+library(units)
+```
 
 Inspect documentation of `read_soilmap()`:
 
