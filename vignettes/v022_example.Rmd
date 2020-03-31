@@ -190,7 +190,7 @@ sm_simple %>%
 
 Clicking a feature on the above generated map reveals all attributes.
 
-## Access more features: the `soilmap` data source
+## Access more information: the `soilmap` data source
 
 ### Download the `soilmap` data source in the correct place
 
