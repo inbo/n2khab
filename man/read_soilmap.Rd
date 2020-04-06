@@ -48,14 +48,17 @@ Defaults to the latest available version defined by the package.}
 Only applied with \code{use_processed = FALSE}.
 If \code{TRUE}, fill the values of the morphogenetic substrate,
 texture and drainage variables (\code{bsm_mo_substr}, \code{bsm_mo_tex} and
-\code{bsm_mo_drain} + their \verb{_explan} counterparts) \emph{for features in the
-'coastal plain' area}.
+\code{bsm_mo_drain} + their \verb{_explan} counterparts) where possible,
+\emph{for features with a geomorphological soil type code}.
+This largely applies to features in the 'coastal plain' area.
 \itemize{
 \item To derive morphogenetic texture and drainage levels from the geomorphological
 ones, a conversion table by Bruno De Vos &
 Carole Ampe is applied (for earlier work on this, see Ampe 2013).
 \item Substrate classes are copied over from \code{bsm_ge_substr} into \code{bsm_mo_substr}
 (\code{bsm_ge_substr} already follows the categories of \code{bsm_mo_substr}).
+\item A logical variable is added to the output to mark conversions
+(see section \emph{Value}).
 }
 
 These steps coincide with the approach that was taken to construct
@@ -98,10 +101,13 @@ Belgian Geomorphological System.
 (Note however, that \code{bsm_ge_substr} does follow the Belgian Morphogenetic
 System as well.)
 \itemize{
-\item These variables are only available \emph{within the coastal plain areas}.
+\item Values are typically available \emph{within the coastal plain areas},
+but some geomorphological soil types (starting with letter \code{O})
+have a wider distribution across Flanders.
 \item They are \emph{not} included in \code{soilmap_simple}.
-\item A special variable is \code{bsm_ge_coastalplain}, which is \code{TRUE} inside
-the coastal plain areas, and \code{FALSE} elsewhere.
+\item A special variable is \code{bsm_ge_typology}, which is \code{TRUE} if
+\code{bsm_soiltype} follows the geomorphological typology,
+and \code{FALSE} otherwise.
 }
 \item \strong{variables without \code{mo_} or \code{ge_} in their name} are:
 \itemize{
@@ -111,6 +117,8 @@ the coastal plain areas, and \code{FALSE} elsewhere.
 \item or \emph{mixed} (representing \code{mo_} categories within and \code{ge_} categories
 outside coastal plains): the other ones, like \code{bsm_region}, \code{bsm_legend},
 \code{bsm_soiltype} and \code{bsm_soilseries}.
+\item A special variable is \code{bsm_converted}, returned only if
+\code{standardize_coastalplain = TRUE}.
 }
 }
 
@@ -125,7 +133,7 @@ More elaborate explanations can be found in the references and in metadata
 \item Meaning of the main non-metadata variables:
 \itemize{
 \item \code{bsm_region} (*): name of the region
-\item \code{bsm_ge_region}: code of the region (within the coastal plain area)
+\item \code{bsm_ge_region}: code of the region within the coastal plain area
 \item \code{bsm_legend}: generalised (simplified) legend key (37 levels)
 \item \code{bsm_legend_title} and \code{bsm_legend_explan}:
 the legend keys and text of Van Ranst & Sys (2000) (833 and 622 levels,
@@ -137,17 +145,20 @@ morphogenetic & geomorphological codes).
 Does the soiltype code follow the geomorphological typology?
 \item \code{bsm_soiltype_region}: \code{bsm_soiltype}, followed by a code representing
 \code{bsm_region}
-\item \code{bsm_soilseries}: the morphogenetic soil series (outside the coastal
-plain areas),
+\item \code{bsm_soilseries}: either the morphogenetic soil series (outside the
+coastal plain areas),
 which is the three core characters of \code{bsm_soiltype},
-or just \code{bsm_soiltype} within the coastal plain areas
+or just \code{bsm_soiltype} if the latter has a geomorphological code.
 \item \code{bsm_converted} (*): Logical.
 Were morphogenetic texture and drainage variables (\code{bsm_mo_tex} and
 \code{bsm_mo_drain}) derived from a conversion table?
+This is equivalent with the question: does \code{bsm_mo_soilunitype} differ
+from \code{bsm_soiltype}?
 Value \code{TRUE} is largely confined to the 'coastal plain' areas.
 Only returned if \code{standardize_coastalplain = TRUE}.
 \item \code{bsm_mo_soilunitype} (*): as \code{bsm_soiltype}, but applying morphogenetic
-codes within the coastal plain areas (see the \code{standardize_coastalplain}
+codes within the coastal plain areas in most cases
+(see the \code{standardize_coastalplain}
 argument for more information about this conversion)
 \item \code{bsm_mo_substr} (*), \code{bsm_ge_substr}: code of the soil substrate
 \item \code{bsm_mo_tex} (*): code of the soil texture category
@@ -159,10 +170,8 @@ argument for more information about this conversion)
 properties).
 They are explained in the book that accompanies the specific analog map
 identified by \code{bsm_map_id}.
-\item \code{bsm_ge_series}: the geomorphological soil series (inside the coastal
-plain areas)
-\item \code{bsm_ge_subseries}: the geomorphological soil subseries (inside the
-coastal plain areas)
+\item \code{bsm_ge_series}: the geomorphological soil series
+\item \code{bsm_ge_subseries}: the geomorphological soil subseries
 }
 \item Meaning of the metadata variables:
 \itemize{
@@ -242,7 +251,7 @@ soilmap_simple \%>\%
   filter(!is.na(bsm_mo_substr)) \%>\%
   glimpse
 soilmap_simple \%>\%
-  filter(bsm_ge_coastalplain) \%>\%
+  filter(bsm_converted) \%>\%
   glimpse
 }
 
