@@ -156,6 +156,7 @@ This is equivalent with the question: does \code{bsm_mo_soilunitype} differ
 from \code{bsm_soiltype}?
 Value \code{TRUE} is largely confined to the 'coastal plain' areas.
 Only returned if \code{standardize_coastalplain = TRUE}.
+(Note: not included in \code{soilmap_simple_v1}.)
 \item \code{bsm_mo_soilunitype} (*): as \code{bsm_soiltype}, but applying morphogenetic
 codes within the coastal plain areas in most cases
 (see the \code{standardize_coastalplain}

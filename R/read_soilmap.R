@@ -162,6 +162,7 @@
 #'     from `bsm_soiltype`?
 #'     Value `TRUE` is largely confined to the 'coastal plain' areas.
 #'     Only returned if `standardize_coastalplain = TRUE`.
+#'     (Note: not included in `soilmap_simple_v1`.)
 #'     - `bsm_mo_soilunitype` (*): as `bsm_soiltype`, but applying morphogenetic
 #'     codes within the coastal plain areas in most cases
 #'     (see the `standardize_coastalplain`
