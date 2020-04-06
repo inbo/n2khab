@@ -141,6 +141,11 @@ Does the soiltype code follow the geomorphological typology?
 plain areas),
 which is the three core characters of \code{bsm_soiltype},
 or just \code{bsm_soiltype} within the coastal plain areas
+\item \code{bsm_converted} (*): Logical.
+Were morphogenetic texture and drainage variables (\code{bsm_mo_tex} and
+\code{bsm_mo_drain}) derived from a conversion table?
+Value \code{TRUE} is largely confined to the 'coastal plain' areas.
+Only returned if \code{standardize_coastalplain = TRUE}.
 \item \code{bsm_mo_soilunitype} (*): as \code{bsm_soiltype}, but applying morphogenetic
 codes within the coastal plain areas (see the \code{standardize_coastalplain}
 argument for more information about this conversion)

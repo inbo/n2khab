@@ -147,6 +147,11 @@
 #'     plain areas),
 #'     which is the three core characters of `bsm_soiltype`,
 #'     or just `bsm_soiltype` within the coastal plain areas
+#'     - `bsm_converted` (*): Logical.
+#'     Were morphogenetic texture and drainage variables (`bsm_mo_tex` and
+#'     `bsm_mo_drain`) derived from a conversion table?
+#'     Value `TRUE` is largely confined to the 'coastal plain' areas.
+#'     Only returned if `standardize_coastalplain = TRUE`.
 #'     - `bsm_mo_soilunitype` (*): as `bsm_soiltype`, but applying morphogenetic
 #'     codes within the coastal plain areas (see the `standardize_coastalplain`
 #'     argument for more information about this conversion)
@@ -239,6 +244,7 @@
 #' matches
 #' distinct
 #' pull
+#' everything
 #' @importFrom stats
 #' setNames
 #' @importFrom rlang .data
@@ -402,7 +408,8 @@ read_soilmap <-
                 mutate(tex_explan_transl = recode(.data$texture_transl,
                                                   !!!keys[["bsm_mo_tex"]]),
                        drain_explan_transl = recode(.data$drainage_transl,
-                                                    !!!keys[["bsm_mo_drain"]]))
+                                                    !!!keys[["bsm_mo_drain"]]),
+                       bsm_converted = TRUE)
 
             stand_vars <- c("bsm_mo_substr",
                             "bsm_mo_tex",
@@ -441,9 +448,15 @@ read_soilmap <-
                                                  !is.na(.data$drain_explan_transl),
                                              .data$drain_explan_transl,
                                              .data$bsm_mo_drain_explan) %>%
-                           factor(levels = levels(soilmap$bsm_mo_drain_explan))
+                           factor(levels = levels(soilmap$bsm_mo_drain_explan)),
+                       bsm_converted = ifelse(is.na(.data$bsm_converted),
+                                              FALSE,
+                                              .data$bsm_converted)
                        ) %>%
-                select(-contains("transl"))
+                select(-contains("transl")) %>%
+                select(.data$bsm_poly_id:.data$bsm_soilseries_explan,
+                       .data$bsm_converted,
+                       everything())
 
         }
 
@@ -452,8 +465,13 @@ read_soilmap <-
         if (simplify) {
             soilmap <-
                 soilmap %>%
+                {if (standardize_coastalplain) . else {
+                    mutate(.,
+                           bsm_converted = NA)
+                }} %>%
                 select(.data$bsm_poly_id,
                        .data$bsm_region,
+                       .data$bsm_converted,
                        .data$bsm_mo_soilunitype,
                        .data$bsm_mo_substr,
                        .data$bsm_mo_tex,
@@ -461,7 +479,10 @@ read_soilmap <-
                        .data$bsm_mo_prof,
                        .data$bsm_mo_parentmat,
                        .data$bsm_mo_profvar
-                       )
+                       ) %>%
+                {if (standardize_coastalplain) . else {
+                    select(., -.data$bsm_converted)
+                }}
         }
 
         return(soilmap)
