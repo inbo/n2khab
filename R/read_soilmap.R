@@ -213,6 +213,7 @@
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' noNA
 #' @importFrom sf
 #' read_sf
 #' @importFrom git2rdata
@@ -246,9 +247,10 @@ read_soilmap <-
              standardize_coastalplain = FALSE,
              simplify = FALSE) {
 
-        assert_that(is.flag(simplify))
-        assert_that(is.flag(standardize_coastalplain))
-        assert_that(is.flag(use_processed))
+        assert_that(is.flag(simplify), noNA(simplify))
+        assert_that(is.flag(standardize_coastalplain),
+                    noNA(standardize_coastalplain))
+        assert_that(is.flag(use_processed), noNA(use_processed))
 
         ####### 1. Reading soilmap_simple ####
         ######################################
