@@ -131,8 +131,6 @@
 #' [at DOV](https://www.dov.vlaanderen.be/geonetwork/srv/dut/catalog.search#/metadata/5c129f2d-4498-4bc3-8860-01cb2d513f8f).
 #' 1. Meaning of the main non-metadata variables:
 #'     - `bsm_region` (*): name of the region
-#'     - `bsm_ge_coastalplain`: Logical.
-#'     Is the polygon situated in the coastal plain area?
 #'     - `bsm_ge_region`: code of the region (within the coastal plain area)
 #'     - `bsm_legend`: generalised (simplified) legend key (37 levels)
 #'     - `bsm_legend_title` and `bsm_legend_explan`:
@@ -141,6 +139,8 @@
 #'     - `bsm_soiltype`: the soil type of the Belgian soil map (mixed nature:
 #'     morphogenetic & geomorphological codes).
 #'     `bsm_soiltype_id` represents a numeric code for each level.
+#'     - `bsm_ge_typology`: Logical.
+#'     Does the soiltype code follow the geomorphological typology?
 #'     - `bsm_soiltype_region`: `bsm_soiltype`, followed by a code representing
 #'     `bsm_region`
 #'     - `bsm_soilseries`: the morphogenetic soil series (outside the coastal
@@ -302,13 +302,13 @@ read_soilmap <-
             select(bsm_poly_id = .data$gid,
                    bsm_map_id = .data$Kaartbldnr,
                    bsm_region = .data$Streek,
-                   bsm_ge_coastalplain = .data$Type_class,
                    bsm_ge_region = .data$Streek_c,
                    bsm_legend = .data$Grove_leg,
                    bsm_legend_title = .data$Uitleg_tit,
                    bsm_legend_explan = .data$Uitleg,
                    bsm_soiltype_id = .data$codeid,
                    bsm_soiltype = .data$Bodemtype,
+                   bsm_ge_typology = .data$Type_class,
                    bsm_soiltype_region = .data$Bodtypstr,
                    bsm_soilseries = .data$Bodemser_c,
                    bsm_soilseries_explan = .data$Bodemserie,
@@ -337,10 +337,10 @@ read_soilmap <-
                    bsm_detailmap_url = .data$Scan_5000,
                    bsm_profloc_url = .data$Scan_stip
                    ) %>%
-            mutate(bsm_ge_coastalplain = .data$bsm_ge_coastalplain == "Zeepolders") %>%
+            mutate(bsm_ge_typology = .data$bsm_ge_typology == "Zeepolders") %>%
             mutate_at(.vars = vars(-.data$bsm_poly_id,
                                    -.data$bsm_soiltype_id,
-                                   -.data$bsm_ge_coastalplain,
+                                   -.data$bsm_ge_typology,
                                    -.data$bsm_soiltype_id,
                                    -.data$geometry,
                                    -matches(".+_mo_.+_explan")),

@@ -125,8 +125,6 @@ More elaborate explanations can be found in the references and in metadata
 \item Meaning of the main non-metadata variables:
 \itemize{
 \item \code{bsm_region} (*): name of the region
-\item \code{bsm_ge_coastalplain}: Logical.
-Is the polygon situated in the coastal plain area?
 \item \code{bsm_ge_region}: code of the region (within the coastal plain area)
 \item \code{bsm_legend}: generalised (simplified) legend key (37 levels)
 \item \code{bsm_legend_title} and \code{bsm_legend_explan}:
@@ -135,6 +133,8 @@ respectively)
 \item \code{bsm_soiltype}: the soil type of the Belgian soil map (mixed nature:
 morphogenetic & geomorphological codes).
 \code{bsm_soiltype_id} represents a numeric code for each level.
+\item \code{bsm_ge_typology}: Logical.
+Does the soiltype code follow the geomorphological typology?
 \item \code{bsm_soiltype_region}: \code{bsm_soiltype}, followed by a code representing
 \code{bsm_region}
 \item \code{bsm_soilseries}: the morphogenetic soil series (outside the coastal
