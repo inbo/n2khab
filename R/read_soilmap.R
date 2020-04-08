@@ -289,10 +289,8 @@ read_soilmap <-
             soilmap_simple_path <- file.path(path, file)
             assert_that(file.exists(soilmap_simple_path))
 
-            suppressWarnings(
-                soilmap_simple <- read_sf(soilmap_simple_path,
-                                          crs = 31370)
-            )
+            soilmap_simple <- read_sf(soilmap_simple_path,
+                                      "soilmap_simple")
 
             soilmap_simple <-
                 soilmap_simple %>%
@@ -302,6 +300,7 @@ read_soilmap <-
                 soilmap_simple <-
                     select(soilmap_simple,
                            -.data$bsm_ge_coastalplain)
+                suppressWarnings(st_crs(soilmap_simple) <- 31370)
             }
 
             return(soilmap_simple)
