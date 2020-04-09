@@ -289,12 +289,54 @@ read_soilmap <-
             soilmap_simple_path <- file.path(path, file)
             assert_that(file.exists(soilmap_simple_path))
 
-            soilmap_simple <- read_sf(soilmap_simple_path,
-                                      "soilmap_simple")
-
             soilmap_simple <-
-                soilmap_simple %>%
+                read_sf(soilmap_simple_path,
+                        "soilmap_simple") %>%
                 mutate_if(is.character, factor)
+
+            if (explan & version_processed == "soilmap_simple_v1") {
+                warning("Version soilmap_simple_v1 is not supported for ",
+                        "adding explanatory variables.")
+            }
+
+            if (explan & version_processed != "soilmap_simple_v1") {
+
+                suppressWarnings(
+                    explanations <-
+                        read_sf(soilmap_simple_path,
+                                "explanations") %>%
+                        split(.$subject) %>%
+                        lapply(function(df) {
+                            select(df, -.data$subject) %>%
+                                rename(name = .data$explan)
+                        })
+                )
+
+                soilmap_simple <-
+                    soilmap_simple %>%
+                    mutate(bsm_mo_substr_explan =
+                               namelist_factor(.data$bsm_mo_substr,
+                                               codelist = explanations[["bsm_mo_substr"]]),
+                           bsm_mo_tex_explan =
+                               namelist_factor(.data$bsm_mo_tex,
+                                               codelist = explanations[["bsm_mo_tex"]]),
+                           bsm_mo_drain_explan =
+                               namelist_factor(.data$bsm_mo_drain,
+                                               codelist = explanations[["bsm_mo_drain"]]),
+                           bsm_mo_prof_explan =
+                               namelist_factor(.data$bsm_mo_prof,
+                                               codelist = explanations[["bsm_mo_prof"]]),
+                           bsm_mo_parentmat_explan =
+                               namelist_factor(.data$bsm_mo_parentmat,
+                                               codelist = explanations[["bsm_mo_parentmat"]]),
+                           bsm_mo_profvar_explan =
+                               namelist_factor(.data$bsm_mo_profvar,
+                                               codelist = explanations[["bsm_mo_profvar"]])
+                    ) %>%
+                    select(.data$bsm_poly_id:.data$bsm_mo_soilunitype,
+                           !!(c(5, 12) + rep(0:5, each = 2)))
+
+            }
 
             if (version_processed == "soilmap_simple_v1") {
                 soilmap_simple <-
