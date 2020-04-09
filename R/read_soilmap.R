@@ -309,8 +309,7 @@ read_soilmap <-
                                 "explanations") %>%
                         split(.$subject) %>%
                         lapply(function(df) {
-                            select(df, -.data$subject) %>%
-                                rename(name = .data$explan)
+                            select(df, -.data$subject)
                         })
                 )
 
