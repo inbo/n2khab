@@ -42,7 +42,9 @@ install_github("inbo/n2khab",
 library(n2khab)
 ```
 
-### Create the `n2khab_data` directory with 2 subdirectories (in the working directory)
+### Create (or locate) the `n2khab_data` directory with 2 subdirectories
+
+This will create `n2khab_data` in the working directory:
 
 ```{r}
 n2khab_data_path <- fileman_folders()
