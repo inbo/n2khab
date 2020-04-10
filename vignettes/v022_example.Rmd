@@ -167,7 +167,7 @@ zwin_map
 zwin_map + coord_sf(datum = st_crs(31370))
 ```
 
-- make an interactive map of it:
+- make an interactive map of it, providing two alternative basemaps:
 
 ```{r}
 sm_simple %>%
@@ -175,7 +175,7 @@ sm_simple %>%
         mutate(bsm_mo_tex = as.character(bsm_mo_tex)) %>%
         mapview(zcol = "bsm_mo_tex",
                 alpha.region = 0.2,
-                map.types = "OpenTopoMap")
+                map.types = c("OpenStreetMap", "OpenTopoMap"))
 ```
 
 Clicking a feature on the above generated map reveals all attributes.
@@ -257,14 +257,14 @@ dim(sm_mp)
 #> [1] 3991   38
 ```
 
-- make an interactive map (on top of Wikimedia's Open Streetmap visualization):
+- make an interactive map (which may open in your webbrowser), with two alternative base maps:
 
 ```{r}
 sm_mp %>%
     mutate(bsm_ge_series = as.character(bsm_ge_series)) %>%
     mapview(zcol = "bsm_ge_series",
             alpha.region = 0.2,
-            map.types = "Wikimedia",
+            map.types = c("Wikimedia", "CartoDB.Positron"),
             alpha = 0)
 ```
 
@@ -325,7 +325,7 @@ sm_mp %>%
 |m.D1           |Overdekte kreekruggronden (Middellandpolders)                    |   13.74 [ha]|           9|
 |m.D5d          |Overdekte kreekruggronden (Middellandpolders)                    |    6.46 [ha]|           6|
 
-- plot all features where `bsm_soilseries == "m.D5"`:
+- plot all features where `bsm_soilseries == "m.D5"` (providing all `mapview`'s default base maps):
 
 ```{r}
 sm_mp %>%
