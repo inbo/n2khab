@@ -73,7 +73,6 @@ library(knitr)
 library(tidyverse)
 library(sf)
 library(mapview)
-library(plotly)
 library(units)
 ```
 
@@ -169,12 +168,6 @@ zwin_map + coord_sf(datum = st_crs(31370))
 ```
 
 - make an interactive map of it:
-
-```{r}
-zwin_map %>% ggplotly()
-```
-
-- show data on top of [OpenTopoMap](https://opentopomap.org/about)'s Open Streetmap visualization:
 
 ```{r}
 sm_simple %>%
