@@ -71,7 +71,7 @@ download_zenodo(doi = "10.5281/zenodo.3732903",
                 path = soilmap_simple_path)
 ```
 
-At some time in future, the download will be performed automatically by `read_soilmap()` (if the `soilmap_simple` data source is missing).
+At some future time, the download will be performed automatically by `read_soilmap()` (if the `soilmap_simple` data source is missing).
 
 ## Explore the `soilmap_simple` data source!
 
@@ -214,7 +214,7 @@ At some time in future, the download will be performed automatically by `read_so
 
 Read the data source -- this takes a while (large dataset) -- and inspect its contents:
 
-```{r}
+```{r paged.print=FALSE}
 sm <- read_soilmap(use_processed = FALSE)
 sm
 #> Simple feature collection with 270550 features and 37 fields
@@ -277,7 +277,7 @@ sm_mp %>%
 
 - calculate surface area (ha) and polygon count per `bsm_ge_series`:
 
-```{r results='asis', paged.print=FALSE}
+```{r results='asis'}
 sm_mp %>%
     mutate(area = st_area(.) %>% set_units("ha")) %>%
     st_drop_geometry %>%
@@ -301,7 +301,7 @@ sm_mp %>%
 
 - calculate surface area (ha) and polygon count per soilseries where `bsm_ge_series == "D"`:
 
-```{r results='asis', paged.print=FALSE}
+```{r results='asis'}
 sm_mp %>%
     filter(bsm_ge_series == "D") %>%
     mutate(area = st_area(.) %>% set_units("ha")) %>%
