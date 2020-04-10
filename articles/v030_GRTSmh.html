@@ -6,20 +6,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Using the GRTS data sources • n2khab</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Using the GRTS data sources">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="n2khab">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -74,7 +74,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/inbo/n2khab">
+  <a href="https://github.com/inbo/n2khab/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -92,7 +92,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Using the GRTS data sources</h1>
+      <h1 data-toc-skip>Using the GRTS data sources</h1>
                         <h4 class="author">Floris Vanderhaeghe</h4>
             
             <h4 class="date">2019-05-29</h4>
@@ -145,26 +145,26 @@
 <a href="#read_grtsmh" class="anchor"></a>read_GRTSmh()</h3>
 <p>In the below R code, it is supposed that a <code>n2khab_data</code> folder is present in the current directory or up to 10 levels higher. See the <code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> for more information.</p>
 <p><code><a href="../reference/read_GRTSmh.html">read_GRTSmh()</a></code> by default returns the <code>GRTSmaster_habitats</code> dataset:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span>()</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; class      : RasterLayer </span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt; resolution : 32, 32  (x, y)</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt; source     : [...]/n2khab_data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif </span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; names      : GRTSmaster_habitats </span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; values     : 1, 67108857  (min, max)</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span>()
+<span class="co">#&gt; class      : RasterLayer </span>
+<span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span>
+<span class="co">#&gt; resolution : 32, 32  (x, y)</span>
+<span class="co">#&gt; extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)</span>
+<span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span>
+<span class="co">#&gt; source     : [...]/n2khab_data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif </span>
+<span class="co">#&gt; names      : GRTSmaster_habitats </span>
+<span class="co">#&gt; values     : 1, 67108857  (min, max)</span></pre></body></html></div>
 <p>With the argument <code>brick = TRUE</code> however, you will get the <code>GRTSmh_brick</code> data source, i.e. <code>GRTSmaster_habitats</code> plus 9 extra layers:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span>(<span class="dt">brick =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; class      : RasterBrick </span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; dimensions : 2843, 7401, 21041043, 10  (nrow, ncol, ncell, nlayers)</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; resolution : 32, 32  (x, y)</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_brick/GRTSmh_brick.tif </span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; names      :   level0,   level1,   level2,   level3,   level4,   level5,   level6,   level7,   level8,   level9 </span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; min values :        1,        1,        1,        1,        1,        1,        1,        1,        1,        1 </span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; max values : 67108857, 16777209,  4194297,  1048569,   262137,    65529,    16377,     4089,     1017,      253</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span>(<span class="kw">brick</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="co">#&gt; class      : RasterBrick </span>
+<span class="co">#&gt; dimensions : 2843, 7401, 21041043, 10  (nrow, ncol, ncell, nlayers)</span>
+<span class="co">#&gt; resolution : 32, 32  (x, y)</span>
+<span class="co">#&gt; extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)</span>
+<span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span>
+<span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_brick/GRTSmh_brick.tif </span>
+<span class="co">#&gt; names      :   level0,   level1,   level2,   level3,   level4,   level5,   level6,   level7,   level8,   level9 </span>
+<span class="co">#&gt; min values :        1,        1,        1,        1,        1,        1,        1,        1,        1,        1 </span>
+<span class="co">#&gt; max values : 67108857, 16777209,  4194297,  1048569,   262137,    65529,    16377,     4089,     1017,      253</span></pre></body></html></div>
 <p>The higher-level ranking numbers of the RasterBrick allow spatially balanced samples at lower spatial resolution than that of 32 m, and can also be used for aggregation purposes. The provided hierarchical levels correspond to the resolution vector <code>32 * 2^(0:9)</code> (minimum: 32 meters, maximum: 16384 meters), with the corresponding RasterBrick layers named as <code>level0</code> to <code>level9</code>.</p>
 </div>
 <div id="read_grtsmh_diffres" class="section level3">
@@ -217,50 +217,50 @@
 </tbody>
 </table>
 <p>An example with level 5:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span>(<span class="dt">level =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; class      : RasterLayer </span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; dimensions : 89, 232, 20648  (nrow, ncol, ncell)</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; resolution : 1024, 1024  (x, y)</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; extent     : 22030, 259598, 153054, 244190  (xmin, xmax, ymin, ymax)</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif </span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; names      : level5 </span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; values     : 1, 65529  (min, max)</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span>(<span class="kw">level</span> <span class="kw">=</span> <span class="fl">5</span>)
+<span class="co">#&gt; class      : RasterLayer </span>
+<span class="co">#&gt; dimensions : 89, 232, 20648  (nrow, ncol, ncell)</span>
+<span class="co">#&gt; resolution : 1024, 1024  (x, y)</span>
+<span class="co">#&gt; extent     : 22030, 259598, 153054, 244190  (xmin, xmax, ymin, ymax)</span>
+<span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span>
+<span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif </span>
+<span class="co">#&gt; names      : level5 </span>
+<span class="co">#&gt; values     : 1, 65529  (min, max)</span></pre></body></html></div>
 <p>Alternatively, a dissolved, polygonized variant of the corresponding <code>GRTSmh_brick</code> level can be returned as an <code>sf</code> object. In order not to inflate the data source, this was only made available for levels 4 to 9.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span>(<span class="dt">level =</span> <span class="dv">5</span>, <span class="dt">polygon =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Simple feature collection with 13791 features and 1 field</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; geometry type:  POLYGON</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; dimension:      XY</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; bbox:           xmin: 22029.59 ymin: 153054.1 xmax: 258861.6 ymax: 244030.1</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; epsg (SRID):    31370</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; First 10 features:</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt;    value                           geom</span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; 1  23390 POLYGON ((178093.6 244030.1...</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; 2  56158 POLYGON ((178701.6 243646.1...</span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; 3  23134 POLYGON ((177581.6 243870.1...</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; 4  60254 POLYGON ((179757.6 243454.1...</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; 5   6750 POLYGON ((176621.6 243390.1...</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; 6  60254 POLYGON ((180333.6 243230.1...</span></a>
-<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; 7  58718 POLYGON ((176653.6 243166.1...</span></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; 8  52318 POLYGON ((177677.6 243166.1...</span></a>
-<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; 9   3166 POLYGON ((178701.6 243166.1...</span></a>
-<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt; 10 15454 POLYGON ((179725.6 243166.1...</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span>(<span class="kw">level</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">polygon</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="co">#&gt; Simple feature collection with 13791 features and 1 field</span>
+<span class="co">#&gt; geometry type:  POLYGON</span>
+<span class="co">#&gt; dimension:      XY</span>
+<span class="co">#&gt; bbox:           xmin: 22029.59 ymin: 153054.1 xmax: 258861.6 ymax: 244030.1</span>
+<span class="co">#&gt; epsg (SRID):    31370</span>
+<span class="co">#&gt; proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs</span>
+<span class="co">#&gt; First 10 features:</span>
+<span class="co">#&gt;    value                           geom</span>
+<span class="co">#&gt; 1  23390 POLYGON ((178093.6 244030.1...</span>
+<span class="co">#&gt; 2  56158 POLYGON ((178701.6 243646.1...</span>
+<span class="co">#&gt; 3  23134 POLYGON ((177581.6 243870.1...</span>
+<span class="co">#&gt; 4  60254 POLYGON ((179757.6 243454.1...</span>
+<span class="co">#&gt; 5   6750 POLYGON ((176621.6 243390.1...</span>
+<span class="co">#&gt; 6  60254 POLYGON ((180333.6 243230.1...</span>
+<span class="co">#&gt; 7  58718 POLYGON ((176653.6 243166.1...</span>
+<span class="co">#&gt; 8  52318 POLYGON ((177677.6 243166.1...</span>
+<span class="co">#&gt; 9   3166 POLYGON ((178701.6 243166.1...</span>
+<span class="co">#&gt; 10 15454 POLYGON ((179725.6 243166.1...</span></pre></body></html></div>
 </div>
 <div id="read_grtsmh_base4frac" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read_grtsmh_base4frac" class="anchor"></a>read_GRTSmh_base4frac()</h3>
 <p>Its use is just to return the base-4-fraction-converted <code>GRTSmaster_habitats</code> as a RasterLayer:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="dt">scipen =</span> <span class="dv">999</span>, <span class="dt">digits =</span> <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac</a></span>()</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; class      : RasterLayer </span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; resolution : 32, 32  (x, y)</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; extent     : 22029.591973471, 258861.591973471, 153054.113583292, 244030.113583292  (xmin, xmax, ymin, ymax)</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif </span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; names      : GRTSmh_base4frac </span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; values     : 0.0000000000001, 0.3333333333321  (min, max)</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">scipen</span> <span class="kw">=</span> <span class="fl">999</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">15</span>)
+<span class="fu"><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac</a></span>()
+<span class="co">#&gt; class      : RasterLayer </span>
+<span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span>
+<span class="co">#&gt; resolution : 32, 32  (x, y)</span>
+<span class="co">#&gt; extent     : 22029.591973471, 258861.591973471, 153054.113583292, 244030.113583292  (xmin, xmax, ymin, ymax)</span>
+<span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span>
+<span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif </span>
+<span class="co">#&gt; names      : GRTSmh_base4frac </span>
+<span class="co">#&gt; values     : 0.0000000000001, 0.3333333333321  (min, max)</span></pre></body></html></div>
 <p>Note that the used options are necessary when treating these base-4-fraction GRTS addresses as characters; otherwise scientific notations will be used.</p>
 <p>Also, be warned that R does not actually regard the values as base 4, but as base 10.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
@@ -285,19 +285,11 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#intro">Intro</a></li>
-      <li><a href="#data-sources">Data sources</a></li>
-      <li><a href="#get-the-data-in-r">Get the data in R</a></li>
-      <li><a href="#references">References</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -308,7 +300,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
