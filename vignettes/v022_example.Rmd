@@ -31,6 +31,7 @@ _The below workflow is an application and demonstrates current setup from R (out
 ### Install and load `n2khab`
 
 ```{r}
+Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS = "true")
 library(remotes)
 install_github("inbo/n2khab",
                build_vignettes = TRUE,
