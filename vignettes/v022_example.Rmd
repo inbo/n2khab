@@ -28,13 +28,10 @@ _The below workflow is an application and demonstrates current setup from R (out
 
 ## Minimal setup for using `read_soilmap()`
 
-```{r}
-library(remotes)
-```
-
 ### Install and load `n2khab`
 
 ```{r}
+library(remotes)
 install_github("inbo/n2khab",
                build_vignettes = TRUE,
                upgrade = TRUE)
