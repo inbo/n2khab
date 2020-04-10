@@ -26,6 +26,16 @@ knitr::opts_chunk$set(
 _Note: for more information on data storage and locations, see `vignette("v020_datastorage")`._
 _The below workflow is an application and demonstrates current setup from R (output is mostly not included)._
 
+If you wish to save the vignette's R code in a script, run:
+
+```{r}
+vignette <- system.file("doc", "v022_example.Rmd", package = "n2khab")
+knitr::purl(vignette, 
+            output = "script.R",
+            documentation = 0)
+```
+
+
 ## Minimal setup for using `read_soilmap()`
 
 ### Install and load `n2khab`
