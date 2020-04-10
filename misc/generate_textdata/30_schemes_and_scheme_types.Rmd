@@ -439,7 +439,7 @@ tribble(~nr, ~lang, ~name, ~shortname,
   mutate(code = str_c(prefix, nr)) %>% 
   select(code, lang, name, shortname) %>% 
   bind_rows(
-    tribble(~code, ~lang, ~name, ~shortname,
+    tribble(~nr, ~lang, ~name, ~shortname,
         1, "en", "types from oligotrophic environments", "oligotrophic",
         1, "nl", "types van oligotroof milieu", "oligotroof",
         2, "en", "types from mesotrophic environments", "mesotrophic",
@@ -449,7 +449,9 @@ tribble(~nr, ~lang, ~name, ~shortname,
         4, "en", "types from moderately eutrophic to eutrophic environments", "(moderately) eutrophic",
         4, "nl", "types van matig eutroof tot eutroof milieu", "(matig) eutroof"
         ) %>% 
-      mutate(code = str_c("GW_03.3_group", code))
+      crossing(prefix = c("GW_03.3_group", "SURF_03.4_lentic_group")) %>% 
+      mutate(code = str_c(prefix, nr)) %>% 
+      select(code, lang, name, shortname)
   ) %>% 
   bind_rows(
         tribble(~code, ~lang, ~name, ~shortname,

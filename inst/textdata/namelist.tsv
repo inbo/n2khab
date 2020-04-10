@@ -200,6 +200,10 @@ SURF	en	Surfacewater monitoring	NA
 SURF_012	en	Surfacewater monitoring: environmental pressure 012_soildyn_incr	SURF: 012_soildyn_incr
 SURF_03.2	en	Surfacewater monitoring: environmental pressure 03.2_eutr_soil	SURF: 03.2_eutr_soil
 SURF_03.4_lentic	en	Surfacewater monitoring: environmental pressure 03.4_eutr_sw: partim lentic waters	SURF: 03.4_eutr_sw: lentic
+SURF_03.4_lentic_group1	en	types from oligotrophic environments	oligotrophic
+SURF_03.4_lentic_group2	en	types from mesotrophic environments	mesotrophic
+SURF_03.4_lentic_group3	en	types from weakly eutrophic environments	weakly eutrophic
+SURF_03.4_lentic_group4	en	types from moderately eutrophic to eutrophic environments	(moderately) eutrophic
 SURF_03.4_lotic	en	Surfacewater monitoring: environmental pressure 03.4_eutr_sw: partim lotic waters	SURF: 03.4_eutr_sw: lotic
 SURF_064	en	Surfacewater monitoring: environmental pressure 064_swlevel_decr	SURF: 064_swlevel_decr
 SURF_066	en	Surfacewater monitoring: environmental pressure 066_wave_decr	SURF: 066_wave_decr
@@ -486,6 +490,10 @@ SURF	nl	Oppervlaktewatermeetnet	NA
 SURF_012	nl	Oppervlaktewatermeetnet: milieudruk 012_boddyn_plus	SURF: 012_boddyn_plus
 SURF_03.2	nl	Oppervlaktewatermeetnet: milieudruk 03.2_eutr_bod	SURF: 03.2_eutr_bod
 SURF_03.4_lentic	nl	Oppervlaktewatermeetnet: milieudruk 03.4_eutr_ow: partim stilstaande wateren	SURF: 03.4_eutr_ow: lentic
+SURF_03.4_lentic_group1	nl	types van oligotroof milieu	oligotroof
+SURF_03.4_lentic_group2	nl	types van mesotroof milieu	mesotroof
+SURF_03.4_lentic_group3	nl	types van zwak eutroof milieu	zwak eutroof
+SURF_03.4_lentic_group4	nl	types van matig eutroof tot eutroof milieu	(matig) eutroof
 SURF_03.4_lotic	nl	Oppervlaktewatermeetnet: milieudruk 03.4_eutr_ow: partim stromende wateren	SURF: 03.4_eutr_ow: lotic
 SURF_064	nl	Oppervlaktewatermeetnet: milieudruk 064_owpeil_min	SURF: 064_owpeil_min
 SURF_066	nl	Oppervlaktewatermeetnet: milieudruk 066_golf_min	SURF: 066_golf_min
