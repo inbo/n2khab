@@ -31,7 +31,7 @@ are returned. The default value is \code{FALSE}.}
 
 \item{units_7220}{If \code{TRUE}, an \code{sf} object of type-\code{7220}-locations is
 returned at the population unit level.
-Tho accomplish this, the data source is aggregated by \code{unit_id}.
+To accomplish this, the data source is aggregated by \code{unit_id}.
 Multiple points belonging to the same unit are replaced by their
 centroid, their area attribute is summed (if all values are known)
 and for other attributes the maximum value is returned.}

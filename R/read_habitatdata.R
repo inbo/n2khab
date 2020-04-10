@@ -1072,7 +1072,7 @@ read_habitatstreams <-
 #' are returned. The default value is \code{FALSE}.
 #' @param units_7220 If \code{TRUE}, an `sf` object of type-`7220`-locations is
 #' returned at the population unit level.
-#' Tho accomplish this, the data source is aggregated by `unit_id`.
+#' To accomplish this, the data source is aggregated by `unit_id`.
 #' Multiple points belonging to the same unit are replaced by their
 #' centroid, their area attribute is summed (if all values are known)
 #' and for other attributes the maximum value is returned.
