@@ -224,14 +224,17 @@ ep_04.3	en	4.3 Acidification through surface water (including inundation and sta
 ep_05.1	en	5.1 Desiccation through groundwater	05.1_des_gw
 ep_05.2	en	5.2 Wetting through groundwater	05.2_wet_gw
 ep_061	en	61 Increase in flood duration or frequency (including tide)	061_flood_incr
-ep_061_explan	en	An increase, respectively decrease in flood occurrence that has a negative effect on the considered non aquatic community. This happens through changes in mechanical impact (velocity/sediment), or through lack of oxygen/CO2 in the flood water.	NA
+ep_061_explan	en	An increase in flood occurrence that has a negative effect on the considered non aquatic community. This happens through changes in mechanical impact (velocity/sediment), or through lack of oxygen/CO2 in the flood water.	NA
 ep_062	en	62 Decrease in flood duration or frequency (including tide)	062_flood_decr
+ep_062_explan	en	A decrease in flood occurrence that has a negative effect on the considered non aquatic community. This happens through changes in mechanical impact (velocity/sediment), or through lack of oxygen/CO2 in the flood water.	NA
 ep_063	en	63 Increase in surface water velocity, level or its fluctuation	063_swlevel_incr
-ep_063_explan	en	An increase, respectively decrease in hydraulic or water level characteristics, that has a direct negative effect on the considered aquatic or semi-terrestrial community	NA
+ep_063_explan	en	An increase in hydraulic or water level characteristics, that has a direct negative effect on the considered aquatic or semi-terrestrial community	NA
 ep_064	en	64 Decrease in surface water velocity, level or its fluctuation	064_swlevel_decr
+ep_064_explan	en	A decrease in hydraulic or water level characteristics, that has a direct negative effect on the considered aquatic or semi-terrestrial community	NA
 ep_065	en	65 Increase of wave impact	065_wave_incr
-ep_065_explan	en	An increase, respectively decrease in wave impact that has a direct negative effect on the considered aquatic or semi-terrestrial community, either through a change in mechanical impact or through negative effects on water or soil quality	NA
+ep_065_explan	en	An increase in wave impact that has a direct negative effect on the considered aquatic or semi-terrestrial community, either through a change in mechanical impact or through negative effects on water or soil quality	NA
 ep_066	en	66 Decrease of wave impact	066_wave_decr
+ep_066_explan	en	A decrease in wave impact that has a direct negative effect on the considered aquatic or semi-terrestrial community, either through a change in mechanical impact or through negative effects on water or soil quality	NA
 ep_07.1	en	7.1 Desalination through groundwater	07.1_desal_gw
 ep_07.2	en	7.2 Desalination through surface water (including inundation)	07.2_desal_sw
 ep_07.3	en	7.3 Salinization through groundwater	07.3_salin_gw
