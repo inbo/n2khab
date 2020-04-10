@@ -51,6 +51,13 @@ n2khab_data_path <- fileman_folders()
 You can also provide a custom root 'path' to `fileman_folders()`, but then take a location that is a (grand-grand-...) parent of the current working directory.
 This is because reading functions of `n2khab` will by default use the first `n2khab_data` directory they can find, starting from the working directory and sequentially climbing up one directory level at a time.
 
+If you already have an existing `n2khab_data` directory in place, instead run:
+
+```{r}
+n2khab_data_path <- fileman_up("n2khab_data")
+```
+
+
 ### Download the `soilmap_simple` data source in the correct place
 
 The `soilmap_simple` data source is a GeoPackage, provided and documented at
