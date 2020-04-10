@@ -39,6 +39,18 @@ help(package = "n2khab")
 Please have a look at our [contributing guide](.github/CONTRIBUTING.md)!
 
 
+## Intention for the future
+
+At a later date, the intention is to incorporate functionality to enhance workflow reproducibility and ease the setup:
+
+- let a user declare which versions of which data sources are used in an R workflow (at the beginning of a script or R markdown file);
+- perform checks whether the needed versions of those data sources are locally present;
+- if missing, download the needed data from the Zenodo collections.
+
+Currently these aspects must be taken care of in a more manual fashion.
+See `vignette("v022_example")` for example code to currently accomplish specific aspects.
+
+
 ## Background information
 
 From its aim, it follows that the package supports various _N2KHAB_ projects, i.e. projects that focus on Natura 2000 habitat (and which may as well use the _n2khab_-prefix for their git repository name, such as [this one](https://github.com/inbo/n2khab-monitoring)).
