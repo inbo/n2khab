@@ -136,7 +136,7 @@ glimpse(sm_simple)
 #> $ geom               <MULTIPOLYGON [m]> MULTIPOLYGON (((204667.9 19..., MULTI…
 ```
 
-You can also read the explanations for levels of the code variables `bsm_mo_substr`, `bsm_mo_tex`, `bsm_mo_drain` etc. from the data source and insert them as columns (with the corresponding order of factor levels).
+You can also read the explanations for levels of the code variables `bsm_mo_substr`, `bsm_mo_tex`, `bsm_mo_drain` etc. from the data source and insert them as columns (with order of factor levels matching the corresponding code's factor level order).
 To do that, you must read the data source with `explan = TRUE`:
 
 ```{r}
