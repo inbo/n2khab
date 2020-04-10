@@ -1,7 +1,7 @@
 ---
 title: "Demonstrating package & data setup and handling of sf objects: a case with read_soilmap()"
 author: "Floris Vanderhaeghe"
-date: "2020-03-30"
+date: "2020-04-10"
 bibliography: references.bib
 output: 
   rmarkdown::html_vignette:
