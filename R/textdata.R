@@ -147,7 +147,7 @@ NULL
 #' 'env_pressures' is a data source in the
 #' \href{https://ropensci.github.io/git2rdata}{vc-format} which provides
 #' a checklist of environmental pressures, represented by codes, together
-#' with the pressure-class and the textual explanation.
+#' with the pressure-class and the textual explanation (with optional remarks).
 #' The codes of environmental pressures, pressure-classes and explanations
 #' are explained in the
 #' data source \code{\link{namelist}} (which can accommodate multiple
@@ -159,7 +159,7 @@ NULL
 #'   \item{ep_code}{Code of the environmental pressure, as a factor.
 #'   This is the ID for use in diverse workflows and datasets.
 #'   Corresponding names and abbreviations
-#'   in multiple languages are to be found in \code{\link{namelist}}
+#'   in multiple languages are stored in \code{\link{namelist}}
 #'   (as name and shortname, respectively).
 #'   The abbreviation may be seen as an alternative, language-dependent code.
 #'   Contains no duplicates!}
@@ -167,7 +167,10 @@ NULL
 #'   corresponding to the environmental pressure's class.
 #'   Is a factor.}
 #'   \item{explanation}{A code explained by \code{\link{namelist}},
-#'   corresponding to the explanation on the environmental pressure.}
+#'   corresponding to the explanation on the environmental pressure, and
+#'   optional remarks.
+#'   Explanation and remarks are stored in \code{\link{namelist}}
+#'   (as name and shortname, respectively)}
 #' }
 #'
 #' @section Typical way of loading:

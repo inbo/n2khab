@@ -18,11 +18,13 @@ The standard reference data include: checklists, spatial habitat distribution, a
 To install, run:
 
 ```r
-remotes::install_github("inbo/n2khab", build_vignettes = TRUE)
+Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS = "true") # as a precaution
+remotes::install_github("inbo/n2khab",
+                        build_vignettes = TRUE,
+                        upgrade = TRUE)
 ```
 
 Note that this will install the package from the `master` branch.
-In case of an installation error because existing dependencies (already installed packages) are too old, add the argument `upgrade = TRUE`.
 If you need a version from another branch, add the `ref` argument in the above function to provide the branch name.
 
 Have a look at the vignettes to quickly find your way!
@@ -37,6 +39,18 @@ help(package = "n2khab")
 ## You are welcome to contribute!
 
 Please have a look at our [contributing guide](.github/CONTRIBUTING.md)!
+
+
+## Intention for the future
+
+At a later date, the intention is to incorporate functionality to enhance workflow reproducibility and ease the setup:
+
+- let a user declare which versions of which data sources are used in an R workflow (at the beginning of a script or R markdown file);
+- perform checks whether the needed versions of those data sources are locally present;
+- if missing, download the needed data from the Zenodo collections.
+
+Currently these aspects must be taken care of in a more manual fashion.
+See `vignette("v022_example")` for example code to currently accomplish specific aspects.
 
 
 ## Background information

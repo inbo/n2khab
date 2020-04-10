@@ -19,6 +19,10 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
+For a practical recipe to setup `n2khab_data`, go to [Getting started](#getting-started).
+
+See `vignette("v022_example")` if you'd like to be guided by a hands-on example.
+
 ### Distribution of the data sources used by `n2khab` functions
 
 Apart from several textual datasets, provided directly with this package,
