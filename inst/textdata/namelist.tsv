@@ -546,7 +546,7 @@ ep_08.1_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffe
 ep_08.2	nl	8.2 Verontreiniging via de bodem	08.2_verontr_bod
 ep_08.2_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffen), in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De stoffen komen de standplaats binnen via de bodem (toevoeging stoffen, incl. inwaai op korte afstand, of vrijstelling uit de bodem van normaliter onbeschikbare stoffen).	NA
 ep_08.3	nl	8.3 Verontreiniging via het grondwater	08.3_verontr_gw
-ep_08.3_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffen), in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De stoffen komen de standplaats binnen via het grondwater of worden intern vrijgesteld bv. door de grondwateraanvoer van sulfaat.	NA
+ep_08.3_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffen), in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De stoffen komen de standplaats binnen via het grondwater of worden intern vrijgesteld door de grondwateraanvoer van bv. sulfaat.	NA
 ep_08.4	nl	8.4 Verontreiniging via het oppervlaktewater (incl. overstromingswater)	08.4_verontr_ow
 ep_08.4_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffen), in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De stoffen komen de standplaats binnen via het oppervlaktewater, inclusief overstromingswater en runoff (aanvoer van stoffen, veelal met sediment - modderstromen inbegrepen).	NA
 ep_08.5	nl	8.5 Thermische verontreiniging: toename temperatuur oppervlaktewater	08.5_verontr_therm
