@@ -100,6 +100,8 @@ the Flemish Region, Belgium.
 
 hs <- read_habitatsprings()
 hs
+hs2 <- read_habitatsprings(units_7220 = TRUE)
+hs2
 }
 
 }

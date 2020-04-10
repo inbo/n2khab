@@ -1126,6 +1126,8 @@ read_habitatstreams <-
 #'
 #' hs <- read_habitatsprings()
 #' hs
+#' hs2 <- read_habitatsprings(units_7220 = TRUE)
+#' hs2
 #' }
 #'
 #' @importFrom assertthat
