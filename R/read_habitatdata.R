@@ -1110,7 +1110,8 @@ read_habitatstreams <-
 #' it as a level with
 #' [forcats::fct_explicit_na()].
 #'
-#' With `units_7220 = TRUE`, an extra attribute variable `nr_of_points` is
+#' With `units_7220 = TRUE`, variable `point_id` is dropped and
+#' an extra attribute variable `nr_of_points` is
 #' added.
 #' It represents the number of points that belong to each unit.
 #'

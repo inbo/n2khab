@@ -70,7 +70,8 @@ If you want this category to appear in certain results, you can add
 it as a level with
 \code{\link[forcats:fct_explicit_na]{forcats::fct_explicit_na()}}.
 
-With \code{units_7220 = TRUE}, an extra attribute variable \code{nr_of_points} is
+With \code{units_7220 = TRUE}, variable \code{point_id} is dropped and
+an extra attribute variable \code{nr_of_points} is
 added.
 It represents the number of points that belong to each unit.
 }
