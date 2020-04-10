@@ -14,6 +14,7 @@ Authors@R: c(
     person("An", "Leyssen", email = "an.leyssen@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0003-3537-286X")), 
     person("Patrik", "Oosterlynck", email = "patrik.oosterlynck@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-5712-0770")), 
     person("Nathalie", "Cools", email = "nathalie.cools@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-7059-2318")), 
+    person("Bruno", "De Vos", email = "bruno.devos@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0001-9523-3453")), 
     person("Suzanna", "Lettens", email = "suzanna.lettens@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0001-5032-495X")), 
     person("Arne", "Verstraeten", email = "arne.verstraeten@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-8813-1261")), 
     person("Research Institute for Nature and Forest", email = "info@inbo.be", role = c("cph")))
@@ -31,7 +32,7 @@ Imports:
     dplyr,
     forcats,
     git2rdata (>= 0.2.0),
-    inborutils (>= 0.1.0.9069),
+    inborutils (>= 0.1.0.9072),
     magrittr,
     plyr,
     purrr,
@@ -48,9 +49,15 @@ Remotes:
     inbo/inborutils
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Suggests: 
+    googledrive,
     knitr,
+    mapview,
+    plotly,
+    readxl,
+    remotes,
     rmarkdown,
+    tidyverse,
     units
 VignetteBuilder: knitr

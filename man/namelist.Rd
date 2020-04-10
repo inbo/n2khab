@@ -3,7 +3,8 @@
 \name{namelist}
 \alias{namelist}
 \title{Documentation of included data source 'namelist'}
-\format{A vc-formatted data source. As such, it corresponds to
+\format{
+A vc-formatted data source. As such, it corresponds to
 a dataframe with many rows and 4 variables:
 \describe{
   \item{code}{A code used elsewhere.}
@@ -12,7 +13,8 @@ a dataframe with many rows and 4 variables:
   47 language tag}, such as \code{"en"} or \code{"nl"}, to identify
   the language of \code{name} and \code{shortname}.}
   \item{name}{The name corresponding to \code{code} and \code{lang}.}
-  \item{shortname}{Optionally, a shorter variant of \code{name}.} }}
+  \item{shortname}{Optionally, a shorter variant of \code{name}.} }
+}
 \source{
 The 'namelist' data source has got its contents from the sources of
 several other n2khab-referencelists (see the source of those).

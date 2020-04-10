@@ -924,7 +924,7 @@ read_habitatmap_terr <-
 #' with textual explanation of the values of the \code{source_id} variable.
 #'
 #' @param source_text Logical, defaults to \code{FALSE}.
-#' If \code{TRUE}, the list version is returned (see \emph{Value}).
+#' If \code{TRUE}, a list is returned (see \emph{Value}).
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
