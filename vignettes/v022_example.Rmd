@@ -1,0 +1,406 @@
+---
+title: "Demonstrating package & data setup and handling of sf objects: a case with read_soilmap()"
+author: "Floris Vanderhaeghe"
+date: "2020-04-10"
+bibliography: references.bib
+output: 
+  rmarkdown::html_vignette:
+    pandoc_args:
+        - --csl
+        - research-institute-for-nature-and-forest.csl
+vignette: >
+  %\VignetteIndexEntry{022. Demonstrating package & data setup and handling of sf objects: a case with read_soilmap()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+options(stringsAsFactors = FALSE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+_Note: for more information on data storage and locations, see `vignette("v020_datastorage")`._
+_The below workflow is an application and demonstrates current setup from R (output is mostly not included)._
+
+If you wish to follow by running the vignette's code chunks, you can put a copy of the vignette in your working directory:
+
+```{r}
+source <- system.file("doc", "v022_example.Rmd", package = "n2khab")
+file.copy(source, ".")
+```
+
+## Minimal setup for using `read_soilmap()`
+
+### Install and load `n2khab`
+
+```{r}
+Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS = "true")
+library(remotes)
+install_github("inbo/n2khab",
+               build_vignettes = TRUE,
+               upgrade = TRUE)
+```
+
+```{r eval=TRUE}
+library(n2khab)
+```
+
+### Create (or locate) the `n2khab_data` directory with 2 subdirectories
+
+This will create `n2khab_data` in the working directory:
+
+```{r}
+n2khab_data_path <- fileman_folders()
+```
+
+You can also provide a custom root 'path' to `fileman_folders()`, but then take a location that is a (grand-grand-...) parent of the current working directory.
+This is because reading functions of `n2khab` will by default use the first `n2khab_data` directory they can find, starting from the working directory and sequentially climbing up one directory level at a time.
+
+If you already have an existing `n2khab_data` directory in place, instead run:
+
+```{r}
+n2khab_data_path <- fileman_up("n2khab_data")
+```
+
+
+### Download the `soilmap_simple` data source in the correct place
+
+The `soilmap_simple` data source is a GeoPackage, provided and documented at
+[Zenodo](https://doi.org/10.5281/zenodo.3732903).
+It belongs to the collection of processed data ([Zenodo-link](https://zenodo.org/communities/n2khab-data-processed)).
+
+```{r}
+soilmap_simple_path <- file.path(n2khab_data_path, "20_processed/soilmap_simple")
+dir.create(soilmap_simple_path)
+download_zenodo(doi = "10.5281/zenodo.3732903",
+                path = soilmap_simple_path)
+```
+
+At some future time, the download will be performed automatically by `read_soilmap()` (if the `soilmap_simple` data source is missing).
+
+## Explore the `soilmap_simple` data source!
+
+```{r}
+library(knitr)
+library(tidyverse)
+library(sf)
+library(mapview)
+library(units)
+```
+
+Inspect documentation of `read_soilmap()`:
+
+```{r}
+?read_soilmap
+```
+
+Read the data source and inspect its contents:
+
+```{r paged.print = FALSE}
+sm_simple <- read_soilmap()
+sm_simple
+#> Simple feature collection with 270550 features and 10 fields
+#> geometry type:  MULTIPOLYGON
+#> dimension:      XY
+#> bbox:           xmin: 22265.45 ymin: 153062.6 xmax: 258872.2 ymax: 244027.9
+#> CRS:            31370
+#> # A tibble: 270,550 x 11
+#>    bsm_poly_id bsm_region bsm_converted bsm_mo_soilunit… bsm_mo_substr
+#>  *       <dbl> <fct>      <lgl>         <fct>            <fct>        
+#>  1      165740 Kunstmati… FALSE         OB               <NA>         
+#>  2      176046 Kunstmati… FALSE         OB               <NA>         
+#>  3      185239 Zandleems… FALSE         Ldc              <NA>         
+#>  4      162400 Kunstmati… FALSE         OB               <NA>         
+#>  5      173971 Kunstmati… FALSE         OB               <NA>         
+#>  6      173087 Zandleems… FALSE         Ldp              <NA>         
+#>  7      199453 Zandleems… FALSE         Lep              <NA>         
+#>  8      176922 Zandleems… FALSE         Ldc              <NA>         
+#>  9      227861 Zandleems… FALSE         Abp(c)           <NA>         
+#> 10      185390 Zandleems… FALSE         Lca              <NA>         
+#> # … with 270,540 more rows, and 6 more variables: bsm_mo_tex <fct>,
+#> #   bsm_mo_drain <fct>, bsm_mo_prof <fct>, bsm_mo_parentmat <fct>,
+#> #   bsm_mo_profvar <fct>, geom <MULTIPOLYGON [m]>
+```
+
+```{r}
+glimpse(sm_simple)
+#> Rows: 270,550
+#> Columns: 11
+#> $ bsm_poly_id        <dbl> 165740, 176046, 185239, 162400, 173971, 173087, 19…
+#> $ bsm_region         <fct> Kunstmatige gronden, Kunstmatige gronden, Zandleem…
+#> $ bsm_converted      <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, F…
+#> $ bsm_mo_soilunitype <fct> OB, OB, Ldc, OB, OB, Ldp, Lep, Ldc, Abp(c), Lca, O…
+#> $ bsm_mo_substr      <fct> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+#> $ bsm_mo_tex         <fct> NA, NA, L, NA, NA, L, L, L, A, L, NA, L, L, NA, NA…
+#> $ bsm_mo_drain       <fct> NA, NA, d, NA, NA, d, e, d, b, c, NA, d, c, NA, NA…
+#> $ bsm_mo_prof        <fct> NA, NA, c, NA, NA, p, p, c, p, a, NA, c, a, NA, NA…
+#> $ bsm_mo_parentmat   <fct> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+#> $ bsm_mo_profvar     <fct> NA, NA, NA, NA, NA, NA, NA, NA, (c), NA, NA, NA, N…
+#> $ geom               <MULTIPOLYGON [m]> MULTIPOLYGON (((204667.9 19..., MULTI…
+```
+
+You can also read the explanations for levels of the code variables `bsm_mo_substr`, `bsm_mo_tex`, `bsm_mo_drain` etc. from the data source and insert them as columns (with order of factor levels matching the corresponding code's factor level order).
+To do that, you must read the data source with `explan = TRUE`:
+
+```{r}
+sm_simple <- read_soilmap(explan = TRUE)
+glimpse(sm_simple)
+#> Rows: 270,550
+#> Columns: 17
+#> $ bsm_poly_id             <dbl> 165740, 176046, 185239, 162400, 173971, 17308…
+#> $ bsm_region              <fct> Kunstmatige gronden, Kunstmatige gronden, Zan…
+#> $ bsm_converted           <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FAL…
+#> $ bsm_mo_soilunitype      <fct> OB, OB, Ldc, OB, OB, Ldp, Lep, Ldc, Abp(c), L…
+#> $ bsm_mo_substr           <fct> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+#> $ bsm_mo_substr_explan    <fct> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+#> $ bsm_mo_tex              <fct> NA, NA, L, NA, NA, L, L, L, A, L, NA, L, L, N…
+#> $ bsm_mo_tex_explan       <fct> NA, NA, zandleem, NA, NA, zandleem, zandleem,…
+#> $ bsm_mo_drain            <fct> NA, NA, d, NA, NA, d, e, d, b, c, NA, d, c, N…
+#> $ bsm_mo_drain_explan     <fct> NA, NA, "matig nat, matig gleyig", NA, NA, "m…
+#> $ bsm_mo_prof             <fct> NA, NA, c, NA, NA, p, p, c, p, a, NA, c, a, N…
+#> $ bsm_mo_prof_explan      <fct> NA, NA, "met sterk gevlekte textuur (bij lemi…
+#> $ bsm_mo_parentmat        <fct> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+#> $ bsm_mo_parentmat_explan <fct> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+#> $ bsm_mo_profvar          <fct> NA, NA, NA, NA, NA, NA, NA, NA, (c), NA, NA, …
+#> $ bsm_mo_profvar_explan   <fct> NA, NA, NA, NA, NA, NA, NA, NA, Bedolven text…
+#> $ geom                    <MULTIPOLYGON [m]> MULTIPOLYGON (((204667.9 19..., …
+```
+
+
+```{r paged.print=FALSE}
+tibble(drain_levels = levels(sm_simple$bsm_mo_drain),
+       drain_levels_explained = levels(sm_simple$bsm_mo_drain_explan))
+#> # A tibble: 15 x 2
+#>    drain_levels drain_levels_explained                                          
+#>    <chr>        <chr>                                                           
+#>  1 a            zeer droog, niet gleyig                                         
+#>  2 a-b          complex van zeer droog, niet gleyig tot droog, niet gleyig      
+#>  3 a-d          complex van zeer droog, niet gleyig tot matig nat, matig gleyig 
+#>  4 b            droog, niet gleyig                                              
+#>  5 c            matig droog, zwak gleyig                                        
+#>  6 c-d          complex van droog, zwak gleyig tot matig droog, matig gleyig    
+#>  7 d            matig nat, matig gleyig                                         
+#>  8 e            nat, sterk gleyig met reductiehorizont                          
+#>  9 e-f          complex van nat, matig gleyig tot zeer nat, zeer sterk gleyig m…
+#> 10 e-i          complex nat, sterk gleyig met reductiehorizont tot zeer nat met…
+#> 11 f            zeer nat, zeer sterk gleyig met reductiehorizont                
+#> 12 g            uiterst nat, gereduceerd                                        
+#> 13 h            nat met relatief hoge ligging, sterk gleyig                     
+#> 14 h-i          complex van nat met relatief hoge ligging, sterk gleyig tot zee…
+#> 15 i            zeer nat met relatief hoge ligging, zeer sterk gleyig
+```
+
+_Note: for the following chunks, it doesn't matter whether you used `explan = TRUE` or not._
+
+How many polygons are available per region?
+
+```{r}
+sm_simple %>%
+    st_drop_geometry %>%
+    count(bsm_region)
+```
+
+Wat is the average polygon area per region?
+
+```{r}
+sm_simple %>%
+    mutate(area = st_area(.)) %>%
+    st_drop_geometry %>%
+    group_by(bsm_region) %>%
+    summarise(mean_area = mean(area))
+```
+
+Plot polygons of the 'Zwin' region:
+
+```{r}
+zwin_map <-
+    sm_simple %>%
+    filter(bsm_region == "Zwin") %>%
+    ggplot(aes(fill = bsm_mo_tex)) +
+    geom_sf()
+```
+
+- with WGS84 graticule (though plotted in Belgian Lambert 72 = CRS 31370):
+
+```{r}
+zwin_map
+```
+
+- with Belgian Lambert 72 graticule:
+
+```{r}
+zwin_map + coord_sf(datum = st_crs(31370))
+```
+
+- make an interactive map of it, providing two alternative basemaps:
+
+```{r}
+sm_simple %>%
+        filter(bsm_region == "Zwin") %>%
+        mutate(bsm_mo_tex = as.character(bsm_mo_tex)) %>%
+        mapview(zcol = "bsm_mo_tex",
+                alpha.region = 0.2,
+                map.types = c("OpenStreetMap", "OpenTopoMap"))
+```
+
+Clicking a feature on the above generated map reveals all attributes.
+
+## Access more information: the `soilmap` data source
+
+### Download the `soilmap` data source in the correct place
+
+The digital soil map of the Flemish Region is published
+[at DOV](https://www.dov.vlaanderen.be/geonetwork/srv/dut/catalog.search#/metadata/5c129f2d-4498-4bc3-8860-01cb2d513f8f)
+(Databank Ondergrond Vlaanderen).
+The `soilmap` data source is the (renamed) shapefile, stored (with versioning) 
+[at Zenodo](https://doi.org/10.5281/zenodo.3387007) in order
+to support the `read_soilmap()` function and to sustain long-term workflow
+reproducibility.
+The `soilmap` data source belongs to the raw data collection ([Zenodo-link](https://zenodo.org/communities/n2khab-data-raw)).
+
+```{r}
+soilmap_path <- file.path(n2khab_data_path, "10_raw/soilmap")
+dir.create(soilmap_path)
+download_zenodo(doi = "10.5281/zenodo.3387008",
+                path = soilmap_path,
+                parallel = TRUE)
+```
+
+At some time in future, the download will be performed automatically by `read_soilmap()` (if the `soilmap` data source is missing).
+
+### Explore the soilmap data source
+
+Read the data source -- this takes a while (large dataset) -- and inspect its contents:
+
+```{r paged.print=FALSE}
+sm <- read_soilmap(use_processed = FALSE)
+sm
+#> Simple feature collection with 270550 features and 37 fields
+#> geometry type:  MULTIPOLYGON
+#> dimension:      XY
+#> bbox:           xmin: 22265.45 ymin: 153062.6 xmax: 258872.2 ymax: 244027.9
+#> CRS:            EPSG:31370
+#> # A tibble: 270,550 x 38
+#>    bsm_poly_id bsm_map_id bsm_region bsm_ge_region bsm_legend bsm_legend_title
+#>  *       <dbl> <fct>      <fct>      <fct>         <fct>      <fct>           
+#>  1      165740 61E        Kunstmati… <NA>          Antropoge… bodemserie OB   
+#>  2      176046 78W        Kunstmati… <NA>          Antropoge… bodemserie OB   
+#>  3      185239 95W        Zandleems… <NA>          Vochtig z… bodemseries Lda…
+#>  4      162400 75E        Kunstmati… <NA>          Antropoge… bodemserie OB   
+#>  5      173971 63W        Kunstmati… <NA>          Antropoge… bodemserie OB   
+#>  6      173087 64W        Zandleems… <NA>          Vochtig z… bodemserie Ldp …
+#>  7      199453 98E        Zandleems… <NA>          Nat zandl… bodemserie Lep …
+#>  8      176922 81W        Zandleems… <NA>          Vochtig z… bodemseries Lda…
+#>  9      227861 88W        Zandleems… <NA>          Droge leem bodemserie Abp …
+#> 10      185390 95W        Zandleems… <NA>          Vochtig z… bodemseries Lca…
+#> # … with 270,540 more rows, and 32 more variables: bsm_legend_explan <fct>,
+#> #   bsm_soiltype_id <dbl>, bsm_soiltype <fct>, bsm_ge_typology <lgl>,
+#> #   bsm_soiltype_region <fct>, bsm_soilseries <fct>,
+#> #   bsm_soilseries_explan <fct>, bsm_mo_soilunitype <fct>, bsm_mo_substr <fct>,
+#> #   bsm_mo_substr_explan <fct>, bsm_mo_tex <fct>, bsm_mo_tex_explan <fct>,
+#> #   bsm_mo_drain <fct>, bsm_mo_drain_explan <fct>, bsm_mo_prof <fct>,
+#> #   bsm_mo_prof_explan <fct>, bsm_mo_parentmat <fct>,
+#> #   bsm_mo_parentmat_explan <fct>, bsm_mo_profvar <fct>,
+#> #   bsm_mo_profvar_explan <fct>, bsm_mo_phase <fct>, bsm_ge_substr <fct>,
+#> #   bsm_ge_substr_explan <fct>, bsm_ge_series <fct>,
+#> #   bsm_ge_series_explan <fct>, bsm_ge_subseries <fct>,
+#> #   bsm_ge_subseries_explan <fct>, bsm_map_url <fct>, bsm_book_url <fct>,
+#> #   bsm_detailmap_url <fct>, bsm_profloc_url <fct>, geometry <MULTIPOLYGON [m]>
+```
+
+```{r}
+glimpse(sm)
+```
+
+Extract features that belong to the 'Middellandpolders' region:
+
+```{r}
+sm_mp <-
+    sm %>%
+    filter(bsm_region == "Middellandpolders")
+dim(sm_mp)
+#> [1] 3991   38
+```
+
+- make an interactive map (which may open in your webbrowser), with two alternative base maps:
+
+```{r}
+sm_mp %>%
+    mutate(bsm_ge_series = as.character(bsm_ge_series)) %>%
+    mapview(zcol = "bsm_ge_series",
+            alpha.region = 0.2,
+            map.types = c("Wikimedia", "CartoDB.Positron"),
+            alpha = 0)
+```
+
+- calculate surface area (ha) and polygon count per `bsm_ge_series`:
+
+```{r results='asis'}
+sm_mp %>%
+    mutate(area = st_area(.) %>% set_units("ha")) %>%
+    st_drop_geometry %>%
+    group_by(bsm_ge_series, bsm_ge_series_explan) %>%
+    summarise(area = sum(area) %>% round(2),
+              nr_polygons = n()) %>%
+    arrange(desc(area)) %>%
+    kable
+```
+
+|bsm_ge_series |bsm_ge_series_explan                                                                                                                                           |         area| nr_polygons|
+|:-------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|------------:|-----------:|
+|D             |overdekte kreekruggronden - Middelland materiaal over Oudland kreekrugmateriaal                                                                                | 9126.95 [ha]|        1387|
+|E             |dekkleigronden - meer dan 100 cm Duinkerken III-klei                                                                                                           | 7160.28 [ha]|         761|
+|F             |overdekte poelgronden en overdekte oude kleiplaatgronden met storende laag op geringe diepte                                                                   | 4848.24 [ha]|        1110|
+|P             |overdekte Pleistocene gronden - gebroken poldermateriaal op Pleistoceen zand                                                                                   | 3506.81 [ha]|         582|
+|G             |geulgronden - meer dan 100 cm zware Duinkerken III-klei in laaggelegen geulen                                                                                  |  815.64 [ha]|          72|
+|A             |kreekruggronden - slibhoudend zand tot klei overgaand naar lichter materiaal                                                                                   |  308.98 [ha]|          27|
+|A             |kreekruggronden - slibhoudend zand tot klei overgaand naar lichter materiaal + overdekte kreekrugronden - Middellland materiaal over Oudland kreekrugmateriaal |  230.75 [ha]|          33|
+|M             |gronden van de Lage Moeren                                                                                                                                     |  163.11 [ha]|          19|
+
+- calculate surface area (ha) and polygon count per soilseries where `bsm_ge_series == "D"`:
+
+```{r results='asis'}
+sm_mp %>%
+    filter(bsm_ge_series == "D") %>%
+    mutate(area = st_area(.) %>% set_units("ha")) %>%
+    st_drop_geometry %>%
+    group_by(bsm_soilseries, bsm_soilseries_explan) %>%
+    summarise(area = sum(area) %>% round(2),
+              nr_polygons = n()) %>%
+    arrange(desc(area)) %>%
+    kable
+```
+
+|bsm_soilseries |bsm_soilseries_explan                                            |         area| nr_polygons|
+|:--------------|:----------------------------------------------------------------|------------:|-----------:|
+|m.D5           |Overdekte kreekruggronden (Middellandpolders)                    | 4628.42 [ha]|         642|
+|m.Dk5          |Overdekte kreekruggronden - klei (Middellandpolders)             | 1287.51 [ha]|         123|
+|m.Dl5          |Overdekte kreekruggronden - slibhoudend zand (Middellandpolders) | 1070.21 [ha]|         105|
+|m.D4           |Overdekte kreekruggronden (Middellandpolders)                    |  843.91 [ha]|         259|
+|m.D2           |Overdekte kreekruggronden (Middellandpolders)                    |  392.31 [ha]|          75|
+|m.Dl6          |Overdekte kreekruggronden - slibhoudend zand (Middellandpolders) |  170.04 [ha]|          37|
+|m.D5l          |Overdekte kreekruggronden (Middellandpolders)                    |  169.59 [ha]|          16|
+|m.Dl4          |Overdekte kreekruggronden - slibhoudend zand (Middellandpolders) |  159.95 [ha]|          29|
+|m.Dl2          |Overdekte kreekruggronden - slibhoudend zand (Middellandpolders) |  127.59 [ha]|          28|
+|m.Dk6          |Overdekte kreekruggronden - klei (Middellandpolders)             |  115.02 [ha]|          19|
+|m.D4l          |Overdekte kreekruggronden (Middellandpolders)                    |   85.74 [ha]|           6|
+|m.D3           |Overdekte kreekruggronden (Middellandpolders)                    |   20.93 [ha]|           4|
+|m.Df1          |Overdekte kreekruggronden - zware klei (Middellandpolders)       |   20.43 [ha]|          23|
+|m.Dk4          |Overdekte kreekruggronden - klei (Middellandpolders)             |   15.08 [ha]|           6|
+|m.D1           |Overdekte kreekruggronden (Middellandpolders)                    |   13.74 [ha]|           9|
+|m.D5d          |Overdekte kreekruggronden (Middellandpolders)                    |    6.46 [ha]|           6|
+
+- plot all features where `bsm_soilseries == "m.D5"` (providing all `mapview`'s default base maps):
+
+```{r}
+sm_mp %>%
+    filter(bsm_soilseries == "m.D5") %>%
+    mapview(color = "red",
+            alpha = 1,
+            alpha.region = 0)
+```
+

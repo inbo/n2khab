@@ -25,7 +25,7 @@ The default follows the data management advice in the
 vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{source_text}{Logical, defaults to \code{FALSE}.
-If \code{TRUE}, the list version is returned (see \emph{Value}).}
+If \code{TRUE}, a list is returned (see \emph{Value}).}
 }
 \value{
 With \code{source_text = FALSE} (default): a Simple feature collection of
