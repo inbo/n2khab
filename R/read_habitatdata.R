@@ -715,6 +715,9 @@ read_habitatmap <-
 #' \code{habitatmap_terr_types}.
 #' \code{habitatmap_terr} is the further interpreted, terrestrial part of
 #' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}).
+#' By default, occurrences of type \code{7220} are dropped because a more
+#' reliable data source is available for this habitat type (see \code{drop_7220}
+#' argument).
 #'
 #' \code{habitatmap_terr} was derived from \code{habitatmap_stdized} as
 #' follows:
@@ -769,7 +772,13 @@ read_habitatmap <-
 #' As each polygon always has at least one (semi-)terrestrial type,
 #' this will not affect the number of polygons returned,
 #' only the number of types.
-#'
+#' @param drop_7220 Logical; \code{TRUE} by default.
+#' Should occurrences of type \code{7220} be dropped from the result?
+#' To get more accurate information about type \code{7220}, notably its
+#' occurrences, surface area and other characteristics, it is advised
+#' to use the \code{habitatsprings} data source and not
+#' \code{habitatmap_terr} - see
+#' \code{\link[=read_habitatsprings]{read_habitatsprings()}}.
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
@@ -837,9 +846,11 @@ read_habitatmap_terr <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
              keep_aq_types = TRUE,
+             drop_7220 = TRUE,
              version = "habitatmap_terr_2018_v2"){
 
         assert_that(is.flag(keep_aq_types), noNA(keep_aq_types))
+        assert_that(is.flag(drop_7220), noNA(drop_7220))
         assert_that(is.string(version))
 
         habmap_terr_polygons <- read_sf(file.path(path, file),
@@ -889,6 +900,14 @@ read_habitatmap_terr <-
             # habmap_terr_polygons %>%
             #     dplyr::semi_join(habmap_terr_types,
             #                      by = "polygon_id")
+        }
+
+        if (drop_7220) {
+            habmap_terr_types <-
+                habmap_terr_types %>%
+                filter(.data$type != "7220")
+            # note that no polygons need to be discarded: 7220 never occurred
+            # alone
         }
 
         if (version == "habitatmap_terr_2018_v1") {
