@@ -1,3 +1,21 @@
+## n2khab 0.2.0
+
+#### New features
+
+- Updates in reference lists (#64, #65, #69):
+    - `types`: updates of flood dependency scores and hydrological class of several types, following several expert discussions and checks
+    - `scheme_types`: updates regarding spatial restrictions, types and typegroup memberships of MNE schemes (for defining the schemes' target populations)
+    - `env_pressures`: updated explanations. Each pressure now has its own explanation
+- [`renv`](https://rstudio.github.io/renv) framework implemented to enhance reproducibility of generating the built-in textual data sources (#72)
+- `read_env_pressures()`: an extra column '`remarks`' is now returned (#65)
+- New function `read_soilmap()` for reading the `soilmap` or processed `soilmap_simple` data sources (#29; inbo/n2khab-preprocessing#34)
+- Vignette to demonstrate package & data setup, using `read_soilmap()` as an example target (#29)
+- `read_habitatsprings()` accommodates the latest version of the `habitatsprings` data source (#62)
+- `read_habitatsprings()` optionally aggregates points to (population) units (#70)
+- `read_habitatmap_terr()` now drops occurrences of type `7220` by default, given the information returned by `read_habitatsprings()` (#71)
+
+Further, a number of smaller fixes and enhancements were made.
+
 ## n2khab 0.1.2
 
 #### Hotfix
