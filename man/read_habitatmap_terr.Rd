@@ -9,6 +9,7 @@ read_habitatmap_terr(
   path = fileman_up("n2khab_data"),
   file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
   keep_aq_types = TRUE,
+  drop_7220 = TRUE,
   version = "habitatmap_terr_2018_v2"
 )
 }
@@ -37,6 +38,14 @@ discard all aquatic types in 'mixed' aquatic/terrestrial polygons.
 As each polygon always has at least one (semi-)terrestrial type,
 this will not affect the number of polygons returned,
 only the number of types.}
+
+\item{drop_7220}{Logical; \code{TRUE} by default.
+Should occurrences of type \code{7220} be dropped from the result?
+To get more accurate information about type \code{7220}, notably its
+occurrences, surface area and other characteristics, it is advised
+to use the \code{habitatsprings} data source and not
+\code{habitatmap_terr} - see
+\code{\link[=read_habitatsprings]{read_habitatsprings()}}.}
 
 \item{version}{Version ID of the data source.
 Defaults to the latest available version defined by the package.}
@@ -76,6 +85,9 @@ Lambert 72 CRS (EPSG-code \href{https://epsg.io/31370}{31370}), and
 \code{habitatmap_terr_types}.
 \code{habitatmap_terr} is the further interpreted, terrestrial part of
 \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}).
+By default, occurrences of type \code{7220} are dropped because a more
+reliable data source is available for this habitat type (see \code{drop_7220}
+argument).
 }
 \details{
 \code{habitatmap_terr} was derived from \code{habitatmap_stdized} as
