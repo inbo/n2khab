@@ -14,9 +14,9 @@
 
 #### Features of the first stable release
 
-- core reading and preprocessing functions
-- several built-in checklists (among which: `types` and `env_pressures`)
-- function documentation
+- Core reading and preprocessing functions
+- Several built-in checklists (among which: `types` and `env_pressures`)
+- Function documentation
 - 4 tutorials (vignettes / articles)
-- a reexport of `download_zenodo()` from `inborutils`
-- website built with `pkgdown`
+- A reexport of `download_zenodo()` from `inborutils`
+- Website built with `pkgdown`
