@@ -4,8 +4,9 @@
 
 - Updates in reference lists (#64, #65, #69):
     - `types`: updates of flood dependency scores and hydrological class of several types, following several expert discussions and checks
-    - `scheme_types`: updates regarding spatial restrictions, types and typegroup memberships of MNE schemes (for defining the schemes' target populations)
+    - `schemes` & `scheme_types`: updates regarding spatial restrictions, types and typegroup memberships of MNE schemes (for defining the schemes' target populations)
     - `env_pressures`: updated explanations. Each pressure now has its own explanation
+    - `namelist`: according updates
 - [`renv`](https://rstudio.github.io/renv) framework implemented to enhance reproducibility of generating the built-in textual data sources (#72)
 - `read_env_pressures()`: an extra column '`remarks`' is now returned (#65)
 - New function `read_soilmap()` for reading the `soilmap` or processed `soilmap_simple` data sources (#29; inbo/n2khab-preprocessing#34)
