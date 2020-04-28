@@ -5,8 +5,8 @@
   sorting:
   - scheme
   - type
-  hash: 736c22a6ca6766924e60b74198e69eb22a3bffee
-  data_hash: cd301fda38dc113fb3d17eeb6c7ddeec321a6ff1
+  hash: d53996fb20ed088cbf21c677565f549c7ceabedf
+  data_hash: ae3ae1799e5c494a50c6f1be8317cefa04ec94bf
 scheme:
   class: factor
   labels:
@@ -47,6 +47,7 @@ scheme:
   - SURF_08.2
   - SURF_08.4
   - HQ1330
+  - HQ2120
   - HQ2130
   - HQ2160
   - HQ2170
@@ -110,6 +111,7 @@ scheme:
   - 33
   - 34
   - 35
+  - 29
   - 36
   - 37
   - 38
