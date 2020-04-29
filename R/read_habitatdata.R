@@ -1179,7 +1179,7 @@ read_habitatsprings <-
              file = "10_raw/habitatsprings/habitatsprings.geojson",
              filter_hab = FALSE,
              units_7220 = FALSE,
-             version = "habitatsprings_2020v1"){
+             version = "habitatsprings_2020v2"){
 
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
