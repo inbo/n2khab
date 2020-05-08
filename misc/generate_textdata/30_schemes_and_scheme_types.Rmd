@@ -41,13 +41,30 @@ ep_codes <-
 Making a dataframe that combines the information of `schemes` and `scheme_types`:
 
 ```{r}
+types <- read_vc(types_path, root)
+# for 5.1, types with HC23 must be doubled:
+types_hc <-
+  types %>% 
+  select(type, hydr_class) %>% 
+  mutate(type = as.character(type),
+         second_class = ifelse(hydr_class == "HC23",
+                               "HC2", 
+                               NA),
+         hydr_class = ifelse(hydr_class == "HC23",
+                             "HC3", 
+                             as.character(hydr_class))) %>% 
+  pivot_longer(cols = contains("class"),
+               names_to = "dummy",
+               values_to = "hydr_class_expand",
+               values_drop_na = TRUE) %>% 
+  select(-dummy)
 schemes_schemetypes <- 
     schemes_types_nl %>% 
     select(attribute_1 = Comp_meetnet,
            attribute_2 = Druk,
-           attribute_3 = Waterhuishoudingsklasse_2,
            tag_1 = MaxMilieudrukkengroep,
            type = Vegcode) %>% 
+    inner_join(types_hc, by = "type") %>% 
     mutate(
         programme = "MNE" %>% factor,
         attribute_1 = recode(attribute_1,
@@ -68,7 +85,7 @@ schemes_schemetypes <-
                                  levels
                         ),
         attribute_3 = ifelse(attribute_1 == "GW" & attribute_2 == "ep_05.1",
-                             ifelse(attribute_3 == "Oppervlaktewater",
+                             ifelse(hydr_class_expand == "HC3",
                                     "aq",
                                     ifelse(type == "8310",
                                            "caves",
@@ -96,10 +113,12 @@ schemes_schemetypes <-
                 factor,
         type = as.character(type) %>% 
                 factor(levels = 
-                           read_vc(types_path, root) %>% 
+                           types %>% 
                            .$type %>% 
                            levels)
     ) %>% 
+    select(-hydr_class_expand) %>% 
+    distinct() %>% 
     arrange(programme, scheme)
 ```
 
@@ -117,17 +136,64 @@ Separately defining spatial restrictions for specific schemes:
 
 ```{r}
 spat_restr <- 
-    tribble(
-        ~scheme, ~spatial_restriction,
-        "GW_05.1_terr", "zones with shallow groundwater (in reach of vegetation)"
+    tibble(
+      scheme = c("GW_05.1_terr"),
+      spatial_restriction = 
+        paste("Restrict to zones with shallow groundwater",
+              "(in reach of vegetation).",
+              "Exclude aquatic (i.e. rivulet) forms of type 7220.",
+              "Don't exclude locations with types that are",
+              "'(almost) everywhere groundwater dependent' (GD2).")
     ) %>% 
+    bind_rows(tibble(
+      scheme = c("GW_03.3",
+                 "GW_04.2", 
+                 "GW_05.2", 
+                 "GW_07.1", 
+                 "GW_08.3"),
+      spatial_restriction = 
+        paste("For terrestrial types: restrict to zones with shallow groundwater",
+              "(in reach of vegetation).",
+              "Don't exclude locations with types that are",
+              "'(almost) everywhere groundwater dependent' (GD2).")
+    )
+    ) %>% 
+    bind_rows(tibble(
+        scheme = c("INUN_062",
+                   "INUN_07.2"),
+        spatial_restriction = "Restrict to areas susceptible to flooding."
+            )
+        ) %>% 
     bind_rows(tibble(
         scheme = c("INUN_03.4", 
                    "INUN_061",
-                   "INUN_062",
-                   "INUN_07.2",
                    "INUN_08.4"),
-        spatial_restriction = "areas susceptible to flooding"
+        spatial_restriction = 
+          paste("Restrict to areas susceptible to flooding.",
+                "Exclude aquatic (i.e. rivulet) forms of type 7220, if applicable."
+                )
+            )
+        ) %>% 
+    bind_rows(tibble(
+        scheme = c("INUN_063",
+                   "INUN_064",
+                   "INUN_065",
+                   "INUN_066"),
+        spatial_restriction = 
+          "Exclude aquatic (i.e. rivulet) forms of type 7220, if applicable."
+            )
+        ) %>% 
+    bind_rows(tibble(
+        scheme = c("GW_05.1_aq",
+                   "SURF_012", 
+                   "SURF_03.2", 
+                   "SURF_03.4_lotic", 
+                   "SURF_064", 
+                   "SURF_066", 
+                   "SURF_08.2", 
+                   "SURF_08.4"),
+        spatial_restriction = 
+          "Exclude terrestrial (i.e. mire) forms of type 7220, if applicable."
             )
         ) %>% 
     mutate(scheme = factor(scheme,
@@ -193,12 +259,10 @@ typegroups <-
         gs_read(ws = ws_list[str_detect(ws_list, "GW_05\\.1")], 
                 check.names = T,
                 verbose = FALSE) %>% 
-        filter(!Type %in% 
-                   (schemes_schemetypes %>% 
-                        filter(scheme %in% 
-                                 c("GW_05.1_aq", 
-                                   "GW_05.1_caves")) %>% 
-                        .$type)
+        filter(Type %in% 
+                 (schemes_schemetypes %>% 
+                    filter(scheme == "GW_05.1_terr") %>% 
+                    .$type)
                ) %>% 
         mutate(scheme = "GW_05.1_terr") %>% 
         select(scheme,
@@ -375,7 +439,7 @@ tribble(~nr, ~lang, ~name, ~shortname,
   mutate(code = str_c(prefix, nr)) %>% 
   select(code, lang, name, shortname) %>% 
   bind_rows(
-    tribble(~code, ~lang, ~name, ~shortname,
+    tribble(~nr, ~lang, ~name, ~shortname,
         1, "en", "types from oligotrophic environments", "oligotrophic",
         1, "nl", "types van oligotroof milieu", "oligotroof",
         2, "en", "types from mesotrophic environments", "mesotrophic",
@@ -385,7 +449,9 @@ tribble(~nr, ~lang, ~name, ~shortname,
         4, "en", "types from moderately eutrophic to eutrophic environments", "(moderately) eutrophic",
         4, "nl", "types van matig eutroof tot eutroof milieu", "(matig) eutroof"
         ) %>% 
-      mutate(code = str_c("GW_03.3_group", code))
+      crossing(prefix = c("GW_03.3_group", "SURF_03.4_lentic_group")) %>% 
+      mutate(code = str_c(prefix, nr)) %>% 
+      select(code, lang, name, shortname)
   ) %>% 
   bind_rows(
         tribble(~code, ~lang, ~name, ~shortname,
@@ -414,7 +480,7 @@ tribble(~nr, ~lang, ~name, ~shortname,
 Writing `schemes`.
 
 ```{r message=FALSE}
-schemes_MHQ <- gs_key("1Lltpq1_OQENZKrCmfDLuBiaZQ0_YCoGkFAqcOtFRdHg") %>%
+schemes_MHQ <- gs_key("1PU9MDyJKZz2DOrKqb-SIIVmSaR1mh4Ke6v0WCqhr8t4") %>%
   gs_read(ws = 1) %>%
   mutate(attribute_1 = ifelse(attribute_1 == 91, 
                               "91E0", 
@@ -464,7 +530,7 @@ schemes %>%
 Writing `scheme_types`.
 
 ```{r}
-scheme_type_MHQ <- gs_key("1Lltpq1_OQENZKrCmfDLuBiaZQ0_YCoGkFAqcOtFRdHg") %>%
+scheme_type_MHQ <- gs_key("1PU9MDyJKZz2DOrKqb-SIIVmSaR1mh4Ke6v0WCqhr8t4") %>%
   gs_read(ws = 2) %>%
   mutate(scheme = factor(scheme))
   

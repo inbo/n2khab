@@ -79,6 +79,12 @@ A tibble is a dataframe that makes working in the tidyverse a little
 \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 By default, the data version delivered with the package is used and English
 names (\code{lang = "en"}) are returned for types, attributes and tags.
+
+Note that factors are generated with implicit \code{NA} values (i.e. there is
+no factor level to represent the missing values).
+If you want this category to appear in certain results, you can convert
+such variables with
+\code{\link[forcats:fct_explicit_na]{forcats::fct_explicit_na()}}.
 }
 \section{Recommended usage}{
 

@@ -34,9 +34,9 @@ the language of human-readable attributes to be returned in the tibble.}
 \value{
 The \code{env_pressures} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
 with human-readable text added for environmental pressures,
-pressure-classes and textual explanations
+pressure-classes and textual explanations and remarks
 according to the \code{lang} argument.
-The tibble has 35 rows and 6 variables.
+The tibble has 35 rows and 7 variables.
 See \code{\link{env_pressures}} for documentation of the data-source's contents.
 See \code{\link{namelist}} for the link between codes or other identifiers
 and the corresponding text.
@@ -53,17 +53,16 @@ The human-readable attributes are represented by the following variables:
   \item{\code{ep_class_name}}{The name of the environmental pressure's class.
   Is a factor with the level order coinciding with that of
   \code{ep_class}.}
-  \item{\code{explanation}}{An explanation of the environmental pressure.
-  \emph{Beware that this explanation is often shared between multiple
-  environmental pressures!}
-  Hence the added explanation may cover more than is revealed by the environmental
-  pressure's \strong{name}.}
+  \item{\code{explanation}}{An explanation of the environmental pressure.}
+  \item{\code{remarks}}{Optional remarks about the environmental
+  pressure.}
 }
 }
 \description{
 Returns the included data source \code{\link{env_pressures}} as a
 \code{\link[tibble:tbl_df-class]{tibble}}.
-Names, shortnames and explanations from \code{\link{namelist}} are added,
+Names, shortnames, explanations and optional remarks from
+\code{\link{namelist}} are added,
 in English by default.
 }
 \details{
@@ -80,7 +79,7 @@ A tibble is a dataframe that makes working in the tidyverse a little
 \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 By default, the data version delivered with the package is used and English
 text (\code{lang = "en"}) is returned for names of environmental pressures and
-pressure-classes, and for textual explanations.
+pressure-classes, and for textual explanations and remarks.
 }
 \section{Recommended usage}{
 

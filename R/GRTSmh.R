@@ -309,6 +309,8 @@ convert_base4frac_to_dec <-
 #' }
 #'
 #' @export
+#' @importFrom sf
+#' st_crs
 #' @importFrom raster
 #' raster
 #' brick
@@ -335,7 +337,7 @@ read_GRTSmh <-
                    }
             result <- r
         }
-        crs(result) <- "+init=epsg:31370"
+        crs(result) <- st_crs(31370)$proj4string
         return(result)
     }
 
@@ -425,6 +427,8 @@ read_GRTSmh <-
 #' }
 #'
 #' @export
+#' @importFrom sf
+#' st_crs
 #' @importFrom raster
 #' raster
 #' crs<-
@@ -432,7 +436,7 @@ read_GRTSmh_base4frac <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif") {
         r <- raster(file.path(path, file))
-        crs(r) <- "+init=epsg:31370"
+        crs(r) <- st_crs(31370)$proj4string
         return(r)
     }
 
@@ -575,6 +579,7 @@ read_GRTSmh_base4frac <-
 #' @importFrom stringr str_c
 #' @importFrom sf
 #' read_sf
+#' st_crs
 #' st_crs<-
 #' @importFrom raster
 #' raster
@@ -607,7 +612,7 @@ read_GRTSmh_diffres <-
                              str_c("GRTSmh_diffres.",
                                    level, ".tif")))
             names(r) <- str_c("level", level)
-            crs(r) <- "+init=epsg:31370"
+            crs(r) <- st_crs(31370)$proj4string
             r
 
         }

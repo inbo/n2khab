@@ -184,6 +184,12 @@ namelist_factor <-
 #' By default, the data version delivered with the package is used and English
 #' names (\code{lang = "en"}) are returned for types, attributes and tags.
 #'
+#' Note that factors are generated with implicit \code{NA} values (i.e. there is
+#' no factor level to represent the missing values).
+#' If you want this category to appear in certain results, you can convert
+#' such variables with
+#' \code{\link[forcats:fct_explicit_na]{forcats::fct_explicit_na()}}.
+#'
 #' @param path Location of the data sources \code{types} and \code{namelist}.
 #' The default is to use the location of the data sources as delivered by
 #' the installed package.
@@ -388,7 +394,8 @@ read_types <-
 #'
 #' Returns the included data source \code{\link{env_pressures}} as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
-#' Names, shortnames and explanations from \code{\link{namelist}} are added,
+#' Names, shortnames, explanations and optional remarks from
+#' \code{\link{namelist}} are added,
 #' in English by default.
 #'
 #' \code{\link{env_pressures}} is a data source in the
@@ -404,7 +411,7 @@ read_types <-
 #' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 #' By default, the data version delivered with the package is used and English
 #' text (\code{lang = "en"}) is returned for names of environmental pressures and
-#' pressure-classes, and for textual explanations.
+#' pressure-classes, and for textual explanations and remarks.
 #'
 #' @param path Location of the data sources \code{env_pressures} and
 #' \code{namelist}.
@@ -423,9 +430,9 @@ read_types <-
 #' @return
 #' The \code{env_pressures} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
 #' with human-readable text added for environmental pressures,
-#' pressure-classes and textual explanations
+#' pressure-classes and textual explanations and remarks
 #' according to the \code{lang} argument.
-#' The tibble has 35 rows and 6 variables.
+#' The tibble has 35 rows and 7 variables.
 #' See \code{\link{env_pressures}} for documentation of the data-source's contents.
 #' See \code{\link{namelist}} for the link between codes or other identifiers
 #' and the corresponding text.
@@ -442,11 +449,9 @@ read_types <-
 #'   \item{\code{ep_class_name}}{The name of the environmental pressure's class.
 #'   Is a factor with the level order coinciding with that of
 #'   \code{ep_class}.}
-#'   \item{\code{explanation}}{An explanation of the environmental pressure.
-#'   \emph{Beware that this explanation is often shared between multiple
-#'   environmental pressures!}
-#'   Hence the added explanation may cover more than is revealed by the environmental
-#'   pressure's \strong{name}.}
+#'   \item{\code{explanation}}{An explanation of the environmental pressure.}
+#'   \item{\code{remarks}}{Optional remarks about the environmental
+#'   pressure.}
 #' }
 #'
 #' @section Recommended usage:
@@ -545,10 +550,11 @@ read_env_pressures <-
                        mapvalues(from = ep_class_levels$codelevel,
                                  to = ep_class_levels$namelevel)
             ) %>%
-            left_join(namelist %>% select(-.data$shortname),
+            left_join(namelist,
                       by = c("explanation" = "code")) %>%
             select(-.data$explanation) %>%
-            rename(explanation = .data$name) %>%
+            rename(explanation = .data$name,
+                   remarks = .data$shortname) %>%
             mutate(ep_code = .data$ep_code %>%
                        factor(levels = env_pressures_base$ep_code %>% levels)
             ) %>%
@@ -557,7 +563,8 @@ read_env_pressures <-
                    .data$ep_name,
                    .data$ep_class,
                    .data$ep_class_name,
-                   .data$explanation) %>%
+                   .data$explanation,
+                   .data$remarks) %>%
             as_tibble
     }
 
@@ -806,9 +813,9 @@ read_schemes <-
 #' The \code{scheme_types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
 #' with names & shortnames added for the typegroup variable and optionally for
 #' scheme, programme,
-#' scheme attributes, type, typeclass and tags of scheme and type, all
+#' scheme attributes, type and attributes & tags of scheme and type, all
 #' according to the \code{lang} argument.
-#' The tibble has either 5 or 44 variables, depending on the \code{extended}
+#' The tibble has either 5 or many variables, depending on the \code{extended}
 #' argument.
 #' See \code{\link{scheme_types}} for documentation of the data-source's contents.
 #' See \code{\link{namelist}} for the link between codes or other identifiers
@@ -835,6 +842,12 @@ read_schemes <-
 #'   \item \code{type_name}
 #'   \item \code{type_shortname}
 #'   \item \code{typeclass_name}
+#'   \item \code{hydr_class_name}
+#'   \item \code{hydr_class_shortname}
+#'   \item \code{groundw_dep_name}
+#'   \item \code{groundw_dep_shortname}
+#'   \item \code{flood_dep_name}
+#'   \item \code{flood_dep_shortname}
 #'   \item \code{typetag_1_name}
 #'   \item \code{typetag_1_shortname}
 #'   \item \code{typetag_2_name}
@@ -843,9 +856,9 @@ read_schemes <-
 #'   \item \code{typetag_3_shortname}
 #' }
 #'
-#' The added names and shortnames for scheme, programme, typeclass,
+#' The added names and shortnames for scheme, programme,
 #' attributes and typegroup are \emph{factors} with their level order according
-#' to that of the scheme, programme, typeclass, attribute or typegroup variable.
+#' to that of the scheme, programme, attribute or typegroup variable.
 #'
 #' @section Recommended usage:
 #'
@@ -932,6 +945,11 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
         spread(key = .data$key, value = .data$value)
 
     scheme_types %>%
+        mutate(typegroup_name = namelist_factor(.data$typegroup,
+                                                codelist = namelist),
+               typegroup_shortname = namelist_factor(.data$typegroup,
+                                                     "shortname",
+                                                     codelist = namelist)) %>%
         left_join(schemes,
                   by = "scheme") %>%
         left_join(types,
@@ -942,11 +960,6 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
                                    pull(.data$type) %>%
                                    levels
                                    )) %>%
-        mutate(typegroup_name = namelist_factor(.data$typegroup,
-                                                codelist = namelist),
-               typegroup_shortname = namelist_factor(.data$typegroup,
-                                                     "shortname",
-                                                     codelist = namelist)) %>%
         as_tibble
 
     } else {

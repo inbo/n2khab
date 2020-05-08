@@ -3,7 +3,8 @@
 \name{scheme_types}
 \alias{scheme_types}
 \title{Documentation of included data source 'scheme_types'}
-\format{A vc-formatted data source. As such, it corresponds to
+\format{
+A vc-formatted data source. As such, it corresponds to
 a dataframe with 3 variables:
 \describe{
   \item{scheme}{Code of the scheme, as a factor, and explained by
@@ -21,7 +22,8 @@ a dataframe with 3 variables:
   inferences for the scheme at hand.}
 }
 
-Each combination of \code{scheme} and \code{type} must be unique.}
+Each combination of \code{scheme} and \code{type} must be unique.
+}
 \source{
 \itemize{
     \item{For the MNE-schemes:

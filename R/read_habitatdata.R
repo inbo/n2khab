@@ -588,7 +588,7 @@ read_watersurfaces <-
 #' Given the size of the data source, this function
 #' takes a bit longer than usual to run.
 #'
-#' @param select_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
+#' @param filter_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 #' important biotope (RIB) are returned. The default value is \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized
@@ -620,6 +620,10 @@ read_watersurfaces <-
 #' }
 #'
 #' @export
+#' @importFrom assertthat
+#' assert_that
+#' is.flag
+#' noNA
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
@@ -634,10 +638,14 @@ read_watersurfaces <-
 read_habitatmap <-
     function(path = fileman_up("n2khab_data"),
              file = "10_raw/habitatmap",
-             select_hab = FALSE){
+             filter_hab = FALSE){
 
-        habitatmap <- read_sf(file.path(path, file),
-                                   "habitatmap")
+        filepath <- file.path(path, file)
+        assert_that(file.exists(filepath))
+        assert_that(is.flag(filter_hab), noNA(filter_hab))
+
+        habitatmap <- read_sf(filepath,
+                              "habitatmap")
 
         colnames(habitatmap) <- tolower(colnames(habitatmap))
 
@@ -671,7 +679,7 @@ read_habitatmap <-
                    hab_legend = factor(.data$hab_legend)
                    )
 
-        if(select_hab){
+        if (filter_hab) {
 
             # we only select polygons with habitat or RIB, i.e. polygons in habitatmap_stdized data source
             hab_stdized <- read_habitatmap_stdized()
@@ -707,6 +715,9 @@ read_habitatmap <-
 #' \code{habitatmap_terr_types}.
 #' \code{habitatmap_terr} is the further interpreted, terrestrial part of
 #' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}).
+#' By default, occurrences of type \code{7220} are dropped because a more
+#' reliable data source is available for this habitat type (see \code{drop_7220}
+#' argument).
 #'
 #' \code{habitatmap_terr} was derived from \code{habitatmap_stdized} as
 #' follows:
@@ -761,7 +772,13 @@ read_habitatmap <-
 #' As each polygon always has at least one (semi-)terrestrial type,
 #' this will not affect the number of polygons returned,
 #' only the number of types.
-#'
+#' @param drop_7220 Logical; \code{TRUE} by default.
+#' Should occurrences of type \code{7220} be dropped from the result?
+#' To get more accurate information about type \code{7220}, notably its
+#' occurrences, surface area and other characteristics, it is advised
+#' to use the \code{habitatsprings} data source and not
+#' \code{habitatmap_terr} - see
+#' \code{\link[=read_habitatsprings]{read_habitatsprings()}}.
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
@@ -815,6 +832,7 @@ read_habitatmap <-
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' noNA
 #' is.string
 #' @importFrom sf
 #' read_sf
@@ -828,9 +846,11 @@ read_habitatmap_terr <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
              keep_aq_types = TRUE,
+             drop_7220 = TRUE,
              version = "habitatmap_terr_2018_v2"){
 
-        assert_that(is.flag(keep_aq_types))
+        assert_that(is.flag(keep_aq_types), noNA(keep_aq_types))
+        assert_that(is.flag(drop_7220), noNA(drop_7220))
         assert_that(is.string(version))
 
         habmap_terr_polygons <- read_sf(file.path(path, file),
@@ -882,6 +902,14 @@ read_habitatmap_terr <-
             #                      by = "polygon_id")
         }
 
+        if (drop_7220) {
+            habmap_terr_types <-
+                habmap_terr_types %>%
+                filter(.data$type != "7220")
+            # note that no polygons need to be discarded: 7220 never occurred
+            # alone
+        }
+
         if (version == "habitatmap_terr_2018_v1") {
             result <- list(habitatmap_terr_polygons = habmap_terr_polygons,
                            habitatmap_terr_patches = habmap_terr_types)
@@ -915,7 +943,7 @@ read_habitatmap_terr <-
 #' with textual explanation of the values of the \code{source_id} variable.
 #'
 #' @param source_text Logical, defaults to \code{FALSE}.
-#' If \code{TRUE}, the list version is returned (see \emph{Value}).
+#' If \code{TRUE}, a list is returned (see \emph{Value}).
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -960,6 +988,7 @@ read_habitatmap_terr <-
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' noNA
 #' @importFrom sf
 #' read_sf
 #' st_drop_geometry
@@ -980,7 +1009,7 @@ read_habitatstreams <-
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
 
-        assert_that(is.flag(source_text))
+        assert_that(is.flag(source_text), noNA(source_text))
 
         habitatstreams <-
             suppressWarnings(
@@ -1046,6 +1075,8 @@ read_habitatstreams <-
 #' Returns the raw data source \code{habitatsprings} as an \code{sf} point
 #' layer in the Belgian Lambert 72 CRS (EPSG-code
 #' \href{https://epsg.io/31370}{31370}).
+#' Optionally, a derived `sf` object of type-`7220`-locations can be
+#' returned at the population unit level, through aggregation by `unit_id`.
 #'
 #' The data source \code{habitatsprings} is a GeoJSON file (conforming to
 #' the RFC7946 specifications), available at
@@ -1056,6 +1087,15 @@ read_habitatstreams <-
 #' the Flemish Region, Belgium.
 #'
 #'
+#' @param filter_hab If \code{TRUE}, only points with (potential) habitat
+#' are returned. The default value is \code{FALSE}.
+#' @param units_7220 If \code{TRUE}, an `sf` object of type-`7220`-locations is
+#' returned at the population unit level.
+#' To accomplish this, the data source is aggregated by `unit_id`.
+#' Multiple points belonging to the same unit are replaced by their
+#' centroid, their area attribute is summed (if all values are known)
+#' and for other attributes the maximum value is returned.
+#'
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
@@ -1064,11 +1104,16 @@ read_habitatstreams <-
 #'   \itemize{
 #'     \item \code{point_id}
 #'     \item \code{name}: site name.
+#'     \item \code{system_type}: environmental typology of `7220`: `mire`,
+#'     `rivulet` or `unknown` (non-`7220` types are `NA`)
 #'     \item \code{code_orig}: original vegetation code in raw
 #'     \code{habitatsprings}.
 #'     \item \code{type}: habitat type listed in \code{\link{types}}.
 #'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
 #'      \code{FALSE} when vegetation type is uncertain.
+#'     \item \code{unit_id}: population unit id for large scale sampling
+#'     events.
+#'     Spatially close points have the same value.
 #'     \item \code{area_m2}: area as square meters.
 #'     \item \code{year}: year of field inventory.
 #'     \item \code{in_sac}: logical.
@@ -1076,13 +1121,18 @@ read_habitatstreams <-
 #'     \item \code{source}: original data source of the record.
 #'   }
 #'
-#' Note that the \code{type} variable has implicit \code{NA} values in this
-#' case
+#' Note that the \code{type} and \code{system_type} variables have
+#' implicit \code{NA} values
 #' (i.e. there is
 #' no factor level to represent the missing values).
 #' If you want this category to appear in certain results, you can add
 #' it as a level with
 #' [forcats::fct_explicit_na()].
+#'
+#' With `units_7220 = TRUE`, variable `point_id` is dropped and
+#' an extra attribute variable `nr_of_points` is
+#' added.
+#' It represents the number of points that belong to each unit.
 #'
 #' @md
 #'
@@ -1094,31 +1144,52 @@ read_habitatstreams <-
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
 #'
-#' library(magrittr)
-#' library(sf)
 #' hs <- read_habitatsprings()
 #' hs
+#' hs2 <- read_habitatsprings(units_7220 = TRUE)
+#' hs2
 #' }
 #'
 #' @importFrom assertthat
 #' assert_that
+#' is.flag
+#' noNA
+#' is.string
 #' @importFrom stringr
 #' str_sub
 #' @importFrom sf
 #' read_sf
 #' st_transform
+#' st_centroid
 #' @importFrom rlang .data
 #' @importFrom dplyr
 #' %>%
 #' mutate
 #' select
+#' filter
+#' everything
+#' group_by
+#' summarise_if
+#' mutate_at
+#' n
+#' vars
 #' @export
 read_habitatsprings <-
     function(path = fileman_up("n2khab_data"),
-             file = "10_raw/habitatsprings/habitatsprings.geojson"){
+             file = "10_raw/habitatsprings/habitatsprings.geojson",
+             filter_hab = FALSE,
+             units_7220 = FALSE,
+             version = "habitatsprings_2020v2"){
 
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
+        assert_that(is.flag(filter_hab), noNA(filter_hab))
+        assert_that(is.string(version))
+
+        typelevels <-
+            read_types() %>%
+            .$type %>%
+            levels
 
         habitatsprings <-
             read_sf(filepath) %>%
@@ -1132,11 +1203,10 @@ read_habitatsprings <-
                               NA),
                 in_sac = (.data$sbz == 1),
                 type = str_sub(.data$habitattype, end = 4) %>%
-                        factor(levels = read_types() %>%
-                                   .$type %>%
-                                   levels),
+                        factor(levels = typelevels),
                 certain = (.data$validity_status == "gecontroleerd")
             ) %>%
+            {if (filter_hab) filter(., !is.na(.$type)) else .} %>%
             select(point_id = .data$id,
                    .data$name,
                    code_orig = .data$habitattype,
@@ -1145,7 +1215,48 @@ read_habitatsprings <-
                    .data$area_m2,
                    .data$year,
                    .data$in_sac,
-                   .data$source)
+                   everything(),
+                   -.data$validity_status,
+                   -.data$sbz)
+
+        if (version != "habitatsprings_2019v1") {
+            habitatsprings <-
+                habitatsprings %>%
+                mutate(system_type = factor(.data$system_type)) %>%
+                select(1:2,
+                       .data$system_type,
+                       3:5,
+                       .data$unit_id,
+                       everything())
+        }
+
+        if (units_7220) {
+            assert_that(version != "habitatsprings_2019v1",
+                        msg = paste("'units_7220 = TRUE' is not supported for",
+                                    "version habitatsprings_2019v1."))
+            suppressWarnings(
+            habitatsprings <-
+                habitatsprings %>%
+                filter(.data$type == "7220") %>%
+                select(-.data$point_id) %>%
+                group_by(.data$unit_id) %>%
+                mutate(area_m2 = sum(.data$area_m2),
+                       system_type = as.character(.data$system_type),
+                       type = as.character(.data$type),
+                       nr_of_points = n()) %>%
+                summarise_if(function(x) {!inherits(x, "sfc")},
+                             max) %>%
+                mutate(type = .data$type %>% factor(levels = typelevels),
+                       system_type = factor(.data$system_type)) %>%
+                mutate_at(vars(.data$certain,
+                               .data$in_sac),
+                          as.logical) %>%
+                st_centroid() %>%
+                select(.data$unit_id,
+                       .data$nr_of_points,
+                       everything())
+            )
+        }
 
         return(habitatsprings)
 

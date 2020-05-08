@@ -148,6 +148,7 @@ HC2	en	Temporarily to permanently wet	Wet
 HC23	en	Temporarily to permanently wet + Surface water	Wet + Surface water
 HC3	en	Surface water	Surface water
 HQ1330	en	Habitat quality scheme: Atlantic salt meadows	Habitat quality scheme 1330
+HQ2120	en	Habitat quality scheme: White dunes	Habitat quality scheme 2120
 HQ2130	en	Habitat quality scheme: Grey dunes	Habitat quality scheme 2130
 HQ2160	en	Habitat quality scheme: Hippophae rhamnoides dunes	Habitat quality scheme 2160
 HQ2170	en	Habitat quality scheme: Salix repens dunes	Habitat quality scheme 2170
@@ -200,6 +201,10 @@ SURF	en	Surfacewater monitoring	NA
 SURF_012	en	Surfacewater monitoring: environmental pressure 012_soildyn_incr	SURF: 012_soildyn_incr
 SURF_03.2	en	Surfacewater monitoring: environmental pressure 03.2_eutr_soil	SURF: 03.2_eutr_soil
 SURF_03.4_lentic	en	Surfacewater monitoring: environmental pressure 03.4_eutr_sw: partim lentic waters	SURF: 03.4_eutr_sw: lentic
+SURF_03.4_lentic_group1	en	types from oligotrophic environments	oligotrophic
+SURF_03.4_lentic_group2	en	types from mesotrophic environments	mesotrophic
+SURF_03.4_lentic_group3	en	types from weakly eutrophic environments	weakly eutrophic
+SURF_03.4_lentic_group4	en	types from moderately eutrophic to eutrophic environments	(moderately) eutrophic
 SURF_03.4_lotic	en	Surfacewater monitoring: environmental pressure 03.4_eutr_sw: partim lotic waters	SURF: 03.4_eutr_sw: lotic
 SURF_064	en	Surfacewater monitoring: environmental pressure 064_swlevel_decr	SURF: 064_swlevel_decr
 SURF_066	en	Surfacewater monitoring: environmental pressure 066_wave_decr	SURF: 066_wave_decr
@@ -222,16 +227,20 @@ ep_04.1	en	4.1 Acidification through air	04.1_acidif_air
 ep_04.2	en	4.2 Acidification through groundwater	04.2_acidif_gw
 ep_04.3	en	4.3 Acidification through surface water (including inundation and stagnating rainwater)	04.3_acidif_sw
 ep_05.1	en	5.1 Desiccation through groundwater	05.1_des_gw
+ep_05.1_explan	en	NA	Sensitivity to environmental pressure ep_05.1 defines the so-called 'groundwater dependent' types. This group is composed of most types from the hydrological classes 'Temporarily to permanently wet' and 'Surface water'.
 ep_05.2	en	5.2 Wetting through groundwater	05.2_wet_gw
 ep_061	en	61 Increase in flood duration or frequency (including tide)	061_flood_incr
-ep_061_explan	en	An increase, respectively decrease in flood occurrence that has a negative effect on the considered non aquatic community. This happens through changes in mechanical impact (velocity/sediment), or through lack of oxygen/CO2 in the flood water.	NA
+ep_061_explan	en	An increase in flood occurrence that has a negative effect on the considered non aquatic community. This happens through changes in mechanical impact (velocity/sediment), or through lack of oxygen/CO2 in the flood water.	Environmental pressure ep_061 is relevant to terrestrial types. 'Terrestrial' refers to types from the hydrological classes 'Dry to moist' and 'Temporarily to permanently wet'.
 ep_062	en	62 Decrease in flood duration or frequency (including tide)	062_flood_decr
+ep_062_explan	en	A decrease in flood occurrence that has a negative effect on the considered non aquatic community. This happens through changes in mechanical impact (velocity/sediment), or through lack of oxygen/CO2 in the flood water.	Sensitivity to environmental pressure ep_062 defines the so-called 'flood dependent' types (these are always terrestrial). This group is composed of a subset of types from the hydrological class 'Temporarily to permanently wet'.
 ep_063	en	63 Increase in surface water velocity, level or its fluctuation	063_swlevel_incr
-ep_063_explan	en	An increase, respectively decrease in hydraulic or water level characteristics, that has a direct negative effect on the considered aquatic or semi-terrestrial community	NA
+ep_063_explan	en	An increase in hydraulic or water level characteristics, that has a direct negative effect on the considered aquatic or semi-terrestrial community	NA
 ep_064	en	64 Decrease in surface water velocity, level or its fluctuation	064_swlevel_decr
+ep_064_explan	en	A decrease in hydraulic or water level characteristics, that has a direct negative effect on the considered aquatic or semi-terrestrial community	NA
 ep_065	en	65 Increase of wave impact	065_wave_incr
-ep_065_explan	en	An increase, respectively decrease in wave impact that has a direct negative effect on the considered aquatic or semi-terrestrial community, either through a change in mechanical impact or through negative effects on water or soil quality	NA
+ep_065_explan	en	An increase in wave impact that has a direct negative effect on the considered aquatic or semi-terrestrial community, either through a change in mechanical impact or through negative effects on water or soil quality	NA
 ep_066	en	66 Decrease of wave impact	066_wave_decr
+ep_066_explan	en	A decrease in wave impact that has a direct negative effect on the considered aquatic or semi-terrestrial community, either through a change in mechanical impact or through negative effects on water or soil quality	NA
 ep_07.1	en	7.1 Desalination through groundwater	07.1_desal_gw
 ep_07.2	en	7.2 Desalination through surface water (including inundation)	07.2_desal_sw
 ep_07.3	en	7.3 Salinization through groundwater	07.3_salin_gw
@@ -301,7 +310,7 @@ terr	en	terrestrial	NA
 2170	nl	Duinen met Salix repens ssp. argentea (Salicion arenaria)	kruipwilgstruwelen
 2180	nl	Beboste duinen van het Atlantische, Continentale en Boreale kustgebied	duinbossen
 2190	nl	Vochtige duinvalleien	vochtige duinvalleien
-2190_a	nl	habitatwaardige plassen in vochtige duinvalleien  (als 2190 in de Habitatkaart; enkel via extra selectie in de BWK-velden te selecteren)	duinplassen
+2190_a	nl	Vochtige duinvalleien (open water)	duinplassen
 2190_mp	nl	duinpannen met kalkminnende vegetaties	duinpannen (kalkrijk)
 2190_overig	nl	overige vegetaties in vochtige duinvalleien  (als 2190 in de Habitatkaart; enkel via extra selectie in de BWK-velden te selecteren)	vochtige duinvalleien - overige vegetaties
 2310	nl	Psammofiele heide met Calluna en Genista	droge heide op landduinen
@@ -430,6 +439,7 @@ HC2	nl	Tijdelijk tot permanent nat	Nat
 HC23	nl	Tijdelijk tot permanent nat + Oppervlaktewater	Nat + Oppervlaktewater
 HC3	nl	Oppervlaktewater	Oppervlaktewater
 HQ1330	nl	Meetnet habitatkwaliteit: Atlantische schorren	Meetnet habitatkwaliteit 1330
+HQ2120	nl	Meetnet habitatkwaliteit: wandelende duinen	Meetnet habitatkwaliteit 2120
 HQ2130	nl	Meetnet habitatkwaliteit: vastgelegde duinen	Meetnet habitatkwaliteit 2130
 HQ2160	nl	Meetnet habitatkwaliteit: duindoornstruwelen	Meetnet habitatkwaliteit 2160
 HQ2170	nl	Meetnet habitatkwaliteit: kruipwilgstruwelen	Meetnet habitatkwaliteit 2170
@@ -482,6 +492,10 @@ SURF	nl	Oppervlaktewatermeetnet	NA
 SURF_012	nl	Oppervlaktewatermeetnet: milieudruk 012_boddyn_plus	SURF: 012_boddyn_plus
 SURF_03.2	nl	Oppervlaktewatermeetnet: milieudruk 03.2_eutr_bod	SURF: 03.2_eutr_bod
 SURF_03.4_lentic	nl	Oppervlaktewatermeetnet: milieudruk 03.4_eutr_ow: partim stilstaande wateren	SURF: 03.4_eutr_ow: lentic
+SURF_03.4_lentic_group1	nl	types van oligotroof milieu	oligotroof
+SURF_03.4_lentic_group2	nl	types van mesotroof milieu	mesotroof
+SURF_03.4_lentic_group3	nl	types van zwak eutroof milieu	zwak eutroof
+SURF_03.4_lentic_group4	nl	types van matig eutroof tot eutroof milieu	(matig) eutroof
 SURF_03.4_lotic	nl	Oppervlaktewatermeetnet: milieudruk 03.4_eutr_ow: partim stromende wateren	SURF: 03.4_eutr_ow: lotic
 SURF_064	nl	Oppervlaktewatermeetnet: milieudruk 064_owpeil_min	SURF: 064_owpeil_min
 SURF_066	nl	Oppervlaktewatermeetnet: milieudruk 066_golf_min	SURF: 066_golf_min
@@ -494,59 +508,71 @@ caves	nl	grotten	NA
 ep_011	nl	11 Aanpassing van de fysische structuur naar een blijvende nieuwe toestand (bodemcompactie, verharding, herprofilering, nieuw substraat, grondverzet, ...)	011_struct
 ep_011_explan	nl	Aard van het substraat of de ruimtelijke vorm van de fysische standplaats worden veranderd naar een blijvende nieuwe toestand, in zodanige mate dat dit de levensgemeenschap negatief beïnvloedt	NA
 ep_012	nl	12 Toename bodemdynamiek (erosie, omwoeling, verstuiving)	012_boddyn_plus
-ep_012_explan	nl	Een toename resp. afname van de frequentie van fysische bodemverstoring, in zodanige mate dat dit de levensgemeenschap negatief beïnvloedt. Dit kan terrestrisch of aquatisch zijn, en zowel betrekking hebben op verandering in frequentie van mechanische omwoeling/baggering/... door mensen, als op veranderingen in wind- of waterstroming die de bodemverstoring beïnvloeden.	NA
+ep_012_explan	nl	Een toename van de frequentie van fysische bodemverstoring, in zodanige mate dat dit de levensgemeenschap negatief beïnvloedt. Dit kan terrestrisch of aquatisch zijn, en zowel betrekking hebben op verandering in frequentie van mechanische omwoeling/baggering/... door mensen, als op veranderingen in wind- of waterstroming die de bodemverstoring beïnvloeden.	NA
 ep_013	nl	13 Afname bodemdynamiek (erosie, omwoeling, verstuiving)	013_boddyn_min
+ep_013_explan	nl	Een afname van de frequentie van fysische bodemverstoring, in zodanige mate dat dit de levensgemeenschap negatief beïnvloedt. Dit kan terrestrisch of aquatisch zijn, en zowel betrekking hebben op verandering in frequentie van mechanische omwoeling/baggering/... door mensen, als op veranderingen in wind- of waterstroming die de bodemverstoring beïnvloeden.	NA
 ep_014	nl	14 Verlies van aquatische connectiviteit	014_aqconn
 ep_014_explan	nl	Barrières en isolatie in het oppervlaktewater leiden tot een achteruitgang van levensgemeenschap(pen)	NA
 ep_015	nl	15 Verlies van terrestrische connectiviteit	015_terrconn
 ep_015_explan	nl	Barrières en isolatie in terrestrisch gebied leiden tot een achteruitgang van levensgemeenschap(pen)	NA
 ep_03.1	nl	3.1 Eutrofiëring via de lucht	03.1_eutr_atm
-ep_03.1_explan	nl	"Voor de levensgemeenschap beperkende nutriënten worden in zodanige mate aangerijkt of meer beschikbaar dat dit leidt tot een achteruitgang van deze levensgemeenschap. De nutriënten komen de standplaats binnen via resp.:
-* de lucht (depositie)
-* de bodem (toevoeging meststoffen, incl. inwaai op korte afstand, of vrijstelling uit de bodem van normaliter onbeschikbare nutriënten, in het bijzonder mineralisatie door verdroging) 
-* het grondwater (aanvoer via uittredend grondwater: ofwel van nutriënten, ofwel van sulfaat omwille van interne eutrofiëring)
-* het oppervlaktewater, inclusief overstromingswater en runoff (aanvoer van nutriënten, veelal met sediment - modderstromen inbegrepen)"	NA
+ep_03.1_explan	nl	Voor de levensgemeenschap beperkende nutriënten worden in zodanige mate aangerijkt of meer beschikbaar dat dit leidt tot een achteruitgang van deze levensgemeenschap. De nutriënten komen de standplaats binnen via de lucht (depositie).	NA
 ep_03.2	nl	3.2 Eutrofiëring via de bodem	03.2_eutr_bod
+ep_03.2_explan	nl	Voor de levensgemeenschap beperkende nutriënten worden in zodanige mate aangerijkt of meer beschikbaar dat dit leidt tot een achteruitgang van deze levensgemeenschap. De nutriënten komen de standplaats binnen via de bodem (toevoeging meststoffen, incl. inwaai op korte afstand, of vrijstelling uit de bodem van normaliter onbeschikbare nutriënten, in het bijzonder mineralisatie door verdroging).	NA
 ep_03.3	nl	3.3 Eutrofiëring via het grondwater	03.3_eutr_gw
+ep_03.3_explan	nl	Voor de levensgemeenschap beperkende nutriënten worden in zodanige mate aangerijkt of meer beschikbaar dat dit leidt tot een achteruitgang van deze levensgemeenschap. De nutriënten komen de standplaats binnen via het grondwater of worden intern vrijgesteld door de grondwateraanvoer van sulfaat (interne eutrofiëring).	NA
 ep_03.4	nl	3.4 Eutrofiëring via het oppervlaktewater (incl. overstromingswater en afspoeling)	03.4_eutr_ow
+ep_03.4_explan	nl	Voor de levensgemeenschap beperkende nutriënten worden in zodanige mate aangerijkt of meer beschikbaar dat dit leidt tot een achteruitgang van deze levensgemeenschap. De nutriënten komen de standplaats binnen via het oppervlaktewater, inclusief overstromingswater en runoff (aanvoer van nutriënten, veelal met sediment - modderstromen inbegrepen).	NA
 ep_04.1	nl	4.1 Verzuring via de lucht	04.1_verzu_atm
-ep_04.1_explan	nl	Daling van de pH van de standplaats in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De aangevoerde stoffen zijn ofwel zuren, ofwel stoffen die zuurvorming teweegbrengen in de standplaats. Aanvoer van deze stoffen gebeurt resp. via lucht, via grondwater of via oppervlaktewater (inclusief overstromingswater, runoff en stagnerend regenwater)	NA
+ep_04.1_explan	nl	Daling van de pH van de standplaats in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De aangevoerde stoffen zijn ofwel zuren, ofwel stoffen die zuurvorming teweegbrengen in de standplaats. Aanvoer van deze stoffen gebeurt via de lucht.	NA
 ep_04.2	nl	4.2 Verzuring via het grondwater	04.2_verzu_gw
+ep_04.2_explan	nl	Daling van de pH van de standplaats in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De aangevoerde stoffen zijn ofwel zuren, ofwel stoffen die zuurvorming teweegbrengen in de standplaats. Aanvoer van deze stoffen gebeurt via grondwater.	NA
 ep_04.3	nl	4.3 Verzuring via het oppervlaktewater (incl. overstromingswater en stagnerend regenwater)	04.3_verzu_ow
+ep_04.3_explan	nl	Daling van de pH van de standplaats in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De aangevoerde stoffen zijn ofwel zuren, ofwel stoffen die zuurvorming teweegbrengen in de standplaats. Aanvoer van deze stoffen gebeurt via oppervlaktewater (inclusief overstromingswater, runoff en stagnerend regenwater).	NA
 ep_05.1	nl	5.1 Verdroging via het grondwater	05.1_verdro_gw
-ep_05.1_explan	nl	Daling resp. stijging van grondwaterstanden (en regime), door veranderingen in grondwateronttrekking,  drainage, evapotranspiratie, …, in zodanige mate dat dit leidt tot achteruitgang van de terrestrische of aquatische levensgemeenschap. Peilregimewijzigingen van het oppervlaktewater vallen hieronder indien zij door de veranderingen in het grondwater zijn veroorzaakt.	NA
+ep_05.1_explan	nl	Daling van grondwaterstanden (en regime), door veranderingen in grondwateronttrekking, drainage, evapotranspiratie, …, in zodanige mate dat dit leidt tot achteruitgang van de terrestrische of aquatische levensgemeenschap. Peilregimewijzigingen van het oppervlaktewater vallen hieronder indien zij door de veranderingen in het grondwater zijn veroorzaakt.	Gevoeligheid voor milieudruk ep_05.1 definieert de zg. 'grondwaterafhankelijke' types (habitattypes/RBB). Het betreft de meeste types uit de waterhuishoudingsklassen 'tijdelijk tot permanent nat' en 'oppervlaktewater' volgens het systeemschema.
 ep_05.2	nl	5.2 Vernatting via het grondwater	05.2_vernat_gw
+ep_05.2_explan	nl	Stijging van grondwaterstanden (en regime), door veranderingen in grondwateronttrekking, drainage, evapotranspiratie, …, in zodanige mate dat dit leidt tot achteruitgang van de terrestrische of aquatische levensgemeenschap. Peilregimewijzigingen van het oppervlaktewater vallen hieronder indien zij door de veranderingen in het grondwater zijn veroorzaakt.	NA
 ep_061	nl	61 Toename overstromingsduur of -frequentie (incl. getijden)	061_overstr_plus
-ep_061_explan	nl	"Een toename resp. afname van het overstromingsregime van waterlopen in zodanige mate dat dit de beschouwde levensgemeenschap buiten het aquatische milieu negatief beïnvloedt. Dit gebeurt door de verandering in mechanische belasting (stroming/sediment), of door de zuurstof/CO2-armoede van overstromingswater.
-Milieudruk 61 is daarmee van toepassing op alle niet-aquatische types, milieudruk 62 op alle oppervlaktewaterafhankelijke niet-aquatische types (niet-aquatisch: betreft de types van de waterhuishoudingsklassen 'droog tot vochtig' en 'tijdelijk tot permanent nat' volgens systeemschema)."	NA
+ep_061_explan	nl	Een toename van het overstromingsregime van waterlopen in zodanige mate dat dit de beschouwde levensgemeenschap buiten het aquatische milieu negatief beïnvloedt. Dit gebeurt door de verandering in mechanische belasting (stroming/sediment), of door de armoede aan zuurstof en CO2 van het overstromingswater.	Milieudruk ep_061 is relevant voor terrestrische types (habitattypes/RBB). 'Terrestrisch' betreft de types van de waterhuishoudingsklassen 'droog tot vochtig' en 'tijdelijk tot permanent nat' volgens het systeemschema.
 ep_062	nl	62 Afname overstromingsduur of -frequentie (incl. getijden)	062_overstr_min
+ep_062_explan	nl	Een afname van het overstromingsregime van waterlopen in zodanige mate dat dit de beschouwde levensgemeenschap buiten het aquatische milieu negatief beïnvloedt. Dit gebeurt door de verandering in mechanische belasting (stroming/sediment), of door de armoede aan zuurstof en CO2 van het overstromingswater.	Gevoeligheid voor milieudruk ep_062 definieert de zg. 'overstromingsafhankelijke' types (deze zijn steeds terrestrisch). Het betreft een subset van types (habitattypes/RBB) uit de waterhuishoudingsklasse 'tijdelijk tot permanent nat' volgens het systeemschema.
 ep_063	nl	63 Toename van stroomsnelheid, waterpeil en/of de fluctuatie ervan	063_owpeil_plus
-ep_063_explan	nl	"Een toename resp. afname van de hydraulische of waterpeilregimekarakteristieken ter hoogte van de beschouwde aquatische of semi-terrestrische levensgemeenschap, in zodanige mate dat deze er negatief door wordt beïnvloed.
-Milieudrukken 63 en 64 zijn daarmee van toepassing op alle 'vrijwel steeds overstromingsgestuurde' types uitgezonderd 1310_pol, 1330_hpr, 6120, 6510_hua, 91E0_vn, 91F0, rbbsf en rbbzil."	NA
+ep_063_explan	nl	Een toename van de hydraulische of waterpeilregimekarakteristieken ter hoogte van de beschouwde aquatische of semi-terrestrische levensgemeenschap, in zodanige mate dat deze er negatief door wordt beïnvloed.	NA
 ep_064	nl	64 Afname van stroomsnelheid, waterpeil en/of de fluctuatie ervan	064_owpeil_min
+ep_064_explan	nl	Een afname van de hydraulische of waterpeilregimekarakteristieken ter hoogte van de beschouwde aquatische of semi-terrestrische levensgemeenschap, in zodanige mate dat deze er negatief door wordt beïnvloed.	NA
 ep_065	nl	65  Toename golfslagwerking	065_golf_plus
-ep_065_explan	nl	"Een toename resp. afname van de golfslagwerking ter hoogte van de beschouwde aquatische of semi-terrestrische levensgemeenschap, in zodanige mate dat deze er negatief door wordt beïnvloed. Dit kan gebeuren door verandering in de mechanische belasting van de levensgemeenschap, of via de effecten op water- of bodemkwaliteit.
-Milieudrukken 65 en 66 zijn daarmee van toepassing op alle 'vrijwel steeds overstromingsgestuurde' types uitgezonderd 1310_pol, 1330_hpr, 6120, 6510_hua, 91E0_vn, 91F0, rbbsf en rbbzil."	NA
+ep_065_explan	nl	Een toename van de golfslagwerking ter hoogte van de beschouwde aquatische of semi-terrestrische levensgemeenschap, in zodanige mate dat deze er negatief door wordt beïnvloed. Dit kan gebeuren door verandering in de mechanische belasting van de levensgemeenschap, of via de effecten op water- of bodemkwaliteit.	NA
 ep_066	nl	66  Afname golfslagwerking	066_golf_min
+ep_066_explan	nl	Een afname van de golfslagwerking ter hoogte van de beschouwde aquatische of semi-terrestrische levensgemeenschap, in zodanige mate dat deze er negatief door wordt beïnvloed. Dit kan gebeuren door verandering in de mechanische belasting van de levensgemeenschap, of via de effecten op water- of bodemkwaliteit.	NA
 ep_07.1	nl	7.1 Verzoeting via het grondwater	07.1_verzoet_gw
-ep_07.1_explan	nl	Toename resp. afname van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken grondwaterlichaam, resp. oppervlaktewaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. Het chloride is daarbij afkomstig uit het natuurlijk milieu (toevoeging van zouten valt onder milieudrukklasse 8)	NA
+ep_07.1_explan	nl	Afname van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken grondwaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap.	NA
 ep_07.2	nl	7.2 Verzoeting via het oppervlaktewater (incl. overstromingswater)	07.2_verzoet_ow
+ep_07.2_explan	nl	Afname van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken oppervlaktewaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap.	NA
 ep_07.3	nl	7.3 Verzilting via het grondwater	07.3_verzilt_gw
+ep_07.3_explan	nl	Toename van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken grondwaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. Het chloride is daarbij afkomstig uit het natuurlijk milieu (toevoeging van zouten valt onder milieudrukklasse 8).	NA
 ep_07.4	nl	7.4 Verzilting via het oppervlaktewater (incl. overstromingswater)	07.4_verzilt_ow
+ep_07.4_explan	nl	Toename van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken oppervlaktewaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. Het chloride is daarbij afkomstig uit het natuurlijk milieu (toevoeging van zouten valt onder milieudrukklasse 8).	NA
 ep_08.1	nl	8.1 Verontreiniging via de lucht	08.1_verontr_atm
-ep_08.1_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffen), in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. Dit kan op verschillende manieren gebeuren, analoog aan deze van eutrofiëring (zie milieudrukklasse 3)	NA
+ep_08.1_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffen), in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De stoffen komen de standplaats binnen via de lucht (depositie).	NA
 ep_08.2	nl	8.2 Verontreiniging via de bodem	08.2_verontr_bod
+ep_08.2_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffen), in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De stoffen komen de standplaats binnen via de bodem (toevoeging stoffen, incl. inwaai op korte afstand, of vrijstelling uit de bodem van normaliter onbeschikbare stoffen).	NA
 ep_08.3	nl	8.3 Verontreiniging via het grondwater	08.3_verontr_gw
+ep_08.3_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffen), in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De stoffen komen de standplaats binnen via het grondwater of worden intern vrijgesteld door de grondwateraanvoer van bv. sulfaat.	NA
 ep_08.4	nl	8.4 Verontreiniging via het oppervlaktewater (incl. overstromingswater)	08.4_verontr_ow
+ep_08.4_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffen), in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De stoffen komen de standplaats binnen via het oppervlaktewater, inclusief overstromingswater en runoff (aanvoer van stoffen, veelal met sediment - modderstromen inbegrepen).	NA
 ep_08.5	nl	8.5 Thermische verontreiniging: toename temperatuur oppervlaktewater	08.5_verontr_therm
 ep_08.5_explan	nl	Een toename van de watertemperatuur ter hoogte van de beschouwde aquatische of oeverlevensgemeenschap, in zodanige mate dat deze er negatief door wordt beïnvloed. De temperatuursverhoging is daarbij het gevolg van warm lozingswater	NA
 ep_09.1	nl	9.1 Geluid en trillingen	09.1_geluid
-ep_09.1_explan	nl	Menselijke activiteit die een gedragswijziging veroorzaakt en/of tot een verhoging van de mortaliteit leidt waardoor de natuurlijke dynamiek van populaties nadelig beïnvloed wordt.	NA
+ep_09.1_explan	nl	Een toename van geluid, infra- of ultrasone vormen van trillingen of druk in lucht, bodem en/of water die een gedragswijziging veroorzaakt en/of tot een verhoging van de mortaliteit leidt waardoor de natuurlijke dynamiek van populaties nadelig beïnvloed wordt.	NA
 ep_09.2	nl	9.2 Licht en straling	09.2_licht
+ep_09.2_explan	nl	Een wijziging van het natuurlijke stralingsniveau, door kunstmatige stralingsbronnen, die een gedragswijziging veroorzaakt en/of tot een verhoging van de mortaliteit leidt waardoor de natuurlijke dynamiek van populaties nadelig beïnvloed wordt.	NA
 ep_09.3	nl	9.3 Beweging en andere visuele verstoring	09.3_beweging
+ep_09.3_explan	nl	Een verstoring louter door de aanwezigheid en/of beweging van mensen, dan wel voorwerpen die niet thuishoren in een natuurlijke omgeving, die een gedragswijziging veroorzaakt en/of tot een verhoging van de mortaliteit leidt waardoor de natuurlijke dynamiek van populaties nadelig beïnvloed wordt.	NA
 ep_101	nl	101 Klimaatverandering in droge perioden	101_klim_droog
-ep_101_explan	nl	Een toename van temperatuur, wind en CO2 in de atmosfeer en een afname resp. toename van de neerslaghoeveelheden, inclusief extreme events. Dit treedt op gedurende een voor de levensgemeenschap betekenisvolle periode (bv. maand / seizoen), in zodanige mate dat deze er negatief door wordt beïnvloed, en waarbij de effecten supplementair zijn boven die van milieudrukken, ontstaan op gebiedsniveau. Dit met uitsluiting van rechtstreekse invloeden van zeespiegelstijging.	NA
+ep_101_explan	nl	Een toename van temperatuur, wind en CO2 in de atmosfeer en een afname van de neerslaghoeveelheden, inclusief extreme events. Dit treedt op gedurende een voor de levensgemeenschap betekenisvolle periode (bv. maand / seizoen), in zodanige mate dat deze er negatief door wordt beïnvloed, en waarbij de effecten supplementair zijn boven die van milieudrukken, ontstaan op gebiedsniveau. Dit met uitsluiting van rechtstreekse invloeden van zeespiegelstijging.	NA
 ep_102	nl	102 Klimaatverandering in natte perioden	102_klim_nat
+ep_102_explan	nl	Een toename van temperatuur, wind en CO2 in de atmosfeer en een toename van de neerslaghoeveelheden, inclusief extreme events. Dit treedt op gedurende een voor de levensgemeenschap betekenisvolle periode (bv. maand / seizoen), in zodanige mate dat deze er negatief door wordt beïnvloed, en waarbij de effecten supplementair zijn boven die van milieudrukken, ontstaan op gebiedsniveau. Dit met uitsluiting van rechtstreekse invloeden van zeespiegelstijging.	NA
 ep_103	nl	103 Klimaatverandering: zeespiegelstijging	103_klim_zee
 ep_103_explan	nl	De verhoging van de zeespiegel en de toename van het getijdenverschil als gevolg van klimaatverandering, in zodanige mate dat dit de beschouwde kust- of estuariene levensgemeenschap negatief beïnvloedt.	NA
 ep_class_01	nl	1 Ruimtebeslag	NA

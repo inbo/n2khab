@@ -7,7 +7,10 @@ layer}
 \usage{
 read_habitatsprings(
   path = fileman_up("n2khab_data"),
-  file = "10_raw/habitatsprings/habitatsprings.geojson"
+  file = "10_raw/habitatsprings/habitatsprings.geojson",
+  filter_hab = FALSE,
+  units_7220 = FALSE,
+  version = "habitatsprings_2020v2"
 )
 }
 \arguments{
@@ -22,6 +25,19 @@ starting from the working directory.}
 May include a path prefix.
 The default follows the data management advice in the
 vignette on data storage (run \code{vignette("v020_datastorage")}).}
+
+\item{filter_hab}{If \code{TRUE}, only points with (potential) habitat
+are returned. The default value is \code{FALSE}.}
+
+\item{units_7220}{If \code{TRUE}, an \code{sf} object of type-\code{7220}-locations is
+returned at the population unit level.
+To accomplish this, the data source is aggregated by \code{unit_id}.
+Multiple points belonging to the same unit are replaced by their
+centroid, their area attribute is summed (if all values are known)
+and for other attributes the maximum value is returned.}
+
+\item{version}{Version ID of the data source.
+Defaults to the latest available version defined by the package.}
 }
 \value{
 A Simple feature collection of
@@ -29,11 +45,16 @@ type \code{POINT}, with attribute variables:
 \itemize{
 \item \code{point_id}
 \item \code{name}: site name.
+\item \code{system_type}: environmental typology of \code{7220}: \code{mire},
+\code{rivulet} or \code{unknown} (non-\code{7220} types are \code{NA})
 \item \code{code_orig}: original vegetation code in raw
 \code{habitatsprings}.
 \item \code{type}: habitat type listed in \code{\link{types}}.
 \item \code{certain}: \code{TRUE} when vegetation type is certain and
 \code{FALSE} when vegetation type is uncertain.
+\item \code{unit_id}: population unit id for large scale sampling
+events.
+Spatially close points have the same value.
 \item \code{area_m2}: area as square meters.
 \item \code{year}: year of field inventory.
 \item \code{in_sac}: logical.
@@ -41,18 +62,25 @@ Is the site situated within a Special Area of Conservation?
 \item \code{source}: original data source of the record.
 }
 
-Note that the \code{type} variable has implicit \code{NA} values in this
-case
+Note that the \code{type} and \code{system_type} variables have
+implicit \code{NA} values
 (i.e. there is
 no factor level to represent the missing values).
 If you want this category to appear in certain results, you can add
 it as a level with
 \code{\link[forcats:fct_explicit_na]{forcats::fct_explicit_na()}}.
+
+With \code{units_7220 = TRUE}, variable \code{point_id} is dropped and
+an extra attribute variable \code{nr_of_points} is
+added.
+It represents the number of points that belong to each unit.
 }
 \description{
 Returns the raw data source \code{habitatsprings} as an \code{sf} point
 layer in the Belgian Lambert 72 CRS (EPSG-code
 \href{https://epsg.io/31370}{31370}).
+Optionally, a derived \code{sf} object of type-\code{7220}-locations can be
+returned at the population unit level, through aggregation by \code{unit_id}.
 }
 \details{
 The data source \code{habitatsprings} is a GeoJSON file (conforming to
@@ -71,10 +99,10 @@ the Flemish Region, Belgium.
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
-library(magrittr)
-library(sf)
 hs <- read_habitatsprings()
 hs
+hs2 <- read_habitatsprings(units_7220 = TRUE)
+hs2
 }
 
 }

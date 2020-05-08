@@ -1,12 +1,12 @@
 ..generic:
-  git2rdata: 0.2.0
+  git2rdata: 0.2.1
   optimize: yes
   NA string: NA
   sorting:
   - scheme
   - type
-  hash: 736c22a6ca6766924e60b74198e69eb22a3bffee
-  data_hash: 42f3b07e0ce27b34048a9534d5de9dd9ca07d315
+  hash: d53996fb20ed088cbf21c677565f549c7ceabedf
+  data_hash: ae3ae1799e5c494a50c6f1be8317cefa04ec94bf
 scheme:
   class: factor
   labels:
@@ -47,6 +47,7 @@ scheme:
   - SURF_08.2
   - SURF_08.4
   - HQ1330
+  - HQ2120
   - HQ2130
   - HQ2160
   - HQ2170
@@ -110,6 +111,7 @@ scheme:
   - 33
   - 34
   - 35
+  - 29
   - 36
   - 37
   - 38

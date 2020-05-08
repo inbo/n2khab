@@ -6,11 +6,12 @@
 
 ## Welcome
 
-The **n2khab** R package provides standard checklists (reference data) and preprocessing functions, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 (**n2k**) habitats (**hab**) and regionally important biotopes (RIBs).
+The **n2khab** R package provides preprocessing functions and standard reference data, supporting _reproducible_ and _transparent_ analyses on Flemish Natura 2000 (**n2k**) habitats (**hab**) and regionally important biotopes (RIBs).
 
 The package's core aim is to **provide readily standardized (preprocessed) data** in your R environment.
 This facilitates collaboration and reproducibility.
 
+The standard reference data include: checklists, spatial habitat distribution, administrative & environmental layers, GRTSmaster_habitats.
 
 ## Installing, testing and using the _n2khab_ package
 
@@ -34,10 +35,27 @@ help(package = "n2khab")
 # documentation of whole package: package?n2khab
 ```
 
+Please take note that you must set up the needed data sources as explained in `vignette("v020_datastorage")` and demonstrated in `vignette("v022_example")`.
+There is a major distinction between:
+
+- **raw data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-raw)), to be stored in a folder `n2khab_data/10_raw`;
+- **processed data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-processed)), to be stored in a folder `n2khab_data/20_processed`.
 
 ## You are welcome to contribute!
 
 Please have a look at our [contributing guide](.github/CONTRIBUTING.md)!
+
+
+## Intention for the future
+
+At a later date, the intention is to incorporate functionality to enhance workflow reproducibility and ease the setup:
+
+- let a user declare which versions of which data sources are used in an R workflow (at the beginning of a script or R markdown file);
+- perform checks whether the needed versions of those data sources are locally present;
+- if missing, download the needed data from the Zenodo collections.
+
+Currently these aspects must be taken care of in a more manual fashion.
+See `vignette("v022_example")` for example code to currently accomplish specific aspects.
 
 
 ## Background information
