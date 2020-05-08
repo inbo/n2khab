@@ -35,6 +35,11 @@ help(package = "n2khab")
 # documentation of whole package: package?n2khab
 ```
 
+Please take note that you must set up the needed data sources as explained in `vignette("v020_datastorage")` and demonstrated in `vignette("v022_example")`.
+There is a major distinction between:
+
+- **raw data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-raw)), to be stored in a folder `n2khab_data/10_raw`;
+- **processed data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-processed)), to be stored in a folder `n2khab_data/20_processed`.
 
 ## You are welcome to contribute!
 
