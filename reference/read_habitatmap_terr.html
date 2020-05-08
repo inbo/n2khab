@@ -49,7 +49,10 @@ as a list of two objects: habitatmap_terr_polygons, having the Belgian
 Lambert 72 CRS (EPSG-code 31370), and
 habitatmap_terr_types.
 habitatmap_terr is the further interpreted, terrestrial part of
-habitatmap_stdized (see read_habitatmap_stdized)." />
+habitatmap_stdized (see read_habitatmap_stdized).
+By default, occurrences of type 7220 are dropped because a more
+reliable data source is available for this habitat type (see drop_7220
+argument)." />
 
 
 
@@ -81,7 +84,7 @@ habitatmap_stdized (see read_habitatmap_stdized)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -108,6 +111,9 @@ habitatmap_stdized (see read_habitatmap_stdized)." />
     </li>
     <li>
       <a href="../articles/v020_datastorage.html">Where to store the N2KHAB input data sources</a>
+    </li>
+    <li>
+      <a href="../articles/v022_example.html">Demonstrating package &amp; data setup and handling of sf objects: a case with read_soilmap()</a>
     </li>
     <li>
       <a href="../articles/v025_geospatial_hab.html">Working with geospatial data sources of habitat (sub)types and RIBs</a>
@@ -153,13 +159,17 @@ as a list of two objects: <code>habitatmap_terr_polygons</code>, having the Belg
 Lambert 72 CRS (EPSG-code <a href='https://epsg.io/31370'>31370</a>), and
 <code>habitatmap_terr_types</code>.
 <code>habitatmap_terr</code> is the further interpreted, terrestrial part of
-<code>habitatmap_stdized</code> (see <code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a></code>).</p>
+<code>habitatmap_stdized</code> (see <code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a></code>).
+By default, occurrences of type <code>7220</code> are dropped because a more
+reliable data source is available for this habitat type (see <code>drop_7220</code>
+argument).</p>
     </div>
 
     <pre class="usage"><span class='fu'>read_habitatmap_terr</span>(
   <span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='fileman_up.html'>fileman_up</a></span>(<span class='st'>"n2khab_data"</span>),
   <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"20_processed/habitatmap_terr/habitatmap_terr.gpkg"</span>,
   <span class='kw'>keep_aq_types</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>drop_7220</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"habitatmap_terr_2018_v2"</span>
 )</pre>
 
@@ -196,6 +206,16 @@ discard all aquatic types in 'mixed' aquatic/terrestrial polygons.
 As each polygon always has at least one (semi-)terrestrial type,
 this will not affect the number of polygons returned,
 only the number of types.</p></td>
+    </tr>
+    <tr>
+      <th>drop_7220</th>
+      <td><p>Logical; <code>TRUE</code> by default.
+Should occurrences of type <code>7220</code> be dropped from the result?
+To get more accurate information about type <code>7220</code>, notably its
+occurrences, surface area and other characteristics, it is advised
+to use the <code>habitatsprings</code> data source and not
+<code>habitatmap_terr</code> - see
+<code><a href='read_habitatsprings.html'>read_habitatsprings()</a></code>.</p></td>
     </tr>
     <tr>
       <th>version</th>

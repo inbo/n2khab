@@ -47,7 +47,7 @@
 and, under certain conditions, adds new rows with codes of the associated
 subtypes and main types, respectively.
 It allows to do sensible selections and joins with interpreted forms of the
-habitatmap_stdized and watersurfaces data sources:
+habitatmap_stdized and watersurfaces_hab data sources:
 habitatmap_terr,
 read_watersurfaces_hab(interpreted = TRUE).
 If the dataframe has one or more grouping variables, by default the
@@ -83,7 +83,7 @@ operation is done independently for each group in turn." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -110,6 +110,9 @@ operation is done independently for each group in turn." />
     </li>
     <li>
       <a href="../articles/v020_datastorage.html">Where to store the N2KHAB input data sources</a>
+    </li>
+    <li>
+      <a href="../articles/v022_example.html">Demonstrating package &amp; data setup and handling of sf objects: a case with read_soilmap()</a>
     </li>
     <li>
       <a href="../articles/v025_geospatial_hab.html">Working with geospatial data sources of habitat (sub)types and RIBs</a>
@@ -154,7 +157,7 @@ operation is done independently for each group in turn." />
 and, under certain conditions, adds new rows with codes of the associated
 <em>subtypes</em> and <em>main types</em>, respectively.
 It allows to do sensible selections and joins with interpreted forms of the
-<code>habitatmap_stdized</code> and <code>watersurfaces</code> data sources:
+<code>habitatmap_stdized</code> and <code>watersurfaces_hab</code> data sources:
 <code>habitatmap_terr</code>,
 <code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab(interpreted = TRUE)</a></code>.
 If the dataframe has one or more grouping variables, by default the
@@ -241,7 +244,7 @@ main type but to an non-defined subtype with no specific code).</p>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span>
     <span class='fu'><a href='read_scheme_types.html'>read_scheme_types</a></span>() <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>scheme</span> <span class='kw'>==</span> <span class='st'>"GW_05.1_terr"</span>)
-<span class='fu'>expand_types</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; # A tibble: 61 x 5
+<span class='fu'>expand_types</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; # A tibble: 62 x 5
 #&gt;    scheme    type    typegroup      typegroup_name             typegroup_shortn…
 #&gt;    &lt;fct&gt;     &lt;fct&gt;   &lt;fct&gt;          &lt;fct&gt;                      &lt;fct&gt;            
 #&gt;  1 GW_05.1_… 1310_p… GW_05.1_terr_… types from moderately wet… moderately wet   
@@ -254,7 +257,7 @@ main type but to an non-defined subtype with no specific code).</p>
 #&gt;  8 GW_05.1_… 2130_hd GW_05.1_terr_… types from dry environmen… dry              
 #&gt;  9 GW_05.1_… 2160    GW_05.1_terr_… types from moist environm… moist            
 #&gt; 10 GW_05.1_… 2170    GW_05.1_terr_… types from moist environm… moist            
-#&gt; # … with 51 more rows</div><div class='input'><span class='fu'>expand_types</span>(<span class='no'>x</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 62 x 5
+#&gt; # … with 52 more rows</div><div class='input'><span class='fu'>expand_types</span>(<span class='no'>x</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 63 x 5
 #&gt;    scheme    type    typegroup      typegroup_name             typegroup_shortn…
 #&gt;    &lt;fct&gt;     &lt;fct&gt;   &lt;fct&gt;          &lt;fct&gt;                      &lt;fct&gt;            
 #&gt;  1 GW_05.1_… 1310_p… GW_05.1_terr_… types from moderately wet… moderately wet   
@@ -267,12 +270,12 @@ main type but to an non-defined subtype with no specific code).</p>
 #&gt;  8 GW_05.1_… 2130_hd GW_05.1_terr_… types from dry environmen… dry              
 #&gt;  9 GW_05.1_… 2160    GW_05.1_terr_… types from moist environm… moist            
 #&gt; 10 GW_05.1_… 2170    GW_05.1_terr_… types from moist environm… moist            
-#&gt; # … with 52 more rows</div><div class='input'>
+#&gt; # … with 53 more rows</div><div class='input'>
 <span class='no'>x</span> <span class='kw'>&lt;-</span>
     <span class='fu'><a href='read_scheme_types.html'>read_scheme_types</a></span>() <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>scheme</span> <span class='kw'>==</span> <span class='st'>"GW_05.1_terr"</span>) <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>typegroup</span>)
-<span class='fu'>expand_types</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; # A tibble: 58 x 5
+<span class='fu'>expand_types</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; # A tibble: 59 x 5
 #&gt; # Groups:   typegroup [5]
 #&gt;    scheme    type    typegroup      typegroup_name             typegroup_shortn…
 #&gt;    &lt;fct&gt;     &lt;fct&gt;   &lt;fct&gt;          &lt;fct&gt;                      &lt;fct&gt;            
@@ -286,7 +289,7 @@ main type but to an non-defined subtype with no specific code).</p>
 #&gt;  8 GW_05.1_… 6430_hw GW_05.1_terr_… types from moderately wet… moderately wet   
 #&gt;  9 GW_05.1_… rbbhc   GW_05.1_terr_… types from moderately wet… moderately wet   
 #&gt; 10 GW_05.1_… rbbhf   GW_05.1_terr_… types from moderately wet… moderately wet   
-#&gt; # … with 48 more rows</div><div class='input'><span class='fu'>expand_types</span>(<span class='no'>x</span>, <span class='kw'>use_grouping</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='co'># equals above example</span></div><div class='output co'>#&gt; # A tibble: 61 x 5
+#&gt; # … with 49 more rows</div><div class='input'><span class='fu'>expand_types</span>(<span class='no'>x</span>, <span class='kw'>use_grouping</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='co'># equals above example</span></div><div class='output co'>#&gt; # A tibble: 62 x 5
 #&gt; # Groups:   typegroup [5]
 #&gt;    scheme    type    typegroup      typegroup_name             typegroup_shortn…
 #&gt;    &lt;fct&gt;     &lt;fct&gt;   &lt;fct&gt;          &lt;fct&gt;                      &lt;fct&gt;            
@@ -300,7 +303,7 @@ main type but to an non-defined subtype with no specific code).</p>
 #&gt;  8 GW_05.1_… 2130_hd GW_05.1_terr_… types from dry environmen… dry              
 #&gt;  9 GW_05.1_… 2160    GW_05.1_terr_… types from moist environm… moist            
 #&gt; 10 GW_05.1_… 2170    GW_05.1_terr_… types from moist environm… moist            
-#&gt; # … with 51 more rows</div><div class='input'>
+#&gt; # … with 52 more rows</div><div class='input'>
 <span class='no'>x</span> <span class='kw'>&lt;-</span>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>tribble</a></span>(
         ~<span class='no'>mycode</span>, ~<span class='no'>obs</span>,

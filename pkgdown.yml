@@ -4,9 +4,10 @@ pkgdown_sha: ~
 articles:
   v010_reference_lists: v010_reference_lists.html
   v020_datastorage: v020_datastorage.html
+  v022_example: v022_example.html
   v025_geospatial_hab: v025_geospatial_hab.html
   v030_GRTSmh: v030_GRTSmh.html
-last_built: 2020-04-10T15:46Z
+last_built: 2020-05-08T17:59Z
 urls:
   reference: https://inbo.github.io/n2khab/reference
   article: https://inbo.github.io/n2khab/articles

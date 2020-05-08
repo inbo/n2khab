@@ -46,7 +46,9 @@ layer — read_habitatsprings • n2khab</title>
 layer — read_habitatsprings" />
 <meta property="og:description" content="Returns the raw data source habitatsprings as an sf point
 layer in the Belgian Lambert 72 CRS (EPSG-code
-31370)." />
+31370).
+Optionally, a derived sf object of type-7220-locations can be
+returned at the population unit level, through aggregation by unit_id." />
 
 
 
@@ -78,7 +80,7 @@ layer in the Belgian Lambert 72 CRS (EPSG-code
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -105,6 +107,9 @@ layer in the Belgian Lambert 72 CRS (EPSG-code
     </li>
     <li>
       <a href="../articles/v020_datastorage.html">Where to store the N2KHAB input data sources</a>
+    </li>
+    <li>
+      <a href="../articles/v022_example.html">Demonstrating package &amp; data setup and handling of sf objects: a case with read_soilmap()</a>
     </li>
     <li>
       <a href="../articles/v025_geospatial_hab.html">Working with geospatial data sources of habitat (sub)types and RIBs</a>
@@ -147,12 +152,17 @@ layer</h1>
     <div class="ref-description">
     <p>Returns the raw data source <code>habitatsprings</code> as an <code>sf</code> point
 layer in the Belgian Lambert 72 CRS (EPSG-code
-<a href='https://epsg.io/31370'>31370</a>).</p>
+<a href='https://epsg.io/31370'>31370</a>).
+Optionally, a derived <code>sf</code> object of type-<code>7220</code>-locations can be
+returned at the population unit level, through aggregation by <code>unit_id</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>read_habitatsprings</span>(
   <span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='fileman_up.html'>fileman_up</a></span>(<span class='st'>"n2khab_data"</span>),
-  <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"10_raw/habitatsprings/habitatsprings.geojson"</span>
+  <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"10_raw/habitatsprings/habitatsprings.geojson"</span>,
+  <span class='kw'>filter_hab</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>units_7220</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"habitatsprings_2020v2"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -174,6 +184,25 @@ May include a path prefix.
 The default follows the data management advice in the
 vignette on data storage (run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>).</p></td>
     </tr>
+    <tr>
+      <th>filter_hab</th>
+      <td><p>If <code>TRUE</code>, only points with (potential) habitat
+are returned. The default value is <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>units_7220</th>
+      <td><p>If <code>TRUE</code>, an <code>sf</code> object of type-<code>7220</code>-locations is
+returned at the population unit level.
+To accomplish this, the data source is aggregated by <code>unit_id</code>.
+Multiple points belonging to the same unit are replaced by their
+centroid, their area attribute is summed (if all values are known)
+and for other attributes the maximum value is returned.</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>Version ID of the data source.
+Defaults to the latest available version defined by the package.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -182,11 +211,16 @@ vignette on data storage (run <code><a href='../articles/v020_datastorage.html'>
 type <code>POINT</code>, with attribute variables:</p><ul>
 <li><p><code>point_id</code></p></li>
 <li><p><code>name</code>: site name.</p></li>
+<li><p><code>system_type</code>: environmental typology of <code>7220</code>: <code>mire</code>,
+<code>rivulet</code> or <code>unknown</code> (non-<code>7220</code> types are <code>NA</code>)</p></li>
 <li><p><code>code_orig</code>: original vegetation code in raw
 <code>habitatsprings</code>.</p></li>
 <li><p><code>type</code>: habitat type listed in <code><a href='types.html'>types</a></code>.</p></li>
 <li><p><code>certain</code>: <code>TRUE</code> when vegetation type is certain and
 <code>FALSE</code> when vegetation type is uncertain.</p></li>
+<li><p><code>unit_id</code>: population unit id for large scale sampling
+events.
+Spatially close points have the same value.</p></li>
 <li><p><code>area_m2</code>: area as square meters.</p></li>
 <li><p><code>year</code>: year of field inventory.</p></li>
 <li><p><code>in_sac</code>: logical.
@@ -194,13 +228,17 @@ Is the site situated within a Special Area of Conservation?</p></li>
 <li><p><code>source</code>: original data source of the record.</p></li>
 </ul>
 
-<p>Note that the <code>type</code> variable has implicit <code>NA</code> values in this
-case
+<p>Note that the <code>type</code> and <code>system_type</code> variables have
+implicit <code>NA</code> values
 (i.e. there is
 no factor level to represent the missing values).
 If you want this category to appear in certain results, you can add
 it as a level with
 <code><a href='https://forcats.tidyverse.org/reference/fct_explicit_na.html'>forcats::fct_explicit_na()</a></code>.</p>
+<p>With <code>units_7220 = TRUE</code>, variable <code>point_id</code> is dropped and
+an extra attribute variable <code>nr_of_points</code> is
+added.
+It represents the number of points that belong to each unit.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The data source <code>habitatsprings</code> is a GeoJSON file (conforming to
@@ -219,10 +257,10 @@ the Flemish Region, Belgium.</p>
 <span class='co'># In all other cases, this example won't work but at least you can</span>
 <span class='co'># consider what to do.</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>magrittr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sf</span>)
 <span class='no'>hs</span> <span class='kw'>&lt;-</span> <span class='fu'>read_habitatsprings</span>()
 <span class='no'>hs</span>
+<span class='no'>hs2</span> <span class='kw'>&lt;-</span> <span class='fu'>read_habitatsprings</span>(<span class='kw'>units_7220</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>hs2</span>
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

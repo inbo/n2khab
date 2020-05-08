@@ -77,7 +77,7 @@ in English by default." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -104,6 +104,9 @@ in English by default." />
     </li>
     <li>
       <a href="../articles/v020_datastorage.html">Where to store the N2KHAB input data sources</a>
+    </li>
+    <li>
+      <a href="../articles/v022_example.html">Demonstrating package &amp; data setup and handling of sf objects: a case with read_soilmap()</a>
     </li>
     <li>
       <a href="../articles/v025_geospatial_hab.html">Working with geospatial data sources of habitat (sub)types and RIBs</a>
@@ -197,9 +200,9 @@ scheme attributes, type, typeclass and tags of scheme and type?</p></td>
     <p>The <code>scheme_types</code> dataframe as a <code><a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tibble</a></code>,
 with names &amp; shortnames added for the typegroup variable and optionally for
 scheme, programme,
-scheme attributes, type, typeclass and tags of scheme and type, all
+scheme attributes, type and attributes &amp; tags of scheme and type, all
 according to the <code>lang</code> argument.
-The tibble has either 5 or 44 variables, depending on the <code>extended</code>
+The tibble has either 5 or many variables, depending on the <code>extended</code>
 argument.
 See <code><a href='scheme_types.html'>scheme_types</a></code> for documentation of the data-source's contents.
 See <code><a href='namelist.html'>namelist</a></code> for the link between codes or other identifiers
@@ -224,6 +227,12 @@ following variables:</p><ul>
 <li><p><code>type_name</code></p></li>
 <li><p><code>type_shortname</code></p></li>
 <li><p><code>typeclass_name</code></p></li>
+<li><p><code>hydr_class_name</code></p></li>
+<li><p><code>hydr_class_shortname</code></p></li>
+<li><p><code>groundw_dep_name</code></p></li>
+<li><p><code>groundw_dep_shortname</code></p></li>
+<li><p><code>flood_dep_name</code></p></li>
+<li><p><code>flood_dep_shortname</code></p></li>
 <li><p><code>typetag_1_name</code></p></li>
 <li><p><code>typetag_1_shortname</code></p></li>
 <li><p><code>typetag_2_name</code></p></li>
@@ -232,9 +241,9 @@ following variables:</p><ul>
 <li><p><code>typetag_3_shortname</code></p></li>
 </ul>
 
-<p>The added names and shortnames for scheme, programme, typeclass,
+<p>The added names and shortnames for scheme, programme,
 attributes and typegroup are <em>factors</em> with their level order according
-to that of the scheme, programme, typeclass, attribute or typegroup variable.</p>
+to that of the scheme, programme, attribute or typegroup variable.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code><a href='scheme_types.html'>scheme_types</a></code> is a data source in the
@@ -269,7 +278,7 @@ names (<code>lang = "en"</code>) are returned.</p>
 <code><a href='read_types.html'>read_types</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>read_scheme_types</span>()</div><div class='output co'>#&gt; # A tibble: 759 x 5
+    <pre class="examples"><div class='input'><span class='fu'>read_scheme_types</span>()</div><div class='output co'>#&gt; # A tibble: 763 x 5
 #&gt;    scheme   type    typegroup     typegroup_name           typegroup_shortname  
 #&gt;    &lt;fct&gt;    &lt;fct&gt;   &lt;fct&gt;         &lt;fct&gt;                    &lt;fct&gt;                
 #&gt;  1 ATM_03.1 1310_p… ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest 
@@ -282,7 +291,7 @@ names (<code>lang = "en"</code>) are returned.</p>
 #&gt;  8 ATM_03.1 2120    ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest 
 #&gt;  9 ATM_03.1 2130_h… ATM_03.1_gro… very sensitive non-fore… very sensitive non-f…
 #&gt; 10 ATM_03.1 2130_hd ATM_03.1_gro… very sensitive non-fore… very sensitive non-f…
-#&gt; # … with 749 more rows</div><div class='input'><span class='fu'>read_scheme_types</span>(<span class='kw'>lang</span> <span class='kw'>=</span> <span class='st'>"nl"</span>)</div><div class='output co'>#&gt; # A tibble: 759 x 5
+#&gt; # … with 753 more rows</div><div class='input'><span class='fu'>read_scheme_types</span>(<span class='kw'>lang</span> <span class='kw'>=</span> <span class='st'>"nl"</span>)</div><div class='output co'>#&gt; # A tibble: 763 x 5
 #&gt;    scheme   type     typegroup     typegroup_name           typegroup_shortname 
 #&gt;    &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;         &lt;fct&gt;                    &lt;fct&gt;               
 #&gt;  1 ATM_03.1 1310_pol ATM_03.1_gro… gevoelige niet-bostypes  gevoelig niet-bos   
@@ -295,7 +304,7 @@ names (<code>lang = "en"</code>) are returned.</p>
 #&gt;  8 ATM_03.1 2120     ATM_03.1_gro… gevoelige niet-bostypes  gevoelig niet-bos   
 #&gt;  9 ATM_03.1 2130_had ATM_03.1_gro… zeer gevoelige niet-bos… zeer gevoelig niet-…
 #&gt; 10 ATM_03.1 2130_hd  ATM_03.1_gro… zeer gevoelige niet-bos… zeer gevoelig niet-…
-#&gt; # … with 749 more rows</div><div class='input'>
+#&gt; # … with 753 more rows</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

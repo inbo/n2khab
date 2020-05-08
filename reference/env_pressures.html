@@ -45,7 +45,7 @@
 <meta property="og:description" content="'env_pressures' is a data source in the
 vc-format which provides
 a checklist of environmental pressures, represented by codes, together
-with the pressure-class and the textual explanation.
+with the pressure-class and the textual explanation (with optional remarks).
 The codes of environmental pressures, pressure-classes and explanations
 are explained in the
 data source namelist (which can accommodate multiple
@@ -81,7 +81,7 @@ languages)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -108,6 +108,9 @@ languages)." />
     </li>
     <li>
       <a href="../articles/v020_datastorage.html">Where to store the N2KHAB input data sources</a>
+    </li>
+    <li>
+      <a href="../articles/v022_example.html">Demonstrating package &amp; data setup and handling of sf objects: a case with read_soilmap()</a>
     </li>
     <li>
       <a href="../articles/v025_geospatial_hab.html">Working with geospatial data sources of habitat (sub)types and RIBs</a>
@@ -150,7 +153,7 @@ languages)." />
     <p>'env_pressures' is a data source in the
 <a href='https://ropensci.github.io/git2rdata'>vc-format</a> which provides
 a checklist of environmental pressures, represented by codes, together
-with the pressure-class and the textual explanation.
+with the pressure-class and the textual explanation (with optional remarks).
 The codes of environmental pressures, pressure-classes and explanations
 are explained in the
 data source <code><a href='namelist.html'>namelist</a></code> (which can accommodate multiple
@@ -166,7 +169,7 @@ a dataframe with 35 rows and 3 variables:</p><dl'>
   <dt>ep_code</dt><dd><p>Code of the environmental pressure, as a factor.
   This is the ID for use in diverse workflows and datasets.
   Corresponding names and abbreviations
-  in multiple languages are to be found in <code><a href='namelist.html'>namelist</a></code>
+  in multiple languages are stored in <code><a href='namelist.html'>namelist</a></code>
   (as name and shortname, respectively).
   The abbreviation may be seen as an alternative, language-dependent code.
   Contains no duplicates!</p></dd>
@@ -174,9 +177,13 @@ a dataframe with 35 rows and 3 variables:</p><dl'>
   corresponding to the environmental pressure's class.
   Is a factor.</p></dd>
   <dt>explanation</dt><dd><p>A code explained by <code><a href='namelist.html'>namelist</a></code>,
-  corresponding to the explanation on the environmental pressure.</p></dd>
+  corresponding to the explanation on the environmental pressure, and
+  optional remarks.
+  Explanation and remarks are stored in <code><a href='namelist.html'>namelist</a></code>
+  (as name and shortname, respectively)</p></dd>
 
 </dl>
+
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>The latest worksheet of

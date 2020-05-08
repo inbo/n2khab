@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -62,6 +62,9 @@
     </li>
     <li>
       <a href="articles/v020_datastorage.html">Where to store the N2KHAB input data sources</a>
+    </li>
+    <li>
+      <a href="articles/v022_example.html">Demonstrating package &amp; data setup and handling of sf objects: a case with read_soilmap()</a>
     </li>
     <li>
       <a href="articles/v025_geospatial_hab.html">Working with geospatial data sources of habitat (sub)types and RIBs</a>
@@ -99,8 +102,9 @@
 <div id="welcome" class="section level2">
 <h2 class="hasAnchor">
 <a href="#welcome" class="anchor"></a>Welcome</h2>
-<p>The <strong>n2khab</strong> R package provides standard checklists (reference data) and preprocessing functions, supporting <em>reproducible</em> and <em>transparent</em> analyses on Flemish Natura 2000 (<strong>n2k</strong>) habitats (<strong>hab</strong>) and regionally important biotopes (RIBs).</p>
+<p>The <strong>n2khab</strong> R package provides preprocessing functions and standard reference data, supporting <em>reproducible</em> and <em>transparent</em> analyses on Flemish Natura 2000 (<strong>n2k</strong>) habitats (<strong>hab</strong>) and regionally important biotopes (RIBs).</p>
 <p>The package’s core aim is to <strong>provide readily standardized (preprocessed) data</strong> in your R environment. This facilitates collaboration and reproducibility.</p>
+<p>The standard reference data include: checklists, spatial habitat distribution, administrative &amp; environmental layers, GRTSmaster_habitats.</p>
 </div>
 <div id="installing-testing-and-using-the-n2khab-package" class="section level2">
 <h2 class="hasAnchor">
@@ -115,11 +119,29 @@
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"n2khab"</span>)
 <span class="co"># vignettes only: browseVignettes("n2khab")</span>
 <span class="co"># documentation of whole package: package?n2khab</span></pre></div>
+<p>Please take note that you must set up the needed data sources as explained in <code><a href="articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> and demonstrated in <code><a href="articles/v022_example.html">vignette("v022_example")</a></code>. There is a major distinction between:</p>
+<ul>
+<li>
+<strong>raw data</strong> (<a href="https://zenodo.org/communities/n2khab-data-raw">Zenodo-link</a>), to be stored in a folder <code>n2khab_data/10_raw</code>;</li>
+<li>
+<strong>processed data</strong> (<a href="https://zenodo.org/communities/n2khab-data-processed">Zenodo-link</a>), to be stored in a folder <code>n2khab_data/20_processed</code>.</li>
+</ul>
 </div>
 <div id="you-are-welcome-to-contribute" class="section level2">
 <h2 class="hasAnchor">
 <a href="#you-are-welcome-to-contribute" class="anchor"></a>You are welcome to contribute!</h2>
 <p>Please have a look at our <a href="CONTRIBUTING.html">contributing guide</a>!</p>
+</div>
+<div id="intention-for-the-future" class="section level2">
+<h2 class="hasAnchor">
+<a href="#intention-for-the-future" class="anchor"></a>Intention for the future</h2>
+<p>At a later date, the intention is to incorporate functionality to enhance workflow reproducibility and ease the setup:</p>
+<ul>
+<li>let a user declare which versions of which data sources are used in an R workflow (at the beginning of a script or R markdown file);</li>
+<li>perform checks whether the needed versions of those data sources are locally present;</li>
+<li>if missing, download the needed data from the Zenodo collections.</li>
+</ul>
+<p>Currently these aspects must be taken care of in a more manual fashion. See <code><a href="articles/v022_example.html">vignette("v022_example")</a></code> for example code to currently accomplish specific aspects.</p>
 </div>
 <div id="background-information" class="section level2">
 <h2 class="hasAnchor">

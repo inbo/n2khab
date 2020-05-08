@@ -76,7 +76,7 @@ by default filtered according to English names and shortnames." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -103,6 +103,9 @@ by default filtered according to English names and shortnames." />
     </li>
     <li>
       <a href="../articles/v020_datastorage.html">Where to store the N2KHAB input data sources</a>
+    </li>
+    <li>
+      <a href="../articles/v022_example.html">Demonstrating package &amp; data setup and handling of sf objects: a case with read_soilmap()</a>
     </li>
     <li>
       <a href="../articles/v025_geospatial_hab.html">Working with geospatial data sources of habitat (sub)types and RIBs</a>
@@ -211,7 +214,7 @@ names (<code>lang = "en"</code>) are returned.</p>
 <code><a href='read_types.html'>read_types</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>read_namelist</span>()</div><div class='output co'>#&gt; # A tibble: 282 x 4
+    <pre class="examples"><div class='input'><span class='fu'>read_namelist</span>()</div><div class='output co'>#&gt; # A tibble: 291 x 4
 #&gt;    code    lang  name                                    shortname              
 #&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;                                   &lt;chr&gt;                  
 #&gt;  1 1130    en    Estuaries                               Estuaries              
@@ -224,7 +227,7 @@ names (<code>lang = "en"</code>) are returned.</p>
 #&gt;  8 1330    en    Atlantic salt meadows (Glauco-Puccinel… Atlantic salt meadows  
 #&gt;  9 1330_da en    Saltmarshes dike outward                Saltmarshes dike outwa…
 #&gt; 10 1330_h… en    Halophytic grasslands dike inward       Halophytic grassland   
-#&gt; # … with 272 more rows</div><div class='input'><span class='fu'>read_namelist</span>(<span class='kw'>lang</span> <span class='kw'>=</span> <span class='st'>"nl"</span>)</div><div class='output co'>#&gt; # A tibble: 295 x 4
+#&gt; # … with 281 more rows</div><div class='input'><span class='fu'>read_namelist</span>(<span class='kw'>lang</span> <span class='kw'>=</span> <span class='st'>"nl"</span>)</div><div class='output co'>#&gt; # A tibble: 319 x 4
 #&gt;    code    lang  name                                       shortname           
 #&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;                                      &lt;chr&gt;               
 #&gt;  1 1130    nl    Estuaria                                   estuaria            
@@ -237,7 +240,7 @@ names (<code>lang = "en"</code>) are returned.</p>
 #&gt;  8 1330    nl    Atlantische schorren (Glauco-Puccinelliet… Atlantische schorren
 #&gt;  9 1330_da nl    buitendijkse schorren                      buitendijkse schor  
 #&gt; 10 1330_h… nl    binnendijkse zilte vegetaties: zilte gras… zilte graslanden    
-#&gt; # … with 285 more rows</div><div class='input'>
+#&gt; # … with 309 more rows</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

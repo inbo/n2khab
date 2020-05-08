@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -59,6 +59,9 @@
     </li>
     <li>
       <a href="../articles/v020_datastorage.html">Where to store the N2KHAB input data sources</a>
+    </li>
+    <li>
+      <a href="../articles/v022_example.html">Demonstrating package &amp; data setup and handling of sf objects: a case with read_soilmap()</a>
     </li>
     <li>
       <a href="../articles/v025_geospatial_hab.html">Working with geospatial data sources of habitat (sub)types and RIBs</a>
@@ -181,24 +184,24 @@
 <p>The <code>lang</code> argument is available in the below functions as well.</p>
 <p><code>env_pressures</code> is made available with:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/read_env_pressures.html">read_env_pressures</a></span>()
-<span class="co">#&gt; # A tibble: 35 x 6</span>
-<span class="co">#&gt;    ep_code ep_abbrev   ep_name               ep_class ep_class_name  explanation</span>
-<span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;       &lt;fct&gt;                 &lt;fct&gt;    &lt;fct&gt;          &lt;chr&gt;      </span>
-<span class="co">#&gt;  1 ep_011  011_struct  11 Change of physica… ep_clas… 1 Physical mo… &lt;NA&gt;       </span>
-<span class="co">#&gt;  2 ep_012  012_soildy… 12 Soil dynamics inc… ep_clas… 1 Physical mo… &lt;NA&gt;       </span>
-<span class="co">#&gt;  3 ep_013  013_soildy… 13 Soil dynamics dec… ep_clas… 1 Physical mo… &lt;NA&gt;       </span>
-<span class="co">#&gt;  4 ep_014  014_aqconn  14 Aquatic connectiv… ep_clas… 1 Physical mo… &lt;NA&gt;       </span>
-<span class="co">#&gt;  5 ep_015  015_terrco… 15 Terrestrial conne… ep_clas… 1 Physical mo… &lt;NA&gt;       </span>
-<span class="co">#&gt;  6 ep_03.1 03.1_eutr_… 3.1 Eutrophication t… ep_clas… 3 Eutrophicat… &lt;NA&gt;       </span>
-<span class="co">#&gt;  7 ep_03.2 03.2_eutr_… 3.2 Eutrophication t… ep_clas… 3 Eutrophicat… &lt;NA&gt;       </span>
-<span class="co">#&gt;  8 ep_03.3 03.3_eutr_… 3.3 Eutrophication t… ep_clas… 3 Eutrophicat… &lt;NA&gt;       </span>
-<span class="co">#&gt;  9 ep_03.4 03.4_eutr_… 3.4 Eutrophication t… ep_clas… 3 Eutrophicat… &lt;NA&gt;       </span>
-<span class="co">#&gt; 10 ep_04.1 04.1_acidi… 4.1 Acidification th… ep_clas… 4 Acidificati… &lt;NA&gt;       </span>
+<span class="co">#&gt; # A tibble: 35 x 7</span>
+<span class="co">#&gt;    ep_code ep_abbrev  ep_name        ep_class ep_class_name  explanation remarks</span>
+<span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;      &lt;fct&gt;          &lt;fct&gt;    &lt;fct&gt;          &lt;chr&gt;       &lt;chr&gt;  </span>
+<span class="co">#&gt;  1 ep_011  011_struct 11 Change of … ep_clas… 1 Physical mo… &lt;NA&gt;        &lt;NA&gt;   </span>
+<span class="co">#&gt;  2 ep_012  012_soild… 12 Soil dynam… ep_clas… 1 Physical mo… &lt;NA&gt;        &lt;NA&gt;   </span>
+<span class="co">#&gt;  3 ep_013  013_soild… 13 Soil dynam… ep_clas… 1 Physical mo… &lt;NA&gt;        &lt;NA&gt;   </span>
+<span class="co">#&gt;  4 ep_014  014_aqconn 14 Aquatic co… ep_clas… 1 Physical mo… &lt;NA&gt;        &lt;NA&gt;   </span>
+<span class="co">#&gt;  5 ep_015  015_terrc… 15 Terrestria… ep_clas… 1 Physical mo… &lt;NA&gt;        &lt;NA&gt;   </span>
+<span class="co">#&gt;  6 ep_03.1 03.1_eutr… 3.1 Eutrophic… ep_clas… 3 Eutrophicat… &lt;NA&gt;        &lt;NA&gt;   </span>
+<span class="co">#&gt;  7 ep_03.2 03.2_eutr… 3.2 Eutrophic… ep_clas… 3 Eutrophicat… &lt;NA&gt;        &lt;NA&gt;   </span>
+<span class="co">#&gt;  8 ep_03.3 03.3_eutr… 3.3 Eutrophic… ep_clas… 3 Eutrophicat… &lt;NA&gt;        &lt;NA&gt;   </span>
+<span class="co">#&gt;  9 ep_03.4 03.4_eutr… 3.4 Eutrophic… ep_clas… 3 Eutrophicat… &lt;NA&gt;        &lt;NA&gt;   </span>
+<span class="co">#&gt; 10 ep_04.1 04.1_acid… 4.1 Acidifica… ep_clas… 4 Acidificati… &lt;NA&gt;        &lt;NA&gt;   </span>
 <span class="co">#&gt; # … with 25 more rows</span></pre></body></html></div>
 <p>When actually using these reading functions, you will – of course – assign its result to an object. E.g. with the <code>schemes</code> reference list:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">schemes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/read_schemes.html">read_schemes</a></span>()
 <span class="no">schemes</span>
-<span class="co">#&gt; # A tibble: 62 x 25</span>
+<span class="co">#&gt; # A tibble: 63 x 25</span>
 <span class="co">#&gt;    scheme scheme_name scheme_shortname programme programme_name attribute_1</span>
 <span class="co">#&gt;    &lt;fct&gt;  &lt;fct&gt;       &lt;fct&gt;            &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;      </span>
 <span class="co">#&gt;  1 ATM_0… Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr… ATM        </span>
@@ -211,7 +214,7 @@
 <span class="co">#&gt;  8 GW_05… Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span>
 <span class="co">#&gt;  9 GW_05… Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span>
 <span class="co">#&gt; 10 GW_05… Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span>
-<span class="co">#&gt; # … with 52 more rows, and 19 more variables: attribute_2 &lt;fct&gt;,</span>
+<span class="co">#&gt; # … with 53 more rows, and 19 more variables: attribute_2 &lt;fct&gt;,</span>
 <span class="co">#&gt; #   attribute_3 &lt;fct&gt;, attribute_1_name &lt;fct&gt;, attribute_1_shortname &lt;fct&gt;,</span>
 <span class="co">#&gt; #   attribute_2_name &lt;fct&gt;, attribute_2_shortname &lt;fct&gt;,</span>
 <span class="co">#&gt; #   attribute_3_name &lt;fct&gt;, attribute_3_shortname &lt;fct&gt;,</span>
@@ -220,7 +223,7 @@
 <span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></pre></body></html></div>
 <p>The <code><a href="../reference/read_scheme_types.html">read_scheme_types()</a></code> function provides the extra ability to <em>toggle</em> the presence of most textual information, because these comprise many extra variables (combining all additional information of the concerned themes <em>and</em> the types). This behaviour is controlled by the argument <code>extended</code>, which is <code>FALSE</code> by default.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span>()
-<span class="co">#&gt; # A tibble: 759 x 5</span>
+<span class="co">#&gt; # A tibble: 763 x 5</span>
 <span class="co">#&gt;    scheme   type    typegroup     typegroup_name           typegroup_shortname  </span>
 <span class="co">#&gt;    &lt;fct&gt;    &lt;fct&gt;   &lt;fct&gt;         &lt;fct&gt;                    &lt;fct&gt;                </span>
 <span class="co">#&gt;  1 ATM_03.1 1310_p… ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest </span>
@@ -233,22 +236,23 @@
 <span class="co">#&gt;  8 ATM_03.1 2120    ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest </span>
 <span class="co">#&gt;  9 ATM_03.1 2130_h… ATM_03.1_gro… very sensitive non-fore… very sensitive non-f…</span>
 <span class="co">#&gt; 10 ATM_03.1 2130_hd ATM_03.1_gro… very sensitive non-fore… very sensitive non-f…</span>
-<span class="co">#&gt; # … with 749 more rows</span></pre></body></html></div>
+<span class="co">#&gt; # … with 753 more rows</span></pre></body></html></div>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span>(<span class="kw">extended</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="co">#&gt; # A tibble: 759 x 53</span>
-<span class="co">#&gt;    scheme type  typegroup scheme_name scheme_shortname programme programme_name</span>
-<span class="co">#&gt;    &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;     &lt;fct&gt;       &lt;fct&gt;            &lt;fct&gt;     &lt;fct&gt;         </span>
-<span class="co">#&gt;  1 ATM_0… 1310… ATM_03.1… Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr…</span>
-<span class="co">#&gt;  2 ATM_0… 1310… ATM_03.1… Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr…</span>
-<span class="co">#&gt;  3 ATM_0… 1310… ATM_03.1… Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr…</span>
-<span class="co">#&gt;  4 ATM_0… 1320  ATM_03.1… Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr…</span>
-<span class="co">#&gt;  5 ATM_0… 1330… ATM_03.1… Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr…</span>
-<span class="co">#&gt;  6 ATM_0… 1330… ATM_03.1… Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr…</span>
-<span class="co">#&gt;  7 ATM_0… 2110  ATM_03.1… Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr…</span>
-<span class="co">#&gt;  8 ATM_0… 2120  ATM_03.1… Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr…</span>
-<span class="co">#&gt;  9 ATM_0… 2130… ATM_03.1… Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr…</span>
-<span class="co">#&gt; 10 ATM_0… 2130… ATM_03.1… Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr…</span>
-<span class="co">#&gt; # … with 749 more rows, and 46 more variables: attribute_1 &lt;fct&gt;,</span>
+<span class="co">#&gt; # A tibble: 763 x 53</span>
+<span class="co">#&gt;    scheme type  typegroup typegroup_name typegroup_short… scheme_name</span>
+<span class="co">#&gt;    &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;            &lt;fct&gt;      </span>
+<span class="co">#&gt;  1 ATM_0… 1310… ATM_03.1… sensitive non… sensitive non-f… Atmospheri…</span>
+<span class="co">#&gt;  2 ATM_0… 1310… ATM_03.1… sensitive non… sensitive non-f… Atmospheri…</span>
+<span class="co">#&gt;  3 ATM_0… 1310… ATM_03.1… sensitive non… sensitive non-f… Atmospheri…</span>
+<span class="co">#&gt;  4 ATM_0… 1320  ATM_03.1… sensitive non… sensitive non-f… Atmospheri…</span>
+<span class="co">#&gt;  5 ATM_0… 1330… ATM_03.1… sensitive non… sensitive non-f… Atmospheri…</span>
+<span class="co">#&gt;  6 ATM_0… 1330… ATM_03.1… sensitive non… sensitive non-f… Atmospheri…</span>
+<span class="co">#&gt;  7 ATM_0… 2110  ATM_03.1… sensitive non… sensitive non-f… Atmospheri…</span>
+<span class="co">#&gt;  8 ATM_0… 2120  ATM_03.1… sensitive non… sensitive non-f… Atmospheri…</span>
+<span class="co">#&gt;  9 ATM_0… 2130… ATM_03.1… very sensitiv… very sensitive … Atmospheri…</span>
+<span class="co">#&gt; 10 ATM_0… 2130… ATM_03.1… very sensitiv… very sensitive … Atmospheri…</span>
+<span class="co">#&gt; # … with 753 more rows, and 47 more variables: scheme_shortname &lt;fct&gt;,</span>
+<span class="co">#&gt; #   programme &lt;fct&gt;, programme_name &lt;fct&gt;, attribute_1 &lt;fct&gt;,</span>
 <span class="co">#&gt; #   attribute_2 &lt;fct&gt;, attribute_3 &lt;fct&gt;, attribute_1_name &lt;fct&gt;,</span>
 <span class="co">#&gt; #   attribute_1_shortname &lt;fct&gt;, attribute_2_name &lt;fct&gt;,</span>
 <span class="co">#&gt; #   attribute_2_shortname &lt;fct&gt;, attribute_3_name &lt;fct&gt;,</span>
@@ -263,8 +267,7 @@
 <span class="co">#&gt; #   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, typetag_1 &lt;chr&gt;,</span>
 <span class="co">#&gt; #   typetag_1_name &lt;chr&gt;, typetag_1_shortname &lt;chr&gt;, typetag_2 &lt;chr&gt;,</span>
 <span class="co">#&gt; #   typetag_2_name &lt;chr&gt;, typetag_2_shortname &lt;chr&gt;, typetag_3 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   typetag_3_name &lt;chr&gt;, typetag_3_shortname &lt;chr&gt;, typegroup_name &lt;fct&gt;,</span>
-<span class="co">#&gt; #   typegroup_shortname &lt;fct&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   typetag_3_name &lt;chr&gt;, typetag_3_shortname &lt;chr&gt;</span></pre></body></html></div>
 <p>When you request all this extra information (some of which is currently empty), you will want to select the columns that you need with <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code>.</p>
 </div>
 <div class="footnotes">

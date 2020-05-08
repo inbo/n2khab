@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -100,6 +100,9 @@
     </li>
     <li>
       <a href="../articles/v020_datastorage.html">Where to store the N2KHAB input data sources</a>
+    </li>
+    <li>
+      <a href="../articles/v022_example.html">Demonstrating package &amp; data setup and handling of sf objects: a case with read_soilmap()</a>
     </li>
     <li>
       <a href="../articles/v025_geospatial_hab.html">Working with geospatial data sources of habitat (sub)types and RIBs</a>
@@ -137,6 +140,41 @@
       <small>Source: <a href='https://github.com/inbo/n2khab/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="n2khab-0-2-0" class="section level2">
+<h2 class="hasAnchor">
+<a href="#n2khab-0-2-0" class="anchor"></a>n2khab 0.2.0</h2>
+<div id="new-features" class="section level4">
+<h4 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h4>
+<ul>
+<li>Updates in reference lists (<a href='https://github.com/inbo/n2khab/issues/64'>#64</a>, <a href='https://github.com/inbo/n2khab/issues/65'>#65</a>, <a href='https://github.com/inbo/n2khab/issues/69'>#69</a>, <a href="https://github.com/inbo/n2khab/pull/73/commits/e69cd52">e69cd52</a>):
+<ul>
+<li>
+<code>types</code>: updates of flood dependency scores and hydrological class of several types, following several expert discussions and checks</li>
+<li>
+<code>schemes</code> &amp; <code>scheme_types</code>: updates regarding spatial restrictions, types and typegroup memberships of MNE schemes (for defining the schemes’ target populations); added MHQ scheme ‘HQ2120’</li>
+<li>
+<code>env_pressures</code>: updated explanations. Each pressure now has its own explanation</li>
+<li>
+<code>namelist</code>: according updates</li>
+</ul>
+</li>
+<li>
+<a href="https://rstudio.github.io/renv"><code>renv</code></a> framework implemented to enhance reproducibility of generating the built-in textual data sources (<a href='https://github.com/inbo/n2khab/issues/72'>#72</a>)</li>
+<li>
+<code><a href="../reference/read_env_pressures.html">read_env_pressures()</a></code>: an extra column ‘<code>remarks</code>’ is now returned (<a href='https://github.com/inbo/n2khab/issues/65'>#65</a>)</li>
+<li>New function <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code> for reading the <code>soilmap</code> or processed <code>soilmap_simple</code> data sources (<a href='https://github.com/inbo/n2khab/issues/29'>#29</a>; <a href="https://github.com/inbo/n2khab-preprocessing/pull/34">inbo/n2khab-preprocessing<a href='https://github.com/inbo/n2khab/issues/34'>#34</a></a>)</li>
+<li>Vignette to demonstrate package &amp; data setup, using <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code> as an example target (<a href='https://github.com/inbo/n2khab/issues/29'>#29</a>)</li>
+<li>
+<code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code> accommodates the latest version of the <code>habitatsprings</code> data source (<a href='https://github.com/inbo/n2khab/issues/62'>#62</a>, <a href="https://github.com/inbo/n2khab/pull/73/commits/5604002">5604002</a>)</li>
+<li>
+<code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code> optionally aggregates points to (population) units (<a href='https://github.com/inbo/n2khab/issues/70'>#70</a>)</li>
+<li>
+<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> now drops occurrences of type <code>7220</code> by default, given the information returned by <code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code> (<a href='https://github.com/inbo/n2khab/issues/71'>#71</a>)</li>
+</ul>
+<p>Further, a number of smaller fixes and enhancements were made.</p>
+</div>
+</div>
     <div id="n2khab-0-1-2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#n2khab-0-1-2" class="anchor"></a>n2khab 0.1.2</h2>
@@ -168,13 +206,13 @@
 <h4 class="hasAnchor">
 <a href="#features-of-the-first-stable-release" class="anchor"></a>Features of the first stable release</h4>
 <ul>
-<li>core reading and preprocessing functions</li>
-<li>several built-in checklists (among which: <code>types</code> and <code>env_pressures</code>)</li>
-<li>function documentation</li>
+<li>Core reading and preprocessing functions</li>
+<li>Several built-in checklists (among which: <code>types</code> and <code>env_pressures</code>)</li>
+<li>Function documentation</li>
 <li>4 tutorials (vignettes / articles)</li>
-<li>a reexport of <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> from <code>inborutils</code>
+<li>A reexport of <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> from <code>inborutils</code>
 </li>
-<li>website built with <code>pkgdown</code>
+<li>Website built with <code>pkgdown</code>
 </li>
 </ul>
 </div>
