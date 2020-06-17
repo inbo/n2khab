@@ -55,7 +55,7 @@ texture and drainage variables (\code{bsm_mo_substr}, \code{bsm_mo_tex} and
 This largely applies to features in the 'coastal plain' area.
 \itemize{
 \item To derive morphogenetic texture and drainage levels from the geomorphological
-ones, a conversion table by Bruno De Vos &
+soil types, a conversion table by Bruno De Vos &
 Carole Ampe is applied (for earlier work on this, see Ampe 2013).
 \item Substrate classes are copied over from \code{bsm_ge_substr} into \code{bsm_mo_substr}
 (\code{bsm_ge_substr} already follows the categories of \code{bsm_mo_substr}).

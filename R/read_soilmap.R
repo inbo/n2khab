@@ -70,7 +70,7 @@
 #' _for features with a geomorphological soil type code_.
 #' This largely applies to features in the 'coastal plain' area.
 #' - To derive morphogenetic texture and drainage levels from the geomorphological
-#' ones, a conversion table by Bruno De Vos &
+#' soil types, a conversion table by Bruno De Vos &
 #' Carole Ampe is applied (for earlier work on this, see Ampe 2013).
 #' - Substrate classes are copied over from `bsm_ge_substr` into `bsm_mo_substr`
 #' (`bsm_ge_substr` already follows the categories of `bsm_mo_substr`).
