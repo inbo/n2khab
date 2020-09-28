@@ -1388,14 +1388,14 @@ read_habitatquarries <-
                         layer = "extra_references")
             if (bibtex)
             {
-                message("You can copy below output into a *.bib file ",
-                        "for further use.\n")
                 if (!requireNamespace("bib2df", quietly = TRUE)) {
                     stop("Package \"bib2df\" is needed when bibtex = TRUE. ",
                          "Please install it from GitHub with: ",
                          "remotes::install_github(\"ropensci/bib2df\")",
                          call. = FALSE)
                 }
+                message("You can copy below output into a *.bib file ",
+                        "for further use.\n")
                 extra_references %>%
                     mutate(author = str_split(.data$author, " and ")) %>%
                     set_colnames(toupper(colnames(.))) %>%
