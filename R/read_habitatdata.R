@@ -1184,6 +1184,7 @@ read_habitatsprings <-
         filepath <- file.path(path, file)
         assert_that(file.exists(filepath))
         assert_that(is.flag(filter_hab), noNA(filter_hab))
+        assert_that(is.flag(units_7220), noNA(units_7220))
         assert_that(is.string(version))
 
         typelevels <-
