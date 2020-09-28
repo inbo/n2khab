@@ -49,7 +49,7 @@ Remotes:
     inbo/inborutils
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Suggests: 
     googledrive,
     knitr,
@@ -58,6 +58,7 @@ Suggests:
     readxl,
     remotes,
     rmarkdown,
+    sp,
     tidyverse,
     units
 VignetteBuilder: knitr
