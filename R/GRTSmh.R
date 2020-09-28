@@ -309,8 +309,6 @@ convert_base4frac_to_dec <-
 #' }
 #'
 #' @export
-#' @importFrom sf
-#' st_crs
 #' @importFrom raster
 #' raster
 #' brick
@@ -322,6 +320,12 @@ read_GRTSmh <-
              file = c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
                       "20_processed/GRTSmh_brick/GRTSmh_brick.tif"),
              brick = FALSE) {
+
+        if (!requireNamespace("sp", quietly = TRUE)) {
+            stop("Package \"sp\" is needed when using this function. ",
+                 "Please install it.",
+                 call. = FALSE)
+        }
 
         if (brick) {
             if (missing(file)) {
@@ -337,7 +341,7 @@ read_GRTSmh <-
                    }
             result <- r
         }
-        crs(result) <- st_crs(31370)$proj4string
+        crs(result) <- sp::CRS(SRS_string = "EPSG:31370")
         return(result)
     }
 
@@ -427,16 +431,21 @@ read_GRTSmh <-
 #' }
 #'
 #' @export
-#' @importFrom sf
-#' st_crs
 #' @importFrom raster
 #' raster
 #' crs<-
 read_GRTSmh_base4frac <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif") {
+
+        if (!requireNamespace("sp", quietly = TRUE)) {
+            stop("Package \"sp\" is needed when using this function. ",
+                 "Please install it.",
+                 call. = FALSE)
+        }
+
         r <- raster(file.path(path, file))
-        crs(r) <- st_crs(31370)$proj4string
+        crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
         return(r)
     }
 
@@ -579,7 +588,6 @@ read_GRTSmh_base4frac <-
 #' @importFrom stringr str_c
 #' @importFrom sf
 #' read_sf
-#' st_crs
 #' st_crs<-
 #' @importFrom raster
 #' raster
@@ -608,11 +616,17 @@ read_GRTSmh_diffres <-
 
         } else {
 
+            if (!requireNamespace("sp", quietly = TRUE)) {
+                stop("Package \"sp\" is needed when using this function. ",
+                     "Please install it.",
+                     call. = FALSE)
+            }
+
             r <- raster(file.path(path, subdir,
                              str_c("GRTSmh_diffres.",
                                    level, ".tif")))
             names(r) <- str_c("level", level)
-            crs(r) <- st_crs(31370)$proj4string
+            crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
             r
 
         }
