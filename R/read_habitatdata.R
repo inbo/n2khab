@@ -1262,3 +1262,180 @@ read_habitatsprings <-
 
     }
 
+
+
+
+
+
+
+#' Return the data source \code{habitatquarries}
+#'
+#' Returns the raw data source \code{habitatquarries} as an \code{sf} polygon
+#' layer in the Belgian Lambert 72 CRS (EPSG-code
+#' \href{https://epsg.io/31370}{31370}).
+#' Optionally, associated bibliographic references can be returned (arguments
+#' `references` or `bibtex`).
+#'
+#' The data source \code{habitatquarries} is a GeoPackage, available at
+#' \href{https://doi.org/10.5281/zenodo.xxxx}{Zenodo}, that contains:
+#' \itemize{
+#'   \item{\code{habitatquarries}: a spatial polygon layer that corresponds
+#'   with the presence or absence of the Natura 2000 Annex I habitat type `8310`
+#'   (Caves not open to the public) in the Flemish Region (and border areas),
+#'   Belgium;}
+#'   \item{\code{extra_references}: a non-spatial table of site-specific
+#'   bibliographic references.}
+#'   }
+#'
+#' In general, different polygons represent different quarry units with their
+#' own internal climatic environment.
+#' Units that cross Flemish borders have been split into separate polygons.
+#' Exceptionally they may overlap if such units are situated above each other.
+#'
+#' @param filter_hab If \code{TRUE}, only polygons with (known) habitat `8310`
+#' are returned.
+#' @param references If \code{TRUE}, a list is returned with both the `sf`
+#' object (element `habitatquarries`) and a dataframe of bibliographic
+#' references (element `extra_references`).
+#' @param bibtex If \code{TRUE}, all that happens is bibliographic references
+#' being printed to the console, formatted for usage in a BibTeX file (`*.bib`).
+#'
+#' @inheritParams read_habitatmap_stdized
+#'
+#' @return
+#' Depending on the arguments, one of:
+#' \itemize{
+#' \item a simple feature collection of
+#' type \code{POLYGON}, with attribute variables:
+#'   \itemize{
+#'     \item \code{polygon_id}: a unique number per polygon.
+#'     \item \code{unit_id}: a unique number for each quarry unit. Quarry units
+#'     consisting of several polygons (= partly outside the Flemish region)
+#'     have a number greater than 100.
+#'     \item \code{name}: site name.
+#'     \item \code{code_orig}: original 'habitattype' code in the raw data
+#'     source \code{habitatquarries}.
+#'     \item \code{type}: habitat type listed in \code{\link{types}} - in this
+#'     case either `8310` or missing (`NA`).
+#'     \item \code{extra_reference}: site-specific bibliographic reference(s).
+#'     Values refer to rows in the non-spatial dataframe `extra_references`.
+#'   }
+#' \item \emph{if `references = TRUE`:} a list with both the `sf`
+#' object (element `habitatquarries`) and a dataframe of bibliographic
+#' references (element `extra_references`).
+#' \item \emph{if `bibtex = TRUE`:} `NULL` (invisibly).
+#' }
+#'
+#' @md
+#'
+#' @examples
+#' \dontrun{
+#' # This example supposes that your working directory or a directory up to 10
+#' # levels above has the 'n2khab_data' folder AND that the 'habitatquarries'
+#' # data source is present in the default subdirectory.
+#' # In all other cases, this example won't work but at least you can
+#' # consider what to do.
+#'
+#' hq <- read_habitatquarries()
+#' hq
+#' hq2 <- read_habitatquarries(filter_hab = TRUE)
+#' hq2
+#' hq3 <- read_habitatquarries(references = TRUE)
+#' hq3
+#' read_habitatquarries(bibtex = TRUE)}
+#'
+#' @importFrom assertthat
+#' assert_that
+#' is.flag
+#' noNA
+#' is.string
+#' @importFrom stringr
+#' str_split
+#' @importFrom sf
+#' read_sf
+#' @importFrom rlang .data
+#' @importFrom magrittr
+#' set_colnames
+#' @importFrom dplyr
+#' %>%
+#' mutate
+#' select
+#' filter
+#' @export
+read_habitatquarries <-
+    function(path = fileman_up("n2khab_data"),
+             file = "10_raw/habitatquarries/habitatquarries.gpkg",
+             filter_hab = FALSE,
+             references = FALSE,
+             bibtex = FALSE,
+             version = "habitatquarries_2020v1"){
+
+        filepath <- file.path(path, file)
+        assert_that(file.exists(filepath))
+        assert_that(is.flag(filter_hab), noNA(filter_hab))
+        assert_that(is.flag(references), noNA(references))
+        assert_that(is.flag(bibtex), noNA(bibtex))
+        assert_that(is.string(version))
+
+        if ((references | filter_hab) & bibtex) {
+            warning("Will not read spatial layer when bibtex = TRUE. ",
+                    "Ignoring other argument(s) that are set to TRUE.")
+        }
+
+        if (references | bibtex) {
+            extra_references <-
+                read_sf(filepath,
+                        layer = "extra_references")
+            if (bibtex)
+            {
+                message("You can copy below output into a *.bib file ",
+                        "for further use.\n")
+                if (!requireNamespace("bib2df", quietly = TRUE)) {
+                    stop("Package \"bib2df\" is needed when bibtex = TRUE. ",
+                         "Please install it from GitHub with: ",
+                         "remotes::install_github(\"ropensci/bib2df\")",
+                         call. = FALSE)
+                }
+                extra_references %>%
+                    mutate(author = str_split(.data$author, " and ")) %>%
+                    set_colnames(toupper(colnames(.))) %>%
+                    bib2df::df2bib()
+                return(invisible(NULL))
+            }
+        }
+
+        typelevels <-
+            read_types() %>%
+            .$type %>%
+            levels
+
+        habitatquarries <-
+            suppressWarnings(
+                read_sf(filepath,
+                        layer = "habitatquarries",
+                        crs = 31370)
+            ) %>%
+            mutate(
+                type = ifelse(.data$habitattype == "8310",
+                              "8310",
+                              NA_character_) %>%
+                    factor(levels = typelevels),
+                extra_reference = factor(.data$extra_reference)
+            ) %>%
+            {if (filter_hab) filter(., !is.na(.$type)) else .} %>%
+            select(.data$polygon_id,
+                   .data$unit_id,
+                   .data$name,
+                   code_orig = .data$habitattype,
+                   .data$type,
+                   .data$extra_reference)
+
+if (references) {
+    habitatquarries <- list(habitatquarries = habitatquarries,
+                            extra_references = extra_references)
+}
+
+        return(habitatquarries)
+
+    }
+
