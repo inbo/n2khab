@@ -60,6 +60,7 @@ Suggests:
     readxl,
     remotes,
     rmarkdown,
+    sp,
     tidyverse,
     units
 VignetteBuilder: knitr
