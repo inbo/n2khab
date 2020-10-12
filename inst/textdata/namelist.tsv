@@ -138,7 +138,7 @@ GW_05.1_terr_group1	en	types from very wet environments	very wet
 GW_05.1_terr_group2	en	types from wet environments	wet
 GW_05.1_terr_group3	en	types from moderately wet environments	moderately wet
 GW_05.1_terr_group4	en	types from moist environments	moist
-GW_05.1_terr_group5	en	types from dry environments	dry
+GW_05.1_terr_group5	en	types from locally moist environments	locally moist
 GW_05.2	en	Groundwater monitoring: environmental pressure 05.2_wet_gw	GW: 05.2_wet_gw
 GW_07.1	en	Groundwater monitoring: environmental pressure 07.1_desal_gw	GW: 07.1_desal_gw
 GW_08.3	en	Groundwater monitoring: environmental pressure 08.3_poll_gw	GW: 08.3_poll_gw
@@ -429,7 +429,7 @@ GW_05.1_terr_group1	nl	types van zeer nat milieu	zeer nat
 GW_05.1_terr_group2	nl	types van nat milieu	nat
 GW_05.1_terr_group3	nl	types van matig nat milieu	matig nat
 GW_05.1_terr_group4	nl	types van vochtig milieu	vochtig
-GW_05.1_terr_group5	nl	types van droog milieu	droog
+GW_05.1_terr_group5	nl	types van lokaal vochtig milieu	lokaal vochtig
 GW_05.2	nl	Grondwatermeetnet: milieudruk 05.2_vernat_gw	GW: 05.2_vernat_gw
 GW_07.1	nl	Grondwatermeetnet: milieudruk 07.1_verzoet_gw	GW: 07.1_verzoet_gw
 GW_08.3	nl	Grondwatermeetnet: milieudruk 08.3_verontr_gw	GW: 08.3_verontr_gw

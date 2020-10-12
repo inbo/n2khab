@@ -463,8 +463,8 @@ tribble(~nr, ~lang, ~name, ~shortname,
         3, "nl", "types van matig nat milieu", "matig nat",
         4, "en", "types from moist environments", "moist",
         4, "nl", "types van vochtig milieu", "vochtig",
-        5, "en", "types from dry environments", "dry",
-        5, "nl", "types van droog milieu", "droog"
+        5, "en", "types from locally moist environments", "locally moist",
+        5, "nl", "types van lokaal vochtig milieu", "lokaal vochtig"
         ) %>% 
       mutate(code = str_c("GW_05.1_terr_group", code))
   ) %>% 
