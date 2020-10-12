@@ -68,11 +68,10 @@ read_admin_areas <-
             file <- file[str_detect(file, dsn)][1]
         }
 
-        filepath <- file
-        assert_that(file.exists(filepath))
+        assert_that(file.exists(file))
 
         suppressWarnings(
-            requested <- read_sf(filepath,
+            requested <- read_sf(file,
                                  crs = 31370)
         )
 

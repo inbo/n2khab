@@ -462,11 +462,10 @@ read_watersurfaces <-
                               "10_raw/watersurfaces"),
              extended = FALSE){
 
-        filepath <- file
-        assert_that(file.exists(filepath))
+        assert_that(file.exists(file))
 
         suppressWarnings(
-            watersurfaces <- read_sf(filepath,
+            watersurfaces <- read_sf(file,
                                      crs = 31370)
         )
 
@@ -635,11 +634,10 @@ read_habitatmap <-
     function(file = file.path(fileman_up("n2khab_data"), "10_raw/habitatmap"),
              filter_hab = FALSE){
 
-        filepath <- file
-        assert_that(file.exists(filepath))
+        assert_that(file.exists(file))
         assert_that(is.flag(filter_hab), noNA(filter_hab))
 
-        habitatmap <- read_sf(filepath,
+        habitatmap <- read_sf(file,
                               "habitatmap")
 
         colnames(habitatmap) <- tolower(colnames(habitatmap))
@@ -1001,14 +999,13 @@ read_habitatstreams <-
                               "10_raw/habitatstreams"),
              source_text = FALSE){
 
-        filepath <- file
-        assert_that(file.exists(filepath))
+        assert_that(file.exists(file))
 
         assert_that(is.flag(source_text), noNA(source_text))
 
         habitatstreams <-
             suppressWarnings(
-                read_sf(filepath,
+                read_sf(file,
                         crs = 31370)
             )
 
@@ -1176,8 +1173,7 @@ read_habitatsprings <-
              units_7220 = FALSE,
              version = "habitatsprings_2020v2"){
 
-        filepath <- file
-        assert_that(file.exists(filepath))
+        assert_that(file.exists(file))
         assert_that(is.flag(filter_hab), noNA(filter_hab))
         assert_that(is.flag(units_7220), noNA(units_7220))
         assert_that(is.string(version))
@@ -1188,7 +1184,7 @@ read_habitatsprings <-
             levels
 
         habitatsprings <-
-            read_sf(filepath) %>%
+            read_sf(file) %>%
             st_transform(31370) %>%
             mutate(
                 area_m2 = ifelse(.data$area_m2 > 0,
