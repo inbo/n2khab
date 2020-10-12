@@ -1277,7 +1277,7 @@ read_habitatsprings <-
 #' `references` or `bibtex`).
 #'
 #' The data source \code{habitatquarries} is a GeoPackage, available at
-#' \href{https://doi.org/10.5281/zenodo.xxxx}{Zenodo}, that contains:
+#' \href{https://doi.org/10.5281/zenodo.4072967}{Zenodo}, that contains:
 #' \itemize{
 #'   \item{\code{habitatquarries}: a spatial polygon layer that corresponds
 #'   with the presence or absence of the Natura 2000 Annex I habitat type `8310`
