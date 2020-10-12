@@ -112,19 +112,11 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
 #' str_remove
 #' str_split
 #' str_match
-#' @importFrom curl curl_fetch_memory curl_download
-#' @importFrom jsonlite fromJSON
-#' @importFrom tools md5sum
-#' @importFrom utils tail
 #' @importFrom assertthat
 #' assert_that
 #' is.string
 #' is.flag
 #' noNA
-#' @importFrom parallel
-#' makeCluster
-#' clusterMap
-#' stopCluster
 #'
 #' @export
 #' @family functions regarding file management for N2KHAB projects
@@ -149,6 +141,14 @@ download_zenodo <- function(doi,
     assert_that(is.string(doi), is.string(path))
     assert_that(is.flag(parallel), noNA(parallel), is.flag(quiet), noNA(quiet))
 
+    if (!requireNamespace("jsonlite", quietly = TRUE) |
+        !requireNamespace("curl", quietly = TRUE) |
+        !requireNamespace("tools", quietly = TRUE)) {
+        stop("You miss at least one of the following packages: ",
+             "jsonlite, curl, tools. Please install them first.",
+             call. = FALSE)
+    }
+
     # check for existence of the folder
     stopifnot(dir.exists(path))
 
@@ -156,8 +156,8 @@ download_zenodo <- function(doi,
 
     # Retrieve file name by records call
     base_url <- 'https://zenodo.org/api/records/'
-    req <- curl_fetch_memory(paste0(base_url, record))
-    content <- fromJSON(rawToChar(req$content))
+    req <- curl::curl_fetch_memory(paste0(base_url, record))
+    content <- jsonlite::fromJSON(rawToChar(req$content))
 
     # Calculate total file size
     totalsize <- sum(content$files$size) %>%
@@ -194,13 +194,19 @@ download_zenodo <- function(doi,
 
     if (parallel) {
 
+        if (!requireNamespace("parallel", quietly = TRUE)) {
+            stop("You miss the 'parallel' package. ",
+                 "Please install it first.",
+                 call. = FALSE)
+        }
+
         nr_nodes <- min(10, length(file_urls))
 
         if (!quiet) message("Initializing parallel download on ",
                             nr_nodes,
                             " R session nodes...\n")
 
-        clus <- makeCluster(nr_nodes)
+        clus <- parallel::makeCluster(nr_nodes)
 
         if (!quiet) {
             message("Starting parallel downloads. ",
@@ -208,22 +214,22 @@ download_zenodo <- function(doi,
                     "Be patient...\n")
         }
 
-        clusterMap(clus,
-                   function(src, dest) {
-                       curl_download(url = src,
-                                     destfile = dest,
-                                     quiet = quiet)
-                   },
-                   file_urls,
-                   destfiles)
+        parallel::clusterMap(clus,
+                             function(src, dest) {
+                                 curl::curl_download(url = src,
+                                                     destfile = dest,
+                                                     quiet = quiet)
+                             },
+                             file_urls,
+                             destfiles)
 
-        stopCluster(clus)
+        parallel::stopCluster(clus)
 
         if (!quiet) message("Ended parallel downloads.")
 
     } else {
 
-        mapply(curl_download,
+        mapply(curl::curl_download,
                file_urls,
                destfiles,
                MoreArgs = list(quiet = quiet))
@@ -237,7 +243,7 @@ download_zenodo <- function(doi,
     for (i in seq_along(file_urls)) {
         filename <- filenames[i]
         destfile <- destfiles[i]
-        md5 <- unname(md5sum(destfile))
+        md5 <- unname(tools::md5sum(destfile))
         zenodo_md5 <- str_split(file_md5[i], ":")[[1]][2]
         if (all.equal(md5, zenodo_md5)) {
             if (!quiet) message(filename,
