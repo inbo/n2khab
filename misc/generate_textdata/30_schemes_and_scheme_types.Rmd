@@ -184,8 +184,7 @@ spat_restr <-
             )
         ) %>% 
     bind_rows(tibble(
-        scheme = c("GW_05.1_aq",
-                   "SURF_012", 
+        scheme = c("SURF_012", 
                    "SURF_03.2", 
                    "SURF_03.4_lotic", 
                    "SURF_064", 
@@ -194,6 +193,13 @@ spat_restr <-
                    "SURF_08.4"),
         spatial_restriction = 
           "Exclude terrestrial (i.e. mire) forms of type 7220, if applicable."
+            )
+        ) %>% 
+    bind_rows(tibble(
+        scheme = "GW_05.1_aq",
+        spatial_restriction = 
+          paste("Exclude terrestrial (i.e. mire) forms of type 7220, if applicable.",
+                "Exclude locations where the surface water is not connected with (nor affected by) the phreatic aquifer.")
             )
         ) %>% 
     mutate(scheme = factor(scheme,
