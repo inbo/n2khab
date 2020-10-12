@@ -6,8 +6,8 @@ scheme	programme	attribute_1	attribute_2	attribute_3	spatial_restriction	notes	t
 5	1	1	34	NA	NA	NA	2	NA	NA
 6	1	3	8	NA	For terrestrial types: restrict to zones with shallow groundwater (in reach of vegetation). Don't exclude locations with types that are '(almost) everywhere groundwater dependent' (GD2).	NA	1	NA	NA
 7	1	3	11	NA	For terrestrial types: restrict to zones with shallow groundwater (in reach of vegetation). Don't exclude locations with types that are '(almost) everywhere groundwater dependent' (GD2).	NA	2	NA	NA
-8	1	3	13	1	Exclude terrestrial (i.e. mire) forms of type 7220, if applicable.	NA	1	NA	NA
-61	1	3	13	3	NA	NA	1	NA	NA
+8	1	3	13	1	Exclude terrestrial (i.e. mire) forms of type 7220, if applicable. Exclude locations where the surface water is not connected with (nor affected by) the phreatic aquifer.	NA	1	NA	NA
+64	1	3	13	6	NA	NA	1	NA	NA
 9	1	3	13	2	Restrict to zones with shallow groundwater (in reach of vegetation). Exclude aquatic (i.e. rivulet) forms of type 7220. Don't exclude locations with types that are '(almost) everywhere groundwater dependent' (GD2).	NA	1	NA	NA
 10	1	3	14	NA	For terrestrial types: restrict to zones with shallow groundwater (in reach of vegetation). Don't exclude locations with types that are '(almost) everywhere groundwater dependent' (GD2).	NA	2	NA	NA
 11	1	3	21	NA	For terrestrial types: restrict to zones with shallow groundwater (in reach of vegetation). Don't exclude locations with types that are '(almost) everywhere groundwater dependent' (GD2).	NA	2	NA	NA

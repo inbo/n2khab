@@ -5,8 +5,8 @@
   sorting:
   - scheme
   - type
-  hash: d53996fb20ed088cbf21c677565f549c7ceabedf
-  data_hash: ae3ae1799e5c494a50c6f1be8317cefa04ec94bf
+  hash: ae0fdabc80affdd71a60d85c35080afb337894c3
+  data_hash: 8d3872d79bc7a5192c34c9dc16d4d2d6e768de20
 scheme:
   class: factor
   labels:
@@ -18,7 +18,7 @@ scheme:
   - GW_03.3
   - GW_04.2
   - GW_05.1_aq
-  - GW_05.1_caves
+  - GW_05.1_quarries
   - GW_05.1_terr
   - GW_05.2
   - GW_07.1
@@ -82,7 +82,7 @@ scheme:
   - 6
   - 7
   - 8
-  - 61
+  - 64
   - 9
   - 10
   - 11
