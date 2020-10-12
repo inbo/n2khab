@@ -1355,15 +1355,14 @@ read_habitatsprings <-
 #' filter
 #' @export
 read_habitatquarries <-
-    function(path = fileman_up("n2khab_data"),
-             file = "10_raw/habitatquarries/habitatquarries.gpkg",
+    function(file = file.path(fileman_up("n2khab_data"),
+                              "10_raw/habitatquarries/habitatquarries.gpkg"),
              filter_hab = FALSE,
              references = FALSE,
              bibtex = FALSE,
              version = "habitatquarries_2020v1"){
 
-        filepath <- file.path(path, file)
-        assert_that(file.exists(filepath))
+        assert_that(file.exists(file))
         assert_that(is.flag(filter_hab), noNA(filter_hab))
         assert_that(is.flag(references), noNA(references))
         assert_that(is.flag(bibtex), noNA(bibtex))
@@ -1376,7 +1375,7 @@ read_habitatquarries <-
 
         if (references | bibtex) {
             extra_references <-
-                read_sf(filepath,
+                read_sf(file,
                         layer = "extra_references")
             if (bibtex)
             {
@@ -1403,7 +1402,7 @@ read_habitatquarries <-
 
         habitatquarries <-
             suppressWarnings(
-                read_sf(filepath,
+                read_sf(file,
                         layer = "habitatquarries",
                         crs = 31370)
             ) %>%

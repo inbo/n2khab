@@ -5,8 +5,8 @@
 \title{Return the data source \code{habitatquarries}}
 \usage{
 read_habitatquarries(
-  path = fileman_up("n2khab_data"),
-  file = "10_raw/habitatquarries/habitatquarries.gpkg",
+  file = file.path(fileman_up("n2khab_data"),
+    "10_raw/habitatquarries/habitatquarries.gpkg"),
   filter_hab = FALSE,
   references = FALSE,
   bibtex = FALSE,
@@ -14,17 +14,12 @@ read_habitatquarries(
 )
 }
 \arguments{
-\item{path}{Location of the file.
-Considering the default value of the \code{file} argument, this should be
-the location of the folder '\strong{\code{n2khab_data}}'.
-By default, the first \code{n2khab_data} folder is used that is found when
+\item{file}{The absolute or relative file path of the data source.
+The default follows the data management advice in the
+vignette on data storage (run \code{vignette("v020_datastorage")}).
+It uses the first \code{n2khab_data} folder that is found when
 sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
-
-\item{file}{The filename of the data source.
-May include a path prefix.
-The default follows the data management advice in the
-vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{filter_hab}{If \code{TRUE}, only polygons with (known) habitat \code{8310}
 are returned.}
