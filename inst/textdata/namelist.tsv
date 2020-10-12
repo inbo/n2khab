@@ -132,7 +132,7 @@ GW_03.3_group3	en	types from weakly eutrophic environments	weakly eutrophic
 GW_03.3_group4	en	types from moderately eutrophic to eutrophic environments	(moderately) eutrophic
 GW_04.2	en	Groundwater monitoring: environmental pressure 04.2_acidif_gw	GW: 04.2_acidif_gw
 GW_05.1_aq	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim aquatic	GW: 05.1_des_gw: aq
-GW_05.1_caves	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim caves	GW: 05.1_des_gw: caves
+GW_05.1_quarries	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim marl quarries	GW: 05.1_des_gw: quarries
 GW_05.1_terr	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim terrestrial	GW: 05.1_des_gw: terr
 GW_05.1_terr_group1	en	types from very wet environments	very wet
 GW_05.1_terr_group2	en	types from wet environments	wet
@@ -213,7 +213,6 @@ SURF_08.2	en	Surfacewater monitoring: environmental pressure 08.2_poll_soil	SURF
 SURF_08.4	en	Surfacewater monitoring: environmental pressure 08.4_poll_sw	SURF: 08.4_poll_sw
 SW	en	Standing water	NA
 aq	en	aquatic	NA
-caves	en	caves	NA
 ep_011	en	11 Change of physical structure to a permanent new state (soil compaction, infrastructure, reprofiling, new substrate, soil transport, ...)	011_struct
 ep_012	en	12 Soil dynamics increase (erosion, soil turbation, sand drift)	012_soildyn_incr
 ep_013	en	13 Soil dynamics decrease (erosion, soil turbation, sand drift)	013_soildyn_decr
@@ -268,6 +267,7 @@ ep_class_10	en	10 Climate change	NA
 focal	en	Focal scheme	NA
 lentic	en	lentic waters	NA
 lotic	en	lotic waters	NA
+quarries	en	marl quarries	NA
 rbbah	en	Brackish to saltish standing waters	Brackish to salty standing waters
 rbbha	en	Species-rich Agrostis grasslands (no 6230 habitat type)	Species-rich Agrostis grasslands (not 6230)
 rbbhc	en	Calthion grasslands	Calthion grasslands
@@ -423,7 +423,7 @@ GW_03.3_group3	nl	types van zwak eutroof milieu	zwak eutroof
 GW_03.3_group4	nl	types van matig eutroof tot eutroof milieu	(matig) eutroof
 GW_04.2	nl	Grondwatermeetnet: milieudruk 04.2_verzu_gw	GW: 04.2_verzu_gw
 GW_05.1_aq	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim aquatisch	GW: 05.1_verdro_gw: aq
-GW_05.1_caves	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim grotten	GW: 05.1_verdro_gw: caves
+GW_05.1_quarries	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim mergelgroeven	GW: 05.1_verdro_gw: quarries
 GW_05.1_terr	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim terrestrisch	GW: 05.1_verdro_gw: terr
 GW_05.1_terr_group1	nl	types van zeer nat milieu	zeer nat
 GW_05.1_terr_group2	nl	types van nat milieu	nat
@@ -504,7 +504,6 @@ SURF_08.2	nl	Oppervlaktewatermeetnet: milieudruk 08.2_verontr_bod	SURF: 08.2_ver
 SURF_08.4	nl	Oppervlaktewatermeetnet: milieudruk 08.4_verontr_ow	SURF: 08.4_verontr_ow
 SW	nl	Stilstaande wateren	NA
 aq	nl	aquatisch	NA
-caves	nl	grotten	NA
 ep_011	nl	11 Aanpassing van de fysische structuur naar een blijvende nieuwe toestand (bodemcompactie, verharding, herprofilering, nieuw substraat, grondverzet, ...)	011_struct
 ep_011_explan	nl	Aard van het substraat of de ruimtelijke vorm van de fysische standplaats worden veranderd naar een blijvende nieuwe toestand, in zodanige mate dat dit de levensgemeenschap negatief beïnvloedt	NA
 ep_012	nl	12 Toename bodemdynamiek (erosie, omwoeling, verstuiving)	012_boddyn_plus
@@ -587,6 +586,7 @@ ep_class_10	nl	10 Klimaatverandering	NA
 focal	nl	Hoofdmeetnet	NA
 lentic	nl	stilstaande wateren	NA
 lotic	nl	stromende wateren	NA
+quarries	nl	mergelgroeven	NA
 rbbah	nl	brak tot zilt water	brak tot zilt water
 rbbha	nl	soortenrijk, niet habitatwaardig struisgrasvegetatie	soortenrijke struisgrasvegetatie
 rbbhc	nl	dotterbloemgrasland	dotterbloemgrasland

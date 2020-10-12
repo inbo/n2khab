@@ -88,7 +88,7 @@ schemes_schemetypes <-
                              ifelse(hydr_class_expand == "HC3",
                                     "aq",
                                     ifelse(type == "8310",
-                                           "caves",
+                                           "quarries",
                                            "terr")
                                     ),
                              ifelse(attribute_1 == "SURF" & 
@@ -339,10 +339,10 @@ cbind(code = c("ATM", "SOIL", "GW", "SURF", "INUN"),
                    "Inundatiemeetnet")) %>% 
     rbind(matrix(c("aq", "en", "aquatic",
                    "terr", "en", "terrestrial",
-                   "caves", "en", "caves",
+                   "quarries", "en", "marl quarries",
                    "aq", "nl", "aquatisch",
                    "terr", "nl", "terrestrisch",
-                   "caves", "nl", "grotten",
+                   "quarries", "nl", "mergelgroeven",
                    "lotic", "en", "lotic waters",
                    "lentic", "en", "lentic waters",
                    "lotic", "nl", "stromende wateren",
