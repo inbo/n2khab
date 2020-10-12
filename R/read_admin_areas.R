@@ -56,10 +56,10 @@
 #' @importFrom rlang .data
 #' @export
 read_admin_areas <-
-    function(path = fileman_up("n2khab_data"),
-             file = c("10_raw/flanders",
-                      "10_raw/provinces",
-                      "10_raw/sac"),
+    function(file = file.path(fileman_up("n2khab_data"),
+                              c("10_raw/flanders",
+                                "10_raw/provinces",
+                                "10_raw/sac")),
              dsn = c("flanders", "provinces", "sac")) {
 
         dsn <- match.arg(dsn)
@@ -68,7 +68,7 @@ read_admin_areas <-
             file <- file[str_detect(file, dsn)][1]
         }
 
-        filepath <- file.path(path, file)
+        filepath <- file
         assert_that(file.exists(filepath))
 
         suppressWarnings(
