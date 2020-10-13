@@ -309,17 +309,18 @@ convert_base4frac_to_dec <-
 #' }
 #'
 #' @export
-#' @importFrom raster
-#' raster
-#' brick
-#' nlayers
-#' crs<-
 #' @importFrom stringr str_c
 read_GRTSmh <-
     function(file = file.path(fileman_up("n2khab_data"),
                               c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
                                 "20_processed/GRTSmh_brick/GRTSmh_brick.tif")),
              brick = FALSE) {
+
+        if (!requireNamespace("raster", quietly = TRUE)) {
+            stop("Package \"raster\" is needed when using this function. ",
+                 "Please install it.",
+                 call. = FALSE)
+        }
 
         if (!requireNamespace("sp", quietly = TRUE)) {
             stop("Package \"sp\" is needed when using this function. ",
@@ -329,19 +330,19 @@ read_GRTSmh <-
 
         if (brick) {
             if (missing(file)) {
-                    b <- brick(file[2])} else {
-                    b <- brick(file)
+                    b <- raster::brick(file[2])} else {
+                    b <- raster::brick(file)
                     }
-            names(b) <- str_c("level", 0:(nlayers(b) - 1))
+            names(b) <- str_c("level", 0:(raster::nlayers(b) - 1))
             result <- b
         } else {
             if (missing(file)) {
-                   r <- raster(file[1])} else {
-                   r <- raster(file)
+                   r <- raster::raster(file[1])} else {
+                   r <- raster::raster(file)
                    }
             result <- r
         }
-        crs(result) <- sp::CRS(SRS_string = "EPSG:31370")
+        raster::crs(result) <- sp::CRS(SRS_string = "EPSG:31370")
         return(result)
     }
 
@@ -431,12 +432,15 @@ read_GRTSmh <-
 #' }
 #'
 #' @export
-#' @importFrom raster
-#' raster
-#' crs<-
 read_GRTSmh_base4frac <-
     function(file = file.path(fileman_up("n2khab_data"),
                               "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif")) {
+
+        if (!requireNamespace("raster", quietly = TRUE)) {
+            stop("Package \"raster\" is needed when using this function. ",
+                 "Please install it.",
+                 call. = FALSE)
+        }
 
         if (!requireNamespace("sp", quietly = TRUE)) {
             stop("Package \"sp\" is needed when using this function. ",
@@ -444,8 +448,8 @@ read_GRTSmh_base4frac <-
                  call. = FALSE)
         }
 
-        r <- raster(file)
-        crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
+        r <- raster::raster(file)
+        raster::crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
         return(r)
     }
 
@@ -589,9 +593,6 @@ read_GRTSmh_base4frac <-
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
-#' @importFrom raster
-#' raster
-#' crs<-
 read_GRTSmh_diffres <-
     function(dir = file.path(fileman_up("n2khab_data"), "20_processed/GRTSmh_diffres"),
              level,
@@ -615,17 +616,23 @@ read_GRTSmh_diffres <-
 
         } else {
 
+            if (!requireNamespace("raster", quietly = TRUE)) {
+                stop("Package \"raster\" is needed when using this function. ",
+                     "Please install it.",
+                     call. = FALSE)
+            }
+
             if (!requireNamespace("sp", quietly = TRUE)) {
                 stop("Package \"sp\" is needed when using this function. ",
                      "Please install it.",
                      call. = FALSE)
             }
 
-            r <- raster(file.path(dir,
-                             str_c("GRTSmh_diffres.",
-                                   level, ".tif")))
+            r <- raster::raster(file.path(dir,
+                                          str_c("GRTSmh_diffres.",
+                                                level, ".tif")))
             names(r) <- str_c("level", level)
-            crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
+            raster::crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
             r
 
         }
