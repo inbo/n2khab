@@ -36,7 +36,6 @@ Imports:
     plyr,
     purrr,
     raster,
-    readr,
     rlang,
     rprojroot,
     sf,
