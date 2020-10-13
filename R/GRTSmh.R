@@ -309,17 +309,18 @@ convert_base4frac_to_dec <-
 #' }
 #'
 #' @export
-#' @importFrom raster
-#' raster
-#' brick
-#' nlayers
-#' crs<-
 #' @importFrom stringr str_c
 read_GRTSmh <-
     function(path = fileman_up("n2khab_data"),
              file = c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
                       "20_processed/GRTSmh_brick/GRTSmh_brick.tif"),
              brick = FALSE) {
+
+        if (!requireNamespace("raster", quietly = TRUE)) {
+            stop("Package \"raster\" is needed when using this function. ",
+                 "Please install it.",
+                 call. = FALSE)
+        }
 
         if (!requireNamespace("sp", quietly = TRUE)) {
             stop("Package \"sp\" is needed when using this function. ",
@@ -329,19 +330,19 @@ read_GRTSmh <-
 
         if (brick) {
             if (missing(file)) {
-                    b <- brick(file.path(path, file[2]))} else {
-                    b <- brick(file.path(path, file))
+                    b <- raster::brick(file.path(path, file[2]))} else {
+                    b <- raster::brick(file.path(path, file))
                     }
-            names(b) <- str_c("level", 0:(nlayers(b) - 1))
+            names(b) <- str_c("level", 0:(raster::nlayers(b) - 1))
             result <- b
         } else {
             if (missing(file)) {
-                   r <- raster(file.path(path, file[1]))} else {
-                   r <- raster(file.path(path, file))
+                   r <- raster::raster(file.path(path, file[1]))} else {
+                   r <- raster::raster(file.path(path, file))
                    }
             result <- r
         }
-        crs(result) <- sp::CRS(SRS_string = "EPSG:31370")
+        raster::crs(result) <- sp::CRS(SRS_string = "EPSG:31370")
         return(result)
     }
 
@@ -431,12 +432,15 @@ read_GRTSmh <-
 #' }
 #'
 #' @export
-#' @importFrom raster
-#' raster
-#' crs<-
 read_GRTSmh_base4frac <-
     function(path = fileman_up("n2khab_data"),
              file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif") {
+
+        if (!requireNamespace("raster", quietly = TRUE)) {
+            stop("Package \"raster\" is needed when using this function. ",
+                 "Please install it.",
+                 call. = FALSE)
+        }
 
         if (!requireNamespace("sp", quietly = TRUE)) {
             stop("Package \"sp\" is needed when using this function. ",
@@ -444,8 +448,8 @@ read_GRTSmh_base4frac <-
                  call. = FALSE)
         }
 
-        r <- raster(file.path(path, file))
-        crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
+        r <- raster::raster(file.path(path, file))
+        raster::crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
         return(r)
     }
 
@@ -589,9 +593,6 @@ read_GRTSmh_base4frac <-
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
-#' @importFrom raster
-#' raster
-#' crs<-
 read_GRTSmh_diffres <-
     function(path = fileman_up("n2khab_data"),
              subdir = "20_processed/GRTSmh_diffres",
@@ -616,17 +617,23 @@ read_GRTSmh_diffres <-
 
         } else {
 
+            if (!requireNamespace("raster", quietly = TRUE)) {
+                stop("Package \"raster\" is needed when using this function. ",
+                     "Please install it.",
+                     call. = FALSE)
+            }
+
             if (!requireNamespace("sp", quietly = TRUE)) {
                 stop("Package \"sp\" is needed when using this function. ",
                      "Please install it.",
                      call. = FALSE)
             }
 
-            r <- raster(file.path(path, subdir,
-                             str_c("GRTSmh_diffres.",
-                                   level, ".tif")))
+            r <- raster::raster(file.path(path, subdir,
+                                          str_c("GRTSmh_diffres.",
+                                                level, ".tif")))
             names(r) <- str_c("level", level)
-            crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
+            raster::crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
             r
 
         }
