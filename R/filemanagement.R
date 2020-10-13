@@ -88,11 +88,226 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
 
 #' Get data from a Zenodo archive
 #'
-#' @name download_zenodo
-#' @keywords documentation
-#' @importFrom inborutils download_zenodo
+#' This function will download an entire archive from Zenodo (\url{https://zenodo.org}).
+#' It only works for Zenodo created DOI (not when the DOI is for
+#' example derived from Zookeys.)
+#'
+#' @author Hans Van Calster, \email{hans.vancalster@@inbo.be}
+#' @author Floris Vanderhaeghe, \email{floris.vanderhaeghe@@inbo.be}
+#'
+#' @param path Path where the data must be downloaded.
+#' Defaults to the working directory.
+#' @param doi a doi pointer to the Zenodo archive starting with '10.5281/zenodo.'. See examples.
+#' @param parallel Logical (\code{FALSE} by default).
+#' If \code{TRUE}, will run a number of parallel processes, each downloading
+#' another file.
+#' This is useful when multiple large files are present in the Zenodo
+#' record, which otherwise would be downloaded sequentially.
+#' Of course, the operation is limited by bandwidth and traffic limitations.
+#' @param quiet Logical (\code{FALSE} by default).
+#' Do you want to suppress informative messages (not warnings)?
+#'
+#' @importFrom stringr
+#' fixed
+#' str_remove
+#' str_split
+#' str_match
+#' @importFrom assertthat
+#' assert_that
+#' is.string
+#' is.flag
+#' noNA
+#'
 #' @export
-inborutils::download_zenodo
+#' @family functions regarding file management for N2KHAB projects
+#'
+#' @examples
+#' \dontrun{
+#' # Example download of an archive containing a single zip
+#' download_zenodo(doi = "10.5281/zenodo.1283345")
+#' download_zenodo(doi = "10.5281/zenodo.1283345", quiet = TRUE)
+#' # Example download of an archive containing multiple files
+#' # using parallel download
+#' # (multiple files will be simultaneously downloaded)
+#' download_zenodo(doi = "10.5281/zenodo.1172801", parallel = TRUE)
+#' # Example download of an archive containing a single pdf file
+#' download_zenodo(doi = "10.5281/zenodo.168478")
+#' }
+download_zenodo <- function(doi,
+                            path = ".",
+                            parallel = FALSE,
+                            quiet = FALSE) {
+
+    assert_that(is.string(doi), is.string(path))
+    assert_that(is.flag(parallel), noNA(parallel), is.flag(quiet), noNA(quiet))
+
+    if (!requireNamespace("jsonlite", quietly = TRUE) |
+        !requireNamespace("curl", quietly = TRUE) |
+        !requireNamespace("tools", quietly = TRUE)) {
+        stop("You miss at least one of the following packages: ",
+             "jsonlite, curl, tools. Please install them first.",
+             call. = FALSE)
+    }
+
+    # check for existence of the folder
+    stopifnot(dir.exists(path))
+
+    record <- str_remove(doi, fixed("10.5281/zenodo."))
+
+    # Retrieve file name by records call
+    base_url <- 'https://zenodo.org/api/records/'
+    req <- curl::curl_fetch_memory(paste0(base_url, record))
+    content <- jsonlite::fromJSON(rawToChar(req$content))
+
+    # Calculate total file size
+    totalsize <- sum(content$files$size) %>%
+        human_filesize()
+
+    # extract individual file names and urls
+    file_urls <- content$files$links$self
+    filenames <- str_match(file_urls, ".+/([^/]+)")[,2]
+    destfiles <- file.path(path, filenames)
+
+    # extract check-sum(s)
+    file_md5 <- content$files$checksum
+
+    # download files
+    if (!quiet) {
+        message("Will download ",
+                (nrfiles <- length(filenames)),
+                " file",
+                ifelse(nrfiles > 1, "s", ""),
+                " (total size: ",
+                totalsize,
+                ") from https://doi.org/",
+                doi,
+                " (",
+                content$metadata$title,
+                "; version: ",
+                ifelse(!is.null(content$metadata$version),
+                       content$metadata$version,
+                       content$metadata$relations$version[1, 1]
+                ),
+                ")\n"
+        )
+    }
+
+    if (parallel) {
+
+        if (!requireNamespace("parallel", quietly = TRUE)) {
+            stop("You miss the 'parallel' package. ",
+                 "Please install it first.",
+                 call. = FALSE)
+        }
+
+        nr_nodes <- min(10, length(file_urls))
+
+        if (!quiet) message("Initializing parallel download on ",
+                            nr_nodes,
+                            " R session nodes...\n")
+
+        clus <- parallel::makeCluster(nr_nodes)
+
+        if (!quiet) {
+            message("Starting parallel downloads. ",
+                    "This may take a while (and I can't show you the overall progress).\n",
+                    "Be patient...\n")
+        }
+
+        parallel::clusterMap(clus,
+                             function(src, dest) {
+                                 curl::curl_download(url = src,
+                                                     destfile = dest,
+                                                     quiet = quiet)
+                             },
+                             file_urls,
+                             destfiles)
+
+        parallel::stopCluster(clus)
+
+        if (!quiet) message("Ended parallel downloads.")
+
+    } else {
+
+        mapply(curl::curl_download,
+               file_urls,
+               destfiles,
+               MoreArgs = list(quiet = quiet))
+
+    }
+
+    # check each of the files
+
+    if (!quiet) message("\nVerifying file integrity...\n")
+
+    for (i in seq_along(file_urls)) {
+        filename <- filenames[i]
+        destfile <- destfiles[i]
+        md5 <- unname(tools::md5sum(destfile))
+        zenodo_md5 <- str_split(file_md5[i], ":")[[1]][2]
+        if (all.equal(md5, zenodo_md5)) {
+            if (!quiet) message(filename,
+                                " was downloaded and its integrity verified (md5sum: ",
+                                md5,
+                                ")")
+        } else {
+            warning("Incorrect download! md5sum ",
+                    md5,
+                    " for file",
+                    filename,
+                    " does not match the Zenodo archived md5sum ",
+                    zenodo_md5)
+        }
+    }
+}
+
+
+
+#' Human-readable binary file size
+#'
+#' Takes an integer (referring to number of bytes) and returns an optimally
+#' human-readable
+#' \href{https://en.wikipedia.org/wiki/Binary_prefix}{binary-prefixed}
+#' byte size (KiB, MiB, GiB, TiB, PiB, EiB).
+#' The function is vectorised.
+#'
+#' @author Floris Vanderhaeghe, \email{floris.vanderhaeghe@@inbo.be}
+#'
+#' @param x A positive integer, i.e. the number of bytes (B).
+#' Can be a vector of file sizes.
+#'
+#' @return
+#' A character vector.
+#'
+#' @keywords internal
+#' @importFrom assertthat
+#' assert_that
+#' @importFrom dplyr
+#' %>%
+human_filesize <- function(x) {
+    assert_that(is.numeric(x))
+    assert_that(all(x %% 1 == 0 & x >= 0))
+    magnitude <-
+        log(x, base = 1024) %>%
+        floor %>%
+        pmin(8)
+    unit <- factor(magnitude,
+                   levels = 0:8,
+                   labels = c(
+                       "B",
+                       "KiB",
+                       "MiB",
+                       "GiB",
+                       "TiB",
+                       "PiB",
+                       "EiB",
+                       "ZiB",
+                       "YiB")
+    )
+    size <- (x / 1024^magnitude) %>% round(1)
+    return(paste(size, unit))
+}
+
 
 
 

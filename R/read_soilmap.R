@@ -245,8 +245,6 @@
 #' read_sf
 #' @importFrom git2rdata
 #' read_vc
-#' @importFrom inborutils
-#' convertdf_enc
 #' @importFrom dplyr
 #' %>%
 #' select
