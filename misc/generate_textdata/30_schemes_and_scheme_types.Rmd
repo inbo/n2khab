@@ -202,6 +202,12 @@ spat_restr <-
                 "Exclude locations where the surface water is not connected with (nor affected by) the phreatic aquifer.")
             )
         ) %>% 
+    bind_rows(tibble(
+        scheme = "GW_05.1_quarries",
+        spatial_restriction = 
+          "Restrict to 8310 marl quarries that are directly connected with (intersected by) a groundwater aquifer."
+            )
+        ) %>% 
     mutate(scheme = factor(scheme,
                            levels = 
                                schemes_schemetypes %>% 
