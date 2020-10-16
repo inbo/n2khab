@@ -1,3 +1,24 @@
+## n2khab 0.3.0
+
+#### Breaking change
+
+- Functions that preprocess (non-included) N2KHAB data sources have been simplified by dropping their `path` argument (#92).
+Existing R code will continue to run normally if you complied with the recommended file organization (see `vignette("v020_datastorage")` and `vignette("v022_example")`) and did not set the `path` and `file` arguments.
+
+#### New features
+
+- New function `read_habitatquarries()` for reading the `habitatquarries` data source (#83, #94,  [inbo/n2khab-preprocessing#41](https://github.com/inbo/n2khab-preprocessing/pull/41)).
+- Updates in reference lists (#88, #93, [7ce3b32](https://github.com/inbo/n2khab/pull/73/commits/7ce3b32)):
+    - `schemes` & `scheme_types`: updates of spatial restrictions, names and typegroup names of MNE schemes (for defining the schemes' target populations);
+    - `types`: update groundwater dependency of type `2170`.
+
+#### Internal changes
+
+- Harden CRS representations (#84)
+- Re-integrate `download_zenodo()` (from `inborutils`) (#89)
+- Drop some package dependencies to speed up package loading (#89, #90)
+
+
 ## n2khab 0.2.0
 
 #### New features
