@@ -26,6 +26,7 @@ reference:
       - read_habitatmap
       - read_habitatstreams
       - read_habitatsprings
+      - read_habitatquarries
   - title: "Using the processed spatial data sources of habitats/RIBs"
     contents:
       - read_habitatmap_stdized

@@ -5,8 +5,8 @@
   sorting:
   - programme
   - scheme
-  hash: 92c1d784b9fac3635a357e47ef8a604dcf8bed96
-  data_hash: 7dc247091b92fc9bc9d7691c582101aa6cf18460
+  hash: d189d370cad2f6ca5b708b73f4c2d6285333b8fa
+  data_hash: ce2a4c8602fc4205b55dcedd93e891015cc39afb
 scheme:
   class: factor
   labels:
@@ -18,7 +18,7 @@ scheme:
   - GW_03.3
   - GW_04.2
   - GW_05.1_aq
-  - GW_05.1_caves
+  - GW_05.1_quarries
   - GW_05.1_terr
   - GW_05.2
   - GW_07.1
@@ -82,7 +82,7 @@ scheme:
   - 6
   - 7
   - 8
-  - 61
+  - 64
   - 9
   - 10
   - 11
@@ -295,15 +295,15 @@ attribute_3:
   class: factor
   labels:
   - aq
-  - caves
   - lentic
   - lotic
+  - quarries
   - terr
   index:
   - 1
-  - 3
   - 4
   - 5
+  - 6
   - 2
   ordered: no
 spatial_restriction:

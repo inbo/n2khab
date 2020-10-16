@@ -16,7 +16,7 @@ type	typelevel	main_type	typeclass	hydr_class	groundw_dep	flood_dep	tag_1	tag_2	
 2130_hd	subtype	2130	CD	HC12	GD1	FD0	NA	NA	NA
 2150	main_type	2150	CD	HC1	GD0	FD0	NA	NA	NA
 2160	main_type	2160	CD	HC12	GD1	FD0	NA	NA	NA
-2170	main_type	2170	CD	HC2	GD2	FD0	NA	NA	NA
+2170	main_type	2170	CD	HC2	GD1	FD0	NA	NA	NA
 2180	main_type	2180	CD	HC12	GD1	FD0	NA	NA	NA
 2190	main_type	2190	CD	HC23	GD2	FD0	NA	NA	NA
 2190_a	subtype	2190	CD	HC3	GD2	NA	SW	NA	NA

@@ -43,6 +43,7 @@ Other contributors:
   \item Maud Raman \email{maud.raman@inbo.be} (\href{https://orcid.org/0000-0003-2116-4963}{ORCID}) [contributor]
   \item Jan Wouters \email{jan.wouters@inbo.be} (\href{https://orcid.org/0000-0001-8200-9102}{ORCID}) [contributor]
   \item Steven De Saeger \email{steven.desaeger@inbo.be} (\href{https://orcid.org/0000-0002-5477-3063}{ORCID}) [contributor]
+  \item Els Lommelen \email{els.lommelen@inbo.be} (\href{https://orcid.org/0000-0002-3481-5684}{ORCID}) [contributor]
   \item Luc Denys \email{luc.denys@inbo.be} (\href{https://orcid.org/0000-0002-1841-6579}{ORCID}) [contributor]
   \item An Leyssen \email{an.leyssen@inbo.be} (\href{https://orcid.org/0000-0003-3537-286X}{ORCID}) [contributor]
   \item Patrik Oosterlynck \email{patrik.oosterlynck@inbo.be} (\href{https://orcid.org/0000-0002-5712-0770}{ORCID}) [contributor]

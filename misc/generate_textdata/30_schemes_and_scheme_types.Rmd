@@ -88,7 +88,7 @@ schemes_schemetypes <-
                              ifelse(hydr_class_expand == "HC3",
                                     "aq",
                                     ifelse(type == "8310",
-                                           "caves",
+                                           "quarries",
                                            "terr")
                                     ),
                              ifelse(attribute_1 == "SURF" & 
@@ -184,8 +184,7 @@ spat_restr <-
             )
         ) %>% 
     bind_rows(tibble(
-        scheme = c("GW_05.1_aq",
-                   "SURF_012", 
+        scheme = c("SURF_012", 
                    "SURF_03.2", 
                    "SURF_03.4_lotic", 
                    "SURF_064", 
@@ -194,6 +193,19 @@ spat_restr <-
                    "SURF_08.4"),
         spatial_restriction = 
           "Exclude terrestrial (i.e. mire) forms of type 7220, if applicable."
+            )
+        ) %>% 
+    bind_rows(tibble(
+        scheme = "GW_05.1_aq",
+        spatial_restriction = 
+          paste("Exclude terrestrial (i.e. mire) forms of type 7220, if applicable.",
+                "Exclude locations where the surface water is not connected with (nor affected by) the phreatic aquifer.")
+            )
+        ) %>% 
+    bind_rows(tibble(
+        scheme = "GW_05.1_quarries",
+        spatial_restriction = 
+          "Restrict to 8310 marl quarries that are directly connected with (intersected by) a groundwater aquifer."
             )
         ) %>% 
     mutate(scheme = factor(scheme,
@@ -339,10 +351,10 @@ cbind(code = c("ATM", "SOIL", "GW", "SURF", "INUN"),
                    "Inundatiemeetnet")) %>% 
     rbind(matrix(c("aq", "en", "aquatic",
                    "terr", "en", "terrestrial",
-                   "caves", "en", "caves",
+                   "quarries", "en", "marl quarries",
                    "aq", "nl", "aquatisch",
                    "terr", "nl", "terrestrisch",
-                   "caves", "nl", "grotten",
+                   "quarries", "nl", "mergelgroeven",
                    "lotic", "en", "lotic waters",
                    "lentic", "en", "lentic waters",
                    "lotic", "nl", "stromende wateren",
@@ -463,8 +475,8 @@ tribble(~nr, ~lang, ~name, ~shortname,
         3, "nl", "types van matig nat milieu", "matig nat",
         4, "en", "types from moist environments", "moist",
         4, "nl", "types van vochtig milieu", "vochtig",
-        5, "en", "types from dry environments", "dry",
-        5, "nl", "types van droog milieu", "droog"
+        5, "en", "types from locally moist environments", "locally moist",
+        5, "nl", "types van lokaal vochtig milieu", "lokaal vochtig"
         ) %>% 
       mutate(code = str_c("GW_05.1_terr_group", code))
   ) %>% 

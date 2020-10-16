@@ -309,35 +309,40 @@ convert_base4frac_to_dec <-
 #' }
 #'
 #' @export
-#' @importFrom sf
-#' st_crs
-#' @importFrom raster
-#' raster
-#' brick
-#' nlayers
-#' crs<-
 #' @importFrom stringr str_c
 read_GRTSmh <-
-    function(path = fileman_up("n2khab_data"),
-             file = c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
-                      "20_processed/GRTSmh_brick/GRTSmh_brick.tif"),
+    function(file = file.path(fileman_up("n2khab_data"),
+                              c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
+                                "20_processed/GRTSmh_brick/GRTSmh_brick.tif")),
              brick = FALSE) {
+
+        if (!requireNamespace("raster", quietly = TRUE)) {
+            stop("Package \"raster\" is needed when using this function. ",
+                 "Please install it.",
+                 call. = FALSE)
+        }
+
+        if (!requireNamespace("sp", quietly = TRUE)) {
+            stop("Package \"sp\" is needed when using this function. ",
+                 "Please install it.",
+                 call. = FALSE)
+        }
 
         if (brick) {
             if (missing(file)) {
-                    b <- brick(file.path(path, file[2]))} else {
-                    b <- brick(file.path(path, file))
+                    b <- raster::brick(file[2])} else {
+                    b <- raster::brick(file)
                     }
-            names(b) <- str_c("level", 0:(nlayers(b) - 1))
+            names(b) <- str_c("level", 0:(raster::nlayers(b) - 1))
             result <- b
         } else {
             if (missing(file)) {
-                   r <- raster(file.path(path, file[1]))} else {
-                   r <- raster(file.path(path, file))
+                   r <- raster::raster(file[1])} else {
+                   r <- raster::raster(file)
                    }
             result <- r
         }
-        crs(result) <- st_crs(31370)$proj4string
+        raster::crs(result) <- sp::CRS(SRS_string = "EPSG:31370")
         return(result)
     }
 
@@ -427,16 +432,24 @@ read_GRTSmh <-
 #' }
 #'
 #' @export
-#' @importFrom sf
-#' st_crs
-#' @importFrom raster
-#' raster
-#' crs<-
 read_GRTSmh_base4frac <-
-    function(path = fileman_up("n2khab_data"),
-             file = "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif") {
-        r <- raster(file.path(path, file))
-        crs(r) <- st_crs(31370)$proj4string
+    function(file = file.path(fileman_up("n2khab_data"),
+                              "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif")) {
+
+        if (!requireNamespace("raster", quietly = TRUE)) {
+            stop("Package \"raster\" is needed when using this function. ",
+                 "Please install it.",
+                 call. = FALSE)
+        }
+
+        if (!requireNamespace("sp", quietly = TRUE)) {
+            stop("Package \"sp\" is needed when using this function. ",
+                 "Please install it.",
+                 call. = FALSE)
+        }
+
+        r <- raster::raster(file)
+        raster::crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
         return(r)
     }
 
@@ -542,16 +555,16 @@ read_GRTSmh_base4frac <-
 #' provided, as the original GRTS raster has been clipped with the Flemish
 #' outer borders (i.e., not excluding the Brussels Capital Region).
 #'
-#' @param subdir The subdirectory path of the data source, as viewed from
-#' \code{path}.
+#' @param dir The data source directory (absolute or relative).
 #' The default follows the data management advice in the
 #' vignette on data storage (run \code{vignette("v020_datastorage")}).
+#' It uses the first \code{n2khab_data} folder that is found when
+#' sequentially climbing up 0 to 10 levels in the file system hierarchy,
+#' starting from the working directory.
 #' @param level Integer in the range from 1 to 9; determines the spatial
 #' resolution. See the Details section.
 #' @param polygon Logical; determines whether a polygon layer or a
 #' RasterLayer is returned. See the Details section.
-#'
-#' @inheritParams read_habitatmap_stdized
 #'
 #' @return
 #' Either a RasterLayer or a Simple feature collection of geometry type
@@ -579,14 +592,9 @@ read_GRTSmh_base4frac <-
 #' @importFrom stringr str_c
 #' @importFrom sf
 #' read_sf
-#' st_crs
 #' st_crs<-
-#' @importFrom raster
-#' raster
-#' crs<-
 read_GRTSmh_diffres <-
-    function(path = fileman_up("n2khab_data"),
-             subdir = "20_processed/GRTSmh_diffres",
+    function(dir = file.path(fileman_up("n2khab_data"), "20_processed/GRTSmh_diffres"),
              level,
              polygon = FALSE) {
 
@@ -600,7 +608,7 @@ read_GRTSmh_diffres <-
                 stop("When polygon = TRUE, level must be an integer in the range 4 to 9.")
             }
 
-            p <- read_sf(file.path(path, subdir,
+            p <- read_sf(file.path(dir,
                               "GRTSmh_diffres.gpkg"),
                     layer = str_c("GRTSmh_polygonized_level", level))
             suppressWarnings(st_crs(p) <- 31370)
@@ -608,11 +616,23 @@ read_GRTSmh_diffres <-
 
         } else {
 
-            r <- raster(file.path(path, subdir,
-                             str_c("GRTSmh_diffres.",
-                                   level, ".tif")))
+            if (!requireNamespace("raster", quietly = TRUE)) {
+                stop("Package \"raster\" is needed when using this function. ",
+                     "Please install it.",
+                     call. = FALSE)
+            }
+
+            if (!requireNamespace("sp", quietly = TRUE)) {
+                stop("Package \"sp\" is needed when using this function. ",
+                     "Please install it.",
+                     call. = FALSE)
+            }
+
+            r <- raster::raster(file.path(dir,
+                                          str_c("GRTSmh_diffres.",
+                                                level, ".tif")))
             names(r) <- str_c("level", level)
-            crs(r) <- st_crs(31370)$proj4string
+            raster::crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
             r
 
         }

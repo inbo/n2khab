@@ -51,16 +51,12 @@
 #'   can be found in the \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing} repository.
 #'
 #'
-#' @param path Location of the file.
-#' Considering the default value of the \code{file} argument, this should be
-#' the location of the folder '\strong{\code{n2khab_data}}'.
-#' By default, the first \code{n2khab_data} folder is used that is found when
-#' sequentially climbing up 0 to 10 levels in the file system hierarchy,
-#' starting from the working directory.
-#' @param file The filename of the data source.
-#' May include a path prefix.
+#' @param file The absolute or relative file path of the data source.
 #' The default follows the data management advice in the
 #' vignette on data storage (run \code{vignette("v020_datastorage")}).
+#' It uses the first \code{n2khab_data} folder that is found when
+#' sequentially climbing up 0 to 10 levels in the file system hierarchy,
+#' starting from the working directory.
 #' @param version Version ID of the data source.
 #' Defaults to the latest available version defined by the package.
 #'
@@ -121,13 +117,13 @@
 #' is.string
 #'
 read_habitatmap_stdized <-
-    function(path = fileman_up("n2khab_data"),
-             file = "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg",
+    function(file = file.path(fileman_up("n2khab_data"),
+                              "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"),
              version = "habitatmap_stdized_2018_v2"){
 
         assert_that(is.string(version))
 
-        habmap_polygons <- read_sf(file.path(path, file),
+        habmap_polygons <- read_sf(file,
                                    "habitatmap_polygons")
 
         habmap_polygons <- habmap_polygons %>%
@@ -137,12 +133,12 @@ read_habitatmap_stdized <-
 
         if (version == "habitatmap_stdized_2018_v1") {
             habmap_types <- suppressWarnings(
-                read_sf(file.path(path, file),
+                read_sf(file,
                         "habitatmap_patches")
             )
         } else {
             habmap_types <- suppressWarnings(
-                read_sf(file.path(path, file),
+                read_sf(file,
                         "habitatmap_types")
             )
         }
@@ -293,14 +289,14 @@ read_habitatmap_stdized <-
 #' is.string
 #'
 read_watersurfaces_hab <-
-    function(path = fileman_up("n2khab_data"),
-             file = "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg",
+    function(file = file.path(fileman_up("n2khab_data"),
+                              "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
              interpreted = FALSE,
              version = "watersurfaces_hab_v3"){
 
         assert_that(is.string(version))
 
-        watersurfaces_polygons <- read_sf(file.path(path, file),
+        watersurfaces_polygons <- read_sf(file,
                                    "watersurfaces_hab_polygons")
 
         watersurfaces_polygons <- watersurfaces_polygons %>%
@@ -311,12 +307,12 @@ read_watersurfaces_hab <-
 
         if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
             watersurfaces_types <- suppressWarnings(
-                read_sf(file.path(path, file),
+                read_sf(file,
                         "watersurfaces_hab_patches")
             )
         } else {
             watersurfaces_types <- suppressWarnings(
-                read_sf(file.path(path, file),
+                read_sf(file,
                         "watersurfaces_hab_types")
             )
         }
@@ -462,15 +458,14 @@ read_watersurfaces_hab <-
 #' assert_that
 #' @export
 read_watersurfaces <-
-    function(path = fileman_up("n2khab_data"),
-             file = "10_raw/watersurfaces",
+    function(file = file.path(fileman_up("n2khab_data"),
+                              "10_raw/watersurfaces"),
              extended = FALSE){
 
-        filepath <- file.path(path, file)
-        assert_that(file.exists(filepath))
+        assert_that(file.exists(file))
 
         suppressWarnings(
-            watersurfaces <- read_sf(filepath,
+            watersurfaces <- read_sf(file,
                                      crs = 31370)
         )
 
@@ -636,15 +631,13 @@ read_watersurfaces <-
 #' starts_with
 #'
 read_habitatmap <-
-    function(path = fileman_up("n2khab_data"),
-             file = "10_raw/habitatmap",
+    function(file = file.path(fileman_up("n2khab_data"), "10_raw/habitatmap"),
              filter_hab = FALSE){
 
-        filepath <- file.path(path, file)
-        assert_that(file.exists(filepath))
+        assert_that(file.exists(file))
         assert_that(is.flag(filter_hab), noNA(filter_hab))
 
-        habitatmap <- read_sf(filepath,
+        habitatmap <- read_sf(file,
                               "habitatmap")
 
         colnames(habitatmap) <- tolower(colnames(habitatmap))
@@ -843,8 +836,8 @@ read_habitatmap <-
 #' mutate
 #' filter
 read_habitatmap_terr <-
-    function(path = fileman_up("n2khab_data"),
-             file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
+    function(file = file.path(fileman_up("n2khab_data"),
+                              "20_processed/habitatmap_terr/habitatmap_terr.gpkg"),
              keep_aq_types = TRUE,
              drop_7220 = TRUE,
              version = "habitatmap_terr_2018_v2"){
@@ -853,7 +846,7 @@ read_habitatmap_terr <-
         assert_that(is.flag(drop_7220), noNA(drop_7220))
         assert_that(is.string(version))
 
-        habmap_terr_polygons <- read_sf(file.path(path, file),
+        habmap_terr_polygons <- read_sf(file,
                                    "habitatmap_terr_polygons")
 
         habmap_terr_polygons <- habmap_terr_polygons %>%
@@ -864,12 +857,12 @@ read_habitatmap_terr <-
 
         if (version == "habitatmap_terr_2018_v1") {
             habmap_terr_types <- suppressWarnings(
-                read_sf(file.path(path, file),
+                read_sf(file,
                         "habitatmap_terr_patches")
             )
         } else {
             habmap_terr_types <- suppressWarnings(
-                read_sf(file.path(path, file),
+                read_sf(file,
                         "habitatmap_terr_types")
             )
         }
@@ -1002,18 +995,17 @@ read_habitatmap_terr <-
 #' fct_reorder
 #' @export
 read_habitatstreams <-
-    function(path = fileman_up("n2khab_data"),
-             file = "10_raw/habitatstreams",
+    function(file = file.path(fileman_up("n2khab_data"),
+                              "10_raw/habitatstreams"),
              source_text = FALSE){
 
-        filepath <- file.path(path, file)
-        assert_that(file.exists(filepath))
+        assert_that(file.exists(file))
 
         assert_that(is.flag(source_text), noNA(source_text))
 
         habitatstreams <-
             suppressWarnings(
-                read_sf(filepath,
+                read_sf(file,
                         crs = 31370)
             )
 
@@ -1175,15 +1167,15 @@ read_habitatstreams <-
 #' vars
 #' @export
 read_habitatsprings <-
-    function(path = fileman_up("n2khab_data"),
-             file = "10_raw/habitatsprings/habitatsprings.geojson",
+    function(file = file.path(fileman_up("n2khab_data"),
+                              "10_raw/habitatsprings/habitatsprings.geojson"),
              filter_hab = FALSE,
              units_7220 = FALSE,
              version = "habitatsprings_2020v2"){
 
-        filepath <- file.path(path, file)
-        assert_that(file.exists(filepath))
+        assert_that(file.exists(file))
         assert_that(is.flag(filter_hab), noNA(filter_hab))
+        assert_that(is.flag(units_7220), noNA(units_7220))
         assert_that(is.string(version))
 
         typelevels <-
@@ -1192,7 +1184,7 @@ read_habitatsprings <-
             levels
 
         habitatsprings <-
-            read_sf(filepath) %>%
+            read_sf(file) %>%
             st_transform(31370) %>%
             mutate(
                 area_m2 = ifelse(.data$area_m2 > 0,
@@ -1259,6 +1251,182 @@ read_habitatsprings <-
         }
 
         return(habitatsprings)
+
+    }
+
+
+
+
+
+
+
+#' Return the data source \code{habitatquarries}
+#'
+#' Returns the raw data source \code{habitatquarries} as an \code{sf} polygon
+#' layer in the Belgian Lambert 72 CRS (EPSG-code
+#' \href{https://epsg.io/31370}{31370}).
+#' Optionally, associated bibliographic references can be returned (arguments
+#' `references` or `bibtex`).
+#'
+#' The data source \code{habitatquarries} is a GeoPackage, available at
+#' \href{https://doi.org/10.5281/zenodo.4072967}{Zenodo}, that contains:
+#' \itemize{
+#'   \item{\code{habitatquarries}: a spatial polygon layer that corresponds
+#'   with the presence or absence of the Natura 2000 Annex I habitat type `8310`
+#'   (Caves not open to the public) in the Flemish Region (and border areas),
+#'   Belgium;}
+#'   \item{\code{extra_references}: a non-spatial table of site-specific
+#'   bibliographic references.}
+#'   }
+#'
+#' In general, different polygons represent different quarry units with their
+#' own internal climatic environment.
+#' Units that cross Flemish borders have been split into separate polygons.
+#' Exceptionally they may overlap if such units are situated above each other.
+#'
+#' @param filter_hab If \code{TRUE}, only polygons with (known) habitat `8310`
+#' are returned.
+#' @param references If \code{TRUE}, a list is returned with both the `sf`
+#' object (element `habitatquarries`) and a dataframe of bibliographic
+#' references (element `extra_references`).
+#' @param bibtex If \code{TRUE}, all that happens is bibliographic references
+#' being printed to the console, formatted for usage in a BibTeX file (`*.bib`).
+#'
+#' @inheritParams read_habitatmap_stdized
+#'
+#' @return
+#' Depending on the arguments, one of:
+#' \itemize{
+#' \item a simple feature collection of
+#' type \code{POLYGON}, with attribute variables:
+#'   \itemize{
+#'     \item \code{polygon_id}: a unique number per polygon.
+#'     \item \code{unit_id}: a unique number for each quarry unit. Quarry units
+#'     consisting of several polygons (= partly outside the Flemish region)
+#'     have a number greater than 100.
+#'     \item \code{name}: site name.
+#'     \item \code{code_orig}: original 'habitattype' code in the raw data
+#'     source \code{habitatquarries}.
+#'     \item \code{type}: habitat type listed in \code{\link{types}} - in this
+#'     case either `8310` or missing (`NA`).
+#'     \item \code{extra_reference}: site-specific bibliographic reference(s).
+#'     Values refer to rows in the non-spatial dataframe `extra_references`.
+#'   }
+#' \item \emph{if `references = TRUE`:} a list with both the `sf`
+#' object (element `habitatquarries`) and a dataframe of bibliographic
+#' references (element `extra_references`).
+#' \item \emph{if `bibtex = TRUE`:} `NULL` (invisibly).
+#' }
+#'
+#' @md
+#'
+#' @examples
+#' \dontrun{
+#' # This example supposes that your working directory or a directory up to 10
+#' # levels above has the 'n2khab_data' folder AND that the 'habitatquarries'
+#' # data source is present in the default subdirectory.
+#' # In all other cases, this example won't work but at least you can
+#' # consider what to do.
+#'
+#' hq <- read_habitatquarries()
+#' hq
+#' hq2 <- read_habitatquarries(filter_hab = TRUE)
+#' hq2
+#' hq3 <- read_habitatquarries(references = TRUE)
+#' hq3
+#' read_habitatquarries(bibtex = TRUE)}
+#'
+#' @importFrom assertthat
+#' assert_that
+#' is.flag
+#' noNA
+#' is.string
+#' @importFrom stringr
+#' str_split
+#' @importFrom sf
+#' read_sf
+#' @importFrom rlang .data
+#' @importFrom magrittr
+#' set_colnames
+#' @importFrom dplyr
+#' %>%
+#' mutate
+#' select
+#' filter
+#' @export
+read_habitatquarries <-
+    function(file = file.path(fileman_up("n2khab_data"),
+                              "10_raw/habitatquarries/habitatquarries.gpkg"),
+             filter_hab = FALSE,
+             references = FALSE,
+             bibtex = FALSE,
+             version = "habitatquarries_2020v1"){
+
+        assert_that(file.exists(file))
+        assert_that(is.flag(filter_hab), noNA(filter_hab))
+        assert_that(is.flag(references), noNA(references))
+        assert_that(is.flag(bibtex), noNA(bibtex))
+        assert_that(is.string(version))
+
+        if ((references | filter_hab) & bibtex) {
+            warning("Will not read spatial layer when bibtex = TRUE. ",
+                    "Ignoring other argument(s) that are set to TRUE.")
+        }
+
+        if (references | bibtex) {
+            extra_references <-
+                read_sf(file,
+                        layer = "extra_references")
+            if (bibtex)
+            {
+                if (!requireNamespace("bib2df", quietly = TRUE)) {
+                    stop("Package \"bib2df\" is needed when bibtex = TRUE. ",
+                         "Please install it from GitHub with: ",
+                         "remotes::install_github(\"ropensci/bib2df\")",
+                         call. = FALSE)
+                }
+                message("You can copy below output into a *.bib file ",
+                        "for further use.\n")
+                extra_references %>%
+                    mutate(author = str_split(.data$author, " and ")) %>%
+                    set_colnames(toupper(colnames(.))) %>%
+                    bib2df::df2bib()
+                return(invisible(NULL))
+            }
+        }
+
+        typelevels <-
+            read_types() %>%
+            .$type %>%
+            levels
+
+        habitatquarries <-
+            suppressWarnings(
+                read_sf(file,
+                        layer = "habitatquarries",
+                        crs = 31370)
+            ) %>%
+            mutate(
+                type = ifelse(.data$habitattype == "8310",
+                              "8310",
+                              NA_character_) %>%
+                    factor(levels = typelevels),
+                extra_reference = factor(.data$extra_reference)
+            ) %>%
+            {if (filter_hab) filter(., !is.na(.$type)) else .} %>%
+            select(.data$polygon_id,
+                   .data$unit_id,
+                   .data$name,
+                   code_orig = .data$habitattype,
+                   .data$type,
+                   .data$extra_reference)
+
+if (references) {
+    habitatquarries <- list(habitatquarries = habitatquarries,
+                            extra_references = extra_references)
+}
+
+        return(habitatquarries)
 
     }
 
