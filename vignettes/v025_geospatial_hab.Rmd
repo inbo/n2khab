@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-_General note: the below vignette contains frozen output of 27 Jan 2020._
+_General note: the below vignette contains frozen output of 16 Oct 2020._
 _This makes it possible to build the package with vignettes without access to the data sources._
 
 
