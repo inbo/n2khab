@@ -125,10 +125,12 @@ habitatmap
 The `habitatmap` object is a very wide dataframe which is not so easy to handle in R.
 For analytical work on habitat types and RIBs, you're advised to use the tidied data source `habitatmap_stdized`; see [below](#processed-data-sources).
 
-`read_habitatmap(select_hab = TRUE)` will only retain the polygons that occur in `habitatmap_stdized`, i.e. those that contain habitat types or RIBs.
+`read_habitatmap(filter_hab = TRUE)` will only retain the polygons that occur in `habitatmap_stdized`, i.e. those that contain habitat types or RIBs.
 
-Both `habitatstreams` and `habitatsprings` have a straightforward data structure.
+The data sources `habitatstreams`, `habitatsprings` and `habitatquarries` have a straightforward data structure.
 There was no need to generate derived data sources.
+The meaning of their columns is described in the function documentation.
+Not all function arguments are discussed in this vignette: do take the time to look at the documentation!
 
 ```{r}
 habitatstreams <- read_habitatstreams()
