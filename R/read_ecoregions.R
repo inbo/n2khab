@@ -39,11 +39,10 @@
 #' @importFrom rlang .data
 #' @export
 read_ecoregions <-
-    function(path = fileman_up("n2khab_data"),
-             file = "10_raw/ecoregions") {
+    function(file = file.path(fileman_up("n2khab_data"), "10_raw/ecoregions")) {
 
         suppressWarnings(
-            ecoregions <- read_sf(file.path(path, file),
+            ecoregions <- read_sf(file,
                                   crs = 31370)
         )
 

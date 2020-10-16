@@ -44,12 +44,15 @@
 #'
 #' @md
 #'
-#' @param file The filename of the _processed_ data source `soilmap_simple`.
-#' May include a path prefix.
+#' @param file The absolute or relative file path of the _processed_ data
+#' source `soilmap_simple`.
 #' Used only if \code{use_processed = TRUE} (= default).
 #' The default value follows the data management advice in the
 #' vignette on data storage (run \code{vignette("v020_datastorage")}).
-#' @param file_raw Same as `file`, to define the name (subpath) of the _raw_
+#' It uses the first \code{n2khab_data} folder that is found when
+#' sequentially climbing up 0 to 10 levels in the file system hierarchy,
+#' starting from the working directory.
+#' @param file_raw Same as `file`, to define the filepath of the _raw_
 #' datasource `soilmap`.
 #' Used only if \code{use_processed = FALSE}.
 #' @param use_processed Logical.
@@ -89,8 +92,6 @@
 #' If \code{use_processed = FALSE}: only has effect if `simplify=TRUE`.
 #' (With `simplify=FALSE`, the `_explan` variables are always returned.)
 #' If \code{use_processed = TRUE}: is applied in returning `soilmap_simple`.
-#'
-#' @inheritParams read_habitatmap_stdized
 #'
 #' @return
 #' A Simple feature collection of geometry type \code{MULTIPOLYGON},
@@ -265,9 +266,9 @@
 #' @importFrom rlang .data
 #' @export
 read_soilmap <-
-    function(path = fileman_up("n2khab_data"),
-             file = "20_processed/soilmap_simple/soilmap_simple.gpkg",
-             file_raw = "10_raw/soilmap",
+    function(file = file.path(fileman_up("n2khab_data"),
+                              "20_processed/soilmap_simple/soilmap_simple.gpkg"),
+             file_raw = file.path(fileman_up("n2khab_data"), "10_raw/soilmap"),
              use_processed = TRUE,
              version_processed = "soilmap_simple_v2",
              standardize_coastalplain = FALSE,
@@ -286,7 +287,7 @@ read_soilmap <-
 
         if (use_processed) {
 
-            soilmap_simple_path <- file.path(path, file)
+            soilmap_simple_path <- file
             assert_that(file.exists(soilmap_simple_path))
 
             soilmap_simple <-
@@ -351,7 +352,7 @@ read_soilmap <-
         ####### 2. Reading soilmap        ####
         ######################################
 
-        soilmap_path <- file.path(path, file_raw)
+        soilmap_path <- file_raw
         assert_that(file.exists(soilmap_path))
 
         suppressWarnings(

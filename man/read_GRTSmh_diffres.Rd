@@ -6,24 +6,18 @@
 source \code{GRTSmh_diffres}}
 \usage{
 read_GRTSmh_diffres(
-  path = fileman_up("n2khab_data"),
-  subdir = "20_processed/GRTSmh_diffres",
+  dir = file.path(fileman_up("n2khab_data"), "20_processed/GRTSmh_diffres"),
   level,
   polygon = FALSE
 )
 }
 \arguments{
-\item{path}{Location of the file.
-Considering the default value of the \code{file} argument, this should be
-the location of the folder '\strong{\code{n2khab_data}}'.
-By default, the first \code{n2khab_data} folder is used that is found when
+\item{dir}{The data source directory (absolute or relative).
+The default follows the data management advice in the
+vignette on data storage (run \code{vignette("v020_datastorage")}).
+It uses the first \code{n2khab_data} folder that is found when
 sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
-
-\item{subdir}{The subdirectory path of the data source, as viewed from
-\code{path}.
-The default follows the data management advice in the
-vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{level}{Integer in the range from 1 to 9; determines the spatial
 resolution. See the Details section.}

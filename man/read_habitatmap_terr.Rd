@@ -6,25 +6,20 @@
 objects}
 \usage{
 read_habitatmap_terr(
-  path = fileman_up("n2khab_data"),
-  file = "20_processed/habitatmap_terr/habitatmap_terr.gpkg",
+  file = file.path(fileman_up("n2khab_data"),
+    "20_processed/habitatmap_terr/habitatmap_terr.gpkg"),
   keep_aq_types = TRUE,
   drop_7220 = TRUE,
   version = "habitatmap_terr_2018_v2"
 )
 }
 \arguments{
-\item{path}{Location of the file.
-Considering the default value of the \code{file} argument, this should be
-the location of the folder '\strong{\code{n2khab_data}}'.
-By default, the first \code{n2khab_data} folder is used that is found when
+\item{file}{The absolute or relative file path of the data source.
+The default follows the data management advice in the
+vignette on data storage (run \code{vignette("v020_datastorage")}).
+It uses the first \code{n2khab_data} folder that is found when
 sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
-
-\item{file}{The filename of the data source.
-May include a path prefix.
-The default follows the data management advice in the
-vignette on data storage (run \code{vignette("v020_datastorage")}).}
 
 \item{keep_aq_types}{Logical; \code{TRUE} by default.
 The data source \code{habitatmap_terr} aims at delineating all
