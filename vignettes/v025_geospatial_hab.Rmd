@@ -410,6 +410,8 @@ hmt$habitatmap_terr_types
 ```
 
 Compared to `habitatmap_stdized`, _purely_ aquatic or non-habitat/RIB polygons were omitted, and a part of the type data were interpreted in a more specific way.
+Further, while type `7220` is present in `habitatmap_terr`, the `read_habitatmap_terr()` function drops it by default because the `habitatsprings` data source is recommended for that.
+This can be controlled by the `drop_7220` argument.
 
 As a consequence, some type codes are completely absent from `habitatmap_terr_types`:
 
