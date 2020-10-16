@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the data source habitatstreams as an sf linestring
-layer or as a list — read_habitatstreams • n2khab</title>
+<title>Human-readable binary file size — human_filesize • n2khab</title>
 
 
 <!-- jquery -->
@@ -42,14 +41,12 @@ layer or as a list — read_habitatstreams • n2khab</title>
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return the data source habitatstreams as an sf linestring
-layer or as a list — read_habitatstreams" />
-<meta property="og:description" content="Returns the raw data source habitatstreams (Leyssen et al., 2018)
-as an sf linestring
-layer or as a list of two objects: the sf object (CRS:
-Belgian Lambert 72 (EPSG-code 31370))
-plus a data frame
-with textual explanation of the values of the source_id variable." />
+<meta property="og:title" content="Human-readable binary file size — human_filesize" />
+<meta property="og:description" content="Takes an integer (referring to number of bytes) and returns an optimally
+human-readable
+binary-prefixed
+byte size (KiB, MiB, GiB, TiB, PiB, EiB).
+The function is vectorised." />
 
 
 
@@ -144,84 +141,38 @@ with textual explanation of the values of the source_id variable." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the data source <code>habitatstreams</code> as an <code>sf</code> linestring
-layer or as a list</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_habitatdata.R'><code>R/read_habitatdata.R</code></a></small>
-    <div class="hidden name"><code>read_habitatstreams.Rd</code></div>
+    <h1>Human-readable binary file size</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/filemanagement.R'><code>R/filemanagement.R</code></a></small>
+    <div class="hidden name"><code>human_filesize.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns the raw data source <code>habitatstreams</code> (Leyssen et al., 2018)
-as an <code>sf</code> linestring
-layer or as a list of two objects: the <code>sf</code> object (CRS:
-Belgian Lambert 72 (EPSG-code <a href='https://epsg.io/31370'>31370</a>))
-plus a data frame
-with textual explanation of the values of the <code>source_id</code> variable.</p>
+    <p>Takes an integer (referring to number of bytes) and returns an optimally
+human-readable
+<a href='https://en.wikipedia.org/wiki/Binary_prefix'>binary-prefixed</a>
+byte size (KiB, MiB, GiB, TiB, PiB, EiB).
+The function is vectorised.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_habitatstreams</span><span class='op'>(</span>
-  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/habitatstreams"</span><span class='op'>)</span>,
-  source_text <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>human_filesize</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>The absolute or relative file path of the data source.
-The default follows the data management advice in the
-vignette on data storage (run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>).
-It uses the first <code>n2khab_data</code> folder that is found when
-sequentially climbing up 0 to 10 levels in the file system hierarchy,
-starting from the working directory.</p></td>
-    </tr>
-    <tr>
-      <th>source_text</th>
-      <td><p>Logical, defaults to <code>FALSE</code>.
-If <code>TRUE</code>, a list is returned (see <em>Value</em>).</p></td>
+      <th>x</th>
+      <td><p>A positive integer, i.e. the number of bytes (B).
+Can be a vector of file sizes.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>With <code>source_text = FALSE</code> (default): a Simple feature collection of
-type <code>LINESTRING</code>.</p>
-<p>With <code>source_text = TRUE</code>: a list of two objects:</p><ul>
-<li><p><code>lines</code>: the same <code>sf</code> object as with <code>source_text = FALSE</code>.</p></li>
-<li><p><code>sources</code>: textual explanation on the values of the <code>source_id</code>
-variable in the <code>sf</code> object.</p></li>
-</ul>
+    <p>A character vector.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <p>Floris Vanderhaeghe, <a href='mailto:floris.vanderhaeghe@inbo.be'>floris.vanderhaeghe@inbo.be</a></p>
 
-    <p>Leyssen A., Denys L. &amp; De Saeger S. (2018). Indicatieve situering van het
-Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
-behorend tot het <em>Ranunculion fluitantis</em> en het
-<em>Callitricho-Batrachion</em>.
-Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
-Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
-DOI: <a href='https://doi.org/10.21436/inbor.15138370'>https://doi.org/10.21436/inbor.15138370</a>.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># This example supposes that your working directory or a directory up to 10</span>
-<span class='co'># levels above has the 'n2khab_data' folder AND that the 'habitatstreams'</span>
-<span class='co'># data source is present in the default subdirectory.</span>
-<span class='co'># In all other cases, this example won't work but at least you can</span>
-<span class='co'># consider what to do.</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>magrittr</span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-spatial.github.io/sf/'>sf</a></span><span class='op'>)</span>
-<span class='va'>hs</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatstreams</span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>hs</span>
-<span class='va'>hs2</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatstreams</span><span class='op'>(</span>source_text <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>hs2</span>
-<span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>hs</span> <span class='op'>%&gt;%</span> <span class='va'>st_drop_geometry</span>,
-          <span class='va'>hs2</span><span class='op'>$</span><span class='va'>lines</span> <span class='op'>%&gt;%</span> <span class='va'>st_drop_geometry</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

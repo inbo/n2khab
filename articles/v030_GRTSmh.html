@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -148,7 +148,8 @@
 <a href="#read_grtsmh" class="anchor"></a>read_GRTSmh()</h3>
 <p>In the below R code, it is supposed that a <code>n2khab_data</code> folder is present in the current directory or up to 10 levels higher. See the <code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> for more information.</p>
 <p><code><a href="../reference/read_GRTSmh.html">read_GRTSmh()</a></code> by default returns the <code>GRTSmaster_habitats</code> dataset:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span>()
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; class      : RasterLayer </span>
 <span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span>
 <span class="co">#&gt; resolution : 32, 32  (x, y)</span>
@@ -156,9 +157,10 @@
 <span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span>
 <span class="co">#&gt; source     : [...]/n2khab_data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif </span>
 <span class="co">#&gt; names      : GRTSmaster_habitats </span>
-<span class="co">#&gt; values     : 1, 67108857  (min, max)</span></pre></body></html></div>
+<span class="co">#&gt; values     : 1, 67108857  (min, max)</span></pre></div>
 <p>With the argument <code>brick = TRUE</code> however, you will get the <code>GRTSmh_brick</code> data source, i.e. <code>GRTSmaster_habitats</code> plus 9 extra layers:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span>(<span class="kw">brick</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span><span class="op">(</span>brick <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; class      : RasterBrick </span>
 <span class="co">#&gt; dimensions : 2843, 7401, 21041043, 10  (nrow, ncol, ncell, nlayers)</span>
 <span class="co">#&gt; resolution : 32, 32  (x, y)</span>
@@ -167,7 +169,7 @@
 <span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_brick/GRTSmh_brick.tif </span>
 <span class="co">#&gt; names      :   level0,   level1,   level2,   level3,   level4,   level5,   level6,   level7,   level8,   level9 </span>
 <span class="co">#&gt; min values :        1,        1,        1,        1,        1,        1,        1,        1,        1,        1 </span>
-<span class="co">#&gt; max values : 67108857, 16777209,  4194297,  1048569,   262137,    65529,    16377,     4089,     1017,      253</span></pre></body></html></div>
+<span class="co">#&gt; max values : 67108857, 16777209,  4194297,  1048569,   262137,    65529,    16377,     4089,     1017,      253</span></pre></div>
 <p>The higher-level ranking numbers of the RasterBrick allow spatially balanced samples at lower spatial resolution than that of 32 m, and can also be used for aggregation purposes. The provided hierarchical levels correspond to the resolution vector <code>32 * 2^(0:9)</code> (minimum: 32 meters, maximum: 16384 meters), with the corresponding RasterBrick layers named as <code>level0</code> to <code>level9</code>.</p>
 </div>
 <div id="read_grtsmh_diffres" class="section level3">
@@ -220,7 +222,8 @@
 </tbody>
 </table>
 <p>An example with level 5:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span>(<span class="kw">level</span> <span class="kw">=</span> <span class="fl">5</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
 <span class="co">#&gt; class      : RasterLayer </span>
 <span class="co">#&gt; dimensions : 89, 232, 20648  (nrow, ncol, ncell)</span>
 <span class="co">#&gt; resolution : 1024, 1024  (x, y)</span>
@@ -228,9 +231,10 @@
 <span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span>
 <span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif </span>
 <span class="co">#&gt; names      : level5 </span>
-<span class="co">#&gt; values     : 1, 65529  (min, max)</span></pre></body></html></div>
+<span class="co">#&gt; values     : 1, 65529  (min, max)</span></pre></div>
 <p>Alternatively, a dissolved, polygonized variant of the corresponding <code>GRTSmh_brick</code> level can be returned as an <code>sf</code> object. In order not to inflate the data source, this was only made available for levels 4 to 9.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span>(<span class="kw">level</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">polygon</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">5</span>, polygon <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Simple feature collection with 13791 features and 1 field</span>
 <span class="co">#&gt; geometry type:  POLYGON</span>
 <span class="co">#&gt; dimension:      XY</span>
@@ -248,14 +252,15 @@
 <span class="co">#&gt; 7  58718 POLYGON ((176653.6 243166.1...</span>
 <span class="co">#&gt; 8  52318 POLYGON ((177677.6 243166.1...</span>
 <span class="co">#&gt; 9   3166 POLYGON ((178701.6 243166.1...</span>
-<span class="co">#&gt; 10 15454 POLYGON ((179725.6 243166.1...</span></pre></body></html></div>
+<span class="co">#&gt; 10 15454 POLYGON ((179725.6 243166.1...</span></pre></div>
 </div>
 <div id="read_grtsmh_base4frac" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read_grtsmh_base4frac" class="anchor"></a>read_GRTSmh_base4frac()</h3>
 <p>Its use is just to return the base-4-fraction-converted <code>GRTSmaster_habitats</code> as a RasterLayer:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">scipen</span> <span class="kw">=</span> <span class="fl">999</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">15</span>)
-<span class="fu"><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac</a></span>()
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span>, digits <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
+<span class="fu"><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; class      : RasterLayer </span>
 <span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span>
 <span class="co">#&gt; resolution : 32, 32  (x, y)</span>
@@ -263,7 +268,7 @@
 <span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span>
 <span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif </span>
 <span class="co">#&gt; names      : GRTSmh_base4frac </span>
-<span class="co">#&gt; values     : 0.0000000000001, 0.3333333333321  (min, max)</span></pre></body></html></div>
+<span class="co">#&gt; values     : 0.0000000000001, 0.3333333333321  (min, max)</span></pre></div>
 <p>Note that the used options are necessary when treating these base-4-fraction GRTS addresses as characters; otherwise scientific notations will be used.</p>
 <p>Also, be warned that R does not actually regard the values as base 4, but as base 10.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
@@ -303,7 +308,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

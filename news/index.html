@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -140,12 +140,47 @@
       <small>Source: <a href='https://github.com/inbo/n2khab/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="n2khab-0-2-0" class="section level2">
+    <div id="n2khab-0-3-0" class="section level2">
 <h2 class="hasAnchor">
-<a href="#n2khab-0-2-0" class="anchor"></a>n2khab 0.2.0</h2>
+<a href="#n2khab-0-3-0" class="anchor"></a>n2khab 0.3.0</h2>
+<div id="breaking-change" class="section level4">
+<h4 class="hasAnchor">
+<a href="#breaking-change" class="anchor"></a>Breaking change</h4>
+<ul>
+<li>Functions that preprocess (non-included) N2KHAB data sources have been simplified by dropping their <code>path</code> argument (<a href='https://github.com/inbo/n2khab/issues/92'>#92</a>). Existing R code will continue to run normally if you complied with the recommended file organization (see <code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> and <code><a href="../articles/v022_example.html">vignette("v022_example")</a></code>) and did not set the <code>path</code> and <code>file</code> arguments.</li>
+</ul>
+</div>
 <div id="new-features" class="section level4">
 <h4 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h4>
+<ul>
+<li>New function <code><a href="../reference/read_habitatquarries.html">read_habitatquarries()</a></code> for reading the <code>habitatquarries</code> data source (<a href='https://github.com/inbo/n2khab/issues/83'>#83</a>, <a href='https://github.com/inbo/n2khab/issues/94'>#94</a>, <a href="https://github.com/inbo/n2khab-preprocessing/pull/41">inbo/n2khab-preprocessing<a href='https://github.com/inbo/n2khab/issues/41'>#41</a></a>).</li>
+<li>Updates in reference lists (<a href='https://github.com/inbo/n2khab/issues/88'>#88</a>, <a href='https://github.com/inbo/n2khab/issues/93'>#93</a>, <a href="https://github.com/inbo/n2khab/pull/73/commits/7ce3b32">7ce3b32</a>):
+<ul>
+<li>
+<code>schemes</code> &amp; <code>scheme_types</code>: updates of spatial restrictions, names and typegroup names of MNE schemes (for defining the schemes’ target populations);</li>
+<li>
+<code>types</code>: update groundwater dependency of type <code>2170</code>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="internal-changes" class="section level4">
+<h4 class="hasAnchor">
+<a href="#internal-changes" class="anchor"></a>Internal changes</h4>
+<ul>
+<li>Harden CRS representations (<a href='https://github.com/inbo/n2khab/issues/84'>#84</a>)</li>
+<li>Re-integrate <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> (from <code>inborutils</code>) (<a href='https://github.com/inbo/n2khab/issues/89'>#89</a>)</li>
+<li>Drop some package dependencies to speed up package loading (<a href='https://github.com/inbo/n2khab/issues/89'>#89</a>, <a href='https://github.com/inbo/n2khab/issues/90'>#90</a>)</li>
+</ul>
+</div>
+</div>
+    <div id="n2khab-0-2-0" class="section level2">
+<h2 class="hasAnchor">
+<a href="#n2khab-0-2-0" class="anchor"></a>n2khab 0.2.0</h2>
+<div id="new-features-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#new-features-1" class="anchor"></a>New features</h4>
 <ul>
 <li>Updates in reference lists (<a href='https://github.com/inbo/n2khab/issues/64'>#64</a>, <a href='https://github.com/inbo/n2khab/issues/65'>#65</a>, <a href='https://github.com/inbo/n2khab/issues/69'>#69</a>, <a href="https://github.com/inbo/n2khab/pull/73/commits/e69cd52">e69cd52</a>):
 <ul>
@@ -234,7 +269,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

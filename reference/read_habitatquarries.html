@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the data source habitatstreams as an sf linestring
-layer or as a list — read_habitatstreams • n2khab</title>
+<title>Return the data source habitatquarries — read_habitatquarries • n2khab</title>
 
 
 <!-- jquery -->
@@ -42,14 +41,12 @@ layer or as a list — read_habitatstreams • n2khab</title>
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return the data source habitatstreams as an sf linestring
-layer or as a list — read_habitatstreams" />
-<meta property="og:description" content="Returns the raw data source habitatstreams (Leyssen et al., 2018)
-as an sf linestring
-layer or as a list of two objects: the sf object (CRS:
-Belgian Lambert 72 (EPSG-code 31370))
-plus a data frame
-with textual explanation of the values of the source_id variable." />
+<meta property="og:title" content="Return the data source habitatquarries — read_habitatquarries" />
+<meta property="og:description" content="Returns the raw data source habitatquarries as an sf polygon
+layer in the Belgian Lambert 72 CRS (EPSG-code
+31370).
+Optionally, associated bibliographic references can be returned (arguments
+references or bibtex)." />
 
 
 
@@ -144,24 +141,26 @@ with textual explanation of the values of the source_id variable." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the data source <code>habitatstreams</code> as an <code>sf</code> linestring
-layer or as a list</h1>
+    <h1>Return the data source <code>habitatquarries</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_habitatdata.R'><code>R/read_habitatdata.R</code></a></small>
-    <div class="hidden name"><code>read_habitatstreams.Rd</code></div>
+    <div class="hidden name"><code>read_habitatquarries.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns the raw data source <code>habitatstreams</code> (Leyssen et al., 2018)
-as an <code>sf</code> linestring
-layer or as a list of two objects: the <code>sf</code> object (CRS:
-Belgian Lambert 72 (EPSG-code <a href='https://epsg.io/31370'>31370</a>))
-plus a data frame
-with textual explanation of the values of the <code>source_id</code> variable.</p>
+    <p>Returns the raw data source <code>habitatquarries</code> as an <code>sf</code> polygon
+layer in the Belgian Lambert 72 CRS (EPSG-code
+<a href='https://epsg.io/31370'>31370</a>).
+Optionally, associated bibliographic references can be returned (arguments
+<code>references</code> or <code>bibtex</code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_habitatstreams</span><span class='op'>(</span>
-  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/habitatstreams"</span><span class='op'>)</span>,
-  source_text <span class='op'>=</span> <span class='cn'>FALSE</span>
+    <pre class="usage"><span class='fu'>read_habitatquarries</span><span class='op'>(</span>
+  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,
+    <span class='st'>"10_raw/habitatquarries/habitatquarries.gpkg"</span><span class='op'>)</span>,
+  filter_hab <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  references <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  bibtex <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  version <span class='op'>=</span> <span class='st'>"habitatquarries_2020v1"</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -177,49 +176,83 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.</p></td>
     </tr>
     <tr>
-      <th>source_text</th>
-      <td><p>Logical, defaults to <code>FALSE</code>.
-If <code>TRUE</code>, a list is returned (see <em>Value</em>).</p></td>
+      <th>filter_hab</th>
+      <td><p>If <code>TRUE</code>, only polygons with (known) habitat <code>8310</code>
+are returned.</p></td>
+    </tr>
+    <tr>
+      <th>references</th>
+      <td><p>If <code>TRUE</code>, a list is returned with both the <code>sf</code>
+object (element <code>habitatquarries</code>) and a dataframe of bibliographic
+references (element <code>extra_references</code>).</p></td>
+    </tr>
+    <tr>
+      <th>bibtex</th>
+      <td><p>If <code>TRUE</code>, all that happens is bibliographic references
+being printed to the console, formatted for usage in a BibTeX file (<code>*.bib</code>).</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>Version ID of the data source.
+Defaults to the latest available version defined by the package.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>With <code>source_text = FALSE</code> (default): a Simple feature collection of
-type <code>LINESTRING</code>.</p>
-<p>With <code>source_text = TRUE</code>: a list of two objects:</p><ul>
-<li><p><code>lines</code>: the same <code>sf</code> object as with <code>source_text = FALSE</code>.</p></li>
-<li><p><code>sources</code>: textual explanation on the values of the <code>source_id</code>
-variable in the <code>sf</code> object.</p></li>
+    <p>Depending on the arguments, one of:</p><ul>
+<li><p>a simple feature collection of
+type <code>POLYGON</code>, with attribute variables:</p><ul>
+<li><p><code>polygon_id</code>: a unique number per polygon.</p></li>
+<li><p><code>unit_id</code>: a unique number for each quarry unit. Quarry units
+consisting of several polygons (= partly outside the Flemish region)
+have a number greater than 100.</p></li>
+<li><p><code>name</code>: site name.</p></li>
+<li><p><code>code_orig</code>: original 'habitattype' code in the raw data
+source <code>habitatquarries</code>.</p></li>
+<li><p><code>type</code>: habitat type listed in <code><a href='types.html'>types</a></code> - in this
+case either <code>8310</code> or missing (<code>NA</code>).</p></li>
+<li><p><code>extra_reference</code>: site-specific bibliographic reference(s).
+Values refer to rows in the non-spatial dataframe <code>extra_references</code>.</p></li>
+</ul></li>
+<li><p><em>if <code>references = TRUE</code>:</em> a list with both the <code>sf</code>
+object (element <code>habitatquarries</code>) and a dataframe of bibliographic
+references (element <code>extra_references</code>).</p></li>
+<li><p><em>if <code>bibtex = TRUE</code>:</em> <code>NULL</code> (invisibly).</p></li>
 </ul>
 
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Leyssen A., Denys L. &amp; De Saeger S. (2018). Indicatieve situering van het
-Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
-behorend tot het <em>Ranunculion fluitantis</em> en het
-<em>Callitricho-Batrachion</em>.
-Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
-Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
-DOI: <a href='https://doi.org/10.21436/inbor.15138370'>https://doi.org/10.21436/inbor.15138370</a>.</p>
+    <p>The data source <code>habitatquarries</code> is a GeoPackage, available at
+<a href='https://doi.org/10.5281/zenodo.4072967'>Zenodo</a>, that contains:</p><ul>
+<li><p><code>habitatquarries</code>: a spatial polygon layer that corresponds
+with the presence or absence of the Natura 2000 Annex I habitat type <code>8310</code>
+(Caves not open to the public) in the Flemish Region (and border areas),
+Belgium;</p></li>
+<li><p><code>extra_references</code>: a non-spatial table of site-specific
+bibliographic references.</p></li>
+</ul>
+
+<p>In general, different polygons represent different quarry units with their
+own internal climatic environment.
+Units that cross Flemish borders have been split into separate polygons.
+Exceptionally they may overlap if such units are situated above each other.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># This example supposes that your working directory or a directory up to 10</span>
-<span class='co'># levels above has the 'n2khab_data' folder AND that the 'habitatstreams'</span>
+<span class='co'># levels above has the 'n2khab_data' folder AND that the 'habitatquarries'</span>
 <span class='co'># data source is present in the default subdirectory.</span>
 <span class='co'># In all other cases, this example won't work but at least you can</span>
 <span class='co'># consider what to do.</span>
 
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>magrittr</span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-spatial.github.io/sf/'>sf</a></span><span class='op'>)</span>
-<span class='va'>hs</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatstreams</span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>hs</span>
-<span class='va'>hs2</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatstreams</span><span class='op'>(</span>source_text <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>hs2</span>
-<span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>hs</span> <span class='op'>%&gt;%</span> <span class='va'>st_drop_geometry</span>,
-          <span class='va'>hs2</span><span class='op'>$</span><span class='va'>lines</span> <span class='op'>%&gt;%</span> <span class='va'>st_drop_geometry</span><span class='op'>)</span>
-<span class='op'>}</span>
+<span class='va'>hq</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatquarries</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>hq</span>
+<span class='va'>hq2</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatquarries</span><span class='op'>(</span>filter_hab <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>hq2</span>
+<span class='va'>hq3</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatquarries</span><span class='op'>(</span>references <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>hq3</span>
+<span class='fu'>read_habitatquarries</span><span class='op'>(</span>bibtex <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>}</span>
 
 </div></pre>
   </div>

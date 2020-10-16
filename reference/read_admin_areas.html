@@ -78,7 +78,7 @@ The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -153,30 +153,23 @@ The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
 (EPSG-code <a href='https://epsg.io/31370'>31370</a>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_admin_areas</span>(
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='fileman_up.html'>fileman_up</a></span>(<span class='st'>"n2khab_data"</span>),
-  <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"10_raw/flanders"</span>, <span class='st'>"10_raw/provinces"</span>, <span class='st'>"10_raw/sac"</span>),
-  <span class='kw'>dsn</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"flanders"</span>, <span class='st'>"provinces"</span>, <span class='st'>"sac"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>read_admin_areas</span><span class='op'>(</span>
+  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"10_raw/flanders"</span>, <span class='st'>"10_raw/provinces"</span>,
+    <span class='st'>"10_raw/sac"</span><span class='op'>)</span><span class='op'>)</span>,
+  dsn <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"flanders"</span>, <span class='st'>"provinces"</span>, <span class='st'>"sac"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>Location of the file.
-Considering the default value of the <code>file</code> argument, this should be
-the location of the folder '<strong><code>n2khab_data</code></strong>'.
-By default, the first <code>n2khab_data</code> folder is used that is found when
+      <th>file</th>
+      <td><p>The absolute or relative file path of the data source.
+The default follows the data management advice in the
+vignette on data storage (run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>).
+It uses the first <code>n2khab_data</code> folder that is found when
 sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p>The filename of the data source.
-May include a path prefix.
-The default follows the data management advice in the
-vignette on data storage (run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>).</p></td>
     </tr>
     <tr>
       <th>dsn</th>
@@ -207,11 +200,13 @@ You are referred to the raw N2KHAB-data collection
 more about these data sources.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>flanders</span> <span class='kw'>&lt;-</span> <span class='fu'>read_admin_areas</span>(<span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"flanders"</span>)
-<span class='no'>provinces</span> <span class='kw'>&lt;-</span> <span class='fu'>read_admin_areas</span>(<span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"provinces"</span>)
-<span class='no'>sac</span> <span class='kw'>&lt;-</span> <span class='fu'>read_admin_areas</span>(<span class='kw'>dsn</span> <span class='kw'>=</span> <span class='st'>"sac"</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>flanders</span> <span class='op'>&lt;-</span> <span class='fu'>read_admin_areas</span><span class='op'>(</span>dsn <span class='op'>=</span> <span class='st'>"flanders"</span><span class='op'>)</span>
+<span class='va'>provinces</span> <span class='op'>&lt;-</span> <span class='fu'>read_admin_areas</span><span class='op'>(</span>dsn <span class='op'>=</span> <span class='st'>"provinces"</span><span class='op'>)</span>
+<span class='va'>sac</span> <span class='op'>&lt;-</span> <span class='fu'>read_admin_areas</span><span class='op'>(</span>dsn <span class='op'>=</span> <span class='st'>"sac"</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -227,7 +222,7 @@ more about these data sources.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

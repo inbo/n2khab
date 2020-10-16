@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -109,8 +109,9 @@
     
 <p><em>Note: for more information on data storage and locations, see <code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code>.</em> <em>The below workflow is an application and demonstrates current setup from R (output is mostly not included).</em></p>
 <p>If you wish to follow by running the vignette’s code chunks, you can put a copy of the vignette in your working directory:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">source</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"doc"</span>, <span class="st">"v022_example.Rmd"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"n2khab"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span>(<span class="no">source</span>, <span class="st">"."</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="va">source</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"doc"</span>, <span class="st">"v022_example.Rmd"</span>, package <span class="op">=</span> <span class="st">"n2khab"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span><span class="va">source</span>, <span class="st">"."</span><span class="op">)</span></pre></div>
 <div id="minimal-setup-for-using-read_soilmap" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minimal-setup-for-using-read_soilmap" class="anchor"></a>Minimal setup for using <code>read_soilmap()</code>
@@ -119,46 +120,54 @@
 <h3 class="hasAnchor">
 <a href="#install-and-load-n2khab" class="anchor"></a>Install and load <code>n2khab</code>
 </h3>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="kw">R_REMOTES_NO_ERRORS_FROM_WARNINGS</span> <span class="kw">=</span> <span class="st">"true"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">remotes</span>)
-<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"inbo/n2khab"</span>,
-               <span class="kw">build_vignettes</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-               <span class="kw">upgrade</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">n2khab</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>R_REMOTES_NO_ERRORS_FROM_WARNINGS <span class="op">=</span> <span class="st">"true"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span>
+<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"inbo/n2khab"</span>,
+               build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,
+               upgrade <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://inbo.github.io/n2khab">n2khab</a></span><span class="op">)</span></pre></div>
 </div>
 <div id="create-or-locate-the-n2khab_data-directory-with-2-subdirectories" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-or-locate-the-n2khab_data-directory-with-2-subdirectories" class="anchor"></a>Create (or locate) the <code>n2khab_data</code> directory with 2 subdirectories</h3>
 <p>This will create <code>n2khab_data</code> in the working directory:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">n2khab_data_path</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/fileman_folders.html">fileman_folders</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="va">n2khab_data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fileman_folders.html">fileman_folders</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p>You can also provide a custom root ‘path’ to <code><a href="../reference/fileman_folders.html">fileman_folders()</a></code>, but then take a location that is a (grand-grand-…) parent of the current working directory. This is because reading functions of <code>n2khab</code> will by default use the first <code>n2khab_data</code> directory they can find, starting from the working directory and sequentially climbing up one directory level at a time.</p>
 <p>If you already have an existing <code>n2khab_data</code> directory in place, instead run:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">n2khab_data_path</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/fileman_up.html">fileman_up</a></span>(<span class="st">"n2khab_data"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="va">n2khab_data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fileman_up.html">fileman_up</a></span><span class="op">(</span><span class="st">"n2khab_data"</span><span class="op">)</span></pre></div>
 </div>
 <div id="download-the-soilmap_simple-data-source-in-the-correct-place" class="section level3">
 <h3 class="hasAnchor">
 <a href="#download-the-soilmap_simple-data-source-in-the-correct-place" class="anchor"></a>Download the <code>soilmap_simple</code> data source in the correct place</h3>
 <p>The <code>soilmap_simple</code> data source is a GeoPackage, provided and documented at <a href="https://doi.org/10.5281/zenodo.3732903">Zenodo</a>. It belongs to the collection of processed data (<a href="https://zenodo.org/communities/n2khab-data-processed">Zenodo-link</a>).</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">soilmap_simple_path</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">n2khab_data_path</span>, <span class="st">"20_processed/soilmap_simple"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(<span class="no">soilmap_simple_path</span>)
-<span class="fu"><a href="../reference/download_zenodo.html">download_zenodo</a></span>(<span class="kw">doi</span> <span class="kw">=</span> <span class="st">"10.5281/zenodo.3732903"</span>,
-                <span class="kw">path</span> <span class="kw">=</span> <span class="no">soilmap_simple_path</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="va">soilmap_simple_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">n2khab_data_path</span>, <span class="st">"20_processed/soilmap_simple"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">soilmap_simple_path</span><span class="op">)</span>
+<span class="fu"><a href="../reference/download_zenodo.html">download_zenodo</a></span><span class="op">(</span>doi <span class="op">=</span> <span class="st">"10.5281/zenodo.3732903"</span>,
+                path <span class="op">=</span> <span class="va">soilmap_simple_path</span><span class="op">)</span></pre></div>
 <p>At some future time, the download will be performed automatically by <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code> (if the <code>soilmap_simple</code> data source is missing).</p>
 </div>
 </div>
 <div id="explore-the-soilmap_simple-data-source" class="section level2">
 <h2 class="hasAnchor">
 <a href="#explore-the-soilmap_simple-data-source" class="anchor"></a>Explore the <code>soilmap_simple</code> data source!</h2>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">knitr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sf</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">mapview</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">units</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/mapview">mapview</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-quantities/units/">units</a></span><span class="op">)</span></pre></div>
 <p>Inspect documentation of <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code>:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r">?<span class="no">read_soilmap</span></pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="op">?</span><span class="va">read_soilmap</span></pre></div>
 <p>Read the data source and inspect its contents:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">sm_simple</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/read_soilmap.html">read_soilmap</a></span>()
-<span class="no">sm_simple</span>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="va">sm_simple</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_soilmap.html">read_soilmap</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">sm_simple</span>
 <span class="co">#&gt; Simple feature collection with 270550 features and 10 fields</span>
 <span class="co">#&gt; geometry type:  MULTIPOLYGON</span>
 <span class="co">#&gt; dimension:      XY</span>
@@ -179,8 +188,9 @@
 <span class="co">#&gt; 10      185390 Zandleems… FALSE         Lca              &lt;NA&gt;         </span>
 <span class="co">#&gt; # … with 270,540 more rows, and 6 more variables: bsm_mo_tex &lt;fct&gt;,</span>
 <span class="co">#&gt; #   bsm_mo_drain &lt;fct&gt;, bsm_mo_prof &lt;fct&gt;, bsm_mo_parentmat &lt;fct&gt;,</span>
-<span class="co">#&gt; #   bsm_mo_profvar &lt;fct&gt;, geom &lt;MULTIPOLYGON [m]&gt;</span></pre></body></html></div>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu">glimpse</span>(<span class="no">sm_simple</span>)
+<span class="co">#&gt; #   bsm_mo_profvar &lt;fct&gt;, geom &lt;MULTIPOLYGON [m]&gt;</span></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">sm_simple</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 270,550</span>
 <span class="co">#&gt; Columns: 11</span>
 <span class="co">#&gt; $ bsm_poly_id        &lt;dbl&gt; 165740, 176046, 185239, 162400, 173971, 173087, 19…</span>
@@ -193,10 +203,11 @@
 <span class="co">#&gt; $ bsm_mo_prof        &lt;fct&gt; NA, NA, c, NA, NA, p, p, c, p, a, NA, c, a, NA, NA…</span>
 <span class="co">#&gt; $ bsm_mo_parentmat   &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span>
 <span class="co">#&gt; $ bsm_mo_profvar     &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, (c), NA, NA, NA, N…</span>
-<span class="co">#&gt; $ geom               &lt;MULTIPOLYGON [m]&gt; MULTIPOLYGON (((204667.9 19..., MULTI…</span></pre></body></html></div>
+<span class="co">#&gt; $ geom               &lt;MULTIPOLYGON [m]&gt; MULTIPOLYGON (((204667.9 19..., MULTI…</span></pre></div>
 <p>You can also read the explanations for levels of the code variables <code>bsm_mo_substr</code>, <code>bsm_mo_tex</code>, <code>bsm_mo_drain</code> etc. from the data source and insert them as columns (with order of factor levels matching the corresponding code’s factor level order). To do that, you must read the data source with <code>explan = TRUE</code>:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">sm_simple</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/read_soilmap.html">read_soilmap</a></span>(<span class="kw">explan</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="fu">glimpse</span>(<span class="no">sm_simple</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="va">sm_simple</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_soilmap.html">read_soilmap</a></span><span class="op">(</span>explan <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">sm_simple</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 270,550</span>
 <span class="co">#&gt; Columns: 17</span>
 <span class="co">#&gt; $ bsm_poly_id             &lt;dbl&gt; 165740, 176046, 185239, 162400, 173971, 17308…</span>
@@ -215,9 +226,10 @@
 <span class="co">#&gt; $ bsm_mo_parentmat_explan &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…</span>
 <span class="co">#&gt; $ bsm_mo_profvar          &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, (c), NA, NA, …</span>
 <span class="co">#&gt; $ bsm_mo_profvar_explan   &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, Bedolven text…</span>
-<span class="co">#&gt; $ geom                    &lt;MULTIPOLYGON [m]&gt; MULTIPOLYGON (((204667.9 19..., …</span></pre></body></html></div>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/sf/man/tibble.html">tibble</a></span>(<span class="kw">drain_levels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span>(<span class="no">sm_simple</span>$<span class="no">bsm_mo_drain</span>),
-       <span class="kw">drain_levels_explained</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span>(<span class="no">sm_simple</span>$<span class="no">bsm_mo_drain_explan</span>))
+<span class="co">#&gt; $ geom                    &lt;MULTIPOLYGON [m]&gt; MULTIPOLYGON (((204667.9 19..., …</span></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/tibble.html">tibble</a></span><span class="op">(</span>drain_levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">sm_simple</span><span class="op">$</span><span class="va">bsm_mo_drain</span><span class="op">)</span>,
+       drain_levels_explained <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">sm_simple</span><span class="op">$</span><span class="va">bsm_mo_drain_explan</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 15 x 2</span>
 <span class="co">#&gt;    drain_levels drain_levels_explained                                          </span>
 <span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;                                                           </span>
@@ -235,41 +247,47 @@
 <span class="co">#&gt; 12 g            uiterst nat, gereduceerd                                        </span>
 <span class="co">#&gt; 13 h            nat met relatief hoge ligging, sterk gleyig                     </span>
 <span class="co">#&gt; 14 h-i          complex van nat met relatief hoge ligging, sterk gleyig tot zee…</span>
-<span class="co">#&gt; 15 i            zeer nat met relatief hoge ligging, zeer sterk gleyig</span></pre></body></html></div>
+<span class="co">#&gt; 15 i            zeer nat met relatief hoge ligging, zeer sterk gleyig</span></pre></div>
 <p><em>Note: for the following chunks, it doesn’t matter whether you used <code>explan = TRUE</code> or not.</em></p>
 <p>How many polygons are available per region?</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">sm_simple</span> <span class="kw">%&gt;%</span>
-    <span class="no">st_drop_geometry</span> <span class="kw">%&gt;%</span>
-    <span class="fu">count</span>(<span class="no">bsm_region</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="va">sm_simple</span> <span class="op">%&gt;%</span>
+    <span class="va">st_drop_geometry</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">bsm_region</span><span class="op">)</span></pre></div>
 <p>Wat is the average polygon area per region?</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">sm_simple</span> <span class="kw">%&gt;%</span>
-    <span class="fu">mutate</span>(<span class="kw">area</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_area</a></span>(<span class="no">.</span>)) <span class="kw">%&gt;%</span>
-    <span class="no">st_drop_geometry</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">bsm_region</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/sf/man/tidyverse.html">summarise</a></span>(<span class="kw">mean_area</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">area</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="va">sm_simple</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="va">st_drop_geometry</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bsm_region</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>mean_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p>Plot polygons of the ‘Zwin’ region:</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">zwin_map</span> <span class="kw">&lt;-</span>
-    <span class="no">sm_simple</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">bsm_region</span> <span class="kw">==</span> <span class="st">"Zwin"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">bsm_mo_tex</span>)) +
-    <span class="fu">geom_sf</span>()</pre></body></html></div>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="va">zwin_map</span> <span class="op">&lt;-</span>
+    <span class="va">sm_simple</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_region</span> <span class="op">==</span> <span class="st">"Zwin"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>fill <span class="op">=</span> <span class="va">bsm_mo_tex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">geom_sf</span><span class="op">(</span><span class="op">)</span></pre></div>
 <ul>
 <li>with WGS84 graticule (though plotted in Belgian Lambert 72 = CRS 31370):</li>
 </ul>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">zwin_map</span></pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="va">zwin_map</span></pre></div>
 <ul>
 <li>with Belgian Lambert 72 graticule:</li>
 </ul>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">zwin_map</span> + <span class="fu">coord_sf</span>(<span class="kw">datum</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_crs.html">st_crs</a></span>(<span class="fl">31370</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb17"><pre class="downlit">
+<span class="va">zwin_map</span> <span class="op">+</span> <span class="fu">coord_sf</span><span class="op">(</span>datum <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="fl">31370</span><span class="op">)</span><span class="op">)</span></pre></div>
 <ul>
 <li>make an interactive map of it, providing two alternative basemaps:</li>
 </ul>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">sm_simple</span> <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">bsm_region</span> <span class="kw">==</span> <span class="st">"Zwin"</span>) <span class="kw">%&gt;%</span>
-        <span class="fu">mutate</span>(<span class="kw">bsm_mo_tex</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">bsm_mo_tex</span>)) <span class="kw">%&gt;%</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span>(<span class="kw">zcol</span> <span class="kw">=</span> <span class="st">"bsm_mo_tex"</span>,
-                <span class="kw">alpha.region</span> <span class="kw">=</span> <span class="fl">0.2</span>,
-                <span class="kw">map.types</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"OpenStreetMap"</span>, <span class="st">"OpenTopoMap"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb18"><pre class="downlit">
+<span class="va">sm_simple</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_region</span> <span class="op">==</span> <span class="st">"Zwin"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>bsm_mo_tex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">bsm_mo_tex</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+        <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span>zcol <span class="op">=</span> <span class="st">"bsm_mo_tex"</span>,
+                alpha.region <span class="op">=</span> <span class="fl">0.2</span>,
+                map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"OpenStreetMap"</span>, <span class="st">"OpenTopoMap"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p>Clicking a feature on the above generated map reveals all attributes.</p>
 </div>
 <div id="access-more-information-the-soilmap-data-source" class="section level2">
@@ -279,19 +297,21 @@
 <h3 class="hasAnchor">
 <a href="#download-the-soilmap-data-source-in-the-correct-place" class="anchor"></a>Download the <code>soilmap</code> data source in the correct place</h3>
 <p>The digital soil map of the Flemish Region is published <a href="https://www.dov.vlaanderen.be/geonetwork/srv/dut/catalog.search#/metadata/5c129f2d-4498-4bc3-8860-01cb2d513f8f">at DOV</a> (Databank Ondergrond Vlaanderen). The <code>soilmap</code> data source is the (renamed) shapefile, stored (with versioning) <a href="https://doi.org/10.5281/zenodo.3387007">at Zenodo</a> in order to support the <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code> function and to sustain long-term workflow reproducibility. The <code>soilmap</code> data source belongs to the raw data collection (<a href="https://zenodo.org/communities/n2khab-data-raw">Zenodo-link</a>).</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">soilmap_path</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">n2khab_data_path</span>, <span class="st">"10_raw/soilmap"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(<span class="no">soilmap_path</span>)
-<span class="fu"><a href="../reference/download_zenodo.html">download_zenodo</a></span>(<span class="kw">doi</span> <span class="kw">=</span> <span class="st">"10.5281/zenodo.3387008"</span>,
-                <span class="kw">path</span> <span class="kw">=</span> <span class="no">soilmap_path</span>,
-                <span class="kw">parallel</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="va">soilmap_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">n2khab_data_path</span>, <span class="st">"10_raw/soilmap"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">soilmap_path</span><span class="op">)</span>
+<span class="fu"><a href="../reference/download_zenodo.html">download_zenodo</a></span><span class="op">(</span>doi <span class="op">=</span> <span class="st">"10.5281/zenodo.3387008"</span>,
+                path <span class="op">=</span> <span class="va">soilmap_path</span>,
+                parallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
 <p>At some time in future, the download will be performed automatically by <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code> (if the <code>soilmap</code> data source is missing).</p>
 </div>
 <div id="explore-the-soilmap-data-source" class="section level3">
 <h3 class="hasAnchor">
 <a href="#explore-the-soilmap-data-source" class="anchor"></a>Explore the soilmap data source</h3>
 <p>Read the data source – this takes a while (large dataset) – and inspect its contents:</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">sm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/read_soilmap.html">read_soilmap</a></span>(<span class="kw">use_processed</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="no">sm</span>
+<div class="sourceCode" id="cb20"><pre class="downlit">
+<span class="va">sm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_soilmap.html">read_soilmap</a></span><span class="op">(</span>use_processed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">sm</span>
 <span class="co">#&gt; Simple feature collection with 270550 features and 37 fields</span>
 <span class="co">#&gt; geometry type:  MULTIPOLYGON</span>
 <span class="co">#&gt; dimension:      XY</span>
@@ -322,34 +342,38 @@
 <span class="co">#&gt; #   bsm_ge_substr_explan &lt;fct&gt;, bsm_ge_series &lt;fct&gt;,</span>
 <span class="co">#&gt; #   bsm_ge_series_explan &lt;fct&gt;, bsm_ge_subseries &lt;fct&gt;,</span>
 <span class="co">#&gt; #   bsm_ge_subseries_explan &lt;fct&gt;, bsm_map_url &lt;fct&gt;, bsm_book_url &lt;fct&gt;,</span>
-<span class="co">#&gt; #   bsm_detailmap_url &lt;fct&gt;, bsm_profloc_url &lt;fct&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></pre></body></html></div>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu">glimpse</span>(<span class="no">sm</span>)</pre></body></html></div>
+<span class="co">#&gt; #   bsm_detailmap_url &lt;fct&gt;, bsm_profloc_url &lt;fct&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit">
+<span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">sm</span><span class="op">)</span></pre></div>
 <p>Extract features that belong to the ‘Middellandpolders’ region:</p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="no">sm_mp</span> <span class="kw">&lt;-</span>
-    <span class="no">sm</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">bsm_region</span> <span class="kw">==</span> <span class="st">"Middellandpolders"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">sm_mp</span>)
-<span class="co">#&gt; [1] 3991   38</span></pre></body></html></div>
+<div class="sourceCode" id="cb22"><pre class="downlit">
+<span class="va">sm_mp</span> <span class="op">&lt;-</span>
+    <span class="va">sm</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_region</span> <span class="op">==</span> <span class="st">"Middellandpolders"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">sm_mp</span><span class="op">)</span>
+<span class="co">#&gt; [1] 3991   38</span></pre></div>
 <ul>
 <li>make an interactive map (which may open in your webbrowser), with two alternative base maps:</li>
 </ul>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">sm_mp</span> <span class="kw">%&gt;%</span>
-    <span class="fu">mutate</span>(<span class="kw">bsm_ge_series</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">bsm_ge_series</span>)) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span>(<span class="kw">zcol</span> <span class="kw">=</span> <span class="st">"bsm_ge_series"</span>,
-            <span class="kw">alpha.region</span> <span class="kw">=</span> <span class="fl">0.2</span>,
-            <span class="kw">map.types</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Wikimedia"</span>, <span class="st">"CartoDB.Positron"</span>),
-            <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb23"><pre class="downlit">
+<span class="va">sm_mp</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>bsm_ge_series <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">bsm_ge_series</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span>zcol <span class="op">=</span> <span class="st">"bsm_ge_series"</span>,
+            alpha.region <span class="op">=</span> <span class="fl">0.2</span>,
+            map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Wikimedia"</span>, <span class="st">"CartoDB.Positron"</span><span class="op">)</span>,
+            alpha <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></pre></div>
 <ul>
 <li>calculate surface area (ha) and polygon count per <code>bsm_ge_series</code>:</li>
 </ul>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">sm_mp</span> <span class="kw">%&gt;%</span>
-    <span class="fu">mutate</span>(<span class="kw">area</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_area</a></span>(<span class="no">.</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span>(<span class="st">"ha"</span>)) <span class="kw">%&gt;%</span>
-    <span class="no">st_drop_geometry</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">bsm_ge_series</span>, <span class="no">bsm_ge_series_explan</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/sf/man/tidyverse.html">summarise</a></span>(<span class="kw">area</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">area</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fl">2</span>),
-              <span class="kw">nr_polygons</span> <span class="kw">=</span> <span class="fu">n</span>()) <span class="kw">%&gt;%</span>
-    <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="no">area</span>)) <span class="kw">%&gt;%</span>
-    <span class="no">kable</span></pre></body></html></div>
+<div class="sourceCode" id="cb24"><pre class="downlit">
+<span class="va">sm_mp</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span><span class="op">(</span><span class="st">"ha"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="va">st_drop_geometry</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bsm_ge_series</span>, <span class="va">bsm_ge_series_explan</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,
+              nr_polygons <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="va">kable</span></pre></div>
 <table class="table">
 <colgroup>
 <col width="7%">
@@ -417,15 +441,16 @@
 <ul>
 <li>calculate surface area (ha) and polygon count per soilseries where <code>bsm_ge_series == "D"</code>:</li>
 </ul>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="no">sm_mp</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">bsm_ge_series</span> <span class="kw">==</span> <span class="st">"D"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu">mutate</span>(<span class="kw">area</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_area</a></span>(<span class="no">.</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span>(<span class="st">"ha"</span>)) <span class="kw">%&gt;%</span>
-    <span class="no">st_drop_geometry</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">bsm_soilseries</span>, <span class="no">bsm_soilseries_explan</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/sf/man/tidyverse.html">summarise</a></span>(<span class="kw">area</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">area</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fl">2</span>),
-              <span class="kw">nr_polygons</span> <span class="kw">=</span> <span class="fu">n</span>()) <span class="kw">%&gt;%</span>
-    <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="no">area</span>)) <span class="kw">%&gt;%</span>
-    <span class="no">kable</span></pre></body></html></div>
+<div class="sourceCode" id="cb25"><pre class="downlit">
+<span class="va">sm_mp</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_ge_series</span> <span class="op">==</span> <span class="st">"D"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span><span class="op">(</span><span class="st">"ha"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="va">st_drop_geometry</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bsm_soilseries</span>, <span class="va">bsm_soilseries_explan</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,
+              nr_polygons <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="va">kable</span></pre></div>
 <table class="table">
 <colgroup>
 <col width="14%">
@@ -541,11 +566,12 @@
 <ul>
 <li>plot all features where <code>bsm_soilseries == "m.D5"</code> (providing all <code>mapview</code>’s default base maps):</li>
 </ul>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">sm_mp</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">bsm_soilseries</span> <span class="kw">==</span> <span class="st">"m.D5"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">"red"</span>,
-            <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">1</span>,
-            <span class="kw">alpha.region</span> <span class="kw">=</span> <span class="fl">0</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb26"><pre class="downlit">
+<span class="va">sm_mp</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_soilseries</span> <span class="op">==</span> <span class="st">"m.D5"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span>,
+            alpha <span class="op">=</span> <span class="fl">1</span>,
+            alpha.region <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></pre></div>
 </div>
 </div>
   </div>
@@ -565,7 +591,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -42,12 +42,9 @@
   
 
 <meta property="og:title" content="Get data from a Zenodo archive — download_zenodo" />
-<meta property="og:description" content="These objects are imported from other packages. Follow the links
-below to see their documentation.
-
-  inborutilsdownload_zenodo
-
-" />
+<meta property="og:description" content="This function will download an entire archive from Zenodo (https://zenodo.org).
+It only works for Zenodo created DOI (not when the DOI is for
+example derived from Zookeys.)" />
 
 
 
@@ -79,7 +76,7 @@ below to see their documentation.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -148,17 +145,64 @@ below to see their documentation.
     </div>
 
     <div class="ref-description">
-    <p>These objects are imported from other packages. Follow the links
-below to see their documentation.</p>
-<dl'>
-  <dt>inborutils</dt><dd><p><code><a href='https://inbo.github.io/inborutils/reference/download_zenodo.html'>download_zenodo</a></code></p></dd>
-
-</dl>
+    <p>This function will download an entire archive from Zenodo (<a href='https://zenodo.org'>https://zenodo.org</a>).
+It only works for Zenodo created DOI (not when the DOI is for
+example derived from Zookeys.)</p>
     </div>
 
+    <pre class="usage"><span class='fu'>download_zenodo</span><span class='op'>(</span><span class='va'>doi</span>, path <span class='op'>=</span> <span class='st'>"."</span>, parallel <span class='op'>=</span> <span class='cn'>FALSE</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>doi</th>
+      <td><p>a doi pointer to the Zenodo archive starting with '10.5281/zenodo.'. See examples.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>Path where the data must be downloaded.
+Defaults to the working directory.</p></td>
+    </tr>
+    <tr>
+      <th>parallel</th>
+      <td><p>Logical (<code>FALSE</code> by default).
+If <code>TRUE</code>, will run a number of parallel processes, each downloading
+another file.
+This is useful when multiple large files are present in the Zenodo
+record, which otherwise would be downloaded sequentially.
+Of course, the operation is limited by bandwidth and traffic limitations.</p></td>
+    </tr>
+    <tr>
+      <th>quiet</th>
+      <td><p>Logical (<code>FALSE</code> by default).
+Do you want to suppress informative messages (not warnings)?</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p>Other functions regarding file management for N2KHAB projects: 
+<code><a href='fileman_folders.html'>fileman_folders</a>()</code>,
+<code><a href='fileman_up.html'>fileman_up</a>()</code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hans Van Calster, <a href='mailto:hans.vancalster@inbo.be'>hans.vancalster@inbo.be</a></p>
+<p>Floris Vanderhaeghe, <a href='mailto:floris.vanderhaeghe@inbo.be'>floris.vanderhaeghe@inbo.be</a></p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># Example download of an archive containing a single zip</span>
+<span class='fu'>download_zenodo</span><span class='op'>(</span>doi <span class='op'>=</span> <span class='st'>"10.5281/zenodo.1283345"</span><span class='op'>)</span>
+<span class='fu'>download_zenodo</span><span class='op'>(</span>doi <span class='op'>=</span> <span class='st'>"10.5281/zenodo.1283345"</span>, quiet <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='co'># Example download of an archive containing multiple files</span>
+<span class='co'># using parallel download</span>
+<span class='co'># (multiple files will be simultaneously downloaded)</span>
+<span class='fu'>download_zenodo</span><span class='op'>(</span>doi <span class='op'>=</span> <span class='st'>"10.5281/zenodo.1172801"</span>, parallel <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='co'># Example download of an archive containing a single pdf file</span>
+<span class='fu'>download_zenodo</span><span class='op'>(</span>doi <span class='op'>=</span> <span class='st'>"10.5281/zenodo.168478"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -174,7 +218,7 @@ below to see their documentation.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

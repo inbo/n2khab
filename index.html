@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -110,13 +110,15 @@
 <h2 class="hasAnchor">
 <a href="#installing-testing-and-using-the-n2khab-package" class="anchor"></a>Installing, testing and using the <em>n2khab</em> package</h2>
 <p>To install, run:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="kw">R_REMOTES_NO_ERRORS_FROM_WARNINGS</span> <span class="kw">=</span> <span class="st">"true"</span>) <span class="co"># as a precaution</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"inbo/n2khab"</span>,
-                        <span class="kw">build_vignettes</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                        <span class="kw">upgrade</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>R_REMOTES_NO_ERRORS_FROM_WARNINGS <span class="op">=</span> <span class="st">"true"</span><span class="op">)</span> <span class="co"># as a precaution</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"inbo/n2khab"</span>,
+                        build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,
+                        upgrade <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
 <p>Note that this will install the package from the <code>master</code> branch. If you need a version from another branch, add the <code>ref</code> argument in the above function to provide the branch name.</p>
 <p>Have a look at the vignettes to quickly find your way!</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"n2khab"</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"n2khab"</span><span class="op">)</span>
 <span class="co"># vignettes only: browseVignettes("n2khab")</span>
 <span class="co"># documentation of whole package: package?n2khab</span></pre></div>
 <p>Please take note that you must set up the needed data sources as explained in <code><a href="articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> and demonstrated in <code><a href="articles/v022_example.html">vignette("v022_example")</a></code>. There is a major distinction between:</p>
@@ -211,7 +213,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

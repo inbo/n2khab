@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -140,7 +140,8 @@
 <h2 class="hasAnchor">
 <a href="#get-the-reference-lists-in-r" class="anchor"></a>Get the reference lists in R</h2>
 <p>Making the <code>types</code> reference list available in the R environment is as easy as:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../reference/read_types.html">read_types</a></span>()
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="../reference/read_types.html">read_types</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 111 x 25</span>
 <span class="co">#&gt;    type  typelevel main_type type_name type_shortname typeclass typeclass_name</span>
 <span class="co">#&gt;    &lt;fct&gt; &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;     &lt;fct&gt;         </span>
@@ -159,9 +160,10 @@
 <span class="co">#&gt; #   groundw_dep_name &lt;fct&gt;, groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;,</span>
 <span class="co">#&gt; #   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, tag_1 &lt;chr&gt;,</span>
 <span class="co">#&gt; #   tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2 &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span>
-<span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></pre></div>
 <p>By default, English is used. But, you can also choose to get a tibble in another language:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/read_types.html">read_types</a></span>(<span class="kw">lang</span> <span class="kw">=</span> <span class="st">"nl"</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="../reference/read_types.html">read_types</a></span><span class="op">(</span>lang <span class="op">=</span> <span class="st">"nl"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 111 x 25</span>
 <span class="co">#&gt;    type  typelevel main_type type_name type_shortname typeclass typeclass_name</span>
 <span class="co">#&gt;    &lt;fct&gt; &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;     &lt;fct&gt;         </span>
@@ -180,10 +182,11 @@
 <span class="co">#&gt; #   groundw_dep_name &lt;fct&gt;, groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;,</span>
 <span class="co">#&gt; #   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, tag_1 &lt;chr&gt;,</span>
 <span class="co">#&gt; #   tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2 &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span>
-<span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></pre></div>
 <p>The <code>lang</code> argument is available in the below functions as well.</p>
 <p><code>env_pressures</code> is made available with:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/read_env_pressures.html">read_env_pressures</a></span>()
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/read_env_pressures.html">read_env_pressures</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 35 x 7</span>
 <span class="co">#&gt;    ep_code ep_abbrev  ep_name        ep_class ep_class_name  explanation remarks</span>
 <span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;      &lt;fct&gt;          &lt;fct&gt;    &lt;fct&gt;          &lt;chr&gt;       &lt;chr&gt;  </span>
@@ -197,10 +200,11 @@
 <span class="co">#&gt;  8 ep_03.3 03.3_eutr… 3.3 Eutrophic… ep_clas… 3 Eutrophicat… &lt;NA&gt;        &lt;NA&gt;   </span>
 <span class="co">#&gt;  9 ep_03.4 03.4_eutr… 3.4 Eutrophic… ep_clas… 3 Eutrophicat… &lt;NA&gt;        &lt;NA&gt;   </span>
 <span class="co">#&gt; 10 ep_04.1 04.1_acid… 4.1 Acidifica… ep_clas… 4 Acidificati… &lt;NA&gt;        &lt;NA&gt;   </span>
-<span class="co">#&gt; # … with 25 more rows</span></pre></body></html></div>
+<span class="co">#&gt; # … with 25 more rows</span></pre></div>
 <p>When actually using these reading functions, you will – of course – assign its result to an object. E.g. with the <code>schemes</code> reference list:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">schemes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/read_schemes.html">read_schemes</a></span>()
-<span class="no">schemes</span>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="va">schemes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_schemes.html">read_schemes</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">schemes</span>
 <span class="co">#&gt; # A tibble: 63 x 25</span>
 <span class="co">#&gt;    scheme scheme_name scheme_shortname programme programme_name attribute_1</span>
 <span class="co">#&gt;    &lt;fct&gt;  &lt;fct&gt;       &lt;fct&gt;            &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;      </span>
@@ -220,9 +224,10 @@
 <span class="co">#&gt; #   attribute_3_name &lt;fct&gt;, attribute_3_shortname &lt;fct&gt;,</span>
 <span class="co">#&gt; #   spatial_restriction &lt;chr&gt;, notes &lt;chr&gt;, tag_1 &lt;chr&gt;, tag_2 &lt;chr&gt;,</span>
 <span class="co">#&gt; #   tag_3 &lt;chr&gt;, tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span>
-<span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></pre></div>
 <p>The <code><a href="../reference/read_scheme_types.html">read_scheme_types()</a></code> function provides the extra ability to <em>toggle</em> the presence of most textual information, because these comprise many extra variables (combining all additional information of the concerned themes <em>and</em> the types). This behaviour is controlled by the argument <code>extended</code>, which is <code>FALSE</code> by default.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span>()
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 763 x 5</span>
 <span class="co">#&gt;    scheme   type    typegroup     typegroup_name           typegroup_shortname  </span>
 <span class="co">#&gt;    &lt;fct&gt;    &lt;fct&gt;   &lt;fct&gt;         &lt;fct&gt;                    &lt;fct&gt;                </span>
@@ -236,8 +241,9 @@
 <span class="co">#&gt;  8 ATM_03.1 2120    ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest </span>
 <span class="co">#&gt;  9 ATM_03.1 2130_h… ATM_03.1_gro… very sensitive non-fore… very sensitive non-f…</span>
 <span class="co">#&gt; 10 ATM_03.1 2130_hd ATM_03.1_gro… very sensitive non-fore… very sensitive non-f…</span>
-<span class="co">#&gt; # … with 753 more rows</span></pre></body></html></div>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span>(<span class="kw">extended</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="co">#&gt; # … with 753 more rows</span></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span><span class="op">(</span>extended <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 763 x 53</span>
 <span class="co">#&gt;    scheme type  typegroup typegroup_name typegroup_short… scheme_name</span>
 <span class="co">#&gt;    &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;            &lt;fct&gt;      </span>
@@ -267,7 +273,7 @@
 <span class="co">#&gt; #   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, typetag_1 &lt;chr&gt;,</span>
 <span class="co">#&gt; #   typetag_1_name &lt;chr&gt;, typetag_1_shortname &lt;chr&gt;, typetag_2 &lt;chr&gt;,</span>
 <span class="co">#&gt; #   typetag_2_name &lt;chr&gt;, typetag_2_shortname &lt;chr&gt;, typetag_3 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   typetag_3_name &lt;chr&gt;, typetag_3_shortname &lt;chr&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   typetag_3_name &lt;chr&gt;, typetag_3_shortname &lt;chr&gt;</span></pre></div>
 <p>When you request all this extra information (some of which is currently empty), you will want to select the columns that you need with <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code>.</p>
 </div>
 <div class="footnotes">
@@ -294,7 +300,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

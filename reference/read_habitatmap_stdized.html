@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the data source <code>habitatmap_stdized</code> as a list of two
+<title>Return the data source habitatmap_stdized as a list of two
 objects — read_habitatmap_stdized • n2khab</title>
 
 
@@ -42,7 +42,7 @@ objects — read_habitatmap_stdized • n2khab</title>
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return the data source <code>habitatmap_stdized</code> as a list of two
+<meta property="og:title" content="Return the data source habitatmap_stdized as a list of two
 objects — read_habitatmap_stdized" />
 <meta property="og:description" content="read_habitatmap_stdized returns the data source habitatmap_stdized as a list of two objects:
 habitatmap_polygons: an sf object in the Belgian Lambert 72
@@ -85,7 +85,7 @@ habitatmap_types: a tibble with information on the
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -167,30 +167,23 @@ objects</h1>
 
     </div>
 
-    <pre class="usage"><span class='fu'>read_habitatmap_stdized</span>(
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='fileman_up.html'>fileman_up</a></span>(<span class='st'>"n2khab_data"</span>),
-  <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"</span>,
-  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"habitatmap_stdized_2018_v2"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>read_habitatmap_stdized</span><span class='op'>(</span>
+  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,
+    <span class='st'>"20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"</span><span class='op'>)</span>,
+  version <span class='op'>=</span> <span class='st'>"habitatmap_stdized_2018_v2"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>Location of the file.
-Considering the default value of the <code>file</code> argument, this should be
-the location of the folder '<strong><code>n2khab_data</code></strong>'.
-By default, the first <code>n2khab_data</code> folder is used that is found when
+      <th>file</th>
+      <td><p>The absolute or relative file path of the data source.
+The default follows the data management advice in the
+vignette on data storage (run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>).
+It uses the first <code>n2khab_data</code> folder that is found when
 sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p>The filename of the data source.
-May include a path prefix.
-The default follows the data management advice in the
-vignette on data storage (run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>).</p></td>
     </tr>
     <tr>
       <th>version</th>
@@ -268,19 +261,21 @@ DOI: <a href='https://doi.org/10.21436/inbor.15138099'>https://doi.org/10.21436/
 <code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># This example supposes that your working directory or a directory up to 10</span>
 <span class='co'># levels above has the 'n2khab_data' folder AND that the 'habitatmap_stdized'</span>
 <span class='co'># data source is present in the default subdirectory.</span>
 <span class='co'># In all other cases, this example won't work but at least you can</span>
 <span class='co'># consider what to do.</span>
 
-<span class='no'>hms</span> <span class='kw'>&lt;-</span> <span class='fu'>read_habitatmap_stdized</span>()
-<span class='no'>hms_polygons</span> <span class='kw'>&lt;-</span> <span class='no'>hms</span>$<span class='no'>habitatmap_polygons</span>
-<span class='no'>hms_types</span> <span class='kw'>&lt;-</span> <span class='no'>hms</span>$<span class='no'>habitatmap_types</span>
-<span class='no'>hms_polygons</span>
-<span class='no'>hms_types</span>
-}</div></pre>
+<span class='va'>hms</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatmap_stdized</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>hms_polygons</span> <span class='op'>&lt;-</span> <span class='va'>hms</span><span class='op'>$</span><span class='va'>habitatmap_polygons</span>
+<span class='va'>hms_types</span> <span class='op'>&lt;-</span> <span class='va'>hms</span><span class='op'>$</span><span class='va'>habitatmap_types</span>
+<span class='va'>hms_polygons</span>
+<span class='va'>hms_types</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -296,7 +291,7 @@ DOI: <a href='https://doi.org/10.21436/inbor.15138099'>https://doi.org/10.21436/
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

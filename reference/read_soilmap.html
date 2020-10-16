@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the <code>soilmap</code> or <code>soilmap_simple</code> data source as an
-<code>sf</code> multipolygon layer — read_soilmap • n2khab</title>
+<title>Return the soilmap or soilmap_simple data source as an
+sf multipolygon layer — read_soilmap • n2khab</title>
 
 
 <!-- jquery -->
@@ -42,8 +42,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return the <code>soilmap</code> or <code>soilmap_simple</code> data source as an
-<code>sf</code> multipolygon layer — read_soilmap" />
+<meta property="og:title" content="Return the soilmap or soilmap_simple data source as an
+sf multipolygon layer — read_soilmap" />
 <meta property="og:description" content="Returns either the raw data source soilmap
 or (by default) the
 processed data source soilmap_simple
@@ -83,7 +83,7 @@ takes a bit longer than usual to run." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -163,40 +163,34 @@ Given the size of these data sources (especially the raw one), this function
 takes a bit longer than usual to run.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_soilmap</span>(
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='fileman_up.html'>fileman_up</a></span>(<span class='st'>"n2khab_data"</span>),
-  <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"20_processed/soilmap_simple/soilmap_simple.gpkg"</span>,
-  <span class='kw'>file_raw</span> <span class='kw'>=</span> <span class='st'>"10_raw/soilmap"</span>,
-  <span class='kw'>use_processed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>version_processed</span> <span class='kw'>=</span> <span class='st'>"soilmap_simple_v2"</span>,
-  <span class='kw'>standardize_coastalplain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>explan</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>read_soilmap</span><span class='op'>(</span>
+  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,
+    <span class='st'>"20_processed/soilmap_simple/soilmap_simple.gpkg"</span><span class='op'>)</span>,
+  file_raw <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/soilmap"</span><span class='op'>)</span>,
+  use_processed <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  version_processed <span class='op'>=</span> <span class='st'>"soilmap_simple_v2"</span>,
+  standardize_coastalplain <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  simplify <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  explan <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>Location of the file.
-Considering the default value of the <code>file</code> argument, this should be
-the location of the folder '<strong><code>n2khab_data</code></strong>'.
-By default, the first <code>n2khab_data</code> folder is used that is found when
+      <th>file</th>
+      <td><p>The absolute or relative file path of the <em>processed</em> data
+source <code>soilmap_simple</code>.
+Used only if <code>use_processed = TRUE</code> (= default).
+The default value follows the data management advice in the
+vignette on data storage (run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>).
+It uses the first <code>n2khab_data</code> folder that is found when
 sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.</p></td>
     </tr>
     <tr>
-      <th>file</th>
-      <td><p>The filename of the <em>processed</em> data source <code>soilmap_simple</code>.
-May include a path prefix.
-Used only if <code>use_processed = TRUE</code> (= default).
-The default value follows the data management advice in the
-vignette on data storage (run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>).</p></td>
-    </tr>
-    <tr>
       <th>file_raw</th>
-      <td><p>Same as <code>file</code>, to define the name (subpath) of the <em>raw</em>
+      <td><p>Same as <code>file</code>, to define the filepath of the <em>raw</em>
 datasource <code>soilmap</code>.
 Used only if <code>use_processed = FALSE</code>.</p></td>
     </tr>
@@ -226,7 +220,7 @@ texture and drainage variables (<code>bsm_mo_substr</code>, <code>bsm_mo_tex</co
 <em>for features with a geomorphological soil type code</em>.
 This largely applies to features in the 'coastal plain' area.</p><ul>
 <li><p>To derive morphogenetic texture and drainage levels from the geomorphological
-ones, a conversion table by Bruno De Vos &amp;
+soil types, a conversion table by Bruno De Vos &amp;
 Carole Ampe is applied (for earlier work on this, see Ampe 2013).</p></li>
 <li><p>Substrate classes are copied over from <code>bsm_ge_substr</code> into <code>bsm_mo_substr</code>
 (<code>bsm_ge_substr</code> already follows the categories of <code>bsm_mo_substr</code>).</p></li>
@@ -416,23 +410,25 @@ voor Bodemkunde, Ghent, 361 p. URL: <a href='http://hdl.handle.net/1854/LU-12589
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># This example supposes that your working directory or a directory up to 10</span>
 <span class='co'># levels above has the 'n2khab_data' folder AND that the 'soilmap_simple'</span>
 <span class='co'># data source is present in the default subdirectory.</span>
 <span class='co'># In all other cases, this example won't work but at least you can</span>
 <span class='co'># consider what to do.</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='no'>soilmap_simple</span> <span class='kw'>&lt;-</span> <span class='fu'>read_soilmap</span>()
-<span class='no'>soilmap_simple</span>
-<span class='no'>soilmap_simple</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(!<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>bsm_mo_substr</span>)) <span class='kw'>%&gt;%</span>
-  <span class='no'>glimpse</span>
-<span class='no'>soilmap_simple</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>bsm_converted</span>) <span class='kw'>%&gt;%</span>
-  <span class='no'>glimpse</span>
-}</div></pre>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='va'>soilmap_simple</span> <span class='op'>&lt;-</span> <span class='fu'>read_soilmap</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>soilmap_simple</span>
+<span class='va'>soilmap_simple</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>bsm_mo_substr</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='va'>glimpse</span>
+<span class='va'>soilmap_simple</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>bsm_converted</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='va'>glimpse</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -448,7 +444,7 @@ voor Bodemkunde, Ghent, 361 p. URL: <a href='http://hdl.handle.net/1854/LU-12589
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
