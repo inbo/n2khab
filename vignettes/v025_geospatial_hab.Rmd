@@ -100,8 +100,7 @@ habitatmap
 #> geometry type:  MULTIPOLYGON
 #> dimension:      XY
 #> bbox:           xmin: 21991.38 ymin: 153058.3 xmax: 258871.8 ymax: 244027.3
-#> epsg (SRID):    31370
-#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
+#> projected CRS:  Belge 1972 / Belgian Lambert 72
 #> # A tibble: 618,147 x 31
 #>    polygon_id eval  eenh1 eenh2 eenh3 eenh4 eenh5 eenh6 eenh7 eenh8 v1    v2   
 #>  * <chr>      <fct> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>
@@ -139,11 +138,10 @@ habitatstreams
 #> geometry type:  LINESTRING
 #> dimension:      XY
 #> bbox:           xmin: 33097.92 ymin: 157529.6 xmax: 254039 ymax: 243444.6
-#> epsg (SRID):    31370
-#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
+#> projected CRS:  Belge 1972 / Belgian Lambert 72
 #> # A tibble: 560 x 4
 #>    river_name   source_id type                                          geometry
-#>  * <fct>        <fct>     <fct>                                 <LINESTRING [m]>
+#>    <fct>        <fct>     <fct>                                 <LINESTRING [m]>
 #>  1 WOLFPUTBEEK  VMM       3260  (127857.1 167681.2, 127854.9 167684.5, 127844 1…
 #>  2 OUDE KALE    VMM       3260  (95737.01 196912.9, 95732.82 196912.4, 95710.38…
 #>  3 VENLOOP      EcoInv    3260  (169352.7 209314.9, 169358.8 209290.5, 169326.2…
@@ -178,7 +176,7 @@ read_habitatstreams(source_text = TRUE) %>%
 ```{r}
 habitatsprings <- read_habitatsprings()
 habitatsprings
-#> Simple feature collection with 102 features and 9 fields
+#> Simple feature collection with 104 features and 11 fields
 #> geometry type:  POINT
 #> dimension:      XY
 #> bbox:           xmin: 36407.89 ymin: 155249.7 xmax: 258371.1 ymax: 179732
@@ -296,8 +294,7 @@ hms_pol
 #> geometry type:  MULTIPOLYGON
 #> dimension:      XY
 #> bbox:           xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243351.8
-#> epsg (SRID):    31370
-#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
+#> projected CRS:  Belge 1972 / Belgian Lambert 72
 #> # A tibble: 77,048 x 3
 #>    polygon_id  description_orig                                             geom
 #>  * <fct>       <chr>                                          <MULTIPOLYGON [m]>
@@ -377,8 +374,7 @@ hmt$habitatmap_terr_polygons
 #> geometry type:  MULTIPOLYGON
 #> dimension:      XY
 #> bbox:           xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243351.8
-#> epsg (SRID):    31370
-#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
+#> projected CRS:  Belge 1972 / Belgian Lambert 72
 #> # A tibble: 68,300 x 5
 #>    polygon_id  description_orig  description source                         geom
 #>  * <fct>       <chr>             <chr>       <fct>            <MULTIPOLYGON [m]>
@@ -397,7 +393,7 @@ hmt$habitatmap_terr_polygons
 
 ```{r}
 hmt$habitatmap_terr_types
-#> # A tibble: 87,513 x 6
+#> # A tibble: 87,473 x 6
 #>    polygon_id   code_orig  phab certain type     source            
 #>    <fct>        <chr>     <dbl> <lgl>   <fct>    <fct>             
 #>  1 000038_v2016 91E0_va     100 TRUE    91E0_va  habitatmap_stdized
@@ -410,7 +406,7 @@ hmt$habitatmap_terr_types
 #>  8 000311_v2016 rbbsp        30 TRUE    rbbsp    habitatmap_stdized
 #>  9 000390_v2016 91E0_vn      70 TRUE    91E0_vn  habitatmap_stdized
 #> 10 000390_v2016 91E0_va      30 TRUE    91E0_va  habitatmap_stdized
-#> # … with 87,503 more rows
+#> # … with 87,463 more rows
 ```
 
 Compared to `habitatmap_stdized`, _purely_ aquatic or non-habitat/RIB polygons were omitted, and a part of the type data were interpreted in a more specific way.
@@ -424,7 +420,7 @@ hms_occ %>%
               distinct(type), 
             by = "type") %>% 
   arrange(type)
-#> # A tibble: 7 x 1
+#> # A tibble: 8 x 1
 #>   type 
 #>   <fct>
 #> 1 2190 
@@ -433,7 +429,8 @@ hms_occ %>%
 #> 4 6430 
 #> 5 6510 
 #> 6 7140 
-#> 7 9130
+#> 7 7220 
+#> 8 9130
 ```
 
 About 4% of all type occurrences received a new type code:
@@ -445,7 +442,7 @@ hmt$habitatmap_terr_types %>%
 #> # A tibble: 2 x 3
 #>   source                                  n   pct
 #>   <fct>                               <int> <dbl>
-#> 1 habitatmap_stdized                  83667    96
+#> 1 habitatmap_stdized                  83627    96
 #> 2 habitatmap_stdized + interpretation  3846     4
 ```
 
@@ -463,8 +460,7 @@ wsh$watersurfaces_polygons
 #> geometry type:  MULTIPOLYGON
 #> dimension:      XY
 #> bbox:           xmin: 22546.57 ymin: 159273.1 xmax: 253928.1 ymax: 242960.1
-#> epsg (SRID):    31370
-#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
+#> projected CRS:  Belge 1972 / Belgian Lambert 72
 #> # A tibble: 2,947 x 5
 #>    polygon_id polygon_id_ws polygon_id_habi… description_orig
 #>  * <fct>      <fct>         <fct>            <chr>           
