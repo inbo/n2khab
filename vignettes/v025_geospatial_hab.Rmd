@@ -53,6 +53,8 @@ For practical information on data storage and locations, see `vignette("v020_dat
     - **`habitatstreams`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3386245)): geospatial lines of the Natura 2000 habitat type `3260` that correspond with its presence in streaming water segments in the Flemish Region, originally published by INBO [@leyssen_indicatieve_2018] and distributed by 'Informatie Vlaanderen'.
     - **`habitatsprings`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3550994)): geospatial points hat correspond with the presence or absence of the Natura 2000 habitat type `7220` in springs and streaming water segments in the Flemish Region.
     The data source is produced, owned and administered by INBO.
+    - **`habitatquarries`** ([Zenodo-link](https://doi.org/10.5281/zenodo.4072967)): geospatial polygons that correspond with the presence or absence of the Natura 2000 habitat type `8310` in underground marl quarries in the Flemish Region (and border areas).
+    The data source is produced, owned and administered by INBO.
 - **processed data sources**:
     - **`habitatmap_stdized`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3355192)):
 derived from `habitatmap`.
@@ -177,26 +179,94 @@ habitatsprings
 #> Simple feature collection with 102 features and 9 fields
 #> geometry type:  POINT
 #> dimension:      XY
-#> bbox:           xmin: 36407.84 ymin: 155249.7 xmax: 258371.1 ymax: 179732
-#> epsg (SRID):    31370
-#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
-#> # A tibble: 102 x 10
-#>    point_id name  code_orig type  certain area_m2  year in_sac source
-#>  *    <dbl> <chr> <chr>     <fct> <lgl>     <dbl> <dbl> <lgl>  <chr> 
-#>  1        1 Stee… 7220      7220  TRUE         50  2014 TRUE   kalkt…
-#>  2        2 Stee… 7220      7220  TRUE         20  2014 TRUE   kalkt…
-#>  3        3 Duli… 7230      7230  TRUE         NA  2014 TRUE   kalkt…
-#>  4        4 Kapi… gh        <NA>  TRUE         NA  2014 TRUE   kalkt…
-#>  5        5 Reme… 7220      7220  TRUE        200  2014 TRUE   kalkt…
-#>  6        6 Reme… 7220      7220  TRUE        500  2014 TRUE   kalkt…
-#>  7        7 Kest… 7220,gh   7220  FALSE        NA    NA TRUE   anb   
-#>  8        8 Krin… 7220      7220  TRUE        800  2014 TRUE   kalkt…
-#>  9        9 Bois… 7220      7220  TRUE         50  2014 TRUE   kalkt…
-#> 10       10 Kwin… 7220      7220  TRUE         10  2014 TRUE   kalkt…
-#> # … with 92 more rows, and 1 more variable: geometry <POINT [m]>
+#> bbox:           xmin: 36407.89 ymin: 155249.7 xmax: 258371.1 ymax: 179732
+#> projected CRS:  Belge 1972 / Belgian Lambert 72
+#> # A tibble: 104 x 12
+#>    point_id name  system_type code_orig type  certain unit_id area_m2  year
+#>       <dbl> <chr> <fct>       <chr>     <fct> <lgl>     <dbl>   <dbl> <dbl>
+#>  1        1 Stee… rivulet     7220      7220  TRUE          1      50  2014
+#>  2        2 Stee… rivulet     7220      7220  TRUE          1      20  2014
+#>  3        3 Duli… <NA>        7230      7230  TRUE         NA      NA  2014
+#>  4        4 Kapi… <NA>        gh        <NA>  TRUE         NA      NA  2014
+#>  5        5 Reme… rivulet     7220      7220  TRUE          2     200  2014
+#>  6        6 Reme… rivulet     7220      7220  TRUE          2     500  2014
+#>  7        7 Kest… unknown     7220,gh   7220  FALSE        32      NA    NA
+#>  8        8 Krin… rivulet     7220      7220  TRUE          3     800  2014
+#>  9        9 Bois… rivulet     7220      7220  TRUE          4      50  2014
+#> 10       10 Kwin… mire        7220      7220  TRUE          5      10  2014
+#> # … with 94 more rows, and 3 more variables: in_sac <lgl>, source <chr>,
+#> #   geometry <POINT [m]>
 ```
 
-The meaning of each column is described in the function documentation.
+Do note that both the `habitatsprings` and `habitatquarries` data sources also contain records which are no habitat type.
+You can filter the habitat types by setting the `filter_hab` argument as `TRUE` (not shown).
+
+```{r}
+habitatquarries <- read_habitatquarries()
+habitatquarries
+#> Simple feature collection with 45 features and 6 fields
+#> geometry type:  POLYGON
+#> dimension:      XY
+#> bbox:           xmin: 221427.3 ymin: 160393.5 xmax: 243211.1 ymax: 168965.1
+#> projected CRS:  Belge 1972 / Belgian Lambert 72
+#> # A tibble: 45 x 7
+#>    polygon_id unit_id name  code_orig type  extra_reference
+#>         <int>   <int> <chr> <chr>     <fct> <fct>          
+#>  1          4       4 Aver… gh        <NA>  Lahaye 2018    
+#>  2          6       6 Aver… 8310      8310  Lahaye 2018    
+#>  3          5       5 Aver… gh        <NA>  Lahaye 2018    
+#>  4         20      20 Cool… 8310      8310  Limburgs Lands…
+#>  5         21      21 Cool… gh        <NA>  Limburgs Lands…
+#>  6         29      29 Groe… 8310      8310  <NA>           
+#>  7         31      31 Grot… 8310      8310  De Haan & Laha…
+#>  8         37      37 Grot… 8310      8310  De Haan & Laha…
+#>  9         24      24 Heni… 8310      8310  Dusar et al. 2…
+#> 10         34      34 Heni… 8310      8310  Dusar et al. 2…
+#> # … with 35 more rows, and 1 more variable: geom <POLYGON [m]>
+```
+
+The habitatquarries data source also includes the literature references.
+These can be added as a second dataframe -- in that case a list is returned:
+
+```{r}
+habitatquarries2 <- read_habitatquarries(references = TRUE)
+class(habitatquarries2)
+#> [1] "list"
+```
+
+
+```{r}
+names(habitatquarries2)
+#> [1] "habitatquarries"  "extra_references"
+```
+
+
+```{r}
+all.equal(habitatquarries, habitatquarries2$habitatquarries)
+#> [1] TRUE
+```
+
+
+```{r}
+habitatquarries2$extra_references
+#> # A tibble: 9 x 23
+#>   category bibtexkey address author booktitle journal month note  number pages
+#>   <chr>    <chr>     <chr>   <chr>  <chr>     <chr>   <chr> <chr> <chr>  <chr>
+#> 1 BOOK     de_haan_… Brusse… De Ha… <NA>      <NA>    <NA>  <NA>  <NA>   <NA> 
+#> 2 INCOLLE… dusar_me… Genk    Dusar… Likona j… <NA>    <NA>  <NA>  <NA>   6-13 
+#> 3 BOOK     jenneken… Riemst  Jenne… <NA>      <NA>    <NA>  <NA>  <NA>   <NA> 
+#> 4 INCOLLE… lahaye_g… Riemst  Lahay… <NA>      <NA>    <NA>  <NA>  <NA>   12   
+#> 5 BOOK     verhoeve… Weert   Verho… <NA>      <NA>    <NA>  <NA>  1769   <NA> 
+#> 6 BOOK     walschot… <NA>    Walsc… <NA>      <NA>    <NA>  <NA>  <NA>   <NA> 
+#> 7 MISC     wikipedi… <NA>    {Wiki… <NA>      <NA>    jan   Page… <NA>   <NA> 
+#> 8 MISC     limburgs… <NA>    {Limb… <NA>      <NA>    apr   Libr… <NA>   <NA> 
+#> 9 ARTICLE  silverta… <NA>    Silve… <NA>      Natuur… <NA>  <NA>  12     334-…
+#> # … with 13 more variables: publisher <chr>, series <chr>, title <chr>,
+#> #   volume <chr>, year <dbl>, url <chr>, isbn <chr>, copyright <chr>,
+#> #   abstract <chr>, language <chr>, urldate <chr>, issn <chr>, keywords <chr>
+```
+
+These extra references can also be printed to the R console in BibTeX format, when specifying `bibtex = TRUE`.
 
 ### Returning processed data sources
 
