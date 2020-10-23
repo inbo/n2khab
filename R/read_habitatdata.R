@@ -460,9 +460,13 @@ read_watersurfaces_hab <-
 read_watersurfaces <-
     function(file = file.path(fileman_up("n2khab_data"),
                               "10_raw/watersurfaces"),
-             extended = FALSE){
+             extended = FALSE,
+             version = "watersurfaces_v1.0") {
 
         assert_that(file.exists(file))
+        assert_that(is.string(version))
+
+        version <- match.arg(version)
 
         suppressWarnings(
             watersurfaces <- read_sf(file,
