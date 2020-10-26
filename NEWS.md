@@ -1,3 +1,10 @@
+## n2khab 0.3.1
+
+#### Minor patch
+
+- `read_watersurfaces()` has been limited explicitly to using data source version 'watersurfaces_v1.0'.
+Accommodation of the newer 'watersurfaces_v1.1' is planned for later.
+
 ## n2khab 0.3.0
 
 #### Breaking change

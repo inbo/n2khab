@@ -6,7 +6,8 @@
 \usage{
 read_watersurfaces(
   file = file.path(fileman_up("n2khab_data"), "10_raw/watersurfaces"),
-  extended = FALSE
+  extended = FALSE,
+  version = "watersurfaces_v1.0"
 )
 }
 \arguments{
@@ -23,6 +24,9 @@ variables in the result?
 Currently only applies to \code{wfd_type}; if \code{TRUE}, a variable
 \code{wfd_type_name} is added.
 Defaults to \code{FALSE}.}
+
+\item{version}{Version ID of the data source.
+Defaults to the latest available version defined by the package.}
 }
 \value{
 A Simple feature collection of
