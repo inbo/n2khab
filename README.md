@@ -43,6 +43,23 @@ There is a major distinction between:
 - **raw data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-raw)), to be stored in a folder `n2khab_data/10_raw`;
 - **processed data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-processed)), to be stored in a folder `n2khab_data/20_processed`.
 
+### Suppressing `rgdal` warnings about proj4string degradation
+
+Setting coordinate reference systems of geospatial R objects is taken care of by the package, in a way that is compatible with older and newer versions of PROJ and GDAL backend libraries.
+This is done by gratefully implementing such features from the `sf` and `sp` packages.
+
+Please note that nonetheless you will see warnings about degraded proj4strings when using certain `n2khab` functions or when converting resulting `sf` objects to `sp` objects.
+This is normal!
+It is the current default behaviour of `rgdal` to yield these warnings, however in the case of `n2khab` functions and resulting objects they are trivial and unnecessary.
+You can suppress them in your R scripts by inserting below statement _before_ loading geospatial packages:
+
+```r
+options("rgdal_show_exportToProj4_warnings" = "none")
+```
+
+See [this](https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/) tutorial if you would like to learn more about this.
+In short: _don't_ use proj4strings to define coordinate reference systems!
+
 ## You are welcome to contribute!
 
 Please have a look at our [contributing guide](.github/CONTRIBUTING.md)!
