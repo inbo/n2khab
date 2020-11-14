@@ -35,6 +35,8 @@ help(package = "n2khab")
 # documentation of whole package: package?n2khab
 ```
 
+### Data setup
+
 Please take note that you must set up the needed data sources as explained in `vignette("v020_datastorage")` and demonstrated in `vignette("v022_example")`.
 There is a major distinction between:
 
