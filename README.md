@@ -52,11 +52,12 @@ This is done by gratefully implementing such features from the `sf` and `sp` pac
 
 Please note that nonetheless you will see warnings about degraded proj4strings when using certain `n2khab` functions or when converting resulting `sf` objects to `sp` objects.
 This is normal!
-It is the current default behaviour of `rgdal` to yield these warnings, however in the case of `n2khab` functions and resulting objects they are trivial and unnecessary.
+It is the current default behaviour of `rgdal` to yield these warnings.
+However in the case of `n2khab` functions and resulting objects these warnings are trivial and unnecessary.
 You can suppress them in your R scripts by inserting below statement _before_ loading geospatial packages:
 
 ```r
-options("rgdal_show_exportToProj4_warnings" = "none")
+options(rgdal_show_exportToProj4_warnings = "none")
 ```
 
 See [this](https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/) tutorial if you would like to learn more about this.
