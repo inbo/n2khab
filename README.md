@@ -27,6 +27,8 @@ remotes::install_github("inbo/n2khab",
 Note that this will install the package from the `master` branch.
 If you need a version from another branch, add the `ref` argument in the above function to provide the branch name.
 
+Repeat the installation when you wish to upgrade.
+
 Have a look at the vignettes to quickly find your way!
 
 ```r
