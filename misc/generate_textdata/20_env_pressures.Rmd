@@ -9,7 +9,7 @@ ep_source <- gs_key("1PH6InqJk0ijQF_N7v7IZjarijlqHRBCKhTbDn44skZU")
 source_df <-
     ep_source %>%
     gs_read(ws = gs_ws_ls(ep_source) %>%
-                 tail(1), 
+                 head(1), 
             check.names = T,
             verbose = FALSE)
 ```
