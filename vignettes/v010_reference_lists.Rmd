@@ -94,7 +94,7 @@ schemes <- read_schemes()
 schemes
 ```
 
-The `read_scheme_types()` function provides the extra ability to _toggle_ the presence of most textual information, because these comprise many extra variables (combining all additional information of the concerned themes _and_ the types).
+The `read_scheme_types()` function provides the extra ability to _toggle_ the presence of most textual information, because these comprise many extra variables (combining all additional information of the concerned schemes _and_ the types).
 This behaviour is controlled by the argument `extended`, which is `FALSE` by default.
 
 ```{r}
