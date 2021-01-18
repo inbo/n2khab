@@ -322,12 +322,6 @@ read_GRTSmh <-
                  call. = FALSE)
         }
 
-        if (!requireNamespace("sp", quietly = TRUE)) {
-            stop("Package \"sp\" is needed when using this function. ",
-                 "Please install it.",
-                 call. = FALSE)
-        }
-
         if (brick) {
             if (missing(file)) {
                     b <- raster::brick(file[2])} else {
@@ -342,7 +336,7 @@ read_GRTSmh <-
                    }
             result <- r
         }
-        raster::crs(result) <- sp::CRS(SRS_string = "EPSG:31370")
+        raster::crs(result) <- "EPSG:31370"
         return(result)
     }
 
@@ -442,14 +436,8 @@ read_GRTSmh_base4frac <-
                  call. = FALSE)
         }
 
-        if (!requireNamespace("sp", quietly = TRUE)) {
-            stop("Package \"sp\" is needed when using this function. ",
-                 "Please install it.",
-                 call. = FALSE)
-        }
-
         r <- raster::raster(file)
-        raster::crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
+        raster::crs(r) <- "EPSG:31370"
         return(r)
     }
 
@@ -622,17 +610,11 @@ read_GRTSmh_diffres <-
                      call. = FALSE)
             }
 
-            if (!requireNamespace("sp", quietly = TRUE)) {
-                stop("Package \"sp\" is needed when using this function. ",
-                     "Please install it.",
-                     call. = FALSE)
-            }
-
             r <- raster::raster(file.path(dir,
                                           str_c("GRTSmh_diffres.",
                                                 level, ".tif")))
             names(r) <- str_c("level", level)
-            raster::crs(r) <- sp::CRS(SRS_string = "EPSG:31370")
+            raster::crs(r) <- "EPSG:31370"
             r
 
         }
