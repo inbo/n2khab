@@ -54,7 +54,6 @@ Suggests:
     knitr,
     mapview,
     parallel,
-    plotly,
     raster (>= 3.3-16),
     readxl,
     remotes,
