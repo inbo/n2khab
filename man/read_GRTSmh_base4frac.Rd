@@ -25,7 +25,7 @@ A RasterLayer with 21041043 cells.
 The \code{GRTSmh_base4frac} data source is like a mirror to
 \code{GRTSmaster_habitats}, holding the ranking numbers as base 4 fractions.
 The function returns it as a RasterLayer in the Belgian Lambert 72 CRS
-(EPSG-code \href{https://epsg.io/31370}{31370})..
+(EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
 The data source file, read by the function, is a monolayered GeoTIFF in the
