@@ -37,8 +37,9 @@ reference:
     contents:
       - read_admin_areas
       - read_ecoregions
-      - read_watersurfaces
       - read_soilmap
+      - read_watersurfaces
+      - read_watercourse_100mseg
   - title: "Using the GRTSmaster data sources (raw + processed)"
     contents:
       - read_GRTSmh
