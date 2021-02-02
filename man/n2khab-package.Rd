@@ -4,7 +4,7 @@
 \name{n2khab-package}
 \alias{n2khab}
 \alias{n2khab-package}
-\title{n2khab: Providing Preprocessed Reference Data For Flemish Natura 2000 Habitat Analyses}
+\title{n2khab: Providing Preprocessed Reference Data for Flemish Natura 2000 Habitat Analyses}
 \description{
 The n2khab package is an R package with
     preprocessing functions and standard reference data, useful for 
