@@ -59,7 +59,7 @@ to a spatially balanced sample of locations.
 Hence, it allows dynamical sample sizes.
 More information on the GRTS algorithm can be found in Stevens & Olsen (2003,
 2004) and in the \href{https://github.com/ThierryO/grts}{GRTS} and
-\href{https://cran.r-project.org/web/packages/spsurvey}{spsurvey} packages.
+\href{https://CRAN.R-project.org/package=spsurvey}{spsurvey} packages.
 
 Depending on the value of the \code{brick} argument, the function either
 returns the \code{GRTSmaster_habitats} data source as a
