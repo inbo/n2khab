@@ -53,9 +53,9 @@ Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (
 DOI: \url{https://doi.org/10.21436/inbor.15138099}.
 }
 \seealso{
-Other functions involved in processing the \code{habitatmap} data source: 
+Other functions involved in processing the 'habitatmap' data source: 
 \code{\link{read_habitatmap_stdized}()},
 \code{\link{read_habitatmap_terr}()},
 \code{\link{read_watersurfaces_hab}()}
 }
-\concept{functions involved in processing the \code{habitatmap} data source}
+\concept{functions involved in processing the 'habitatmap' data source}

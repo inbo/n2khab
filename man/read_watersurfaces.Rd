@@ -93,8 +93,8 @@ DOI: \url{https://doi.org/10.21436/inbor.14178464}.
 }
 }
 \seealso{
-Other functions involved in processing the \code{watersurfaces} data source: 
+Other functions involved in processing the 'watersurfaces' data source: 
 \code{\link{read_watersurfaces_hab}()}
 }
-\concept{functions involved in processing the \code{watersurfaces} data source}
+\concept{functions involved in processing the 'watersurfaces' data source}
 \concept{functions returning important environmental data sets}

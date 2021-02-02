@@ -81,7 +81,7 @@
 #'     }
 #'     }
 #'
-#' @family functions involved in processing the \code{habitatmap} data source
+#' @family functions involved in processing the 'habitatmap' data source
 #'
 #' @references
 #'
@@ -239,9 +239,9 @@ read_habitatmap_stdized <-
 #'     }
 #'     }
 #'
-#' @family functions involved in processing the \code{habitatmap} data source
+#' @family functions involved in processing the 'habitatmap' data source
 #'
-#' @family functions involved in processing the \code{watersurfaces} data source
+#' @family functions involved in processing the 'watersurfaces' data source
 #'
 #' @references
 #' \itemize{
@@ -403,7 +403,7 @@ read_watersurfaces_hab <-
 #'   \item \code{usage}: usage class.
 #' }
 #'
-#' @family functions involved in processing the \code{watersurfaces} data source
+#' @family functions involved in processing the 'watersurfaces' data source
 #' @family functions returning important environmental data sets
 #'
 #' @references
@@ -596,7 +596,7 @@ read_watersurfaces <-
 #' A Simple feature collection of
 #' type \code{MULTIPOLYGON}.
 #'
-#' @family functions involved in processing the \code{habitatmap} data source
+#' @family functions involved in processing the 'habitatmap' data source
 #'
 #' @references
 #'
@@ -806,7 +806,7 @@ read_habitatmap <-
 #'     }
 #'     }
 #'
-#' @family functions involved in processing the \code{habitatmap} data source
+#' @family functions involved in processing the 'habitatmap' data source
 #'
 #' @examples
 #' \dontrun{

@@ -29,7 +29,7 @@
 #' @return
 #' The corresponding base4 scalar or vector, stored as a fraction.
 #'
-#' @family functions involved in processing the \code{GRTSmaster_habitats} data source
+#' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
 #' @references
 #'
@@ -130,7 +130,7 @@ convert_dec_to_base4frac <-
 #' @return
 #' The corresponding decimal (i.e. base 10) integer scalar or vector.
 #'
-#' @family functions involved in processing the \code{GRTSmaster_habitats} data source
+#' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
 #' @references
 #'
@@ -284,7 +284,7 @@ convert_base4frac_to_dec <-
 #' @return
 #' Either a RasterLayer or a 10-layered RasterBrick, always with 21041043 cells.
 #'
-#' @family functions involved in processing the \code{GRTSmaster_habitats} data source
+#' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
 #' @references
 #'
@@ -405,7 +405,7 @@ read_GRTSmh <-
 #' @return
 #' A RasterLayer with 21041043 cells.
 #'
-#' @family functions involved in processing the \code{GRTSmaster_habitats} data source
+#' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
 #' @references
 #'
@@ -558,7 +558,7 @@ read_GRTSmh_base4frac <-
 #' Either a RasterLayer or a Simple feature collection of geometry type
 #' \code{POLYGON}.
 #'
-#' @family functions involved in processing the \code{GRTSmaster_habitats} data source
+#' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
 #' @examples
 #' \dontrun{
