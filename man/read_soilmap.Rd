@@ -216,7 +216,7 @@ The raw data source is published
 is discussed by Van Ranst & Sys (2000) and Dudal et al. (2005).
 A 'pure' (single) dataformat of the raw data source (no metadatafiles etc.)
 has also been stored (with versioning) at
-Zenodo (\url{https://doi.org/10.5281/zenodo.3387007}) - which we refer to as the
+Zenodo (\doi{10.5281/zenodo.3387007}) - which we refer to as the
 \code{soilmap} data source - in order
 to support the \code{read_soilmap()} function and to sustain long-term workflow
 reproducibility.

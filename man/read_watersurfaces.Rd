@@ -89,7 +89,7 @@ Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
 Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
 Instituut voor Natuur- en Bosonderzoek, Brussel.
-DOI: \url{https://doi.org/10.21436/inbor.14178464}.
+\doi{10.21436/inbor.14178464}.
 }
 }
 \seealso{

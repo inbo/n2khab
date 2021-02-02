@@ -16,13 +16,13 @@
 #' is discussed by Van Ranst & Sys (2000) and Dudal et al. (2005).
 #' A 'pure' (single) dataformat of the raw data source (no metadatafiles etc.)
 #' has also been stored (with versioning) at
-#' Zenodo (<https://doi.org/10.5281/zenodo.3387007>) - which we refer to as the
+#' Zenodo (\doi{10.5281/zenodo.3387007}) - which we refer to as the
 #' `soilmap` data source - in order
 #' to support the `read_soilmap()` function and to sustain long-term workflow
 #' reproducibility.
 #'
 #' The processed data source `soilmap_simple` is a GeoPackage, available at
-#' [Zenodo](https://doi.org/10.5281/zenodo.3732903).
+#' \href{https://doi.org/10.5281/zenodo.3732903}{Zenodo}.
 #'
 #' Note that factors are generated with implicit \code{NA} values (i.e. there is
 #' no factor level to represent the missing values).
