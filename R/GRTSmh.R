@@ -29,13 +29,13 @@
 #' @return
 #' The corresponding base4 scalar or vector, stored as a fraction.
 #'
-#' @family functions involved in processing the \code{GRTSmaster_habitats} data source
+#' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
 #' @references
 #'
 #' Stevens D.L. & Olsen A.R. (2004). Spatially Balanced Sampling of Natural
 #' Resources. Journal of the American Statistical Association 99 (465):
-#' 262–278. DOI: \url{https://doi.org/10.1198/016214504000000250}.
+#' 262–278. \doi{10.1198/016214504000000250}.
 #'
 #' @examples
 #' oldoption <- options(list(digits = 15, scipen = 999))
@@ -130,13 +130,13 @@ convert_dec_to_base4frac <-
 #' @return
 #' The corresponding decimal (i.e. base 10) integer scalar or vector.
 #'
-#' @family functions involved in processing the \code{GRTSmaster_habitats} data source
+#' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
 #' @references
 #'
 #' Stevens D.L. & Olsen A.R. (2004). Spatially Balanced Sampling of Natural
 #' Resources. Journal of the American Statistical Association 99 (465):
-#' 262–278. DOI: \url{https://doi.org/10.1198/016214504000000250}.
+#' 262–278. \doi{10.1198/016214504000000250}.
 #'
 #' @examples
 #' oldoption <- options(list(digits = 15, scipen = 999))
@@ -249,7 +249,7 @@ convert_base4frac_to_dec <-
 #' Hence, it allows dynamical sample sizes.
 #' More information on the GRTS algorithm can be found in Stevens & Olsen (2003,
 #' 2004) and in the \href{https://github.com/ThierryO/grts}{GRTS} and
-#' \href{https://cran.r-project.org/web/packages/spsurvey}{spsurvey} packages.
+#' \href{https://CRAN.R-project.org/package=spsurvey}{spsurvey} packages.
 #'
 #' Depending on the value of the \code{brick} argument, the function either
 #' returns the \code{GRTSmaster_habitats} data source as a
@@ -284,17 +284,17 @@ convert_base4frac_to_dec <-
 #' @return
 #' Either a RasterLayer or a 10-layered RasterBrick, always with 21041043 cells.
 #'
-#' @family functions involved in processing the \code{GRTSmaster_habitats} data source
+#' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
 #' @references
 #'
 #' Stevens D.L. & Olsen A.R. (2003). Variance estimation for spatially balanced
 #' samples of environmental resources. Environmetrics 14 (6): 593–610.
-#' DOI: \url{https://doi.org/10.1002/env.606}.
+#' \doi{10.1002/env.606}.
 #'
 #' Stevens D.L. & Olsen A.R. (2004). Spatially Balanced Sampling of Natural
 #' Resources. Journal of the American Statistical Association 99 (465):
-#' 262–278. DOI: \url{https://doi.org/10.1198/016214504000000250}.
+#' 262–278. \doi{10.1198/016214504000000250}.
 #'
 #' @examples
 #' \dontrun{
@@ -405,13 +405,13 @@ read_GRTSmh <-
 #' @return
 #' A RasterLayer with 21041043 cells.
 #'
-#' @family functions involved in processing the \code{GRTSmaster_habitats} data source
+#' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
 #' @references
 #'
 #' Stevens D.L. & Olsen A.R. (2004). Spatially Balanced Sampling of Natural
 #' Resources. Journal of the American Statistical Association 99 (465):
-#' 262–278. DOI: \url{https://doi.org/10.1198/016214504000000250}.
+#' 262–278. \doi{10.1198/016214504000000250}.
 #'
 #' @examples
 #' \dontrun{
@@ -558,7 +558,7 @@ read_GRTSmh_base4frac <-
 #' Either a RasterLayer or a Simple feature collection of geometry type
 #' \code{POLYGON}.
 #'
-#' @family functions involved in processing the \code{GRTSmaster_habitats} data source
+#' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
 #' @examples
 #' \dontrun{

@@ -66,5 +66,5 @@ behorend tot het \emph{Ranunculion fluitantis} en het
 \emph{Callitricho-Batrachion}.
 Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
 Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
-DOI: \url{https://doi.org/10.21436/inbor.15138370}.
+\doi{10.21436/inbor.15138370}.
 }
