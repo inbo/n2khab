@@ -42,7 +42,7 @@ jobs:
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+          done < <(Rscript -e 'release <- system("lsb_release -rs", intern = TRUE); writeLines(remotes::system_requirements("ubuntu", release))')
           sudo apt-get install -y libfribidi-dev libharfbuzz-dev
 
       - name: Install dependencies
