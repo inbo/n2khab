@@ -1,13 +1,10 @@
 on:
-  push:
-    branches:
-      - main
-      - master
+  pull_request:
 
-name: site-deploy
+name: site-devel
 
 jobs:
-  site-deploy:
+  site-devel:
     runs-on: ${{ matrix.config.os }}
     strategy:
       matrix:
@@ -54,8 +51,12 @@ jobs:
       - name: Install package
         run: R CMD INSTALL .
 
-      - name: Deploy package
+      - name: Build site
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          Rscript -e 'options(rmarkdown.html_vignette.check_title = FALSE); pkgdown::deploy_to_branch(new_process = FALSE)'
+          Rscript -e 'options(rmarkdown.html_vignette.check_title = FALSE); pkgdown::build_site()'
+
+      - name: Upload pkgdown-site as artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: pkgdown-site
+          path: docs
