@@ -87,17 +87,20 @@ This is the structure of the [repo]:
 │   └── textdata        <- Textual data delivered with the package (in vc-format).
 │                          They can be read into R by package functions or with
 │                          git2rdata::read_vc().
-├── man
+├── man                 <- Don't change this manually, it will be overwritten.
 ├── misc                <- Package-related scripts / R markdown files. Rbuild-ignored!
 │                          Contains a script on package management + a bookdown 
 │                          project to reproduce the included textual data + a 
 │                          script to upgrade vc-formatted files.
 ├── R                   <- Package functions are to be made here.
 ├── vignettes           <- Vignettes are to be made here.
+├── .github             <- Includes this guide, the code of conduct and configuration
+│                          files for automated code management.
 ├── DESCRIPTION
 ├── LICENSE
-├── n2khab.Rproj        <- RStudio project file
+├── n2khab.Rproj        <- Main RStudio project file.
 ├── NAMESPACE
+├── NEWS.md             <- The changelog.
 └── README.md
 ```
 
