@@ -147,7 +147,7 @@ We try to follow the [GitHub flow](https://guides.github.com/introduction/flow/)
 
 #### _With_ write permissions to the [code repository][repo]
 
-It is wise to first think about the scope of your function (or your proposed enhancement of an exisiting one), and talk it through with other collaborators:
+It is wise to first think about the scope of your function (or your proposed enhancement of an existing one), and talk it through with other collaborators:
 
 - functions that are of broader interest than Natura 2000, better go to [inborutils](https://inbo.github.io/inborutils/) or a separate package;
 - functions that will only be relevant to a specific _N2KHAB_ project, are better developed in the project-specific repo.
@@ -205,7 +205,7 @@ As long as no merge is performed, more commits can be added to this PR with `git
 See also [these git workshop materials](https://inbo.github.io/git-course/index.html).
 - Günther T. (2014). Learn version control with Git: A step-by-step course for the complete beginner.
 - <https://learngitbranching.js.org/>
-- [Git CLI cheatsheet](http://ndpsoftware.com/git-cheatsheet.html)
+- [Interactive Git cheatsheet](http://ndpsoftware.com/git-cheatsheet.html)
 
 
 
