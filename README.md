@@ -95,9 +95,3 @@ Others may be written as the result of a synchronization script to give them a s
 The code to reproduce these files is inside the `misc` folder of the [source code](https://github.com/inbo/n2khab).
 The package provides the necessary functions to return these as standardized tibbles (`vignette("v010_reference_lists")`).
 
-This package is the successor of the 'n2khabutils' package.
-Previous to commit `c8608d9`, the code was part of the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (formerly 'n2khab-inputs'), where the original version history remains stored.
-At that time, the package was called 'n2khabutils'.
-As a convenience, the **n2khab** repo still holds the rewritten (shrinked) package history from before commit `c8608d9`, as defined by the related files and folders.
-See [this](https://github.com/inbo/n2khab-monitoring/issues/28) issue in the 'n2khab-monitoring' repo, where the migration is documented.
-
