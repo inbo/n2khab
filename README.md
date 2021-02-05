@@ -14,7 +14,7 @@ This facilitates collaboration and reproducibility.
 
 The standard reference data include: checklists, spatial habitat distribution, administrative & environmental layers, GRTSmaster_habitats.
 
-## Installing, testing and using the _n2khab_ package
+## Installing and using the _n2khab_ package
 
 To install, run:
 
@@ -48,8 +48,9 @@ There is a major distinction between:
 
 ### Suppressing `rgdal` warnings about proj4string degradation
 
-Setting coordinate reference systems of geospatial R objects is taken care of by the package, in a way that is compatible with older and newer versions of PROJ and GDAL backend libraries.
+Setting coordinate reference systems (CRS) of geospatial R objects is taken care of by the package, in a way that is compatible with older and current versions of PROJ and GDAL backend libraries.
 This is done by gratefully implementing such features from the `sf` and `sp` packages.
+The functions never specify a CRS by means of a proj4string, which is an aged format not supported by the current backend versions.
 
 Please note that nonetheless you will see warnings about degraded proj4strings when using certain `n2khab` functions or when converting resulting `sf` objects to `sp` objects.
 This is normal!
@@ -62,7 +63,7 @@ options(rgdal_show_exportToProj4_warnings = "none")
 ```
 
 See [this](https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/) tutorial if you would like to learn more about this.
-In short: _don't_ use proj4strings to define coordinate reference systems!
+In short: _don't_ use proj4strings to define CRSs!
 
 ## You are welcome to contribute!
 
