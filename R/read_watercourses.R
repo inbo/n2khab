@@ -77,7 +77,7 @@
 #' }
 #' Optionally, only one of these \code{sf} objects is returned.
 #'
-#' @family functions involved in processing the \code{watercourses} data source
+#' @family functions involved in processing the 'watercourses' data source
 #'
 #' @examples
 #' \dontrun{

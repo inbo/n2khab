@@ -114,4 +114,4 @@ str(read_watercourse_100mseg(), give.attr = FALSE)
 }
 
 }
-\concept{functions involved in processing the \code{watercourses} data source}
+\concept{functions involved in processing the 'watercourses' data source}
