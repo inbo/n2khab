@@ -81,7 +81,7 @@
 #'     }
 #'     }
 #'
-#' @family functions involved in processing the \code{habitatmap} data source
+#' @family functions involved in processing the 'habitatmap' data source
 #'
 #' @references
 #'
@@ -89,7 +89,7 @@
 #' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 #' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 #' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' DOI: \url{https://doi.org/10.21436/inbor.15138099}.
+#' \doi{10.21436/inbor.15138099}.
 #'
 #' @examples
 #' \dontrun{
@@ -239,9 +239,9 @@ read_habitatmap_stdized <-
 #'     }
 #'     }
 #'
-#' @family functions involved in processing the \code{habitatmap} data source
+#' @family functions involved in processing the 'habitatmap' data source
 #'
-#' @family functions involved in processing the \code{watersurfaces} data source
+#' @family functions involved in processing the 'watersurfaces' data source
 #'
 #' @references
 #' \itemize{
@@ -251,12 +251,12 @@ read_habitatmap_stdized <-
 #' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' DOI: \url{https://doi.org/10.21436/inbor.14178464}.
+#' \doi{10.21436/inbor.14178464}.
 #' \item De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
 #' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 #' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 #' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' DOI: \url{https://doi.org/10.21436/inbor.15138099}.
+#' \doi{10.21436/inbor.15138099}.
 #' }
 #'
 #' @examples
@@ -403,7 +403,7 @@ read_watersurfaces_hab <-
 #'   \item \code{usage}: usage class.
 #' }
 #'
-#' @family functions involved in processing the \code{watersurfaces} data source
+#' @family functions involved in processing the 'watersurfaces' data source
 #' @family functions returning important environmental data sets
 #'
 #' @references
@@ -419,7 +419,7 @@ read_watersurfaces_hab <-
 #' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' DOI: \url{https://doi.org/10.21436/inbor.14178464}.
+#' \doi{10.21436/inbor.14178464}.
 #' }
 #'
 #' @examples
@@ -596,7 +596,7 @@ read_watersurfaces <-
 #' A Simple feature collection of
 #' type \code{MULTIPOLYGON}.
 #'
-#' @family functions involved in processing the \code{habitatmap} data source
+#' @family functions involved in processing the 'habitatmap' data source
 #'
 #' @references
 #'
@@ -604,7 +604,7 @@ read_watersurfaces <-
 #' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 #' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 #' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' DOI: \url{https://doi.org/10.21436/inbor.15138099}.
+#' \doi{10.21436/inbor.15138099}.
 #'
 #' @examples
 #' \dontrun{
@@ -806,7 +806,7 @@ read_habitatmap <-
 #'     }
 #'     }
 #'
-#' @family functions involved in processing the \code{habitatmap} data source
+#' @family functions involved in processing the 'habitatmap' data source
 #'
 #' @examples
 #' \dontrun{
@@ -962,7 +962,7 @@ read_habitatmap_terr <-
 #' \emph{Callitricho-Batrachion}.
 #' Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
 #' Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
-#' DOI: \url{https://doi.org/10.21436/inbor.15138370}.
+#' \doi{10.21436/inbor.15138370}.
 #'
 #' @examples
 #' \dontrun{

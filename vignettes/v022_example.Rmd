@@ -3,11 +3,7 @@ title: "Demonstrating package & data setup and handling of sf objects: a case wi
 author: "Floris Vanderhaeghe"
 date: "2020-04-10"
 bibliography: references.bib
-output: 
-  rmarkdown::html_vignette:
-    pandoc_args:
-        - --csl
-        - research-institute-for-nature-and-forest.csl
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{022. Demonstrating package & data setup and handling of sf objects: a case with read_soilmap()}
   %\VignetteEngine{knitr::rmarkdown}

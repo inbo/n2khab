@@ -108,22 +108,22 @@ Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
 Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
 Instituut voor Natuur- en Bosonderzoek, Brussel.
-DOI: \url{https://doi.org/10.21436/inbor.14178464}.
+\doi{10.21436/inbor.14178464}.
 \item De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
 Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
 Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
 Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-DOI: \url{https://doi.org/10.21436/inbor.15138099}.
+\doi{10.21436/inbor.15138099}.
 }
 }
 \seealso{
-Other functions involved in processing the \code{habitatmap} data source: 
+Other functions involved in processing the 'habitatmap' data source: 
 \code{\link{read_habitatmap_stdized}()},
 \code{\link{read_habitatmap_terr}()},
 \code{\link{read_habitatmap}()}
 
-Other functions involved in processing the \code{watersurfaces} data source: 
+Other functions involved in processing the 'watersurfaces' data source: 
 \code{\link{read_watersurfaces}()}
 }
-\concept{functions involved in processing the \code{habitatmap} data source}
-\concept{functions involved in processing the \code{watersurfaces} data source}
+\concept{functions involved in processing the 'habitatmap' data source}
+\concept{functions involved in processing the 'watersurfaces' data source}

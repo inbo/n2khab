@@ -1,5 +1,5 @@
 Package: n2khab
-Title: Providing Preprocessed Reference Data For Flemish Natura 2000 Habitat Analyses
+Title: Providing Preprocessed Reference Data for Flemish Natura 2000 Habitat Analyses
 Version: 0.3.1.9000
 Authors@R: c(
     person("Floris", "Vanderhaeghe", email = "floris.vanderhaeghe@inbo.be", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6378-6229")), 

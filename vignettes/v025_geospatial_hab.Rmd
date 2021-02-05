@@ -2,10 +2,12 @@
 title: "Working with geospatial data sources of habitat (sub)types and RIBs"
 author: "Floris Vanderhaeghe, Toon Westra, Jan Wouters"
 date: "2020-10-16"
-csl: '`r cslfile <- file.path(tempdir(), "research-institute-for-nature-and-forest.csl"); download.file("https://github.com/inbo/styles/raw/inbocsl-0.1.0/research-institute-for-nature-and-forest.csl", cslfile); cslfile`'
 bibliography: references.bib
 output: 
-  rmarkdown::html_vignette: default
+  rmarkdown::html_vignette:
+    pandoc_args:
+        - --csl
+        - research-institute-for-nature-and-forest.csl
 vignette: >
   %\VignetteIndexEntry{025. Working with geospatial data sources of habitat (sub)types and RIBs}
   %\VignetteEngine{knitr::rmarkdown}

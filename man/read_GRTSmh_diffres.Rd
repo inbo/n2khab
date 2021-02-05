@@ -121,10 +121,10 @@ plot(p)
 
 }
 \seealso{
-Other functions involved in processing the \code{GRTSmaster_habitats} data source: 
+Other functions involved in processing the 'GRTSmaster_habitats' data source: 
 \code{\link{convert_base4frac_to_dec}()},
 \code{\link{convert_dec_to_base4frac}()},
 \code{\link{read_GRTSmh_base4frac}()},
 \code{\link{read_GRTSmh}()}
 }
-\concept{functions involved in processing the \code{GRTSmaster_habitats} data source}
+\concept{functions involved in processing the 'GRTSmaster_habitats' data source}

@@ -64,13 +64,13 @@ options(oldoption)
 \references{
 Stevens D.L. & Olsen A.R. (2004). Spatially Balanced Sampling of Natural
 Resources. Journal of the American Statistical Association 99 (465):
-262–278. DOI: \url{https://doi.org/10.1198/016214504000000250}.
+262–278. \doi{10.1198/016214504000000250}.
 }
 \seealso{
-Other functions involved in processing the \code{GRTSmaster_habitats} data source: 
+Other functions involved in processing the 'GRTSmaster_habitats' data source: 
 \code{\link{convert_dec_to_base4frac}()},
 \code{\link{read_GRTSmh_base4frac}()},
 \code{\link{read_GRTSmh_diffres}()},
 \code{\link{read_GRTSmh}()}
 }
-\concept{functions involved in processing the \code{GRTSmaster_habitats} data source}
+\concept{functions involved in processing the 'GRTSmaster_habitats' data source}
