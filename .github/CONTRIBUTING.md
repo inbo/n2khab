@@ -53,6 +53,9 @@ Using n2khab and discovered a bug? That's annoying! Don't let others have the sa
 * Any details about your local setup that might be helpful in troubleshooting.
 * Detailed steps to reproduce the bug.
 
+Help yourself and those you are asking for help: use the reprex package!
+Usually just running [`reprex::reprex(session_info = TRUE)`](https://reprex.tidyverse.org/reference/reprex.html) on a small reproducible example will do all the magic. 🌟
+
 ### Improve the documentation 📖
 
 Noticed a typo on the website? Think a function could use a better example? Good documentation makes all the difference, so your help to improve it is very welcome!
