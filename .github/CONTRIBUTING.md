@@ -154,17 +154,50 @@ It is wise to first think about the scope of your function (or your proposed enh
 
 You will want to look at the file `src/manage_package.R` to get some useful packaging commands and developing tips.
 
-**Git workflow**
+**Releases, version numbering and the relation to git branches**
 
-1. Make commits (in your local clone of the remote repo on Github) _in your own git branch_, branched off from the `master` branch.
-(But see this in a relative manner: exactly the same process can be repeated by someone else in turn, relative to your branch.
-So '`master`' in this protocol can be replaced by another branch name!)
-You can push your branch to the remote as often as you like, as it will not influence other branches (first time: do `git push -u origin yourbranchname`; afterwards `git push` suffices). It serves as a backup and enables others to work with you on that branch.
-1. Meanwhile, make sure that your branch stays up to date with evolutions in `master` (i.e. in your local repo, update `master` with `git checkout master && git pull` and then, with your own branch checked out again, do `git merge --no-ff master`), in order to prevent merge conflicts with `master` later on.
-At this stage, you need to resolve any merge conflicts that may arise in your own branch.
-1. Propose to merge your commits into `master`: this starts with making a 'pull request' (PR; actually this is a merge request) and assign at least one reviewer before a merge can be decided. At that moment, open online discussion in the repo is possible on your changes (for other open discussion that you want to start, make an _issue_). As long as no merge is performed, more commits can be added to this PR with `git push`, e.g. to implement requested changes by others.
-    - note that, if you branched off another (reference) branch than `master`, make sure to change the reference branch in the pull request (the default reference is `master`).
-1. After your PR is merged, pull the reference branch (usually `master`) and clean up your local repo in order to keep up with the remote.
+- We follow the semantic version numbering as described [here](https://r-pkgs.org/description.html#version).
+- The commit referred to by `master` (branch tip) must always have a `<major>.<minor>.<patch>` version number in the `DESCRIPTION` file.
+It is the latest released package version.
+  - Subsequent commits on `master` which do not change the package code itself, but only website setup and repo documentation, must inherit the _same_ release version number.
+  - Commits which do change the package _must_ carry a development version number; typically `<major>.<minor>.<patch>.9000`.
+It follows that they are never committed directly to the `master` branch.
+Non-package commits _may_ follow this route as well: it is safe for all new commits.
+
+  These conventions ensure that:
+  - a simple package installation with `remotes::install_github()`, which defaults to downloading from the `master` branch, will result in an installation of the latest release;
+  - the `pkgdown` [website] shows the version number of the latest release.
+  
+- Development branches can have various names.
+However, there is always at least one development branch with a name starting with the characters `dev`.
+For example: `dev_nextrelease`, `dev_0.4.0`, ...
+It is the collector of new features and bugfixes that will lead to a later release, and its first commit should be to add a dev-suffix (`.9000`) to the current version number (don't increment `<major>.<minor>.<patch>`).
+  - Especially when cooperating, it is counteradvised to push directly to this branch; better do so through pull requests from feature branches.
+- Eventually, the development branch's last commit before merging to `master` will be to increment at least one of `<major>`, `<minor>` or `<patch>` and to drop the dev-suffix from the version number (i.e. in the `DESCRIPTION` file).
+Such final commits should happen directly on the development branch.
+No later than that commmit (but it can safely be done earlier), also the `.zenodo.json` metadata must be updated to the new release version number.
+
+
+**Steps and tricks in git**
+
+The preceding philosophy leads to following steps and guidelines:
+
+1. Make commits (in your local clone of the remote repo on Github) _in your own git branch_, branched off from the **base** branch you wish to contribute to -- below referred as `<base>` branch.
+Let's call your new branch the `<feature>` branch.
+    - In general, the base branch will be a `dev*` branch, or it could be a feature branch of someone else you wish to make a contribution to.
+    
+    You can push your branch to the remote as often as you like, as it will not influence other branches (first time: do `git push -u origin yourbranchname`; afterwards `git push` suffices). It serves as a backup and enables others to work with you on that branch.
+1. Meanwhile, make sure that your branch stays up to date with evolutions in the base branch.
+This is needed to ensure a smooth merge of your branch to the base branch later on.
+    - To do that in your local repo, you can run `git pull origin <base>` while having your feature branch checked out.
+    - If you also wish to update your local base branch in this process, you can first `git checkout <base>` followed by `git pull`, then switch back to `git checkout <feature>` and merge the base branch with `git merge --no-ff <base>`.
+    
+    If any merge conflicts arise at this stage, resolve them in your own branch.
+1. Propose to merge your commits into the base branch: after pushing your branch to GitHub (which you can do repeatedly), this starts with making a 'pull request' (PR; actually this is a merge request) and assign at least one reviewer before a merge can be decided.
+At that moment, open online discussion in the repo is possible on your changes (for other open discussion that you want to start, make an _issue_).
+As long as no merge is performed, more commits can be added to this PR with `git push`, e.g. to implement requested changes by others.
+    - make sure to correctly **set the base branch** in the pull request (because the default is `master`).
+1. After your PR is merged, pull the base branch and clean up your local repo in order to keep up with the remote.
 
 **Git resources**
 
