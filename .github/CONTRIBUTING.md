@@ -84,14 +84,14 @@ This is the structure of the [repo]:
 
 ```
 ├── inst
-    └── textdata        <- Textual data delivered with the package (in vc-format).
-                           They can be read into R by package functions or with
-                           git2rdata::read_vc().
+│   └── textdata        <- Textual data delivered with the package (in vc-format).
+│                          They can be read into R by package functions or with
+│                          git2rdata::read_vc().
 ├── man
 ├── misc                <- Package-related scripts / R markdown files. Rbuild-ignored!
-                           Contains a script on package management + a bookdown 
-                           project to reproduce the included textual data + a 
-                           script to upgrade vc-formatted files.
+│                          Contains a script on package management + a bookdown 
+│                          project to reproduce the included textual data + a 
+│                          script to upgrade vc-formatted files.
 ├── R                   <- Package functions are to be made here.
 ├── vignettes           <- Vignettes are to be made here.
 ├── DESCRIPTION
