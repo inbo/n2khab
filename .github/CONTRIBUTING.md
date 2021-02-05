@@ -152,12 +152,9 @@ It is wise to first think about the scope of your function (or your proposed enh
 - functions that are of broader interest than Natura 2000, better go to [inborutils](https://inbo.github.io/inborutils/) or a separate package;
 - functions that will only be relevant to a specific _N2KHAB_ project, are better developed in the project-specific repo.
 
-For more inspiration on where to put your own function, look into the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (which centralizes planning and workflow documentation in N2KHAB monitoring).
-
 You will want to look at the file `src/manage_package.R` to get some useful packaging commands and developing tips.
 
-More detailed info on git workflows at INBO: <https://inbo.github.io/tutorials/tags/git/>.
-See also [these git workshop materials](https://inbo.github.io/git-course/index.html).
+**Git workflow**
 
 1. Make commits (in your local clone of the remote repo on Github) _in your own git branch_, branched off from the `master` branch.
 (But see this in a relative manner: exactly the same process can be repeated by someone else in turn, relative to your branch.
@@ -168,6 +165,14 @@ At this stage, you need to resolve any merge conflicts that may arise in your ow
 1. Propose to merge your commits into `master`: this starts with making a 'pull request' (PR; actually this is a merge request) and assign at least one reviewer before a merge can be decided. At that moment, open online discussion in the repo is possible on your changes (for other open discussion that you want to start, make an _issue_). As long as no merge is performed, more commits can be added to this PR with `git push`, e.g. to implement requested changes by others.
     - note that, if you branched off another (reference) branch than `master`, make sure to change the reference branch in the pull request (the default reference is `master`).
 1. After your PR is merged, pull the reference branch (usually `master`) and clean up your local repo in order to keep up with the remote.
+
+**Git resources**
+
+- Info on general git workflows at INBO: <https://inbo.github.io/tutorials/tags/git/>.
+See also [these git workshop materials](https://inbo.github.io/git-course/index.html).
+- Günther T. (2014). Learn version control with Git: A step-by-step course for the complete beginner.
+- <https://learngitbranching.js.org/>
+- [Git CLI cheatsheet](http://ndpsoftware.com/git-cheatsheet.html)
 
 
 
