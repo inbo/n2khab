@@ -1,11 +1,11 @@
-## n2khab 0.3.1
+## n2khab 0.3.1 (2020-10-26)
 
 #### Minor patch
 
 - `read_watersurfaces()` has been limited explicitly to using data source version 'watersurfaces_v1.0'.
 Accommodation of the newer 'watersurfaces_v1.1' is planned for later.
 
-## n2khab 0.3.0
+## n2khab 0.3.0 (2020-10-16)
 
 #### Breaking change
 
@@ -26,7 +26,7 @@ Existing R code will continue to run normally if you complied with the recommend
 - Drop some package dependencies to speed up package loading (#89, #90)
 
 
-## n2khab 0.2.0
+## n2khab 0.2.0 (2020-05-08)
 
 #### New features
 
@@ -46,19 +46,19 @@ Existing R code will continue to run normally if you complied with the recommend
 
 Further, a number of smaller fixes and enhancements were made.
 
-## n2khab 0.1.2
+## n2khab 0.1.2 (2020-03-04)
 
 #### Hotfix
 
 - `read_GRTSmh()`, `read_GRTSmh_base4frac()`, `read_GRTSmh_diffres()`: avoided CRS error with more recent GDAL/PROJ.4 installations (#61)
 
-## n2khab 0.1.1
+## n2khab 0.1.1 (2020-02-26)
 
 #### Hotfix
 
 - `read_habitatmap_terr()`: fixed non-functioning argument `keep_aq_types=FALSE` (#60)
 
-## n2khab 0.1.0
+## n2khab 0.1.0 (2020-01-30)
 
 #### Features of the first stable release
 
