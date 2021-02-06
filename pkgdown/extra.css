@@ -51,4 +51,16 @@ a:not([href]):hover {
   text-decoration: none;
 }
 
+body {
+  font-size: 17px;
+}
 
+pre, code {
+  font-size: 17px;
+	color: #222;
+	font-family: "Ubuntu mono",Menlo,Monaco,Consolas,monospace;
+}
+
+code a, pre a {
+	color: #AD3C78;
+}
