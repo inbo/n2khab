@@ -56,7 +56,7 @@ body {
 }
 
 pre, code {
-  font-size: 17px;
+  font-size: 100%;
 	color: #222;
 	font-family: "Ubuntu mono",Menlo,Monaco,Consolas,monospace;
 }
