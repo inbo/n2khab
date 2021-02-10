@@ -1,3 +1,27 @@
+## n2khab 0.4.0 (2021-02-10)
+
+#### New feature
+
+- Function `read_watercourse_100mseg()` (#105) to return the `watercourse_100mseg` data source or one of its elements.
+`watercourse_100mseg` is a new processed data source ([inbo/n2khab-preprocessing#44](https://github.com/inbo/n2khab-preprocessing/pull/44); <https://doi.org/10.5281/zenodo.4452577>).
+
+#### Updates & internal changes
+
+Including:
+
+- Update `namelist` data source: Dutch shortname of one type changed (#102).
+- Drop dependency on `sp`, which was used for CRS handling in a few functions (#103).
+- Minor updates in documentation and vignettes to solve newly encountered errors and notes in `R CMD check` (#107).
+
+#### Repo and website maintenance
+
+- Update and extend Readme (homepage) and Contributing Guide (#97, #110), including:
+    - instruction for upgrading the package;
+    - note on handling _proj4string_ warnings;
+    - improved explanation of git workflows in developing the package.
+- Continuous integration: leave Travis CI; add new GitHub Actions workflows (#108).
+- Website: larger fontsize; Ubuntu Mono font for code; consistent colouring of hyperlinks (#110).
+
 ## n2khab 0.3.1 (2020-10-26)
 
 #### Minor patch
