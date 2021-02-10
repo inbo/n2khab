@@ -1,11 +1,35 @@
-## n2khab 0.3.1
+## n2khab 0.4.0 (2021-02-10)
+
+#### New feature
+
+- Function `read_watercourse_100mseg()` (#105) to return the `watercourse_100mseg` data source or one of its elements.
+`watercourse_100mseg` is a new processed data source ([inbo/n2khab-preprocessing#44](https://github.com/inbo/n2khab-preprocessing/pull/44); <https://doi.org/10.5281/zenodo.4452577>).
+
+#### Updates & internal changes
+
+Including:
+
+- Update `namelist` data source: Dutch shortname of one type changed (#102).
+- Drop dependency on `sp`, which was used for CRS handling in a few functions (#103).
+- Minor updates in documentation and vignettes to solve newly encountered errors and notes in `R CMD check` (#107).
+
+#### Repo and website maintenance
+
+- Update and extend Readme (homepage) and Contributing Guide (#97, #110), including:
+    - instruction for upgrading the package;
+    - note on handling _proj4string_ warnings;
+    - improved explanation of git workflows in developing the package.
+- Continuous integration: leave Travis CI; add new GitHub Actions workflows (#108).
+- Website: larger fontsize; Ubuntu Mono font for code; consistent colouring of hyperlinks (#110).
+
+## n2khab 0.3.1 (2020-10-26)
 
 #### Minor patch
 
 - `read_watersurfaces()` has been limited explicitly to using data source version 'watersurfaces_v1.0'.
 Accommodation of the newer 'watersurfaces_v1.1' is planned for later.
 
-## n2khab 0.3.0
+## n2khab 0.3.0 (2020-10-16)
 
 #### Breaking change
 
@@ -26,7 +50,7 @@ Existing R code will continue to run normally if you complied with the recommend
 - Drop some package dependencies to speed up package loading (#89, #90)
 
 
-## n2khab 0.2.0
+## n2khab 0.2.0 (2020-05-08)
 
 #### New features
 
@@ -46,19 +70,19 @@ Existing R code will continue to run normally if you complied with the recommend
 
 Further, a number of smaller fixes and enhancements were made.
 
-## n2khab 0.1.2
+## n2khab 0.1.2 (2020-03-04)
 
 #### Hotfix
 
 - `read_GRTSmh()`, `read_GRTSmh_base4frac()`, `read_GRTSmh_diffres()`: avoided CRS error with more recent GDAL/PROJ.4 installations (#61)
 
-## n2khab 0.1.1
+## n2khab 0.1.1 (2020-02-26)
 
 #### Hotfix
 
 - `read_habitatmap_terr()`: fixed non-functioning argument `keep_aq_types=FALSE` (#60)
 
-## n2khab 0.1.0
+## n2khab 0.1.0 (2020-01-30)
 
 #### Features of the first stable release
 
@@ -68,3 +92,11 @@ Further, a number of smaller fixes and enhancements were made.
 - 4 tutorials (vignettes / articles)
 - A reexport of `download_zenodo()` from `inborutils`
 - Website built with `pkgdown`
+
+#### Historical note
+
+This package is the successor of the 'n2khabutils' package.
+Previous to commit `c8608d9`, the code was part of the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (formerly 'n2khab-inputs'), where the original version history remains stored.
+At that time, the package was called 'n2khabutils'.
+As a convenience, the **n2khab** repo still holds the rewritten (shrinked) package history from before commit `c8608d9`, as defined by the related files and folders.
+See [this](https://github.com/inbo/n2khab-monitoring/issues/28) issue in the 'n2khab-monitoring' repo, where the migration is documented.

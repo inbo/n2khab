@@ -145,9 +145,9 @@ habmap_terr_noaq$habitatmap_terr_types
 
 }
 \seealso{
-Other functions involved in processing the \code{habitatmap} data source: 
+Other functions involved in processing the 'habitatmap' data source: 
 \code{\link{read_habitatmap_stdized}()},
 \code{\link{read_habitatmap}()},
 \code{\link{read_watersurfaces_hab}()}
 }
-\concept{functions involved in processing the \code{habitatmap} data source}
+\concept{functions involved in processing the 'habitatmap' data source}

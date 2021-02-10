@@ -37,6 +37,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+renv::restore()
 options(stringsAsFactors = FALSE)
 library(tidyverse)
 library(stringr)
@@ -49,7 +50,7 @@ opts_chunk$set(
 )
 ```
 
-**Note: this is a bookdown project, supposed to be run from within the `misc/generate_textdata` subfolder. You can use the `generate_textdata.Rproj` RStudio project file in this subfolder to run it.**
+**Note: this is a bookdown project, supposed to be run from within the `misc/generate_textdata` subfolder. You can use the `generate_textdata.Rproj` RStudio project file in this subfolder to run it, and run `bookdown::render_book("index.Rmd", "bookdown::html_document2")`. To run in a separate R session, use RStudio's build button, or (for older renv libraries) with R or Rscript (use the right version) in a shell.**
 
 
 

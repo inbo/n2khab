@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu%20Mono:400,700');
+
 .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus {
     color: #ffffff;
     text-decoration: none;
@@ -51,4 +53,16 @@ a:not([href]):hover {
   text-decoration: none;
 }
 
+body {
+  font-size: 17px;
+}
 
+pre, code {
+  font-size: 100%;
+	color: #222;
+	font-family: "Ubuntu mono",Menlo,Monaco,Consolas,monospace;
+}
+
+code a, pre a {
+	color: #AD3C78;
+}

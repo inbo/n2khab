@@ -1,7 +1,8 @@
 <!-- badges: start -->
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3631579.svg)](https://doi.org/10.5281/zenodo.3631579)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Build Status](https://travis-ci.com/inbo/n2khab.svg?branch=master)](https://travis-ci.com/inbo/n2khab)
+[![R-CMD-check](https://github.com/inbo/n2khab/workflows/R-CMD-check/badge.svg)](https://github.com/inbo/n2khab/actions?query=workflow%3AR-CMD-check)
+[![site-devel](https://github.com/inbo/n2khab/workflows/site-devel/badge.svg)](https://github.com/inbo/n2khab/actions?query=workflow%3Asite-devel)
 <!-- badges: end -->
 
 ## Welcome
@@ -13,7 +14,7 @@ This facilitates collaboration and reproducibility.
 
 The standard reference data include: checklists, spatial habitat distribution, administrative & environmental layers, GRTSmaster_habitats.
 
-## Installing, testing and using the _n2khab_ package
+## Installing and using the _n2khab_ package
 
 To install, run:
 
@@ -47,8 +48,9 @@ There is a major distinction between:
 
 ### Suppressing `rgdal` warnings about proj4string degradation
 
-Setting coordinate reference systems of geospatial R objects is taken care of by the package, in a way that is compatible with older and newer versions of PROJ and GDAL backend libraries.
+Setting coordinate reference systems (CRS) of geospatial R objects is taken care of by the package, in a way that is compatible with older and current versions of PROJ and GDAL backend libraries.
 This is done by gratefully implementing such features from the `sf` and `sp` packages.
+The functions never specify a CRS by means of a proj4string, which is an aged format not supported by the current backend versions.
 
 Please note that nonetheless you will see warnings about degraded proj4strings when using certain `n2khab` functions or when converting resulting `sf` objects to `sp` objects.
 This is normal!
@@ -61,7 +63,7 @@ options(rgdal_show_exportToProj4_warnings = "none")
 ```
 
 See [this](https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/) tutorial if you would like to learn more about this.
-In short: _don't_ use proj4strings to define coordinate reference systems!
+In short: _don't_ use proj4strings to define CRSs!
 
 ## You are welcome to contribute!
 
@@ -93,10 +95,4 @@ Some of them come over from another repository.
 Others may be written as the result of a synchronization script to give them a start.
 The code to reproduce these files is inside the `misc` folder of the [source code](https://github.com/inbo/n2khab).
 The package provides the necessary functions to return these as standardized tibbles (`vignette("v010_reference_lists")`).
-
-This package is the successor of the 'n2khabutils' package.
-Previous to commit `c8608d9`, the code was part of the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (formerly 'n2khab-inputs'), where the original version history remains stored.
-At that time, the package was called 'n2khabutils'.
-As a convenience, the **n2khab** repo still holds the rewritten (shrinked) package history from before commit `c8608d9`, as defined by the related files and folders.
-See [this](https://github.com/inbo/n2khab-monitoring/issues/28) issue in the 'n2khab-monitoring' repo, where the migration is documented.
 

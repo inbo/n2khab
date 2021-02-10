@@ -59,7 +59,7 @@ to a spatially balanced sample of locations.
 Hence, it allows dynamical sample sizes.
 More information on the GRTS algorithm can be found in Stevens & Olsen (2003,
 2004) and in the \href{https://github.com/ThierryO/grts}{GRTS} and
-\href{https://cran.r-project.org/web/packages/spsurvey}{spsurvey} packages.
+\href{https://CRAN.R-project.org/package=spsurvey}{spsurvey} packages.
 
 Depending on the value of the \code{brick} argument, the function either
 returns the \code{GRTSmaster_habitats} data source as a
@@ -102,17 +102,17 @@ r
 \references{
 Stevens D.L. & Olsen A.R. (2003). Variance estimation for spatially balanced
 samples of environmental resources. Environmetrics 14 (6): 593–610.
-DOI: \url{https://doi.org/10.1002/env.606}.
+\doi{10.1002/env.606}.
 
 Stevens D.L. & Olsen A.R. (2004). Spatially Balanced Sampling of Natural
 Resources. Journal of the American Statistical Association 99 (465):
-262–278. DOI: \url{https://doi.org/10.1198/016214504000000250}.
+262–278. \doi{10.1198/016214504000000250}.
 }
 \seealso{
-Other functions involved in processing the \code{GRTSmaster_habitats} data source: 
+Other functions involved in processing the 'GRTSmaster_habitats' data source: 
 \code{\link{convert_base4frac_to_dec}()},
 \code{\link{convert_dec_to_base4frac}()},
 \code{\link{read_GRTSmh_base4frac}()},
 \code{\link{read_GRTSmh_diffres}()}
 }
-\concept{functions involved in processing the \code{GRTSmaster_habitats} data source}
+\concept{functions involved in processing the 'GRTSmaster_habitats' data source}
