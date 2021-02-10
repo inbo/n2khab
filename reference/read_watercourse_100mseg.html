@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the data source habitatmap as an sf multipolygon layer — read_habitatmap • n2khab</title>
+<title>Return the processed data source watercourse_100mseg — read_watercourse_100mseg • n2khab</title>
 
 
 <!-- jquery -->
@@ -41,13 +41,19 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return the data source habitatmap as an sf multipolygon layer — read_habitatmap" />
-<meta property="og:description" content="Returns the raw data source habitatmap (De Saeger et al., 2018)
-as a standardized sf multipolygon layer
-(tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
-(EPSG-code 31370).
-Given the size of the data source, this function
-takes a bit longer than usual to run." />
+<meta property="og:title" content="Return the processed data source watercourse_100mseg — read_watercourse_100mseg" />
+<meta property="og:description" content="Returns the data source watercourse_100mseg
+as a list of two sf objects:
+lines
+(LINESTRING geometry): represents
+line segments of length 100 m derived from the raw watercourses
+data source;
+points (POINT geometry):
+represents the downstream
+endpoints of all segments ('downstream' as defined in watercourses).
+Optionally, only one of these objects is returned.
+The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+(EPSG-code 31370)." />
 
 
 
@@ -142,23 +148,31 @@ takes a bit longer than usual to run." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the data source <code>habitatmap</code> as an <code>sf</code> multipolygon layer</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_habitatdata.R'><code>R/read_habitatdata.R</code></a></small>
-    <div class="hidden name"><code>read_habitatmap.Rd</code></div>
+    <h1>Return the processed data source <code>watercourse_100mseg</code></h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_watercourses.R'><code>R/read_watercourses.R</code></a></small>
+    <div class="hidden name"><code>read_watercourse_100mseg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns the raw data source <code>habitatmap</code> (De Saeger et al., 2018)
-as a standardized <code>sf</code> multipolygon layer
-(tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
-(EPSG-code <a href='https://epsg.io/31370'>31370</a>).
-Given the size of the data source, this function
-takes a bit longer than usual to run.</p>
+    <p>Returns the data source <code>watercourse_100mseg</code>
+as a list of two <code>sf</code> objects:</p><ul>
+<li><p><code>lines</code>
+(<code>LINESTRING</code> geometry): represents
+line segments of length 100 m derived from the raw <code>watercourses</code>
+data source;</p></li>
+<li><p><code>points</code> (<code>POINT</code> geometry):
+represents the <em>downstream</em>
+endpoints of all segments ('downstream' as defined in <code>watercourses</code>).</p></li>
+</ul><p>Optionally, only one of these objects is returned.
+The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+(EPSG-code <a href='https://epsg.io/31370'>31370</a>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_habitatmap</span><span class='op'>(</span>
-  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/habitatmap"</span><span class='op'>)</span>,
-  filter_hab <span class='op'>=</span> <span class='cn'>FALSE</span>
+    <pre class="usage"><span class='fu'>read_watercourse_100mseg</span><span class='op'>(</span>
+  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,
+    <span class='st'>"20_processed/watercourse_100mseg/watercourse_100mseg.gpkg"</span><span class='op'>)</span>,
+  element <span class='op'>=</span> <span class='cn'>NULL</span>,
+  version <span class='op'>=</span> <span class='st'>"watercourse_100mseg_20200807v1"</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -174,41 +188,82 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.</p></td>
     </tr>
     <tr>
-      <th>filter_hab</th>
-      <td><p>If <code>TRUE</code> only polygons that (partially) contain habitat or a regionally
-important biotope (RIB) are returned. The default value is <code>FALSE</code>.</p></td>
+      <th>element</th>
+      <td><p>Optional string.
+The string must be one of two possible values: <code>"lines"</code> or
+<code>"points"</code>.
+If set, either the <code>lines</code> or the <code>points</code> object will be
+returned, respectively.</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>Version ID of the data source.
+Defaults to the latest available version defined by the package.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Simple feature collection of
-type <code>MULTIPOLYGON</code>.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <p>By default, a list of two <code>sf</code> objects (see 'Description').
+The <code>lines</code> and the <code>points</code> objects have the same number of
+rows.
+They share the same attributes:</p><dl>
+<dt><code>rank</code></dt><dd><p>A unique, incremental number for each segment/endpoint.
+It just reflects the downstream-to-upstream order of segments within
+each original line.</p></dd>
+<dt><code>vhag_code</code></dt><dd><p>The VHAG code from the raw <code>watercourses</code> data
+source.
+It distinguishes the different watercourses, so it is common to all
+segments/points that belong to the same watercourse.</p></dd>
 
-    <p>De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
-Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
-Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
-Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-doi: <a href='https://doi.org/10.21436/inbor.15138099'>10.21436/inbor.15138099</a>
-.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+</dl><p>Optionally, only one of these <code>sf</code> objects is returned.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <div class='dont-index'><p>Other functions involved in processing the 'habitatmap' data source: 
-<code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a>()</code>,
-<code><a href='read_habitatmap_terr.html'>read_habitatmap_terr</a>()</code>,
-<code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a>()</code></p></div>
+    <p>The data source <code>watercourse_100mseg</code> represents all officially known
+watercourses
+of the Flemish Region as line segments of 100 m (or &lt; 100 m, for the most
+upstream segment of a watercourse).
+The data source can be used as a base layer of statistical
+<strong>population units</strong> (line segments) and corresponding anchor points,
+in the design of monitoring and research of watercourses.</p>
+<p>The data source is a GeoPackage, available at
+<a href='https://doi.org/10.5281/zenodo.4452577'>Zenodo</a>, and contains two
+spatial layers:</p><ul>
+<li><p><code>watercourse_100mseg_lines</code>: the line segments;</p></li>
+<li><p><code>watercourse_100mseg_points</code>: the corresponding downstream
+  endpoints.</p></li>
+</ul><p>Both layers have the same number of rows and share the same attributes.</p>
+<p>The data source was derived from the raw
+<a href='https://doi.org/10.5281/zenodo.4420904'><code>watercourses</code></a> data
+source as follows:</p><ol>
+<li><p>each line ('watercourse') of <code>watercourses</code> is split into
+segments of 100 m, where
+the remaining segment of &lt; 100 m (per original line) is situated most
+upstream.
+For this step, the direction of the lines has been reverted (in
+<code>watercourses</code> the direction is from upstream to downstream).
+A unique rank number is assigned to each segment, as well as the
+VHAG code from the corresponding line in <code>watercourses</code>.</p></li>
+<li><p>the downstream endpoint of each segment is located, and assigned the
+same attributes (<code>rank</code> and <code>vhag_code</code>).</p></li>
+</ol>
+
+<p>The R and GRASS code for creating the <code>watercourse_100mseg</code> data source
+can be found in the
+<a href='https://github.com/inbo/n2khab-preprocessing'>n2khab-preprocessing</a>
+repository.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># This example supposes that your working directory or a directory up to 10</span>
-<span class='co'># levels above has the 'n2khab_data' folder AND that the 'habitatmap'</span>
-<span class='co'># data source is present in the default subdirectory.</span>
+<span class='co'># levels above has the 'n2khab_data' folder AND that the</span>
+<span class='co'># 'watercourse_100mseg' data source is present in the default subdirectory.</span>
 <span class='co'># In all other cases, this example won't work but at least you can</span>
 <span class='co'># consider what to do.</span>
 
-<span class='va'>hm</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatmap</span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>hm</span>
+<span class='op'>(</span><span class='va'>lines</span> <span class='op'>&lt;-</span> <span class='fu'>read_watercourse_100mseg</span><span class='op'>(</span>element <span class='op'>=</span> <span class='st'>"lines"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>(</span><span class='va'>points</span> <span class='op'>&lt;-</span> <span class='fu'>read_watercourse_100mseg</span><span class='op'>(</span>element <span class='op'>=</span> <span class='st'>"points"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>read_watercourse_100mseg</span><span class='op'>(</span><span class='op'>)</span>, give.attr <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='op'>}</span>
 
 </div></pre>

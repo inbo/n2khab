@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -40,7 +40,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -78,7 +78,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/inbo/n2khab/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -92,8 +92,7 @@
 
       
 
-      </header><link href="v020_datastorage_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="v020_datastorage_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="v020_datastorage_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Where to store the N2KHAB input data sources</h1>
@@ -154,7 +153,8 @@
 <a href="#getting-started" class="anchor"></a>Getting started for your (collaborative) workflow</h2>
 <p>Mind that, <em>if</em> you store the <code>n2khab_data</code> folder inside a version controlled repository (e.g. using git), it must be <strong>ignored by version control</strong>!</p>
 <ol style="list-style-type: decimal">
-<li>Decide <strong>where</strong> you want to store the <code>n2khab_data</code> folder:
+<li>
+<p>Decide <strong>where</strong> you want to store the <code>n2khab_data</code> folder:</p>
 <ul>
 <li>from the viewpoint of several projects / several git repositories, when these need the same data source versions, the location may be at a high level in your file system. A convenient approach is to use the folder which holds the different project folders / repositories.</li>
 <li>from the viewpoint of one project / repository: the <code>n2khab_data</code> folder can be put inside the project / repository folder. This approach has the advantage that you can store versions of data sources different from those in another repository (where you also have an <code>n2khab_data</code> folder).</li>
@@ -163,12 +163,12 @@
 </li>
 <li><p>From your working directory, use <code><a href="../reference/fileman_folders.html">fileman_folders()</a></code> to specify the desired location (using the function’s arguments). It will check the existence of the folders <code>n2khab_data</code>, <code>n2khab_data/10_raw</code> and <code>n2khab_data/20_processed</code> and create them if they don’t exist.</p></li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="../reference/fileman_folders.html">fileman_folders</a></span><span class="op">(</span>root <span class="op">=</span> <span class="st">"rproj"</span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fileman_folders.html">fileman_folders</a></span><span class="op">(</span>root <span class="op">=</span> <span class="st">"rproj"</span><span class="op">)</span>
 <span class="co">#&gt; Created &lt;clipped_path_prefix&gt;/n2khab_data</span>
 <span class="co">#&gt; Created subfolder 10_raw</span>
 <span class="co">#&gt; Created subfolder 20_processed</span>
-<span class="co">#&gt; [1] "&lt;clipped_path_prefix&gt;/n2khab_data"</span></pre></div>
+<span class="co">#&gt; [1] "&lt;clipped_path_prefix&gt;/n2khab_data"</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>
 <p>From the cloud storage (links: <a href="https://zenodo.org/communities/n2khab-data-raw">raw data</a> | <a href="https://zenodo.org/communities/n2khab-data-processed">processed data</a>), <strong>download</strong> the respective data files of a data source. You can also use the function <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> to do that, using the DOI of each data source version. For each data source, put its file(s) in an appropriate subfolder either below <code>n2khab_data/10_raw</code> or <code>n2khab_data/20_processed</code> (depending on the data source). Use the data source’s default name for the subfolder. You get a list of the data source names with <em>XXX</em>. These names are version-agnostic! The names of the <code>n2khab</code> ‘read’ function and their documentation make clear which data sources you will need.</p>
@@ -187,8 +187,8 @@
 <div class="footnotes">
 <hr>
 <ol>
-<li id="fn1"><p>N2KHAB data sources are a list of public, standard data sources, important to analytical workflows concerning Natura 2000 (n2k) habitats (hab) in Flanders. They are in a public repository in order to be easily findable and to be preserved in a durable way.<a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p> This also means that several previously published (<a href="https://opendefinition.org/licenses/">open</a>) data sources have been publicly redistributed at Zenodo.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>N2KHAB data sources are a list of public, standard data sources, important to analytical workflows concerning Natura 2000 (n2k) habitats (hab) in Flanders. They are in a public repository in order to be easily findable and to be preserved in a durable way.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p> This also means that several previously published (<a href="https://opendefinition.org/licenses/">open</a>) data sources have been publicly redistributed at Zenodo.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
