@@ -1017,7 +1017,10 @@ read_habitatstreams <-
             habitatstreams %>%
             select(river_name = .data$NAAM,
                    source_id = .data$BRON) %>%
-            mutate(river_name = factor(.data$river_name),
+            mutate(river_name = factor(
+                       gsub("(^|[[:punct:]])([[:alpha:]])", "\\1\\U\\2",
+                            str_to_title(.data$river_name),
+                            perl = TRUE)),
                    source_id = factor(.data$source_id),
                    type = "3260" %>%
                        factor(levels = read_types() %>%
