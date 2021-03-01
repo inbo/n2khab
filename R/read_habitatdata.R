@@ -932,7 +932,7 @@ read_habitatmap_terr <-
 #' Return the data source \code{habitatstreams} as an \code{sf} linestring
 #' layer or as a list
 #'
-#' Returns the raw data source \code{habitatstreams} (Leyssen et al., 2018)
+#' Returns the raw data source \code{habitatstreams} (Leyssen et al., 2020)
 #' as an \code{sf} linestring
 #' layer or as a list of two objects: the \code{sf} object (CRS:
 #' Belgian Lambert 72 (EPSG-code \href{https://epsg.io/31370}{31370}))
@@ -956,13 +956,13 @@ read_habitatmap_terr <-
 #' }
 #'
 #' @references
-#' Leyssen A., Denys L. & De Saeger S. (2018). Indicatieve situering van het
+#' Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
 #' Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 #' behorend tot het \emph{Ranunculion fluitantis} en het
 #' \emph{Callitricho-Batrachion}.
-#' Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
-#' Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
-#' \doi{10.21436/inbor.15138370}.
+#' Uitgave 2020 (versie 1.7). Rapporten van het Instituut voor Natuur- en
+#' Bosonderzoek 2020 (34). Research Institute for Nature and Forest, Brussels.
+#' \doi{10.21436/inbor.18903609}.
 #'
 #' @examples
 #' \dontrun{
@@ -997,6 +997,10 @@ read_habitatmap_terr <-
 #' distinct
 #' @importFrom forcats
 #' fct_reorder
+#' @importFrom stringr
+#' str_replace
+#' str_squish
+#' str_to_title
 #' @export
 read_habitatstreams <-
     function(file = file.path(fileman_up("n2khab_data"),
@@ -1017,7 +1021,14 @@ read_habitatstreams <-
             habitatstreams %>%
             select(river_name = .data$NAAM,
                    source_id = .data$BRON) %>%
-            mutate(river_name = factor(.data$river_name),
+            mutate(river_name = factor(
+                       gsub(pattern = "(^|[[:punct:]])([[:alpha:]])",
+                            replacement = "\\1\\U\\2",
+                            str_replace(str_to_title(
+                                str_squish(.data$river_name)),
+                                pattern = "Ij",
+                                replacement = "IJ"),
+                            perl = TRUE)),
                    source_id = factor(.data$source_id),
                    type = "3260" %>%
                        factor(levels = read_types() %>%

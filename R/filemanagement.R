@@ -374,7 +374,7 @@ fileman_up <- function(name,
         file.path(path, name) %>%
             normalizePath()
     } else {
-        NULL
+        stop(name, " was not found. Searched up to ", normalizePath(path))
     }
 
 }
