@@ -997,6 +997,10 @@ read_habitatmap_terr <-
 #' distinct
 #' @importFrom forcats
 #' fct_reorder
+#' @importFrom stringr
+#' str_replace
+#' str_squish
+#' str_to_title
 #' @export
 read_habitatstreams <-
     function(file = file.path(fileman_up("n2khab_data"),
@@ -1018,8 +1022,12 @@ read_habitatstreams <-
             select(river_name = .data$NAAM,
                    source_id = .data$BRON) %>%
             mutate(river_name = factor(
-                       gsub("(^|[[:punct:]])([[:alpha:]])", "\\1\\U\\2",
-                            str_to_title(.data$river_name),
+                       gsub(pattern = "(^|[[:punct:]])([[:alpha:]])",
+                            replacement = "\\1\\U\\2",
+                            str_replace(str_to_title(
+                                str_squish(.data$river_name)),
+                                pattern = "Ij",
+                                replacement = "IJ"),
                             perl = TRUE)),
                    source_id = factor(.data$source_id),
                    type = "3260" %>%
