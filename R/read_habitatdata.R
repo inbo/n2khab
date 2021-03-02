@@ -364,12 +364,12 @@ read_watersurfaces_hab <-
 
 #' Return the data source \code{watersurfaces} as an \code{sf} polygon layer
 #'
-#' Returns the raw data source \code{watersurfaces} (Packet et al., 2018)
+#' Returns the raw data source \code{watersurfaces} (Leyssen et al., 2020)
 #' as a standardized \code{sf} polygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
-#' See Packet et al. (2018) for an elaborate explanation of the data source
+#' See Leyssen et al. (2020) for an elaborate explanation of the data source
 #' and its attributes.
 #'
 #' @param extended Logical.
@@ -413,13 +413,12 @@ read_watersurfaces_hab <-
 #' wateren in Vlaanderen.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
-#' (2018).
-#' Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
-#' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
-#' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
-#' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \doi{10.21436/inbor.14178464}.
+#' \item Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &
+#' Denys L. (2020).
+#' Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
+#' Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
+#' (40). Instituut voor Natuur en Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.19088385}.
 #' }
 #'
 #' @examples
