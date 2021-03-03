@@ -497,6 +497,17 @@ read_watersurfaces <-
                                   levels = .$wfd_type)
             )
 
+        connectivitytransl <-
+            tribble(~connectivity, ~connectivity_name,
+                    "geïsoleerd", "niet verbonden met een waterloop",
+                    "periodiek", "tijdelijk (door peilbeheer of droogte) in verbinding met minstens één waterloop",
+                    "permanent", "permanent in verbinding met minstens één waterloop"
+            ) %>%
+            mutate(
+                connectivity = factor(.data$connectivity,
+                                      levels = .$connectivity)
+            )
+
         watersurfaces <-
             watersurfaces %>%
             select(polygon_id = .data$WVLC,
@@ -543,8 +554,17 @@ read_watersurfaces <-
                         mapvalues(from = wfd_typetransl$wfd_type,
                                   to = wfd_typetransl$wfd_type_name)
                 ) %>%
+                left_join(connectivitytransl, by = "connectivity") %>%
+                mutate(
+                    connectivity_name =
+                        .data$connectivity %>%
+                        mapvalues(from = connectivitytransl$connectivity,
+                                  to = connectivitytransl$connectivity_name)
+                ) %>%
                 select(1:6,
                        .data$wfd_type_name,
+                       7:9,
+                       .data$connectivity_name,
                        everything())
         }
 
