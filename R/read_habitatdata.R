@@ -520,10 +520,6 @@ read_watersurfaces <-
                    depth_class = .data$DIEPKL,
                    connectivity = .data$CONNECT,
                    usage = .data$FUNCTIE) %>%
-            mutate_at(.vars = c("wfd_code", "name"),
-                      .funs = function(x) {
-                          ifelse(x == "<Null>", NA, x)
-                      }) %>%
             mutate_at(.vars = c("area_name",
                                 "depth_class",
                                 "connectivity",
@@ -533,16 +529,31 @@ read_watersurfaces <-
                 wfd_type = .data$wfd_type %>%
                     factor(levels =
                                levels(wfd_typetransl$wfd_type)),
-                wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
-                                                na_lgl,
-                                                .data$wfd_type_certain %in%
-                                                    c("zeker",
-                                                      "definitief")),
                 hyla_code = ifelse(.data$hyla_code == 0,
                                    NA,
                                    .data$hyla_code)
             ) %>%
             arrange(.data$polygon_id)
+
+        if (version == "watersurfaces_v1.0") {
+            watersurfaces <-
+                watersurfaces %>%
+                mutate_at(.vars = c("wfd_code", "name"),
+                          .funs = function(x) {
+                              ifelse(x == "<Null>", NA, x)
+                          }) %>%
+                mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+                                                 na_lgl,
+                                                 .data$wfd_type_certain %in%
+                                                     c("zeker",
+                                                       "definitief")))
+        } else {
+            watersurfaces <-
+                watersurfaces %>%
+                mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+                                                 na_lgl,
+                                                 .data$wfd_type_certain == "definitief"))
+        }
 
         if (extended) {
             watersurfaces <-
