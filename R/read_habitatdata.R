@@ -375,8 +375,9 @@ read_watersurfaces_hab <-
 #' @param extended Logical.
 #' Should names or explanations of codes be added as extra
 #' variables in the result?
-#' Currently only applies to \code{wfd_type}; if \code{TRUE}, a variable
-#' \code{wfd_type_name} is added.
+#' Currently only applies to \code{wfd_type} and \code{connectivity};
+#' if \code{TRUE}, the variables \code{wfd_type_name} and
+#' \code{connectivity_name} are added.
 #' Defaults to \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized

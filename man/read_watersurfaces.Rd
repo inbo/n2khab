@@ -7,7 +7,7 @@
 read_watersurfaces(
   file = file.path(fileman_up("n2khab_data"), "10_raw/watersurfaces"),
   extended = FALSE,
-  version = "watersurfaces_v1.0"
+  version = c("watersurfaces_v1.1", "watersurfaces_v1.0")
 )
 }
 \arguments{
@@ -21,8 +21,9 @@ starting from the working directory.}
 \item{extended}{Logical.
 Should names or explanations of codes be added as extra
 variables in the result?
-Currently only applies to \code{wfd_type}; if \code{TRUE}, a variable
-\code{wfd_type_name} is added.
+Currently only applies to \code{wfd_type} and \code{connectivity};
+if \code{TRUE}, the variables \code{wfd_type_name} and
+\code{connectivity_name} are added.
 Defaults to \code{FALSE}.}
 
 \item{version}{Version ID of the data source.
@@ -51,13 +52,13 @@ variables (not mentioning extra 'name' variables for
 }
 }
 \description{
-Returns the raw data source \code{watersurfaces} (Packet et al., 2018)
+Returns the raw data source \code{watersurfaces} (Leyssen et al., 2020)
 as a standardized \code{sf} polygon layer
 (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 (EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
-See Packet et al. (2018) for an elaborate explanation of the data source
+See Leyssen et al. (2020) for an elaborate explanation of the data source
 and its attributes.
 }
 \examples{
@@ -83,13 +84,12 @@ ws2
 wateren in Vlaanderen.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 Instituut voor Natuur- en Bosonderzoek, Brussel.
-\item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
-(2018).
-Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
-Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
-Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
-Instituut voor Natuur- en Bosonderzoek, Brussel.
-\doi{10.21436/inbor.14178464}.
+\item Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &
+Denys L. (2020).
+Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
+Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
+(40). Instituut voor Natuur en Bosonderzoek, Brussel.
+\doi{10.21436/inbor.19088385}.
 }
 }
 \seealso{
