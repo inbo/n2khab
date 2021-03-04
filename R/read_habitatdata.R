@@ -460,12 +460,21 @@ read_watersurfaces <-
     function(file = file.path(fileman_up("n2khab_data"),
                               "10_raw/watersurfaces"),
              extended = FALSE,
-             version = "watersurfaces_v1.0") {
-
-        assert_that(file.exists(file))
-        assert_that(is.string(version))
+             version = c("watersurfaces_v1.1", "watersurfaces_v1.0")) {
 
         version <- match.arg(version)
+
+        if (file == file.path(fileman_up("n2khab_data"),
+                              "10_raw/watersurfaces")) {
+
+            if (version == "watersurfaces_v1.1") {
+                file <- file.path(fileman_up("n2khab_data"),
+                                  "10_raw/watersurfaces/watersurfaces.gpkg")
+            }
+        }
+
+        assert_that(file.exists(file),
+                    msg =  paste("Path", file, "does not exist. Control the path and specify the corresponding version if you do not use", version))
 
         suppressWarnings(
             watersurfaces <- read_sf(file,
