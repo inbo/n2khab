@@ -476,24 +476,37 @@ read_watersurfaces_hab <-
 #' assert_that
 #' @export
 read_watersurfaces <-
-    function(file = file.path(fileman_up("n2khab_data"),
-                              "10_raw/watersurfaces"),
+    function(file = NULL,
              extended = FALSE,
              version = c("watersurfaces_v1.1", "watersurfaces_v1.0")) {
 
         version <- match.arg(version)
 
-        if (file == file.path(fileman_up("n2khab_data"),
-                              "10_raw/watersurfaces")) {
-
+        if (is.null(file)) {
             if (version == "watersurfaces_v1.1") {
                 file <- file.path(fileman_up("n2khab_data"),
                                   "10_raw/watersurfaces/watersurfaces.gpkg")
+                } else {
+                    file <- file.path(fileman_up("n2khab_data"),
+                                      "10_raw/watersurfaces/watersurfaces.shp")
+                }
+
+            assert_that(file.exists(file),
+                        msg =  paste("Path", file, "does not exist. Control the",
+                                     "path and specify the corresponding version",
+                                     "if you do not use", version))
+        } else {
+
+            assert_that(file.exists(file))
+
+            if (version == "watersurfaces_v1.1") {
+                if (substr(file, nchar(file) - 4, nchar(file)) != ".gpkg") {
+                    stop(paste(version, "should be a GeoPackage (.gpkg).",
+                               "Control the version and the path."))
+                }
             }
         }
 
-        assert_that(file.exists(file),
-                    msg =  paste("Path", file, "does not exist. Control the path and specify the corresponding version if you do not use", version))
 
         suppressWarnings(
             watersurfaces <- read_sf(file,
@@ -610,7 +623,6 @@ read_watersurfaces <-
         return(watersurfaces)
 
     }
-
 
 
 
