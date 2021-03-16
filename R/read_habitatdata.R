@@ -507,47 +507,53 @@ read_watersurfaces <-
             }
         }
 
+        if (version == "watersurfaces_v1.1") {
 
-        suppressWarnings(
-            watersurfaces <- read_sf(file,
-                                     crs = 31370)
-        )
+            suppressWarnings(
+                watersurfaces <- read_sf(file,
+                                         layer = "Watervlakken",
+                                         crs = 31370))
 
-        wfd_typetransl <-
-            tribble(~wfd_type, ~wfd_type_name,
-                    "B", "sterk brak",
-                    "Bzl", "zeer licht brak",
-                    "Ad", "alkalisch duinwater",
-                    "Ai", "ondiep, alkalisch, ionenrijk",
-                    "Ami", "ondiep, alkalisch, matig ionenrijk",
-                    "Ami-e", "ondiep, alkalisch, matig ionenrijk, eutroof",
-                    "Ami-om", "ondiep, alkalisch, matig ionenrijk, oligo-mesotroof",
-                    "Aw", "groot-diep, alkalisch",
-                    "Aw-e", "groot-diep, alkalisch, eutroof",
-                    "Aw-om", "groot-diep, alkalisch, oligo-mesotroof",
-                    "C", "circumneutraal",
-                    "Cb", "circumneutraal, sterk gebufferd",
-                    "CbFe", "circumneutraal, sterk gebufferd, ijzerrijk",
-                    "Czb", "circumneutraal, zwak gebufferd",
-                    "Z", "zuur",
-                    "Zm", "zwak zuur",
-                    "Zs", "sterk zuur"
-            ) %>%
-            mutate(
-                wfd_type = factor(.data$wfd_type,
-                                  levels = .$wfd_type)
+            wfd_typetransl <- read_sf(file, layer = "LktKRWTYPE") %>%
+                mutate(across(c(Code), as.factor)) %>%
+                dplyr::rename(wfd_type = Code,
+                              wfd_type_name = Omschrijving)
+
+        } else {
+
+            suppressWarnings(
+                watersurfaces <- read_sf(file,
+                                         crs = 31370)
             )
 
-        connectivitytransl <-
-            tribble(~connectivity, ~connectivity_name,
-                    "geïsoleerd", "niet verbonden met een waterloop",
-                    "periodiek", "tijdelijk (door peilbeheer of droogte) in verbinding met minstens één waterloop",
-                    "permanent", "permanent in verbinding met minstens één waterloop"
-            ) %>%
-            mutate(
-                connectivity = factor(.data$connectivity,
-                                      levels = .$connectivity)
-            )
+            wfd_typetransl <-
+                tribble(~wfd_type, ~wfd_type_name,
+                        "B", "sterk brak",
+                        "Bzl", "zeer licht brak",
+                        "Ad", "alkalisch duinwater",
+                        "Ai", "ondiep, alkalisch, ionenrijk",
+                        "Ami", "ondiep, alkalisch, matig ionenrijk",
+                        "Ami-e", "ondiep, alkalisch, matig ionenrijk, eutroof",
+                        "Ami-om", "ondiep, alkalisch, matig ionenrijk, oligo-mesotroof",
+                        "Aw", "groot-diep, alkalisch",
+                        "Aw-e", "groot-diep, alkalisch, eutroof",
+                        "Aw-om", "groot-diep, alkalisch, oligo-mesotroof",
+                        "C", "circumneutraal",
+                        "Cb", "circumneutraal, sterk gebufferd",
+                        "CbFe", "circumneutraal, sterk gebufferd, ijzerrijk",
+                        "Czb", "circumneutraal, zwak gebufferd",
+                        "Z", "zuur",
+                        "Zm", "zwak zuur",
+                        "Zs", "sterk zuur"
+                ) %>%
+                mutate(
+                    wfd_type = factor(.data$wfd_type,
+                                      levels = .$wfd_type)
+                )
+
+        }
+
+
 
         watersurfaces <-
             watersurfaces %>%
@@ -561,13 +567,12 @@ read_watersurfaces <-
                    depth_class = .data$DIEPKL,
                    connectivity = .data$CONNECT,
                    usage = .data$FUNCTIE) %>%
-            mutate_at(.vars = c("area_name",
-                                "depth_class",
-                                "connectivity",
-                                "usage"),
-                      .funs = factor) %>%
-            mutate(
-                wfd_type = .data$wfd_type %>%
+            mutate(across(c(area_name,
+                            depth_class,
+                            connectivity,
+                            usage),
+                          as.factor)) %>%
+            mutate(wfd_type = .data$wfd_type %>%
                     factor(levels =
                                levels(wfd_typetransl$wfd_type)),
                 hyla_code = ifelse(.data$hyla_code == 0,
@@ -593,10 +598,34 @@ read_watersurfaces <-
                 watersurfaces %>%
                 mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
                                                  na_lgl,
-                                                 .data$wfd_type_certain == "definitief"))
+                                                 .data$wfd_type_certain ==
+                                                     "definitief"))
         }
 
         if (extended) {
+
+            if (version == "watersurfaces_v1.1") {
+
+                connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
+                    mutate(across(c(Code), as.factor)) %>%
+                    rename(connectivity = Code,
+                           connectivity_name = Omschr)
+
+            } else {
+
+                connectivitytransl <-
+                    tribble(~connectivity, ~connectivity_name,
+                            "geïsoleerd", "niet verbonden met een waterloop",
+                            "periodiek", paste("tijdelijk (door peilbeheer of droogte)",
+                                               "in verbinding met minstens één waterloop"),
+                            "permanent", "permanent in verbinding met minstens één waterloop"
+                    ) %>%
+                    mutate(
+                        connectivity = factor(.data$connectivity,
+                                              levels = .$connectivity)
+                    )
+            }
+
             watersurfaces <-
                 watersurfaces %>%
                 left_join(wfd_typetransl, by = "wfd_type") %>%
