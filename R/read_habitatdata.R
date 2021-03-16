@@ -626,10 +626,15 @@ read_watersurfaces <-
 
                 connectivitytransl <-
                     tribble(~connectivity, ~connectivity_name,
-                            "geïsoleerd", "niet verbonden met een waterloop",
-                            "periodiek", paste("tijdelijk (door peilbeheer of droogte)",
-                                               "in verbinding met minstens één waterloop"),
-                            "permanent", "permanent in verbinding met minstens één waterloop"
+                            paste0("ge","\u00EF","soleerd"),
+                            "niet verbonden met een waterloop",
+                            "periodiek",
+                            paste0("tijdelijk (door peilbeheer of droogte) ",
+                                   "in verbinding met minstens ","\u00E9",
+                                   "\u00E9","n waterloop"),
+                            "permanent",
+                            paste0("permanent in verbinding met minstens ",
+                                   "\u00E9","\u00E9","n waterloop")
                     ) %>%
                     mutate(
                         connectivity = factor(.data$connectivity,
