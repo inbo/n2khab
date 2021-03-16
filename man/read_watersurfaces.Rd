@@ -5,15 +5,16 @@
 \title{Return the data source \code{watersurfaces} as an \code{sf} polygon layer}
 \usage{
 read_watersurfaces(
-  file = file.path(fileman_up("n2khab_data"), "10_raw/watersurfaces"),
+  file = NULL,
   extended = FALSE,
   version = c("watersurfaces_v1.1", "watersurfaces_v1.0")
 )
 }
 \arguments{
-\item{file}{The absolute or relative file path of the data source.
-The default follows the data management advice in the
-vignette on data storage (run \code{vignette("v020_datastorage")}).
+\item{file}{Optional string. An absolute or relative file path of
+the data source. If left \code{NULL}, the default follows the data management
+advice in the vignette on data storage
+(run \code{vignette("v020_datastorage")}).
 It uses the first \code{n2khab_data} folder that is found when
 sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
@@ -58,14 +59,22 @@ as a standardized \code{sf} polygon layer
 (EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
+If \code{file} is left \code{NULL}, the function will try to read the file
+in the default folder for data storage (as described in the data management
+advice in the vignette (run \code{vignette("v020_datastorage")})).
+If you want to use another file or file structure than the default
+data storage, you can specify your own \code{file}.
+In both cases: always make sure to specify the correct \code{version}, that
+is the version corresponding to the \code{file} (note that the \code{version}
+defaults to the latest version, that is \code{watersurfaces_v1.1}).
 See Leyssen et al. (2020) for an elaborate explanation of the data source
 and its attributes.
 }
 \examples{
 \dontrun{
 # This example supposes that your working directory or a directory up to 10
-# levels above has the 'n2khab_data' folder AND that the 'watersurfaces'
-# data source is present in the default subdirectory.
+# levels above has the 'n2khab_data' folder AND that the latest version of
+# the 'watersurfaces' data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can
 # consider what to do.
 
