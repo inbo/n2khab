@@ -515,6 +515,10 @@ read_watersurfaces <-
                                          crs = 31370))
 
             wfd_typetransl <- read_sf(file, layer = "LktKRWTYPE") %>%
+                # mutate(across(where(is.character),
+                #               .fns = function(x){return(`Encoding<-`(x, "UTF-8"))})) %>%
+                mutate_if(., is.character,
+                          .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
                 mutate(across(c(Code), as.factor)) %>%
                 dplyr::rename(wfd_type = Code,
                               wfd_type_name = Omschrijving)
@@ -567,6 +571,9 @@ read_watersurfaces <-
                    depth_class = .data$DIEPKL,
                    connectivity = .data$CONNECT,
                    usage = .data$FUNCTIE) %>%
+            mutate(depth_class = str_replace(string = depth_class,
+                                             pattern = "\u2265",
+                                             replacement = ">=")) %>%
             mutate(across(c(area_name,
                             depth_class,
                             connectivity,
@@ -607,6 +614,10 @@ read_watersurfaces <-
             if (version == "watersurfaces_v1.1") {
 
                 connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
+                    # mutate(across(where(is.character),
+                    #               .fns = function(x){return(`Encoding<-`(x, "UTF-8"))})) %>%
+                    mutate_if(., is.character,
+                              .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
                     mutate(across(c(Code), as.factor)) %>%
                     rename(connectivity = Code,
                            connectivity_name = Omschr)
