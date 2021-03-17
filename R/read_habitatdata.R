@@ -94,7 +94,8 @@
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatmap_stdized'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatmap_stdized'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -262,7 +263,8 @@ read_habitatmap_stdized <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'watersurfaces_hab'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'watersurfaces_hab'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -609,7 +611,8 @@ read_watersurfaces <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatmap'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatmap'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -811,7 +814,8 @@ read_habitatmap <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatmap_terr'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatmap_terr'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -967,7 +971,8 @@ read_habitatmap_terr <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatstreams'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatstreams'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -1146,7 +1151,8 @@ read_habitatstreams <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatsprings'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatsprings'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -1338,7 +1344,8 @@ read_habitatsprings <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatquarries'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatquarries'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
