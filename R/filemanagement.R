@@ -391,7 +391,10 @@ fileman_up <- function(name,
 #'
 #' The function names were chosen to match those of GNU coreutils.
 #'
-#' The functions use the OpenSSL implementation of the \code{openssl} package.
+#' The functions use the OpenSSL implementation and stream-hash the binary
+#' contents of the connections to the respective files.
+#' They turn the hash-format for binary streams by the \code{openssl} package
+#' into a regular hash string.
 #' Note that \code{n2khab} will mask
 #' \code{\link[tools:md5sum]{tools::md5sum()}},
 #' which is a standalone implementation.
