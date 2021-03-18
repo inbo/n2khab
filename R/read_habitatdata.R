@@ -369,7 +369,7 @@ read_watersurfaces_hab <-
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
-#' If \code{file} is left \code{NULL}, the function will try to read the file
+#' If \code{file} is not specified, the function will try to read the file
 #' in the default folder for data storage (as described in the data management
 #' advice in the vignette (run \code{vignette("v020_datastorage")})).
 #' If you want to use another file or file structure than the default
@@ -485,7 +485,8 @@ read_watersurfaces <-
 
         version <- match.arg(version)
 
-        if (is.null(file)) {
+        if (missing(file)) {
+
             if (version == "watersurfaces_v1.1") {
                 file <- file.path(fileman_up("n2khab_data"),
                                   "10_raw/watersurfaces/watersurfaces.gpkg")
