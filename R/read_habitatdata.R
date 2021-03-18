@@ -377,6 +377,7 @@ read_watersurfaces_hab <-
 #' In both cases: always make sure to specify the correct \code{version}, that
 #' is the version corresponding to the \code{file} (note that the \code{version}
 #' defaults to the latest version, that is \code{watersurfaces_v1.1}).
+#'
 #' See Leyssen et al. (2020) for an elaborate explanation of the data source
 #' and its attributes.
 #'
@@ -515,8 +516,6 @@ read_watersurfaces <-
                                          crs = 31370))
 
             wfd_typetransl <- read_sf(file, layer = "LktKRWTYPE") %>%
-                # mutate(across(where(is.character),
-                #               .fns = function(x){return(`Encoding<-`(x, "UTF-8"))})) %>%
                 mutate_if(., is.character,
                           .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
                 mutate(across(c(Code), as.factor)) %>%
@@ -614,8 +613,6 @@ read_watersurfaces <-
             if (version == "watersurfaces_v1.1") {
 
                 connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
-                    # mutate(across(where(is.character),
-                    #               .fns = function(x){return(`Encoding<-`(x, "UTF-8"))})) %>%
                     mutate_if(., is.character,
                               .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
                     mutate(across(c(Code), as.factor)) %>%
