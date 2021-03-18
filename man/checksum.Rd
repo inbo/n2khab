@@ -25,8 +25,7 @@ They can be used to verify file integrity.
 \details{
 The function names were chosen to match those of GNU coreutils.
 
-The functions use the OpenSSL implementation of the \code{openssl} package,
-and silently close file connections.
+The functions use the OpenSSL implementation of the \code{openssl} package.
 Note that \code{n2khab} will mask
 \code{\link[tools:md5sum]{tools::md5sum()}},
 which is a standalone implementation.
@@ -37,7 +36,9 @@ file1 <- tempfile()
 file2 <- tempfile()
 files <- c(file1, file2)
 file.create(files)
-writeLines("some text", file(file2))
+con <- file(file2)
+writeLines("some text", con)
+close(con)
 
 # computing two alternative checksums:
 md5sum(files)
