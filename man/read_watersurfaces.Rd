@@ -59,7 +59,7 @@ as a standardized \code{sf} polygon layer
 (EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
-If \code{file} is left \code{NULL}, the function will try to read the file
+If \code{file} is not specified, the function will try to read the file
 in the default folder for data storage (as described in the data management
 advice in the vignette (run \code{vignette("v020_datastorage")})).
 If you want to use another file or file structure than the default
@@ -67,6 +67,7 @@ data storage, you can specify your own \code{file}.
 In both cases: always make sure to specify the correct \code{version}, that
 is the version corresponding to the \code{file} (note that the \code{version}
 defaults to the latest version, that is \code{watersurfaces_v1.1}).
+
 See Leyssen et al. (2020) for an elaborate explanation of the data source
 and its attributes.
 }
