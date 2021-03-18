@@ -383,3 +383,87 @@ fileman_up <- function(name,
 
 
 
+#' Calculate file checksums (OpenSSL implementation)
+#'
+#' The functions calculate the checksum (cryptographic digest, hash value) of
+#' one or multiple files.
+#' They can be used to verify file integrity.
+#'
+#' The function names were chosen to match those of GNU coreutils.
+#'
+#' The functions use the OpenSSL implementation of the \code{openssl} package,
+#' and silently close file connections.
+#' Note that \code{n2khab} will mask
+#' \code{\link[tools:md5sum]{tools::md5sum()}},
+#' which is a standalone implementation.
+#'
+#'
+#' @param files Character vector of file path(s).
+#' File path(s) can be absolute or relative.
+#'
+#' @return
+#' Character vector with the same length as \code{file}.
+#'
+#' @family functions regarding file management for N2KHAB projects
+#'
+#' @examples
+#' # creating two different temporary files:
+#' file1 <- tempfile()
+#' file2 <- tempfile()
+#' files <- c(file1, file2)
+#' file.create(files)
+#' writeLines("some text", file(file2))
+#'
+#' # computing two alternative checksums:
+#' md5sum(files)
+#' sha256sum(files)
+#'
+#' \dontrun{
+#' # This will error:
+#' files <- c(file1, file2, tempfile(), tempfile())
+#' md5sum(files)
+#' }
+#'
+#' @importFrom openssl
+#' md5
+#' sha256
+#' @importFrom purrr
+#' map_chr
+#'
+#' @name checksum
+#' @export
+md5sum <- function(files) {
+    assert_that_allfiles_exist(files)
+    checksums <- map_chr(files, ~paste(md5(file(.))))
+    names(checksums) <- basename(files)
+    silently_close_connections()
+    return(checksums)
+    }
+
+#' @rdname checksum
+#' @export
+sha256sum <- function(files) {
+    assert_that_allfiles_exist(files)
+    checksums <- map_chr(files, ~paste(sha256(file(.))))
+    names(checksums) <- basename(files)
+    silently_close_connections()
+    return(checksums)
+}
+
+#' @importFrom assertthat
+#' assert_that
+#' @keywords internal
+assert_that_allfiles_exist <- function(x) {
+    exist <- file.exists(x)
+    assert_that(all(exist),
+                msg = paste0("The following file(s) do not exist:\n",
+                             paste0(x[!exist], collapse = "\n")))
+}
+
+#' @keywords internal
+silently_close_connections <- function() {
+    oldopt <- options(warn = -1)[[1]]
+    closeAllConnections()
+    options(warn = oldopt)
+}
+

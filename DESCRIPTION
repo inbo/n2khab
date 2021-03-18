@@ -34,6 +34,7 @@ Imports:
     forcats,
     git2rdata (>= 0.2.0),
     magrittr,
+    openssl,
     plyr,
     purrr,
     rlang,
