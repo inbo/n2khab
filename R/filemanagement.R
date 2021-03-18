@@ -404,7 +404,8 @@ fileman_up <- function(name,
 #' File path(s) can be absolute or relative.
 #'
 #' @return
-#' Character vector with the same length as \code{file}.
+#' Named character vector with the same length as \code{files}
+#' and with the file names as names.
 #'
 #' @family functions regarding file management for N2KHAB projects
 #'

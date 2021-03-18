@@ -15,7 +15,8 @@ sha256sum(files)
 File path(s) can be absolute or relative.}
 }
 \value{
-Character vector with the same length as \code{file}.
+Named character vector with the same length as \code{files}
+and with the file names as names.
 }
 \description{
 The functions calculate the checksum (cryptographic digest, hash value) of
