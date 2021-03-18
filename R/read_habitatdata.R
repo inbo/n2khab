@@ -475,6 +475,8 @@ read_watersurfaces_hab <-
 #' tribble
 #' @importFrom assertthat
 #' assert_that
+#' @importFrom stringr
+#' str_replace
 #' @export
 read_watersurfaces <-
     function(file = NULL,
@@ -518,9 +520,9 @@ read_watersurfaces <-
             wfd_typetransl <- read_sf(file, layer = "LktKRWTYPE") %>%
                 mutate_if(., is.character,
                           .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
-                mutate(across(c(Code), as.factor)) %>%
-                dplyr::rename(wfd_type = Code,
-                              wfd_type_name = Omschrijving)
+                mutate(across(c(.data$Code), as.factor)) %>%
+                dplyr::rename(wfd_type = .data$Code,
+                              wfd_type_name = .data$Omschrijving)
 
         } else {
 
@@ -570,13 +572,13 @@ read_watersurfaces <-
                    depth_class = .data$DIEPKL,
                    connectivity = .data$CONNECT,
                    usage = .data$FUNCTIE) %>%
-            mutate(depth_class = str_replace(string = depth_class,
+            mutate(depth_class = str_replace(string = .data$depth_class,
                                              pattern = "\u2265",
                                              replacement = ">=")) %>%
-            mutate(across(c(area_name,
-                            depth_class,
-                            connectivity,
-                            usage),
+            mutate(across(c(.data$area_name,
+                            .data$depth_class,
+                            .data$connectivity,
+                            .data$usage),
                           as.factor)) %>%
             mutate(wfd_type = .data$wfd_type %>%
                     factor(levels =
@@ -615,9 +617,9 @@ read_watersurfaces <-
                 connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
                     mutate_if(., is.character,
                               .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
-                    mutate(across(c(Code), as.factor)) %>%
-                    rename(connectivity = Code,
-                           connectivity_name = Omschr)
+                    mutate(across(c(.data$Code), as.factor)) %>%
+                    rename(connectivity = .data$Code,
+                           connectivity_name = .data$Omschr)
 
             } else {
 
