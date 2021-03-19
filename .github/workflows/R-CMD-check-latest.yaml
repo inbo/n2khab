@@ -50,14 +50,14 @@ jobs:
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
-      - name: Cache R packages or restore matching cache
+      - name: Restore (or define new) R package cache
         if: runner.os != 'Windows'
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ matrix.config.os }}-${{ secrets.CACHE_VERSION }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
 
-      - name: Install system dependencies
+      - name: Install system dependencies (Linux)
         if: runner.os == 'Linux'
         run: |
           sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
@@ -67,7 +67,7 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'release <- system("lsb_release -rs", intern = TRUE); writeLines(remotes::system_requirements("ubuntu", release))')
 
-      - name: Install dependencies
+      - name: Install package dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")

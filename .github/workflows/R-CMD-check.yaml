@@ -41,7 +41,7 @@ jobs:
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
-      - name: Cache R packages or restore matching cache
+      - name: Restore (or define new) R package cache
         if: runner.os != 'Windows'
         uses: actions/cache@v2
         with:
@@ -49,7 +49,7 @@ jobs:
           key: ${{ matrix.config.os }}-${{ secrets.CACHE_VERSION }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ matrix.config.os }}-${{ secrets.CACHE_VERSION }}-${{ hashFiles('.github/R-version') }}-1-
 
-      - name: Install system dependencies
+      - name: Install system dependencies (Linux)
         if: runner.os == 'Linux'
         run: |
           while read -r cmd
@@ -64,7 +64,7 @@ jobs:
           brew install udunits
           brew install gdal
 
-      - name: Install dependencies
+      - name: Install package dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
