@@ -11,7 +11,7 @@ on:
   schedule:
     - cron:  '0 3 14 * *'
 
-name: R-CMD-check
+name: R-CMD-check-latest
 
 jobs:
   R-CMD-check:
