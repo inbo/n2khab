@@ -9,16 +9,20 @@ name: site-deploy
 jobs:
   site-deploy:
     runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     strategy:
       matrix:
         config:
-          - {os: ubuntu-20.04}
+          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
     env:
+      RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
 
       - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.config.r }}
 
       - uses: r-lib/actions/setup-pandoc@v1
 
@@ -29,16 +33,14 @@ jobs:
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
-      - name: Cache R packages
+      - name: Restore (or define new) R package cache
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.config.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ matrix.config.os }}-${{ secrets.CACHE_VERSION }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
 
-      - name: Install system dependencies
+      - name: Install system dependencies (Linux)
         run: |
-          sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
-          sudo apt-get update
           while read -r cmd
           do
             eval sudo $cmd
