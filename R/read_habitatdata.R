@@ -120,9 +120,10 @@
 read_habitatmap_stdized <-
     function(file = file.path(fileman_up("n2khab_data"),
                               "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"),
-             version = "habitatmap_stdized_2018_v2"){
+             version = c("habitatmap_stdized_2020_v3",
+                         "habitatmap_stdized_2018_v2", "habitatmap_stdized_2018_v1")){
 
-        assert_that(is.string(version))
+        version <- match.arg(version)
 
         habmap_polygons <- read_sf(file,
                                    "habitatmap_polygons")
@@ -846,11 +847,12 @@ read_habitatmap_terr <-
                               "20_processed/habitatmap_terr/habitatmap_terr.gpkg"),
              keep_aq_types = TRUE,
              drop_7220 = TRUE,
-             version = "habitatmap_terr_2018_v2"){
+             version = c("habitatmap_terr_2020_v3",
+                         "habitatmap_terr_2018_v2", "habitatmap_terr_2018_v1")){
 
         assert_that(is.flag(keep_aq_types), noNA(keep_aq_types))
         assert_that(is.flag(drop_7220), noNA(drop_7220))
-        assert_that(is.string(version))
+        version <- match.arg(version)
 
         habmap_terr_polygons <- read_sf(file,
                                    "habitatmap_terr_polygons")
