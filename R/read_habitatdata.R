@@ -95,7 +95,8 @@
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatmap_stdized'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatmap_stdized'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -264,7 +265,8 @@ read_habitatmap_stdized <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'watersurfaces_hab'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'watersurfaces_hab'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -366,19 +368,36 @@ read_watersurfaces_hab <-
 
 #' Return the data source \code{watersurfaces} as an \code{sf} polygon layer
 #'
-#' Returns the raw data source \code{watersurfaces} (Packet et al., 2018)
+#' Returns the raw data source \code{watersurfaces} (Leyssen et al., 2020)
 #' as a standardized \code{sf} polygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
-#' See Packet et al. (2018) for an elaborate explanation of the data source
+#' If \code{file} is not specified, the function will try to read the file
+#' in the default folder for data storage (as described in the data management
+#' advice in the vignette (run \code{vignette("v020_datastorage")})).
+#' If you want to use another file or file structure than the default
+#' data storage, you can specify your own \code{file}.
+#' In both cases: always make sure to specify the correct \code{version}, that
+#' is the version corresponding to the \code{file} (note that the \code{version}
+#' defaults to the latest version, that is \code{watersurfaces_v1.1}).
+#'
+#' See Leyssen et al. (2020) for an elaborate explanation of the data source
 #' and its attributes.
 #'
+#' @param file Optional string. An absolute or relative file path of
+#' the data source. If left \code{NULL}, the default follows the data management
+#' advice in the vignette on data storage
+#' (run \code{vignette("v020_datastorage")}).
+#' It uses the first \code{n2khab_data} folder that is found when
+#' sequentially climbing up 0 to 10 levels in the file system hierarchy,
+#' starting from the working directory.
 #' @param extended Logical.
 #' Should names or explanations of codes be added as extra
 #' variables in the result?
-#' Currently only applies to \code{wfd_type}; if \code{TRUE}, a variable
-#' \code{wfd_type_name} is added.
+#' Currently only applies to \code{wfd_type} and \code{connectivity};
+#' if \code{TRUE}, the variables \code{wfd_type_name} and
+#' \code{connectivity_name} are added.
 #' Defaults to \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized
@@ -415,20 +434,19 @@ read_watersurfaces_hab <-
 #' wateren in Vlaanderen.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
-#' (2018).
-#' Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
-#' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
-#' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
-#' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \doi{10.21436/inbor.14178464}.
+#' \item Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &
+#' Denys L. (2020).
+#' Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
+#' Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
+#' (40). Instituut voor Natuur en Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.19088385}.
 #' }
 #'
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'watersurfaces'
-#' # data source is present in the default subdirectory.
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'watersurfaces' data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
 #'
@@ -449,56 +467,103 @@ read_watersurfaces_hab <-
 #' na_lgl
 #' @importFrom dplyr
 #' %>%
+#' across
 #' arrange
 #' mutate
 #' mutate_at
+#' mutate_if
+#' rename
 #' select
 #' left_join
 #' everything
 #' tribble
 #' @importFrom assertthat
 #' assert_that
+#' @importFrom stringr
+#' str_replace
 #' @export
 read_watersurfaces <-
-    function(file = file.path(fileman_up("n2khab_data"),
-                              "10_raw/watersurfaces"),
+    function(file = NULL,
              extended = FALSE,
-             version = "watersurfaces_v1.0") {
-
-        assert_that(file.exists(file))
-        assert_that(is.string(version))
+             version = c("watersurfaces_v1.1", "watersurfaces_v1.0")) {
 
         version <- match.arg(version)
 
-        suppressWarnings(
-            watersurfaces <- read_sf(file,
-                                     crs = 31370)
-        )
+        if (missing(file)) {
 
-        wfd_typetransl <-
-            tribble(~wfd_type, ~wfd_type_name,
-                    "B", "sterk brak",
-                    "Bzl", "zeer licht brak",
-                    "Ad", "alkalisch duinwater",
-                    "Ai", "ondiep, alkalisch, ionenrijk",
-                    "Ami", "ondiep, alkalisch, matig ionenrijk",
-                    "Ami-e", "ondiep, alkalisch, matig ionenrijk, eutroof",
-                    "Ami-om", "ondiep, alkalisch, matig ionenrijk, oligo-mesotroof",
-                    "Aw", "groot-diep, alkalisch",
-                    "Aw-e", "groot-diep, alkalisch, eutroof",
-                    "Aw-om", "groot-diep, alkalisch, oligo-mesotroof",
-                    "C", "circumneutraal",
-                    "Cb", "circumneutraal, sterk gebufferd",
-                    "CbFe", "circumneutraal, sterk gebufferd, ijzerrijk",
-                    "Czb", "circumneutraal, zwak gebufferd",
-                    "Z", "zuur",
-                    "Zm", "zwak zuur",
-                    "Zs", "sterk zuur"
-            ) %>%
-            mutate(
-                wfd_type = factor(.data$wfd_type,
-                                  levels = .$wfd_type)
+            if (version == "watersurfaces_v1.1") {
+                file <- file.path(fileman_up("n2khab_data"),
+                                  "10_raw/watersurfaces/watersurfaces.gpkg")
+                } else {
+                    file <- file.path(fileman_up("n2khab_data"),
+                                      "10_raw/watersurfaces/watersurfaces.shp")
+                }
+
+            assert_that(file.exists(file),
+                        msg =  paste("Path", file, "does not exist. Control the",
+                                     "path and specify the corresponding version",
+                                     "if you do not use", version))
+        } else {
+
+            assert_that(file.exists(file))
+
+            if (version == "watersurfaces_v1.1") {
+                if (substr(file, nchar(file) - 4, nchar(file)) != ".gpkg") {
+                    stop(paste(version, "should be a GeoPackage (.gpkg).",
+                               "Control the version and the path."))
+                }
+            }
+        }
+
+        if (version == "watersurfaces_v1.1") {
+
+            suppressWarnings(
+                watersurfaces <- read_sf(file,
+                                         layer = "Watervlakken",
+                                         crs = 31370))
+
+            wfd_typetransl <- read_sf(file, layer = "LktKRWTYPE") %>%
+                mutate_if(., is.character,
+                          .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
+                mutate(across(c(.data$Code), as.factor)) %>%
+                dplyr::rename(wfd_type = .data$Code,
+                              wfd_type_name = .data$Omschrijving)
+
+        } else {
+
+            suppressWarnings(
+                watersurfaces <- read_sf(file,
+                                         crs = 31370)
             )
+
+            wfd_typetransl <-
+                tribble(~wfd_type, ~wfd_type_name,
+                        "B", "sterk brak",
+                        "Bzl", "zeer licht brak",
+                        "Ad", "alkalisch duinwater",
+                        "Ai", "ondiep, alkalisch, ionenrijk",
+                        "Ami", "ondiep, alkalisch, matig ionenrijk",
+                        "Ami-e", "ondiep, alkalisch, matig ionenrijk, eutroof",
+                        "Ami-om", "ondiep, alkalisch, matig ionenrijk, oligo-mesotroof",
+                        "Aw", "groot-diep, alkalisch",
+                        "Aw-e", "groot-diep, alkalisch, eutroof",
+                        "Aw-om", "groot-diep, alkalisch, oligo-mesotroof",
+                        "C", "circumneutraal",
+                        "Cb", "circumneutraal, sterk gebufferd",
+                        "CbFe", "circumneutraal, sterk gebufferd, ijzerrijk",
+                        "Czb", "circumneutraal, zwak gebufferd",
+                        "Z", "zuur",
+                        "Zm", "zwak zuur",
+                        "Zs", "sterk zuur"
+                ) %>%
+                mutate(
+                    wfd_type = factor(.data$wfd_type,
+                                      levels = .$wfd_type)
+                )
+
+        }
+
+
 
         watersurfaces <-
             watersurfaces %>%
@@ -512,31 +577,75 @@ read_watersurfaces <-
                    depth_class = .data$DIEPKL,
                    connectivity = .data$CONNECT,
                    usage = .data$FUNCTIE) %>%
-            mutate_at(.vars = c("wfd_code", "name"),
-                      .funs = function(x) {
-                          ifelse(x == "<Null>", NA, x)
-                      }) %>%
-            mutate_at(.vars = c("area_name",
-                                "depth_class",
-                                "connectivity",
-                                "usage"),
-                      .funs = factor) %>%
-            mutate(
-                wfd_type = .data$wfd_type %>%
+            mutate(depth_class = str_replace(string = .data$depth_class,
+                                             pattern = "\u2265",
+                                             replacement = ">=")) %>%
+            mutate(across(c(.data$area_name,
+                            .data$depth_class,
+                            .data$connectivity,
+                            .data$usage),
+                          as.factor)) %>%
+            mutate(wfd_type = .data$wfd_type %>%
                     factor(levels =
                                levels(wfd_typetransl$wfd_type)),
-                wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
-                                                na_lgl,
-                                                .data$wfd_type_certain %in%
-                                                    c("zeker",
-                                                      "definitief")),
                 hyla_code = ifelse(.data$hyla_code == 0,
                                    NA,
                                    .data$hyla_code)
             ) %>%
             arrange(.data$polygon_id)
 
+        if (version == "watersurfaces_v1.0") {
+            watersurfaces <-
+                watersurfaces %>%
+                mutate_at(.vars = c("wfd_code", "name"),
+                          .funs = function(x) {
+                              ifelse(x == "<Null>", NA, x)
+                          }) %>%
+                mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+                                                 na_lgl,
+                                                 .data$wfd_type_certain %in%
+                                                     c("zeker",
+                                                       "definitief")))
+        } else {
+            watersurfaces <-
+                watersurfaces %>%
+                mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+                                                 na_lgl,
+                                                 .data$wfd_type_certain ==
+                                                     "definitief"))
+        }
+
         if (extended) {
+
+            if (version == "watersurfaces_v1.1") {
+
+                connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
+                    mutate_if(., is.character,
+                              .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
+                    mutate(across(c(.data$Code), as.factor)) %>%
+                    rename(connectivity = .data$Code,
+                           connectivity_name = .data$Omschr)
+
+            } else {
+
+                connectivitytransl <-
+                    tribble(~connectivity, ~connectivity_name,
+                            paste0("ge","\u00EF","soleerd"),
+                            "niet verbonden met een waterloop",
+                            "periodiek",
+                            paste0("tijdelijk (door peilbeheer of droogte) ",
+                                   "in verbinding met minstens ","\u00E9",
+                                   "\u00E9","n waterloop"),
+                            "permanent",
+                            paste0("permanent in verbinding met minstens ",
+                                   "\u00E9","\u00E9","n waterloop")
+                    ) %>%
+                    mutate(
+                        connectivity = factor(.data$connectivity,
+                                              levels = .$connectivity)
+                    )
+            }
+
             watersurfaces <-
                 watersurfaces %>%
                 left_join(wfd_typetransl, by = "wfd_type") %>%
@@ -546,15 +655,23 @@ read_watersurfaces <-
                         mapvalues(from = wfd_typetransl$wfd_type,
                                   to = wfd_typetransl$wfd_type_name)
                 ) %>%
+                left_join(connectivitytransl, by = "connectivity") %>%
+                mutate(
+                    connectivity_name =
+                        .data$connectivity %>%
+                        mapvalues(from = connectivitytransl$connectivity,
+                                  to = connectivitytransl$connectivity_name)
+                ) %>%
                 select(1:6,
                        .data$wfd_type_name,
+                       7:9,
+                       .data$connectivity_name,
                        everything())
         }
 
         return(watersurfaces)
 
     }
-
 
 
 
@@ -612,7 +729,8 @@ read_watersurfaces <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatmap'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatmap'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -814,7 +932,8 @@ read_habitatmap <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatmap_terr'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatmap_terr'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -971,7 +1090,8 @@ read_habitatmap_terr <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatstreams'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatstreams'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -1150,7 +1270,8 @@ read_habitatstreams <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatsprings'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatsprings'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -1342,7 +1463,8 @@ read_habitatsprings <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatquarries'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatquarries'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
