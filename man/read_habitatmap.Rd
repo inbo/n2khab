@@ -25,7 +25,7 @@ A Simple feature collection of
 type \code{MULTIPOLYGON}.
 }
 \description{
-Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
+Returns the raw data source \code{habitatmap} (De Saeger et al., 2020)
 as a standardized \code{sf} multipolygon layer
 (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -47,11 +47,12 @@ hm
 
 }
 \references{
-De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
-Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
-Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
-Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-\doi{10.21436/inbor.15138099}.
+De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
+Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
+Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
+en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
+\doi{10.21436/inbor.18840851}.
 }
 \seealso{
 Other functions involved in processing the 'habitatmap' data source: 

@@ -10,7 +10,8 @@ read_habitatmap_terr(
     "20_processed/habitatmap_terr/habitatmap_terr.gpkg"),
   keep_aq_types = TRUE,
   drop_7220 = TRUE,
-  version = "habitatmap_terr_2018_v2"
+  version = c("habitatmap_terr_2020_v3", "habitatmap_terr_2018_v2",
+    "habitatmap_terr_2018_v1")
 )
 }
 \arguments{
