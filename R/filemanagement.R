@@ -419,17 +419,15 @@ fileman_up <- function(name,
 #' md5sum(files)
 #' }
 #'
-#' @importFrom openssl
-#' md5
-#' sha256
 #' @importFrom purrr
 #' map_chr
 #'
 #' @name checksum
 #' @export
 md5sum <- function(files) {
+    require_pkgs("openssl")
     assert_that_allfiles_exist(files)
-    checksums <- map_chr(files, ~paste(md5(file(.))))
+    checksums <- map_chr(files, ~paste(openssl::md5(file(.))))
     names(checksums) <- basename(files)
     return(checksums)
     }
@@ -437,8 +435,9 @@ md5sum <- function(files) {
 #' @rdname checksum
 #' @export
 sha256sum <- function(files) {
+    require_pkgs("openssl")
     assert_that_allfiles_exist(files)
-    checksums <- map_chr(files, ~paste(sha256(file(.))))
+    checksums <- map_chr(files, ~paste(openssl::sha256(file(.))))
     names(checksums) <- basename(files)
     return(checksums)
 }
@@ -457,4 +456,6 @@ assert_that_allfiles_exist <- function(x) {
                              "the following path(s) are directories:\n",
                              paste0(x[isdir], collapse = "\n")))
 }
+
+
 
