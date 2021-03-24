@@ -381,9 +381,9 @@ fileman_up <- function(name,
 #'
 #' A few cryptographic and non-cryptographic hash functions are implemented,
 #' either from the OpenSSL library (through
-#' \href{https://cran.r-project.org/web/packages/openssl/index.html}{\code{openssl}})
+#' \href{https://CRAN.R-project.org/package=openssl}{\code{openssl}})
 #' or as embedded in the
-#' \href{https://cran.r-project.org/web/packages/digest/index.html}{\code{digest}}
+#' \href{https://CRAN.R-project.org/package=digest}{\code{digest}}
 #' package.
 #'
 #' Functions \code{md5sum()} etc. are simple shortcuts to \code{checksum()}
