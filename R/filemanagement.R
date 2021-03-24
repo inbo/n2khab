@@ -141,13 +141,7 @@ download_zenodo <- function(doi,
     assert_that(is.string(doi), is.string(path))
     assert_that(is.flag(parallel), noNA(parallel), is.flag(quiet), noNA(quiet))
 
-    if (!requireNamespace("jsonlite", quietly = TRUE) |
-        !requireNamespace("curl", quietly = TRUE) |
-        !requireNamespace("tools", quietly = TRUE)) {
-        stop("You miss at least one of the following packages: ",
-             "jsonlite, curl, tools. Please install them first.",
-             call. = FALSE)
-    }
+    require_pkgs(c("jsonlite", "curl", "tools"))
 
     # check for existence of the folder
     stopifnot(dir.exists(path))
@@ -194,11 +188,7 @@ download_zenodo <- function(doi,
 
     if (parallel) {
 
-        if (!requireNamespace("parallel", quietly = TRUE)) {
-            stop("You miss the 'parallel' package. ",
-                 "Please install it first.",
-                 call. = FALSE)
-        }
+        require_pkgs("parallel")
 
         nr_nodes <- min(10, length(file_urls))
 
