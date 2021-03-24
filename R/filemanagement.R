@@ -459,7 +459,12 @@ sha256sum <- function(files) {
 assert_that_allfiles_exist <- function(x) {
     exist <- file.exists(x)
     assert_that(all(exist),
-                msg = paste0("The following file(s) do not exist:\n",
+                msg = paste0("The following path(s) do not exist:\n",
                              paste0(x[!exist], collapse = "\n")))
+    isfolder <- dir.exists(x)
+    assert_that(!any(isfolder),
+                msg = paste0("The following path(s) are folders; only ",
+                             "files are accepted:\n",
+                             paste0(x[isfolder], collapse = "\n")))
 }
 
