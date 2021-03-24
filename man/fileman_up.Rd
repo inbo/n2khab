@@ -39,7 +39,7 @@ fileman_up("n2khab_data")
 }
 \seealso{
 Other functions regarding file management for N2KHAB projects: 
-\code{\link{checksum}},
+\code{\link{checksum}()},
 \code{\link{download_zenodo}()},
 \code{\link{fileman_folders}()}
 }

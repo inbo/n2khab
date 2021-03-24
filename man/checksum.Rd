@@ -2,10 +2,15 @@
 % Please edit documentation in R/filemanagement.R
 \name{checksum}
 \alias{checksum}
+\alias{xxh64sum}
 \alias{md5sum}
 \alias{sha256sum}
-\title{Calculate file checksums (OpenSSL implementation)}
+\title{Calculate file checksums}
 \usage{
+checksum(files, hash_fun = c("xxh64", "md5", "sha256"))
+
+xxh64sum(files)
+
 md5sum(files)
 
 sha256sum(files)
@@ -13,20 +18,33 @@ sha256sum(files)
 \arguments{
 \item{files}{Character vector of file path(s).
 File path(s) can be absolute or relative.}
+
+\item{hash_fun}{String that defines the hash function.
+See \emph{Usage} for allowed values; defaults to the first.}
 }
 \value{
 Named character vector with the same length as \code{files}
 and with the file names as names.
 }
 \description{
-The functions calculate the checksum (cryptographic digest, hash value) of
+The functions calculate the checksum (digest; hash value) of
 one or multiple files.
 They can be used to verify file integrity.
 }
 \details{
-The function names were chosen to match those of GNU coreutils.
+A few cryptographic and non-cryptographic hash functions are implemented,
+either from the OpenSSL library (through
+\href{https://cran.r-project.org/web/packages/openssl/index.html}{\code{openssl}})
+or as embedded in the
+\href{https://cran.r-project.org/web/packages/digest/index.html}{\code{digest}}
+package.
 
-The functions use the OpenSSL implementation and stream-hash the binary
+Functions \code{md5sum()} etc. are simple shortcuts to \code{checksum()}
+with the appropriate hash function preset.
+Their names were chosen to match those of xxHash and GNU coreutils.
+
+The cryptographic algorithms use the OpenSSL implementation and
+stream-hash the binary
 contents of the connections to the respective files.
 They turn the hash-format for binary streams by the \code{openssl} package
 into a regular hash string.
@@ -44,14 +62,16 @@ con <- file(file2)
 writeLines("some text", con)
 close(con)
 
-# computing two alternative checksums:
+# computing alternative checksums:
+checksum(files)
+xxh64sum(files)
 md5sum(files)
 sha256sum(files)
 
 \dontrun{
 # This will error:
 files <- c(file1, file2, tempfile(), tempfile())
-md5sum(files)
+checksum(files)
 }
 
 }

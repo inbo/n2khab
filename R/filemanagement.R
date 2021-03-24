@@ -373,15 +373,25 @@ fileman_up <- function(name,
 
 
 
-#' Calculate file checksums (OpenSSL implementation)
+#' Calculate file checksums
 #'
-#' The functions calculate the checksum (cryptographic digest, hash value) of
+#' The functions calculate the checksum (digest; hash value) of
 #' one or multiple files.
 #' They can be used to verify file integrity.
 #'
-#' The function names were chosen to match those of GNU coreutils.
+#' A few cryptographic and non-cryptographic hash functions are implemented,
+#' either from the OpenSSL library (through
+#' \href{https://cran.r-project.org/web/packages/openssl/index.html}{\code{openssl}})
+#' or as embedded in the
+#' \href{https://cran.r-project.org/web/packages/digest/index.html}{\code{digest}}
+#' package.
 #'
-#' The functions use the OpenSSL implementation and stream-hash the binary
+#' Functions \code{md5sum()} etc. are simple shortcuts to \code{checksum()}
+#' with the appropriate hash function preset.
+#' Their names were chosen to match those of xxHash and GNU coreutils.
+#'
+#' The cryptographic algorithms use the OpenSSL implementation and
+#' stream-hash the binary
 #' contents of the connections to the respective files.
 #' They turn the hash-format for binary streams by the \code{openssl} package
 #' into a regular hash string.
@@ -389,9 +399,10 @@ fileman_up <- function(name,
 #' \code{\link[tools:md5sum]{tools::md5sum()}},
 #' which is a standalone implementation.
 #'
-#'
 #' @param files Character vector of file path(s).
 #' File path(s) can be absolute or relative.
+#' @param hash_fun String that defines the hash function.
+#' See \emph{Usage} for allowed values; defaults to the first.
 #'
 #' @return
 #' Named character vector with the same length as \code{files}
@@ -409,38 +420,57 @@ fileman_up <- function(name,
 #' writeLines("some text", con)
 #' close(con)
 #'
-#' # computing two alternative checksums:
+#' # computing alternative checksums:
+#' checksum(files)
+#' xxh64sum(files)
 #' md5sum(files)
 #' sha256sum(files)
 #'
 #' \dontrun{
 #' # This will error:
 #' files <- c(file1, file2, tempfile(), tempfile())
-#' md5sum(files)
+#' checksum(files)
 #' }
 #'
 #' @importFrom purrr
 #' map_chr
-#'
-#' @name checksum
+#' @importFrom stringr
+#' str_detect
 #' @export
-md5sum <- function(files) {
-    require_pkgs("openssl")
+checksum <- function(files,
+                     hash_fun = c("xxh64", "md5", "sha256")) {
+
     assert_that_allfiles_exist(files)
-    checksums <- map_chr(files, ~paste(openssl::md5(file(.))))
-    names(checksums) <- basename(files)
-    return(checksums)
+    hash_fun <- match.arg(hash_fun)
+
+    if (str_detect(hash_fun, "^xxh")) {
+        require_pkgs("digest")
+        checksums <- map_chr(files,
+                             ~digest::digest(.,
+                                             algo = "xxhash64",
+                                             file = TRUE))
+    } else {
+        require_pkgs("openssl")
+        fun <- eval(str2lang(paste0("openssl::", hash_fun)))
+        checksums <- map_chr(files, ~paste(fun(file(.))))
     }
 
-#' @rdname checksum
-#' @export
-sha256sum <- function(files) {
-    require_pkgs("openssl")
-    assert_that_allfiles_exist(files)
-    checksums <- map_chr(files, ~paste(openssl::sha256(file(.))))
     names(checksums) <- basename(files)
     return(checksums)
 }
+
+#' @rdname checksum
+#' @export
+xxh64sum <- function(files) checksum(files, hash_fun = "xxh64")
+
+#' @rdname checksum
+#' @export
+md5sum <- function(files) checksum(files, hash_fun = "md5")
+
+#' @rdname checksum
+#' @export
+sha256sum <- function(files) checksum(files, hash_fun = "sha256")
+
 
 #' @importFrom assertthat
 #' assert_that
