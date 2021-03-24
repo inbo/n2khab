@@ -62,7 +62,7 @@ A list of two objects:
 }
 \details{
 The data source \code{watersurfaces_hab} is a combination of \code{habitatmap_stdized} (see
-\code{\link{read_habitatmap_stdized}}) and the \href{https://http://www.geopunt.be/catalogus/datasetfolder/10e87ad3-8235-40e0-8269-42c3c96a884d}{watersurface map of Flanders}.
+\code{\link{read_habitatmap_stdized}}) and the \href{http://www.geopunt.be/catalogus/datasetfolder/10e87ad3-8235-40e0-8269-42c3c96a884d}{watersurface map of Flanders}.
 It contains all standing water types in Flanders.
 
 
