@@ -55,5 +55,4 @@ reference:
       - fileman_up
       - convert_dec_to_base4frac
       - convert_base4frac_to_dec
-      - md5sum
-      - sha256sum
+      - checksum
