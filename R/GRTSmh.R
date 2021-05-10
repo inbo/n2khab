@@ -316,11 +316,7 @@ read_GRTSmh <-
                                 "20_processed/GRTSmh_brick/GRTSmh_brick.tif")),
              brick = FALSE) {
 
-        if (!requireNamespace("raster", quietly = TRUE)) {
-            stop("Package \"raster\" is needed when using this function. ",
-                 "Please install it.",
-                 call. = FALSE)
-        }
+        require_pkgs("raster")
 
         if (brick) {
             if (missing(file)) {
@@ -430,11 +426,7 @@ read_GRTSmh_base4frac <-
     function(file = file.path(fileman_up("n2khab_data"),
                               "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif")) {
 
-        if (!requireNamespace("raster", quietly = TRUE)) {
-            stop("Package \"raster\" is needed when using this function. ",
-                 "Please install it.",
-                 call. = FALSE)
-        }
+        require_pkgs("raster")
 
         r <- raster::raster(file)
         raster::crs(r) <- "EPSG:31370"
@@ -604,11 +596,7 @@ read_GRTSmh_diffres <-
 
         } else {
 
-            if (!requireNamespace("raster", quietly = TRUE)) {
-                stop("Package \"raster\" is needed when using this function. ",
-                     "Please install it.",
-                     call. = FALSE)
-            }
+            require_pkgs("raster")
 
             r <- raster::raster(file.path(dir,
                                           str_c("GRTSmh_diffres.",

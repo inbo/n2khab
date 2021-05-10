@@ -55,3 +55,4 @@ reference:
       - fileman_up
       - convert_dec_to_base4frac
       - convert_base4frac_to_dec
+      - checksum

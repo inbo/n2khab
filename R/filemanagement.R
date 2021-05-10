@@ -141,13 +141,7 @@ download_zenodo <- function(doi,
     assert_that(is.string(doi), is.string(path))
     assert_that(is.flag(parallel), noNA(parallel), is.flag(quiet), noNA(quiet))
 
-    if (!requireNamespace("jsonlite", quietly = TRUE) |
-        !requireNamespace("curl", quietly = TRUE) |
-        !requireNamespace("tools", quietly = TRUE)) {
-        stop("You miss at least one of the following packages: ",
-             "jsonlite, curl, tools. Please install them first.",
-             call. = FALSE)
-    }
+    require_pkgs(c("jsonlite", "curl", "tools"))
 
     # check for existence of the folder
     stopifnot(dir.exists(path))
@@ -194,11 +188,7 @@ download_zenodo <- function(doi,
 
     if (parallel) {
 
-        if (!requireNamespace("parallel", quietly = TRUE)) {
-            stop("You miss the 'parallel' package. ",
-                 "Please install it first.",
-                 call. = FALSE)
-        }
+        require_pkgs("parallel")
 
         nr_nodes <- min(10, length(file_urls))
 
@@ -380,6 +370,122 @@ fileman_up <- function(name,
 }
 
 
+
+
+
+#' Calculate file checksums
+#'
+#' The functions calculate the checksum (digest; hash value) of
+#' one or multiple files.
+#' They can be used to verify file integrity.
+#'
+#' A few cryptographic and non-cryptographic hash functions are implemented,
+#' either from the OpenSSL library (through
+#' \href{https://CRAN.R-project.org/package=openssl}{\code{openssl}})
+#' or as embedded in the
+#' \href{https://CRAN.R-project.org/package=digest}{\code{digest}}
+#' package.
+#'
+#' Functions \code{md5sum()} etc. are simple shortcuts to \code{checksum()}
+#' with the appropriate hash function preset.
+#' Their names were chosen to match those of xxHash and GNU coreutils.
+#'
+#' The cryptographic algorithms use the OpenSSL implementation and
+#' stream-hash the binary
+#' contents of the connections to the respective files.
+#' They turn the hash-format for binary streams by the \code{openssl} package
+#' into a regular hash string.
+#' Note that \code{n2khab} will mask
+#' \code{\link[tools:md5sum]{tools::md5sum()}},
+#' which is a standalone implementation.
+#'
+#' @param files Character vector of file path(s).
+#' File path(s) can be absolute or relative.
+#' @param hash_fun String that defines the hash function.
+#' See \emph{Usage} for allowed values; defaults to the first.
+#'
+#' @return
+#' Named character vector with the same length as \code{files}
+#' and with the file names as names.
+#'
+#' @family functions regarding file management for N2KHAB projects
+#'
+#' @examples
+#' # creating two different temporary files:
+#' file1 <- tempfile()
+#' file2 <- tempfile()
+#' files <- c(file1, file2)
+#' file.create(files)
+#' con <- file(file2)
+#' writeLines("some text", con)
+#' close(con)
+#'
+#' # computing alternative checksums:
+#' checksum(files)
+#' xxh64sum(files)
+#' md5sum(files)
+#' sha256sum(files)
+#'
+#' \dontrun{
+#' # This will error:
+#' files <- c(file1, file2, tempfile(), tempfile())
+#' checksum(files)
+#' }
+#'
+#' @importFrom purrr
+#' map_chr
+#' @importFrom stringr
+#' str_detect
+#' @export
+checksum <- function(files,
+                     hash_fun = c("xxh64", "md5", "sha256")) {
+
+    assert_that_allfiles_exist(files)
+    hash_fun <- match.arg(hash_fun)
+
+    if (str_detect(hash_fun, "^xxh")) {
+        require_pkgs("digest")
+        checksums <- map_chr(files,
+                             ~digest::digest(.,
+                                             algo = "xxhash64",
+                                             file = TRUE))
+    } else {
+        require_pkgs("openssl")
+        fun <- eval(str2lang(paste0("openssl::", hash_fun)))
+        checksums <- map_chr(files, ~paste(fun(file(.))))
+    }
+
+    names(checksums) <- basename(files)
+    return(checksums)
+}
+
+#' @rdname checksum
+#' @export
+xxh64sum <- function(files) checksum(files, hash_fun = "xxh64")
+
+#' @rdname checksum
+#' @export
+md5sum <- function(files) checksum(files, hash_fun = "md5")
+
+#' @rdname checksum
+#' @export
+sha256sum <- function(files) checksum(files, hash_fun = "sha256")
+
+
+#' @importFrom assertthat
+#' assert_that
+#' @keywords internal
+assert_that_allfiles_exist <- function(x) {
+    exist <- file.exists(x)
+    assert_that(all(exist),
+                msg = paste0("The following path(s) do not exist:\n",
+                             paste0(x[!exist], collapse = "\n")))
+    isdir <- dir.exists(x)
+    assert_that(!any(isdir),
+                msg = paste0("Only files are accepted; ",
+                             "the following path(s) are directories:\n",
+                             paste0(x[isdir], collapse = "\n")))
+}
 
 
 
