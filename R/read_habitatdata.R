@@ -758,10 +758,13 @@ read_watersurfaces <-
 #'
 read_habitatmap <-
     function(file = file.path(fileman_up("n2khab_data"), "10_raw/habitatmap"),
-             filter_hab = FALSE){
+             filter_hab = FALSE,
+             version = c("habitatmap_2020",
+                         "habitatmap_2018")){
 
         assert_that(file.exists(file))
         assert_that(is.flag(filter_hab), noNA(filter_hab))
+        version <- match.arg(version)
 
         habitatmap <- read_sf(file,
                               "habitatmap")
@@ -799,6 +802,28 @@ read_habitatmap <-
                    )
 
         if (filter_hab) {
+
+            # version control: version habitatmap == version habitatmap_stdized
+            xxh64sum_habitatmap_stdized_present <- xxh64sum(file.path(
+                fileman_up("n2khab_data"),
+                "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"))
+
+            if (version == "habitatmap_2020") {
+                xxh64sum_habitatmap_stdized_expected <- "3109c26f0a27a0f3"
+            } else {
+                xxh64sum_habitatmap_stdized_expected <- c("b80f469f33636c8b","8e9c4e09f5f67c3e")
+            }
+
+            if (!(xxh64sum_habitatmap_stdized_present %in%
+                xxh64sum_habitatmap_stdized_expected)) {
+                stop("You are trying to use habitatmap version '", version,"' ",
+                     "with another version of habitatmap_stdized. ",
+                     "Specify the correct version as argument (version =) ",
+                     "and add the corresponding files under ",
+                     "'n2khab_data/10_raw/habitatmap' and ",
+                     "'n2khab_data/10_processed/habitatmap_stdized'.",
+                     call. = FALSE)
+            }
 
             # we only select polygons with habitat or RIB, i.e. polygons in habitatmap_stdized data source
             hab_stdized <- read_habitatmap_stdized()
