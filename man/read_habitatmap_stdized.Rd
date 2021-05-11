@@ -42,6 +42,9 @@ A list of two objects:
     \item \code{phab}: proportion of polygon covered by type, as a percentage.
      \code{FALSE} when vegetation type is uncertain.
     }
+    Since version \code{habitatmap_stdized_2020_v1}, rows are unique only
+    by the combination of the \code{polygon_id}, \code{type} and
+    \code{certain} columns.
     }
 }
 \description{

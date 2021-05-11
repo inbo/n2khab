@@ -90,7 +90,11 @@
 #'     \item \code{phab}: proportion of polygon covered by type, as a percentage.
 #'      \code{FALSE} when vegetation type is uncertain.
 #'     }
+#'     Since version \code{habitatmap_stdized_2020_v1}, rows are unique only
+#'     by the combination of the \code{polygon_id}, \code{type} and
+#'     \code{certain} columns.
 #'     }
+#'
 #'
 #' @family functions involved in processing the 'habitatmap' data source
 #'
@@ -985,6 +989,9 @@ read_habitatmap <-
 #'     \item \code{source}: states where \code{type} comes from: either
 #'     \code{habitatmap_stdized} or \code{habitatmap_stdized + interpretation}
 #'     }
+#'     Since version \code{habitatmap_terr_2020_v1}, rows are unique only
+#'     by the combination of the \code{polygon_id}, \code{type} and
+#'     \code{certain} columns.
 #'     }
 #'
 #' @family functions involved in processing the 'habitatmap' data source
