@@ -6,7 +6,8 @@
 \usage{
 read_habitatmap(
   file = file.path(fileman_up("n2khab_data"), "10_raw/habitatmap"),
-  filter_hab = FALSE
+  filter_hab = FALSE,
+  version = c("habitatmap_2020", "habitatmap_2018")
 )
 }
 \arguments{
@@ -18,7 +19,12 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
 
 \item{filter_hab}{If \code{TRUE} only polygons that (partially) contain habitat or a regionally
-important biotope (RIB) are returned. The default value is \code{FALSE}.}
+important biotope (RIB) are returned. The default value is \code{FALSE}. This
+requires the corresponding version of the processed data source
+\code{habitatmap_stdized} to be present in the 'n2khab_data' folder.}
+
+\item{version}{Version ID of the data source.
+Defaults to the latest available version defined by the package.}
 }
 \value{
 A Simple feature collection of
