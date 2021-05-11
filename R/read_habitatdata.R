@@ -708,7 +708,9 @@ read_watersurfaces <-
 #' takes a bit longer than usual to run.
 #'
 #' @param filter_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
-#' important biotope (RIB) are returned. The default value is \code{FALSE}.
+#' important biotope (RIB) are returned. The default value is \code{FALSE}. This
+#' requires the corresponding version of the processed data source
+#' \code{habitatmap_stdized} to be present in the 'n2khab_data' folder.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -826,7 +828,13 @@ read_habitatmap <-
             }
 
             # we only select polygons with habitat or RIB, i.e. polygons in habitatmap_stdized data source
-            hab_stdized <- read_habitatmap_stdized()
+            if (xxh64sum_habitatmap_stdized_present == "8e9c4e09f5f67c3e") {
+                # 2018_v1
+                hab_stdized <- read_habitatmap_stdized(version = "habitatmap_stdized_2018_v1")
+            } else {
+                hab_stdized <- read_habitatmap_stdized()
+            }
+
             hab_stdized <- hab_stdized$habitatmap_polygons
 
             habitatmap <- habitatmap %>%
