@@ -40,8 +40,8 @@ The \code{raster_runif} data source is a GeoTIFF file (available at
 \href{https://doi.org/10.5281/zenodo.4745984}{Zenodo}).
 
 The R-code for creating the \code{raster_runif} data source can be found in
-the GitHub repository \href{https://github.com/inbo/n2khab-preprocessing/tree/ede43a4/src/generate_raster_runif}{
-'n2khab-preprocessing' at commit ede43a4}.
+the \href{https://github.com/inbo/n2khab-preprocessing}{
+n2khab-preprocessing} repository.
 }
 \examples{
 \dontrun{
