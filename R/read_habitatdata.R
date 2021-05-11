@@ -1000,7 +1000,7 @@ read_habitatmap_terr <-
                               "20_processed/habitatmap_terr/habitatmap_terr.gpkg"),
              keep_aq_types = TRUE,
              drop_7220 = TRUE,
-             version = c("habitatmap_terr_2020_v3",
+             version = c("habitatmap_terr_2020_v1",
                          "habitatmap_terr_2018_v2", "habitatmap_terr_2018_v1")){
 
         assert_that(is.flag(keep_aq_types), noNA(keep_aq_types))
