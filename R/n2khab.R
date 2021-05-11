@@ -21,9 +21,9 @@ utils::globalVariables(c("."))
         "You must do this before using the n2khab functions ",
         "depending on \nrgdal or raster, and before loading ",
         "the latter (or sp).\n\n",
-        "Do note that those warnings are applicable: the generated ",
-        "proj4string\nof 'EPSG:31370' objects is effectively degraded ",
-        "and should not be used.\n",
+        "Do note that those warnings are applicable: in the returned raster\n",
+        "objects, the proj4string is effectively degraded and should not ",
+        "be used.\n",
         "See https://inbo.github.io/n2khab/#suppressing-rgdal-warnings-about-",
         "proj4string-degradation\nfor more information.")
 }
