@@ -722,7 +722,8 @@ read_watersurfaces <-
 #' @param filter_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 #' important biotope (RIB) are returned. The default value is \code{FALSE}. This
 #' requires the corresponding version of the processed data source
-#' \code{habitatmap_stdized} to be present in the 'n2khab_data' folder.
+#' \code{habitatmap_stdized} to be present in its default location inside the
+#' \code{n2khab_data} folder.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
