@@ -46,8 +46,8 @@ read_raster_runif <-
 
         require_pkgs("raster")
 
-        suppressWarnings(r <- raster::raster(file))
-        suppressWarnings(raster::crs(r) <- "EPSG:31370")
+        r <- raster::raster(file)
+        raster::crs(r) <- "EPSG:31370"
 
         return(r)
         }
