@@ -50,7 +50,7 @@ GitHub repository \href{https://github.com/inbo/n2khab-preprocessing/tree/ede43a
 # what to do.
 r <- read_raster_runif()
 r
-sp::spplot(r)
+raster::spplot(r)
 }
 
 }

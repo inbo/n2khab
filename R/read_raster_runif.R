@@ -30,7 +30,7 @@
 #' # what to do.
 #' r <- read_raster_runif()
 #' r
-#' sp::spplot(r)
+#' raster::spplot(r)
 #' }
 #'
 #' @export

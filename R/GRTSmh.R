@@ -562,7 +562,7 @@ read_GRTSmh_base4frac <-
 #' # what to do.
 #' r <- read_GRTSmh_diffres(level = 7)
 #' r
-#' sp::spplot(r)
+#' raster::spplot(r)
 #' p <- read_GRTSmh_diffres(level = 7, polygon = TRUE)
 #' p
 #' plot(p)
