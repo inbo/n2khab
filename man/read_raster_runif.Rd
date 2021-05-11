@@ -24,7 +24,8 @@ Defaults to the latest available version defined by the package.}
 A RasterLayer.
 }
 \description{
-The \code{raster_runif} data source covers the Flanders and Brussels region
+The \code{raster_runif} data source covers Flanders and the Brussels
+Capital Region
 and has a resolution of 32 meters.
 The raster cells with non-missing values match the value-cells of
 the \code{GRTSmaster_habitats} data source (see \code{\link{read_GRTSmh}})
@@ -35,10 +36,12 @@ The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
 (EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
-The \code{raster_runif} data source is a GeoTIFF file (available at \href{https://doi.org/10.5281/zenodo.4745984}{Zenodo}).
+The \code{raster_runif} data source is a GeoTIFF file (available at
+\href{https://doi.org/10.5281/zenodo.4745984}{Zenodo}).
 
-The R-code for creating the raster_runif data source can be found in the
-GitHub repository \href{https://github.com/inbo/n2khab-preprocessing/tree/ede43a409a938cdcb4dccd963b0efee265ab58c3/src/generate_raster_runif}{n2khab-preprocessing' at commit ede43a4}.
+The R-code for creating the \code{raster_runif} data source can be found in
+the GitHub repository \href{https://github.com/inbo/n2khab-preprocessing/tree/ede43a4/src/generate_raster_runif}{
+'n2khab-preprocessing' at commit ede43a4}.
 }
 \examples{
 \dontrun{
@@ -50,7 +53,7 @@ GitHub repository \href{https://github.com/inbo/n2khab-preprocessing/tree/ede43a
 # what to do.
 r <- read_raster_runif()
 r
-sp::spplot(r)
+raster::spplot(r)
 }
 
 }
