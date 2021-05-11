@@ -36,11 +36,11 @@ A list of two objects:
   \item \code{habitatmap_types}: a tibble with following variables
   \itemize{
     \item \code{polygon_id}
+    \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
+    \item \code{certain}: \code{TRUE} when vegetation type is certain and
     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
     \item \code{phab}: proportion of polygon covered by type, as a percentage.
-    \item \code{certain}: \code{TRUE} when vegetation type is certain and
      \code{FALSE} when vegetation type is uncertain.
-    \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
     }
     }
 }

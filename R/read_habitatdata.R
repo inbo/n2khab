@@ -84,11 +84,11 @@
 #'   \item \code{habitatmap_types}: a tibble with following variables
 #'   \itemize{
 #'     \item \code{polygon_id}
+#'     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
+#'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
 #'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
 #'     \item \code{phab}: proportion of polygon covered by type, as a percentage.
-#'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
 #'      \code{FALSE} when vegetation type is uncertain.
-#'     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
 #'     }
 #'     }
 #'
@@ -124,7 +124,10 @@
 #' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr %>% mutate
+#' @importFrom dplyr
+#' %>%
+#' mutate
+#' relocate
 #' @importFrom assertthat
 #' assert_that
 #' is.string
@@ -168,6 +171,14 @@ read_habitatmap_stdized <-
                                   levels = levels(types$type)
                                   )
                     )
+
+        if (grepl("2018", version)) {
+            habmap_types <-
+                habmap_types %>%
+                relocate(.data$polygon_id,
+                         .data$type,
+                         .data$certain)
+        }
 
         if (version == "habitatmap_stdized_2018_v1") {
 
@@ -967,10 +978,10 @@ read_habitatmap <-
 #'   \code{habitatmap_stdized}):
 #'   \itemize{
 #'     \item \code{polygon_id}
+#'     \item \code{type}: the interpreted habitat or RIB type
+#'     \item \code{certain}
 #'     \item \code{code_orig}
 #'     \item \code{phab}
-#'     \item \code{certain}
-#'     \item \code{type}: the interpreted habitat or RIB type
 #'     \item \code{source}: states where \code{type} comes from: either
 #'     \code{habitatmap_stdized} or \code{habitatmap_stdized + interpretation}
 #'     }
@@ -1010,6 +1021,7 @@ read_habitatmap <-
 #' %>%
 #' mutate
 #' filter
+#' relocate
 read_habitatmap_terr <-
     function(file = file.path(fileman_up("n2khab_data"),
                               "20_processed/habitatmap_terr/habitatmap_terr.gpkg"),
@@ -1079,6 +1091,14 @@ read_habitatmap_terr <-
             # note that no polygons need to be discarded: 7220 never occurred
             # alone
         }
+
+        if (grepl("2018", version)) {
+            habmap_terr_types <-
+                habmap_terr_types %>%
+                relocate(.data$polygon_id,
+                         .data$type,
+                         .data$certain)
+            }
 
         if (version == "habitatmap_terr_2018_v1") {
             result <- list(habitatmap_terr_polygons = habmap_terr_polygons,

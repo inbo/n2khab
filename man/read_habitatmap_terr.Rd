@@ -65,10 +65,10 @@ A list of two objects:
   \code{habitatmap_stdized}):
   \itemize{
     \item \code{polygon_id}
+    \item \code{type}: the interpreted habitat or RIB type
+    \item \code{certain}
     \item \code{code_orig}
     \item \code{phab}
-    \item \code{certain}
-    \item \code{type}: the interpreted habitat or RIB type
     \item \code{source}: states where \code{type} comes from: either
     \code{habitatmap_stdized} or \code{habitatmap_stdized + interpretation}
     }
