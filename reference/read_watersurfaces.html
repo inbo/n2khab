@@ -42,7 +42,7 @@
   
 
 <meta property="og:title" content="Return the data source watersurfaces as an sf polygon layer — read_watersurfaces" />
-<meta property="og:description" content="Returns the raw data source watersurfaces (Packet et al., 2018)
+<meta property="og:description" content="Returns the raw data source watersurfaces (Leyssen et al., 2020)
 as a standardized sf polygon layer
 (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 (EPSG-code 31370)." />
@@ -77,7 +77,7 @@ as a standardized sf polygon layer
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -146,16 +146,16 @@ as a standardized sf polygon layer
     </div>
 
     <div class="ref-description">
-    <p>Returns the raw data source <code>watersurfaces</code> (Packet et al., 2018)
+    <p>Returns the raw data source <code>watersurfaces</code> (Leyssen et al., 2020)
 as a standardized <code>sf</code> polygon layer
 (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 (EPSG-code <a href='https://epsg.io/31370'>31370</a>).</p>
     </div>
 
     <pre class="usage"><span class='fu'>read_watersurfaces</span><span class='op'>(</span>
-  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/watersurfaces"</span><span class='op'>)</span>,
+  file <span class='op'>=</span> <span class='cn'>NULL</span>,
   extended <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  version <span class='op'>=</span> <span class='st'>"watersurfaces_v1.0"</span>
+  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_v1.1"</span>, <span class='st'>"watersurfaces_v1.0"</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -163,9 +163,10 @@ as a standardized <code>sf</code> polygon layer
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file</th>
-      <td><p>The absolute or relative file path of the data source.
-The default follows the data management advice in the
-vignette on data storage (run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>).
+      <td><p>Optional string. An absolute or relative file path of
+the data source. If left <code>NULL</code>, the default follows the data management
+advice in the vignette on data storage
+(run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>).
 It uses the first <code>n2khab_data</code> folder that is found when
 sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.</p></td>
@@ -175,8 +176,9 @@ starting from the working directory.</p></td>
       <td><p>Logical.
 Should names or explanations of codes be added as extra
 variables in the result?
-Currently only applies to <code>wfd_type</code>; if <code>TRUE</code>, a variable
-<code>wfd_type_name</code> is added.
+Currently only applies to <code>wfd_type</code> and <code>connectivity</code>;
+if <code>TRUE</code>, the variables <code>wfd_type_name</code> and
+<code>connectivity_name</code> are added.
 Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
@@ -210,7 +212,15 @@ variables (not mentioning extra 'name' variables for
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>See Packet et al. (2018) for an elaborate explanation of the data source
+    <p>If <code>file</code> is not specified, the function will try to read the file
+in the default folder for data storage (as described in the data management
+advice in the vignette (run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>)).
+If you want to use another file or file structure than the default
+data storage, you can specify your own <code>file</code>.
+In both cases: always make sure to specify the correct <code>version</code>, that
+is the version corresponding to the <code>file</code> (note that the <code>version</code>
+defaults to the latest version, that is <code>watersurfaces_v1.1</code>).</p>
+<p>See Leyssen et al. (2020) for an elaborate explanation of the data source
 and its attributes.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -220,13 +230,12 @@ and its attributes.</p>
 wateren in Vlaanderen.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 Instituut voor Natuur- en Bosonderzoek, Brussel.</p></li>
-<li><p>Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. &amp; Denys L.
-(2018).
-Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
-Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
-Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
-Instituut voor Natuur- en Bosonderzoek, Brussel.
-doi: <a href='https://doi.org/10.21436/inbor.14178464'>10.21436/inbor.14178464</a>
+<li><p>Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &amp;
+Denys L. (2020).
+Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
+Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
+(40). Instituut voor Natuur en Bosonderzoek, Brussel.
+doi: <a href='https://doi.org/10.21436/inbor.19088385'>10.21436/inbor.19088385</a>
 .</p></li>
 </ul>
 
@@ -238,8 +247,8 @@ doi: <a href='https://doi.org/10.21436/inbor.14178464'>10.21436/inbor.14178464</
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># This example supposes that your working directory or a directory up to 10</span>
-<span class='co'># levels above has the 'n2khab_data' folder AND that the 'watersurfaces'</span>
-<span class='co'># data source is present in the default subdirectory.</span>
+<span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span>
+<span class='co'># the 'watersurfaces' data source is present in the default subdirectory.</span>
 <span class='co'># In all other cases, this example won't work but at least you can</span>
 <span class='co'># consider what to do.</span>
 
@@ -263,7 +272,7 @@ doi: <a href='https://doi.org/10.21436/inbor.14178464'>10.21436/inbor.14178464</
 
       <footer>
       <div class="copyright">
-  <p>Developed by Floris Vanderhaeghe, Toon Westra, Hans Van Calster.</p>
+  <p>Developed by Floris Vanderhaeghe, Toon Westra, Cécile Herr, Hans Van Calster.</p>
 </div>
 
 <div class="pkgdown">

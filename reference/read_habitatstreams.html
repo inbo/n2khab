@@ -44,7 +44,7 @@ layer or as a list — read_habitatstreams • n2khab</title>
 
 <meta property="og:title" content="Return the data source habitatstreams as an sf linestring
 layer or as a list — read_habitatstreams" />
-<meta property="og:description" content="Returns the raw data source habitatstreams (Leyssen et al., 2018)
+<meta property="og:description" content="Returns the raw data source habitatstreams (Leyssen et al., 2020)
 as an sf linestring
 layer or as a list of two objects: the sf object (CRS:
 Belgian Lambert 72 (EPSG-code 31370))
@@ -81,7 +81,7 @@ with textual explanation of the values of the source_id variable." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -151,7 +151,7 @@ layer or as a list</h1>
     </div>
 
     <div class="ref-description">
-    <p>Returns the raw data source <code>habitatstreams</code> (Leyssen et al., 2018)
+    <p>Returns the raw data source <code>habitatstreams</code> (Leyssen et al., 2020)
 as an <code>sf</code> linestring
 layer or as a list of two objects: the <code>sf</code> object (CRS:
 Belgian Lambert 72 (EPSG-code <a href='https://epsg.io/31370'>31370</a>))
@@ -195,19 +195,20 @@ variable in the <code>sf</code> object.</p></li>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Leyssen A., Denys L. &amp; De Saeger S. (2018). Indicatieve situering van het
+    <p>Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
 Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 behorend tot het <em>Ranunculion fluitantis</em> en het
 <em>Callitricho-Batrachion</em>.
-Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
-Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
-doi: <a href='https://doi.org/10.21436/inbor.15138370'>10.21436/inbor.15138370</a>
+Uitgave 2020 (versie 1.7). Rapporten van het Instituut voor Natuur- en
+Bosonderzoek 2020 (34). Research Institute for Nature and Forest, Brussels.
+doi: <a href='https://doi.org/10.21436/inbor.18903609'>10.21436/inbor.18903609</a>
 .</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># This example supposes that your working directory or a directory up to 10</span>
-<span class='co'># levels above has the 'n2khab_data' folder AND that the 'habitatstreams'</span>
+<span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span>
+<span class='co'># the 'habitatstreams'</span>
 <span class='co'># data source is present in the default subdirectory.</span>
 <span class='co'># In all other cases, this example won't work but at least you can</span>
 <span class='co'># consider what to do.</span>
@@ -234,7 +235,7 @@ doi: <a href='https://doi.org/10.21436/inbor.15138370'>10.21436/inbor.15138370</
 
       <footer>
       <div class="copyright">
-  <p>Developed by Floris Vanderhaeghe, Toon Westra, Hans Van Calster.</p>
+  <p>Developed by Floris Vanderhaeghe, Toon Westra, Cécile Herr, Hans Van Calster.</p>
 </div>
 
 <div class="pkgdown">

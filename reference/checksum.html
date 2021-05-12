@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Climb up in the file system hierarchy to find a file or folder — fileman_up • n2khab</title>
+<title>Calculate file checksums — checksum • n2khab</title>
 
 
 <!-- jquery -->
@@ -41,11 +41,10 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Climb up in the file system hierarchy to find a file or folder — fileman_up" />
-<meta property="og:description" content="Searches for a specific file or folder, starting from the start
-directory and sequentially climbing up one directory level at a time.
-The first match causes this sequence to stop
-and the full path will be returned." />
+<meta property="og:title" content="Calculate file checksums — checksum" />
+<meta property="og:description" content="The functions calculate the checksum (digest; hash value) of
+one or multiple files.
+They can be used to verify file integrity." />
 
 
 
@@ -140,59 +139,96 @@ and the full path will be returned." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Climb up in the file system hierarchy to find a file or folder</h1>
+    <h1>Calculate file checksums</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/filemanagement.R'><code>R/filemanagement.R</code></a></small>
-    <div class="hidden name"><code>fileman_up.Rd</code></div>
+    <div class="hidden name"><code>checksum.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Searches for a specific file or folder, starting from the <code>start</code>
-directory and sequentially climbing up one directory level at a time.
-The first match causes this sequence to stop
-and the full path will be returned.</p>
+    <p>The functions calculate the checksum (digest; hash value) of
+one or multiple files.
+They can be used to verify file integrity.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fileman_up</span><span class='op'>(</span><span class='va'>name</span>, start <span class='op'>=</span> <span class='st'>"."</span>, levels <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>checksum</span><span class='op'>(</span><span class='va'>files</span>, hash_fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"xxh64"</span>, <span class='st'>"md5"</span>, <span class='st'>"sha256"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'>xxh64sum</span><span class='op'>(</span><span class='va'>files</span><span class='op'>)</span>
+
+<span class='fu'>md5sum</span><span class='op'>(</span><span class='va'>files</span><span class='op'>)</span>
+
+<span class='fu'>sha256sum</span><span class='op'>(</span><span class='va'>files</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>Name of file or folder to search for.
-An exact match is needed.
-The matching is case sensitive.</p></td>
+      <th>files</th>
+      <td><p>Character vector of file path(s).
+File path(s) can be absolute or relative.</p></td>
     </tr>
     <tr>
-      <th>start</th>
-      <td><p>String.
-Directory to start searching from.</p></td>
-    </tr>
-    <tr>
-      <th>levels</th>
-      <td><p>Integer.
-How many levels to sequentially climb up in the file hierarchy,
-if the file or folder is not found in the <code>start</code> directory?</p></td>
+      <th>hash_fun</th>
+      <td><p>String that defines the hash function.
+See <em>Usage</em> for allowed values; defaults to the first.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The path to the specified folder or file (string), or <code>NULL</code> if
-not found.</p>
+    <p>Named character vector with the same length as <code>files</code>
+and with the file names as names.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Symbolic links are matched, and in the returned path they are converted.</p>
+    <p>A few cryptographic and non-cryptographic hash functions are implemented,
+either from the OpenSSL library (through
+<a href='https://CRAN.R-project.org/package=openssl'><code>openssl</code></a>)
+or as embedded in the
+<a href='https://CRAN.R-project.org/package=digest'><code>digest</code></a>
+package.</p>
+<p>Functions <code>md5sum()</code> etc. are simple shortcuts to <code>checksum()</code>
+with the appropriate hash function preset.
+Their names were chosen to match those of xxHash and GNU coreutils.</p>
+<p>The cryptographic algorithms use the OpenSSL implementation and
+stream-hash the binary
+contents of the connections to the respective files.
+They turn the hash-format for binary streams by the <code>openssl</code> package
+into a regular hash string.
+Note that <code>n2khab</code> will mask
+<code><a href='https://rdrr.io/r/tools/md5sum.html'>tools::md5sum()</a></code>,
+which is a standalone implementation.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other functions regarding file management for N2KHAB projects: 
-<code><a href='checksum.html'>checksum</a>()</code>,
 <code><a href='download_zenodo.html'>download_zenodo</a>()</code>,
-<code><a href='fileman_folders.html'>fileman_folders</a>()</code></p></div>
+<code><a href='fileman_folders.html'>fileman_folders</a>()</code>,
+<code><a href='fileman_up.html'>fileman_up</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>fileman_up</span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># creating two different temporary files:</span>
+<span class='va'>file1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>file2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>file1</span>, <span class='va'>file2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.create</a></span><span class='op'>(</span><span class='va'>files</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'><span class='va'>con</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/connections.html'>file</a></span><span class='op'>(</span><span class='va'>file2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/writeLines.html'>writeLines</a></span><span class='op'>(</span><span class='st'>"some text"</span>, <span class='va'>con</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/connections.html'>close</a></span><span class='op'>(</span><span class='va'>con</span><span class='op'>)</span>
+
+<span class='co'># computing alternative checksums:</span>
+<span class='fu'>checksum</span><span class='op'>(</span><span class='va'>files</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    file45fbbc5839e   file45fb230238e7 
+#&gt; "ef46db3751d8e999" "b563efb2061ae502" </div><div class='input'><span class='fu'>xxh64sum</span><span class='op'>(</span><span class='va'>files</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    file45fbbc5839e   file45fb230238e7 
+#&gt; "ef46db3751d8e999" "b563efb2061ae502" </div><div class='input'><span class='fu'>md5sum</span><span class='op'>(</span><span class='va'>files</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                    file45fbbc5839e                   file45fb230238e7 
+#&gt; "d41d8cd98f00b204e9800998ecf8427e" "4d93d51945b88325c213640ef59fc50b" </div><div class='input'><span class='fu'>sha256sum</span><span class='op'>(</span><span class='va'>files</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                                    file45fbbc5839e 
+#&gt; "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" 
+#&gt;                                                   file45fb230238e7 
+#&gt; "a23e5fdcd7b276bdd81aa1a0b7b963101863dd3f61ff57935f8c5ba462681ea6" </div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># This will error:</span>
+<span class='va'>files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>file1</span>, <span class='va'>file2</span>, <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>checksum</span><span class='op'>(</span><span class='va'>files</span><span class='op'>)</span>
 <span class='op'>}</span>
 
 </div></pre>

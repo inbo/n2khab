@@ -80,7 +80,7 @@ returned at the population unit level, through aggregation by unit_id." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -206,11 +206,11 @@ type <code>POINT</code>, with attribute variables:</p><ul>
 <li><p><code>name</code>: site name.</p></li>
 <li><p><code>system_type</code>: environmental typology of <code>7220</code>: <code>mire</code>,
 <code>rivulet</code> or <code>unknown</code> (non-<code>7220</code> types are <code>NA</code>)</p></li>
-<li><p><code>code_orig</code>: original vegetation code in raw
+<li><p><code>code_orig</code>: original type code in raw
 <code>habitatsprings</code>.</p></li>
 <li><p><code>type</code>: habitat type listed in <code><a href='types.html'>types</a></code>.</p></li>
-<li><p><code>certain</code>: <code>TRUE</code> when vegetation type is certain and
-<code>FALSE</code> when vegetation type is uncertain.</p></li>
+<li><p><code>certain</code>: <code>TRUE</code> when the type is certain and
+<code>FALSE</code> when the type is uncertain.</p></li>
 <li><p><code>unit_id</code>: population unit id for large scale sampling
 events.
 Spatially close points have the same value.</p></li>
@@ -245,7 +245,8 @@ the Flemish Region, Belgium.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># This example supposes that your working directory or a directory up to 10</span>
-<span class='co'># levels above has the 'n2khab_data' folder AND that the 'habitatsprings'</span>
+<span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span>
+<span class='co'># the 'habitatsprings'</span>
 <span class='co'># data source is present in the default subdirectory.</span>
 <span class='co'># In all other cases, this example won't work but at least you can</span>
 <span class='co'># consider what to do.</span>
@@ -268,7 +269,7 @@ the Flemish Region, Belgium.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Floris Vanderhaeghe, Toon Westra, Hans Van Calster.</p>
+  <p>Developed by Floris Vanderhaeghe, Toon Westra, Cécile Herr, Hans Van Calster.</p>
 </div>
 
 <div class="pkgdown">

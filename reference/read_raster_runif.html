@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return one of the available geospatial data sources representing
-administrative areas — read_admin_areas • n2khab</title>
+<title>Return the data source raster_runif as a RasterLayer — read_raster_runif • n2khab</title>
 
 
 <!-- jquery -->
@@ -42,9 +41,15 @@ administrative areas — read_admin_areas • n2khab</title>
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return one of the available geospatial data sources representing
-administrative areas — read_admin_areas" />
-<meta property="og:description" content="Returns an administrative geospatial data source.
+<meta property="og:title" content="Return the data source raster_runif as a RasterLayer — read_raster_runif" />
+<meta property="og:description" content="The raster_runif data source covers Flanders and the Brussels
+Capital Region
+and has a resolution of 32 meters.
+The raster cells with non-missing values match the value-cells of
+the GRTSmaster_habitats data source (see read_GRTSmh)
+with a small buffer added.
+Every raster cell has a random value between 0 and 1 according to the
+uniform distribution.
 The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
 (EPSG-code 31370)." />
 
@@ -141,22 +146,27 @@ The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return one of the available geospatial data sources representing
-administrative areas</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_admin_areas.R'><code>R/read_admin_areas.R</code></a></small>
-    <div class="hidden name"><code>read_admin_areas.Rd</code></div>
+    <h1>Return the data source <code>raster_runif</code> as a RasterLayer</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_raster_runif.R'><code>R/read_raster_runif.R</code></a></small>
+    <div class="hidden name"><code>read_raster_runif.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns an administrative geospatial data source.
+    <p>The <code>raster_runif</code> data source covers Flanders and the Brussels
+Capital Region
+and has a resolution of 32 meters.
+The raster cells with non-missing values match the value-cells of
+the <code>GRTSmaster_habitats</code> data source (see <code><a href='read_GRTSmh.html'>read_GRTSmh</a></code>)
+with a small buffer added.
+Every raster cell has a random value between 0 and 1 according to the
+uniform distribution.
 The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
 (EPSG-code <a href='https://epsg.io/31370'>31370</a>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_admin_areas</span><span class='op'>(</span>
-  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"10_raw/flanders"</span>, <span class='st'>"10_raw/provinces"</span>,
-    <span class='st'>"10_raw/sac"</span><span class='op'>)</span><span class='op'>)</span>,
-  dsn <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"flanders"</span>, <span class='st'>"provinces"</span>, <span class='st'>"sac"</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>read_raster_runif</span><span class='op'>(</span>
+  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/raster_runif/raster_runif.tif"</span><span class='op'>)</span>,
+  version <span class='op'>=</span> <span class='st'>"raster_runif_v1"</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -172,38 +182,34 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.</p></td>
     </tr>
     <tr>
-      <th>dsn</th>
-      <td><p>A string, conforming to one of the data source names listed under
-<em>Usage</em>.
-Considering the default values of the <code>path</code> and <code>file</code> arguments,
-it is recommended to just use this argument.
-Defaults to <code>"flanders"</code>.</p>
-<p>Different data sources are handled differently by the function.
-The <code>dsn</code> argument states which data source is requested.
-It is also used to determine <code>file</code> if that argument is not specified,
-in order to select the right data file(s) from the <code>n2khab_data</code> folder.</p></td>
+      <th>version</th>
+      <td><p>Version ID of the data source.
+Defaults to the latest available version defined by the package.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Simple feature collection of geometry type <code>MULTIPOLYGON</code> or
-<code>POLYGON</code>.</p>
+    <p>A RasterLayer.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>See section <em>Usage</em> to see which N2KHAB data sources are
-available.
-You get a list of the data source names and related information with
-<code>XXXXXXXXX</code>.
-You are referred to the raw N2KHAB-data collection
-<a href='https://zenodo.org/communities/n2khab-data-raw'>at Zenodo</a> to learn
-more about these data sources.</p>
+    <p>The <code>raster_runif</code> data source is a GeoTIFF file (available at
+<a href='https://doi.org/10.5281/zenodo.4745984'>Zenodo</a>).</p>
+<p>The R-code for creating the <code>raster_runif</code> data source can be found in
+the <a href='https://github.com/inbo/n2khab-preprocessing'>
+n2khab-preprocessing</a> repository.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>flanders</span> <span class='op'>&lt;-</span> <span class='fu'>read_admin_areas</span><span class='op'>(</span>dsn <span class='op'>=</span> <span class='st'>"flanders"</span><span class='op'>)</span>
-<span class='va'>provinces</span> <span class='op'>&lt;-</span> <span class='fu'>read_admin_areas</span><span class='op'>(</span>dsn <span class='op'>=</span> <span class='st'>"provinces"</span><span class='op'>)</span>
-<span class='va'>sac</span> <span class='op'>&lt;-</span> <span class='fu'>read_admin_areas</span><span class='op'>(</span>dsn <span class='op'>=</span> <span class='st'>"sac"</span><span class='op'>)</span>
+<span class='co'># This example supposes that your working directory or a directory up to 10</span>
+<span class='co'># levels above has</span>
+<span class='co'># the 'n2khab_data' folder AND that the latest version of the</span>
+<span class='co'># 'raster_runif' data source is present in the default subdirectory.</span>
+<span class='co'># In all other cases, this example won't work but at least you can consider</span>
+<span class='co'># what to do.</span>
+<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>read_raster_runif</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>r</span>
+<span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 <span class='op'>}</span>
 
 </div></pre>

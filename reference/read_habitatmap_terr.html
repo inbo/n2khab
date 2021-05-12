@@ -52,7 +52,9 @@ habitatmap_terr is the further interpreted, terrestrial part of
 habitatmap_stdized (see read_habitatmap_stdized).
 By default, occurrences of type 7220 are dropped because a more
 reliable data source is available for this habitat type (see drop_7220
-argument)." />
+argument).
+Note: a type is a habitat (sub)type or a regionally
+important biotope (RIB)." />
 
 
 
@@ -84,7 +86,7 @@ argument)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -162,7 +164,9 @@ Lambert 72 CRS (EPSG-code <a href='https://epsg.io/31370'>31370</a>), and
 <code>habitatmap_stdized</code> (see <code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a></code>).
 By default, occurrences of type <code>7220</code> are dropped because a more
 reliable data source is available for this habitat type (see <code>drop_7220</code>
-argument).</p>
+argument).
+Note: a <a href='types.html'>type</a> is a habitat (sub)type or a regionally
+important biotope (RIB).</p>
     </div>
 
     <pre class="usage"><span class='fu'>read_habitatmap_terr</span><span class='op'>(</span>
@@ -170,7 +174,8 @@ argument).</p>
     <span class='st'>"20_processed/habitatmap_terr/habitatmap_terr.gpkg"</span><span class='op'>)</span>,
   keep_aq_types <span class='op'>=</span> <span class='cn'>TRUE</span>,
   drop_7220 <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  version <span class='op'>=</span> <span class='st'>"habitatmap_terr_2018_v2"</span>
+  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"habitatmap_terr_2020_v1"</span>, <span class='st'>"habitatmap_terr_2018_v2"</span>,
+    <span class='st'>"habitatmap_terr_2018_v1"</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -224,7 +229,7 @@ Defaults to the latest available version defined by the package.</p></td>
   geometry type <code>MULTIPOLYGON</code> with four attribute variables:</p><ul>
 <li><p><code>polygon_id</code></p></li>
 <li><p><code>description_orig</code>: polygon description based on the
-    original vegetation codes in the <code>habitatmap</code> data source</p></li>
+    original type codes in the <code>habitatmap</code> data source</p></li>
 <li><p><code>description</code>: based on <code>description_orig</code> but with the
     interpreted type codes</p></li>
 <li><p><code>source</code>: states where <code>description</code> comes from: either
@@ -234,13 +239,15 @@ Defaults to the latest available version defined by the package.</p></td>
   variables (the first 4 being identical to those in
   <code>habitatmap_stdized</code>):</p><ul>
 <li><p><code>polygon_id</code></p></li>
+<li><p><code>type</code>: the interpreted habitat or RIB type</p></li>
+<li><p><code>certain</code></p></li>
 <li><p><code>code_orig</code></p></li>
 <li><p><code>phab</code></p></li>
-<li><p><code>certain</code></p></li>
-<li><p><code>type</code>: the interpreted habitat or RIB type</p></li>
 <li><p><code>source</code>: states where <code>type</code> comes from: either
     <code>habitatmap_stdized</code> or <code>habitatmap_stdized + interpretation</code></p></li>
-</ul></li>
+</ul><p>Since version <code>habitatmap_terr_2020_v1</code>, rows are unique only
+    by the combination of the <code>polygon_id</code>, <code>type</code> and
+    <code>certain</code> columns.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -293,7 +300,8 @@ repository.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># This example supposes that your working directory or a directory up to 10</span>
-<span class='co'># levels above has the 'n2khab_data' folder AND that the 'habitatmap_terr'</span>
+<span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span>
+<span class='co'># the 'habitatmap_terr'</span>
 <span class='co'># data source is present in the default subdirectory.</span>
 <span class='co'># In all other cases, this example won't work but at least you can</span>
 <span class='co'># consider what to do.</span>
@@ -319,7 +327,7 @@ repository.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Floris Vanderhaeghe, Toon Westra, Hans Van Calster.</p>
+  <p>Developed by Floris Vanderhaeghe, Toon Westra, Cécile Herr, Hans Van Calster.</p>
 </div>
 
 <div class="pkgdown">

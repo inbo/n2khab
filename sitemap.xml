@@ -4,6 +4,9 @@
     <loc>https://inbo.github.io/n2khab/index.html</loc>
   </url>
   <url>
+    <loc>https://inbo.github.io/n2khab/reference/checksum.html</loc>
+  </url>
+  <url>
     <loc>https://inbo.github.io/n2khab/reference/convert_base4frac_to_dec.html</loc>
   </url>
   <url>
@@ -85,6 +88,9 @@
     <loc>https://inbo.github.io/n2khab/reference/read_namelist.html</loc>
   </url>
   <url>
+    <loc>https://inbo.github.io/n2khab/reference/read_raster_runif.html</loc>
+  </url>
+  <url>
     <loc>https://inbo.github.io/n2khab/reference/read_scheme_types.html</loc>
   </url>
   <url>
@@ -104,6 +110,9 @@
   </url>
   <url>
     <loc>https://inbo.github.io/n2khab/reference/read_watersurfaces_hab.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/n2khab/reference/require_pkgs.html</loc>
   </url>
   <url>
     <loc>https://inbo.github.io/n2khab/reference/scheme_types.html</loc>

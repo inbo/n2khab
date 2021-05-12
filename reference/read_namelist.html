@@ -76,7 +76,7 @@ by default filtered according to English names and shortnames." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -215,34 +215,34 @@ names (<code>lang = "en"</code>) are returned.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>read_namelist</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 291 x 4</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 291 x 4</span><span>
 #&gt;    code    lang  name                                    shortname              
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                  
-#&gt; </span><span style='color: #555555;'> 1</span><span> 1130    en    Estuaries                               Estuaries              
-#&gt; </span><span style='color: #555555;'> 2</span><span> 1140    en    Mudflats and sandflats not covered by … Mud- and sandflats     
-#&gt; </span><span style='color: #555555;'> 3</span><span> 1310    en    Salicornia and other annuals colonizin… Brackish pioneer habit…
-#&gt; </span><span style='color: #555555;'> 4</span><span> 1310_p… en    Salicornia habitats dike inward         Salicornia habitats di…
-#&gt; </span><span style='color: #555555;'> 5</span><span> 1310_zk en    Low saltmarshes Salicornia habitats di… Low saltmarshes dike o…
-#&gt; </span><span style='color: #555555;'> 6</span><span> 1310_zv en    High saltmarshes Saginion habitats dik… High saltmarshes dike …
-#&gt; </span><span style='color: #555555;'> 7</span><span> 1320    en    Spartina swards (Spartinion maritimae)  Spartina swards        
-#&gt; </span><span style='color: #555555;'> 8</span><span> 1330    en    Atlantic salt meadows (Glauco-Puccinel… Atlantic salt meadows  
-#&gt; </span><span style='color: #555555;'> 9</span><span> 1330_da en    Saltmarshes dike outward                Saltmarshes dike outwa…
-#&gt; </span><span style='color: #555555;'>10</span><span> 1330_h… en    Halophytic grasslands dike inward       Halophytic grassland   
-#&gt; </span><span style='color: #555555;'># … with 281 more rows</span><span></div><div class='input'><span class='fu'>read_namelist</span><span class='op'>(</span>lang <span class='op'>=</span> <span class='st'>"nl"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 319 x 4</span><span>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                  
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 1130    en    Estuaries                               Estuaries              
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 1140    en    Mudflats and sandflats not covered by … Mud- and sandflats     
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 1310    en    Salicornia and other annuals colonizin… Brackish pioneer habit…
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 1310_p… en    Salicornia habitats dike inward         Salicornia habitats di…
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 1310_zk en    Low saltmarshes Salicornia habitats di… Low saltmarshes dike o…
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 1310_zv en    High saltmarshes Saginion habitats dik… High saltmarshes dike …
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 1320    en    Spartina swards (Spartinion maritimae)  Spartina swards        
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 1330    en    Atlantic salt meadows (Glauco-Puccinel… Atlantic salt meadows  
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 1330_da en    Saltmarshes dike outward                Saltmarshes dike outwa…
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 1330_h… en    Halophytic grasslands dike inward       Halophytic grassland   
+#&gt; </span><span style='color: #949494;'># … with 281 more rows</span><span></div><div class='input'><span class='fu'>read_namelist</span><span class='op'>(</span>lang <span class='op'>=</span> <span class='st'>"nl"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 319 x 4</span><span>
 #&gt;    code    lang  name                                       shortname           
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               
-#&gt; </span><span style='color: #555555;'> 1</span><span> 1130    nl    Estuaria                                   estuaria            
-#&gt; </span><span style='color: #555555;'> 2</span><span> 1140    nl    Bij eb droogvallende slikwadden en zandpl… bij eb droogvallend…
-#&gt; </span><span style='color: #555555;'> 3</span><span> 1310    nl    Eenjarige pioniersvegetaties van slik- en… zilte pionierbegroe…
-#&gt; </span><span style='color: #555555;'> 4</span><span> 1310_p… nl    binnendijks gelegen zeekraalvegetaties     binnendijkse zeekra…
-#&gt; </span><span style='color: #555555;'> 5</span><span> 1310_zk nl    buitendijks laag schor met zeekraalvegeta… buitendijks laag sc…
-#&gt; </span><span style='color: #555555;'> 6</span><span> 1310_zv nl    buitendijks hoog schor met zeevetmuurvege… buitendijks hoog sc…
-#&gt; </span><span style='color: #555555;'> 7</span><span> 1320    nl    Schorren met slijkgrasvegetatie (Spartini… schorren met slijkg…
-#&gt; </span><span style='color: #555555;'> 8</span><span> 1330    nl    Atlantische schorren (Glauco-Puccinelliet… Atlantische schorren
-#&gt; </span><span style='color: #555555;'> 9</span><span> 1330_da nl    buitendijkse schorren                      buitendijkse schor  
-#&gt; </span><span style='color: #555555;'>10</span><span> 1330_h… nl    binnendijkse zilte vegetaties: zilte gras… zilte graslanden    
-#&gt; </span><span style='color: #555555;'># … with 309 more rows</span><span></div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 1130    nl    Estuaria                                   estuaria            
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 1140    nl    Bij eb droogvallende slikwadden en zandpl… bij eb droogvallend…
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 1310    nl    Eenjarige pioniersvegetaties van slik- en… zilte pionierbegroe…
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 1310_p… nl    binnendijks gelegen zeekraalvegetaties     binnendijkse zeekra…
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 1310_zk nl    buitendijks laag schor met zeekraalvegeta… buitendijks laag sc…
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 1310_zv nl    buitendijks hoog schor met zeevetmuurvege… buitendijks hoog sc…
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 1320    nl    Schorren met slijkgrasvegetatie (Spartini… schorren met slijkg…
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 1330    nl    Atlantische schorren (Glauco-Puccinelliet… Atlantische schorren
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 1330_da nl    buitendijkse schorren                      buitendijkse schor  
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 1330_h… nl    binnendijkse zilte vegetaties: zilte gras… zilte graslanden    
+#&gt; </span><span style='color: #949494;'># … with 309 more rows</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -255,7 +255,7 @@ names (<code>lang = "en"</code>) are returned.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Floris Vanderhaeghe, Toon Westra, Hans Van Calster.</p>
+  <p>Developed by Floris Vanderhaeghe, Toon Westra, Cécile Herr, Hans Van Calster.</p>
 </div>
 
 <div class="pkgdown">

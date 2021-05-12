@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -139,7 +139,7 @@
 <li>
 <strong>processed data</strong> (<a href="https://zenodo.org/communities/n2khab-data-processed">Zenodo-link</a>), to be stored in a folder <code>n2khab_data/20_processed</code>. These data sources have been derived from the raw data sources, but are distributed on their own because of the time-consuming or intricate calculations needed to reproduce them.</li>
 </ul>
-<p>You can reproduce the processed data sources from an <a href="https://github.com/inbo/n2khab-preprocessing/blob/master/src/complete_reproducible_workflow.R">R script on Github</a>, but it will take hours.</p>
+<p>You can reproduce the processed data sources from a <a href="https://github.com/inbo/n2khab-preprocessing/blob/master/src/complete_reproducible_workflow.sh">shell script on Github</a>, but it will take hours.</p>
 <p>As you see, when storing these binary or large data, we avoid using a folder named as <code>data</code>:</p>
 <ul>
 <li>the <code>n2khab_data</code> name is better fit when the folder does not sit inside one project or repository (see further) but instead delivers to several projects / repositories.</li>
@@ -177,9 +177,9 @@
 </ol>
 <pre><code>n2khab_data
     ├── 10_raw
-          ├── habitatmap            -&gt; contains habitatmat.shp, habitatmap.dbf etc.
-          ├── soilmap
-          └── GRTSmaster_habitats
+    │     ├── habitatmap            -&gt; contains habitatmat.shp, habitatmap.dbf etc.
+    │     ├── soilmap
+    │     └── GRTSmaster_habitats
     └── 20_processed
           ├── habitatmap_stdized
           └── GRTSmh_diffres</code></pre>
@@ -204,7 +204,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Floris Vanderhaeghe, Toon Westra, Hans Van Calster.</p>
+  <p>Developed by Floris Vanderhaeghe, Toon Westra, Cécile Herr, Hans Van Calster.</p>
 </div>
 
 <div class="pkgdown">

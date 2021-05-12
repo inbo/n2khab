@@ -84,7 +84,7 @@ watersurfaces_types: a tibble with information on the
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -159,7 +159,7 @@ objects</h1>
   CRS (EPSG-code <a href='https://epsg.io/31370'>31370</a>) with all polygons
   that contain standing water types (habitat or RIB).</p></li>
 <li><p><code>watersurfaces_types</code>: a tibble with information on the
-  standing water types (HAB1, HAB2,..., HAB5) that occur within
+  standing water <a href='types.html'>types</a> (HAB1, HAB2,..., HAB5) that occur within
   each polygon of <code>watersurfaces_polygons</code>.</p></li>
 </ul>
 
@@ -169,7 +169,8 @@ objects</h1>
   file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,
     <span class='st'>"20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"</span><span class='op'>)</span>,
   interpreted <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  version <span class='op'>=</span> <span class='st'>"watersurfaces_hab_v3"</span>
+  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_hab_v4"</span>, <span class='st'>"watersurfaces_hab_v3"</span>, <span class='st'>"watersurfaces_hab_v2"</span>,
+    <span class='st'>"watersurfaces_hab_v1"</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -210,17 +211,18 @@ Defaults to the latest available version defined by the package.</p></td>
 </ul><p></p><ul>
 <li><p><code>watersurfaces_types</code>: a tibble with following variables:</p><ul>
 <li><p><code>polygon_id</code></p></li>
-<li><p><code>code_orig</code>: original vegetation code in raw <code>habitatmap</code>.</p></li>
-<li><p><code>certain</code>: <code>TRUE</code> when vegetation type is certain and
-     <code>FALSE</code> when vegetation type is uncertain.</p></li>
 <li><p><code>type</code>: habitat or RIB type listed in <code><a href='types.html'>types</a></code>.</p></li>
+<li><p><code>certain</code>: <code>TRUE</code> when the type is certain and
+     <code>FALSE</code> when the type is uncertain.</p></li>
+<li><p><code>code_orig</code>: original type code in raw <code>habitatmap</code>.</p></li>
 </ul></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The data source <code>watersurfaces_hab</code> is a combination of <code>habitatmap_stdized</code> (see
-<code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a></code>) and the <a href='https://http://www.geopunt.be/catalogus/datasetfolder/10e87ad3-8235-40e0-8269-42c3c96a884d'>watersurface map of Flanders</a>.
+<code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a></code>) and the
+<a href='https://doi.org/10.5281/zenodo.3386857'>watersurface map of Flanders</a>.
 It contains all standing water types in Flanders.</p>
 
 <p>The data source <code>watersurfaces_hab</code> is a GeoPackage, available at
@@ -241,19 +243,20 @@ repository.</p>
 
     
 <ul>
-<li><p>Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. &amp; Denys L.
-(2018).
-Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
-Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
-Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
-Instituut voor Natuur- en Bosonderzoek, Brussel.
-doi: <a href='https://doi.org/10.21436/inbor.14178464'>10.21436/inbor.14178464</a>
+<li><p>Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &amp;
+Denys L. (2020).
+Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
+Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
+(40). Instituut voor Natuur en Bosonderzoek, Brussel.
+doi: <a href='https://doi.org/10.21436/inbor.19088385'>10.21436/inbor.19088385</a>
 .</p></li>
-<li><p>De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
-Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
-Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
-Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-doi: <a href='https://doi.org/10.21436/inbor.15138099'>10.21436/inbor.15138099</a>
+<li><p>De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
+Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
+Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
+en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor
+Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
+doi: <a href='https://doi.org/10.21436/inbor.18840851'>10.21436/inbor.18840851</a>
 .</p></li>
 </ul>
 
@@ -269,7 +272,8 @@ doi: <a href='https://doi.org/10.21436/inbor.15138099'>10.21436/inbor.15138099</
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># This example supposes that your working directory or a directory up to 10</span>
-<span class='co'># levels above has the 'n2khab_data' folder AND that the 'watersurfaces_hab'</span>
+<span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span>
+<span class='co'># the 'watersurfaces_hab'</span>
 <span class='co'># data source is present in the default subdirectory.</span>
 <span class='co'># In all other cases, this example won't work but at least you can</span>
 <span class='co'># consider what to do.</span>
@@ -293,7 +297,7 @@ doi: <a href='https://doi.org/10.21436/inbor.15138099'>10.21436/inbor.15138099</
 
       <footer>
       <div class="copyright">
-  <p>Developed by Floris Vanderhaeghe, Toon Westra, Hans Van Calster.</p>
+  <p>Developed by Floris Vanderhaeghe, Toon Westra, Cécile Herr, Hans Van Calster.</p>
 </div>
 
 <div class="pkgdown">

@@ -84,7 +84,7 @@ The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -268,13 +268,13 @@ outer borders (i.e., not excluding the Brussels Capital Region).</p>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># This example supposes that your working directory or a directory up to 10</span>
 <span class='co'># levels above has</span>
-<span class='co'># the 'n2khab_data' folder AND that the</span>
+<span class='co'># the 'n2khab_data' folder AND that the latest version of the</span>
 <span class='co'># 'GRTSmh_diffres' data source is present in the default subdirectory.</span>
 <span class='co'># In all other cases, this example won't work but at least you can consider</span>
 <span class='co'># what to do.</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>read_GRTSmh_diffres</span><span class='op'>(</span>level <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span>
 <span class='va'>r</span>
-<span class='fu'>sp</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sp/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+<span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>read_GRTSmh_diffres</span><span class='op'>(</span>level <span class='op'>=</span> <span class='fl'>7</span>, polygon <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='va'>p</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
@@ -292,7 +292,7 @@ outer borders (i.e., not excluding the Brussels Capital Region).</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Floris Vanderhaeghe, Toon Westra, Hans Van Calster.</p>
+  <p>Developed by Floris Vanderhaeghe, Toon Westra, Cécile Herr, Hans Van Calster.</p>
 </div>
 
 <div class="pkgdown">
