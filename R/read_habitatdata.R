@@ -15,9 +15,9 @@
 #' The data source \code{habitatmap_stdized} is the processed version
 #' of the raw data source \code{habitatmap} (De Saeger et al., 2020).
 #' Every polygon in the \code{habitatmap} can consist of maximum 5
-#' different vegetation types. This information is stored in the
+#' different types. This information is stored in the
 #' columns 'HAB1', HAB2',..., 'HAB5' of the attribute table. The
-#' fraction of each vegetation type within the polygons is stored in
+#' fraction of each type within the polygons is stored in
 #' the columns 'PHAB1', 'PHAB2', ..., 'PHAB5'.
 #'
 #' The data source \code{habitatmap_stdized} is a GeoPackage, available at
@@ -33,38 +33,38 @@
 #' The processing of the \code{habitatmap_types} tibble included
 #' following steps:
 #' \itemize{
-#'   \item For some polygons the vegetation type is uncertain, and the
-#'   vegetation code in the raw \code{habitatmap} data source consists
+#'   \item For some polygons the type is uncertain, and the
+#'   type code in the raw \code{habitatmap} data source consists
 #'   of 2 or 3 possible types, separated with a ','. The different
-#'   possible vegetation types are split up and one row is created for
+#'   possible types are split up and one row is created for
 #'   each of them, with \code{phab} for each new row simply set to the original
 #'   value of \code{phab}.
 #'   The variable \code{certain} will be \code{FALSE} if
-#'   the original code consists of 2 or 3 possible vegetation types, and \code{TRUE}
-#'   if only one vegetation type is provided.
+#'   the original code consists of 2 or 3 possible types, and \code{TRUE}
+#'   if only one type is provided.
 #'   \item Some polygons contain both a standing water habitat type
 #'   and \code{rbbmr}:
 #'   \code{3130_rbbmr},
 #'   \code{3140_rbbmr},
 #'   \code{3150_rbbmr} and
 #'   \code{3160_rbbmr}.
-#'   Since \code{habitatmap_stdized_2020_v1}, the two vegetation
+#'   Since \code{habitatmap_stdized_2020_v1}, the two
 #'   types \code{31xx} and \code{rbbmr} are split up and one row is
 #'   created for each of them, with \code{phab} for each new row simply
-#'   set to the original value of \code{phab}. 
+#'   set to the original value of \code{phab}.
 #'   The variable \code{certain} in this case will be \code{TRUE} for both
 #'   types.
-#'   \item After those first two steps, a given polygon could contain the 
+#'   \item After those first two steps, a given polygon could contain the
 #'   same type with the same value for \code{certain} repeated several
 #'   times, e.g. when \code{31xx_rbbmr} is present with \code{phab} = yy\%
 #'   and \code{31xx} is present with \code{phab} = zz\%.
-#'   In that case the rows with the same \code{polygon_id}, \code{type} 
-#'   and \code{certain} were gathered into one row and the respective 
-#'   \code{phab} were added up.
-#'   \item For some polygons the original vegetation code in the
+#'   In that case the rows with the same \code{polygon_id}, \code{type}
+#'   and \code{certain} were gathered into one row and the respective
+#'   \code{phab} values were added up.
+#'   \item For some polygons the original type code in the
 #'   \code{habitatmap} was not consistent with general coding syntax or
-#'   with the type codes from the \code{\link{types}}. In that case the
-#'   code was adjusted.
+#'   with the type codes from the \code{\link{types}} data source. In that
+#'   case the code was adjusted.
 #'
 #'   }
 #'
@@ -88,17 +88,17 @@
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{description_orig}: polygon description based on the
-#'     orginal vegetation codes in the raw \code{habitatmap}}
+#'     orginal type codes in the raw \code{habitatmap}}
 #'   }
 #'   \itemize{
 #'   \item \code{habitatmap_types}: a tibble with following variables
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
-#'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
-#'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
+#'     \item \code{certain}: \code{TRUE} when the type is certain and
+#'      \code{FALSE} when the type is uncertain.
+#'     \item \code{code_orig}: original type code in raw \code{habitatmap}.
 #'     \item \code{phab}: proportion of polygon covered by type, as a percentage.
-#'      \code{FALSE} when vegetation type is uncertain.
 #'     }
 #'     Since version \code{habitatmap_stdized_2020_v1}, rows are unique only
 #'     by the combination of the \code{polygon_id}, \code{type} and
