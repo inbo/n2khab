@@ -1,3 +1,34 @@
+## n2khab 0.5.0 (2021-05-12)
+
+#### Support for new data source versions
+
+The following new data source versions are now supported by their associated reading functions:
+
+- `habitatmap_2020` (`read_habitatmap()` - #139)
+- `habitatmap_stdized_2020_v1` (`read_habitatmap_stdized()` - #139, #140)
+- `habitatmap_terr_2020_v1` (`read_habitatmap_terr()` - #139, #140)
+- `habitatstreams_v1.7` (`read_habitatstreams()` - #114)
+- `watersurfaces_v1.1` (`read_watersurfaces()` - #118)
+- `watersurfaces_hab_v4` (`read_watersurfaces_hab()` - #142)
+
+Function documentation was updated accordingly and refined.
+
+#### New functions
+
+- Function `read_raster_runif()` to return the `raster_runif` data source (#136, #138)
+  - The raw data source `raster_runif` is a raster with cells matching those of `GRTSmaster_habitats`.
+  Their values are uniformly distributed random numbers between 0 and 1
+  ([inbo/n2khab-preprocessing/pull/55](https://github.com/inbo/n2khab-preprocessing/pull/55) and following pull requests; <https://doi.org/10.5281/zenodo.4745983>).
+- Function `checksum()` and associated shortcut functions to calculate file checksums (#122)
+
+#### Other updates & internal changes
+
+Including:
+
+- `scheme_types` data source: updates in typegroup memberships of MNE scheme `GW_05.1_terr` (#116)
+- `expand_types()` now also supports expanding `5130_hei` to `5130` (#143)
+
+
 ## n2khab 0.4.0 (2021-02-10)
 
 #### New feature
