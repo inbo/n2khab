@@ -1,12 +1,12 @@
 Package: n2khab
 Title: Providing Preprocessed Reference Data for Flemish Natura 2000 Habitat Analyses
-Version: 0.4.0
+Version: 0.5.0
 Authors@R: c(
     person("Floris", "Vanderhaeghe", email = "floris.vanderhaeghe@inbo.be", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6378-6229")), 
     person("Toon", "Westra", email = "toon.westra@inbo.be", role = c("aut"), comment = c(ORCID = "0000-0003-2478-9459")), 
+    person("Cécile", "Herr", email = "cecile.herr@inbo.be", role = c("aut"), comment = c(ORCID = "0000-0002-2833-6046")), 
     person("Hans", "Van Calster", email = "hans.vancalster@inbo.be", role = c("aut"), comment = c(ORCID = "0000-0001-8595-8426")), 
     person("Dries", "Adriaens", email = "dries.adriaens@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-7216-3111")), 
-    person("Cécile", "Herr", email = "cecile.herr@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-2833-6046")), 
     person("Maud", "Raman", email = "maud.raman@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0003-2116-4963")), 
     person("Jan", "Wouters", email = "jan.wouters@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0001-8200-9102")), 
     person("Steven", "De Saeger", email = "steven.desaeger@inbo.be", role = c("ctb"), comment = c(ORCID = "0000-0002-5477-3063")), 
@@ -49,10 +49,12 @@ RoxygenNote: 7.1.1
 Suggests: 
     bib2df,
     curl,
+    digest,
     googledrive,
     jsonlite,
     knitr,
     mapview,
+    openssl,
     parallel,
     raster (>= 3.3-16),
     readxl,

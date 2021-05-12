@@ -40,11 +40,12 @@ reference:
       - read_soilmap
       - read_watersurfaces
       - read_watercourse_100mseg
-  - title: "Using the GRTSmaster data sources (raw + processed)"
+  - title: "Using the GRTSmaster related data sources"
     contents:
       - read_GRTSmh
       - read_GRTSmh_base4frac
       - read_GRTSmh_diffres
+      - read_raster_runif
   - title: "Managing files and directories"
     contents:
       - fileman_folders
@@ -55,3 +56,4 @@ reference:
       - fileman_up
       - convert_dec_to_base4frac
       - convert_base4frac_to_dec
+      - checksum

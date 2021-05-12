@@ -35,10 +35,10 @@ Each combination of \code{scheme} and \code{type} must be unique.
         n2khab Github repository}:
         \code{misc/generate_textdata/rawraw_data/10_compmeetnet_types_milieudrukken}.
         This data source was originally generated in the
-        \href{https://gitlab.com/florisvdh/n2khab-mne-selections}{
-        n2khab-mne-selections repository}.}
+        n2khab-mne-selections repository
+        (\samp{https://gitlab.com/florisvdh/n2khab-mne-selections}).}
         \item{the declaration of typegroups comes from
-        \href{https://docs.google.com/spreadsheets/d/1dK0S1Tt3RlVEh4WrNF5N_-hn0OXiTUVOvsL2JRhSl78}{
+        \href{https://docs.google.com/spreadsheets/d/1n2ohvuLEK_anX37gxlanQXRGotweMVonFxKxtfTcuZI}{
         this googlesheet}.
         Currently, the typegroups are kept up to date both in the
         googlesheet and in the data source.}

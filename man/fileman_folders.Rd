@@ -39,6 +39,7 @@ datapath <- fileman_folders(root = "git")
 }
 \seealso{
 Other functions regarding file management for N2KHAB projects: 
+\code{\link{checksum}()},
 \code{\link{download_zenodo}()},
 \code{\link{fileman_up}()}
 }

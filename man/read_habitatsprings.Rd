@@ -42,11 +42,11 @@ type \code{POINT}, with attribute variables:
 \item \code{name}: site name.
 \item \code{system_type}: environmental typology of \code{7220}: \code{mire},
 \code{rivulet} or \code{unknown} (non-\code{7220} types are \code{NA})
-\item \code{code_orig}: original vegetation code in raw
+\item \code{code_orig}: original type code in raw
 \code{habitatsprings}.
 \item \code{type}: habitat type listed in \code{\link{types}}.
-\item \code{certain}: \code{TRUE} when vegetation type is certain and
-\code{FALSE} when vegetation type is uncertain.
+\item \code{certain}: \code{TRUE} when the type is certain and
+\code{FALSE} when the type is uncertain.
 \item \code{unit_id}: population unit id for large scale sampling
 events.
 Spatially close points have the same value.
@@ -89,7 +89,8 @@ the Flemish Region, Belgium.
 \examples{
 \dontrun{
 # This example supposes that your working directory or a directory up to 10
-# levels above has the 'n2khab_data' folder AND that the 'habitatsprings'
+# levels above has the 'n2khab_data' folder AND that the latest version of
+# the 'habitatsprings'
 # data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can
 # consider what to do.

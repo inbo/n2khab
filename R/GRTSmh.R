@@ -300,7 +300,7 @@ convert_base4frac_to_dec <-
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
 #' # levels above has
-#' # the 'n2khab_data' folder AND that the
+#' # the 'n2khab_data' folder AND that the latest version of the
 #' # 'GRTSmaster_habitats' data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can consider
 #' # what to do.
@@ -316,11 +316,7 @@ read_GRTSmh <-
                                 "20_processed/GRTSmh_brick/GRTSmh_brick.tif")),
              brick = FALSE) {
 
-        if (!requireNamespace("raster", quietly = TRUE)) {
-            stop("Package \"raster\" is needed when using this function. ",
-                 "Please install it.",
-                 call. = FALSE)
-        }
+        require_pkgs("raster")
 
         if (brick) {
             if (missing(file)) {
@@ -417,7 +413,7 @@ read_GRTSmh <-
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
 #' # levels above has
-#' # the 'n2khab_data' folder AND that the
+#' # the 'n2khab_data' folder AND that the latest version of the
 #' # 'GRTSmh_base4frac' data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can consider
 #' # what to do.
@@ -430,11 +426,7 @@ read_GRTSmh_base4frac <-
     function(file = file.path(fileman_up("n2khab_data"),
                               "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif")) {
 
-        if (!requireNamespace("raster", quietly = TRUE)) {
-            stop("Package \"raster\" is needed when using this function. ",
-                 "Please install it.",
-                 call. = FALSE)
-        }
+        require_pkgs("raster")
 
         r <- raster::raster(file)
         raster::crs(r) <- "EPSG:31370"
@@ -564,13 +556,13 @@ read_GRTSmh_base4frac <-
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
 #' # levels above has
-#' # the 'n2khab_data' folder AND that the
+#' # the 'n2khab_data' folder AND that the latest version of the
 #' # 'GRTSmh_diffres' data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can consider
 #' # what to do.
 #' r <- read_GRTSmh_diffres(level = 7)
 #' r
-#' sp::spplot(r)
+#' raster::spplot(r)
 #' p <- read_GRTSmh_diffres(level = 7, polygon = TRUE)
 #' p
 #' plot(p)
@@ -604,11 +596,7 @@ read_GRTSmh_diffres <-
 
         } else {
 
-            if (!requireNamespace("raster", quietly = TRUE)) {
-                stop("Package \"raster\" is needed when using this function. ",
-                     "Please install it.",
-                     call. = FALSE)
-            }
+            require_pkgs("raster")
 
             r <- raster::raster(file.path(dir,
                                           str_c("GRTSmh_diffres.",
