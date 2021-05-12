@@ -87,6 +87,8 @@ Lambert 72 CRS (EPSG-code \href{https://epsg.io/31370}{31370}), and
 By default, occurrences of type \code{7220} are dropped because a more
 reliable data source is available for this habitat type (see \code{drop_7220}
 argument).
+Note: a \link[=types]{type} is a habitat (sub)type or a regionally
+important biotope (RIB).
 }
 \details{
 \code{habitatmap_terr} was derived from \code{habitatmap_stdized} as

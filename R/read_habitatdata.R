@@ -8,7 +8,7 @@
 #'   of the \code{habitatmap} that contain habitat or a regionally
 #'   important biotope (RIB).
 #'   \item \code{habitatmap_types}: a tibble with information on the
-#'   habitat and RIB types (HAB1, HAB2,..., HAB5) that occur within
+#'   habitat and RIB \link{types} (HAB1, HAB2,..., HAB5) that occur within
 #'   each polygon of \code{habitatmap_polygons}.
 #'   }
 #'
@@ -223,7 +223,7 @@ read_habitatmap_stdized <-
 #'   CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
 #'   that contain standing water types (habitat or RIB).
 #'   \item \code{watersurfaces_types}: a tibble with information on the
-#'   standing water types (HAB1, HAB2,..., HAB5) that occur within
+#'   standing water \link{types} (HAB1, HAB2,..., HAB5) that occur within
 #'   each polygon of \code{watersurfaces_polygons}.
 #'   }
 #'
@@ -918,6 +918,8 @@ read_habitatmap <-
 #' By default, occurrences of type \code{7220} are dropped because a more
 #' reliable data source is available for this habitat type (see \code{drop_7220}
 #' argument).
+#' Note: a \link[=types]{type} is a habitat (sub)type or a regionally
+#' important biotope (RIB).
 #'
 #' \code{habitatmap_terr} was derived from \code{habitatmap_stdized} as
 #' follows:

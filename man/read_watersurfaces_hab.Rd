@@ -57,7 +57,7 @@ A list of two objects:
   CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
   that contain standing water types (habitat or RIB).
   \item \code{watersurfaces_types}: a tibble with information on the
-  standing water types (HAB1, HAB2,..., HAB5) that occur within
+  standing water \link{types} (HAB1, HAB2,..., HAB5) that occur within
   each polygon of \code{watersurfaces_polygons}.
   }
 }
