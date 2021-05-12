@@ -6,7 +6,8 @@
 \usage{
 read_habitatmap(
   file = file.path(fileman_up("n2khab_data"), "10_raw/habitatmap"),
-  filter_hab = FALSE
+  filter_hab = FALSE,
+  version = c("habitatmap_2020", "habitatmap_2018")
 )
 }
 \arguments{
@@ -18,14 +19,20 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
 
 \item{filter_hab}{If \code{TRUE} only polygons that (partially) contain habitat or a regionally
-important biotope (RIB) are returned. The default value is \code{FALSE}.}
+important biotope (RIB) are returned. The default value is \code{FALSE}. This
+requires the corresponding version of the processed data source
+\code{habitatmap_stdized} to be present in its default location inside the
+\code{n2khab_data} folder.}
+
+\item{version}{Version ID of the data source.
+Defaults to the latest available version defined by the package.}
 }
 \value{
 A Simple feature collection of
 type \code{MULTIPOLYGON}.
 }
 \description{
-Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
+Returns the raw data source \code{habitatmap} (De Saeger et al., 2020)
 as a standardized \code{sf} multipolygon layer
 (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -47,11 +54,12 @@ hm
 
 }
 \references{
-De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
-Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
-Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
-Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-\doi{10.21436/inbor.15138099}.
+De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
+Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
+Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
+en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
+\doi{10.21436/inbor.18840851}.
 }
 \seealso{
 Other functions involved in processing the 'habitatmap' data source: 
