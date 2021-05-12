@@ -50,9 +50,17 @@
 #'   \code{3160_rbbmr}.
 #'   Since \code{habitatmap_stdized_2020_v1}, the two vegetation
 #'   types \code{31xx} and \code{rbbmr} are split up and one row is
-#'   created for each of them.
+#'   created for each of them, with \code{phab} for each new row simply
+#'   set to the original value of \code{phab}. 
 #'   The variable \code{certain} in this case will be \code{TRUE} for both
 #'   types.
+#'   \item After those first two steps, a given polygon could contain the 
+#'   same type with the same value for \code{certain} repeated several
+#'   times, e.g. when \code{31xx_rbbmr} is present with \code{phab} = yy\%
+#'   and \code{31xx} is present with \code{phab} = zz\%.
+#'   In that case the rows with the same \code{polygon_id}, \code{type} 
+#'   and \code{certain} were gathered into one row and the respective 
+#'   \code{phab} were added up.
 #'   \item For some polygons the original vegetation code in the
 #'   \code{habitatmap} was not consistent with general coding syntax or
 #'   with the type codes from the \code{\link{types}}. In that case the
