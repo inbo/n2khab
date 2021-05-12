@@ -85,20 +85,21 @@ following steps:
   vegetation code in the raw \code{habitatmap} data source consists
   of 2 or 3 possible types, separated with a ','. The different
   possible vegetation types are split up and one row is created for
-  each of them. The variable \code{certain} will be \code{FALSE} if
+  each of them, with \code{phab} for each new row simply set to the original 
+  value of \code{phab}. 
+  The variable \code{certain} will be \code{FALSE} if
   the original code consists of 2 or 3 possible vegetation types, and \code{TRUE}
   if only one vegetation type is provided.
-  \itemize{
-    \item Note that this does not hold for the following codes:
-    \code{3130,rbbmr},
-    \code{3140,rbbmr},
-    \code{3150,rbbmr} and
-    \code{3160,rbbmr}.
-    These are standing water bodies that contain both \code{rbbmr} and the
-    habitat type.
-    Since \code{habitatmap_stdized_2020_v1} this has been taken into
-    account (setting \code{certain} as \code{TRUE} for both types).
-  }
+    \item Some polygons contain both a standing water habitat type 
+    and \code{rbbmr}, e.g.:
+    \code{3130_rbbmr},
+    \code{3140_rbbmr},
+    \code{3150_rbbmr} and
+    \code{3160_rbbmr}.
+    Since \code{habitatmap_stdized_2020_v1}, the two vegetation
+    types \code{31xx} and \code{rbbmr} are split up and one row is 
+    created for each of them. 
+    The variable \code{certain} in this case will be \code{TRUE} for both types.
   \item For some polygons the original vegetation code in the
   \code{habitatmap} was not consistent with general coding syntax or
   with the type codes from the \code{\link{types}}. In that case the
