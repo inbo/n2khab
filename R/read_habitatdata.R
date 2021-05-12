@@ -42,16 +42,17 @@
 #'   The variable \code{certain} will be \code{FALSE} if
 #'   the original code consists of 2 or 3 possible vegetation types, and \code{TRUE}
 #'   if only one vegetation type is provided.
-#'     \item Some polygons contain both a standing water habitat type
-#'     and \code{rbbmr}:
-#'     \code{3130_rbbmr},
-#'     \code{3140_rbbmr},
-#'     \code{3150_rbbmr} and
-#'     \code{3160_rbbmr}.
-#'     Since \code{habitatmap_stdized_2020_v1}, the two vegetation
-#'     types \code{31xx} and \code{rbbmr} are split up and one row is
-#'     created for each of them.
-#'     The variable \code{certain} in this case will be \code{TRUE} for both types.
+#'   \item Some polygons contain both a standing water habitat type
+#'   and \code{rbbmr}:
+#'   \code{3130_rbbmr},
+#'   \code{3140_rbbmr},
+#'   \code{3150_rbbmr} and
+#'   \code{3160_rbbmr}.
+#'   Since \code{habitatmap_stdized_2020_v1}, the two vegetation
+#'   types \code{31xx} and \code{rbbmr} are split up and one row is
+#'   created for each of them.
+#'   The variable \code{certain} in this case will be \code{TRUE} for both
+#'   types.
 #'   \item For some polygons the original vegetation code in the
 #'   \code{habitatmap} was not consistent with general coding syntax or
 #'   with the type codes from the \code{\link{types}}. In that case the
