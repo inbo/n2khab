@@ -37,7 +37,9 @@
 #'   vegetation code in the raw \code{habitatmap} data source consists
 #'   of 2 or 3 possible types, separated with a ','. The different
 #'   possible vegetation types are split up and one row is created for
-#'   each of them. The variable \code{certain} will be \code{FALSE} if
+#'   each of them, with \code{phab} for each new row simply set to the original 
+#'   value of \code{phab}. 
+#'   The variable \code{certain} will be \code{FALSE} if
 #'   the original code consists of 2 or 3 possible vegetation types, and \code{TRUE}
 #'   if only one vegetation type is provided.
 #'     \item Some polygons contain both a standing water habitat type 
