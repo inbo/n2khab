@@ -247,18 +247,20 @@ read_habitatmap_stdized <-
 #'
 #' @references
 #' \itemize{
-#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
-#' (2018).
-#' Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
-#' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
-#' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
-#' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \doi{10.21436/inbor.14178464}.
-#' \item De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
-#' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
-#' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
-#' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.15138099}.
+#' \item Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &
+#' Denys L. (2020).
+#' Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
+#' Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
+#' (40). Instituut voor Natuur en Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.19088385}.
+#'
+#' \item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
+#' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
+#' Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+#' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
+#' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor
+#' Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
+#' \doi{10.21436/inbor.18840851}.
 #' }
 #'
 #' @examples
