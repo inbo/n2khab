@@ -1,7 +1,7 @@
 ---
 title: "Working with geospatial data sources of habitat (sub)types and RIBs"
-author: "Floris Vanderhaeghe, Toon Westra, Jan Wouters"
-date: "2020-10-16"
+author: "Floris Vanderhaeghe, Toon Westra, Jan Wouters, Cécile Herr"
+date: "2021-05-12"
 bibliography: references.bib
 output: 
   rmarkdown::html_vignette:
@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-_General note: the below vignette contains frozen output of 16 Oct 2020._
+_General note: the below vignette contains frozen output of 12 May 2021._
 _This makes it possible to build the package with vignettes without access to the data sources._
 
 
@@ -49,8 +49,8 @@ The below N2KHAB data sources are available.
 For practical information on data storage and locations, see `vignette("v020_datastorage")`.
 
 - **raw data sources**:
-    - **`habitatmap`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3354381)): geospatial polygons of BWK and Natura 2000 habitat types in the Flemish Region, originally published by the Research Institute for Nature and Forest (INBO) [@de_saeger_biologische_2018] and distributed by 'Informatie Vlaanderen'.
-    - **`habitatstreams`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3386245)): geospatial lines of the Natura 2000 habitat type `3260` that correspond with its presence in streaming water segments in the Flemish Region, originally published by INBO [@leyssen_indicatieve_2018] and distributed by 'Informatie Vlaanderen'.
+    - **`habitatmap`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3354381)): geospatial polygons of BWK and Natura 2000 habitat types in the Flemish Region, originally published by the Research Institute for Nature and Forest (INBO) [@de_saeger_biologische_2020] and distributed by 'Informatie Vlaanderen'.
+    - **`habitatstreams`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3386245)): geospatial lines of the Natura 2000 habitat type `3260` that correspond with its presence in streaming water segments in the Flemish Region, originally published by INBO [@leyssen_indicatieve_2020] and distributed by 'Informatie Vlaanderen'.
     - **`habitatsprings`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3550994)): geospatial points hat correspond with the presence or absence of the Natura 2000 habitat type `7220` in springs and streaming water segments in the Flemish Region.
     The data source is produced, owned and administered by INBO.
     - **`habitatquarries`** ([Zenodo-link](https://doi.org/10.5281/zenodo.4072967)): geospatial polygons that correspond with the presence or absence of the Natura 2000 habitat type `8310` in underground marl quarries in the Flemish Region (and border areas).
@@ -68,7 +68,7 @@ Amongst other properties, it excludes polygons _without_ terrestrial types, it e
 The datasource is a GeoPackage, organized in the same way as `habitatmap_stdized`.
 For more details see `read_habitatmap_terr()`.
     - **`watersurfaces_hab`** ([Zenodo-link](https://doi.org/10.5281/zenodo.3374645)): 
-a combination of the environmental data source `watersurfaces` (@packet_watervlakken_2018; see `read_watersurfaces()`) and the above data source `habitatmap_stdized`.
+a combination of the environmental data source `watersurfaces` (@leyssen_watervlakken_2020; see `read_watersurfaces()`) and the above data source `habitatmap_stdized`.
 It represents polygons (from `watersurfaces` or `habitatmap_stdized`) that completely or partly contain standing water habitat types or RIBs (i.e. `2190_a`, '`31..`' types or `rbbah`; 
 types `3260` and `7220` are not included).
 The datasource is a GeoPackage, organized in the same way as `habitatmap_stdized`.
@@ -96,25 +96,25 @@ The functions do just basic preprocessing, in order to return (by default) an ob
 ```{r}
 habitatmap <- read_habitatmap()
 habitatmap
-#> Simple feature collection with 618147 features and 30 fields
-#> geometry type:  MULTIPOLYGON
-#> dimension:      XY
-#> bbox:           xmin: 21991.38 ymin: 153058.3 xmax: 258871.8 ymax: 244027.3
-#> projected CRS:  Belge 1972 / Belgian Lambert 72
-#> # A tibble: 618,147 x 31
-#>    polygon_id eval  eenh1 eenh2 eenh3 eenh4 eenh5 eenh6 eenh7 eenh8 v1    v2   
-#>  * <chr>      <fct> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>
-#>  1 000098_v2… m     b     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  2 000132_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  3 000135_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  4 000136_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  5 000142_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  6 000150_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  7 000152_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  8 000154_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  9 000297_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#> 10 000805_v2… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#> # … with 618,137 more rows, and 19 more variables: v3 <chr>, source <chr>,
+#> Simple feature collection with 646589 features and 30 fields
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: 21991.38 ymin: 153058.3 xmax: 258871.8 ymax: 244027.3
+#> Projected CRS: Belge 1972 / Belgian Lambert 72
+#> # A tibble: 646,589 x 31
+#>    polygon_id  eval  eenh1 eenh2 eenh3 eenh4 eenh5 eenh6 eenh7 eenh8 v1    v2   
+#>  * <chr>       <fct> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>
+#>  1 000098_v20… m     b     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  2 000132_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  3 000135_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  4 000136_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  5 000142_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  6 000150_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  7 000297_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  8 000991_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  9 000999_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#> 10 001000_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#> # … with 646,579 more rows, and 19 more variables: v3 <chr>, source <chr>,
 #> #   info <chr>, bwk_label <chr>, hab1 <chr>, phab1 <int>, hab2 <chr>,
 #> #   phab2 <int>, hab3 <chr>, phab3 <int>, hab4 <chr>, phab4 <int>, hab5 <chr>,
 #> #   phab5 <int>, source_hab <chr>, source_phab <chr>, hab_legend <fct>,
@@ -135,23 +135,23 @@ Not all function arguments are discussed in this vignette: do take the time to l
 habitatstreams <- read_habitatstreams()
 habitatstreams
 #> Simple feature collection with 560 features and 3 fields
-#> geometry type:  LINESTRING
-#> dimension:      XY
-#> bbox:           xmin: 33097.92 ymin: 157529.6 xmax: 254039 ymax: 243444.6
-#> projected CRS:  Belge 1972 / Belgian Lambert 72
+#> Geometry type: LINESTRING
+#> Dimension:     XY
+#> Bounding box:  xmin: 33097.92 ymin: 157529.6 xmax: 254039 ymax: 243444.6
+#> Projected CRS: Belge 1972 / Belgian Lambert 72
 #> # A tibble: 560 x 4
 #>    river_name   source_id type                                          geometry
 #>    <fct>        <fct>     <fct>                                 <LINESTRING [m]>
-#>  1 WOLFPUTBEEK  VMM       3260  (127857.1 167681.2, 127854.9 167684.5, 127844 1…
-#>  2 OUDE KALE    VMM       3260  (95737.01 196912.9, 95732.82 196912.4, 95710.38…
-#>  3 VENLOOP      EcoInv    3260  (169352.7 209314.9, 169358.8 209290.5, 169326.2…
-#>  4 VENLOOP      EcoInv    3260  (169633.6 209293.5, 169625 209289.2, 169594.4 2…
-#>  5 KLEINE NETE  EcoInv    3260  (181087.1 208607.2, 181088.6 208608.1, 181089 2…
-#>  6 KLEINE NETE  EcoInv    3260  (180037.4 208360.4, 180038.3 208377.5, 180038.3…
-#>  7 KLEINE NETE  EcoInv    3260  (180520 208595.7, 180540.5 208607.4, 180541.2 2…
-#>  8 KLEINE NETE  EcoInv    3260  (187379.9 209998.8, 187381.3 209998.5, 187381.6…
-#>  9 RAAMDONKSEB… extrapol  3260  (183545.5 192409, 183541.9 192406.7, 183541.9 1…
-#> 10 KLEINE NETE  EcoInv    3260  (183516.4 208261.7, 183567.3 208279.2, 183567.3…
+#>  1 Wolfputbeek  VMM       3260  (127857.1 167681.2, 127854.9 167684.5, 127844 1…
+#>  2 Oude Kale    VMM       3260  (95737.01 196912.9, 95732.82 196912.4, 95710.38…
+#>  3 Venloop      EcoInv    3260  (169352.7 209314.9, 169358.8 209290.5, 169326.2…
+#>  4 Venloop      EcoInv    3260  (169633.6 209293.5, 169625 209289.2, 169594.4 2…
+#>  5 Kleine Nete  EcoInv    3260  (181087.1 208607.2, 181088.6 208608.1, 181089 2…
+#>  6 Kleine Nete  EcoInv    3260  (180037.4 208360.4, 180038.3 208377.5, 180038.3…
+#>  7 Kleine Nete  EcoInv    3260  (180520 208595.7, 180540.5 208607.4, 180541.2 2…
+#>  8 Kleine Nete  EcoInv    3260  (187379.9 209998.8, 187381.3 209998.5, 187381.6…
+#>  9 Raamdonkseb… extrapol  3260  (183545.5 192409, 183541.9 192406.7, 183541.9 1…
+#> 10 Kleine Nete  EcoInv    3260  (183516.4 208261.7, 183567.3 208279.2, 183567.3…
 #> # … with 550 more rows
 ```
 
@@ -177,23 +177,23 @@ read_habitatstreams(source_text = TRUE) %>%
 habitatsprings <- read_habitatsprings()
 habitatsprings
 #> Simple feature collection with 104 features and 11 fields
-#> geometry type:  POINT
-#> dimension:      XY
-#> bbox:           xmin: 36407.89 ymin: 155249.7 xmax: 258371.1 ymax: 179732
-#> projected CRS:  Belge 1972 / Belgian Lambert 72
+#> Geometry type: POINT
+#> Dimension:     XY
+#> Bounding box:  xmin: 36407.84 ymin: 155249.7 xmax: 258371.1 ymax: 179732
+#> Projected CRS: Belge 1972 / Belgian Lambert 72
 #> # A tibble: 104 x 12
-#>    point_id name  system_type code_orig type  certain unit_id area_m2  year
-#>       <dbl> <chr> <fct>       <chr>     <fct> <lgl>     <dbl>   <dbl> <dbl>
-#>  1        1 Stee… rivulet     7220      7220  TRUE          1      50  2014
-#>  2        2 Stee… rivulet     7220      7220  TRUE          1      20  2014
-#>  3        3 Duli… <NA>        7230      7230  TRUE         NA      NA  2014
-#>  4        4 Kapi… <NA>        gh        <NA>  TRUE         NA      NA  2014
-#>  5        5 Reme… rivulet     7220      7220  TRUE          2     200  2014
-#>  6        6 Reme… rivulet     7220      7220  TRUE          2     500  2014
-#>  7        7 Kest… unknown     7220,gh   7220  FALSE        32      NA    NA
-#>  8        8 Krin… rivulet     7220      7220  TRUE          3     800  2014
-#>  9        9 Bois… rivulet     7220      7220  TRUE          4      50  2014
-#> 10       10 Kwin… mire        7220      7220  TRUE          5      10  2014
+#>    point_id name       system_type code_orig type  certain unit_id area_m2  year
+#>       <dbl> <chr>      <fct>       <chr>     <fct> <lgl>     <dbl>   <dbl> <dbl>
+#>  1        1 Steenputb… rivulet     7220      7220  TRUE          1      50  2014
+#>  2        2 Steenputb… rivulet     7220      7220  TRUE          1      20  2014
+#>  3        3 Duling     <NA>        7230      7230  TRUE         NA      NA  2014
+#>  4        4 Kapittelb… <NA>        gh        <NA>  TRUE         NA      NA  2014
+#>  5        5 Remersdaa… rivulet     7220      7220  TRUE          2     200  2014
+#>  6        6 Remersdaa… rivulet     7220      7220  TRUE          2     500  2014
+#>  7        7 Kesterbeek unknown     7220,gh   7220  FALSE        32      NA    NA
+#>  8        8 Krindaal   rivulet     7220      7220  TRUE          3     800  2014
+#>  9        9 Bois de B… rivulet     7220      7220  TRUE          4      50  2014
+#> 10       10 KwintenHo… mire        7220      7220  TRUE          5      10  2014
 #> # … with 94 more rows, and 3 more variables: in_sac <lgl>, source <chr>,
 #> #   geometry <POINT [m]>
 ```
@@ -205,23 +205,23 @@ You can filter the habitat types by setting the `filter_hab` argument as `TRUE` 
 habitatquarries <- read_habitatquarries()
 habitatquarries
 #> Simple feature collection with 45 features and 6 fields
-#> geometry type:  POLYGON
-#> dimension:      XY
-#> bbox:           xmin: 221427.3 ymin: 160393.5 xmax: 243211.1 ymax: 168965.1
-#> projected CRS:  Belge 1972 / Belgian Lambert 72
+#> Geometry type: POLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: 221427.3 ymin: 160393.5 xmax: 243211.1 ymax: 168965.1
+#> Projected CRS: Belge 1972 / Belgian Lambert 72
 #> # A tibble: 45 x 7
-#>    polygon_id unit_id name  code_orig type  extra_reference
-#>         <int>   <int> <chr> <chr>     <fct> <fct>          
-#>  1          4       4 Aver… gh        <NA>  Lahaye 2018    
-#>  2          6       6 Aver… 8310      8310  Lahaye 2018    
-#>  3          5       5 Aver… gh        <NA>  Lahaye 2018    
-#>  4         20      20 Cool… 8310      8310  Limburgs Lands…
-#>  5         21      21 Cool… gh        <NA>  Limburgs Lands…
-#>  6         29      29 Groe… 8310      8310  <NA>           
-#>  7         31      31 Grot… 8310      8310  De Haan & Laha…
-#>  8         37      37 Grot… 8310      8310  De Haan & Laha…
-#>  9         24      24 Heni… 8310      8310  Dusar et al. 2…
-#> 10         34      34 Heni… 8310      8310  Dusar et al. 2…
+#>    polygon_id unit_id name        code_orig type  extra_reference               
+#>         <int>   <int> <chr>       <chr>     <fct> <fct>                         
+#>  1          4       4 Avergat - … gh        <NA>  Lahaye 2018                   
+#>  2          6       6 Avergat - … 8310      8310  Lahaye 2018                   
+#>  3          5       5 Avergat - … gh        <NA>  Lahaye 2018                   
+#>  4         20      20 Coolen      8310      8310  Limburgs Landschap 2020; pers…
+#>  5         21      21 Coolen      gh        <NA>  Limburgs Landschap 2020       
+#>  6         29      29 Groeve Lin… 8310      8310  <NA>                          
+#>  7         31      31 Grote berg… 8310      8310  De Haan & Lahaye 2018         
+#>  8         37      37 Grote berg… 8310      8310  De Haan & Lahaye 2018         
+#>  9         24      24 Henisdael … 8310      8310  Dusar et al. 2007             
+#> 10         34      34 Henisdael … 8310      8310  Dusar et al. 2007             
 #> # … with 35 more rows, and 1 more variable: geom <POLYGON [m]>
 ```
 
@@ -290,44 +290,44 @@ hms <- read_habitatmap_stdized()
 ```{r}
 hms_pol <- hms$habitatmap_polygons
 hms_pol
-#> Simple feature collection with 77048 features and 2 fields
-#> geometry type:  MULTIPOLYGON
-#> dimension:      XY
-#> bbox:           xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243351.8
-#> projected CRS:  Belge 1972 / Belgian Lambert 72
-#> # A tibble: 77,048 x 3
+#> Simple feature collection with 87781 features and 2 fields
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243446.1
+#> Projected CRS: Belge 1972 / Belgian Lambert 72
+#> # A tibble: 87,781 x 3
 #>    polygon_id  description_orig                                             geom
 #>  * <fct>       <chr>                                          <MULTIPOLYGON [m]>
-#>  1 129420_v20… 60% x; 40% 6430_hf (((242838.5 161337.3, 242842.8 161324.7, 2428…
-#>  2 130153_v20… 70% 9120_qb; 30% … (((150669.4 227248.6, 150668.1 227242.9, 1505…
-#>  3 130815_v20… 70% gh; 30% 9160   (((258338.4 158696.1, 258336.5 158693.5, 2583…
-#>  4 137826_v20… 100% 6430,rbbhf    (((181587.2 234938, 181613.1 234933.1, 181646…
-#>  5 170624_v20… 100% rbbmr         (((145876.8 229686.8, 145701.7 229680.6, 1456…
-#>  6 203261_v20… 70% gh; 30% rbbmr  (((117137.2 210307.9, 117136.3 210288.3, 1171…
-#>  7 204352_v20… 80% gh; 20% rbbsp  (((116357.3 159278.3, 116340.5 159259.8, 1163…
-#>  8 204376_v20… 90% gh; 10% rbbsg  (((116110.1 210545.5, 116102.4 210541.1, 1160…
-#>  9 205188_v20… 60% rbbsp; 40% gh  (((232114.7 161594.5, 232122.7 161590.5, 2321…
-#> 10 205291_v20… 70% gh; 30% rbbsp  (((191253.5 160641.5, 191254.8 160636.1, 1912…
-#> # … with 77,038 more rows
+#>  1 130153_v20… 70% 9120_qb; 30% … (((150669.4 227248.6, 150668.1 227242.9, 1505…
+#>  2 130815_v20… 70% gh; 30% 9160   (((258338.4 158696.1, 258336.5 158693.5, 2583…
+#>  3 137826_v20… 100% 6430,rbbhf    (((181587.2 234938, 181613.1 234933.1, 181646…
+#>  4 170624_v20… 100% rbbmr         (((145876.8 229686.8, 145701.7 229680.6, 1456…
+#>  5 203261_v20… 70% gh; 30% rbbmr  (((117137.2 210307.9, 117136.3 210288.3, 1171…
+#>  6 204352_v20… 80% gh; 20% rbbsp  (((116357.3 159278.3, 116340.5 159259.8, 1163…
+#>  7 204376_v20… 90% gh; 10% rbbsg  (((116110.1 210545.5, 116102.4 210541.1, 1160…
+#>  8 205188_v20… 60% rbbsp; 40% gh  (((232114.7 161594.5, 232122.7 161590.5, 2321…
+#>  9 205291_v20… 70% gh; 30% rbbsp  (((191253.5 160641.5, 191254.8 160636.1, 1912…
+#> 10 205756_v20… 70% gh; 30% rbbsf  (((216258.8 156749, 216260.9 156750, 216287.7…
+#> # … with 87,771 more rows
 ```
 
 ```{r}
 hms_occ <- hms$habitatmap_types
 hms_occ
-#> # A tibble: 98,737 x 5
-#>    polygon_id   code_orig  phab certain type    
-#>    <fct>        <chr>     <dbl> <lgl>   <fct>   
-#>  1 000038_v2016 91E0_va     100 TRUE    91E0_va 
-#>  2 000043_v2016 9130_end    100 TRUE    9130_end
-#>  3 000132_v2016 9130_end    100 TRUE    9130_end
-#>  4 000204_v2016 91E0_vn     100 TRUE    91E0_vn 
-#>  5 000255_v2016 91E0_vc     100 TRUE    91E0_vc 
-#>  6 000297_v2016 rbbsp        10 TRUE    rbbsp   
-#>  7 000311_v2016 9130_end     70 TRUE    9130_end
-#>  8 000311_v2016 rbbsp        30 TRUE    rbbsp   
-#>  9 000390_v2016 91E0_vn      70 TRUE    91E0_vn 
-#> 10 000390_v2016 91E0_va      30 TRUE    91E0_va 
-#> # … with 98,727 more rows
+#> # A tibble: 110,485 x 5
+#>    polygon_id   type     certain code_orig  phab
+#>    <fct>        <fct>    <lgl>   <chr>     <int>
+#>  1 000038_v2016 91E0_va  TRUE    91E0_va     100
+#>  2 000043_v2016 9130_end TRUE    9130_end    100
+#>  3 000064_v2020 9130_end TRUE    9130_end    100
+#>  4 000132_v2016 9130_end TRUE    9130_end    100
+#>  5 000204_v2016 91E0_vn  TRUE    91E0_vn     100
+#>  6 000255_v2016 91E0_vc  TRUE    91E0_vc     100
+#>  7 000297_v2016 rbbsp    TRUE    rbbsp        10
+#>  8 000311_v2016 9130_end TRUE    9130_end     70
+#>  9 000311_v2016 rbbsp    TRUE    rbbsp        30
+#> 10 000390_v2016 91E0_vn  TRUE    91E0_vn      70
+#> # … with 110,475 more rows
 ```
 
 Let's estimate the surface area per type, including uncertain occurrences of types and taking into account cover percentage per polygon (`phab`):
@@ -347,16 +347,16 @@ hms_pol %>%
 #> # A tibble: 101 x 2
 #>    type        area
 #>    <fct>       [ha]
-#>  1 1130     5353.85
-#>  2 1140     2096.20
+#>  1 1130     5678.87
+#>  2 1140     2098.03
 #>  3 1310_pol   17.39
-#>  4 1310_zk    43.08
+#>  4 1310_zk    34.02
 #>  5 1310_zv    10.62
-#>  6 1320        1.55
-#>  7 1330_da   110.23
-#>  8 1330_hpr  136.40
-#>  9 2110       26.84
-#> 10 2120      481.62
+#>  6 1320        2.41
+#>  7 1330_da   117.61
+#>  8 1330_hpr  138.12
+#>  9 2110       27.14
+#> 10 2120      462.54
 #> # … with 91 more rows
 ```
 
@@ -370,43 +370,43 @@ hmt <- read_habitatmap_terr()
 
 ```{r}
 hmt$habitatmap_terr_polygons
-#> Simple feature collection with 68300 features and 4 fields
-#> geometry type:  MULTIPOLYGON
-#> dimension:      XY
-#> bbox:           xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243351.8
-#> projected CRS:  Belge 1972 / Belgian Lambert 72
-#> # A tibble: 68,300 x 5
+#> Simple feature collection with 78602 features and 4 fields
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243351.8
+#> Projected CRS: Belge 1972 / Belgian Lambert 72
+#> # A tibble: 78,602 x 5
 #>    polygon_id  description_orig  description source                         geom
 #>  * <fct>       <chr>             <chr>       <fct>            <MULTIPOLYGON [m]>
-#>  1 129420_v20… 60% x; 40% 6430_… 60% x; 40%… habita… (((242838.5 161337.3, 2428…
-#>  2 130153_v20… 70% 9120_qb; 30%… 70% 9120_q… habita… (((150669.4 227248.6, 1506…
-#>  3 130815_v20… 70% gh; 30% 9160  70% gh; 30… habita… (((258338.4 158696.1, 2583…
-#>  4 137826_v20… 100% 6430,rbbhf   100% 6430_… habita… (((181587.2 234938, 181613…
-#>  5 170624_v20… 100% rbbmr        100% rbbmr  habita… (((145876.8 229686.8, 1457…
-#>  6 203261_v20… 70% gh; 30% rbbmr 70% gh; 30… habita… (((117137.2 210307.9, 1171…
-#>  7 204352_v20… 80% gh; 20% rbbsp 80% gh; 20… habita… (((116357.3 159278.3, 1163…
-#>  8 204376_v20… 90% gh; 10% rbbsg 90% gh; 10… habita… (((116110.1 210545.5, 1161…
-#>  9 205188_v20… 60% rbbsp; 40% gh 60% rbbsp;… habita… (((232114.7 161594.5, 2321…
-#> 10 205291_v20… 70% gh; 30% rbbsp 70% gh; 30… habita… (((191253.5 160641.5, 1912…
-#> # … with 68,290 more rows
+#>  1 130153_v20… 70% 9120_qb; 30%… 70% 9120_q… habita… (((150669.4 227248.6, 1506…
+#>  2 130815_v20… 70% gh; 30% 9160  70% gh; 30… habita… (((258338.4 158696.1, 2583…
+#>  3 137826_v20… 100% 6430,rbbhf   100% 6430_… habita… (((181587.2 234938, 181613…
+#>  4 170624_v20… 100% rbbmr        100% rbbmr  habita… (((145876.8 229686.8, 1457…
+#>  5 203261_v20… 70% gh; 30% rbbmr 70% gh; 30… habita… (((117137.2 210307.9, 1171…
+#>  6 204352_v20… 80% gh; 20% rbbsp 80% gh; 20… habita… (((116357.3 159278.3, 1163…
+#>  7 204376_v20… 90% gh; 10% rbbsg 90% gh; 10… habita… (((116110.1 210545.5, 1161…
+#>  8 205188_v20… 60% rbbsp; 40% gh 60% rbbsp;… habita… (((232114.7 161594.5, 2321…
+#>  9 205291_v20… 70% gh; 30% rbbsp 70% gh; 30… habita… (((191253.5 160641.5, 1912…
+#> 10 205756_v20… 70% gh; 30% rbbsf 70% gh; 30… habita… (((216258.8 156749, 216260…
+#> # … with 78,592 more rows
 ```
 
 ```{r}
 hmt$habitatmap_terr_types
-#> # A tibble: 87,473 x 6
-#>    polygon_id   code_orig  phab certain type     source            
-#>    <fct>        <chr>     <dbl> <lgl>   <fct>    <fct>             
-#>  1 000038_v2016 91E0_va     100 TRUE    91E0_va  habitatmap_stdized
-#>  2 000043_v2016 9130_end    100 TRUE    9130_end habitatmap_stdized
-#>  3 000132_v2016 9130_end    100 TRUE    9130_end habitatmap_stdized
-#>  4 000204_v2016 91E0_vn     100 TRUE    91E0_vn  habitatmap_stdized
-#>  5 000255_v2016 91E0_vc     100 TRUE    91E0_vc  habitatmap_stdized
-#>  6 000297_v2016 rbbsp        10 TRUE    rbbsp    habitatmap_stdized
-#>  7 000311_v2016 9130_end     70 TRUE    9130_end habitatmap_stdized
-#>  8 000311_v2016 rbbsp        30 TRUE    rbbsp    habitatmap_stdized
-#>  9 000390_v2016 91E0_vn      70 TRUE    91E0_vn  habitatmap_stdized
-#> 10 000390_v2016 91E0_va      30 TRUE    91E0_va  habitatmap_stdized
-#> # … with 87,463 more rows
+#> # A tibble: 99,784 x 6
+#>    polygon_id   type     certain code_orig  phab source            
+#>    <fct>        <fct>    <lgl>   <chr>     <int> <fct>             
+#>  1 000038_v2016 91E0_va  TRUE    91E0_va     100 habitatmap_stdized
+#>  2 000043_v2016 9130_end TRUE    9130_end    100 habitatmap_stdized
+#>  3 000064_v2020 9130_end TRUE    9130_end    100 habitatmap_stdized
+#>  4 000132_v2016 9130_end TRUE    9130_end    100 habitatmap_stdized
+#>  5 000204_v2016 91E0_vn  TRUE    91E0_vn     100 habitatmap_stdized
+#>  6 000255_v2016 91E0_vc  TRUE    91E0_vc     100 habitatmap_stdized
+#>  7 000297_v2016 rbbsp    TRUE    rbbsp        10 habitatmap_stdized
+#>  8 000311_v2016 9130_end TRUE    9130_end     70 habitatmap_stdized
+#>  9 000311_v2016 rbbsp    TRUE    rbbsp        30 habitatmap_stdized
+#> 10 000390_v2016 91E0_vn  TRUE    91E0_vn      70 habitatmap_stdized
+#> # … with 99,774 more rows
 ```
 
 Compared to `habitatmap_stdized`, _purely_ aquatic or non-habitat/RIB polygons were omitted, and a part of the type data were interpreted in a more specific way.
@@ -422,20 +422,19 @@ hms_occ %>%
               distinct(type), 
             by = "type") %>% 
   arrange(type)
-#> # A tibble: 8 x 1
+#> # A tibble: 7 x 1
 #>   type 
 #>   <fct>
 #> 1 2190 
-#> 2 3110 
-#> 3 6410 
-#> 4 6430 
-#> 5 6510 
-#> 6 7140 
-#> 7 7220 
-#> 8 9130
+#> 2 6410 
+#> 3 6430 
+#> 4 6510 
+#> 5 7140 
+#> 6 7220 
+#> 7 9130
 ```
 
-About 4% of all type occurrences received a new type code:
+About 3% of all type occurrences received a new type code:
 
 ```{r}
 hmt$habitatmap_terr_types %>%  
@@ -444,8 +443,8 @@ hmt$habitatmap_terr_types %>%
 #> # A tibble: 2 x 3
 #>   source                                  n   pct
 #>   <fct>                               <int> <dbl>
-#> 1 habitatmap_stdized                  83627    96
-#> 2 habitatmap_stdized + interpretation  3846     4
+#> 1 habitatmap_stdized                  96424    97
+#> 2 habitatmap_stdized + interpretation  3360     3
 ```
 
 #### read_watersurfaces_hab()
@@ -458,43 +457,43 @@ wsh <- read_watersurfaces_hab()
 
 ```{r}
 wsh$watersurfaces_polygons
-#> Simple feature collection with 2947 features and 4 fields
-#> geometry type:  MULTIPOLYGON
-#> dimension:      XY
-#> bbox:           xmin: 22546.57 ymin: 159273.1 xmax: 253928.1 ymax: 242960.1
-#> projected CRS:  Belge 1972 / Belgian Lambert 72
-#> # A tibble: 2,947 x 5
-#>    polygon_id polygon_id_ws polygon_id_habi… description_orig
-#>  * <fct>      <fct>         <fct>            <chr>           
-#>  1 ANTANT0082 ANTANT0082    596466_v2014     60% 3150; 20% r…
-#>  2 ANTANT0251 ANTANT0251    113978_v2014     100% 3150       
-#>  3 ANTANT0253 ANTANT0253    111606_v2014     100% 3150       
-#>  4 ANTANT0297 ANTANT0297    409153_v2014+40… 85% 3140; 15% 3…
-#>  5 ANTANT0315 ANTANT0315    519082_v2018     100% 3140       
-#>  6 ANTANT0319 ANTANT0319    601958_v2014     100% 3150,gh    
-#>  7 ANTANT0381 ANTANT0381    644003_v2014     85% gh; 15% 3140
-#>  8 ANTANT0383 ANTANT0383    631879_v2014+59… 50% 3150; 40% r…
-#>  9 ANTANT0384 ANTANT0384    644003_v2014     85% gh; 15% 3140
-#> 10 ANTANT0434 ANTANT0434    537902_v2018     100% 3140       
-#> # … with 2,937 more rows, and 1 more variable: geom <MULTIPOLYGON [m]>
+#> Simple feature collection with 3233 features and 4 fields
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: 22546.57 ymin: 159273.1 xmax: 253896.9 ymax: 242960.1
+#> Projected CRS: Belge 1972 / Belgian Lambert 72
+#> # A tibble: 3,233 x 5
+#>    polygon_id polygon_id_ws polygon_id_habitatm… description_orig               
+#>  * <fct>      <fct>         <fct>                <chr>                          
+#>  1 ANTANT0082 ANTANT0082    596466_v2014         60% 3150; 20% rbbmr; 20% rbbsf 
+#>  2 ANTANT0234 ANTANT0234    633396_v2020         100% 3130_na                   
+#>  3 ANTANT0251 ANTANT0251    113978_v2014         100% 3150                      
+#>  4 ANTANT0253 ANTANT0253    111606_v2014         100% 3150                      
+#>  5 ANTANT0297 ANTANT0297    409153_v2014+409153… 85% 3140; 15% 3150+85% 3140; 1…
+#>  6 ANTANT0315 ANTANT0315    519082_v2018         100% 3140                      
+#>  7 ANTANT0319 ANTANT0319    601958_v2014         100% 3150,gh                   
+#>  8 ANTANT0381 ANTANT0381    644003_v2014         85% gh; 15% 3140               
+#>  9 ANTANT0383 ANTANT0383    631879_v2014+593522… 50% 3150; 40% rbbmr; 10% rbbsf…
+#> 10 ANTANT0384 ANTANT0384    644003_v2014         85% gh; 15% 3140               
+#> # … with 3,223 more rows, and 1 more variable: geom <MULTIPOLYGON [m]>
 ```
 
 ```{r}
 wsh$watersurfaces_types
-#> # A tibble: 3,302 x 4
-#>    polygon_id code_orig certain type 
-#>    <fct>      <chr>     <lgl>   <fct>
-#>  1 ANTANT0082 3150      TRUE    3150 
-#>  2 ANTANT0251 3150      TRUE    3150 
-#>  3 ANTANT0253 3150      TRUE    3150 
-#>  4 ANTANT0297 3140      TRUE    3140 
-#>  5 ANTANT0297 3150      TRUE    3150 
-#>  6 ANTANT0315 3140      TRUE    3140 
-#>  7 ANTANT0319 3150,gh   FALSE   3150 
-#>  8 ANTANT0381 3140      TRUE    3140 
-#>  9 ANTANT0383 3150      TRUE    3150 
-#> 10 ANTANT0384 3140      TRUE    3140 
-#> # … with 3,292 more rows
+#> # A tibble: 3,669 x 4
+#>    polygon_id type    certain code_orig
+#>    <fct>      <fct>   <lgl>   <chr>    
+#>  1 ANTANT0082 3150    TRUE    3150     
+#>  2 ANTANT0234 3130_na TRUE    3130_na  
+#>  3 ANTANT0251 3150    TRUE    3150     
+#>  4 ANTANT0253 3150    TRUE    3150     
+#>  5 ANTANT0297 3140    TRUE    3140     
+#>  6 ANTANT0297 3150    TRUE    3150     
+#>  7 ANTANT0315 3140    TRUE    3140     
+#>  8 ANTANT0319 3150    FALSE   3150,gh  
+#>  9 ANTANT0381 3140    TRUE    3140     
+#> 10 ANTANT0383 3150    TRUE    3150     
+#> # … with 3,659 more rows
 ```
 
 Let's compute some statistics of standing water types (ignoring the value `certain`):
@@ -519,15 +518,15 @@ wsh$watersurfaces_polygons %>%
 #> # A tibble: 9 x 8
 #>   type     nr_watersurfaces total_area area_min area_Q1 area_Q2 area_Q3     max
 #>   <fct>               <int>        [a]      [a]     [a]     [a]     [a]     [a]
-#> 1 2190_a                308     3547.4      0.0     0.9     2.0     5.6   317.5
-#> 2 3110                    5     1642.6    111.7   119.8   199.5   362.3   849.3
-#> 3 3130                  271    37433.4      0.8    11.1    36.2   124.3  2807.2
-#> 4 3130_aom             1022    88380.7      0.1     2.1     9.0    43.1  7062.7
-#> 5 3130_na               226    85942.7      0.6    37.6   111.9   266.5 13668.2
-#> 6 3140                  105    66531.9      0.8    11.8    46.6   230.4 13668.2
-#> 7 3150                  500   113617.5      0.1     6.4    17.1    86.5 13668.2
-#> 8 3160                  297    25137.0      0.1     6.4    21.8    64.3  4179.1
-#> 9 rbbah                 528    40830.2      0.1     4.2    12.8    55.2  3748.6
+#> 1 2190_a                318     3605.6      0.0     0.9     2.1     5.5   317.5
+#> 2 3110                    6     1876.8    111.7   139.7   216.9   330.3   849.3
+#> 3 3130                  219    33022.9      0.6    13.0    41.0   160.0  2807.2
+#> 4 3130_aom             1267   107732.6      0.1     2.3     9.7    44.1  7062.7
+#> 5 3130_na               354   120174.2      1.0    44.7   122.5   277.9 13668.2
+#> 6 3140                  104    72272.0      0.8    13.3    55.3   418.5 13668.2
+#> 7 3150                  475   105019.1      0.4     6.6    17.3    83.5 13668.2
+#> 8 3160                  379    27936.9      0.1     6.1    17.4    59.3  4179.1
+#> 9 rbbah                 517    33716.3      0.1     4.2    10.9    47.0  3748.6
 ```
 
 An strong point of `sf` objects is that the geometry has explicit units.
@@ -587,7 +586,7 @@ Obviously, more rows of `habitatmap_terr` will be retained by joining `df_exp`:
 hmt$habitatmap_terr_types %>% 
   semi_join(df_exp, by = c(type = "mycode")) %>% 
   nrow
-#> [1] 5885
+#> [1] 6634
 ```
 
 When joining with `df`:
@@ -596,7 +595,7 @@ When joining with `df`:
 hmt$habitatmap_terr_types %>% 
   semi_join(df, by = c(type = "mycode")) %>% 
   nrow
-#> [1] 4447
+#> [1] 4984
 ```
 
 
