@@ -44,9 +44,9 @@ A list of two objects:
   \itemize{
     \item \code{polygon_id}
     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
-    \item \code{certain}: \code{TRUE} when vegetation type is certain and
-     \code{FALSE} when vegetation type is uncertain.
-    \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
+    \item \code{certain}: \code{TRUE} when the type is certain and
+     \code{FALSE} when the type is uncertain.
+    \item \code{code_orig}: original type code in raw \code{habitatmap}.
     }
     }
 }
@@ -57,7 +57,7 @@ A list of two objects:
   CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
   that contain standing water types (habitat or RIB).
   \item \code{watersurfaces_types}: a tibble with information on the
-  standing water types (HAB1, HAB2,..., HAB5) that occur within
+  standing water \link{types} (HAB1, HAB2,..., HAB5) that occur within
   each polygon of \code{watersurfaces_polygons}.
   }
 }
