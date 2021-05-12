@@ -49,10 +49,12 @@ RoxygenNote: 7.1.1
 Suggests: 
     bib2df,
     curl,
+    digest,
     googledrive,
     jsonlite,
     knitr,
     mapview,
+    openssl,
     parallel,
     raster (>= 3.3-16),
     readxl,

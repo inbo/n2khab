@@ -62,7 +62,8 @@ A list of two objects:
 }
 \details{
 The data source \code{watersurfaces_hab} is a combination of \code{habitatmap_stdized} (see
-\code{\link{read_habitatmap_stdized}}) and the \href{https://http://www.geopunt.be/catalogus/datasetfolder/10e87ad3-8235-40e0-8269-42c3c96a884d}{watersurface map of Flanders}.
+\code{\link{read_habitatmap_stdized}}) and the
+\href{https://doi.org/10.5281/zenodo.3386857}{watersurface map of Flanders}.
 It contains all standing water types in Flanders.
 
 
@@ -87,7 +88,8 @@ repository.
 \examples{
 \dontrun{
 # This example supposes that your working directory or a directory up to 10
-# levels above has the 'n2khab_data' folder AND that the 'watersurfaces_hab'
+# levels above has the 'n2khab_data' folder AND that the latest version of
+# the 'watersurfaces_hab'
 # data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can
 # consider what to do.
