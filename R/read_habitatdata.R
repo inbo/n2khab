@@ -253,7 +253,6 @@ read_habitatmap_stdized <-
 #' Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
 #' (40). Instituut voor Natuur en Bosonderzoek, Brussel.
 #' \doi{10.21436/inbor.19088385}.
-#'
 #' \item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
 #' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
 #' Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
