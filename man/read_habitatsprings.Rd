@@ -42,11 +42,11 @@ type \code{POINT}, with attribute variables:
 \item \code{name}: site name.
 \item \code{system_type}: environmental typology of \code{7220}: \code{mire},
 \code{rivulet} or \code{unknown} (non-\code{7220} types are \code{NA})
-\item \code{code_orig}: original vegetation code in raw
+\item \code{code_orig}: original type code in raw
 \code{habitatsprings}.
 \item \code{type}: habitat type listed in \code{\link{types}}.
-\item \code{certain}: \code{TRUE} when vegetation type is certain and
-\code{FALSE} when vegetation type is uncertain.
+\item \code{certain}: \code{TRUE} when the type is certain and
+\code{FALSE} when the type is uncertain.
 \item \code{unit_id}: population unit id for large scale sampling
 events.
 Spatially close points have the same value.

@@ -54,7 +54,7 @@ A list of two objects:
   \itemize{
     \item \code{polygon_id}
     \item \code{description_orig}: polygon description based on the
-    original vegetation codes in the \code{habitatmap} data source
+    original type codes in the \code{habitatmap} data source
     \item \code{description}: based on \code{description_orig} but with the
     interpreted type codes
     \item \code{source}: states where \code{description} comes from: either

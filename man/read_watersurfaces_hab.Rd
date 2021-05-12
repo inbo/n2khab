@@ -44,9 +44,9 @@ A list of two objects:
   \itemize{
     \item \code{polygon_id}
     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
-    \item \code{certain}: \code{TRUE} when vegetation type is certain and
-     \code{FALSE} when vegetation type is uncertain.
-    \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
+    \item \code{certain}: \code{TRUE} when the type is certain and
+     \code{FALSE} when the type is uncertain.
+    \item \code{code_orig}: original type code in raw \code{habitatmap}.
     }
     }
 }

@@ -274,9 +274,9 @@ read_habitatmap_stdized <-
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
-#'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
-#'      \code{FALSE} when vegetation type is uncertain.
-#'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
+#'     \item \code{certain}: \code{TRUE} when the type is certain and
+#'      \code{FALSE} when the type is uncertain.
+#'     \item \code{code_orig}: original type code in raw \code{habitatmap}.
 #'     }
 #'     }
 #'
@@ -989,7 +989,7 @@ read_habitatmap <-
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{description_orig}: polygon description based on the
-#'     original vegetation codes in the \code{habitatmap} data source
+#'     original type codes in the \code{habitatmap} data source
 #'     \item \code{description}: based on \code{description_orig} but with the
 #'     interpreted type codes
 #'     \item \code{source}: states where \code{description} comes from: either
@@ -1332,11 +1332,11 @@ read_habitatstreams <-
 #'     \item \code{name}: site name.
 #'     \item \code{system_type}: environmental typology of `7220`: `mire`,
 #'     `rivulet` or `unknown` (non-`7220` types are `NA`)
-#'     \item \code{code_orig}: original vegetation code in raw
+#'     \item \code{code_orig}: original type code in raw
 #'     \code{habitatsprings}.
 #'     \item \code{type}: habitat type listed in \code{\link{types}}.
-#'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
-#'      \code{FALSE} when vegetation type is uncertain.
+#'     \item \code{certain}: \code{TRUE} when the type is certain and
+#'      \code{FALSE} when the type is uncertain.
 #'     \item \code{unit_id}: population unit id for large scale sampling
 #'     events.
 #'     Spatially close points have the same value.
