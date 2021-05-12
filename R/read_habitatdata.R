@@ -234,10 +234,10 @@ read_habitatmap_stdized <-
 #'   \item \code{watersurfaces_types}: a tibble with following variables:
 #'   \itemize{
 #'     \item \code{polygon_id}
-#'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
+#'     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
 #'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
 #'      \code{FALSE} when vegetation type is uncertain.
-#'     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
+#'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
 #'     }
 #'     }
 #'
@@ -287,6 +287,7 @@ read_habitatmap_stdized <-
 #' mutate
 #' mutate_at
 #' vars
+#' relocate
 #' @importFrom assertthat
 #' assert_that
 #' is.string
@@ -333,7 +334,10 @@ read_watersurfaces_hab <-
                     type = factor(.data$type,
                                   levels = levels(types$type)
                                   )
-                    )
+                    ) %>%
+            relocate(.data$polygon_id,
+                     .data$type,
+                     .data$certain)
 
         if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
 
