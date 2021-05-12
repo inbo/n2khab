@@ -21,7 +21,8 @@ starting from the working directory.}
 \item{filter_hab}{If \code{TRUE} only polygons that (partially) contain habitat or a regionally
 important biotope (RIB) are returned. The default value is \code{FALSE}. This
 requires the corresponding version of the processed data source
-\code{habitatmap_stdized} to be present in the 'n2khab_data' folder.}
+\code{habitatmap_stdized} to be present in its default location inside the
+\code{n2khab_data} folder.}
 
 \item{version}{Version ID of the data source.
 Defaults to the latest available version defined by the package.}

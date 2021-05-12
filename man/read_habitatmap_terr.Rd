@@ -65,13 +65,16 @@ A list of two objects:
   \code{habitatmap_stdized}):
   \itemize{
     \item \code{polygon_id}
+    \item \code{type}: the interpreted habitat or RIB type
+    \item \code{certain}
     \item \code{code_orig}
     \item \code{phab}
-    \item \code{certain}
-    \item \code{type}: the interpreted habitat or RIB type
     \item \code{source}: states where \code{type} comes from: either
     \code{habitatmap_stdized} or \code{habitatmap_stdized + interpretation}
     }
+    Since version \code{habitatmap_terr_2020_v1}, rows are unique only
+    by the combination of the \code{polygon_id}, \code{type} and
+    \code{certain} columns.
     }
 }
 \description{
