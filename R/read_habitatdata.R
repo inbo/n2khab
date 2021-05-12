@@ -298,9 +298,12 @@ read_watersurfaces_hab <-
     function(file = file.path(fileman_up("n2khab_data"),
                               "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
              interpreted = FALSE,
-             version = "watersurfaces_hab_v3"){
+             version = c("watersurfaces_hab_v4",
+                         "watersurfaces_hab_v3",
+                         "watersurfaces_hab_v2",
+                         "watersurfaces_hab_v1")){
 
-        assert_that(is.string(version))
+        version <- match.arg(version)
 
         watersurfaces_polygons <- read_sf(file,
                                    "watersurfaces_hab_polygons")
