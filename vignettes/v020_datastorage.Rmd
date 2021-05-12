@@ -60,7 +60,7 @@ There is a major distinction between:
 - **processed data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-processed)), to be stored in a folder `n2khab_data/20_processed`.
 These data sources have been derived from the raw data sources, but are distributed on their own because of the time-consuming or intricate calculations needed to reproduce them.
 
-You can reproduce the processed data sources from an [R script on Github](https://github.com/inbo/n2khab-preprocessing/blob/master/src/complete_reproducible_workflow.R), but it will take hours.
+You can reproduce the processed data sources from a [shell script on Github](https://github.com/inbo/n2khab-preprocessing/blob/master/src/complete_reproducible_workflow.sh), but it will take hours.
 
 As you see, when storing these binary or large data, we avoid using a folder named as `data`:
 
@@ -108,9 +108,9 @@ The names of the `n2khab` 'read' function and their documentation make clear whi
 ```
 n2khab_data
     ├── 10_raw
-          ├── habitatmap            -> contains habitatmat.shp, habitatmap.dbf etc.
-          ├── soilmap
-          └── GRTSmaster_habitats
+    │     ├── habitatmap            -> contains habitatmat.shp, habitatmap.dbf etc.
+    │     ├── soilmap
+    │     └── GRTSmaster_habitats
     └── 20_processed
           ├── habitatmap_stdized
           └── GRTSmh_diffres

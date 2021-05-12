@@ -9,7 +9,8 @@ read_watersurfaces_hab(
   file = file.path(fileman_up("n2khab_data"),
     "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
   interpreted = FALSE,
-  version = "watersurfaces_hab_v3"
+  version = c("watersurfaces_hab_v4", "watersurfaces_hab_v3", "watersurfaces_hab_v2",
+    "watersurfaces_hab_v1")
 )
 }
 \arguments{
@@ -42,10 +43,10 @@ A list of two objects:
   \item \code{watersurfaces_types}: a tibble with following variables:
   \itemize{
     \item \code{polygon_id}
-    \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
-    \item \code{certain}: \code{TRUE} when vegetation type is certain and
-     \code{FALSE} when vegetation type is uncertain.
     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
+    \item \code{certain}: \code{TRUE} when the type is certain and
+     \code{FALSE} when the type is uncertain.
+    \item \code{code_orig}: original type code in raw \code{habitatmap}.
     }
     }
 }
@@ -56,13 +57,14 @@ A list of two objects:
   CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
   that contain standing water types (habitat or RIB).
   \item \code{watersurfaces_types}: a tibble with information on the
-  standing water types (HAB1, HAB2,..., HAB5) that occur within
+  standing water \link{types} (HAB1, HAB2,..., HAB5) that occur within
   each polygon of \code{watersurfaces_polygons}.
   }
 }
 \details{
 The data source \code{watersurfaces_hab} is a combination of \code{habitatmap_stdized} (see
-\code{\link{read_habitatmap_stdized}}) and the \href{https://http://www.geopunt.be/catalogus/datasetfolder/10e87ad3-8235-40e0-8269-42c3c96a884d}{watersurface map of Flanders}.
+\code{\link{read_habitatmap_stdized}}) and the
+\href{https://doi.org/10.5281/zenodo.3386857}{watersurface map of Flanders}.
 It contains all standing water types in Flanders.
 
 
@@ -87,7 +89,8 @@ repository.
 \examples{
 \dontrun{
 # This example supposes that your working directory or a directory up to 10
-# levels above has the 'n2khab_data' folder AND that the 'watersurfaces_hab'
+# levels above has the 'n2khab_data' folder AND that the latest version of
+# the 'watersurfaces_hab'
 # data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can
 # consider what to do.
@@ -102,18 +105,19 @@ wsh_types
 }
 \references{
 \itemize{
-\item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
-(2018).
-Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
-Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
-Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
-Instituut voor Natuur- en Bosonderzoek, Brussel.
-\doi{10.21436/inbor.14178464}.
-\item De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
-Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
-Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
-Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-\doi{10.21436/inbor.15138099}.
+\item Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &
+Denys L. (2020).
+Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
+Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
+(40). Instituut voor Natuur en Bosonderzoek, Brussel.
+\doi{10.21436/inbor.19088385}.
+\item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
+Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
+Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
+en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor
+Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
+\doi{10.21436/inbor.18840851}.
 }
 }
 \seealso{

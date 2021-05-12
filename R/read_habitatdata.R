@@ -8,16 +8,16 @@
 #'   of the \code{habitatmap} that contain habitat or a regionally
 #'   important biotope (RIB).
 #'   \item \code{habitatmap_types}: a tibble with information on the
-#'   habitat and RIB types (HAB1, HAB2,..., HAB5) that occur within
+#'   habitat and RIB \link{types} (HAB1, HAB2,..., HAB5) that occur within
 #'   each polygon of \code{habitatmap_polygons}.
 #'   }
 #'
 #' The data source \code{habitatmap_stdized} is the processed version
-#' of the raw data source \code{habitatmap} (De Saeger et al., 2018).
+#' of the raw data source \code{habitatmap} (De Saeger et al., 2020).
 #' Every polygon in the \code{habitatmap} can consist of maximum 5
-#' different vegetation types. This information is stored in the
+#' different types. This information is stored in the
 #' columns 'HAB1', HAB2',..., 'HAB5' of the attribute table. The
-#' fraction of each vegetation type within the polygons is stored in
+#' fraction of each type within the polygons is stored in
 #' the columns 'PHAB1', 'PHAB2', ..., 'PHAB5'.
 #'
 #' The data source \code{habitatmap_stdized} is a GeoPackage, available at
@@ -33,17 +33,38 @@
 #' The processing of the \code{habitatmap_types} tibble included
 #' following steps:
 #' \itemize{
-#'   \item For some polygons the vegetation type is uncertain, and the
-#'   vegetation code in the raw \code{habitatmap} data source consists
+#'   \item For some polygons the type is uncertain, and the
+#'   type code in the raw \code{habitatmap} data source consists
 #'   of 2 or 3 possible types, separated with a ','. The different
-#'   possible vegetation types are split up and one row is created for
-#'   each of them. The variable \code{certain} will be \code{FALSE} if
-#'   the original code consists of 2 or 3 possible vegetation types, and \code{TRUE}
-#'   if only one vegetation type is provided.
-#'   \item For some polygons the original vegetation code in the
+#'   possible types are split up and one row is created for
+#'   each of them, with \code{phab} for each new row simply set to the original
+#'   value of \code{phab}.
+#'   The variable \code{certain} will be \code{FALSE} if
+#'   the original code consists of 2 or 3 possible types, and \code{TRUE}
+#'   if only one type is provided.
+#'   \item Some polygons contain both a standing water habitat type
+#'   and \code{rbbmr}:
+#'   \code{3130_rbbmr},
+#'   \code{3140_rbbmr},
+#'   \code{3150_rbbmr} and
+#'   \code{3160_rbbmr}.
+#'   Since \code{habitatmap_stdized_2020_v1}, the two
+#'   types \code{31xx} and \code{rbbmr} are split up and one row is
+#'   created for each of them, with \code{phab} for each new row simply
+#'   set to the original value of \code{phab}.
+#'   The variable \code{certain} in this case will be \code{TRUE} for both
+#'   types.
+#'   \item After those first two steps, a given polygon could contain the
+#'   same type with the same value for \code{certain} repeated several
+#'   times, e.g. when \code{31xx_rbbmr} is present with \code{phab} = yy\%
+#'   and \code{31xx} is present with \code{phab} = zz\%.
+#'   In that case the rows with the same \code{polygon_id}, \code{type}
+#'   and \code{certain} were gathered into one row and the respective
+#'   \code{phab} values were added up.
+#'   \item For some polygons the original type code in the
 #'   \code{habitatmap} was not consistent with general coding syntax or
-#'   with the type codes from the \code{\link{types}}. In that case the
-#'   code was adjusted.
+#'   with the type codes from the \code{\link{types}} data source. In that
+#'   case the code was adjusted.
 #'
 #'   }
 #'
@@ -67,34 +88,40 @@
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{description_orig}: polygon description based on the
-#'     orginal vegetation codes in the raw \code{habitatmap}}
+#'     orginal type codes in the raw \code{habitatmap}}
 #'   }
 #'   \itemize{
 #'   \item \code{habitatmap_types}: a tibble with following variables
 #'   \itemize{
 #'     \item \code{polygon_id}
-#'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
-#'     \item \code{phab}: proportion of polygon covered by type, as a percentage.
-#'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
-#'      \code{FALSE} when vegetation type is uncertain.
 #'     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
+#'     \item \code{certain}: \code{TRUE} when the type is certain and
+#'      \code{FALSE} when the type is uncertain.
+#'     \item \code{code_orig}: original type code in raw \code{habitatmap}.
+#'     \item \code{phab}: proportion of polygon covered by type, as a percentage.
 #'     }
+#'     Since version \code{habitatmap_stdized_2020_v1}, rows are unique only
+#'     by the combination of the \code{polygon_id}, \code{type} and
+#'     \code{certain} columns.
 #'     }
+#'
 #'
 #' @family functions involved in processing the 'habitatmap' data source
 #'
 #' @references
 #'
-#' De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
-#' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
-#' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
-#' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.15138099}.
+#' De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
+#' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
+#' Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+#' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
+#' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
+#' \doi{10.21436/inbor.18840851}.
 #'
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatmap_stdized'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatmap_stdized'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -111,7 +138,10 @@
 #' read_sf
 #' st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr %>% mutate
+#' @importFrom dplyr
+#' %>%
+#' mutate
+#' relocate
 #' @importFrom assertthat
 #' assert_that
 #' is.string
@@ -119,9 +149,11 @@
 read_habitatmap_stdized <-
     function(file = file.path(fileman_up("n2khab_data"),
                               "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"),
-             version = "habitatmap_stdized_2018_v2"){
+             version = c("habitatmap_stdized_2020_v1",
+                         "habitatmap_stdized_2018_v2",
+                         "habitatmap_stdized_2018_v1")){
 
-        assert_that(is.string(version))
+        version <- match.arg(version)
 
         habmap_polygons <- read_sf(file,
                                    "habitatmap_polygons")
@@ -154,6 +186,14 @@ read_habitatmap_stdized <-
                                   )
                     )
 
+        if (grepl("2018", version)) {
+            habmap_types <-
+                habmap_types %>%
+                relocate(.data$polygon_id,
+                         .data$type,
+                         .data$certain)
+        }
+
         if (version == "habitatmap_stdized_2018_v1") {
 
             result <- list(habitatmap_polygons = habmap_polygons,
@@ -183,12 +223,13 @@ read_habitatmap_stdized <-
 #'   CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
 #'   that contain standing water types (habitat or RIB).
 #'   \item \code{watersurfaces_types}: a tibble with information on the
-#'   standing water types (HAB1, HAB2,..., HAB5) that occur within
+#'   standing water \link{types} (HAB1, HAB2,..., HAB5) that occur within
 #'   each polygon of \code{watersurfaces_polygons}.
 #'   }
 #'
 #' The data source \code{watersurfaces_hab} is a combination of \code{habitatmap_stdized} (see
-#' \code{\link{read_habitatmap_stdized}}) and the \href{https://http://www.geopunt.be/catalogus/datasetfolder/10e87ad3-8235-40e0-8269-42c3c96a884d}{watersurface map of Flanders}.
+#' \code{\link{read_habitatmap_stdized}}) and the
+#' \href{https://doi.org/10.5281/zenodo.3386857}{watersurface map of Flanders}.
 #' It contains all standing water types in Flanders.
 #'
 #'
@@ -232,10 +273,10 @@ read_habitatmap_stdized <-
 #'   \item \code{watersurfaces_types}: a tibble with following variables:
 #'   \itemize{
 #'     \item \code{polygon_id}
-#'     \item \code{code_orig}: original vegetation code in raw \code{habitatmap}.
-#'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
-#'      \code{FALSE} when vegetation type is uncertain.
 #'     \item \code{type}: habitat or RIB type listed in \code{\link{types}}.
+#'     \item \code{certain}: \code{TRUE} when the type is certain and
+#'      \code{FALSE} when the type is uncertain.
+#'     \item \code{code_orig}: original type code in raw \code{habitatmap}.
 #'     }
 #'     }
 #'
@@ -245,24 +286,26 @@ read_habitatmap_stdized <-
 #'
 #' @references
 #' \itemize{
-#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
-#' (2018).
-#' Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
-#' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
-#' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
-#' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \doi{10.21436/inbor.14178464}.
-#' \item De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
-#' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
-#' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
-#' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.15138099}.
+#' \item Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &
+#' Denys L. (2020).
+#' Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
+#' Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
+#' (40). Instituut voor Natuur en Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.19088385}.
+#' \item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
+#' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
+#' Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+#' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
+#' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor
+#' Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
+#' \doi{10.21436/inbor.18840851}.
 #' }
 #'
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'watersurfaces_hab'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'watersurfaces_hab'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -284,6 +327,7 @@ read_habitatmap_stdized <-
 #' mutate
 #' mutate_at
 #' vars
+#' relocate
 #' @importFrom assertthat
 #' assert_that
 #' is.string
@@ -292,9 +336,12 @@ read_watersurfaces_hab <-
     function(file = file.path(fileman_up("n2khab_data"),
                               "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
              interpreted = FALSE,
-             version = "watersurfaces_hab_v3"){
+             version = c("watersurfaces_hab_v4",
+                         "watersurfaces_hab_v3",
+                         "watersurfaces_hab_v2",
+                         "watersurfaces_hab_v1")){
 
-        assert_that(is.string(version))
+        version <- match.arg(version)
 
         watersurfaces_polygons <- read_sf(file,
                                    "watersurfaces_hab_polygons")
@@ -330,7 +377,10 @@ read_watersurfaces_hab <-
                     type = factor(.data$type,
                                   levels = levels(types$type)
                                   )
-                    )
+                    ) %>%
+            relocate(.data$polygon_id,
+                     .data$type,
+                     .data$certain)
 
         if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
 
@@ -364,19 +414,36 @@ read_watersurfaces_hab <-
 
 #' Return the data source \code{watersurfaces} as an \code{sf} polygon layer
 #'
-#' Returns the raw data source \code{watersurfaces} (Packet et al., 2018)
+#' Returns the raw data source \code{watersurfaces} (Leyssen et al., 2020)
 #' as a standardized \code{sf} polygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
-#' See Packet et al. (2018) for an elaborate explanation of the data source
+#' If \code{file} is not specified, the function will try to read the file
+#' in the default folder for data storage (as described in the data management
+#' advice in the vignette (run \code{vignette("v020_datastorage")})).
+#' If you want to use another file or file structure than the default
+#' data storage, you can specify your own \code{file}.
+#' In both cases: always make sure to specify the correct \code{version}, that
+#' is the version corresponding to the \code{file} (note that the \code{version}
+#' defaults to the latest version, that is \code{watersurfaces_v1.1}).
+#'
+#' See Leyssen et al. (2020) for an elaborate explanation of the data source
 #' and its attributes.
 #'
+#' @param file Optional string. An absolute or relative file path of
+#' the data source. If left \code{NULL}, the default follows the data management
+#' advice in the vignette on data storage
+#' (run \code{vignette("v020_datastorage")}).
+#' It uses the first \code{n2khab_data} folder that is found when
+#' sequentially climbing up 0 to 10 levels in the file system hierarchy,
+#' starting from the working directory.
 #' @param extended Logical.
 #' Should names or explanations of codes be added as extra
 #' variables in the result?
-#' Currently only applies to \code{wfd_type}; if \code{TRUE}, a variable
-#' \code{wfd_type_name} is added.
+#' Currently only applies to \code{wfd_type} and \code{connectivity};
+#' if \code{TRUE}, the variables \code{wfd_type_name} and
+#' \code{connectivity_name} are added.
 #' Defaults to \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized
@@ -413,20 +480,19 @@ read_watersurfaces_hab <-
 #' wateren in Vlaanderen.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \item Packet J., Scheers K., Smeekens V., Leyssen A., Wils C. & Denys L.
-#' (2018).
-#' Watervlakken versie 1.0: polygonenkaart van stilstaand water in Vlaanderen.
-#' Een nieuw instrument voor onderzoek, water-, milieu- en natuurbeleid.
-#' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2018 (14).
-#' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \doi{10.21436/inbor.14178464}.
+#' \item Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &
+#' Denys L. (2020).
+#' Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
+#' Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
+#' (40). Instituut voor Natuur en Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.19088385}.
 #' }
 #'
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'watersurfaces'
-#' # data source is present in the default subdirectory.
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'watersurfaces' data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
 #'
@@ -447,56 +513,103 @@ read_watersurfaces_hab <-
 #' na_lgl
 #' @importFrom dplyr
 #' %>%
+#' across
 #' arrange
 #' mutate
 #' mutate_at
+#' mutate_if
+#' rename
 #' select
 #' left_join
 #' everything
 #' tribble
 #' @importFrom assertthat
 #' assert_that
+#' @importFrom stringr
+#' str_replace
 #' @export
 read_watersurfaces <-
-    function(file = file.path(fileman_up("n2khab_data"),
-                              "10_raw/watersurfaces"),
+    function(file = NULL,
              extended = FALSE,
-             version = "watersurfaces_v1.0") {
-
-        assert_that(file.exists(file))
-        assert_that(is.string(version))
+             version = c("watersurfaces_v1.1", "watersurfaces_v1.0")) {
 
         version <- match.arg(version)
 
-        suppressWarnings(
-            watersurfaces <- read_sf(file,
-                                     crs = 31370)
-        )
+        if (missing(file)) {
 
-        wfd_typetransl <-
-            tribble(~wfd_type, ~wfd_type_name,
-                    "B", "sterk brak",
-                    "Bzl", "zeer licht brak",
-                    "Ad", "alkalisch duinwater",
-                    "Ai", "ondiep, alkalisch, ionenrijk",
-                    "Ami", "ondiep, alkalisch, matig ionenrijk",
-                    "Ami-e", "ondiep, alkalisch, matig ionenrijk, eutroof",
-                    "Ami-om", "ondiep, alkalisch, matig ionenrijk, oligo-mesotroof",
-                    "Aw", "groot-diep, alkalisch",
-                    "Aw-e", "groot-diep, alkalisch, eutroof",
-                    "Aw-om", "groot-diep, alkalisch, oligo-mesotroof",
-                    "C", "circumneutraal",
-                    "Cb", "circumneutraal, sterk gebufferd",
-                    "CbFe", "circumneutraal, sterk gebufferd, ijzerrijk",
-                    "Czb", "circumneutraal, zwak gebufferd",
-                    "Z", "zuur",
-                    "Zm", "zwak zuur",
-                    "Zs", "sterk zuur"
-            ) %>%
-            mutate(
-                wfd_type = factor(.data$wfd_type,
-                                  levels = .$wfd_type)
+            if (version == "watersurfaces_v1.1") {
+                file <- file.path(fileman_up("n2khab_data"),
+                                  "10_raw/watersurfaces/watersurfaces.gpkg")
+                } else {
+                    file <- file.path(fileman_up("n2khab_data"),
+                                      "10_raw/watersurfaces/watersurfaces.shp")
+                }
+
+            assert_that(file.exists(file),
+                        msg =  paste("Path", file, "does not exist. Control the",
+                                     "path and specify the corresponding version",
+                                     "if you do not use", version))
+        } else {
+
+            assert_that(file.exists(file))
+
+            if (version == "watersurfaces_v1.1") {
+                if (substr(file, nchar(file) - 4, nchar(file)) != ".gpkg") {
+                    stop(paste(version, "should be a GeoPackage (.gpkg).",
+                               "Control the version and the path."))
+                }
+            }
+        }
+
+        if (version == "watersurfaces_v1.1") {
+
+            suppressWarnings(
+                watersurfaces <- read_sf(file,
+                                         layer = "Watervlakken",
+                                         crs = 31370))
+
+            wfd_typetransl <- read_sf(file, layer = "LktKRWTYPE") %>%
+                mutate_if(., is.character,
+                          .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
+                mutate(across(c(.data$Code), as.factor)) %>%
+                dplyr::rename(wfd_type = .data$Code,
+                              wfd_type_name = .data$Omschrijving)
+
+        } else {
+
+            suppressWarnings(
+                watersurfaces <- read_sf(file,
+                                         crs = 31370)
             )
+
+            wfd_typetransl <-
+                tribble(~wfd_type, ~wfd_type_name,
+                        "B", "sterk brak",
+                        "Bzl", "zeer licht brak",
+                        "Ad", "alkalisch duinwater",
+                        "Ai", "ondiep, alkalisch, ionenrijk",
+                        "Ami", "ondiep, alkalisch, matig ionenrijk",
+                        "Ami-e", "ondiep, alkalisch, matig ionenrijk, eutroof",
+                        "Ami-om", "ondiep, alkalisch, matig ionenrijk, oligo-mesotroof",
+                        "Aw", "groot-diep, alkalisch",
+                        "Aw-e", "groot-diep, alkalisch, eutroof",
+                        "Aw-om", "groot-diep, alkalisch, oligo-mesotroof",
+                        "C", "circumneutraal",
+                        "Cb", "circumneutraal, sterk gebufferd",
+                        "CbFe", "circumneutraal, sterk gebufferd, ijzerrijk",
+                        "Czb", "circumneutraal, zwak gebufferd",
+                        "Z", "zuur",
+                        "Zm", "zwak zuur",
+                        "Zs", "sterk zuur"
+                ) %>%
+                mutate(
+                    wfd_type = factor(.data$wfd_type,
+                                      levels = .$wfd_type)
+                )
+
+        }
+
+
 
         watersurfaces <-
             watersurfaces %>%
@@ -510,31 +623,75 @@ read_watersurfaces <-
                    depth_class = .data$DIEPKL,
                    connectivity = .data$CONNECT,
                    usage = .data$FUNCTIE) %>%
-            mutate_at(.vars = c("wfd_code", "name"),
-                      .funs = function(x) {
-                          ifelse(x == "<Null>", NA, x)
-                      }) %>%
-            mutate_at(.vars = c("area_name",
-                                "depth_class",
-                                "connectivity",
-                                "usage"),
-                      .funs = factor) %>%
-            mutate(
-                wfd_type = .data$wfd_type %>%
+            mutate(depth_class = str_replace(string = .data$depth_class,
+                                             pattern = "\u2265",
+                                             replacement = ">=")) %>%
+            mutate(across(c(.data$area_name,
+                            .data$depth_class,
+                            .data$connectivity,
+                            .data$usage),
+                          as.factor)) %>%
+            mutate(wfd_type = .data$wfd_type %>%
                     factor(levels =
                                levels(wfd_typetransl$wfd_type)),
-                wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
-                                                na_lgl,
-                                                .data$wfd_type_certain %in%
-                                                    c("zeker",
-                                                      "definitief")),
                 hyla_code = ifelse(.data$hyla_code == 0,
                                    NA,
                                    .data$hyla_code)
             ) %>%
             arrange(.data$polygon_id)
 
+        if (version == "watersurfaces_v1.0") {
+            watersurfaces <-
+                watersurfaces %>%
+                mutate_at(.vars = c("wfd_code", "name"),
+                          .funs = function(x) {
+                              ifelse(x == "<Null>", NA, x)
+                          }) %>%
+                mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+                                                 na_lgl,
+                                                 .data$wfd_type_certain %in%
+                                                     c("zeker",
+                                                       "definitief")))
+        } else {
+            watersurfaces <-
+                watersurfaces %>%
+                mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+                                                 na_lgl,
+                                                 .data$wfd_type_certain ==
+                                                     "definitief"))
+        }
+
         if (extended) {
+
+            if (version == "watersurfaces_v1.1") {
+
+                connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
+                    mutate_if(., is.character,
+                              .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
+                    mutate(across(c(.data$Code), as.factor)) %>%
+                    rename(connectivity = .data$Code,
+                           connectivity_name = .data$Omschr)
+
+            } else {
+
+                connectivitytransl <-
+                    tribble(~connectivity, ~connectivity_name,
+                            paste0("ge","\u00EF","soleerd"),
+                            "niet verbonden met een waterloop",
+                            "periodiek",
+                            paste0("tijdelijk (door peilbeheer of droogte) ",
+                                   "in verbinding met minstens ","\u00E9",
+                                   "\u00E9","n waterloop"),
+                            "permanent",
+                            paste0("permanent in verbinding met minstens ",
+                                   "\u00E9","\u00E9","n waterloop")
+                    ) %>%
+                    mutate(
+                        connectivity = factor(.data$connectivity,
+                                              levels = .$connectivity)
+                    )
+            }
+
             watersurfaces <-
                 watersurfaces %>%
                 left_join(wfd_typetransl, by = "wfd_type") %>%
@@ -544,8 +701,17 @@ read_watersurfaces <-
                         mapvalues(from = wfd_typetransl$wfd_type,
                                   to = wfd_typetransl$wfd_type_name)
                 ) %>%
+                left_join(connectivitytransl, by = "connectivity") %>%
+                mutate(
+                    connectivity_name =
+                        .data$connectivity %>%
+                        mapvalues(from = connectivitytransl$connectivity,
+                                  to = connectivitytransl$connectivity_name)
+                ) %>%
                 select(1:6,
                        .data$wfd_type_name,
+                       7:9,
+                       .data$connectivity_name,
                        everything())
         }
 
@@ -577,10 +743,9 @@ read_watersurfaces <-
 
 
 
-
 #' Return the data source \code{habitatmap} as an \code{sf} multipolygon layer
 #'
-#' Returns the raw data source \code{habitatmap} (De Saeger et al., 2018)
+#' Returns the raw data source \code{habitatmap} (De Saeger et al., 2020)
 #' as a standardized \code{sf} multipolygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -588,7 +753,10 @@ read_watersurfaces <-
 #' takes a bit longer than usual to run.
 #'
 #' @param filter_hab If \code{TRUE} only polygons that (partially) contain habitat or a regionally
-#' important biotope (RIB) are returned. The default value is \code{FALSE}.
+#' important biotope (RIB) are returned. The default value is \code{FALSE}. This
+#' requires the corresponding version of the processed data source
+#' \code{habitatmap_stdized} to be present in its default location inside the
+#' \code{n2khab_data} folder.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -600,16 +768,18 @@ read_watersurfaces <-
 #'
 #' @references
 #'
-#' De Saeger S., Guelinckx R., Oosterlynck P., De Bruyn A., Debusschere K., Dhaluin P.,
-#' Erens R., Hendrickx P., Hendrix R., Hennebel D., et al. (2018). Biologische
-#' Waarderingskaart en Natura 2000 Habitatkaart: Uitgave 2018. Rapporten van het
-#' Instituut voor Natuur- en Bosonderzoek. Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.15138099}.
+#' De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
+#' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
+#' Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+#' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
+#' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
+#' \doi{10.21436/inbor.18840851}.
 #'
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatmap'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatmap'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -636,10 +806,37 @@ read_watersurfaces <-
 #'
 read_habitatmap <-
     function(file = file.path(fileman_up("n2khab_data"), "10_raw/habitatmap"),
-             filter_hab = FALSE){
+             filter_hab = FALSE,
+             version = c("habitatmap_2020",
+                         "habitatmap_2018")){
 
         assert_that(file.exists(file))
         assert_that(is.flag(filter_hab), noNA(filter_hab))
+        version <- match.arg(version)
+
+        if (filter_hab) {
+            # version control: version habitatmap == version habitatmap_stdized
+            xxh64sum_habitatmap_stdized_present <- xxh64sum(file.path(
+                fileman_up("n2khab_data"),
+                "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"))
+
+            if (version == "habitatmap_2020") {
+                xxh64sum_habitatmap_stdized_expected <- "3109c26f0a27a0f3"
+            } else {
+                xxh64sum_habitatmap_stdized_expected <- c("b80f469f33636c8b","8e9c4e09f5f67c3e")
+            }
+
+            if (!(xxh64sum_habitatmap_stdized_present %in%
+                  xxh64sum_habitatmap_stdized_expected)) {
+                stop("You are trying to use habitatmap version '", version,"' ",
+                     "with another version of habitatmap_stdized. ",
+                     "Specify the correct version as argument (version =) ",
+                     "and add the corresponding files under ",
+                     "'n2khab_data/10_raw/habitatmap' and ",
+                     "'n2khab_data/20_processed/habitatmap_stdized'.",
+                     call. = FALSE)
+            }
+        }
 
         habitatmap <- read_sf(file,
                               "habitatmap")
@@ -679,7 +876,13 @@ read_habitatmap <-
         if (filter_hab) {
 
             # we only select polygons with habitat or RIB, i.e. polygons in habitatmap_stdized data source
-            hab_stdized <- read_habitatmap_stdized()
+            if (xxh64sum_habitatmap_stdized_present == "8e9c4e09f5f67c3e") {
+                # 2018_v1
+                hab_stdized <- read_habitatmap_stdized(version = "habitatmap_stdized_2018_v1")
+            } else {
+                hab_stdized <- read_habitatmap_stdized()
+            }
+
             hab_stdized <- hab_stdized$habitatmap_polygons
 
             habitatmap <- habitatmap %>%
@@ -715,6 +918,8 @@ read_habitatmap <-
 #' By default, occurrences of type \code{7220} are dropped because a more
 #' reliable data source is available for this habitat type (see \code{drop_7220}
 #' argument).
+#' Note: a \link[=types]{type} is a habitat (sub)type or a regionally
+#' important biotope (RIB).
 #'
 #' \code{habitatmap_terr} was derived from \code{habitatmap_stdized} as
 #' follows:
@@ -786,7 +991,7 @@ read_habitatmap <-
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{description_orig}: polygon description based on the
-#'     original vegetation codes in the \code{habitatmap} data source
+#'     original type codes in the \code{habitatmap} data source
 #'     \item \code{description}: based on \code{description_orig} but with the
 #'     interpreted type codes
 #'     \item \code{source}: states where \code{description} comes from: either
@@ -797,13 +1002,16 @@ read_habitatmap <-
 #'   \code{habitatmap_stdized}):
 #'   \itemize{
 #'     \item \code{polygon_id}
+#'     \item \code{type}: the interpreted habitat or RIB type
+#'     \item \code{certain}
 #'     \item \code{code_orig}
 #'     \item \code{phab}
-#'     \item \code{certain}
-#'     \item \code{type}: the interpreted habitat or RIB type
 #'     \item \code{source}: states where \code{type} comes from: either
 #'     \code{habitatmap_stdized} or \code{habitatmap_stdized + interpretation}
 #'     }
+#'     Since version \code{habitatmap_terr_2020_v1}, rows are unique only
+#'     by the combination of the \code{polygon_id}, \code{type} and
+#'     \code{certain} columns.
 #'     }
 #'
 #' @family functions involved in processing the 'habitatmap' data source
@@ -811,7 +1019,8 @@ read_habitatmap <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatmap_terr'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatmap_terr'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -839,16 +1048,19 @@ read_habitatmap <-
 #' %>%
 #' mutate
 #' filter
+#' relocate
 read_habitatmap_terr <-
     function(file = file.path(fileman_up("n2khab_data"),
                               "20_processed/habitatmap_terr/habitatmap_terr.gpkg"),
              keep_aq_types = TRUE,
              drop_7220 = TRUE,
-             version = "habitatmap_terr_2018_v2"){
+             version = c("habitatmap_terr_2020_v1",
+                         "habitatmap_terr_2018_v2",
+                         "habitatmap_terr_2018_v1")){
 
         assert_that(is.flag(keep_aq_types), noNA(keep_aq_types))
         assert_that(is.flag(drop_7220), noNA(drop_7220))
-        assert_that(is.string(version))
+        version <- match.arg(version)
 
         habmap_terr_polygons <- read_sf(file,
                                    "habitatmap_terr_polygons")
@@ -907,6 +1119,14 @@ read_habitatmap_terr <-
             # alone
         }
 
+        if (grepl("2018", version)) {
+            habmap_terr_types <-
+                habmap_terr_types %>%
+                relocate(.data$polygon_id,
+                         .data$type,
+                         .data$certain)
+            }
+
         if (version == "habitatmap_terr_2018_v1") {
             result <- list(habitatmap_terr_polygons = habmap_terr_polygons,
                            habitatmap_terr_patches = habmap_terr_types)
@@ -932,7 +1152,7 @@ read_habitatmap_terr <-
 #' Return the data source \code{habitatstreams} as an \code{sf} linestring
 #' layer or as a list
 #'
-#' Returns the raw data source \code{habitatstreams} (Leyssen et al., 2018)
+#' Returns the raw data source \code{habitatstreams} (Leyssen et al., 2020)
 #' as an \code{sf} linestring
 #' layer or as a list of two objects: the \code{sf} object (CRS:
 #' Belgian Lambert 72 (EPSG-code \href{https://epsg.io/31370}{31370}))
@@ -956,18 +1176,19 @@ read_habitatmap_terr <-
 #' }
 #'
 #' @references
-#' Leyssen A., Denys L. & De Saeger S. (2018). Indicatieve situering van het
+#' Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
 #' Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 #' behorend tot het \emph{Ranunculion fluitantis} en het
 #' \emph{Callitricho-Batrachion}.
-#' Uitgave 2018 (versie 1.6). Rapporten van het Instituut voor Natuur- en
-#' Bosonderzoek 2018 (72). Research Institute for Nature and Forest, Brussels.
-#' \doi{10.21436/inbor.15138370}.
+#' Uitgave 2020 (versie 1.7). Rapporten van het Instituut voor Natuur- en
+#' Bosonderzoek 2020 (34). Research Institute for Nature and Forest, Brussels.
+#' \doi{10.21436/inbor.18903609}.
 #'
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatstreams'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatstreams'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -997,6 +1218,10 @@ read_habitatmap_terr <-
 #' distinct
 #' @importFrom forcats
 #' fct_reorder
+#' @importFrom stringr
+#' str_replace
+#' str_squish
+#' str_to_title
 #' @export
 read_habitatstreams <-
     function(file = file.path(fileman_up("n2khab_data"),
@@ -1017,7 +1242,14 @@ read_habitatstreams <-
             habitatstreams %>%
             select(river_name = .data$NAAM,
                    source_id = .data$BRON) %>%
-            mutate(river_name = factor(.data$river_name),
+            mutate(river_name = factor(
+                       gsub(pattern = "(^|[[:punct:]])([[:alpha:]])",
+                            replacement = "\\1\\U\\2",
+                            str_replace(str_to_title(
+                                str_squish(.data$river_name)),
+                                pattern = "Ij",
+                                replacement = "IJ"),
+                            perl = TRUE)),
                    source_id = factor(.data$source_id),
                    type = "3260" %>%
                        factor(levels = read_types() %>%
@@ -1102,11 +1334,11 @@ read_habitatstreams <-
 #'     \item \code{name}: site name.
 #'     \item \code{system_type}: environmental typology of `7220`: `mire`,
 #'     `rivulet` or `unknown` (non-`7220` types are `NA`)
-#'     \item \code{code_orig}: original vegetation code in raw
+#'     \item \code{code_orig}: original type code in raw
 #'     \code{habitatsprings}.
 #'     \item \code{type}: habitat type listed in \code{\link{types}}.
-#'     \item \code{certain}: \code{TRUE} when vegetation type is certain and
-#'      \code{FALSE} when vegetation type is uncertain.
+#'     \item \code{certain}: \code{TRUE} when the type is certain and
+#'      \code{FALSE} when the type is uncertain.
 #'     \item \code{unit_id}: population unit id for large scale sampling
 #'     events.
 #'     Spatially close points have the same value.
@@ -1135,7 +1367,8 @@ read_habitatstreams <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatsprings'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatsprings'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -1327,7 +1560,8 @@ read_habitatsprings <-
 #' @examples
 #' \dontrun{
 #' # This example supposes that your working directory or a directory up to 10
-#' # levels above has the 'n2khab_data' folder AND that the 'habitatquarries'
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'habitatquarries'
 #' # data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can
 #' # consider what to do.
@@ -1433,4 +1667,3 @@ if (references) {
         return(habitatquarries)
 
     }
-

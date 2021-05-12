@@ -94,8 +94,8 @@ a dataframe with 10 variables:
     n2khab Github repository}:
     \code{misc/generate_textdata/rawraw_data/10_compmeetnet_types_milieudrukken}.
     This data source was originally generated in the
-    \href{https://gitlab.com/florisvdh/n2khab-mne-selections}{
-    n2khab-mne-selections repository}.
+    n2khab-mne-selections repository
+    (\samp{https://gitlab.com/florisvdh/n2khab-mne-selections}).
     }
   }
 \itemize{

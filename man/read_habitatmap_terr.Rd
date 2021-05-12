@@ -10,7 +10,8 @@ read_habitatmap_terr(
     "20_processed/habitatmap_terr/habitatmap_terr.gpkg"),
   keep_aq_types = TRUE,
   drop_7220 = TRUE,
-  version = "habitatmap_terr_2018_v2"
+  version = c("habitatmap_terr_2020_v1", "habitatmap_terr_2018_v2",
+    "habitatmap_terr_2018_v1")
 )
 }
 \arguments{
@@ -53,7 +54,7 @@ A list of two objects:
   \itemize{
     \item \code{polygon_id}
     \item \code{description_orig}: polygon description based on the
-    original vegetation codes in the \code{habitatmap} data source
+    original type codes in the \code{habitatmap} data source
     \item \code{description}: based on \code{description_orig} but with the
     interpreted type codes
     \item \code{source}: states where \code{description} comes from: either
@@ -64,13 +65,16 @@ A list of two objects:
   \code{habitatmap_stdized}):
   \itemize{
     \item \code{polygon_id}
+    \item \code{type}: the interpreted habitat or RIB type
+    \item \code{certain}
     \item \code{code_orig}
     \item \code{phab}
-    \item \code{certain}
-    \item \code{type}: the interpreted habitat or RIB type
     \item \code{source}: states where \code{type} comes from: either
     \code{habitatmap_stdized} or \code{habitatmap_stdized + interpretation}
     }
+    Since version \code{habitatmap_terr_2020_v1}, rows are unique only
+    by the combination of the \code{polygon_id}, \code{type} and
+    \code{certain} columns.
     }
 }
 \description{
@@ -83,6 +87,8 @@ Lambert 72 CRS (EPSG-code \href{https://epsg.io/31370}{31370}), and
 By default, occurrences of type \code{7220} are dropped because a more
 reliable data source is available for this habitat type (see \code{drop_7220}
 argument).
+Note: a \link[=types]{type} is a habitat (sub)type or a regionally
+important biotope (RIB).
 }
 \details{
 \code{habitatmap_terr} was derived from \code{habitatmap_stdized} as
@@ -129,7 +135,8 @@ repository.
 \examples{
 \dontrun{
 # This example supposes that your working directory or a directory up to 10
-# levels above has the 'n2khab_data' folder AND that the 'habitatmap_terr'
+# levels above has the 'n2khab_data' folder AND that the latest version of
+# the 'habitatmap_terr'
 # data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can
 # consider what to do.

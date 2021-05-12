@@ -39,7 +39,7 @@ Existing R code will continue to run normally if you complied with the recommend
 #### New features
 
 - New function `read_habitatquarries()` for reading the `habitatquarries` data source (#83, #94,  [inbo/n2khab-preprocessing/pull/41](https://github.com/inbo/n2khab-preprocessing/pull/41)).
-- Updates in reference lists (#88, #93, [7ce3b32](https://github.com/inbo/n2khab/pull/73/commits/7ce3b32)):
+- Updates in reference lists (#88, #93, [7ce3b32](https://github.com/inbo/n2khab/commit/7ce3b32)):
     - `schemes` & `scheme_types`: updates of spatial restrictions, names and typegroup names of MNE schemes (for defining the schemes' target populations);
     - `types`: update groundwater dependency of type `2170`.
 
