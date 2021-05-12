@@ -108,9 +108,9 @@ The names of the `n2khab` 'read' function and their documentation make clear whi
 ```
 n2khab_data
     ├── 10_raw
-          ├── habitatmap            -> contains habitatmat.shp, habitatmap.dbf etc.
-          ├── soilmap
-          └── GRTSmaster_habitats
+    │     ├── habitatmap            -> contains habitatmat.shp, habitatmap.dbf etc.
+    │     ├── soilmap
+    │     └── GRTSmaster_habitats
     └── 20_processed
           ├── habitatmap_stdized
           └── GRTSmh_diffres
