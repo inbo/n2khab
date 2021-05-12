@@ -33,13 +33,13 @@ Useful links:
 Authors:
 \itemize{
   \item Toon Westra \email{toon.westra@inbo.be} (\href{https://orcid.org/0000-0003-2478-9459}{ORCID})
+  \item Cécile Herr \email{cecile.herr@inbo.be} (\href{https://orcid.org/0000-0002-2833-6046}{ORCID})
   \item Hans Van Calster \email{hans.vancalster@inbo.be} (\href{https://orcid.org/0000-0001-8595-8426}{ORCID})
 }
 
 Other contributors:
 \itemize{
   \item Dries Adriaens \email{dries.adriaens@inbo.be} (\href{https://orcid.org/0000-0002-7216-3111}{ORCID}) [contributor]
-  \item Cécile Herr \email{cecile.herr@inbo.be} (\href{https://orcid.org/0000-0002-2833-6046}{ORCID}) [contributor]
   \item Maud Raman \email{maud.raman@inbo.be} (\href{https://orcid.org/0000-0003-2116-4963}{ORCID}) [contributor]
   \item Jan Wouters \email{jan.wouters@inbo.be} (\href{https://orcid.org/0000-0001-8200-9102}{ORCID}) [contributor]
   \item Steven De Saeger \email{steven.desaeger@inbo.be} (\href{https://orcid.org/0000-0002-5477-3063}{ORCID}) [contributor]
