@@ -2,7 +2,6 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3631579.svg)](https://doi.org/10.5281/zenodo.3631579)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R-CMD-check](https://github.com/inbo/n2khab/workflows/R-CMD-check/badge.svg)](https://github.com/inbo/n2khab/actions?query=workflow%3AR-CMD-check)
-[![site-devel](https://github.com/inbo/n2khab/workflows/site-devel/badge.svg)](https://github.com/inbo/n2khab/actions?query=workflow%3Asite-devel)
 <!-- badges: end -->
 
 ## Welcome
