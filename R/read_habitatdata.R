@@ -1540,7 +1540,7 @@ read_habitatsprings <-
 #'     \item \code{polygon_id}: a unique number per polygon.
 #'     \item \code{unit_id}: a unique number for each quarry unit. Quarry units
 #'     consisting of several polygons (= partly outside the Flemish region)
-#'     have a number greater than 100.
+#'     have a number greater than or equal to 100.
 #'     \item \code{name}: site name.
 #'     \item \code{code_orig}: original 'habitattype' code in the raw data
 #'     source \code{habitatquarries}.
