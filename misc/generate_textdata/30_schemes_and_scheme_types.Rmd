@@ -64,6 +64,7 @@ schemes_schemetypes <-
            attribute_2 = Druk,
            tag_1 = MaxMilieudrukkengroep,
            type = Vegcode) %>% 
+    mutate(type = as.character(type)) %>% 
     inner_join(types_hc, by = "type") %>% 
     mutate(
         programme = "MNE" %>% factor,
@@ -111,11 +112,11 @@ schemes_schemetypes <-
                        "focal",
                        "secondary") %>% 
                 factor,
-        type = as.character(type) %>% 
-                factor(levels = 
-                           types %>% 
-                           .$type %>% 
-                           levels)
+        type = factor(type,
+                      levels = 
+                        types %>% 
+                        .$type %>% 
+                        levels)
     ) %>% 
     select(-hydr_class_expand) %>% 
     distinct() %>% 
