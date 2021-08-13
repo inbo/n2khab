@@ -217,7 +217,7 @@ spat_restr <-
 
 Preparing `schemes` with MNE content:
 
-```{r message=FALSE}
+```{r}
 schemes <- 
   schemes_schemetypes %>% 
     distinct(scheme,
@@ -226,7 +226,7 @@ schemes <-
              attribute_2,
              attribute_3,
              tag_1) %>% 
-    left_join(spat_restr) %>% 
+    left_join(spat_restr, by = "scheme") %>% 
     mutate(notes = NA %>% as.character,
            tag_2 = NA %>% as.character,
            tag_3 = NA %>% as.character
@@ -321,12 +321,13 @@ typegroups <-
 
 Preparing `scheme_types` with MNE content:
 
-```{r message=FALSE}
+```{r}
 scheme_types <- 
   schemes_schemetypes %>% 
     distinct(scheme,
              type) %>% 
-    left_join(typegroups) %>% 
+    left_join(typegroups, 
+              by = c("scheme", "type")) %>% 
     arrange(scheme, type)
 ```
 
@@ -396,7 +397,8 @@ schemes %>%
     rename(name_1 = name) %>% 
     left_join(tibble(lang = c("en", "nl"),
                      name_2 = c("environmental pressure",
-                                "milieudruk"))) %>% 
+                                "milieudruk")),
+              by = "lang") %>% 
     left_join(namelist %>% select(-name),
               by = c("attribute_2" = "code", "lang")) %>% 
     rename(name_3 = shortname) %>% 

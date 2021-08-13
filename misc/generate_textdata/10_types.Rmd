@@ -26,7 +26,7 @@ source_df <-
 
 Writing the namelist a first time:
 
-```{r message=FALSE}
+```{r}
 dummy <- 
     str_c(root, "/", namelist_path, ".*") %>% 
     Sys.glob %>% 
@@ -48,7 +48,7 @@ source_df %>%
         "BMF", "Bogs, mires and fens", 
         "RC", "Rocky habitats and caves", 
         "FS", "Forest and scrub"
-    )) %>% 
+    ), by = "en") %>% 
     gather(key = "lang", value = "name", en:nl) %>% 
     mutate(shortname = NA %>% as.character) %>% 
     write_vc(namelist_path,
@@ -80,7 +80,7 @@ source_df %>%
 
 Information for tag 1:
 
-```{r message=FALSE}
+```{r}
 source_df %>% 
     distinct(nl = Groepering.niveau.2,
            en = Groepering.niveau.2.Eng) %>% 
@@ -95,7 +95,7 @@ source_df %>%
         "SW", "Standing water", 
         "RW", "Running water", 
         "CT", "Calcareous type"
-    )) %>% 
+    ), by = "en") %>% 
     gather(key = "lang", value = "name", en:nl) %>% 
     mutate(shortname = NA %>% as.character) %>% 
     bind_rows(read_vc(namelist_path, root),
@@ -157,7 +157,8 @@ hc_names %>%
         pivot_longer(cols = -code,
                      names_to = "lang",
                      names_pattern = "(..)_.+",
-                     values_to = "shortname")
+                     values_to = "shortname"),
+        by = c("code", "lang")
     ) %>% 
     bind_rows(read_vc(namelist_path, root),
               .) %>% 
