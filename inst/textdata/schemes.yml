@@ -5,8 +5,8 @@
   sorting:
   - programme
   - scheme
-  hash: d189d370cad2f6ca5b708b73f4c2d6285333b8fa
-  data_hash: ce2a4c8602fc4205b55dcedd93e891015cc39afb
+  hash: b28a62b443678796a29db126dcb4b1e774c20377
+  data_hash: ed075ef64e0a7fbf4ab772afd586e02e2d2e2b87
 scheme:
   class: factor
   labels:
@@ -52,7 +52,8 @@ scheme:
   - HQ2160
   - HQ2170
   - HQ2180
-  - HQ2190
+  - HQ2190_aq
+  - HQ2190_terr
   - HQ2310
   - HQ2330
   - HQ3110
@@ -116,7 +117,8 @@ scheme:
   - 37
   - 38
   - 39
-  - 40
+  - 61
+  - 65
   - 41
   - 42
   - 43
@@ -161,7 +163,8 @@ attribute_1:
   - '2160'
   - '2170'
   - '2180'
-  - '2190'
+  - 2190_a
+  - 2190_terr
   - '2310'
   - '2330'
   - '3110'
@@ -194,7 +197,8 @@ attribute_1:
   - 8
   - 9
   - 10
-  - 11
+  - 33
+  - 34
   - 12
   - 13
   - 14
