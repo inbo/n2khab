@@ -13,15 +13,12 @@ root <- "../.."
 Reading from the source googlesheet (maintained by Steven De Saeger):
 
 ```{r message=FALSE}
-# the first time, run:
-# gs_auth()
-types_source <- gs_key("1dK0S1Tt3RlVEh4WrNF5N_-hn0OXiTUVOvsL2JRhSl78")
-# gs_browse(types_source)
+# gs4_browse(types_gs_id)
 source_df <-
-    types_source %>%
-    gs_read(ws = 1, 
-            check.names = T,
-            verbose = FALSE)
+    types_gs_id %>%
+    read_sheet(sheet = 1,
+               .name_repair = make.names) %>% 
+    mutate(across(starts_with("Code"), unlist))
 ```
 
 Writing the namelist a first time:
@@ -167,18 +164,16 @@ hc_names %>%
 
 Groundwater and flood dependency:
 
-```{r}
-wdep_ss <- gs_key("1bhXgamK28K--MSWF7goKNOWtWPEI149_QCpU-3V_k_E")
-# gs_browse(wdep_ss)
+```{r message=FALSE}
+# gs4_browse(wdep_gs_id)
 type_wdep <-
-    wdep_ss %>%
-    gs_read(ws = "Waterafhankelijke HT en RBB",
-            verbose = FALSE,
+    wdep_gs_id %>%
+    read_sheet(sheet = "Waterafhankelijke HT en RBB",
             skip = 2,
             col_names = FALSE) %>%  
-    select(type = X1, 
-           groundw_dep = X9,
-           flood_dep = X10) %>% 
+    select(type = ...1, 
+           groundw_dep = ...9,
+           flood_dep = ...10) %>% 
     mutate(groundw_dep = case_when(str_detect(groundw_dep, "alle") ~ "GD2",
                                     str_detect(groundw_dep, "niet") ~ "GD0",
                                     TRUE ~ "GD1") %>% 
