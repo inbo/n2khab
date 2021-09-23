@@ -132,8 +132,8 @@ GW_03.3_group3	en	types from weakly eutrophic environments	weakly eutrophic
 GW_03.3_group4	en	types from moderately eutrophic to eutrophic environments	(moderately) eutrophic
 GW_04.2	en	Groundwater monitoring: environmental pressure 04.2_acidif_gw	GW: 04.2_acidif_gw
 GW_05.1_aq	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim aquatic	GW: 05.1_des_gw: aq
-GW_05.1_aq_group1	en	types from springbrooks	springbrooks
-GW_05.1_aq_group2	en	lentic types with stable groundwater table	lentic with stable groundwater
+GW_05.1_aq_group1	en	types from spring-fed brooks	spring-fed brooks
+GW_05.1_aq_group2	en	types from lakes with stable groundwater table	stable lakes
 GW_05.1_aq_group3	en	types from lowland rivers	lowland rivers
 GW_05.1_aq_group4	en	types from dune lakes (moderate groundwater dynamics)	dune lakes
 GW_05.1_aq_group5	en	types from softwater lakes with dynamic groundwater table	dynamic softwater lakes
@@ -430,8 +430,8 @@ GW_03.3_group4	nl	types van matig eutroof tot eutroof milieu	(matig) eutroof
 GW_04.2	nl	Grondwatermeetnet: milieudruk 04.2_verzu_gw	GW: 04.2_verzu_gw
 GW_05.1_aq	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim aquatisch	GW: 05.1_verdro_gw: aq
 GW_05.1_aq_group1	nl	types van bronbeken	bronbeken
-GW_05.1_aq_group2	nl	types van stilstaand water met stabiel grondwaterregime	plassen stabiel grondwater
-GW_05.1_aq_group3	nl	types van laaglandrivieren	laaglandrivieren
+GW_05.1_aq_group2	nl	types van stilstaand water met stabiel grondwaterregime	stabiele plassen
+GW_05.1_aq_group3	nl	types van laaglandbeken	laaglandbeken
 GW_05.1_aq_group4	nl	types van duinplassen (middelmatig grondwaterregime)	duinplassen
 GW_05.1_aq_group5	nl	types van vennen met dynamisch grondwaterregime	dynamische vennen
 GW_05.1_quarries	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim mergelgroeven	GW: 05.1_verdro_gw: quarries
