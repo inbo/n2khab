@@ -490,7 +490,7 @@ Writing `schemes`.
 ```{r message=FALSE}
 schemes_MHQ <- 
   mhq_gs_id %>%
-  read_sheet(sheet = 1) %>%
+  read_sheet(sheet = 1, col_types = "c") %>%
   mutate(attribute_1 = ifelse(attribute_1 == 91, 
                               "91E0", 
                               as.character(attribute_1)),
@@ -577,11 +577,20 @@ schemes_MHQ_names <- schemes_MHQ %>%
   mutate(name = paste(ifelse(lang == "en",
                              "Habitat quality scheme:",
                              "Meetnet habitatkwaliteit:"),
-                      shortname),
+                      shortname,
+                      ifelse(scheme == "HQ2190_terr",
+                             ifelse(lang == "en",
+                                    "(terrestrial)", "(terrestrisch)"),
+                             "")
+                      ),
          shortname = paste(ifelse(lang == "en",
                              "Habitat quality scheme",
                              "Meetnet habitatkwaliteit"),
-                      attribute_1)) %>%
+                      attribute_1,
+                      ifelse(scheme == "HQ2190_terr",
+                             "(terr)",
+                             ""))
+         ) %>%
   select(code = scheme, lang, name, shortname)
 
 namelist %>%
