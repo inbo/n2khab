@@ -574,21 +574,21 @@ namelist <- read_vc(namelist_path, root)
 
 schemes_MHQ_names <- schemes_MHQ %>%
   left_join(namelist, by = c("attribute_1" = "code")) %>%
-  mutate(name = paste(ifelse(lang == "en",
-                             "Habitat quality scheme:",
-                             "Meetnet habitatkwaliteit:"),
+  mutate(name = paste0(ifelse(lang == "en",
+                             "Habitat quality scheme: ",
+                             "Meetnet habitatkwaliteit: "),
                       shortname,
                       ifelse(scheme == "HQ2190_terr",
                              ifelse(lang == "en",
-                                    "(terrestrial)", "(terrestrisch)"),
+                                    " (terrestrial)", " (terrestrisch)"),
                              "")
                       ),
-         shortname = paste(ifelse(lang == "en",
-                             "Habitat quality scheme",
-                             "Meetnet habitatkwaliteit"),
+         shortname = paste0(ifelse(lang == "en",
+                             "Habitat quality scheme ",
+                             "Meetnet habitatkwaliteit "),
                       attribute_1,
                       ifelse(scheme == "HQ2190_terr",
-                             "(terr)",
+                             " (terr)",
                              ""))
          ) %>%
   select(code = scheme, lang, name, shortname)

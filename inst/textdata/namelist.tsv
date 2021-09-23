@@ -147,34 +147,34 @@ HC12	en	Dry to moist + Temporarily to permanently wet	Dry + Wet
 HC2	en	Temporarily to permanently wet	Wet
 HC23	en	Temporarily to permanently wet + Surface water	Wet + Surface water
 HC3	en	Surface water	Surface water
-HQ1330	en	Habitat quality scheme: Atlantic salt meadows 	Habitat quality scheme 1330 
-HQ2120	en	Habitat quality scheme: White dunes 	Habitat quality scheme 2120 
-HQ2130	en	Habitat quality scheme: Grey dunes 	Habitat quality scheme 2130 
-HQ2160	en	Habitat quality scheme: Hippophae rhamnoides dunes 	Habitat quality scheme 2160 
-HQ2170	en	Habitat quality scheme: Salix repens dunes 	Habitat quality scheme 2170 
-HQ2180	en	Habitat quality scheme: Wooded dunes 	Habitat quality scheme 2180 
-HQ2190_aq	en	Habitat quality scheme: Dune slack ponds 	Habitat quality scheme 2190_a 
+HQ1330	en	Habitat quality scheme: Atlantic salt meadows	Habitat quality scheme 1330
+HQ2120	en	Habitat quality scheme: White dunes	Habitat quality scheme 2120
+HQ2130	en	Habitat quality scheme: Grey dunes	Habitat quality scheme 2130
+HQ2160	en	Habitat quality scheme: Hippophae rhamnoides dunes	Habitat quality scheme 2160
+HQ2170	en	Habitat quality scheme: Salix repens dunes	Habitat quality scheme 2170
+HQ2180	en	Habitat quality scheme: Wooded dunes	Habitat quality scheme 2180
+HQ2190_aq	en	Habitat quality scheme: Dune slack ponds	Habitat quality scheme 2190_a
 HQ2190_terr	en	Habitat quality scheme: Humid dune slacks (terrestrial)	Habitat quality scheme 2190 (terr)
-HQ2310	en	Habitat quality scheme: Psammophylic heath 	Habitat quality scheme 2310 
-HQ2330	en	Habitat quality scheme: Inland shifting dunes 	Habitat quality scheme 2330 
-HQ3110	en	Habitat quality scheme: Barely buffered standing waters 	Habitat quality scheme 3110 
-HQ3130	en	Habitat quality scheme: Poorly buffered standing waters 	Habitat quality scheme 3130 
-HQ3140	en	Habitat quality scheme: Standing waters with Chara 	Habitat quality scheme 3140 
-HQ3150	en	Habitat quality scheme: Lakes with Stratiotes and Potamogeton 	Habitat quality scheme 3150 
-HQ3160	en	Habitat quality scheme: Dystrophic standing waters 	Habitat quality scheme 3160 
-HQ3270	en	Habitat quality scheme: Rivers with muddy banks 	Habitat quality scheme 3270 
-HQ4010	en	Habitat quality scheme: Wet heaths 	Habitat quality scheme 4010 
-HQ4030	en	Habitat quality scheme: Dry heaths 	Habitat quality scheme 4030 
-HQ6120	en	Habitat quality scheme: Pioneer calcareous sand swards 	Habitat quality scheme 6120 
-HQ6230	en	Habitat quality scheme: Nardus grasslands 	Habitat quality scheme 6230 
-HQ6410	en	Habitat quality scheme: Molinion grasslands 	Habitat quality scheme 6410 
-HQ6510	en	Habitat quality scheme: Arrhenaterion and Alopecurion grasslands 	Habitat quality scheme 6510 
-HQ7140	en	Habitat quality scheme: Transition mires and quaking bogs 	Habitat quality scheme 7140 
-HQ9120	en	Habitat quality scheme: Beech-oak forests with Ilex 	Habitat quality scheme 9120 
-HQ9130	en	Habitat quality scheme: Neutrophilic beech forest 	Habitat quality scheme 9130 
-HQ9160	en	Habitat quality scheme: Oak-hornbeam forests 	Habitat quality scheme 9160 
-HQ9190	en	Habitat quality scheme: Old oak forests 	Habitat quality scheme 9190 
-HQ91E0	en	Habitat quality scheme: Alluvial forests 	Habitat quality scheme 91E0 
+HQ2310	en	Habitat quality scheme: Psammophylic heath	Habitat quality scheme 2310
+HQ2330	en	Habitat quality scheme: Inland shifting dunes	Habitat quality scheme 2330
+HQ3110	en	Habitat quality scheme: Barely buffered standing waters	Habitat quality scheme 3110
+HQ3130	en	Habitat quality scheme: Poorly buffered standing waters	Habitat quality scheme 3130
+HQ3140	en	Habitat quality scheme: Standing waters with Chara	Habitat quality scheme 3140
+HQ3150	en	Habitat quality scheme: Lakes with Stratiotes and Potamogeton	Habitat quality scheme 3150
+HQ3160	en	Habitat quality scheme: Dystrophic standing waters	Habitat quality scheme 3160
+HQ3270	en	Habitat quality scheme: Rivers with muddy banks	Habitat quality scheme 3270
+HQ4010	en	Habitat quality scheme: Wet heaths	Habitat quality scheme 4010
+HQ4030	en	Habitat quality scheme: Dry heaths	Habitat quality scheme 4030
+HQ6120	en	Habitat quality scheme: Pioneer calcareous sand swards	Habitat quality scheme 6120
+HQ6230	en	Habitat quality scheme: Nardus grasslands	Habitat quality scheme 6230
+HQ6410	en	Habitat quality scheme: Molinion grasslands	Habitat quality scheme 6410
+HQ6510	en	Habitat quality scheme: Arrhenaterion and Alopecurion grasslands	Habitat quality scheme 6510
+HQ7140	en	Habitat quality scheme: Transition mires and quaking bogs	Habitat quality scheme 7140
+HQ9120	en	Habitat quality scheme: Beech-oak forests with Ilex	Habitat quality scheme 9120
+HQ9130	en	Habitat quality scheme: Neutrophilic beech forest	Habitat quality scheme 9130
+HQ9160	en	Habitat quality scheme: Oak-hornbeam forests	Habitat quality scheme 9160
+HQ9190	en	Habitat quality scheme: Old oak forests	Habitat quality scheme 9190
+HQ91E0	en	Habitat quality scheme: Alluvial forests	Habitat quality scheme 91E0
 HS	en	Temperate heath and scrub	NA
 ID	en	Inland dunes	NA
 INUN	en	Inundationwater monitoring	NA
@@ -439,34 +439,34 @@ HC12	nl	Droog tot vochtig + Tijdelijk tot permanent nat	Droog + Nat
 HC2	nl	Tijdelijk tot permanent nat	Nat
 HC23	nl	Tijdelijk tot permanent nat + Oppervlaktewater	Nat + Oppervlaktewater
 HC3	nl	Oppervlaktewater	Oppervlaktewater
-HQ1330	nl	Meetnet habitatkwaliteit: Atlantische schorren 	Meetnet habitatkwaliteit 1330 
-HQ2120	nl	Meetnet habitatkwaliteit: wandelende duinen 	Meetnet habitatkwaliteit 2120 
-HQ2130	nl	Meetnet habitatkwaliteit: vastgelegde duinen 	Meetnet habitatkwaliteit 2130 
-HQ2160	nl	Meetnet habitatkwaliteit: duindoornstruwelen 	Meetnet habitatkwaliteit 2160 
-HQ2170	nl	Meetnet habitatkwaliteit: kruipwilgstruwelen 	Meetnet habitatkwaliteit 2170 
-HQ2180	nl	Meetnet habitatkwaliteit: duinbossen 	Meetnet habitatkwaliteit 2180 
-HQ2190_aq	nl	Meetnet habitatkwaliteit: duinplassen 	Meetnet habitatkwaliteit 2190_a 
+HQ1330	nl	Meetnet habitatkwaliteit: Atlantische schorren	Meetnet habitatkwaliteit 1330
+HQ2120	nl	Meetnet habitatkwaliteit: wandelende duinen	Meetnet habitatkwaliteit 2120
+HQ2130	nl	Meetnet habitatkwaliteit: vastgelegde duinen	Meetnet habitatkwaliteit 2130
+HQ2160	nl	Meetnet habitatkwaliteit: duindoornstruwelen	Meetnet habitatkwaliteit 2160
+HQ2170	nl	Meetnet habitatkwaliteit: kruipwilgstruwelen	Meetnet habitatkwaliteit 2170
+HQ2180	nl	Meetnet habitatkwaliteit: duinbossen	Meetnet habitatkwaliteit 2180
+HQ2190_aq	nl	Meetnet habitatkwaliteit: duinplassen	Meetnet habitatkwaliteit 2190_a
 HQ2190_terr	nl	Meetnet habitatkwaliteit: vochtige duinvalleien (terrestrisch)	Meetnet habitatkwaliteit 2190 (terr)
-HQ2310	nl	Meetnet habitatkwaliteit: droge heide op landduinen 	Meetnet habitatkwaliteit 2310 
-HQ2330	nl	Meetnet habitatkwaliteit: open grasland op landduinen 	Meetnet habitatkwaliteit 2330 
-HQ3110	nl	Meetnet habitatkwaliteit: zeer zwakgebufferde vennen 	Meetnet habitatkwaliteit 3110 
-HQ3130	nl	Meetnet habitatkwaliteit: zwakgebufferde vennen 	Meetnet habitatkwaliteit 3130 
-HQ3140	nl	Meetnet habitatkwaliteit: kranswierwateren 	Meetnet habitatkwaliteit 3140 
-HQ3150	nl	Meetnet habitatkwaliteit: van nature eutrofe wateren 	Meetnet habitatkwaliteit 3150 
-HQ3160	nl	Meetnet habitatkwaliteit: dystrofe vennen 	Meetnet habitatkwaliteit 3160 
-HQ3270	nl	Meetnet habitatkwaliteit: voedselrijke slikoevers met bepaalde eenjarige planten 	Meetnet habitatkwaliteit 3270 
-HQ4010	nl	Meetnet habitatkwaliteit: vochtige heide 	Meetnet habitatkwaliteit 4010 
-HQ4030	nl	Meetnet habitatkwaliteit: droge heide 	Meetnet habitatkwaliteit 4030 
-HQ6120	nl	Meetnet habitatkwaliteit: stroomdalgraslanden 	Meetnet habitatkwaliteit 6120 
-HQ6230	nl	Meetnet habitatkwaliteit: heischrale graslanden 	Meetnet habitatkwaliteit 6230 
-HQ6410	nl	Meetnet habitatkwaliteit: blauwgraslanden 	Meetnet habitatkwaliteit 6410 
-HQ6510	nl	Meetnet habitatkwaliteit: soortenrijke glanshavergraslanden 	Meetnet habitatkwaliteit 6510 
-HQ7140	nl	Meetnet habitatkwaliteit: overgangs- en trilveen 	Meetnet habitatkwaliteit 7140 
-HQ9120	nl	Meetnet habitatkwaliteit: beuken-eikenbossen op zure bodem 	Meetnet habitatkwaliteit 9120 
-HQ9130	nl	Meetnet habitatkwaliteit: eiken-beukenbossen met wilde hyacint en parelgras-beukenbossen 	Meetnet habitatkwaliteit 9130 
-HQ9160	nl	Meetnet habitatkwaliteit: eiken-haagbeukenbossen 	Meetnet habitatkwaliteit 9160 
-HQ9190	nl	Meetnet habitatkwaliteit: oude eiken-berkenbossen 	Meetnet habitatkwaliteit 9190 
-HQ91E0	nl	Meetnet habitatkwaliteit: vochtige alluviale bossen 	Meetnet habitatkwaliteit 91E0 
+HQ2310	nl	Meetnet habitatkwaliteit: droge heide op landduinen	Meetnet habitatkwaliteit 2310
+HQ2330	nl	Meetnet habitatkwaliteit: open grasland op landduinen	Meetnet habitatkwaliteit 2330
+HQ3110	nl	Meetnet habitatkwaliteit: zeer zwakgebufferde vennen	Meetnet habitatkwaliteit 3110
+HQ3130	nl	Meetnet habitatkwaliteit: zwakgebufferde vennen	Meetnet habitatkwaliteit 3130
+HQ3140	nl	Meetnet habitatkwaliteit: kranswierwateren	Meetnet habitatkwaliteit 3140
+HQ3150	nl	Meetnet habitatkwaliteit: van nature eutrofe wateren	Meetnet habitatkwaliteit 3150
+HQ3160	nl	Meetnet habitatkwaliteit: dystrofe vennen	Meetnet habitatkwaliteit 3160
+HQ3270	nl	Meetnet habitatkwaliteit: voedselrijke slikoevers met bepaalde eenjarige planten	Meetnet habitatkwaliteit 3270
+HQ4010	nl	Meetnet habitatkwaliteit: vochtige heide	Meetnet habitatkwaliteit 4010
+HQ4030	nl	Meetnet habitatkwaliteit: droge heide	Meetnet habitatkwaliteit 4030
+HQ6120	nl	Meetnet habitatkwaliteit: stroomdalgraslanden	Meetnet habitatkwaliteit 6120
+HQ6230	nl	Meetnet habitatkwaliteit: heischrale graslanden	Meetnet habitatkwaliteit 6230
+HQ6410	nl	Meetnet habitatkwaliteit: blauwgraslanden	Meetnet habitatkwaliteit 6410
+HQ6510	nl	Meetnet habitatkwaliteit: soortenrijke glanshavergraslanden	Meetnet habitatkwaliteit 6510
+HQ7140	nl	Meetnet habitatkwaliteit: overgangs- en trilveen	Meetnet habitatkwaliteit 7140
+HQ9120	nl	Meetnet habitatkwaliteit: beuken-eikenbossen op zure bodem	Meetnet habitatkwaliteit 9120
+HQ9130	nl	Meetnet habitatkwaliteit: eiken-beukenbossen met wilde hyacint en parelgras-beukenbossen	Meetnet habitatkwaliteit 9130
+HQ9160	nl	Meetnet habitatkwaliteit: eiken-haagbeukenbossen	Meetnet habitatkwaliteit 9160
+HQ9190	nl	Meetnet habitatkwaliteit: oude eiken-berkenbossen	Meetnet habitatkwaliteit 9190
+HQ91E0	nl	Meetnet habitatkwaliteit: vochtige alluviale bossen	Meetnet habitatkwaliteit 91E0
 HS	nl	Heiden	NA
 ID	nl	Binnenlandse duinen	NA
 INUN	nl	Inundatiemeetnet	NA
