@@ -19,12 +19,10 @@ schemes_types_nl <-
 Reading a link between older Dutch codes of environmental pressures and the current ep_codes:
 
 ```{r message=FALSE}
-ws_list <- gs_ws_ls(ep_source)
+ws_list <- sheet_names(ep_gs_id)
 ep_codes <- 
-    ep_source %>%
-    gs_read(ws = ws_list[str_detect(ws_list, "\\ 1.0\\ ")], 
-            check.names = T,
-            verbose = FALSE) %>% 
+    ep_gs_id %>%
+    read_sheet(sheet = ws_list[str_detect(ws_list, "\\ 1.0\\ ")]) %>% 
     select(ep_code = Environmental_pressure_code,
            ep_code_nl = Environmental_pressure_code_NL_OLD) %>% 
     mutate(ep_code = factor(ep_code,
@@ -64,6 +62,7 @@ schemes_schemetypes <-
            attribute_2 = Druk,
            tag_1 = MaxMilieudrukkengroep,
            type = Vegcode) %>% 
+    mutate(type = as.character(type)) %>% 
     inner_join(types_hc, by = "type") %>% 
     mutate(
         programme = "MNE" %>% factor,
@@ -111,11 +110,11 @@ schemes_schemetypes <-
                        "focal",
                        "secondary") %>% 
                 factor,
-        type = as.character(type) %>% 
-                factor(levels = 
-                           types %>% 
-                           .$type %>% 
-                           levels)
+        type = factor(type,
+                      levels = 
+                        types %>% 
+                        .$type %>% 
+                        levels)
     ) %>% 
     select(-hydr_class_expand) %>% 
     distinct() %>% 
@@ -217,7 +216,7 @@ spat_restr <-
 
 Preparing `schemes` with MNE content:
 
-```{r message=FALSE}
+```{r}
 schemes <- 
   schemes_schemetypes %>% 
     distinct(scheme,
@@ -226,7 +225,7 @@ schemes <-
              attribute_2,
              attribute_3,
              tag_1) %>% 
-    left_join(spat_restr) %>% 
+    left_join(spat_restr, by = "scheme") %>% 
     mutate(notes = NA %>% as.character,
            tag_2 = NA %>% as.character,
            tag_3 = NA %>% as.character
@@ -249,15 +248,13 @@ schemes <-
 Collecting typegroup information to join on type:
 
 ```{r message=FALSE}
-tg_source <- gs_key("1n2ohvuLEK_anX37gxlanQXRGotweMVonFxKxtfTcuZI")
-ws_list <- gs_ws_ls(tg_source)
+ws_list <- sheet_names(tg_gs_id)
 
 typegroups <- 
     
-    tg_source %>%
-    gs_read(ws = ws_list[str_detect(ws_list, "Eutrofiëring")], 
-            check.names = T,
-            verbose = FALSE) %>% 
+    tg_gs_id %>%
+    read_sheet(sheet = ws_list[str_detect(ws_list, "Eutrofiëring")],
+               .name_repair = make.names) %>% 
     slice(2:n()) %>% 
     expand_grid(scheme = c("GW_03.3",
                            "SURF_03.4_lentic")
@@ -267,10 +264,9 @@ typegroups <-
            typegroup = Cluster.voedselrijkdom) %>% 
     
     bind_rows(
-        tg_source %>%
-        gs_read(ws = ws_list[str_detect(ws_list, "GW_05\\.1")], 
-                check.names = T,
-                verbose = FALSE) %>% 
+        tg_gs_id %>%
+        read_sheet(sheet = "GW_05.1 (XG3)",
+                   .name_repair = make.names) %>% 
         filter(Type %in% 
                  (schemes_schemetypes %>% 
                     filter(scheme == "GW_05.1_terr") %>% 
@@ -283,10 +279,9 @@ typegroups <-
     ) %>% 
     
     bind_rows(
-        tg_source %>%
-        gs_read(ws = ws_list[str_detect(ws_list, "ATM_03\\.1")], 
-                check.names = T,
-                verbose = FALSE) %>% 
+        tg_gs_id %>%
+        read_sheet(sheet = ws_list[str_detect(ws_list, "ATM_03\\.1")],
+                   .name_repair = make.names) %>% 
         mutate(scheme = "ATM_03.1") %>% 
         select(scheme,
                type = Type,
@@ -294,10 +289,9 @@ typegroups <-
     ) %>% 
     
     bind_rows(
-        tg_source %>%
-        gs_read(ws = ws_list[str_detect(ws_list, "ATM_04\\.1")], 
-                check.names = T,
-                verbose = FALSE) %>% 
+        tg_gs_id %>%
+        read_sheet(sheet = ws_list[str_detect(ws_list, "ATM_04\\.1")],
+                   .name_repair = make.names) %>% 
         mutate(scheme = "ATM_04.1") %>% 
         select(scheme,
                type = Type,
@@ -321,12 +315,13 @@ typegroups <-
 
 Preparing `scheme_types` with MNE content:
 
-```{r message=FALSE}
+```{r}
 scheme_types <- 
   schemes_schemetypes %>% 
     distinct(scheme,
              type) %>% 
-    left_join(typegroups) %>% 
+    left_join(typegroups, 
+              by = c("scheme", "type")) %>% 
     arrange(scheme, type)
 ```
 
@@ -396,7 +391,8 @@ schemes %>%
     rename(name_1 = name) %>% 
     left_join(tibble(lang = c("en", "nl"),
                      name_2 = c("environmental pressure",
-                                "milieudruk"))) %>% 
+                                "milieudruk")),
+              by = "lang") %>% 
     left_join(namelist %>% select(-name),
               by = c("attribute_2" = "code", "lang")) %>% 
     rename(name_3 = shortname) %>% 
@@ -492,8 +488,9 @@ tribble(~nr, ~lang, ~name, ~shortname,
 Writing `schemes`.
 
 ```{r message=FALSE}
-schemes_MHQ <- gs_key("1PU9MDyJKZz2DOrKqb-SIIVmSaR1mh4Ke6v0WCqhr8t4") %>%
-  gs_read(ws = 1) %>%
+schemes_MHQ <- 
+  mhq_gs_id %>%
+  read_sheet(sheet = 1, col_types = "c") %>%
   mutate(attribute_1 = ifelse(attribute_1 == 91, 
                               "91E0", 
                               as.character(attribute_1)),
@@ -542,9 +539,11 @@ schemes %>%
 Writing `scheme_types`.
 
 ```{r}
-scheme_type_MHQ <- gs_key("1PU9MDyJKZz2DOrKqb-SIIVmSaR1mh4Ke6v0WCqhr8t4") %>%
-  gs_read(ws = 2) %>%
-  mutate(scheme = factor(scheme))
+scheme_type_MHQ <- 
+  mhq_gs_id %>%
+  read_sheet(sheet = 2) %>%
+  mutate(scheme = factor(scheme),
+         type = unlist(type))
   
 scheme_types %>%
   bind_rows(scheme_type_MHQ) %>%
@@ -575,14 +574,23 @@ namelist <- read_vc(namelist_path, root)
 
 schemes_MHQ_names <- schemes_MHQ %>%
   left_join(namelist, by = c("attribute_1" = "code")) %>%
-  mutate(name = paste(ifelse(lang == "en",
-                             "Habitat quality scheme:",
-                             "Meetnet habitatkwaliteit:"),
-                      shortname),
-         shortname = paste(ifelse(lang == "en",
-                             "Habitat quality scheme",
-                             "Meetnet habitatkwaliteit"),
-                      attribute_1)) %>%
+  mutate(name = paste0(ifelse(lang == "en",
+                             "Habitat quality scheme: ",
+                             "Meetnet habitatkwaliteit: "),
+                      shortname,
+                      ifelse(scheme == "HQ2190_terr",
+                             ifelse(lang == "en",
+                                    " (terrestrial)", " (terrestrisch)"),
+                             "")
+                      ),
+         shortname = paste0(ifelse(lang == "en",
+                             "Habitat quality scheme ",
+                             "Meetnet habitatkwaliteit "),
+                      attribute_1,
+                      ifelse(scheme == "HQ2190_terr",
+                             " (terr)",
+                             ""))
+         ) %>%
   select(code = scheme, lang, name, shortname)
 
 namelist %>%

@@ -153,7 +153,8 @@ HQ2130	en	Habitat quality scheme: Grey dunes	Habitat quality scheme 2130
 HQ2160	en	Habitat quality scheme: Hippophae rhamnoides dunes	Habitat quality scheme 2160
 HQ2170	en	Habitat quality scheme: Salix repens dunes	Habitat quality scheme 2170
 HQ2180	en	Habitat quality scheme: Wooded dunes	Habitat quality scheme 2180
-HQ2190	en	Habitat quality scheme: Humid dune slacks	Habitat quality scheme 2190
+HQ2190_aq	en	Habitat quality scheme: Dune slack ponds	Habitat quality scheme 2190_a
+HQ2190_terr	en	Habitat quality scheme: Humid dune slacks (terrestrial)	Habitat quality scheme 2190 (terr)
 HQ2310	en	Habitat quality scheme: Psammophylic heath	Habitat quality scheme 2310
 HQ2330	en	Habitat quality scheme: Inland shifting dunes	Habitat quality scheme 2330
 HQ3110	en	Habitat quality scheme: Barely buffered standing waters	Habitat quality scheme 3110
@@ -276,10 +277,10 @@ rbbhfl	en	Tall herb communities with Lysimachia vulgaris and Calamagrostis canes
 rbbkam	en	Cynosurion grasslands	Cynosurion grasslands
 rbbkam+	en	Species-rich Cynosurion grasslands	Species-rich Cynosurion grasslands
 rbbmc	en	Tall sedges communities	Tall sedges communities
-rbbmr	en	Reed beds and other Phragmites communities (no habitat type 6430)	Reed beds and other Phragmites communities (not 6430)
+rbbmr	en	Reed beds and other Phragmites communities	Reed beds and other Phragmites communities
 rbbms	en	Small sedge communities (no habitat type 7140)	Small sedge communities (not 7140)
 rbbppm	en	Old, structure rich Pinus sylvestris forest	Old, structure rich Pinus sylvestris forest
-rbbsf	en	Wet Salix scrubs on nutrient rich soil (no habitat type 91E0)	Wet Salix scrubs on nutrient rich soil (not 91E0)
+rbbsf	en	Wet Salix scrubs on nutrient rich soil	Wet Salix scrubs on nutrient rich soil
 rbbsg	en	Cytisus and Ulex scrub	Cytisus and Ulex scrubs
 rbbsm	en	Myrica gale scrubs	Myrica gale scrubs
 rbbso	en	Wet Salix scrubs on acid peaty soil	Wet Salix scrubs on acid peaty soil
@@ -444,7 +445,8 @@ HQ2130	nl	Meetnet habitatkwaliteit: vastgelegde duinen	Meetnet habitatkwaliteit 
 HQ2160	nl	Meetnet habitatkwaliteit: duindoornstruwelen	Meetnet habitatkwaliteit 2160
 HQ2170	nl	Meetnet habitatkwaliteit: kruipwilgstruwelen	Meetnet habitatkwaliteit 2170
 HQ2180	nl	Meetnet habitatkwaliteit: duinbossen	Meetnet habitatkwaliteit 2180
-HQ2190	nl	Meetnet habitatkwaliteit: vochtige duinvalleien	Meetnet habitatkwaliteit 2190
+HQ2190_aq	nl	Meetnet habitatkwaliteit: duinplassen	Meetnet habitatkwaliteit 2190_a
+HQ2190_terr	nl	Meetnet habitatkwaliteit: vochtige duinvalleien (terrestrisch)	Meetnet habitatkwaliteit 2190 (terr)
 HQ2310	nl	Meetnet habitatkwaliteit: droge heide op landduinen	Meetnet habitatkwaliteit 2310
 HQ2330	nl	Meetnet habitatkwaliteit: open grasland op landduinen	Meetnet habitatkwaliteit 2330
 HQ3110	nl	Meetnet habitatkwaliteit: zeer zwakgebufferde vennen	Meetnet habitatkwaliteit 3110

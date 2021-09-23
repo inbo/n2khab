@@ -5,13 +5,9 @@
 Reading from the source googlesheet:
 
 ```{r message=FALSE}
-ep_source <- gs_key("1PH6InqJk0ijQF_N7v7IZjarijlqHRBCKhTbDn44skZU")
 source_df <-
-    ep_source %>%
-    gs_read(ws = gs_ws_ls(ep_source) %>%
-                 head(1), 
-            check.names = T,
-            verbose = FALSE)
+    ep_gs_id %>%
+    read_sheet(sheet = sheet_names(ep_gs_id)[1])
 ```
 
 Adding multilingual EP names and abbreviations to `namelist`:
