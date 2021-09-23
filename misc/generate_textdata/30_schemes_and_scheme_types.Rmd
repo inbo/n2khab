@@ -280,6 +280,21 @@ typegroups <-
     
     bind_rows(
         tg_gs_id %>%
+        read_sheet(sheet = "GW_05.1_aq (XG3)",
+                   .name_repair = make.names) %>%
+        filter(Type %in% 
+                 (schemes_schemetypes %>% 
+                    filter(scheme == "GW_05.1_aq") %>% 
+                    .$type)
+               ) %>% 
+        mutate(scheme = "GW_05.1_aq") %>% 
+        select(scheme,
+               type = Type,
+               typegroup = Typegroep)
+    ) %>% 
+    
+    bind_rows(
+        tg_gs_id %>%
         read_sheet(sheet = ws_list[str_detect(ws_list, "ATM_03\\.1")],
                    .name_repair = make.names) %>% 
         mutate(scheme = "ATM_03.1") %>% 
@@ -475,6 +490,21 @@ tribble(~nr, ~lang, ~name, ~shortname,
         5, "nl", "types van lokaal vochtig milieu", "lokaal vochtig"
         ) %>% 
       mutate(code = str_c("GW_05.1_terr_group", code))
+  ) %>% 
+  bind_rows(
+        tribble(~code, ~lang, ~name, ~shortname,
+        1, "en", "types from spring-fed brooks", "spring-fed brooks",
+        1, "nl", "types van bronbeken", "bronbeken",
+        2, "en", "types from lakes with stable groundwater table", "stable lakes",
+        2, "nl", "types van stilstaand water met stabiel grondwaterregime", "stabiele plassen",
+        3, "en", "types from lowland rivers", "lowland rivers",
+        3, "nl", "types van laaglandbeken", "laaglandbeken",
+        4, "en", "types from dune lakes (moderate groundwater dynamics)", "dune lakes",
+        4, "nl", "types van duinplassen (middelmatig grondwaterregime)", "duinplassen",
+        5, "en", "types from softwater lakes with dynamic groundwater table", "dynamic softwater lakes",
+        5, "nl", "types van vennen met dynamisch grondwaterregime", "dynamische vennen"
+        ) %>% 
+      mutate(code = str_c("GW_05.1_aq_group", code))
   ) %>% 
   bind_rows(read_vc(namelist_path, root),
               .) %>% 

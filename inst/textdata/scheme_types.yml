@@ -5,8 +5,8 @@
   sorting:
   - scheme
   - type
-  hash: 996b90ba309ada058fd4c3cf59ef4521bfd9c4be
-  data_hash: 254b130bf1724301703284797b3adb326c1db1e0
+  hash: 1d16af60f0fb182574a03255abb68d40909e1c07
+  data_hash: f407d7564b783d0704a3ddb2757cbffb2ea16c0c
 scheme:
   class: factor
   labels:
@@ -385,6 +385,11 @@ typegroup:
   - GW_03.3_group2
   - GW_03.3_group3
   - GW_03.3_group4
+  - GW_05.1_aq_group1
+  - GW_05.1_aq_group2
+  - GW_05.1_aq_group3
+  - GW_05.1_aq_group4
+  - GW_05.1_aq_group5
   - GW_05.1_terr_group1
   - GW_05.1_terr_group2
   - GW_05.1_terr_group3
@@ -410,6 +415,11 @@ typegroup:
   - 13
   - 14
   - 15
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
   - 16
   - 17
   - 18
