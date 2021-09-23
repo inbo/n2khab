@@ -5,8 +5,8 @@
   sorting:
   - programme
   - scheme
-  hash: b28a62b443678796a29db126dcb4b1e774c20377
-  data_hash: ed075ef64e0a7fbf4ab772afd586e02e2d2e2b87
+  hash: a7161d9fe68befeb9feec626e0d5b0e3710eca97
+  data_hash: 031ed7c381ae9a8bc4c70dab750d4b4b24a1e2ae
 scheme:
   class: factor
   labels:
@@ -163,8 +163,8 @@ attribute_1:
   - '2160'
   - '2170'
   - '2180'
+  - '2190'
   - 2190_a
-  - 2190_terr
   - '2310'
   - '2330'
   - '3110'
@@ -197,8 +197,8 @@ attribute_1:
   - 8
   - 9
   - 10
+  - 11
   - 33
-  - 34
   - 12
   - 13
   - 14
