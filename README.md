@@ -2,6 +2,8 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3631579.svg)](https://doi.org/10.5281/zenodo.3631579)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R-CMD-check](https://github.com/inbo/n2khab/workflows/R-CMD-check/badge.svg)](https://github.com/inbo/n2khab/actions?query=workflow%3AR-CMD-check)
+[![inbo r-universe-name](https://inbo.r-universe.dev/badges/:name?color=pink)](https://inbo.r-universe.dev)
+[![inbo r-universe n2khab status](https://inbo.r-universe.dev/badges/n2khab)](https://inbo.r-universe.dev)
 <!-- badges: end -->
 
 ## Welcome
@@ -15,7 +17,16 @@ The standard reference data include: checklists, spatial habitat distribution, a
 
 ## Installing and using the _n2khab_ package
 
-To install, run:
+To install the current package version from the `master` branch (latest stable release), run:
+
+```r
+install.packages("n2khab", repos = "https://inbo.r-universe.dev")
+```
+
+The above provides a pre-compiled package for Windows and Mac, which should be faster than below approach.
+INBO staff should have the INBO repository enabled already (check with `getOption("repos")`), in which case **`install.packages("n2khab")`** is all you need!
+
+If you want to install from the source repository, run:
 
 ```r
 Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS = "true") # as a precaution
