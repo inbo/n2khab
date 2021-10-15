@@ -15,7 +15,16 @@ The standard reference data include: checklists, spatial habitat distribution, a
 
 ## Installing and using the _n2khab_ package
 
-To install, run:
+To install the current package version from the `master` branch (latest stable release), run:
+
+```r
+install.packages("n2khab", repos = "https://inbo.r-universe.dev")
+```
+
+The above provides a pre-compiled package for Windows and Mac, which should be faster than below approach.
+INBO staff should have the INBO repository enabled already (check with `getOption("repos")`), in which case **`install.packages("n2khab")`** is all you need!
+
+If you want to install from the source repository, run:
 
 ```r
 Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS = "true") # as a precaution
