@@ -23,7 +23,7 @@ To install the current package version from the `master` branch (latest stable r
 install.packages("n2khab", repos = "https://inbo.r-universe.dev")
 ```
 
-The above provides a pre-compiled package for Windows and Mac, which should be faster than below approach.
+The above provides a pre-compiled package for Windows and macOS, which should be faster than below approach.
 INBO staff should have the INBO repository enabled already (check with `getOption("repos")`), in which case **`install.packages("n2khab")`** is all you need!
 
 If you want to install from the source repository, run:
