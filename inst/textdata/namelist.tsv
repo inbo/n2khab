@@ -559,11 +559,11 @@ ep_066_explan	nl	Een afname van de golfslagwerking ter hoogte van de beschouwde 
 ep_07.1	nl	7.1 Verzoeting via het grondwater	07.1_verzoet_gw
 ep_07.1_explan	nl	Afname van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken grondwaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap.	NA
 ep_07.2	nl	7.2 Verzoeting via het oppervlaktewater (incl. overstromingswater)	07.2_verzoet_ow
-ep_07.2_explan	nl	Afname van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken oppervlaktewaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap.	NA
+ep_07.2_explan	nl	Afname van het chloridegehalte van de standplaats, door hydromorfologische, regime- of kwaliteitswijzigingen van het betrokken oppervlaktewaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap.	NA
 ep_07.3	nl	7.3 Verzilting via het grondwater	07.3_verzilt_gw
 ep_07.3_explan	nl	Toename van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken grondwaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. Het chloride is daarbij afkomstig uit het natuurlijk milieu (toevoeging van zouten valt onder milieudrukklasse 8).	NA
 ep_07.4	nl	7.4 Verzilting via het oppervlaktewater (incl. overstromingswater)	07.4_verzilt_ow
-ep_07.4_explan	nl	Toename van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken oppervlaktewaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. Het chloride is daarbij afkomstig uit het natuurlijk milieu (toevoeging van zouten valt onder milieudrukklasse 8).	NA
+ep_07.4_explan	nl	Toename van het chloridegehalte van de standplaats, door hydromorfologische, regime- of kwaliteitswijzigingen van het betrokken oppervlaktewaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. Het chloride is daarbij afkomstig uit het natuurlijk milieu (toevoeging van zouten valt onder milieudrukklasse 8).	NA
 ep_08.1	nl	8.1 Verontreiniging via de lucht	08.1_verontr_atm
 ep_08.1_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffen), in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De stoffen komen de standplaats binnen via de lucht (depositie).	NA
 ep_08.2	nl	8.2 Verontreiniging via de bodem	08.2_verontr_bod
