@@ -280,6 +280,7 @@ voor Bodemkunde, Ghent, 361 p. URL: \url{http://hdl.handle.net/1854/LU-125899}.
 }
 \seealso{
 Other functions returning environmental data sets: 
+\code{\link{read_shallowgroundwater}()},
 \code{\link{read_watercourse_100mseg}()},
 \code{\link{read_watersurfaces}()}
 }

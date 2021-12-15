@@ -17,6 +17,8 @@
 #' @return
 #' A Simple feature collection of geometry type \code{MULTIPOLYGON}.
 #'
+#' @family functions returning environmental data sets
+#'
 #' @examples
 #' \dontrun{
 #' shallowgroundwater <- read_shallowgroundwater()

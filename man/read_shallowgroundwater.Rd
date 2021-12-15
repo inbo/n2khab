@@ -41,3 +41,10 @@ shallowgroundwater
 }
 
 }
+\seealso{
+Other functions returning environmental data sets: 
+\code{\link{read_soilmap}()},
+\code{\link{read_watercourse_100mseg}()},
+\code{\link{read_watersurfaces}()}
+}
+\concept{functions returning environmental data sets}
