@@ -105,6 +105,10 @@ Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
 \seealso{
 Other functions involved in processing the 'watersurfaces' data source: 
 \code{\link{read_watersurfaces_hab}()}
+
+Other functions returning environmental data sets: 
+\code{\link{read_soilmap}()},
+\code{\link{read_watercourse_100mseg}()}
 }
 \concept{functions involved in processing the 'watersurfaces' data source}
-\concept{functions returning important environmental data sets}
+\concept{functions returning environmental data sets}

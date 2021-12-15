@@ -78,6 +78,7 @@
 #' Optionally, only one of these \code{sf} objects is returned.
 #'
 #' @family functions involved in processing the 'watercourses' data source
+#' @family functions returning environmental data sets
 #'
 #' @examples
 #' \dontrun{

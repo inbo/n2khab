@@ -204,6 +204,8 @@
 #'
 #' (*) Included in the `soilmap_simple` data source.
 #'
+#' @family functions returning environmental data sets
+#'
 #' @references
 #' - Ampe C. (2013). Databank aardewerk Vlaanderen 2010.
 #' Omzetten (zeer) oude legende bodemkartering naar legende bodemkaart

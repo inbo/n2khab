@@ -471,7 +471,7 @@ read_watersurfaces_hab <-
 #' }
 #'
 #' @family functions involved in processing the 'watersurfaces' data source
-#' @family functions returning important environmental data sets
+#' @family functions returning environmental data sets
 #'
 #' @references
 #'
