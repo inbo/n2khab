@@ -1,3 +1,17 @@
+# n2khab (development version)
+
+## New features
+
+- Function `read_shallowgroundwater()` to return the `shallowgroundwater` data source (#156).
+  - x
+- Reference lists `schemes`, `scheme_types`, `namelist` were updated (#150, #151, #154):
+  - a few type name updates (thanks S. De Saeger);
+  - environmental pressures `ep_07.2` and `ep_07.4` received updated (Dutch) explanations;
+  - scheme `HQ2190` has been replaced by two schemes `HQ2190_terr` and `HQ2190_aq`;
+  - typegroups were defined for scheme `GW_05.1_aq` (with contributions from L. Denys & A. Leyssen).
+- Readme (homepage): a **new installation method** using [inbo.r-universe.dev](https://inbo.r-universe.dev) has been added and is recommended (#153).
+  
+
 # n2khab 0.5.0 (2021-05-12)
 
 ## Support for new data source versions
