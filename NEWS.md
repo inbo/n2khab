@@ -4,8 +4,9 @@
 
 - Function `read_shallowgroundwater()` to return the `shallowgroundwater` data source (#156).
   - x
-- Reference lists `schemes`, `scheme_types`, `namelist` were updated (#150, #151, #154):
+- Reference lists `types`, `schemes`, `scheme_types`, `namelist` were updated (#150, #151, #154, #158):
   - a few type name updates (thanks S. De Saeger);
+  - updated value of `groundw_dep` for type `91F0`;
   - environmental pressures `ep_07.2` and `ep_07.4` received updated (Dutch) explanations;
   - scheme `HQ2190` has been replaced by two schemes `HQ2190_terr` and `HQ2190_aq`;
   - typegroups were defined for scheme `GW_05.1_aq` (with contributions from L. Denys & A. Leyssen).
