@@ -10,7 +10,7 @@
   - environmental pressures `ep_07.2` and `ep_07.4` received updated (Dutch) explanations;
   - scheme `HQ2190` has been replaced by two schemes `HQ2190_terr` and `HQ2190_aq`;
   - typegroups were defined for scheme `GW_05.1_aq` (with contributions from L. Denys & A. Leyssen).
-- Readme (homepage): a **new installation method** using [inbo.r-universe.dev](https://inbo.r-universe.dev) has been added and is recommended (#153).
+- Readme (homepage): a **new installation method** using [inbo.r-universe.dev](https://inbo.r-universe.dev) has been added and is recommended (#153, 746fb81).
   
 
 # n2khab 0.5.0 (2021-05-12)
