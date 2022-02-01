@@ -20,7 +20,8 @@ The standard reference data include: checklists, spatial habitat distribution, a
 To install the current package version from the `master` branch (latest stable release), run:
 
 ```r
-install.packages("n2khab", repos = "https://inbo.r-universe.dev")
+install.packages("n2khab", repos = c(inbo = "https://inbo.r-universe.dev", 
+                                     CRAN = "https://cloud.r-project.org"))
 ```
 
 The above provides a pre-compiled package for Windows and macOS, which should be faster than below approach.

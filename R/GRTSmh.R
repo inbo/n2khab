@@ -225,7 +225,7 @@ convert_base4frac_to_dec <-
 #' with the decimal integer ranking numbers of 10 hierarchical levels of the
 #' GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
 #' (with GRTS cell addresses at the resolution level).
-#' The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+#' The coordinate reference system is 'BD72 / Belgian Lambert 72'
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
 #' The data source \code{GRTSmaster_habitats}, provided and documented in
@@ -470,7 +470,7 @@ read_GRTSmh_base4frac <-
 #' The function returns one selected level, either as a RasterLayer or as an
 #' \code{sf} polygon layer (in the latter case, only levels 4 to 9 are
 #' provided).
-#' The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+#' The coordinate reference system is 'BD72 / Belgian Lambert 72'
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
 #' The \code{GRTSmh_diffres} data source file is a file collection (available
