@@ -4,7 +4,7 @@
 #' Returns the raw data source \code{shallowgroundwater}
 #' as an \code{sf} multipolygon
 #' layer.
-#' The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+#' The coordinate reference system is 'BD72 / Belgian Lambert 72'
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
 #' The R code for creating the \code{shallowgroundwater} data source,

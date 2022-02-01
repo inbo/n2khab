@@ -25,7 +25,7 @@ A Simple feature collection of geometry type \code{MULTIPOLYGON}.
 Returns the raw data source \code{shallowgroundwater}
 as an \code{sf} multipolygon
 layer.
-The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+The coordinate reference system is 'BD72 / Belgian Lambert 72'
 (EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
