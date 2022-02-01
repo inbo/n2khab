@@ -36,7 +36,7 @@ A Simple feature collection of geometry type \code{MULTIPOLYGON} or
 }
 \description{
 Returns an administrative geospatial data source.
-The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+The coordinate reference system is 'BD72 / Belgian Lambert 72'
 (EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{

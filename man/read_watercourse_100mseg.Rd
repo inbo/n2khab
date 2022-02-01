@@ -57,7 +57,7 @@ represents the \emph{downstream}
 endpoints of all segments ('downstream' as defined in \code{watercourses}).
 }
 Optionally, only one of these objects is returned.
-The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+The coordinate reference system is 'BD72 / Belgian Lambert 72'
 (EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
