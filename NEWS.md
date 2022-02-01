@@ -3,7 +3,8 @@
 ## New features
 
 - Function `read_shallowgroundwater()` to return the `shallowgroundwater` data source (#156).
-  - x
+  - The raw data source `shallowgroundwater` represents the areas in
+the Flemish region of Belgium where the mean lowest groundwater level is estimated to be less than approximately 2 m below soil surface ([inbo/n2khab-preprocessing/pull/61](https://github.com/inbo/n2khab-preprocessing/pull/61); <https://doi.org/10.5281/zenodo.5902880>).
 - Reference lists `types`, `schemes`, `scheme_types`, `namelist` were updated (#150, #151, #154, #158):
   - a few type name updates (thanks S. De Saeger);
   - updated value of `groundw_dep` for type `91F0`;

@@ -107,6 +107,7 @@ Other functions involved in processing the 'watersurfaces' data source:
 \code{\link{read_watersurfaces_hab}()}
 
 Other functions returning environmental data sets: 
+\code{\link{read_shallowgroundwater}()},
 \code{\link{read_soilmap}()},
 \code{\link{read_watercourse_100mseg}()}
 }
