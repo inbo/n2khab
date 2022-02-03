@@ -1,4 +1,4 @@
-# n2khab (development version)
+# n2khab 0.6.0 (2022-02-03)
 
 ## New features
 
