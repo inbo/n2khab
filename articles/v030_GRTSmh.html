@@ -92,7 +92,7 @@
 
       
 
-      </header><script src="v030_GRTSmh_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="v030_GRTSmh_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using the GRTS data sources</h1>
@@ -175,7 +175,7 @@
 <div id="read_grtsmh_diffres" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read_grtsmh_diffres" class="anchor"></a>read_GRTSmh_diffres()</h3>
-<p><code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code> by default returns one RasterLayer from the <code>GRTSmh_diffres</code> data source, i.e. with the GRTS ranking numbers of the user-specified hierarchical level. This is done <em>at the corresponding spatial resolution</em> of the GRTS algorithm, which is the fundamental distinction from <code><a href="../reference/read_GRTSmh.html">read_GRTSmh(brick = TRUE)</a></code>.</p>
+<p><code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code> by default returns one RasterLayer from the <code>GRTSmh_diffres</code> data source, i.e. with the GRTS ranking numbers of the user-specified hierarchical level. This is done <em>at the corresponding spatial resolution</em> of the GRTS algorithm, which is the fundamental distinction from <code>read_GRTSmh(brick = TRUE)</code>.</p>
 <p>The resolutions of each level are the following (in meters):</p>
 <table class="table">
 <thead><tr class="header">
@@ -270,18 +270,18 @@
 <span class="co">#&gt; names      : GRTSmh_base4frac </span>
 <span class="co">#&gt; values     : 0.0000000000001, 0.3333333333321  (min, max)</span></code></pre></div>
 <p>Note that the used options are necessary when treating these base-4-fraction GRTS addresses as characters; otherwise scientific notations will be used.</p>
-<p>Also, be warned that R does not actually regard the values as base 4, but as base 10.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Also, be warned that R does not actually regard the values as base 4, but as base 10. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
-<div id="refs" class="references">
-<div id="ref-stevens_variance_2003">
-<p>Stevens, Don L., and Anthony R. Olsen. 2003. “Variance Estimation for Spatially Balanced Samples of Environmental Resources.” <em>Environmetrics</em> 14 (6): 593–610. <a href="https://doi.org/10.1002/env.606">https://doi.org/10.1002/env.606</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-stevens_variance_2003" class="csl-entry">
+Stevens, Don L., and Anthony R. Olsen. 2003. <span>“Variance Estimation for Spatially Balanced Samples of Environmental Resources.”</span> <em>Environmetrics</em> 14 (6): 593–610. <a href="https://doi.org/10.1002/env.606">https://doi.org/10.1002/env.606</a>.
 </div>
-<div id="ref-stevens_spatially_2004">
-<p>———. 2004. “Spatially Balanced Sampling of Natural Resources.” <em>Journal of the American Statistical Association</em> 99 (465): 262–78. <a href="https://doi.org/10.1198/016214504000000250">https://doi.org/10.1198/016214504000000250</a>.</p>
+<div id="ref-stevens_spatially_2004" class="csl-entry">
+———. 2004. <span>“Spatially <span>Balanced Sampling</span> of <span>Natural Resources</span>.”</span> <em>Journal of the American Statistical Association</em> 99 (465): 262–78. <a href="https://doi.org/10.1198/016214504000000250">https://doi.org/10.1198/016214504000000250</a>.
 </div>
 </div>
 </div>

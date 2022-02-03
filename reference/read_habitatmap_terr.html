@@ -298,24 +298,24 @@ repository.</p>
 <code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># This example supposes that your working directory or a directory up to 10</span>
-<span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span>
-<span class='co'># the 'habitatmap_terr'</span>
-<span class='co'># data source is present in the default subdirectory.</span>
-<span class='co'># In all other cases, this example won't work but at least you can</span>
-<span class='co'># consider what to do.</span>
-
-<span class='va'>habmap_terr</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatmap_terr</span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>habmap_terr</span><span class='op'>$</span><span class='va'>habitatmap_terr_polygons</span>
-<span class='va'>habmap_terr</span><span class='op'>$</span><span class='va'>habitatmap_terr_types</span>
-
-<span class='va'>habmap_terr_noaq</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatmap_terr</span><span class='op'>(</span>keep_aq_types <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='va'>habmap_terr_noaq</span><span class='op'>$</span><span class='va'>habitatmap_terr_polygons</span>
-<span class='va'>habmap_terr_noaq</span><span class='op'>$</span><span class='va'>habitatmap_terr_types</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># This example supposes that your working directory or a directory up to 10</span></span>
+<span class='r-in'><span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span></span>
+<span class='r-in'><span class='co'># the 'habitatmap_terr'</span></span>
+<span class='r-in'><span class='co'># data source is present in the default subdirectory.</span></span>
+<span class='r-in'><span class='co'># In all other cases, this example won't work but at least you can</span></span>
+<span class='r-in'><span class='co'># consider what to do.</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>habmap_terr</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatmap_terr</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>habmap_terr</span><span class='op'>$</span><span class='va'>habitatmap_terr_polygons</span></span>
+<span class='r-in'><span class='va'>habmap_terr</span><span class='op'>$</span><span class='va'>habitatmap_terr_types</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>habmap_terr_noaq</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatmap_terr</span><span class='op'>(</span>keep_aq_types <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>habmap_terr_noaq</span><span class='op'>$</span><span class='va'>habitatmap_terr_polygons</span></span>
+<span class='r-in'><span class='va'>habmap_terr_noaq</span><span class='op'>$</span><span class='va'>habitatmap_terr_types</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

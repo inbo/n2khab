@@ -265,22 +265,22 @@ outer borders (i.e., not excluding the Brussels Capital Region).</p>
 <code><a href='read_GRTSmh.html'>read_GRTSmh</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># This example supposes that your working directory or a directory up to 10</span>
-<span class='co'># levels above has</span>
-<span class='co'># the 'n2khab_data' folder AND that the latest version of the</span>
-<span class='co'># 'GRTSmh_diffres' data source is present in the default subdirectory.</span>
-<span class='co'># In all other cases, this example won't work but at least you can consider</span>
-<span class='co'># what to do.</span>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>read_GRTSmh_diffres</span><span class='op'>(</span>level <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span>
-<span class='va'>r</span>
-<span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>read_GRTSmh_diffres</span><span class='op'>(</span>level <span class='op'>=</span> <span class='fl'>7</span>, polygon <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>p</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># This example supposes that your working directory or a directory up to 10</span></span>
+<span class='r-in'><span class='co'># levels above has</span></span>
+<span class='r-in'><span class='co'># the 'n2khab_data' folder AND that the latest version of the</span></span>
+<span class='r-in'><span class='co'># 'GRTSmh_diffres' data source is present in the default subdirectory.</span></span>
+<span class='r-in'><span class='co'># In all other cases, this example won't work but at least you can consider</span></span>
+<span class='r-in'><span class='co'># what to do.</span></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>read_GRTSmh_diffres</span><span class='op'>(</span>level <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r</span></span>
+<span class='r-in'><span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>read_GRTSmh_diffres</span><span class='op'>(</span>level <span class='op'>=</span> <span class='fl'>7</span>, polygon <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>p</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

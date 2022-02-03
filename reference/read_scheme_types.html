@@ -278,36 +278,38 @@ names (<code>lang = "en"</code>) are returned.</p>
 <code><a href='read_types.html'>read_types</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>read_scheme_types</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 763 x 5</span><span>
-#&gt;    scheme   type    typegroup     typegroup_name           typegroup_shortname  
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>                    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>                
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> ATM_03.1 1310_p… ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest 
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> ATM_03.1 1310_zk ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest 
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> ATM_03.1 1310_zv ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest 
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> ATM_03.1 1320    ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest 
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> ATM_03.1 1330_da ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest 
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> ATM_03.1 1330_h… ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest 
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> ATM_03.1 2110    ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest 
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> ATM_03.1 2120    ATM_03.1_gro… sensitive non-forest ty… sensitive non-forest 
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> ATM_03.1 2130_h… ATM_03.1_gro… very sensitive non-fore… very sensitive non-f…
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> ATM_03.1 2130_hd ATM_03.1_gro… very sensitive non-fore… very sensitive non-f…
-#&gt; </span><span style='color: #949494;'># … with 753 more rows</span><span></div><div class='input'><span class='fu'>read_scheme_types</span><span class='op'>(</span>lang <span class='op'>=</span> <span class='st'>"nl"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 763 x 5</span><span>
-#&gt;    scheme   type     typegroup     typegroup_name           typegroup_shortname 
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>                    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>               
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> ATM_03.1 1310_pol ATM_03.1_gro… gevoelige niet-bostypes  gevoelig niet-bos   
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> ATM_03.1 1310_zk  ATM_03.1_gro… gevoelige niet-bostypes  gevoelig niet-bos   
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> ATM_03.1 1310_zv  ATM_03.1_gro… gevoelige niet-bostypes  gevoelig niet-bos   
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> ATM_03.1 1320     ATM_03.1_gro… gevoelige niet-bostypes  gevoelig niet-bos   
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> ATM_03.1 1330_da  ATM_03.1_gro… gevoelige niet-bostypes  gevoelig niet-bos   
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> ATM_03.1 1330_hpr ATM_03.1_gro… gevoelige niet-bostypes  gevoelig niet-bos   
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> ATM_03.1 2110     ATM_03.1_gro… gevoelige niet-bostypes  gevoelig niet-bos   
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> ATM_03.1 2120     ATM_03.1_gro… gevoelige niet-bostypes  gevoelig niet-bos   
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> ATM_03.1 2130_had ATM_03.1_gro… zeer gevoelige niet-bos… zeer gevoelig niet-…
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> ATM_03.1 2130_hd  ATM_03.1_gro… zeer gevoelige niet-bos… zeer gevoelig niet-…
-#&gt; </span><span style='color: #949494;'># … with 753 more rows</span><span></div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>read_scheme_types</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 763 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    scheme   type     typegroup       typegroup_name             typegroup_short…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>                      <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> ATM_03.1 1310_pol ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> ATM_03.1 1310_zk  ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> ATM_03.1 1310_zv  ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> ATM_03.1 1320     ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> ATM_03.1 1330_da  ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> ATM_03.1 1330_hpr ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> ATM_03.1 2110     ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> ATM_03.1 2120     ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> ATM_03.1 2130_had ATM_03.1_group1 very sensitive non-forest… very sensitive …</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> ATM_03.1 2130_hd  ATM_03.1_group1 very sensitive non-forest… very sensitive …</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 753 more rows</span></span>
+<span class='r-in'><span class='fu'>read_scheme_types</span><span class='op'>(</span>lang <span class='op'>=</span> <span class='st'>"nl"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 763 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    scheme   type     typegroup       typegroup_name             typegroup_short…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>                      <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> ATM_03.1 1310_pol ATM_03.1_group2 gevoelige niet-bostypes    gevoelig niet-b…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> ATM_03.1 1310_zk  ATM_03.1_group2 gevoelige niet-bostypes    gevoelig niet-b…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> ATM_03.1 1310_zv  ATM_03.1_group2 gevoelige niet-bostypes    gevoelig niet-b…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> ATM_03.1 1320     ATM_03.1_group2 gevoelige niet-bostypes    gevoelig niet-b…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> ATM_03.1 1330_da  ATM_03.1_group2 gevoelige niet-bostypes    gevoelig niet-b…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> ATM_03.1 1330_hpr ATM_03.1_group2 gevoelige niet-bostypes    gevoelig niet-b…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> ATM_03.1 2110     ATM_03.1_group2 gevoelige niet-bostypes    gevoelig niet-b…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> ATM_03.1 2120     ATM_03.1_group2 gevoelige niet-bostypes    gevoelig niet-b…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> ATM_03.1 2130_had ATM_03.1_group1 zeer gevoelige niet-bosty… zeer gevoelig n…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> ATM_03.1 2130_hd  ATM_03.1_group1 zeer gevoelige niet-bosty… zeer gevoelig n…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 753 more rows</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

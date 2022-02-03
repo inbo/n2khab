@@ -252,46 +252,48 @@ such variables with
 <code><a href='read_schemes.html'>read_schemes</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>read_types</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 111 x 25</span><span>
-#&gt;    type   typelevel main_type type_name  type_shortname typeclass typeclass_name
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>         
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 1130   main_type 1130      Estuaries  Estuaries      CH        Coastal and h…
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 1140   main_type 1140      Mudflats … Mud- and sand… CH        Coastal and h…
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 1310   main_type 1310      Salicorni… Brackish pion… CH        Coastal and h…
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 1310_… subtype   1310      Salicorni… Salicornia ha… CH        Coastal and h…
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 1310_… subtype   1310      Low saltm… Low saltmarsh… CH        Coastal and h…
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 1310_… subtype   1310      High salt… High saltmars… CH        Coastal and h…
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 1320   main_type 1320      Spartina … Spartina swar… CH        Coastal and h…
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 1330   main_type 1330      Atlantic … Atlantic salt… CH        Coastal and h…
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 1330_… subtype   1330      Saltmarsh… Saltmarshes d… CH        Coastal and h…
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 1330_… subtype   1330      Halophyti… Halophytic gr… CH        Coastal and h…
-#&gt; </span><span style='color: #949494;'># … with 101 more rows, and 18 more variables: hydr_class &lt;fct&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   hydr_class_name &lt;fct&gt;, hydr_class_shortname &lt;fct&gt;, groundw_dep &lt;fct&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   groundw_dep_name &lt;fct&gt;, groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, tag_1 &lt;chr&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2 &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span><span></div><div class='input'><span class='fu'>read_types</span><span class='op'>(</span>lang <span class='op'>=</span> <span class='st'>"nl"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 111 x 25</span><span>
-#&gt;    type   typelevel main_type type_name  type_shortname typeclass typeclass_name
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>         
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 1130   main_type 1130      Estuaria   estuaria       CH        Kust- en zilt…
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 1140   main_type 1140      Bij eb dr… bij eb droogv… CH        Kust- en zilt…
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 1310   main_type 1310      Eenjarige… zilte pionier… CH        Kust- en zilt…
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 1310_… subtype   1310      binnendij… binnendijkse … CH        Kust- en zilt…
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 1310_… subtype   1310      buitendij… buitendijks l… CH        Kust- en zilt…
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 1310_… subtype   1310      buitendij… buitendijks h… CH        Kust- en zilt…
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 1320   main_type 1320      Schorren … schorren met … CH        Kust- en zilt…
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 1330   main_type 1330      Atlantisc… Atlantische s… CH        Kust- en zilt…
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 1330_… subtype   1330      buitendij… buitendijkse … CH        Kust- en zilt…
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 1330_… subtype   1330      binnendij… zilte graslan… CH        Kust- en zilt…
-#&gt; </span><span style='color: #949494;'># … with 101 more rows, and 18 more variables: hydr_class &lt;fct&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   hydr_class_name &lt;fct&gt;, hydr_class_shortname &lt;fct&gt;, groundw_dep &lt;fct&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   groundw_dep_name &lt;fct&gt;, groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, tag_1 &lt;chr&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2 &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span><span></div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>read_types</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 111 × 25</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    type    typelevel main_type type_name type_shortname typeclass typeclass_name</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 1130    main_type 1130      Estuaries Estuaries      CH        Coastal and h…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 1140    main_type 1140      Mudflats… Mud- and sand… CH        Coastal and h…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 1310    main_type 1310      Salicorn… Brackish pion… CH        Coastal and h…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 1310_p… subtype   1310      Salicorn… Salicornia ha… CH        Coastal and h…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 1310_zk subtype   1310      Low salt… Low saltmarsh… CH        Coastal and h…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 1310_zv subtype   1310      High sal… High saltmars… CH        Coastal and h…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 1320    main_type 1320      Spartina… Spartina swar… CH        Coastal and h…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 1330    main_type 1330      Atlantic… Atlantic salt… CH        Coastal and h…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 1330_da subtype   1330      Saltmars… Saltmarshes d… CH        Coastal and h…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 1330_h… subtype   1330      Halophyt… Halophytic gr… CH        Coastal and h…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 101 more rows, and 18 more variables: hydr_class &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   hydr_class_name &lt;fct&gt;, hydr_class_shortname &lt;fct&gt;, groundw_dep &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   groundw_dep_name &lt;fct&gt;, groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, tag_1 &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2 &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></span>
+<span class='r-in'><span class='fu'>read_types</span><span class='op'>(</span>lang <span class='op'>=</span> <span class='st'>"nl"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 111 × 25</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    type    typelevel main_type type_name type_shortname typeclass typeclass_name</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 1130    main_type 1130      Estuaria  estuaria       CH        Kust- en zilt…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 1140    main_type 1140      Bij eb d… bij eb droogv… CH        Kust- en zilt…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 1310    main_type 1310      Eenjarig… zilte pionier… CH        Kust- en zilt…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 1310_p… subtype   1310      binnendi… binnendijkse … CH        Kust- en zilt…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 1310_zk subtype   1310      buitendi… buitendijks l… CH        Kust- en zilt…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 1310_zv subtype   1310      buitendi… buitendijks h… CH        Kust- en zilt…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 1320    main_type 1320      Schorren… schorren met … CH        Kust- en zilt…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 1330    main_type 1330      Atlantis… Atlantische s… CH        Kust- en zilt…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 1330_da subtype   1330      buitendi… buitendijkse … CH        Kust- en zilt…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 1330_h… subtype   1330      binnendi… zilte graslan… CH        Kust- en zilt…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 101 more rows, and 18 more variables: hydr_class &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   hydr_class_name &lt;fct&gt;, hydr_class_shortname &lt;fct&gt;, groundw_dep &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   groundw_dep_name &lt;fct&gt;, groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, tag_1 &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2 &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
