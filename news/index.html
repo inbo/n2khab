@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -140,12 +140,37 @@
       <small>Source: <a href='https://github.com/inbo/n2khab/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="n2khab-050-2021-05-12" class="section level2">
+    <div id="n2khab-060-2022-02-03" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.0">
+<a href="#n2khab-060-2022-02-03" class="anchor"></a>n2khab 0.6.0 (2022-02-03)</h1>
+<div id="new-features" class="section level2">
 <h2 class="hasAnchor">
-<a href="#n2khab-050-2021-05-12" class="anchor"></a>n2khab 0.5.0 (2021-05-12)</h2>
-<div id="support-for-new-data-source-versions" class="section level4">
-<h4 class="hasAnchor">
-<a href="#support-for-new-data-source-versions" class="anchor"></a>Support for new data source versions</h4>
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>Function <code><a href="../reference/read_shallowgroundwater.html">read_shallowgroundwater()</a></code> to return the <code>shallowgroundwater</code> data source (<a href='https://github.com/inbo/n2khab/issues/156'>#156</a>).
+<ul>
+<li>The raw data source <code>shallowgroundwater</code> represents the areas in the Flemish region of Belgium where the mean lowest groundwater level is estimated to be less than approximately 2 m below soil surface (<a href="https://github.com/inbo/n2khab-preprocessing/pull/61">inbo/n2khab-preprocessing/pull/61</a>; <a href="https://doi.org/10.5281/zenodo.5902880" class="uri">https://doi.org/10.5281/zenodo.5902880</a>).</li>
+</ul>
+</li>
+<li>Reference lists <code>types</code>, <code>schemes</code>, <code>scheme_types</code>, <code>namelist</code> were updated (<a href='https://github.com/inbo/n2khab/issues/150'>#150</a>, <a href='https://github.com/inbo/n2khab/issues/151'>#151</a>, <a href='https://github.com/inbo/n2khab/issues/154'>#154</a>, <a href='https://github.com/inbo/n2khab/issues/158'>#158</a>):
+<ul>
+<li>a few type name updates (thanks S. De Saeger);</li>
+<li>updated value of <code>groundw_dep</code> for type <code>91F0</code>;</li>
+<li>environmental pressures <code>ep_07.2</code> and <code>ep_07.4</code> received updated (Dutch) explanations;</li>
+<li>scheme <code>HQ2190</code> has been replaced by two schemes <code>HQ2190_terr</code> and <code>HQ2190_aq</code>;</li>
+<li>typegroups were defined for scheme <code>GW_05.1_aq</code> (with contributions from L. Denys &amp; A. Leyssen).</li>
+</ul>
+</li>
+<li>Readme (homepage): a <strong>new installation method</strong> using <a href="https://inbo.r-universe.dev">inbo.r-universe.dev</a> has been added and is recommended (<a href='https://github.com/inbo/n2khab/issues/153'>#153</a>, 746fb81).</li>
+</ul>
+</div>
+</div>
+    <div id="n2khab-050-2021-05-12" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.0">
+<a href="#n2khab-050-2021-05-12" class="anchor"></a>n2khab 0.5.0 (2021-05-12)</h1>
+<div id="support-for-new-data-source-versions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#support-for-new-data-source-versions" class="anchor"></a>Support for new data source versions</h2>
 <p>The following new data source versions are now supported by their associated reading functions:</p>
 <ul>
 <li>
@@ -163,9 +188,9 @@
 </ul>
 <p>Function documentation was updated accordingly and refined.</p>
 </div>
-<div id="new-functions" class="section level4">
-<h4 class="hasAnchor">
-<a href="#new-functions" class="anchor"></a>New functions</h4>
+<div id="new-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-functions" class="anchor"></a>New functions</h2>
 <ul>
 <li>Function <code><a href="../reference/read_raster_runif.html">read_raster_runif()</a></code> to return the <code>raster_runif</code> data source (<a href='https://github.com/inbo/n2khab/issues/136'>#136</a>, <a href='https://github.com/inbo/n2khab/issues/138'>#138</a>)
 <ul>
@@ -175,9 +200,9 @@
 <li>Function <code><a href="../reference/checksum.html">checksum()</a></code> and associated shortcut functions to calculate file checksums (<a href='https://github.com/inbo/n2khab/issues/122'>#122</a>)</li>
 </ul>
 </div>
-<div id="other-updates--internal-changes" class="section level4">
-<h4 class="hasAnchor">
-<a href="#other-updates--internal-changes" class="anchor"></a>Other updates &amp; internal changes</h4>
+<div id="other-updates--internal-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-updates--internal-changes" class="anchor"></a>Other updates &amp; internal changes</h2>
 <p>Including:</p>
 <ul>
 <li>
@@ -187,19 +212,19 @@
 </ul>
 </div>
 </div>
-    <div id="n2khab-040-2021-02-10" class="section level2">
+    <div id="n2khab-040-2021-02-10" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.0">
+<a href="#n2khab-040-2021-02-10" class="anchor"></a>n2khab 0.4.0 (2021-02-10)</h1>
+<div id="new-feature" class="section level2">
 <h2 class="hasAnchor">
-<a href="#n2khab-040-2021-02-10" class="anchor"></a>n2khab 0.4.0 (2021-02-10)</h2>
-<div id="new-feature" class="section level4">
-<h4 class="hasAnchor">
-<a href="#new-feature" class="anchor"></a>New feature</h4>
+<a href="#new-feature" class="anchor"></a>New feature</h2>
 <ul>
 <li>Function <code><a href="../reference/read_watercourse_100mseg.html">read_watercourse_100mseg()</a></code> (<a href='https://github.com/inbo/n2khab/issues/105'>#105</a>) to return the <code>watercourse_100mseg</code> data source or one of its elements. <code>watercourse_100mseg</code> is a new processed data source (<a href="https://github.com/inbo/n2khab-preprocessing/pull/44">inbo/n2khab-preprocessing/pull/44</a>; <a href="https://doi.org/10.5281/zenodo.4452577" class="uri">https://doi.org/10.5281/zenodo.4452577</a>).</li>
 </ul>
 </div>
-<div id="updates--internal-changes" class="section level4">
-<h4 class="hasAnchor">
-<a href="#updates--internal-changes" class="anchor"></a>Updates &amp; internal changes</h4>
+<div id="updates--internal-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#updates--internal-changes" class="anchor"></a>Updates &amp; internal changes</h2>
 <p>Including:</p>
 <ul>
 <li>Update <code>namelist</code> data source: Dutch shortname of one type changed (<a href='https://github.com/inbo/n2khab/issues/102'>#102</a>).</li>
@@ -207,9 +232,9 @@
 <li>Minor updates in documentation and vignettes to solve newly encountered errors and notes in <code>R CMD check</code> (<a href='https://github.com/inbo/n2khab/issues/107'>#107</a>).</li>
 </ul>
 </div>
-<div id="repo-and-website-maintenance" class="section level4">
-<h4 class="hasAnchor">
-<a href="#repo-and-website-maintenance" class="anchor"></a>Repo and website maintenance</h4>
+<div id="repo-and-website-maintenance" class="section level2">
+<h2 class="hasAnchor">
+<a href="#repo-and-website-maintenance" class="anchor"></a>Repo and website maintenance</h2>
 <ul>
 <li>Update and extend Readme (homepage) and Contributing Guide (<a href='https://github.com/inbo/n2khab/issues/97'>#97</a>, <a href='https://github.com/inbo/n2khab/issues/110'>#110</a>), including:
 <ul>
@@ -223,31 +248,31 @@
 </ul>
 </div>
 </div>
-    <div id="n2khab-031-2020-10-26" class="section level2">
+    <div id="n2khab-031-2020-10-26" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.1">
+<a href="#n2khab-031-2020-10-26" class="anchor"></a>n2khab 0.3.1 (2020-10-26)</h1>
+<div id="minor-patch" class="section level2">
 <h2 class="hasAnchor">
-<a href="#n2khab-031-2020-10-26" class="anchor"></a>n2khab 0.3.1 (2020-10-26)</h2>
-<div id="minor-patch" class="section level4">
-<h4 class="hasAnchor">
-<a href="#minor-patch" class="anchor"></a>Minor patch</h4>
+<a href="#minor-patch" class="anchor"></a>Minor patch</h2>
 <ul>
 <li>
 <code><a href="../reference/read_watersurfaces.html">read_watersurfaces()</a></code> has been limited explicitly to using data source version ‘watersurfaces_v1.0’. Accommodation of the newer ‘watersurfaces_v1.1’ is planned for later.</li>
 </ul>
 </div>
 </div>
-    <div id="n2khab-030-2020-10-16" class="section level2">
+    <div id="n2khab-030-2020-10-16" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#n2khab-030-2020-10-16" class="anchor"></a>n2khab 0.3.0 (2020-10-16)</h1>
+<div id="breaking-change" class="section level2">
 <h2 class="hasAnchor">
-<a href="#n2khab-030-2020-10-16" class="anchor"></a>n2khab 0.3.0 (2020-10-16)</h2>
-<div id="breaking-change" class="section level4">
-<h4 class="hasAnchor">
-<a href="#breaking-change" class="anchor"></a>Breaking change</h4>
+<a href="#breaking-change" class="anchor"></a>Breaking change</h2>
 <ul>
 <li>Functions that preprocess (non-included) N2KHAB data sources have been simplified by dropping their <code>path</code> argument (<a href='https://github.com/inbo/n2khab/issues/92'>#92</a>). Existing R code will continue to run normally if you complied with the recommended file organization (see <code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> and <code><a href="../articles/v022_example.html">vignette("v022_example")</a></code>) and did not set the <code>path</code> and <code>file</code> arguments.</li>
 </ul>
 </div>
-<div id="new-features" class="section level4">
-<h4 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h4>
+<div id="new-features-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>New function <code><a href="../reference/read_habitatquarries.html">read_habitatquarries()</a></code> for reading the <code>habitatquarries</code> data source (<a href='https://github.com/inbo/n2khab/issues/83'>#83</a>, <a href='https://github.com/inbo/n2khab/issues/94'>#94</a>, <a href="https://github.com/inbo/n2khab-preprocessing/pull/41">inbo/n2khab-preprocessing/pull/41</a>).</li>
 <li>Updates in reference lists (<a href='https://github.com/inbo/n2khab/issues/88'>#88</a>, <a href='https://github.com/inbo/n2khab/issues/93'>#93</a>, <a href="https://github.com/inbo/n2khab/commit/7ce3b32">7ce3b32</a>):
@@ -260,9 +285,9 @@
 </li>
 </ul>
 </div>
-<div id="internal-changes" class="section level4">
-<h4 class="hasAnchor">
-<a href="#internal-changes" class="anchor"></a>Internal changes</h4>
+<div id="internal-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal-changes" class="anchor"></a>Internal changes</h2>
 <ul>
 <li>Harden CRS representations (<a href='https://github.com/inbo/n2khab/issues/84'>#84</a>)</li>
 <li>Re-integrate <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> (from <code>inborutils</code>) (<a href='https://github.com/inbo/n2khab/issues/89'>#89</a>)</li>
@@ -270,12 +295,12 @@
 </ul>
 </div>
 </div>
-    <div id="n2khab-020-2020-05-08" class="section level2">
+    <div id="n2khab-020-2020-05-08" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#n2khab-020-2020-05-08" class="anchor"></a>n2khab 0.2.0 (2020-05-08)</h1>
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#n2khab-020-2020-05-08" class="anchor"></a>n2khab 0.2.0 (2020-05-08)</h2>
-<div id="new-features-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h4>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>Updates in reference lists (<a href='https://github.com/inbo/n2khab/issues/64'>#64</a>, <a href='https://github.com/inbo/n2khab/issues/65'>#65</a>, <a href='https://github.com/inbo/n2khab/issues/69'>#69</a>, <a href="https://github.com/inbo/n2khab/pull/73/commits/e69cd52">e69cd52</a>):
 <ul>
@@ -305,36 +330,36 @@
 <p>Further, a number of smaller fixes and enhancements were made.</p>
 </div>
 </div>
-    <div id="n2khab-012-2020-03-04" class="section level2">
+    <div id="n2khab-012-2020-03-04" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.2">
+<a href="#n2khab-012-2020-03-04" class="anchor"></a>n2khab 0.1.2 (2020-03-04)</h1>
+<div id="hotfix" class="section level2">
 <h2 class="hasAnchor">
-<a href="#n2khab-012-2020-03-04" class="anchor"></a>n2khab 0.1.2 (2020-03-04)</h2>
-<div id="hotfix" class="section level4">
-<h4 class="hasAnchor">
-<a href="#hotfix" class="anchor"></a>Hotfix</h4>
+<a href="#hotfix" class="anchor"></a>Hotfix</h2>
 <ul>
 <li>
 <code><a href="../reference/read_GRTSmh.html">read_GRTSmh()</a></code>, <code><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac()</a></code>, <code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code>: avoided CRS error with more recent GDAL/PROJ.4 installations (<a href='https://github.com/inbo/n2khab/issues/61'>#61</a>)</li>
 </ul>
 </div>
 </div>
-    <div id="n2khab-011-2020-02-26" class="section level2">
+    <div id="n2khab-011-2020-02-26" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.1">
+<a href="#n2khab-011-2020-02-26" class="anchor"></a>n2khab 0.1.1 (2020-02-26)</h1>
+<div id="hotfix-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#n2khab-011-2020-02-26" class="anchor"></a>n2khab 0.1.1 (2020-02-26)</h2>
-<div id="hotfix-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#hotfix-1" class="anchor"></a>Hotfix</h4>
+<a href="#hotfix-1" class="anchor"></a>Hotfix</h2>
 <ul>
 <li>
 <code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code>: fixed non-functioning argument <code>keep_aq_types=FALSE</code> (<a href='https://github.com/inbo/n2khab/issues/60'>#60</a>)</li>
 </ul>
 </div>
 </div>
-    <div id="n2khab-010-2020-01-30" class="section level2">
+    <div id="n2khab-010-2020-01-30" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0">
+<a href="#n2khab-010-2020-01-30" class="anchor"></a>n2khab 0.1.0 (2020-01-30)</h1>
+<div id="features-of-the-first-stable-release" class="section level2">
 <h2 class="hasAnchor">
-<a href="#n2khab-010-2020-01-30" class="anchor"></a>n2khab 0.1.0 (2020-01-30)</h2>
-<div id="features-of-the-first-stable-release" class="section level4">
-<h4 class="hasAnchor">
-<a href="#features-of-the-first-stable-release" class="anchor"></a>Features of the first stable release</h4>
+<a href="#features-of-the-first-stable-release" class="anchor"></a>Features of the first stable release</h2>
 <ul>
 <li>Core reading and preprocessing functions</li>
 <li>Several built-in checklists (among which: <code>types</code> and <code>env_pressures</code>)</li>
@@ -346,9 +371,9 @@
 </li>
 </ul>
 </div>
-<div id="historical-note" class="section level4">
-<h4 class="hasAnchor">
-<a href="#historical-note" class="anchor"></a>Historical note</h4>
+<div id="historical-note" class="section level2">
+<h2 class="hasAnchor">
+<a href="#historical-note" class="anchor"></a>Historical note</h2>
 <p>This package is the successor of the ‘n2khabutils’ package. Previous to commit <code>c8608d9</code>, the code was part of the <a href="https://github.com/inbo/n2khab-monitoring">n2khab-monitoring</a> repo (formerly ‘n2khab-inputs’), where the original version history remains stored. At that time, the package was called ‘n2khabutils’. As a convenience, the <strong>n2khab</strong> repo still holds the rewritten (shrinked) package history from before commit <code>c8608d9</code>, as defined by the related files and folders. See <a href="https://github.com/inbo/n2khab-monitoring/issues/28">this</a> issue in the ‘n2khab-monitoring’ repo, where the migration is documented.</p>
 </div>
 </div>

@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -205,7 +205,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">schemes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_schemes.html">read_schemes</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">schemes</span>
-<span class="co">#&gt; # A tibble: 63 × 25</span>
+<span class="co">#&gt; # A tibble: 64 × 25</span>
 <span class="co">#&gt;    scheme      scheme_name scheme_shortname programme programme_name attribute_1</span>
 <span class="co">#&gt;    &lt;fct&gt;       &lt;fct&gt;       &lt;fct&gt;            &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;      </span>
 <span class="co">#&gt;  1 ATM_03.1    Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr… ATM        </span>
@@ -218,7 +218,7 @@
 <span class="co">#&gt;  8 GW_05.1_aq  Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span>
 <span class="co">#&gt;  9 GW_05.1_qu… Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span>
 <span class="co">#&gt; 10 GW_05.1_te… Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span>
-<span class="co">#&gt; # … with 53 more rows, and 19 more variables: attribute_2 &lt;fct&gt;,</span>
+<span class="co">#&gt; # … with 54 more rows, and 19 more variables: attribute_2 &lt;fct&gt;,</span>
 <span class="co">#&gt; #   attribute_3 &lt;fct&gt;, attribute_1_name &lt;fct&gt;, attribute_1_shortname &lt;fct&gt;,</span>
 <span class="co">#&gt; #   attribute_2_name &lt;fct&gt;, attribute_2_shortname &lt;fct&gt;,</span>
 <span class="co">#&gt; #   attribute_3_name &lt;fct&gt;, attribute_3_shortname &lt;fct&gt;,</span>
@@ -228,7 +228,7 @@
 <p>The <code><a href="../reference/read_scheme_types.html">read_scheme_types()</a></code> function provides the extra ability to <em>toggle</em> the presence of most textual information, because these comprise many extra variables (combining all additional information of the concerned schemes <em>and</em> the types). This behaviour is controlled by the argument <code>extended</code>, which is <code>FALSE</code> by default.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 763 × 5</span>
+<span class="co">#&gt; # A tibble: 764 × 5</span>
 <span class="co">#&gt;    scheme   type     typegroup       typegroup_name             typegroup_short…</span>
 <span class="co">#&gt;    &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;           &lt;fct&gt;                      &lt;fct&gt;           </span>
 <span class="co">#&gt;  1 ATM_03.1 1310_pol ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
@@ -241,10 +241,10 @@
 <span class="co">#&gt;  8 ATM_03.1 2120     ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
 <span class="co">#&gt;  9 ATM_03.1 2130_had ATM_03.1_group1 very sensitive non-forest… very sensitive …</span>
 <span class="co">#&gt; 10 ATM_03.1 2130_hd  ATM_03.1_group1 very sensitive non-forest… very sensitive …</span>
-<span class="co">#&gt; # … with 753 more rows</span></code></pre></div>
+<span class="co">#&gt; # … with 754 more rows</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span><span class="op">(</span>extended <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 763 × 53</span>
+<span class="co">#&gt; # A tibble: 764 × 53</span>
 <span class="co">#&gt;    scheme   type     typegroup       typegroup_name typegroup_short… scheme_name</span>
 <span class="co">#&gt;    &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;           &lt;fct&gt;          &lt;fct&gt;            &lt;fct&gt;      </span>
 <span class="co">#&gt;  1 ATM_03.1 1310_pol ATM_03.1_group2 sensitive non… sensitive non-f… Atmospheri…</span>
@@ -257,7 +257,7 @@
 <span class="co">#&gt;  8 ATM_03.1 2120     ATM_03.1_group2 sensitive non… sensitive non-f… Atmospheri…</span>
 <span class="co">#&gt;  9 ATM_03.1 2130_had ATM_03.1_group1 very sensitiv… very sensitive … Atmospheri…</span>
 <span class="co">#&gt; 10 ATM_03.1 2130_hd  ATM_03.1_group1 very sensitiv… very sensitive … Atmospheri…</span>
-<span class="co">#&gt; # … with 753 more rows, and 47 more variables: scheme_shortname &lt;fct&gt;,</span>
+<span class="co">#&gt; # … with 754 more rows, and 47 more variables: scheme_shortname &lt;fct&gt;,</span>
 <span class="co">#&gt; #   programme &lt;fct&gt;, programme_name &lt;fct&gt;, attribute_1 &lt;fct&gt;,</span>
 <span class="co">#&gt; #   attribute_2 &lt;fct&gt;, attribute_3 &lt;fct&gt;, attribute_1_name &lt;fct&gt;,</span>
 <span class="co">#&gt; #   attribute_1_shortname &lt;fct&gt;, attribute_2_name &lt;fct&gt;,</span>

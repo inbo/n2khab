@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -197,7 +197,7 @@
 <span class="co">#&gt; #   phab2 &lt;int&gt;, hab3 &lt;chr&gt;, phab3 &lt;int&gt;, hab4 &lt;chr&gt;, phab4 &lt;int&gt;, hab5 &lt;chr&gt;,</span>
 <span class="co">#&gt; #   phab5 &lt;int&gt;, source_hab &lt;chr&gt;, source_phab &lt;chr&gt;, hab_legend &lt;fct&gt;,</span>
 <span class="co">#&gt; #   area_m2 &lt;dbl&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></code></pre></div>
-<p>The <code>habitatmap</code> object is a very wide dataframe which is not so easy to handle in R. For analytical work on habitat types and RIBs, you’re advised to use the tidied data source <code>habitatmap_stdized</code>; see <a href="#processed-data-sources">below</a>.</p>
+<p>The <code>habitatmap</code> object is a very wide dataframe which is not so easy to handle in R. For analytical work on habitat types and RIBs, you’re advised to use the tidied data source <code>habitatmap_stdized</code>; see <a href="#processed">below</a>.</p>
 <p><code>read_habitatmap(filter_hab = TRUE)</code> will only retain the polygons that occur in <code>habitatmap_stdized</code>, i.e. those that contain habitat types or RIBs.</p>
 <p>The data sources <code>habitatstreams</code>, <code>habitatsprings</code> and <code>habitatquarries</code> have a straightforward data structure. There was no need to generate derived data sources. The meaning of their columns is described in the function documentation. Not all function arguments are discussed in this vignette: do take the time to look at the documentation!</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -312,9 +312,9 @@
 <span class="co">#&gt; #   abstract &lt;chr&gt;, language &lt;chr&gt;, urldate &lt;chr&gt;, issn &lt;chr&gt;, keywords &lt;chr&gt;</span></code></pre></div>
 <p>These extra references can also be printed to the R console in BibTeX format, when specifying <code>bibtex = TRUE</code>.</p>
 </div>
-<div id="returning-processed-data-sources" class="section level3">
+<div id="processed" class="section level3">
 <h3 class="hasAnchor">
-<a href="#returning-processed-data-sources" class="anchor"></a>Returning processed data sources</h3>
+<a href="#processed" class="anchor"></a>Returning processed data sources</h3>
 <p>The reading functions for the three processed data sources will always return a <strong>list</strong>:</p>
 <ul>
 <li>the first element holds the geospatial information as an <strong>sf object</strong>. It has unique feature IDs that can be joined with rows of the second element;</li>
@@ -540,7 +540,7 @@
 <span class="co">#&gt; 7 3150                  475   105019.1      0.4     6.6    17.3    83.5 13668.2</span>
 <span class="co">#&gt; 8 3160                  379    27936.9      0.1     6.1    17.4    59.3  4179.1</span>
 <span class="co">#&gt; 9 rbbah                 517    33716.3      0.1     4.2    10.9    47.0  3748.6</span></code></pre></div>
-<p>An strong point of <code>sf</code> objects is that the geometry has explicit units. Consequently we can make use of tools like <code><a href="https://rdrr.io/pkg/units/man/units.html">set_units()</a></code> to convert units (e.g. surface area as <em>are</em> (a)).</p>
+<p>A strong point of <code>sf</code> objects is that the geometry has explicit units. Consequently we can make use of tools like <code><a href="https://rdrr.io/pkg/units/man/units.html">set_units()</a></code> to convert units (e.g. surface area as <em>are</em> (a)).</p>
 <p>Because the main type code <code>3130</code> will mostly boil down to <code>3130_aom</code> in the field, a further interpreted flavour can be generated with <code>read_watersurfaces_hab(interpreted = TRUE)</code>.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab</a></span><span class="op">(</span>interpreted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
