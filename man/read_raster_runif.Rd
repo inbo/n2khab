@@ -32,7 +32,7 @@ the \code{GRTSmaster_habitats} data source (see \code{\link{read_GRTSmh}})
 with a small buffer added.
 Every raster cell has a random value between 0 and 1 according to the
 uniform distribution.
-The coordinate reference system is 'Belge 72 / Belgian Lambert 72'
+The coordinate reference system is 'BD72 / Belgian Lambert 72'
 (EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{

@@ -122,7 +122,7 @@ habitatmap
 ```
 
 The `habitatmap` object is a very wide dataframe which is not so easy to handle in R.
-For analytical work on habitat types and RIBs, you're advised to use the tidied data source `habitatmap_stdized`; see [below](#processed-data-sources).
+For analytical work on habitat types and RIBs, you're advised to use the tidied data source `habitatmap_stdized`; see [below](#processed).
 
 `read_habitatmap(filter_hab = TRUE)` will only retain the polygons that occur in `habitatmap_stdized`, i.e. those that contain habitat types or RIBs.
 
@@ -268,7 +268,7 @@ habitatquarries2$extra_references
 
 These extra references can also be printed to the R console in BibTeX format, when specifying `bibtex = TRUE`.
 
-### Returning processed data sources
+### Returning processed data sources {#processed}
 
 The reading functions for the three processed data sources will always return a **list**:
 
@@ -529,7 +529,7 @@ wsh$watersurfaces_polygons %>%
 #> 9 rbbah                 517    33716.3      0.1     4.2    10.9    47.0  3748.6
 ```
 
-An strong point of `sf` objects is that the geometry has explicit units.
+A strong point of `sf` objects is that the geometry has explicit units.
 Consequently we can make use of tools like `set_units()` to convert units (e.g. surface area as _are_ (a)).
 
 Because the main type code `3130` will mostly boil down to `3130_aom` in the field, a further interpreted flavour can be generated with `read_watersurfaces_hab(interpreted = TRUE)`.

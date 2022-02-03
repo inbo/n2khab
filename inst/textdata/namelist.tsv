@@ -132,6 +132,11 @@ GW_03.3_group3	en	types from weakly eutrophic environments	weakly eutrophic
 GW_03.3_group4	en	types from moderately eutrophic to eutrophic environments	(moderately) eutrophic
 GW_04.2	en	Groundwater monitoring: environmental pressure 04.2_acidif_gw	GW: 04.2_acidif_gw
 GW_05.1_aq	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim aquatic	GW: 05.1_des_gw: aq
+GW_05.1_aq_group1	en	types from spring-fed brooks	spring-fed brooks
+GW_05.1_aq_group2	en	types from lakes with stable groundwater table	stable lakes
+GW_05.1_aq_group3	en	types from lowland rivers	lowland rivers
+GW_05.1_aq_group4	en	types from dune lakes (moderate groundwater dynamics)	dune lakes
+GW_05.1_aq_group5	en	types from softwater lakes with dynamic groundwater table	dynamic softwater lakes
 GW_05.1_quarries	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim marl quarries	GW: 05.1_des_gw: quarries
 GW_05.1_terr	en	Groundwater monitoring: environmental pressure 05.1_des_gw: partim terrestrial	GW: 05.1_des_gw: terr
 GW_05.1_terr_group1	en	types from very wet environments	very wet
@@ -153,7 +158,8 @@ HQ2130	en	Habitat quality scheme: Grey dunes	Habitat quality scheme 2130
 HQ2160	en	Habitat quality scheme: Hippophae rhamnoides dunes	Habitat quality scheme 2160
 HQ2170	en	Habitat quality scheme: Salix repens dunes	Habitat quality scheme 2170
 HQ2180	en	Habitat quality scheme: Wooded dunes	Habitat quality scheme 2180
-HQ2190	en	Habitat quality scheme: Humid dune slacks	Habitat quality scheme 2190
+HQ2190_aq	en	Habitat quality scheme: Dune slack ponds	Habitat quality scheme 2190_a
+HQ2190_terr	en	Habitat quality scheme: Humid dune slacks (terrestrial)	Habitat quality scheme 2190 (terr)
 HQ2310	en	Habitat quality scheme: Psammophylic heath	Habitat quality scheme 2310
 HQ2330	en	Habitat quality scheme: Inland shifting dunes	Habitat quality scheme 2330
 HQ3110	en	Habitat quality scheme: Barely buffered standing waters	Habitat quality scheme 3110
@@ -276,10 +282,10 @@ rbbhfl	en	Tall herb communities with Lysimachia vulgaris and Calamagrostis canes
 rbbkam	en	Cynosurion grasslands	Cynosurion grasslands
 rbbkam+	en	Species-rich Cynosurion grasslands	Species-rich Cynosurion grasslands
 rbbmc	en	Tall sedges communities	Tall sedges communities
-rbbmr	en	Reed beds and other Phragmites communities (no habitat type 6430)	Reed beds and other Phragmites communities (not 6430)
+rbbmr	en	Reed beds and other Phragmites communities	Reed beds and other Phragmites communities
 rbbms	en	Small sedge communities (no habitat type 7140)	Small sedge communities (not 7140)
 rbbppm	en	Old, structure rich Pinus sylvestris forest	Old, structure rich Pinus sylvestris forest
-rbbsf	en	Wet Salix scrubs on nutrient rich soil (no habitat type 91E0)	Wet Salix scrubs on nutrient rich soil (not 91E0)
+rbbsf	en	Wet Salix scrubs on nutrient rich soil	Wet Salix scrubs on nutrient rich soil
 rbbsg	en	Cytisus and Ulex scrub	Cytisus and Ulex scrubs
 rbbsm	en	Myrica gale scrubs	Myrica gale scrubs
 rbbso	en	Wet Salix scrubs on acid peaty soil	Wet Salix scrubs on acid peaty soil
@@ -423,6 +429,11 @@ GW_03.3_group3	nl	types van zwak eutroof milieu	zwak eutroof
 GW_03.3_group4	nl	types van matig eutroof tot eutroof milieu	(matig) eutroof
 GW_04.2	nl	Grondwatermeetnet: milieudruk 04.2_verzu_gw	GW: 04.2_verzu_gw
 GW_05.1_aq	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim aquatisch	GW: 05.1_verdro_gw: aq
+GW_05.1_aq_group1	nl	types van bronbeken	bronbeken
+GW_05.1_aq_group2	nl	types van stilstaand water met stabiel grondwaterregime	stabiele plassen
+GW_05.1_aq_group3	nl	types van laaglandbeken	laaglandbeken
+GW_05.1_aq_group4	nl	types van duinplassen (middelmatig grondwaterregime)	duinplassen
+GW_05.1_aq_group5	nl	types van vennen met dynamisch grondwaterregime	dynamische vennen
 GW_05.1_quarries	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim mergelgroeven	GW: 05.1_verdro_gw: quarries
 GW_05.1_terr	nl	Grondwatermeetnet: milieudruk 05.1_verdro_gw: partim terrestrisch	GW: 05.1_verdro_gw: terr
 GW_05.1_terr_group1	nl	types van zeer nat milieu	zeer nat
@@ -444,7 +455,8 @@ HQ2130	nl	Meetnet habitatkwaliteit: vastgelegde duinen	Meetnet habitatkwaliteit 
 HQ2160	nl	Meetnet habitatkwaliteit: duindoornstruwelen	Meetnet habitatkwaliteit 2160
 HQ2170	nl	Meetnet habitatkwaliteit: kruipwilgstruwelen	Meetnet habitatkwaliteit 2170
 HQ2180	nl	Meetnet habitatkwaliteit: duinbossen	Meetnet habitatkwaliteit 2180
-HQ2190	nl	Meetnet habitatkwaliteit: vochtige duinvalleien	Meetnet habitatkwaliteit 2190
+HQ2190_aq	nl	Meetnet habitatkwaliteit: duinplassen	Meetnet habitatkwaliteit 2190_a
+HQ2190_terr	nl	Meetnet habitatkwaliteit: vochtige duinvalleien (terrestrisch)	Meetnet habitatkwaliteit 2190 (terr)
 HQ2310	nl	Meetnet habitatkwaliteit: droge heide op landduinen	Meetnet habitatkwaliteit 2310
 HQ2330	nl	Meetnet habitatkwaliteit: open grasland op landduinen	Meetnet habitatkwaliteit 2330
 HQ3110	nl	Meetnet habitatkwaliteit: zeer zwakgebufferde vennen	Meetnet habitatkwaliteit 3110
@@ -547,11 +559,11 @@ ep_066_explan	nl	Een afname van de golfslagwerking ter hoogte van de beschouwde 
 ep_07.1	nl	7.1 Verzoeting via het grondwater	07.1_verzoet_gw
 ep_07.1_explan	nl	Afname van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken grondwaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap.	NA
 ep_07.2	nl	7.2 Verzoeting via het oppervlaktewater (incl. overstromingswater)	07.2_verzoet_ow
-ep_07.2_explan	nl	Afname van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken oppervlaktewaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap.	NA
+ep_07.2_explan	nl	Afname van het chloridegehalte van de standplaats, door hydromorfologische, regime- of kwaliteitswijzigingen van het betrokken oppervlaktewaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap.	NA
 ep_07.3	nl	7.3 Verzilting via het grondwater	07.3_verzilt_gw
 ep_07.3_explan	nl	Toename van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken grondwaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. Het chloride is daarbij afkomstig uit het natuurlijk milieu (toevoeging van zouten valt onder milieudrukklasse 8).	NA
 ep_07.4	nl	7.4 Verzilting via het oppervlaktewater (incl. overstromingswater)	07.4_verzilt_ow
-ep_07.4_explan	nl	Toename van het chloridegehalte van de standplaats, door regime- of kwaliteitswijzigingen van het betrokken oppervlaktewaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. Het chloride is daarbij afkomstig uit het natuurlijk milieu (toevoeging van zouten valt onder milieudrukklasse 8).	NA
+ep_07.4_explan	nl	Toename van het chloridegehalte van de standplaats, door hydromorfologische, regime- of kwaliteitswijzigingen van het betrokken oppervlaktewaterlichaam, in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. Het chloride is daarbij afkomstig uit het natuurlijk milieu (toevoeging van zouten valt onder milieudrukklasse 8).	NA
 ep_08.1	nl	8.1 Verontreiniging via de lucht	08.1_verontr_atm
 ep_08.1_explan	nl	Toename van stoffen (excl. eutrofiërende of verzurende stoffen), in zodanige mate dat dit leidt tot een achteruitgang van de levensgemeenschap. De stoffen komen de standplaats binnen via de lucht (depositie).	NA
 ep_08.2	nl	8.2 Verontreiniging via de bodem	08.2_verontr_bod

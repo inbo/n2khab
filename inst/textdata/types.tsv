@@ -105,7 +105,7 @@ rbbms	main_type	rbbms	BMF	HC2	GD2	FD0	NA	NA	NA
 91E0_vm	subtype	91E0	FS	HC2	GD2	FD0	NA	NA	NA
 91E0_vn	subtype	91E0	FS	HC2	GD2	FD1	NA	NA	NA
 91E0_vo	subtype	91E0	FS	HC2	GD2	FD0	NA	NA	NA
-91F0	main_type	91F0	FS	HC2	GD1	FD2	NA	NA	NA
+91F0	main_type	91F0	FS	HC2	GD2	FD2	NA	NA	NA
 rbbppm	main_type	rbbppm	FS	HC12	GD1	FD0	NA	NA	NA
 rbbsf	main_type	rbbsf	FS	HC2	GD2	FD1	NA	NA	NA
 rbbso	main_type	rbbso	FS	HC2	GD2	FD0	NA	NA	NA

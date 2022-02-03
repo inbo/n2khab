@@ -6,10 +6,7 @@
 \alias{n2khab-package}
 \title{n2khab: Providing Preprocessed Reference Data for Flemish Natura 2000 Habitat Analyses}
 \description{
-The n2khab package is an R package with
-    preprocessing functions and standard reference data, useful for 
-    analyses regarding Flemish Natura 2000 habitats and regionally 
-    important biotopes (RIBs).
+The n2khab package is an R package with preprocessing functions and standard reference data, useful for analyses regarding Flemish Natura 2000 habitats and regionally important biotopes (RIBs).
 }
 \details{
 See the \href{00Index.html}{Index} for vignettes and
