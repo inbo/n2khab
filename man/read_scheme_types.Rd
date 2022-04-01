@@ -5,7 +5,7 @@
 \title{Return the 'scheme_types' data source as a tibble}
 \usage{
 read_scheme_types(
-  path = pkgdatasource_path("textdata/scheme_types", ".tsv"),
+  path = pkgdatasource_path("textdata/scheme_types", ".yml"),
   file = "scheme_types",
   file_namelist = "namelist",
   lang = "en",

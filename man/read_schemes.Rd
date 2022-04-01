@@ -5,7 +5,7 @@
 \title{Return the 'schemes' data source as a tibble with names & shortnames}
 \usage{
 read_schemes(
-  path = pkgdatasource_path("textdata/schemes", ".tsv"),
+  path = pkgdatasource_path("textdata/schemes", ".yml"),
   file = "schemes",
   file_namelist = "namelist",
   lang = "en"

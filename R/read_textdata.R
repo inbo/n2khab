@@ -54,7 +54,7 @@
 #' is.string
 #' @importFrom dplyr %>% filter as_tibble
 read_namelist <-
-    function(path = pkgdatasource_path("textdata/namelist", ".tsv"),
+    function(path = pkgdatasource_path("textdata/namelist", ".yml"),
              file = "namelist",
              lang = "en") {
 
@@ -267,7 +267,7 @@ namelist_factor <-
 #' @importFrom plyr mapvalues
 #' @importFrom rlang .data
 read_types <-
-    function(path = pkgdatasource_path("textdata/types", ".tsv"),
+    function(path = pkgdatasource_path("textdata/types", ".yml"),
              file = "types",
              file_namelist = "namelist",
              lang = "en") {
@@ -488,7 +488,7 @@ read_types <-
 #' pull
 #' @importFrom rlang .data
 read_env_pressures <-
-    function(path = pkgdatasource_path("textdata/env_pressures", ".tsv"),
+    function(path = pkgdatasource_path("textdata/env_pressures", ".yml"),
              file = "env_pressures",
              file_namelist = "namelist",
              lang = "en") {
@@ -679,7 +679,7 @@ read_env_pressures <-
 #' pull
 #' @importFrom rlang .data
 read_schemes <-
-    function(path = pkgdatasource_path("textdata/schemes", ".tsv"),
+    function(path = pkgdatasource_path("textdata/schemes", ".yml"),
              file = "schemes",
              file_namelist = "namelist",
              lang = "en") {
@@ -892,7 +892,7 @@ read_schemes <-
 #' @importFrom tidyr gather spread
 #' @importFrom stringr str_c
 #' @importFrom rlang .data
-read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types", ".tsv"),
+read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types", ".yml"),
                               file = "scheme_types",
                               file_namelist = "namelist",
                               lang = "en",
