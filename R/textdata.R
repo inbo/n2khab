@@ -102,7 +102,7 @@ NULL
 #'
 #' @section Corresponding datafiles in the installed package:
 #'
-#'   \code{textdata/types.tsv}
+#'   \code{textdata/types.csv}
 #'
 #'   \code{textdata/types.yml}
 #'
@@ -181,7 +181,7 @@ NULL
 #'
 #' @section Corresponding datafiles in the installed package:
 #'
-#'   \code{textdata/env_pressures.tsv}
+#'   \code{textdata/env_pressures.csv}
 #'
 #'   \code{textdata/env_pressures.yml}
 #'

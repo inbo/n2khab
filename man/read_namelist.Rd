@@ -5,7 +5,7 @@
 \title{Return the 'namelist' data source as a tibble}
 \usage{
 read_namelist(
-  path = pkgdatasource_path("textdata/namelist", ".tsv"),
+  path = pkgdatasource_path("textdata/namelist", ".yml"),
   file = "namelist",
   lang = "en"
 )
