@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -140,6 +140,15 @@
       <small>Source: <a href='https://github.com/inbo/n2khab/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="n2khab-070-2022-05-23" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.0">
+<a href="#n2khab-070-2022-05-23" class="anchor"></a>n2khab 0.7.0 (2022-05-23)</h1>
+<ul>
+<li>Upgrade most <a href="https://ropensci.github.io/git2rdata">vc-formatted</a> data sources to the format of <strong>git2rdata</strong> version 0.4.0. In this version, files not optimized for version control (but rather for readability), are saved as csv instead of tsv files. For <strong>n2khab</strong>, this applies to the <code>types</code> and <code>env_pressures</code> data sources. Since it is expected that this upgrade is not compatible with older <strong>git2rdata</strong> versions, the version dependency for <strong>git2rdata</strong> has been updated (<a href='https://github.com/inbo/n2khab/issues/161'>#161</a>).</li>
+<li>
+<code>scheme_types</code> data source: update typegroup membership of type <code>7210</code> in scheme <code>GW_03.3</code> (<a href='https://github.com/inbo/n2khab/issues/161'>#161</a>).</li>
+</ul>
+</div>
     <div id="n2khab-060-2022-02-03" class="section level1">
 <h1 class="page-header" data-toc-text="0.6.0">
 <a href="#n2khab-060-2022-02-03" class="anchor"></a>n2khab 0.6.0 (2022-02-03)</h1>
