@@ -460,7 +460,7 @@ read_soilmap <-
         if (standardize_coastalplain) {
             transl <- read_vc(file = "soil_translation_coastalplain",
                               root = pkgdatasource_path(
-                                  "textdata/soil_translation_coastalplain", ".tsv")) %>%
+                                  "textdata/soil_translation_coastalplain", ".yml")) %>%
                 mutate(soiltype_orig = factor(.data$soiltype_orig,
                                               levels =
                                                   levels(soilmap$bsm_soiltype))

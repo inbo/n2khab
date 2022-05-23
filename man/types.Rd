@@ -86,7 +86,7 @@ languages).
 \section{Corresponding datafiles in the installed package}{
 
 
-  \code{textdata/types.tsv}
+  \code{textdata/types.csv}
 
   \code{textdata/types.yml}
 }

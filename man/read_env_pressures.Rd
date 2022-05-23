@@ -6,7 +6,7 @@
 attributes}
 \usage{
 read_env_pressures(
-  path = pkgdatasource_path("textdata/env_pressures", ".tsv"),
+  path = pkgdatasource_path("textdata/env_pressures", ".yml"),
   file = "env_pressures",
   file_namelist = "namelist",
   lang = "en"

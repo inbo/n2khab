@@ -5,7 +5,7 @@
 \title{Return the 'types' data source as a tibble with names & shortnames}
 \usage{
 read_types(
-  path = pkgdatasource_path("textdata/types", ".tsv"),
+  path = pkgdatasource_path("textdata/types", ".yml"),
   file = "types",
   file_namelist = "namelist",
   lang = "en"
