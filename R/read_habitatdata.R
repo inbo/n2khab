@@ -112,7 +112,7 @@
 #'
 #' De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
 #' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-#' Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+#' Opdebeeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
 #' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
 #' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
 #' \doi{10.21436/inbor.18840851}.
@@ -770,7 +770,7 @@ read_watersurfaces <-
 #'
 #' De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
 #' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-#' Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+#' Opdebeeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
 #' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
 #' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
 #' \doi{10.21436/inbor.18840851}.
