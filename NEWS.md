@@ -1,5 +1,7 @@
 # n2khab (development version)
 
+- Reference list `namelist` has been updated with improved type names (#163; thanks @jeroenvdborre).
+
 # n2khab 0.7.0 (2022-05-23)
 
 - Upgrade most [vc-formatted](https://ropensci.github.io/git2rdata) data sources to the format of **git2rdata** version 0.4.0. In this version, files not optimized for version control (but rather for readability), are saved as csv instead of tsv files. For **n2khab**, this applies to the `types` and `env_pressures` data sources. Since it is expected that this upgrade is not compatible with older **git2rdata** versions, the version dependency for **git2rdata** has been updated (#161).
