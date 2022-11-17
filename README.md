@@ -17,7 +17,7 @@ The standard reference data include: checklists, spatial habitat distribution, a
 
 ## Installing and using the _n2khab_ package
 
-To install the current package version from the `master` branch (latest stable release), run:
+To install the current package version from the `main` branch (latest stable release), run:
 
 ```r
 install.packages("n2khab", repos = c(inbo = "https://inbo.r-universe.dev", 
@@ -36,7 +36,7 @@ remotes::install_github("inbo/n2khab",
                         upgrade = TRUE)
 ```
 
-Note that this will install the package from the `master` branch.
+Note that this will install the package from the `main` branch.
 If you need a version from another branch, add the `ref` argument in the above function to provide the branch name.
 
 Repeat the installation when you wish to upgrade.
