@@ -157,13 +157,13 @@ Optionally, a derived <code>sf</code> object of type-<code>7220</code>-locations
 returned at the population unit level, through aggregation by <code>unit_id</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_habitatsprings</span><span class='op'>(</span>
-  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,
-    <span class='st'>"10_raw/habitatsprings/habitatsprings.geojson"</span><span class='op'>)</span>,
-  filter_hab <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  units_7220 <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  version <span class='op'>=</span> <span class='st'>"habitatsprings_2020v2"</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span><span class='fu'>read_habitatsprings</span><span class='op'>(</span></span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,</span>
+<span>    <span class='st'>"10_raw/habitatsprings/habitatsprings.geojson"</span><span class='op'>)</span>,</span>
+<span>  filter_hab <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span>  units_7220 <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span>  version <span class='op'>=</span> <span class='st'>"habitatsprings_2020v2"</span></span>
+<span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -243,20 +243,20 @@ formation (<em>Cratoneurion</em>)) in springs and streaming water segments in
 the Flemish Region, Belgium.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='co'># This example supposes that your working directory or a directory up to 10</span></span>
-<span class='r-in'><span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span></span>
-<span class='r-in'><span class='co'># the 'habitatsprings'</span></span>
-<span class='r-in'><span class='co'># data source is present in the default subdirectory.</span></span>
-<span class='r-in'><span class='co'># In all other cases, this example won't work but at least you can</span></span>
-<span class='r-in'><span class='co'># consider what to do.</span></span>
-<span class='r-in'></span>
-<span class='r-in'><span class='va'>hs</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatsprings</span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>hs</span></span>
-<span class='r-in'><span class='va'>hs2</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatsprings</span><span class='op'>(</span>units_7220 <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>hs2</span></span>
-<span class='r-in'><span class='op'>}</span></span>
-<span class='r-in'></span>
+    <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>
+<span class='r-in'><span><span class='co'># This example supposes that your working directory or a directory up to 10</span></span></span>
+<span class='r-in'><span><span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span></span></span>
+<span class='r-in'><span><span class='co'># the 'habitatsprings'</span></span></span>
+<span class='r-in'><span><span class='co'># data source is present in the default subdirectory.</span></span></span>
+<span class='r-in'><span><span class='co'># In all other cases, this example won't work but at least you can</span></span></span>
+<span class='r-in'><span><span class='co'># consider what to do.</span></span></span>
+<span class='r-in'><span></span></span>
+<span class='r-in'><span><span class='va'>hs</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatsprings</span><span class='op'>(</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>hs</span></span></span>
+<span class='r-in'><span><span class='va'>hs2</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatsprings</span><span class='op'>(</span>units_7220 <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>hs2</span></span></span>
+<span class='r-in'><span><span class='op'>}</span></span></span>
+<span class='r-in'><span></span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

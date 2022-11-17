@@ -159,10 +159,10 @@ plus a data frame
 with textual explanation of the values of the <code>source_id</code> variable.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_habitatstreams</span><span class='op'>(</span>
-  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/habitatstreams"</span><span class='op'>)</span>,
-  source_text <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span><span class='fu'>read_habitatstreams</span><span class='op'>(</span></span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/habitatstreams"</span><span class='op'>)</span>,</span>
+<span>  source_text <span class='op'>=</span> <span class='cn'>FALSE</span></span>
+<span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -205,24 +205,24 @@ Bosonderzoek 2020 (34). Research Institute for Nature and Forest, Brussels.
 .</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='co'># This example supposes that your working directory or a directory up to 10</span></span>
-<span class='r-in'><span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span></span>
-<span class='r-in'><span class='co'># the 'habitatstreams'</span></span>
-<span class='r-in'><span class='co'># data source is present in the default subdirectory.</span></span>
-<span class='r-in'><span class='co'># In all other cases, this example won't work but at least you can</span></span>
-<span class='r-in'><span class='co'># consider what to do.</span></span>
-<span class='r-in'></span>
-<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://magrittr.tidyverse.org'>magrittr</a></span><span class='op'>)</span></span>
-<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-spatial.github.io/sf/'>sf</a></span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>hs</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatstreams</span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>hs</span></span>
-<span class='r-in'><span class='va'>hs2</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatstreams</span><span class='op'>(</span>source_text <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>hs2</span></span>
-<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>hs</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>st_drop_geometry</span>,</span>
-<span class='r-in'>          <span class='va'>hs2</span><span class='op'>$</span><span class='va'>lines</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>st_drop_geometry</span><span class='op'>)</span></span>
-<span class='r-in'><span class='op'>}</span></span>
-<span class='r-in'></span>
+    <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>
+<span class='r-in'><span><span class='co'># This example supposes that your working directory or a directory up to 10</span></span></span>
+<span class='r-in'><span><span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span></span></span>
+<span class='r-in'><span><span class='co'># the 'habitatstreams'</span></span></span>
+<span class='r-in'><span><span class='co'># data source is present in the default subdirectory.</span></span></span>
+<span class='r-in'><span><span class='co'># In all other cases, this example won't work but at least you can</span></span></span>
+<span class='r-in'><span><span class='co'># consider what to do.</span></span></span>
+<span class='r-in'><span></span></span>
+<span class='r-in'><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://magrittr.tidyverse.org'>magrittr</a></span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-spatial.github.io/sf/'>sf</a></span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>hs</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatstreams</span><span class='op'>(</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>hs</span></span></span>
+<span class='r-in'><span><span class='va'>hs2</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatstreams</span><span class='op'>(</span>source_text <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>hs2</span></span></span>
+<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>hs</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>st_drop_geometry</span>,</span></span>
+<span class='r-in'><span>          <span class='va'>hs2</span><span class='op'>$</span><span class='va'>lines</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>st_drop_geometry</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='op'>}</span></span></span>
+<span class='r-in'><span></span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

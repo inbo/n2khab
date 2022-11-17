@@ -144,9 +144,18 @@
 <h1 class="page-header" data-toc-text="0.7.0">
 <a href="#n2khab-070-2022-05-23" class="anchor"></a>n2khab 0.7.0 (2022-05-23)</h1>
 <ul>
-<li>Upgrade most <a href="https://ropensci.github.io/git2rdata">vc-formatted</a> data sources to the format of <strong>git2rdata</strong> version 0.4.0. In this version, files not optimized for version control (but rather for readability), are saved as csv instead of tsv files. For <strong>n2khab</strong>, this applies to the <code>types</code> and <code>env_pressures</code> data sources. Since it is expected that this upgrade is not compatible with older <strong>git2rdata</strong> versions, the version dependency for <strong>git2rdata</strong> has been updated (<a href='https://github.com/inbo/n2khab/issues/161'>#161</a>).</li>
+<li>Upgrade most <a href="https://ropensci.github.io/git2rdata">vc-formatted</a> data
+sources to the format of <strong>git2rdata</strong> version 0.4.0. In
+this version, files not optimized for version control (but rather for
+readability), are saved as csv instead of tsv files. For
+<strong>n2khab</strong>, this applies to the <code>types</code> and
+<code>env_pressures</code> data sources. Since it is expected that this
+upgrade is not compatible with older <strong>git2rdata</strong>
+versions, the version dependency for <strong>git2rdata</strong> has been
+updated (<a href='https://github.com/inbo/n2khab/issues/161'>#161</a>).</li>
 <li>
-<code>scheme_types</code> data source: update typegroup membership of type <code>7210</code> in scheme <code>GW_03.3</code> (<a href='https://github.com/inbo/n2khab/issues/161'>#161</a>).</li>
+<code>scheme_types</code> data source: update typegroup membership
+of type <code>7210</code> in scheme <code>GW_03.3</code> (<a href='https://github.com/inbo/n2khab/issues/161'>#161</a>).</li>
 </ul>
 </div>
     <div id="n2khab-060-2022-02-03" class="section level1">
@@ -156,21 +165,34 @@
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
-<li>Function <code><a href="../reference/read_shallowgroundwater.html">read_shallowgroundwater()</a></code> to return the <code>shallowgroundwater</code> data source (<a href='https://github.com/inbo/n2khab/issues/156'>#156</a>).
+<li>Function <code><a href="../reference/read_shallowgroundwater.html">read_shallowgroundwater()</a></code> to return the
+<code>shallowgroundwater</code> data source (<a href='https://github.com/inbo/n2khab/issues/156'>#156</a>).
 <ul>
-<li>The raw data source <code>shallowgroundwater</code> represents the areas in the Flemish region of Belgium where the mean lowest groundwater level is estimated to be less than approximately 2 m below soil surface (<a href="https://github.com/inbo/n2khab-preprocessing/pull/61">inbo/n2khab-preprocessing/pull/61</a>; <a href="https://doi.org/10.5281/zenodo.5902880" class="uri">https://doi.org/10.5281/zenodo.5902880</a>).</li>
+<li>The raw data source <code>shallowgroundwater</code> represents the
+areas in the Flemish region of Belgium where the mean lowest groundwater
+level is estimated to be less than approximately 2 m below soil surface
+(<a href="https://github.com/inbo/n2khab-preprocessing/pull/61">inbo/n2khab-preprocessing/pull/61</a>;
+<a href="https://doi.org/10.5281/zenodo.5902880" class="uri">https://doi.org/10.5281/zenodo.5902880</a>).</li>
 </ul>
 </li>
-<li>Reference lists <code>types</code>, <code>schemes</code>, <code>scheme_types</code>, <code>namelist</code> were updated (<a href='https://github.com/inbo/n2khab/issues/150'>#150</a>, <a href='https://github.com/inbo/n2khab/issues/151'>#151</a>, <a href='https://github.com/inbo/n2khab/issues/154'>#154</a>, <a href='https://github.com/inbo/n2khab/issues/158'>#158</a>):
+<li>Reference lists <code>types</code>, <code>schemes</code>,
+<code>scheme_types</code>, <code>namelist</code> were updated (<a href='https://github.com/inbo/n2khab/issues/150'>#150</a>,
+<a href='https://github.com/inbo/n2khab/issues/151'>#151</a>, <a href='https://github.com/inbo/n2khab/issues/154'>#154</a>, <a href='https://github.com/inbo/n2khab/issues/158'>#158</a>):
 <ul>
 <li>a few type name updates (thanks S. De Saeger);</li>
-<li>updated value of <code>groundw_dep</code> for type <code>91F0</code>;</li>
-<li>environmental pressures <code>ep_07.2</code> and <code>ep_07.4</code> received updated (Dutch) explanations;</li>
-<li>scheme <code>HQ2190</code> has been replaced by two schemes <code>HQ2190_terr</code> and <code>HQ2190_aq</code>;</li>
-<li>typegroups were defined for scheme <code>GW_05.1_aq</code> (with contributions from L. Denys &amp; A. Leyssen).</li>
+<li>updated value of <code>groundw_dep</code> for type
+<code>91F0</code>;</li>
+<li>environmental pressures <code>ep_07.2</code> and
+<code>ep_07.4</code> received updated (Dutch) explanations;</li>
+<li>scheme <code>HQ2190</code> has been replaced by two schemes
+<code>HQ2190_terr</code> and <code>HQ2190_aq</code>;</li>
+<li>typegroups were defined for scheme <code>GW_05.1_aq</code> (with
+contributions from L. Denys &amp; A. Leyssen).</li>
 </ul>
 </li>
-<li>Readme (homepage): a <strong>new installation method</strong> using <a href="https://inbo.r-universe.dev">inbo.r-universe.dev</a> has been added and is recommended (<a href='https://github.com/inbo/n2khab/issues/153'>#153</a>, 746fb81).</li>
+<li>Readme (homepage): a <strong>new installation method</strong> using
+<a href="https://inbo.r-universe.dev">inbo.r-universe.dev</a> has been
+added and is recommended (<a href='https://github.com/inbo/n2khab/issues/153'>#153</a>, 746fb81).</li>
 </ul>
 </div>
 </div>
@@ -180,20 +202,27 @@
 <div id="support-for-new-data-source-versions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#support-for-new-data-source-versions" class="anchor"></a>Support for new data source versions</h2>
-<p>The following new data source versions are now supported by their associated reading functions:</p>
+<p>The following new data source versions are now supported by their
+associated reading functions:</p>
 <ul>
 <li>
-<code>habitatmap_2020</code> (<code><a href="../reference/read_habitatmap.html">read_habitatmap()</a></code> - <a href='https://github.com/inbo/n2khab/issues/139'>#139</a>)</li>
+<code>habitatmap_2020</code> (<code><a href="../reference/read_habitatmap.html">read_habitatmap()</a></code> -
+<a href='https://github.com/inbo/n2khab/issues/139'>#139</a>)</li>
 <li>
-<code>habitatmap_stdized_2020_v1</code> (<code><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code> - <a href='https://github.com/inbo/n2khab/issues/139'>#139</a>, <a href='https://github.com/inbo/n2khab/issues/140'>#140</a>)</li>
+<code>habitatmap_stdized_2020_v1</code>
+(<code><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code> - <a href='https://github.com/inbo/n2khab/issues/139'>#139</a>, <a href='https://github.com/inbo/n2khab/issues/140'>#140</a>)</li>
 <li>
-<code>habitatmap_terr_2020_v1</code> (<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> - <a href='https://github.com/inbo/n2khab/issues/139'>#139</a>, <a href='https://github.com/inbo/n2khab/issues/140'>#140</a>)</li>
+<code>habitatmap_terr_2020_v1</code>
+(<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> - <a href='https://github.com/inbo/n2khab/issues/139'>#139</a>, <a href='https://github.com/inbo/n2khab/issues/140'>#140</a>)</li>
 <li>
-<code>habitatstreams_v1.7</code> (<code><a href="../reference/read_habitatstreams.html">read_habitatstreams()</a></code> - <a href='https://github.com/inbo/n2khab/issues/114'>#114</a>)</li>
+<code>habitatstreams_v1.7</code> (<code><a href="../reference/read_habitatstreams.html">read_habitatstreams()</a></code>
+- <a href='https://github.com/inbo/n2khab/issues/114'>#114</a>)</li>
 <li>
-<code>watersurfaces_v1.1</code> (<code><a href="../reference/read_watersurfaces.html">read_watersurfaces()</a></code> - <a href='https://github.com/inbo/n2khab/issues/118'>#118</a>)</li>
+<code>watersurfaces_v1.1</code> (<code><a href="../reference/read_watersurfaces.html">read_watersurfaces()</a></code> -
+<a href='https://github.com/inbo/n2khab/issues/118'>#118</a>)</li>
 <li>
-<code>watersurfaces_hab_v4</code> (<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code> - <a href='https://github.com/inbo/n2khab/issues/142'>#142</a>)</li>
+<code>watersurfaces_hab_v4</code>
+(<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code> - <a href='https://github.com/inbo/n2khab/issues/142'>#142</a>)</li>
 </ul>
 <p>Function documentation was updated accordingly and refined.</p>
 </div>
@@ -201,12 +230,17 @@
 <h2 class="hasAnchor">
 <a href="#new-functions" class="anchor"></a>New functions</h2>
 <ul>
-<li>Function <code><a href="../reference/read_raster_runif.html">read_raster_runif()</a></code> to return the <code>raster_runif</code> data source (<a href='https://github.com/inbo/n2khab/issues/136'>#136</a>, <a href='https://github.com/inbo/n2khab/issues/138'>#138</a>)
+<li>Function <code><a href="../reference/read_raster_runif.html">read_raster_runif()</a></code> to return the
+<code>raster_runif</code> data source (<a href='https://github.com/inbo/n2khab/issues/136'>#136</a>, <a href='https://github.com/inbo/n2khab/issues/138'>#138</a>)
 <ul>
-<li>The raw data source <code>raster_runif</code> is a raster with cells matching those of <code>GRTSmaster_habitats</code>. Their values are uniformly distributed random numbers between 0 and 1 (<a href="https://github.com/inbo/n2khab-preprocessing/pull/55">inbo/n2khab-preprocessing/pull/55</a> and following pull requests; <a href="https://doi.org/10.5281/zenodo.4745983" class="uri">https://doi.org/10.5281/zenodo.4745983</a>).</li>
+<li>The raw data source <code>raster_runif</code> is a raster with cells
+matching those of <code>GRTSmaster_habitats</code>. Their values are
+uniformly distributed random numbers between 0 and 1 (<a href="https://github.com/inbo/n2khab-preprocessing/pull/55">inbo/n2khab-preprocessing/pull/55</a>
+and following pull requests; <a href="https://doi.org/10.5281/zenodo.4745983" class="uri">https://doi.org/10.5281/zenodo.4745983</a>).</li>
 </ul>
 </li>
-<li>Function <code><a href="../reference/checksum.html">checksum()</a></code> and associated shortcut functions to calculate file checksums (<a href='https://github.com/inbo/n2khab/issues/122'>#122</a>)</li>
+<li>Function <code><a href="../reference/checksum.html">checksum()</a></code> and associated shortcut functions
+to calculate file checksums (<a href='https://github.com/inbo/n2khab/issues/122'>#122</a>)</li>
 </ul>
 </div>
 <div id="other-updates--internal-changes" class="section level2">
@@ -215,9 +249,11 @@
 <p>Including:</p>
 <ul>
 <li>
-<code>scheme_types</code> data source: updates in typegroup memberships of MNE scheme <code>GW_05.1_terr</code> (<a href='https://github.com/inbo/n2khab/issues/116'>#116</a>)</li>
+<code>scheme_types</code> data source: updates in typegroup
+memberships of MNE scheme <code>GW_05.1_terr</code> (<a href='https://github.com/inbo/n2khab/issues/116'>#116</a>)</li>
 <li>
-<code><a href="../reference/expand_types.html">expand_types()</a></code> now also supports expanding <code>5130_hei</code> to <code>5130</code> (<a href='https://github.com/inbo/n2khab/issues/143'>#143</a>)</li>
+<code><a href="../reference/expand_types.html">expand_types()</a></code> now also supports expanding
+<code>5130_hei</code> to <code>5130</code> (<a href='https://github.com/inbo/n2khab/issues/143'>#143</a>)</li>
 </ul>
 </div>
 </div>
@@ -228,7 +264,10 @@
 <h2 class="hasAnchor">
 <a href="#new-feature" class="anchor"></a>New feature</h2>
 <ul>
-<li>Function <code><a href="../reference/read_watercourse_100mseg.html">read_watercourse_100mseg()</a></code> (<a href='https://github.com/inbo/n2khab/issues/105'>#105</a>) to return the <code>watercourse_100mseg</code> data source or one of its elements. <code>watercourse_100mseg</code> is a new processed data source (<a href="https://github.com/inbo/n2khab-preprocessing/pull/44">inbo/n2khab-preprocessing/pull/44</a>; <a href="https://doi.org/10.5281/zenodo.4452577" class="uri">https://doi.org/10.5281/zenodo.4452577</a>).</li>
+<li>Function <code><a href="../reference/read_watercourse_100mseg.html">read_watercourse_100mseg()</a></code> (<a href='https://github.com/inbo/n2khab/issues/105'>#105</a>) to return
+the <code>watercourse_100mseg</code> data source or one of its elements.
+<code>watercourse_100mseg</code> is a new processed data source (<a href="https://github.com/inbo/n2khab-preprocessing/pull/44">inbo/n2khab-preprocessing/pull/44</a>;
+<a href="https://doi.org/10.5281/zenodo.4452577" class="uri">https://doi.org/10.5281/zenodo.4452577</a>).</li>
 </ul>
 </div>
 <div id="updates--internal-changes" class="section level2">
@@ -236,24 +275,31 @@
 <a href="#updates--internal-changes" class="anchor"></a>Updates &amp; internal changes</h2>
 <p>Including:</p>
 <ul>
-<li>Update <code>namelist</code> data source: Dutch shortname of one type changed (<a href='https://github.com/inbo/n2khab/issues/102'>#102</a>).</li>
-<li>Drop dependency on <code>sp</code>, which was used for CRS handling in a few functions (<a href='https://github.com/inbo/n2khab/issues/103'>#103</a>).</li>
-<li>Minor updates in documentation and vignettes to solve newly encountered errors and notes in <code>R CMD check</code> (<a href='https://github.com/inbo/n2khab/issues/107'>#107</a>).</li>
+<li>Update <code>namelist</code> data source: Dutch shortname of one
+type changed (<a href='https://github.com/inbo/n2khab/issues/102'>#102</a>).</li>
+<li>Drop dependency on <code>sp</code>, which was used for CRS handling
+in a few functions (<a href='https://github.com/inbo/n2khab/issues/103'>#103</a>).</li>
+<li>Minor updates in documentation and vignettes to solve newly
+encountered errors and notes in <code>R CMD check</code> (<a href='https://github.com/inbo/n2khab/issues/107'>#107</a>).</li>
 </ul>
 </div>
 <div id="repo-and-website-maintenance" class="section level2">
 <h2 class="hasAnchor">
 <a href="#repo-and-website-maintenance" class="anchor"></a>Repo and website maintenance</h2>
 <ul>
-<li>Update and extend Readme (homepage) and Contributing Guide (<a href='https://github.com/inbo/n2khab/issues/97'>#97</a>, <a href='https://github.com/inbo/n2khab/issues/110'>#110</a>), including:
+<li>Update and extend Readme (homepage) and Contributing Guide (<a href='https://github.com/inbo/n2khab/issues/97'>#97</a>,
+<a href='https://github.com/inbo/n2khab/issues/110'>#110</a>), including:
 <ul>
 <li>instruction for upgrading the package;</li>
 <li>note on handling <em>proj4string</em> warnings;</li>
-<li>improved explanation of git workflows in developing the package.</li>
+<li>improved explanation of git workflows in developing the
+package.</li>
 </ul>
 </li>
-<li>Continuous integration: leave Travis CI; add new GitHub Actions workflows (<a href='https://github.com/inbo/n2khab/issues/108'>#108</a>).</li>
-<li>Website: larger fontsize; Ubuntu Mono font for code; consistent colouring of hyperlinks (<a href='https://github.com/inbo/n2khab/issues/110'>#110</a>).</li>
+<li>Continuous integration: leave Travis CI; add new GitHub Actions
+workflows (<a href='https://github.com/inbo/n2khab/issues/108'>#108</a>).</li>
+<li>Website: larger fontsize; Ubuntu Mono font for code; consistent
+colouring of hyperlinks (<a href='https://github.com/inbo/n2khab/issues/110'>#110</a>).</li>
 </ul>
 </div>
 </div>
@@ -265,7 +311,9 @@
 <a href="#minor-patch" class="anchor"></a>Minor patch</h2>
 <ul>
 <li>
-<code><a href="../reference/read_watersurfaces.html">read_watersurfaces()</a></code> has been limited explicitly to using data source version ‘watersurfaces_v1.0’. Accommodation of the newer ‘watersurfaces_v1.1’ is planned for later.</li>
+<code><a href="../reference/read_watersurfaces.html">read_watersurfaces()</a></code> has been limited explicitly to
+using data source version ‘watersurfaces_v1.0’. Accommodation of the
+newer ‘watersurfaces_v1.1’ is planned for later.</li>
 </ul>
 </div>
 </div>
@@ -276,20 +324,30 @@
 <h2 class="hasAnchor">
 <a href="#breaking-change" class="anchor"></a>Breaking change</h2>
 <ul>
-<li>Functions that preprocess (non-included) N2KHAB data sources have been simplified by dropping their <code>path</code> argument (<a href='https://github.com/inbo/n2khab/issues/92'>#92</a>). Existing R code will continue to run normally if you complied with the recommended file organization (see <code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> and <code><a href="../articles/v022_example.html">vignette("v022_example")</a></code>) and did not set the <code>path</code> and <code>file</code> arguments.</li>
+<li>Functions that preprocess (non-included) N2KHAB data sources have
+been simplified by dropping their <code>path</code> argument (<a href='https://github.com/inbo/n2khab/issues/92'>#92</a>).
+Existing R code will continue to run normally if you complied with the
+recommended file organization (see
+<code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> and
+<code><a href="../articles/v022_example.html">vignette("v022_example")</a></code>) and did not set the
+<code>path</code> and <code>file</code> arguments.</li>
 </ul>
 </div>
 <div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
-<li>New function <code><a href="../reference/read_habitatquarries.html">read_habitatquarries()</a></code> for reading the <code>habitatquarries</code> data source (<a href='https://github.com/inbo/n2khab/issues/83'>#83</a>, <a href='https://github.com/inbo/n2khab/issues/94'>#94</a>, <a href="https://github.com/inbo/n2khab-preprocessing/pull/41">inbo/n2khab-preprocessing/pull/41</a>).</li>
+<li>New function <code><a href="../reference/read_habitatquarries.html">read_habitatquarries()</a></code> for reading the
+<code>habitatquarries</code> data source (<a href='https://github.com/inbo/n2khab/issues/83'>#83</a>, <a href='https://github.com/inbo/n2khab/issues/94'>#94</a>, <a href="https://github.com/inbo/n2khab-preprocessing/pull/41">inbo/n2khab-preprocessing/pull/41</a>).</li>
 <li>Updates in reference lists (<a href='https://github.com/inbo/n2khab/issues/88'>#88</a>, <a href='https://github.com/inbo/n2khab/issues/93'>#93</a>, <a href="https://github.com/inbo/n2khab/commit/7ce3b32">7ce3b32</a>):
 <ul>
 <li>
-<code>schemes</code> &amp; <code>scheme_types</code>: updates of spatial restrictions, names and typegroup names of MNE schemes (for defining the schemes’ target populations);</li>
+<code>schemes</code> &amp; <code>scheme_types</code>: updates of
+spatial restrictions, names and typegroup names of MNE schemes (for
+defining the schemes’ target populations);</li>
 <li>
-<code>types</code>: update groundwater dependency of type <code>2170</code>.</li>
+<code>types</code>: update groundwater dependency of type
+<code>2170</code>.</li>
 </ul>
 </li>
 </ul>
@@ -299,8 +357,10 @@
 <a href="#internal-changes" class="anchor"></a>Internal changes</h2>
 <ul>
 <li>Harden CRS representations (<a href='https://github.com/inbo/n2khab/issues/84'>#84</a>)</li>
-<li>Re-integrate <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> (from <code>inborutils</code>) (<a href='https://github.com/inbo/n2khab/issues/89'>#89</a>)</li>
-<li>Drop some package dependencies to speed up package loading (<a href='https://github.com/inbo/n2khab/issues/89'>#89</a>, <a href='https://github.com/inbo/n2khab/issues/90'>#90</a>)</li>
+<li>Re-integrate <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> (from
+<code>inborutils</code>) (<a href='https://github.com/inbo/n2khab/issues/89'>#89</a>)</li>
+<li>Drop some package dependencies to speed up package loading (<a href='https://github.com/inbo/n2khab/issues/89'>#89</a>,
+<a href='https://github.com/inbo/n2khab/issues/90'>#90</a>)</li>
 </ul>
 </div>
 </div>
@@ -314,27 +374,43 @@
 <li>Updates in reference lists (<a href='https://github.com/inbo/n2khab/issues/64'>#64</a>, <a href='https://github.com/inbo/n2khab/issues/65'>#65</a>, <a href='https://github.com/inbo/n2khab/issues/69'>#69</a>, <a href="https://github.com/inbo/n2khab/pull/73/commits/e69cd52">e69cd52</a>):
 <ul>
 <li>
-<code>types</code>: updates of flood dependency scores and hydrological class of several types, following several expert discussions and checks</li>
+<code>types</code>: updates of flood dependency scores and
+hydrological class of several types, following several expert
+discussions and checks</li>
 <li>
-<code>schemes</code> &amp; <code>scheme_types</code>: updates regarding spatial restrictions, types and typegroup memberships of MNE schemes (for defining the schemes’ target populations); added MHQ scheme ‘HQ2120’</li>
+<code>schemes</code> &amp; <code>scheme_types</code>: updates
+regarding spatial restrictions, types and typegroup memberships of MNE
+schemes (for defining the schemes’ target populations); added MHQ scheme
+‘HQ2120’</li>
 <li>
-<code>env_pressures</code>: updated explanations. Each pressure now has its own explanation</li>
+<code>env_pressures</code>: updated explanations. Each pressure now
+has its own explanation</li>
 <li>
 <code>namelist</code>: according updates</li>
 </ul>
 </li>
 <li>
-<a href="https://rstudio.github.io/renv"><code>renv</code></a> framework implemented to enhance reproducibility of generating the built-in textual data sources (<a href='https://github.com/inbo/n2khab/issues/72'>#72</a>)</li>
+<a href="https://rstudio.github.io/renv"><code>renv</code></a>
+framework implemented to enhance reproducibility of generating the
+built-in textual data sources (<a href='https://github.com/inbo/n2khab/issues/72'>#72</a>)</li>
 <li>
-<code><a href="../reference/read_env_pressures.html">read_env_pressures()</a></code>: an extra column ‘<code>remarks</code>’ is now returned (<a href='https://github.com/inbo/n2khab/issues/65'>#65</a>)</li>
-<li>New function <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code> for reading the <code>soilmap</code> or processed <code>soilmap_simple</code> data sources (<a href='https://github.com/inbo/n2khab/issues/29'>#29</a>; <a href="https://github.com/inbo/n2khab-preprocessing/pull/34">inbo/n2khab-preprocessing/pull/34</a>)</li>
-<li>Vignette to demonstrate package &amp; data setup, using <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code> as an example target (<a href='https://github.com/inbo/n2khab/issues/29'>#29</a>)</li>
+<code><a href="../reference/read_env_pressures.html">read_env_pressures()</a></code>: an extra column
+‘<code>remarks</code>’ is now returned (<a href='https://github.com/inbo/n2khab/issues/65'>#65</a>)</li>
+<li>New function <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code> for reading the
+<code>soilmap</code> or processed <code>soilmap_simple</code> data
+sources (<a href='https://github.com/inbo/n2khab/issues/29'>#29</a>; <a href="https://github.com/inbo/n2khab-preprocessing/pull/34">inbo/n2khab-preprocessing/pull/34</a>)</li>
+<li>Vignette to demonstrate package &amp; data setup, using
+<code><a href="../reference/read_soilmap.html">read_soilmap()</a></code> as an example target (<a href='https://github.com/inbo/n2khab/issues/29'>#29</a>)</li>
 <li>
-<code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code> accommodates the latest version of the <code>habitatsprings</code> data source (<a href='https://github.com/inbo/n2khab/issues/62'>#62</a>, <a href="https://github.com/inbo/n2khab/pull/73/commits/5604002">5604002</a>)</li>
+<code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code> accommodates the latest version
+of the <code>habitatsprings</code> data source (<a href='https://github.com/inbo/n2khab/issues/62'>#62</a>, <a href="https://github.com/inbo/n2khab/pull/73/commits/5604002">5604002</a>)</li>
 <li>
-<code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code> optionally aggregates points to (population) units (<a href='https://github.com/inbo/n2khab/issues/70'>#70</a>)</li>
+<code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code> optionally aggregates points to
+(population) units (<a href='https://github.com/inbo/n2khab/issues/70'>#70</a>)</li>
 <li>
-<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> now drops occurrences of type <code>7220</code> by default, given the information returned by <code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code> (<a href='https://github.com/inbo/n2khab/issues/71'>#71</a>)</li>
+<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> now drops occurrences of type
+<code>7220</code> by default, given the information returned by
+<code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code> (<a href='https://github.com/inbo/n2khab/issues/71'>#71</a>)</li>
 </ul>
 <p>Further, a number of smaller fixes and enhancements were made.</p>
 </div>
@@ -347,7 +423,9 @@
 <a href="#hotfix" class="anchor"></a>Hotfix</h2>
 <ul>
 <li>
-<code><a href="../reference/read_GRTSmh.html">read_GRTSmh()</a></code>, <code><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac()</a></code>, <code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code>: avoided CRS error with more recent GDAL/PROJ.4 installations (<a href='https://github.com/inbo/n2khab/issues/61'>#61</a>)</li>
+<code><a href="../reference/read_GRTSmh.html">read_GRTSmh()</a></code>, <code><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac()</a></code>,
+<code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code>: avoided CRS error with more recent
+GDAL/PROJ.4 installations (<a href='https://github.com/inbo/n2khab/issues/61'>#61</a>)</li>
 </ul>
 </div>
 </div>
@@ -359,7 +437,8 @@
 <a href="#hotfix-1" class="anchor"></a>Hotfix</h2>
 <ul>
 <li>
-<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code>: fixed non-functioning argument <code>keep_aq_types=FALSE</code> (<a href='https://github.com/inbo/n2khab/issues/60'>#60</a>)</li>
+<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code>: fixed non-functioning argument
+<code>keep_aq_types=FALSE</code> (<a href='https://github.com/inbo/n2khab/issues/60'>#60</a>)</li>
 </ul>
 </div>
 </div>
@@ -371,10 +450,12 @@
 <a href="#features-of-the-first-stable-release" class="anchor"></a>Features of the first stable release</h2>
 <ul>
 <li>Core reading and preprocessing functions</li>
-<li>Several built-in checklists (among which: <code>types</code> and <code>env_pressures</code>)</li>
+<li>Several built-in checklists (among which: <code>types</code> and
+<code>env_pressures</code>)</li>
 <li>Function documentation</li>
 <li>4 tutorials (vignettes / articles)</li>
-<li>A reexport of <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> from <code>inborutils</code>
+<li>A reexport of <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> from
+<code>inborutils</code>
 </li>
 <li>Website built with <code>pkgdown</code>
 </li>
@@ -383,7 +464,15 @@
 <div id="historical-note" class="section level2">
 <h2 class="hasAnchor">
 <a href="#historical-note" class="anchor"></a>Historical note</h2>
-<p>This package is the successor of the ‘n2khabutils’ package. Previous to commit <code>c8608d9</code>, the code was part of the <a href="https://github.com/inbo/n2khab-monitoring">n2khab-monitoring</a> repo (formerly ‘n2khab-inputs’), where the original version history remains stored. At that time, the package was called ‘n2khabutils’. As a convenience, the <strong>n2khab</strong> repo still holds the rewritten (shrinked) package history from before commit <code>c8608d9</code>, as defined by the related files and folders. See <a href="https://github.com/inbo/n2khab-monitoring/issues/28">this</a> issue in the ‘n2khab-monitoring’ repo, where the migration is documented.</p>
+<p>This package is the successor of the ‘n2khabutils’ package. Previous
+to commit <code>c8608d9</code>, the code was part of the <a href="https://github.com/inbo/n2khab-monitoring">n2khab-monitoring</a>
+repo (formerly ‘n2khab-inputs’), where the original version history
+remains stored. At that time, the package was called ‘n2khabutils’. As a
+convenience, the <strong>n2khab</strong> repo still holds the rewritten
+(shrinked) package history from before commit <code>c8608d9</code>, as
+defined by the related files and folders. See <a href="https://github.com/inbo/n2khab-monitoring/issues/28">this</a>
+issue in the ‘n2khab-monitoring’ repo, where the migration is
+documented.</p>
 </div>
 </div>
   </div>

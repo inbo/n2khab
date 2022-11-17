@@ -92,7 +92,7 @@
 
       
 
-      </header><script src="v010_reference_lists_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><script src="v010_reference_lists_files/header-attrs-2.18/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Reference lists and using them</h1>
@@ -110,167 +110,219 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>With reference lists we mean complete and authorative lists of all items or categories that constitute some collection. Their purpose is typically to promote standardization and thereby to ease collaborative work.</p>
-<p>The <code>n2khab</code> package provides the following built-in reference lists, relevant to N2KHAB projects <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>:</p>
+<p>With reference lists we mean complete and authorative lists of all
+items or categories that constitute some collection. Their purpose is
+typically to promote standardization and thereby to ease collaborative
+work.</p>
+<p>The <code>n2khab</code> package provides the following built-in
+reference lists, relevant to N2KHAB projects <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>:</p>
 <ul>
 <li>
-<code>types</code>: checklist of types (habitat (sub)types and regionally important biotopes) (documentation links: <a href="../reference/types.html">this website</a> / <a href="../html/types.html">installed package</a>), represented by their <em>current</em> codes</li>
+<code>types</code>: checklist of types (habitat (sub)types and
+regionally important biotopes) (documentation links: <a href="../reference/types.html">this website</a> / <a href="../html/types.html">installed package</a>), represented by their
+<em>current</em> codes</li>
 <li>
-<code>env_pressures</code>: checklist of environmental pressures, represented by codes (documentation links: <a href="../reference/env_pressures.html">this website</a> / <a href="../html/env_pressures.html">installed package</a>)</li>
+<code>env_pressures</code>: checklist of environmental pressures,
+represented by codes (documentation links: <a href="../reference/env_pressures.html">this website</a> / <a href="../html/env_pressures.html">installed package</a>)</li>
 <li>
-<code>schemes</code>: list of schemes <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> for N2KHAB monitoring programmes or other N2KHAB projects (documentation links: <a href="../reference/schemes.html">this website</a> / <a href="../html/schemes.html">installed package</a>)</li>
+<code>schemes</code>: list of schemes <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> for N2KHAB monitoring
+programmes or other N2KHAB projects (documentation links: <a href="../reference/schemes.html">this website</a> / <a href="../html/schemes.html">installed package</a>)</li>
 <li>
-<code>scheme_types</code>: lists the types that belong to each N2KHAB scheme, and optionally defines typegroups within a scheme (documentation links: <a href="../reference/scheme_types.html">this website</a> / <a href="../html/scheme_types.html">installed package</a>)</li>
+<code>scheme_types</code>: lists the types that belong to each
+N2KHAB scheme, and optionally defines typegroups within a scheme
+(documentation links: <a href="../reference/scheme_types.html">this
+website</a> / <a href="../html/scheme_types.html">installed
+package</a>)</li>
 </ul>
-<p>Additionally, <code>namelist</code> provides names and (optionally) shortnames for IDs/codes used in the above lists (documentation links: <a href="../reference/namelist.html">this website</a> / <a href="../html/namelist.html">installed package</a>).</p>
+<p>Additionally, <code>namelist</code> provides names and (optionally)
+shortnames for IDs/codes used in the above lists (documentation links:
+<a href="../reference/namelist.html">this website</a> / <a href="../html/namelist.html">installed package</a>).</p>
 <div id="more-on-list-contents-and-package-functionality" class="section level3">
 <h3 class="hasAnchor">
 <a href="#more-on-list-contents-and-package-functionality" class="anchor"></a>More on list contents and package functionality</h3>
-<p>Beside enlisting all items, the reference lists provide additional information on them, sometimes in a generic way with variables like ‘attribute_1’, ‘attribute_2’, ‘tag_1’ and so on (explained in the <strong>documentation files</strong>). This information may be of a defining nature (and obligate), or may just provide useful categories and tags to filter by.</p>
-<p>Reading functions of the <code>n2khab</code> package return the reference lists as <strong>tibbles</strong>, with appropriate text from <code>namelist</code> added. A tibble is a dataframe that makes working in the tidyverse a little <a href="https://r4ds.had.co.nz/tibbles.html">easier</a>.</p>
+<p>Beside enlisting all items, the reference lists provide additional
+information on them, sometimes in a generic way with variables like
+‘attribute_1’, ‘attribute_2’, ‘tag_1’ and so on (explained in the
+<strong>documentation files</strong>). This information may be of a
+defining nature (and obligate), or may just provide useful categories
+and tags to filter by.</p>
+<p>Reading functions of the <code>n2khab</code> package return the
+reference lists as <strong>tibbles</strong>, with appropriate text from
+<code>namelist</code> added. A tibble is a dataframe that makes working
+in the tidyverse a little <a href="https://r4ds.had.co.nz/tibbles.html">easier</a>.</p>
 </div>
 <div id="multilanguage-support" class="section level3">
 <h3 class="hasAnchor">
 <a href="#multilanguage-support" class="anchor"></a>Multilanguage support</h3>
-<p>In the data source on disk, each item envisaged by a reference list is always represented by a <strong>code</strong> (sometimes a combination of two codes) – not a name. The same approach is often followed for other attributes (use of codes, not names or descriptions). However for some variables English has been used directly in the data source.</p>
-<p>The splitting between code and explanatory names, shortnames and other language-dependent text made it possible to store the latter in <em>multiple languages</em> in <code>namelist</code>, in the variables <code>name</code> and <code>shortname</code>. Currently, this list systematically provides English and Dutch text for each code. This can be extended in future versions of the package (not necessarily in a systematic way).</p>
+<p>In the data source on disk, each item envisaged by a reference list
+is always represented by a <strong>code</strong> (sometimes a
+combination of two codes) – not a name. The same approach is often
+followed for other attributes (use of codes, not names or descriptions).
+However for some variables English has been used directly in the data
+source.</p>
+<p>The splitting between code and explanatory names, shortnames and
+other language-dependent text made it possible to store the latter in
+<em>multiple languages</em> in <code>namelist</code>, in the variables
+<code>name</code> and <code>shortname</code>. Currently, this list
+systematically provides English and Dutch text for each code. This can
+be extended in future versions of the package (not necessarily in a
+systematic way).</p>
 </div>
 </div>
 <div id="get-the-reference-lists-in-r" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-the-reference-lists-in-r" class="anchor"></a>Get the reference lists in R</h2>
-<p>Making the <code>types</code> reference list available in the R environment is as easy as:</p>
+<p>Making the <code>types</code> reference list available in the R
+environment is as easy as:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_types.html">read_types</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 111 × 25</span>
-<span class="co">#&gt;    type    typelevel main_type type_name type_shortname typeclass typeclass_name</span>
-<span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;     &lt;fct&gt;         </span>
-<span class="co">#&gt;  1 1130    main_type 1130      Estuaries Estuaries      CH        Coastal and h…</span>
-<span class="co">#&gt;  2 1140    main_type 1140      Mudflats… Mud- and sand… CH        Coastal and h…</span>
-<span class="co">#&gt;  3 1310    main_type 1310      Salicorn… Brackish pion… CH        Coastal and h…</span>
-<span class="co">#&gt;  4 1310_p… subtype   1310      Salicorn… Salicornia ha… CH        Coastal and h…</span>
-<span class="co">#&gt;  5 1310_zk subtype   1310      Low salt… Low saltmarsh… CH        Coastal and h…</span>
-<span class="co">#&gt;  6 1310_zv subtype   1310      High sal… High saltmars… CH        Coastal and h…</span>
-<span class="co">#&gt;  7 1320    main_type 1320      Spartina… Spartina swar… CH        Coastal and h…</span>
-<span class="co">#&gt;  8 1330    main_type 1330      Atlantic… Atlantic salt… CH        Coastal and h…</span>
-<span class="co">#&gt;  9 1330_da subtype   1330      Saltmars… Saltmarshes d… CH        Coastal and h…</span>
-<span class="co">#&gt; 10 1330_h… subtype   1330      Halophyt… Halophytic gr… CH        Coastal and h…</span>
-<span class="co">#&gt; # … with 101 more rows, and 18 more variables: hydr_class &lt;fct&gt;,</span>
-<span class="co">#&gt; #   hydr_class_name &lt;fct&gt;, hydr_class_shortname &lt;fct&gt;, groundw_dep &lt;fct&gt;,</span>
-<span class="co">#&gt; #   groundw_dep_name &lt;fct&gt;, groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;,</span>
-<span class="co">#&gt; #   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, tag_1 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2 &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span>
-<span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></code></pre></div>
-<p>By default, English is used. But, you can also choose to get a tibble in another language:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_types.html">read_types</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 111 × 25</span></span>
+<span><span class="co">#&gt;    type  typel…¹ main_…² type_…³ type_…⁴ typec…⁵ typec…⁶ hydr_…⁷ hydr_…⁸ hydr_…⁹</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  </span></span>
+<span><span class="co">#&gt;  1 1130  main_t… 1130    Estuar… Estuar… CH      Coasta… HC3     Surfac… Surfac…</span></span>
+<span><span class="co">#&gt;  2 1140  main_t… 1140    Mudfla… Mud- a… CH      Coasta… HC2     Tempor… Wet    </span></span>
+<span><span class="co">#&gt;  3 1310  main_t… 1310    Salico… Bracki… CH      Coasta… HC2     Tempor… Wet    </span></span>
+<span><span class="co">#&gt;  4 1310… subtype 1310    Salico… Salico… CH      Coasta… HC2     Tempor… Wet    </span></span>
+<span><span class="co">#&gt;  5 1310… subtype 1310    Low sa… Low sa… CH      Coasta… HC2     Tempor… Wet    </span></span>
+<span><span class="co">#&gt;  6 1310… subtype 1310    High s… High s… CH      Coasta… HC2     Tempor… Wet    </span></span>
+<span><span class="co">#&gt;  7 1320  main_t… 1320    Sparti… Sparti… CH      Coasta… HC2     Tempor… Wet    </span></span>
+<span><span class="co">#&gt;  8 1330  main_t… 1330    Atlant… Atlant… CH      Coasta… HC2     Tempor… Wet    </span></span>
+<span><span class="co">#&gt;  9 1330… subtype 1330    Saltma… Saltma… CH      Coasta… HC2     Tempor… Wet    </span></span>
+<span><span class="co">#&gt; 10 1330… subtype 1330    Haloph… Haloph… CH      Coasta… HC2     Tempor… Wet    </span></span>
+<span><span class="co">#&gt; # … with 101 more rows, 15 more variables: groundw_dep &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   groundw_dep_name &lt;fct&gt;, groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, tag_1 &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2 &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   tag_3_shortname &lt;chr&gt;, and abbreviated variable names ¹​typelevel,</span></span>
+<span><span class="co">#&gt; #   ²​main_type, ³​type_name, ⁴​type_shortname, ⁵​typeclass, ⁶​typeclass_name, …</span></span></code></pre></div>
+<p>By default, English is used. But, you can also choose to get a tibble
+in another language:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_types.html">read_types</a></span><span class="op">(</span>lang <span class="op">=</span> <span class="st">"nl"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 111 × 25</span>
-<span class="co">#&gt;    type    typelevel main_type type_name type_shortname typeclass typeclass_name</span>
-<span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;     &lt;fct&gt;         </span>
-<span class="co">#&gt;  1 1130    main_type 1130      Estuaria  estuaria       CH        Kust- en zilt…</span>
-<span class="co">#&gt;  2 1140    main_type 1140      Bij eb d… bij eb droogv… CH        Kust- en zilt…</span>
-<span class="co">#&gt;  3 1310    main_type 1310      Eenjarig… zilte pionier… CH        Kust- en zilt…</span>
-<span class="co">#&gt;  4 1310_p… subtype   1310      binnendi… binnendijkse … CH        Kust- en zilt…</span>
-<span class="co">#&gt;  5 1310_zk subtype   1310      buitendi… buitendijks l… CH        Kust- en zilt…</span>
-<span class="co">#&gt;  6 1310_zv subtype   1310      buitendi… buitendijks h… CH        Kust- en zilt…</span>
-<span class="co">#&gt;  7 1320    main_type 1320      Schorren… schorren met … CH        Kust- en zilt…</span>
-<span class="co">#&gt;  8 1330    main_type 1330      Atlantis… Atlantische s… CH        Kust- en zilt…</span>
-<span class="co">#&gt;  9 1330_da subtype   1330      buitendi… buitendijkse … CH        Kust- en zilt…</span>
-<span class="co">#&gt; 10 1330_h… subtype   1330      binnendi… zilte graslan… CH        Kust- en zilt…</span>
-<span class="co">#&gt; # … with 101 more rows, and 18 more variables: hydr_class &lt;fct&gt;,</span>
-<span class="co">#&gt; #   hydr_class_name &lt;fct&gt;, hydr_class_shortname &lt;fct&gt;, groundw_dep &lt;fct&gt;,</span>
-<span class="co">#&gt; #   groundw_dep_name &lt;fct&gt;, groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;,</span>
-<span class="co">#&gt; #   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, tag_1 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2 &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span>
-<span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></code></pre></div>
-<p>The <code>lang</code> argument is available in the below functions as well.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_types.html">read_types</a></span><span class="op">(</span>lang <span class="op">=</span> <span class="st">"nl"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 111 × 25</span></span>
+<span><span class="co">#&gt;    type  typel…¹ main_…² type_…³ type_…⁴ typec…⁵ typec…⁶ hydr_…⁷ hydr_…⁸ hydr_…⁹</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  </span></span>
+<span><span class="co">#&gt;  1 1130  main_t… 1130    Estuar… estuar… CH      Kust- … HC3     Opperv… Opperv…</span></span>
+<span><span class="co">#&gt;  2 1140  main_t… 1140    Bij eb… bij eb… CH      Kust- … HC2     Tijdel… Nat    </span></span>
+<span><span class="co">#&gt;  3 1310  main_t… 1310    Eenjar… zilte … CH      Kust- … HC2     Tijdel… Nat    </span></span>
+<span><span class="co">#&gt;  4 1310… subtype 1310    binnen… binnen… CH      Kust- … HC2     Tijdel… Nat    </span></span>
+<span><span class="co">#&gt;  5 1310… subtype 1310    buiten… buiten… CH      Kust- … HC2     Tijdel… Nat    </span></span>
+<span><span class="co">#&gt;  6 1310… subtype 1310    buiten… buiten… CH      Kust- … HC2     Tijdel… Nat    </span></span>
+<span><span class="co">#&gt;  7 1320  main_t… 1320    Schorr… schorr… CH      Kust- … HC2     Tijdel… Nat    </span></span>
+<span><span class="co">#&gt;  8 1330  main_t… 1330    Atlant… Atlant… CH      Kust- … HC2     Tijdel… Nat    </span></span>
+<span><span class="co">#&gt;  9 1330… subtype 1330    buiten… buiten… CH      Kust- … HC2     Tijdel… Nat    </span></span>
+<span><span class="co">#&gt; 10 1330… subtype 1330    binnen… zilte … CH      Kust- … HC2     Tijdel… Nat    </span></span>
+<span><span class="co">#&gt; # … with 101 more rows, 15 more variables: groundw_dep &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   groundw_dep_name &lt;fct&gt;, groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   flood_dep_name &lt;fct&gt;, flood_dep_shortname &lt;fct&gt;, tag_1 &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2 &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3 &lt;chr&gt;, tag_3_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   tag_3_shortname &lt;chr&gt;, and abbreviated variable names ¹​typelevel,</span></span>
+<span><span class="co">#&gt; #   ²​main_type, ³​type_name, ⁴​type_shortname, ⁵​typeclass, ⁶​typeclass_name, …</span></span></code></pre></div>
+<p>The <code>lang</code> argument is available in the below functions as
+well.</p>
 <p><code>env_pressures</code> is made available with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_env_pressures.html">read_env_pressures</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 35 × 7</span>
-<span class="co">#&gt;    ep_code ep_abbrev        ep_name   ep_class ep_class_name explanation remarks</span>
-<span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;            &lt;fct&gt;     &lt;fct&gt;    &lt;fct&gt;         &lt;chr&gt;       &lt;chr&gt;  </span>
-<span class="co">#&gt;  1 ep_011  011_struct       11 Chang… ep_clas… 1 Physical m… &lt;NA&gt;        &lt;NA&gt;   </span>
-<span class="co">#&gt;  2 ep_012  012_soildyn_incr 12 Soil … ep_clas… 1 Physical m… &lt;NA&gt;        &lt;NA&gt;   </span>
-<span class="co">#&gt;  3 ep_013  013_soildyn_decr 13 Soil … ep_clas… 1 Physical m… &lt;NA&gt;        &lt;NA&gt;   </span>
-<span class="co">#&gt;  4 ep_014  014_aqconn       14 Aquat… ep_clas… 1 Physical m… &lt;NA&gt;        &lt;NA&gt;   </span>
-<span class="co">#&gt;  5 ep_015  015_terrconn     15 Terre… ep_clas… 1 Physical m… &lt;NA&gt;        &lt;NA&gt;   </span>
-<span class="co">#&gt;  6 ep_03.1 03.1_eutr_air    3.1 Eutr… ep_clas… 3 Eutrophica… &lt;NA&gt;        &lt;NA&gt;   </span>
-<span class="co">#&gt;  7 ep_03.2 03.2_eutr_soil   3.2 Eutr… ep_clas… 3 Eutrophica… &lt;NA&gt;        &lt;NA&gt;   </span>
-<span class="co">#&gt;  8 ep_03.3 03.3_eutr_gw     3.3 Eutr… ep_clas… 3 Eutrophica… &lt;NA&gt;        &lt;NA&gt;   </span>
-<span class="co">#&gt;  9 ep_03.4 03.4_eutr_sw     3.4 Eutr… ep_clas… 3 Eutrophica… &lt;NA&gt;        &lt;NA&gt;   </span>
-<span class="co">#&gt; 10 ep_04.1 04.1_acidif_air  4.1 Acid… ep_clas… 4 Acidificat… &lt;NA&gt;        &lt;NA&gt;   </span>
-<span class="co">#&gt; # … with 25 more rows</span></code></pre></div>
-<p>When actually using these reading functions, you will – of course – assign its result to an object. E.g. with the <code>schemes</code> reference list:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_env_pressures.html">read_env_pressures</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 35 × 7</span></span>
+<span><span class="co">#&gt;    ep_code ep_abbrev        ep_name              ep_cl…¹ ep_cl…² expla…³ remarks</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;            &lt;fct&gt;                &lt;fct&gt;   &lt;fct&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt;  1 ep_011  011_struct       11 Change of physic… ep_cla… 1 Phys… &lt;NA&gt;    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  2 ep_012  012_soildyn_incr 12 Soil dynamics in… ep_cla… 1 Phys… &lt;NA&gt;    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  3 ep_013  013_soildyn_decr 13 Soil dynamics de… ep_cla… 1 Phys… &lt;NA&gt;    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  4 ep_014  014_aqconn       14 Aquatic connecti… ep_cla… 1 Phys… &lt;NA&gt;    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  5 ep_015  015_terrconn     15 Terrestrial conn… ep_cla… 1 Phys… &lt;NA&gt;    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  6 ep_03.1 03.1_eutr_air    3.1 Eutrophication … ep_cla… 3 Eutr… &lt;NA&gt;    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  7 ep_03.2 03.2_eutr_soil   3.2 Eutrophication … ep_cla… 3 Eutr… &lt;NA&gt;    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  8 ep_03.3 03.3_eutr_gw     3.3 Eutrophication … ep_cla… 3 Eutr… &lt;NA&gt;    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  9 ep_03.4 03.4_eutr_sw     3.4 Eutrophication … ep_cla… 3 Eutr… &lt;NA&gt;    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt; 10 ep_04.1 04.1_acidif_air  4.1 Acidification t… ep_cla… 4 Acid… &lt;NA&gt;    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt; # … with 25 more rows, and abbreviated variable names ¹​ep_class,</span></span>
+<span><span class="co">#&gt; #   ²​ep_class_name, ³​explanation</span></span></code></pre></div>
+<p>When actually using these reading functions, you will – of course –
+assign its result to an object. E.g. with the <code>schemes</code>
+reference list:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">schemes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_schemes.html">read_schemes</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">schemes</span>
-<span class="co">#&gt; # A tibble: 64 × 25</span>
-<span class="co">#&gt;    scheme      scheme_name scheme_shortname programme programme_name attribute_1</span>
-<span class="co">#&gt;    &lt;fct&gt;       &lt;fct&gt;       &lt;fct&gt;            &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;      </span>
-<span class="co">#&gt;  1 ATM_03.1    Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr… ATM        </span>
-<span class="co">#&gt;  2 ATM_04.1    Atmospheri… ATM: 04.1_acidi… MNE       Monitoring pr… ATM        </span>
-<span class="co">#&gt;  3 ATM_08.1    Atmospheri… ATM: 08.1_poll_… MNE       Monitoring pr… ATM        </span>
-<span class="co">#&gt;  4 ATM_101     Atmospheri… ATM: 101_clim_d… MNE       Monitoring pr… ATM        </span>
-<span class="co">#&gt;  5 ATM_102     Atmospheri… ATM: 102_clim_w… MNE       Monitoring pr… ATM        </span>
-<span class="co">#&gt;  6 GW_03.3     Groundwate… GW: 03.3_eutr_gw MNE       Monitoring pr… GW         </span>
-<span class="co">#&gt;  7 GW_04.2     Groundwate… GW: 04.2_acidif… MNE       Monitoring pr… GW         </span>
-<span class="co">#&gt;  8 GW_05.1_aq  Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span>
-<span class="co">#&gt;  9 GW_05.1_qu… Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span>
-<span class="co">#&gt; 10 GW_05.1_te… Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span>
-<span class="co">#&gt; # … with 54 more rows, and 19 more variables: attribute_2 &lt;fct&gt;,</span>
-<span class="co">#&gt; #   attribute_3 &lt;fct&gt;, attribute_1_name &lt;fct&gt;, attribute_1_shortname &lt;fct&gt;,</span>
-<span class="co">#&gt; #   attribute_2_name &lt;fct&gt;, attribute_2_shortname &lt;fct&gt;,</span>
-<span class="co">#&gt; #   attribute_3_name &lt;fct&gt;, attribute_3_shortname &lt;fct&gt;,</span>
-<span class="co">#&gt; #   spatial_restriction &lt;chr&gt;, notes &lt;chr&gt;, tag_1 &lt;chr&gt;, tag_2 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   tag_3 &lt;chr&gt;, tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span>
-<span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;</span></code></pre></div>
-<p>The <code><a href="../reference/read_scheme_types.html">read_scheme_types()</a></code> function provides the extra ability to <em>toggle</em> the presence of most textual information, because these comprise many extra variables (combining all additional information of the concerned schemes <em>and</em> the types). This behaviour is controlled by the argument <code>extended</code>, which is <code>FALSE</code> by default.</p>
+<code class="sourceCode R"><span><span class="va">schemes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_schemes.html">read_schemes</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">schemes</span></span>
+<span><span class="co">#&gt; # A tibble: 64 × 25</span></span>
+<span><span class="co">#&gt;    scheme        schem…¹ schem…² progr…³ progr…⁴ attri…⁵ attri…⁶ attri…⁷ attri…⁸</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;         &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  </span></span>
+<span><span class="co">#&gt;  1 ATM_03.1      Atmosp… ATM: 0… MNE     Monito… ATM     ep_03.1 &lt;NA&gt;    Atmosp…</span></span>
+<span><span class="co">#&gt;  2 ATM_04.1      Atmosp… ATM: 0… MNE     Monito… ATM     ep_04.1 &lt;NA&gt;    Atmosp…</span></span>
+<span><span class="co">#&gt;  3 ATM_08.1      Atmosp… ATM: 0… MNE     Monito… ATM     ep_08.1 &lt;NA&gt;    Atmosp…</span></span>
+<span><span class="co">#&gt;  4 ATM_101       Atmosp… ATM: 1… MNE     Monito… ATM     ep_101  &lt;NA&gt;    Atmosp…</span></span>
+<span><span class="co">#&gt;  5 ATM_102       Atmosp… ATM: 1… MNE     Monito… ATM     ep_102  &lt;NA&gt;    Atmosp…</span></span>
+<span><span class="co">#&gt;  6 GW_03.3       Ground… GW: 03… MNE     Monito… GW      ep_03.3 &lt;NA&gt;    Ground…</span></span>
+<span><span class="co">#&gt;  7 GW_04.2       Ground… GW: 04… MNE     Monito… GW      ep_04.2 &lt;NA&gt;    Ground…</span></span>
+<span><span class="co">#&gt;  8 GW_05.1_aq    Ground… GW: 05… MNE     Monito… GW      ep_05.1 aq      Ground…</span></span>
+<span><span class="co">#&gt;  9 GW_05.1_quar… Ground… GW: 05… MNE     Monito… GW      ep_05.1 quarri… Ground…</span></span>
+<span><span class="co">#&gt; 10 GW_05.1_terr  Ground… GW: 05… MNE     Monito… GW      ep_05.1 terr    Ground…</span></span>
+<span><span class="co">#&gt; # … with 54 more rows, 16 more variables: attribute_1_shortname &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   attribute_2_name &lt;fct&gt;, attribute_2_shortname &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   attribute_3_name &lt;fct&gt;, attribute_3_shortname &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   spatial_restriction &lt;chr&gt;, notes &lt;chr&gt;, tag_1 &lt;chr&gt;, tag_2 &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   tag_3 &lt;chr&gt;, tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   tag_2_shortname &lt;chr&gt;, tag_3_name &lt;chr&gt;, tag_3_shortname &lt;chr&gt;, and</span></span>
+<span><span class="co">#&gt; #   abbreviated variable names ¹​scheme_name, ²​scheme_shortname, ³​programme, …</span></span></code></pre></div>
+<p>The <code><a href="../reference/read_scheme_types.html">read_scheme_types()</a></code> function provides the extra
+ability to <em>toggle</em> the presence of most textual information,
+because these comprise many extra variables (combining all additional
+information of the concerned schemes <em>and</em> the types). This
+behaviour is controlled by the argument <code>extended</code>, which is
+<code>FALSE</code> by default.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 764 × 5</span>
-<span class="co">#&gt;    scheme   type     typegroup       typegroup_name             typegroup_short…</span>
-<span class="co">#&gt;    &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;           &lt;fct&gt;                      &lt;fct&gt;           </span>
-<span class="co">#&gt;  1 ATM_03.1 1310_pol ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
-<span class="co">#&gt;  2 ATM_03.1 1310_zk  ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
-<span class="co">#&gt;  3 ATM_03.1 1310_zv  ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
-<span class="co">#&gt;  4 ATM_03.1 1320     ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
-<span class="co">#&gt;  5 ATM_03.1 1330_da  ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
-<span class="co">#&gt;  6 ATM_03.1 1330_hpr ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
-<span class="co">#&gt;  7 ATM_03.1 2110     ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
-<span class="co">#&gt;  8 ATM_03.1 2120     ATM_03.1_group2 sensitive non-forest types sensitive non-f…</span>
-<span class="co">#&gt;  9 ATM_03.1 2130_had ATM_03.1_group1 very sensitive non-forest… very sensitive …</span>
-<span class="co">#&gt; 10 ATM_03.1 2130_hd  ATM_03.1_group1 very sensitive non-forest… very sensitive …</span>
-<span class="co">#&gt; # … with 754 more rows</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 764 × 5</span></span>
+<span><span class="co">#&gt;    scheme   type     typegroup       typegroup_name                  typegroup…¹</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;           &lt;fct&gt;                           &lt;fct&gt;      </span></span>
+<span><span class="co">#&gt;  1 ATM_03.1 1310_pol ATM_03.1_group2 sensitive non-forest types      sensitive …</span></span>
+<span><span class="co">#&gt;  2 ATM_03.1 1310_zk  ATM_03.1_group2 sensitive non-forest types      sensitive …</span></span>
+<span><span class="co">#&gt;  3 ATM_03.1 1310_zv  ATM_03.1_group2 sensitive non-forest types      sensitive …</span></span>
+<span><span class="co">#&gt;  4 ATM_03.1 1320     ATM_03.1_group2 sensitive non-forest types      sensitive …</span></span>
+<span><span class="co">#&gt;  5 ATM_03.1 1330_da  ATM_03.1_group2 sensitive non-forest types      sensitive …</span></span>
+<span><span class="co">#&gt;  6 ATM_03.1 1330_hpr ATM_03.1_group2 sensitive non-forest types      sensitive …</span></span>
+<span><span class="co">#&gt;  7 ATM_03.1 2110     ATM_03.1_group2 sensitive non-forest types      sensitive …</span></span>
+<span><span class="co">#&gt;  8 ATM_03.1 2120     ATM_03.1_group2 sensitive non-forest types      sensitive …</span></span>
+<span><span class="co">#&gt;  9 ATM_03.1 2130_had ATM_03.1_group1 very sensitive non-forest types very sensi…</span></span>
+<span><span class="co">#&gt; 10 ATM_03.1 2130_hd  ATM_03.1_group1 very sensitive non-forest types very sensi…</span></span>
+<span><span class="co">#&gt; # … with 754 more rows, and abbreviated variable name ¹​typegroup_shortname</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span><span class="op">(</span>extended <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 764 × 53</span>
-<span class="co">#&gt;    scheme   type     typegroup       typegroup_name typegroup_short… scheme_name</span>
-<span class="co">#&gt;    &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;           &lt;fct&gt;          &lt;fct&gt;            &lt;fct&gt;      </span>
-<span class="co">#&gt;  1 ATM_03.1 1310_pol ATM_03.1_group2 sensitive non… sensitive non-f… Atmospheri…</span>
-<span class="co">#&gt;  2 ATM_03.1 1310_zk  ATM_03.1_group2 sensitive non… sensitive non-f… Atmospheri…</span>
-<span class="co">#&gt;  3 ATM_03.1 1310_zv  ATM_03.1_group2 sensitive non… sensitive non-f… Atmospheri…</span>
-<span class="co">#&gt;  4 ATM_03.1 1320     ATM_03.1_group2 sensitive non… sensitive non-f… Atmospheri…</span>
-<span class="co">#&gt;  5 ATM_03.1 1330_da  ATM_03.1_group2 sensitive non… sensitive non-f… Atmospheri…</span>
-<span class="co">#&gt;  6 ATM_03.1 1330_hpr ATM_03.1_group2 sensitive non… sensitive non-f… Atmospheri…</span>
-<span class="co">#&gt;  7 ATM_03.1 2110     ATM_03.1_group2 sensitive non… sensitive non-f… Atmospheri…</span>
-<span class="co">#&gt;  8 ATM_03.1 2120     ATM_03.1_group2 sensitive non… sensitive non-f… Atmospheri…</span>
-<span class="co">#&gt;  9 ATM_03.1 2130_had ATM_03.1_group1 very sensitiv… very sensitive … Atmospheri…</span>
-<span class="co">#&gt; 10 ATM_03.1 2130_hd  ATM_03.1_group1 very sensitiv… very sensitive … Atmospheri…</span>
-<span class="co">#&gt; # … with 754 more rows, and 47 more variables: scheme_shortname &lt;fct&gt;,</span>
-<span class="co">#&gt; #   programme &lt;fct&gt;, programme_name &lt;fct&gt;, attribute_1 &lt;fct&gt;,</span>
-<span class="co">#&gt; #   attribute_2 &lt;fct&gt;, attribute_3 &lt;fct&gt;, attribute_1_name &lt;fct&gt;,</span>
-<span class="co">#&gt; #   attribute_1_shortname &lt;fct&gt;, attribute_2_name &lt;fct&gt;,</span>
-<span class="co">#&gt; #   attribute_2_shortname &lt;fct&gt;, attribute_3_name &lt;fct&gt;,</span>
-<span class="co">#&gt; #   attribute_3_shortname &lt;fct&gt;, spatial_restriction &lt;chr&gt;, notes &lt;chr&gt;,</span>
-<span class="co">#&gt; #   schemetag_1 &lt;chr&gt;, schemetag_1_name &lt;chr&gt;, schemetag_1_shortname &lt;chr&gt;, …</span></code></pre></div>
-<p>When you request all this extra information (some of which is currently empty), you will want to select the columns that you need with <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code>.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span><span class="op">(</span>extended <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 764 × 53</span></span>
+<span><span class="co">#&gt;    scheme  type  typeg…¹ typeg…² typeg…³ schem…⁴ schem…⁵ progr…⁶ progr…⁷ attri…⁸</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  </span></span>
+<span><span class="co">#&gt;  1 ATM_03… 1310… ATM_03… sensit… sensit… Atmosp… ATM: 0… MNE     Monito… ATM    </span></span>
+<span><span class="co">#&gt;  2 ATM_03… 1310… ATM_03… sensit… sensit… Atmosp… ATM: 0… MNE     Monito… ATM    </span></span>
+<span><span class="co">#&gt;  3 ATM_03… 1310… ATM_03… sensit… sensit… Atmosp… ATM: 0… MNE     Monito… ATM    </span></span>
+<span><span class="co">#&gt;  4 ATM_03… 1320  ATM_03… sensit… sensit… Atmosp… ATM: 0… MNE     Monito… ATM    </span></span>
+<span><span class="co">#&gt;  5 ATM_03… 1330… ATM_03… sensit… sensit… Atmosp… ATM: 0… MNE     Monito… ATM    </span></span>
+<span><span class="co">#&gt;  6 ATM_03… 1330… ATM_03… sensit… sensit… Atmosp… ATM: 0… MNE     Monito… ATM    </span></span>
+<span><span class="co">#&gt;  7 ATM_03… 2110  ATM_03… sensit… sensit… Atmosp… ATM: 0… MNE     Monito… ATM    </span></span>
+<span><span class="co">#&gt;  8 ATM_03… 2120  ATM_03… sensit… sensit… Atmosp… ATM: 0… MNE     Monito… ATM    </span></span>
+<span><span class="co">#&gt;  9 ATM_03… 2130… ATM_03… very s… very s… Atmosp… ATM: 0… MNE     Monito… ATM    </span></span>
+<span><span class="co">#&gt; 10 ATM_03… 2130… ATM_03… very s… very s… Atmosp… ATM: 0… MNE     Monito… ATM    </span></span>
+<span><span class="co">#&gt; # … with 754 more rows, 43 more variables: attribute_2 &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   attribute_3 &lt;fct&gt;, attribute_1_name &lt;fct&gt;, attribute_1_shortname &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   attribute_2_name &lt;fct&gt;, attribute_2_shortname &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   attribute_3_name &lt;fct&gt;, attribute_3_shortname &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   spatial_restriction &lt;chr&gt;, notes &lt;chr&gt;, schemetag_1 &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   schemetag_1_name &lt;chr&gt;, schemetag_1_shortname &lt;chr&gt;, schemetag_2 &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   schemetag_2_name &lt;chr&gt;, schemetag_2_shortname &lt;chr&gt;, schemetag_3 &lt;chr&gt;, …</span></span></code></pre></div>
+<p>When you request all this extra information (some of which is
+currently empty), you will want to select the columns that you need with
+<code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code>.</p>
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
-<li id="fn1"><p>With N2KHAB projects, we mean scientific monitoring programmes and research projects regarding Flemish Natura 2000 habitats and regionally important biotopes (RIBs).<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>A ‘scheme’ refers to a monitoring or research setup that determines which types (habitat/RIBs) are to be investigated for a question or for a bunch of related questions.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>With N2KHAB projects, we mean scientific monitoring
+programmes and research projects regarding Flemish Natura 2000 habitats
+and regionally important biotopes (RIBs).<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>A ‘scheme’ refers to a monitoring or research setup that
+determines which types (habitat/RIBs) are to be investigated for a
+question or for a bunch of related questions.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>

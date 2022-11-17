@@ -102,50 +102,89 @@
 <div id="welcome" class="section level2">
 <h2 class="hasAnchor">
 <a href="#welcome" class="anchor"></a>Welcome</h2>
-<p>The <strong>n2khab</strong> R package provides preprocessing functions and standard reference data, supporting <em>reproducible</em> and <em>transparent</em> analyses on Flemish Natura 2000 (<strong>n2k</strong>) habitats (<strong>hab</strong>) and regionally important biotopes (RIBs).</p>
-<p>The package’s core aim is to <strong>provide readily standardized (preprocessed) data</strong> in your R environment. This facilitates collaboration and reproducibility.</p>
-<p>The standard reference data include: checklists, spatial habitat distribution, administrative &amp; environmental layers, GRTSmaster_habitats.</p>
+<p>The <strong>n2khab</strong> R package provides preprocessing
+functions and standard reference data, supporting <em>reproducible</em>
+and <em>transparent</em> analyses on Flemish Natura 2000
+(<strong>n2k</strong>) habitats (<strong>hab</strong>) and regionally
+important biotopes (RIBs).</p>
+<p>The package’s core aim is to <strong>provide readily standardized
+(preprocessed) data</strong> in your R environment. This facilitates
+collaboration and reproducibility.</p>
+<p>The standard reference data include: checklists, spatial habitat
+distribution, administrative &amp; environmental layers,
+GRTSmaster_habitats.</p>
 </div>
 <div id="installing-and-using-the-n2khab-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-and-using-the-n2khab-package" class="anchor"></a>Installing and using the <em>n2khab</em> package</h2>
-<p>To install the current package version from the <code>master</code> branch (latest stable release), run:</p>
+<p>To install the current package version from the <code>master</code>
+branch (latest stable release), run:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"n2khab"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>inbo <span class="op">=</span> <span class="st">"https://inbo.r-universe.dev"</span>, 
-                                     CRAN <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>The above provides a pre-compiled package for Windows and macOS, which should be faster than below approach. INBO staff should have the INBO repository enabled already (check with <code>getOption("repos")</code>), in which case <strong><code>install.packages("n2khab")</code></strong> is all you need!</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"n2khab"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>inbo <span class="op">=</span> <span class="st">"https://inbo.r-universe.dev"</span>, </span>
+<span>                                     CRAN <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>The above provides a pre-compiled package for Windows and macOS,
+which should be faster than below approach. INBO staff should have the
+INBO repository enabled already (check with
+<code>getOption("repos")</code>), in which case
+<strong><code>install.packages("n2khab")</code></strong> is all you
+need!</p>
 <p>If you want to install from the source repository, run:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>R_REMOTES_NO_ERRORS_FROM_WARNINGS <span class="op">=</span> <span class="st">"true"</span><span class="op">)</span> <span class="co"># as a precaution</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"inbo/n2khab"</span>,
-                        build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,
-                        upgrade <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>Note that this will install the package from the <code>master</code> branch. If you need a version from another branch, add the <code>ref</code> argument in the above function to provide the branch name.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>R_REMOTES_NO_ERRORS_FROM_WARNINGS <span class="op">=</span> <span class="st">"true"</span><span class="op">)</span> <span class="co"># as a precaution</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"inbo/n2khab"</span>,</span>
+<span>                        build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                        upgrade <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>Note that this will install the package from the <code>master</code>
+branch. If you need a version from another branch, add the
+<code>ref</code> argument in the above function to provide the branch
+name.</p>
 <p>Repeat the installation when you wish to upgrade.</p>
 <p>Have a look at the vignettes to quickly find your way!</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"n2khab"</span><span class="op">)</span>
-<span class="co"># vignettes only: browseVignettes("n2khab")</span>
-<span class="co"># documentation of whole package: package?n2khab</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"n2khab"</span><span class="op">)</span></span>
+<span><span class="co"># vignettes only: browseVignettes("n2khab")</span></span>
+<span><span class="co"># documentation of whole package: package?n2khab</span></span></code></pre></div>
 <div id="data-setup" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-setup" class="anchor"></a>Data setup</h3>
-<p>Please take note that you must set up the needed data sources as explained in <code><a href="articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> and demonstrated in <code><a href="articles/v022_example.html">vignette("v022_example")</a></code>. There is a major distinction between:</p>
+<p>Please take note that you must set up the needed data sources as
+explained in <code><a href="articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> and demonstrated
+in <code><a href="articles/v022_example.html">vignette("v022_example")</a></code>. There is a major distinction
+between:</p>
 <ul>
 <li>
-<strong>raw data</strong> (<a href="https://zenodo.org/communities/n2khab-data-raw">Zenodo-link</a>), to be stored in a folder <code>n2khab_data/10_raw</code>;</li>
+<strong>raw data</strong> (<a href="https://zenodo.org/communities/n2khab-data-raw">Zenodo-link</a>),
+to be stored in a folder <code>n2khab_data/10_raw</code>;</li>
 <li>
-<strong>processed data</strong> (<a href="https://zenodo.org/communities/n2khab-data-processed">Zenodo-link</a>), to be stored in a folder <code>n2khab_data/20_processed</code>.</li>
+<strong>processed data</strong> (<a href="https://zenodo.org/communities/n2khab-data-processed">Zenodo-link</a>),
+to be stored in a folder <code>n2khab_data/20_processed</code>.</li>
 </ul>
 </div>
 <div id="suppressing-rgdal-warnings-about-proj4string-degradation" class="section level3">
 <h3 class="hasAnchor">
-<a href="#suppressing-rgdal-warnings-about-proj4string-degradation" class="anchor"></a>Suppressing <code>rgdal</code> warnings about proj4string degradation</h3>
-<p>Setting coordinate reference systems (CRS) of geospatial R objects is taken care of by the package, in a way that is compatible with older and current versions of PROJ and GDAL backend libraries. This is done by gratefully implementing such features from the <code>sf</code> and <code>sp</code> packages. The functions never specify a CRS by means of a proj4string, which is an aged format not supported by the current backend versions.</p>
-<p>Please note that nonetheless you will see warnings about degraded proj4strings when using certain <code>n2khab</code> functions or when converting resulting <code>sf</code> objects to <code>sp</code> objects. This is normal! It is the current default behaviour of <code>rgdal</code> to yield these warnings. However in the case of <code>n2khab</code> functions and resulting objects these warnings are trivial and unnecessary. You can suppress them in your R scripts by inserting below statement <em>before</em> loading geospatial packages:</p>
+<a href="#suppressing-rgdal-warnings-about-proj4string-degradation" class="anchor"></a>Suppressing <code>rgdal</code> warnings about proj4string
+degradation</h3>
+<p>Setting coordinate reference systems (CRS) of geospatial R objects is
+taken care of by the package, in a way that is compatible with older and
+current versions of PROJ and GDAL backend libraries. This is done by
+gratefully implementing such features from the <code>sf</code> and
+<code>sp</code> packages. The functions never specify a CRS by means of
+a proj4string, which is an aged format not supported by the current
+backend versions.</p>
+<p>Please note that nonetheless you will see warnings about degraded
+proj4strings when using certain <code>n2khab</code> functions or when
+converting resulting <code>sf</code> objects to <code>sp</code> objects.
+This is normal! It is the current default behaviour of
+<code>rgdal</code> to yield these warnings. However in the case of
+<code>n2khab</code> functions and resulting objects these warnings are
+trivial and unnecessary. You can suppress them in your R scripts by
+inserting below statement <em>before</em> loading geospatial
+packages:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>rgdal_show_exportToProj4_warnings <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
-<p>See <a href="https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/">this</a> tutorial if you would like to learn more about this. In short: <em>don’t</em> use proj4strings to define CRSs!</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>rgdal_show_exportToProj4_warnings <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
+<p>See <a href="https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/">this</a>
+tutorial if you would like to learn more about this. In short:
+<em>don’t</em> use proj4strings to define CRSs!</p>
 </div>
 </div>
 <div id="you-are-welcome-to-contribute" class="section level2">
@@ -156,20 +195,40 @@
 <div id="intention-for-the-future" class="section level2">
 <h2 class="hasAnchor">
 <a href="#intention-for-the-future" class="anchor"></a>Intention for the future</h2>
-<p>At a later date, the intention is to incorporate functionality to enhance workflow reproducibility and ease the setup:</p>
+<p>At a later date, the intention is to incorporate functionality to
+enhance workflow reproducibility and ease the setup:</p>
 <ul>
-<li>let a user declare which versions of which data sources are used in an R workflow (at the beginning of a script or R markdown file);</li>
-<li>perform checks whether the needed versions of those data sources are locally present;</li>
-<li>if missing, download the needed data from the Zenodo collections.</li>
+<li>let a user declare which versions of which data sources are used in
+an R workflow (at the beginning of a script or R markdown file);</li>
+<li>perform checks whether the needed versions of those data sources are
+locally present;</li>
+<li>if missing, download the needed data from the Zenodo
+collections.</li>
 </ul>
-<p>Currently these aspects must be taken care of in a more manual fashion. See <code><a href="articles/v022_example.html">vignette("v022_example")</a></code> for example code to currently accomplish specific aspects.</p>
+<p>Currently these aspects must be taken care of in a more manual
+fashion. See <code><a href="articles/v022_example.html">vignette("v022_example")</a></code> for example code to
+currently accomplish specific aspects.</p>
 </div>
 <div id="background-information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#background-information" class="anchor"></a>Background information</h2>
-<p>From its aim, it follows that the package supports various <em>N2KHAB</em> projects, i.e. projects that focus on Natura 2000 habitat (and which may as well use the <em>n2khab</em>-prefix for their git repository name, such as <a href="https://github.com/inbo/n2khab-monitoring">this one</a>).</p>
-<p>The package is a companion to the <a href="https://github.com/inbo/n2khab-preprocessing">n2khab-preprocessing</a> repo. Beside direct preprocessing functions, <strong>n2khab</strong> provides several functions that return datasets, generated in <code>n2khab-preprocessing</code>, as standardized R-objects. Having processed datasets readily available is useful in the case of time-consuming calculations to produce them.</p>
-<p>The data definitions &amp; standard checklists (reference data) provided by the package are textual files in the <a href="https://ropensci.github.io/git2rdata/index.html">vc-format</a>. Some of them come over from another repository. Others may be written as the result of a synchronization script to give them a start. The code to reproduce these files is inside the <code>misc</code> folder of the <a href="https://github.com/inbo/n2khab">source code</a>. The package provides the necessary functions to return these as standardized tibbles (<code><a href="articles/v010_reference_lists.html">vignette("v010_reference_lists")</a></code>).</p>
+<p>From its aim, it follows that the package supports various
+<em>N2KHAB</em> projects, i.e. projects that focus on Natura 2000
+habitat (and which may as well use the <em>n2khab</em>-prefix for their
+git repository name, such as <a href="https://github.com/inbo/n2khab-monitoring">this one</a>).</p>
+<p>The package is a companion to the <a href="https://github.com/inbo/n2khab-preprocessing">n2khab-preprocessing</a>
+repo. Beside direct preprocessing functions, <strong>n2khab</strong>
+provides several functions that return datasets, generated in
+<code>n2khab-preprocessing</code>, as standardized R-objects. Having
+processed datasets readily available is useful in the case of
+time-consuming calculations to produce them.</p>
+<p>The data definitions &amp; standard checklists (reference data)
+provided by the package are textual files in the <a href="https://ropensci.github.io/git2rdata/index.html">vc-format</a>.
+Some of them come over from another repository. Others may be written as
+the result of a synchronization script to give them a start. The code to
+reproduce these files is inside the <code>misc</code> folder of the <a href="https://github.com/inbo/n2khab">source code</a>. The package
+provides the necessary functions to return these as standardized tibbles
+(<code><a href="articles/v010_reference_lists.html">vignette("v010_reference_lists")</a></code>).</p>
 </div>
 
   </div>

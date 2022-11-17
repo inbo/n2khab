@@ -163,16 +163,16 @@ Given the size of these data sources (especially the raw one), this function
 takes a bit longer than usual to run.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_soilmap</span><span class='op'>(</span>
-  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,
-    <span class='st'>"20_processed/soilmap_simple/soilmap_simple.gpkg"</span><span class='op'>)</span>,
-  file_raw <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/soilmap"</span><span class='op'>)</span>,
-  use_processed <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  version_processed <span class='op'>=</span> <span class='st'>"soilmap_simple_v2"</span>,
-  standardize_coastalplain <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  simplify <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  explan <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span><span class='fu'>read_soilmap</span><span class='op'>(</span></span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,</span>
+<span>    <span class='st'>"20_processed/soilmap_simple/soilmap_simple.gpkg"</span><span class='op'>)</span>,</span>
+<span>  file_raw <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/soilmap"</span><span class='op'>)</span>,</span>
+<span>  use_processed <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
+<span>  version_processed <span class='op'>=</span> <span class='st'>"soilmap_simple_v2"</span>,</span>
+<span>  standardize_coastalplain <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span>  simplify <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span>  explan <span class='op'>=</span> <span class='cn'>FALSE</span></span>
+<span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -417,25 +417,25 @@ voor Bodemkunde, Ghent, 361 p. URL: <a href='http://hdl.handle.net/1854/LU-12589
 <code><a href='read_watersurfaces.html'>read_watersurfaces</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='co'># This example supposes that your working directory or a directory up to 10</span></span>
-<span class='r-in'><span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span></span>
-<span class='r-in'><span class='co'># the 'soilmap_simple'</span></span>
-<span class='r-in'><span class='co'># data source is present in the default subdirectory.</span></span>
-<span class='r-in'><span class='co'># In all other cases, this example won't work but at least you can</span></span>
-<span class='r-in'><span class='co'># consider what to do.</span></span>
-<span class='r-in'></span>
-<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>soilmap_simple</span> <span class='op'>&lt;-</span> <span class='fu'>read_soilmap</span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>soilmap_simple</span></span>
-<span class='r-in'><span class='va'>soilmap_simple</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span class='r-in'>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>bsm_mo_substr</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span class='r-in'>  <span class='va'>glimpse</span></span>
-<span class='r-in'><span class='va'>soilmap_simple</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span class='r-in'>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>bsm_converted</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span class='r-in'>  <span class='va'>glimpse</span></span>
-<span class='r-in'><span class='op'>}</span></span>
-<span class='r-in'></span>
+    <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>
+<span class='r-in'><span><span class='co'># This example supposes that your working directory or a directory up to 10</span></span></span>
+<span class='r-in'><span><span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span></span></span>
+<span class='r-in'><span><span class='co'># the 'soilmap_simple'</span></span></span>
+<span class='r-in'><span><span class='co'># data source is present in the default subdirectory.</span></span></span>
+<span class='r-in'><span><span class='co'># In all other cases, this example won't work but at least you can</span></span></span>
+<span class='r-in'><span><span class='co'># consider what to do.</span></span></span>
+<span class='r-in'><span></span></span>
+<span class='r-in'><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>soilmap_simple</span> <span class='op'>&lt;-</span> <span class='fu'>read_soilmap</span><span class='op'>(</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>soilmap_simple</span></span></span>
+<span class='r-in'><span><span class='va'>soilmap_simple</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span></span>
+<span class='r-in'><span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>bsm_mo_substr</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span></span>
+<span class='r-in'><span>  <span class='va'>glimpse</span></span></span>
+<span class='r-in'><span><span class='va'>soilmap_simple</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span></span>
+<span class='r-in'><span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>bsm_converted</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span></span>
+<span class='r-in'><span>  <span class='va'>glimpse</span></span></span>
+<span class='r-in'><span><span class='op'>}</span></span></span>
+<span class='r-in'><span></span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

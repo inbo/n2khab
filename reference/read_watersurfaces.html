@@ -152,11 +152,11 @@ as a standardized <code>sf</code> polygon layer
 (EPSG-code <a href='https://epsg.io/31370'>31370</a>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_watersurfaces</span><span class='op'>(</span>
-  file <span class='op'>=</span> <span class='cn'>NULL</span>,
-  extended <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_v1.1"</span>, <span class='st'>"watersurfaces_v1.0"</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span><span class='fu'>read_watersurfaces</span><span class='op'>(</span></span>
+<span>  file <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>  extended <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_v1.1"</span>, <span class='st'>"watersurfaces_v1.0"</span><span class='op'>)</span></span>
+<span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -249,21 +249,21 @@ Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
 <code><a href='read_watercourse_100mseg.html'>read_watercourse_100mseg</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='co'># This example supposes that your working directory or a directory up to 10</span></span>
-<span class='r-in'><span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span></span>
-<span class='r-in'><span class='co'># the 'watersurfaces' data source is present in the default subdirectory.</span></span>
-<span class='r-in'><span class='co'># In all other cases, this example won't work but at least you can</span></span>
-<span class='r-in'><span class='co'># consider what to do.</span></span>
-<span class='r-in'></span>
-<span class='r-in'><span class='va'>ws</span> <span class='op'>&lt;-</span> <span class='fu'>read_watersurfaces</span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>ws</span></span>
-<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>ws</span><span class='op'>)</span></span>
-<span class='r-in'></span>
-<span class='r-in'><span class='va'>ws2</span> <span class='op'>&lt;-</span> <span class='fu'>read_watersurfaces</span><span class='op'>(</span>extended <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>ws2</span></span>
-<span class='r-in'><span class='op'>}</span></span>
-<span class='r-in'></span>
+    <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>
+<span class='r-in'><span><span class='co'># This example supposes that your working directory or a directory up to 10</span></span></span>
+<span class='r-in'><span><span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span></span></span>
+<span class='r-in'><span><span class='co'># the 'watersurfaces' data source is present in the default subdirectory.</span></span></span>
+<span class='r-in'><span><span class='co'># In all other cases, this example won't work but at least you can</span></span></span>
+<span class='r-in'><span><span class='co'># consider what to do.</span></span></span>
+<span class='r-in'><span></span></span>
+<span class='r-in'><span><span class='va'>ws</span> <span class='op'>&lt;-</span> <span class='fu'>read_watersurfaces</span><span class='op'>(</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>ws</span></span></span>
+<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>ws</span><span class='op'>)</span></span></span>
+<span class='r-in'><span></span></span>
+<span class='r-in'><span><span class='va'>ws2</span> <span class='op'>&lt;-</span> <span class='fu'>read_watersurfaces</span><span class='op'>(</span>extended <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>ws2</span></span></span>
+<span class='r-in'><span><span class='op'>}</span></span></span>
+<span class='r-in'><span></span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

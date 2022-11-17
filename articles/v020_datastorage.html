@@ -92,10 +92,11 @@
 
       
 
-      </header><script src="v020_datastorage_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><script src="v020_datastorage_files/header-attrs-2.18/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Where to store the N2KHAB input data sources</h1>
+      <h1 data-toc-skip>Where to store the N2KHAB input data
+sources</h1>
                         <h4 class="author">Floris Vanderhaeghe</h4>
             
             <h4 class="date">2019-08-02</h4>
@@ -111,68 +112,144 @@
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>For a practical recipe to setup <code>n2khab_data</code>, go to <a href="#getting-started">Getting started</a>.</p>
-<p>See <code><a href="../articles/v022_example.html">vignette("v022_example")</a></code> if you’d like to be guided by a hands-on example.</p>
+<p>See <code><a href="../articles/v022_example.html">vignette("v022_example")</a></code> if you’d like to be guided
+by a hands-on example.</p>
 <div id="distribution-of-the-data-sources-used-by-n2khab-functions" class="section level3">
 <h3 class="hasAnchor">
-<a href="#distribution-of-the-data-sources-used-by-n2khab-functions" class="anchor"></a>Distribution of the data sources used by <code>n2khab</code> functions</h3>
-<p>Apart from several textual datasets, provided directly with this package, other N2KHAB data sources <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> are binary or large data. Those are made available through cloud-based infrastructure, preserved for the future at least via Zenodo (see below).<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> An overview of data distribution pathways is given <a href="https://drive.google.com/file/d/1xZz9f9n8zSUxBJvW6WEFLyDK7Ya0u4iN/view">here</a>.</p>
+<a href="#distribution-of-the-data-sources-used-by-n2khab-functions" class="anchor"></a>Distribution of the data sources used by <code>n2khab</code>
+functions</h3>
+<p>Apart from several textual datasets, provided directly with this
+package, other N2KHAB data sources <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> are binary or large data. Those are made
+available through cloud-based infrastructure, preserved for the future
+at least via Zenodo (see below).<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> An overview of data distribution pathways
+is given <a href="https://drive.google.com/file/d/1xZz9f9n8zSUxBJvW6WEFLyDK7Ya0u4iN/view">here</a>.</p>
 </div>
 <div id="more-about-zenodo" class="section level3">
 <h3 class="hasAnchor">
 <a href="#more-about-zenodo" class="anchor"></a>More about Zenodo</h3>
-<p><strong><a href="https://zenodo.org">Zenodo</a></strong> is a scientific repository funded by the European Commission and hosted at CERN.</p>
+<p><strong><a href="https://zenodo.org">Zenodo</a></strong> is a
+scientific repository funded by the European Commission and hosted at
+CERN.</p>
 <ul>
-<li>We prefer Zenodo for its straightforward, easy approach of preserving data sources for the <strong>long term</strong> – needed for reproducibility – while providing a stable <strong>DOI</strong> link for each version and for each record as whole.</li>
-<li>Managing the N2KHAB data sources at Zenodo allowed us to apply <em>a uniform and pure representation</em> of each data source: we made <em>one</em> data version correspond to <em>one</em> data set following <em>one</em> fileformat (not zipped); we add no other files (e.g. metadata files like pdf’s, alternative fileformats etc.). The filenames in these Zenodo records follow the codes of the data sources that are used in the <code>n2khab</code> package.</li>
-<li>Zenodo storage nicely fits with an internationalized approach of reproducible N2KHAB workflows in R, as its website is in English.</li>
+<li>We prefer Zenodo for its straightforward, easy approach of
+preserving data sources for the <strong>long term</strong> – needed for
+reproducibility – while providing a stable <strong>DOI</strong> link for
+each version and for each record as whole.</li>
+<li>Managing the N2KHAB data sources at Zenodo allowed us to apply <em>a
+uniform and pure representation</em> of each data source: we made
+<em>one</em> data version correspond to <em>one</em> data set following
+<em>one</em> fileformat (not zipped); we add no other files
+(e.g. metadata files like pdf’s, alternative fileformats etc.). The
+filenames in these Zenodo records follow the codes of the data sources
+that are used in the <code>n2khab</code> package.</li>
+<li>Zenodo storage nicely fits with an internationalized approach of
+reproducible N2KHAB workflows in R, as its website is in English.</li>
 </ul>
 </div>
 <div id="local-data-storage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#local-data-storage" class="anchor"></a>Local data storage</h3>
-<p>Data sources evolve, and hence, data source versions succeed one another. To ease reproducibility of analytical workflows, this package assumes <em>locally stored</em> data sources.</p>
-<p>The <code>n2khab</code> functions, aimed at reading these data and returning them in R in some kind of standardized way, always provide <em>arguments</em> to specify the file’s name and location – so you can in fact freely choose these. However, to <strong>ease collaboration in scripting</strong>, it is highly recommended to follow the below standard locations and filenames (see: <a href="#getting-started">Getting started</a>). Moreover, the <em>functions assume</em> these conventions by default in order to make your life easier!</p>
+<p>Data sources evolve, and hence, data source versions succeed one
+another. To ease reproducibility of analytical workflows, this package
+assumes <em>locally stored</em> data sources.</p>
+<p>The <code>n2khab</code> functions, aimed at reading these data and
+returning them in R in some kind of standardized way, always provide
+<em>arguments</em> to specify the file’s name and location – so you can
+in fact freely choose these. However, to <strong>ease collaboration in
+scripting</strong>, it is highly recommended to follow the below
+standard locations and filenames (see: <a href="#getting-started">Getting started</a>). Moreover, the
+<em>functions assume</em> these conventions by default in order to make
+your life easier!</p>
 <p>There is a major distinction between:</p>
 <ul>
 <li>
-<strong>raw data</strong> (<a href="https://zenodo.org/communities/n2khab-data-raw">Zenodo-link</a>), to be stored in a folder <code>n2khab_data/10_raw</code>;</li>
+<strong>raw data</strong> (<a href="https://zenodo.org/communities/n2khab-data-raw">Zenodo-link</a>),
+to be stored in a folder <code>n2khab_data/10_raw</code>;</li>
 <li>
-<strong>processed data</strong> (<a href="https://zenodo.org/communities/n2khab-data-processed">Zenodo-link</a>), to be stored in a folder <code>n2khab_data/20_processed</code>. These data sources have been derived from the raw data sources, but are distributed on their own because of the time-consuming or intricate calculations needed to reproduce them.</li>
+<strong>processed data</strong> (<a href="https://zenodo.org/communities/n2khab-data-processed">Zenodo-link</a>),
+to be stored in a folder <code>n2khab_data/20_processed</code>. These
+data sources have been derived from the raw data sources, but are
+distributed on their own because of the time-consuming or intricate
+calculations needed to reproduce them.</li>
 </ul>
-<p>You can reproduce the processed data sources from a <a href="https://github.com/inbo/n2khab-preprocessing/blob/master/src/complete_reproducible_workflow.sh">shell script on Github</a>, but it will take hours.</p>
-<p>As you see, when storing these binary or large data, we avoid using a folder named as <code>data</code>:</p>
+<p>You can reproduce the processed data sources from a <a href="https://github.com/inbo/n2khab-preprocessing/blob/master/src/complete_reproducible_workflow.sh">shell
+script on Github</a>, but it will take hours.</p>
+<p>As you see, when storing these binary or large data, we avoid using a
+folder named as <code>data</code>:</p>
 <ul>
-<li>the <code>n2khab_data</code> name is better fit when the folder does not sit inside one project or repository (see further) but instead delivers to several projects / repositories.</li>
-<li>within a project or repository, the specific name keeps it separate from a project-specific <code>data</code> folder with locally generated or extra needed input data, part or all of which is to be version-controlled, and which may use its own substructure. <code>n2khab_data</code> should always be ignored by version control systems.</li>
-<li>it works better for the <code>n2khab</code> functions to automatically detect the right location when using a more special name.</li>
+<li>the <code>n2khab_data</code> name is better fit when the folder does
+not sit inside one project or repository (see further) but instead
+delivers to several projects / repositories.</li>
+<li>within a project or repository, the specific name keeps it separate
+from a project-specific <code>data</code> folder with locally generated
+or extra needed input data, part or all of which is to be
+version-controlled, and which may use its own substructure.
+<code>n2khab_data</code> should always be ignored by version control
+systems.</li>
+<li>it works better for the <code>n2khab</code> functions to
+automatically detect the right location when using a more special
+name.</li>
 </ul>
 </div>
 </div>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started for your (collaborative) workflow</h2>
-<p>Mind that, <em>if</em> you store the <code>n2khab_data</code> folder inside a version controlled repository (e.g. using git), it must be <strong>ignored by version control</strong>!</p>
+<p>Mind that, <em>if</em> you store the <code>n2khab_data</code> folder
+inside a version controlled repository (e.g. using git), it must be
+<strong>ignored by version control</strong>!</p>
 <ol style="list-style-type: decimal">
 <li>
-<p>Decide <strong>where</strong> you want to store the <code>n2khab_data</code> folder:</p>
+<p>Decide <strong>where</strong> you want to store the
+<code>n2khab_data</code> folder:</p>
 <ul>
-<li>from the viewpoint of several projects / several git repositories, when these need the same data source versions, the location may be at a high level in your file system. A convenient approach is to use the folder which holds the different project folders / repositories.</li>
-<li>from the viewpoint of one project / repository: the <code>n2khab_data</code> folder can be put inside the project / repository folder. This approach has the advantage that you can store versions of data sources different from those in another repository (where you also have an <code>n2khab_data</code> folder).</li>
+<li>from the viewpoint of several projects / several git repositories,
+when these need the same data source versions, the location may be at a
+high level in your file system. A convenient approach is to use the
+folder which holds the different project folders / repositories.</li>
+<li>from the viewpoint of one project / repository: the
+<code>n2khab_data</code> folder can be put inside the project /
+repository folder. This approach has the advantage that you can store
+versions of data sources different from those in another repository
+(where you also have an <code>n2khab_data</code> folder).</li>
 </ul>
-<p>For the functions to succeed in finding the <code>n2khab_data</code> folder in each collaborator’s file system, make sure that the folder is present <em>either in the working directory of your R scripts or in a path 1 up to 10 levels above this working directory</em>. By default, the functions search the folder in that order and use the <strong>first encountered</strong> <code>n2khab_data</code> folder. (Otherwise, you would need to actively set the path to the data folder with the <code>path</code> argument in each function call.)</p>
+<p>For the functions to succeed in finding the <code>n2khab_data</code>
+folder in each collaborator’s file system, make sure that the folder is
+present <em>either in the working directory of your R scripts or in a
+path 1 up to 10 levels above this working directory</em>. By default,
+the functions search the folder in that order and use the <strong>first
+encountered</strong> <code>n2khab_data</code> folder. (Otherwise, you
+would need to actively set the path to the data folder with the
+<code>path</code> argument in each function call.)</p>
 </li>
-<li><p>From your working directory, use <code><a href="../reference/fileman_folders.html">fileman_folders()</a></code> to specify the desired location (using the function’s arguments). It will check the existence of the folders <code>n2khab_data</code>, <code>n2khab_data/10_raw</code> and <code>n2khab_data/20_processed</code> and create them if they don’t exist.</p></li>
+<li><p>From your working directory, use <code><a href="../reference/fileman_folders.html">fileman_folders()</a></code>
+to specify the desired location (using the function’s arguments). It
+will check the existence of the folders <code>n2khab_data</code>,
+<code>n2khab_data/10_raw</code> and
+<code>n2khab_data/20_processed</code> and create them if they don’t
+exist.</p></li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fileman_folders.html">fileman_folders</a></span><span class="op">(</span>root <span class="op">=</span> <span class="st">"rproj"</span><span class="op">)</span>
-<span class="co">#&gt; Created &lt;clipped_path_prefix&gt;/n2khab_data</span>
-<span class="co">#&gt; Created subfolder 10_raw</span>
-<span class="co">#&gt; Created subfolder 20_processed</span>
-<span class="co">#&gt; [1] "&lt;clipped_path_prefix&gt;/n2khab_data"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fileman_folders.html">fileman_folders</a></span><span class="op">(</span>root <span class="op">=</span> <span class="st">"rproj"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Created &lt;clipped_path_prefix&gt;/n2khab_data</span></span>
+<span><span class="co">#&gt; Created subfolder 10_raw</span></span>
+<span><span class="co">#&gt; Created subfolder 20_processed</span></span>
+<span><span class="co">#&gt; [1] "&lt;clipped_path_prefix&gt;/n2khab_data"</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>
-<p>From the cloud storage (links: <a href="https://zenodo.org/communities/n2khab-data-raw">raw data</a> | <a href="https://zenodo.org/communities/n2khab-data-processed">processed data</a>), <strong>download</strong> the respective data files of a data source. You can also use the function <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> to do that, using the DOI of each data source version. For each data source, put its file(s) in an appropriate subfolder either below <code>n2khab_data/10_raw</code> or <code>n2khab_data/20_processed</code> (depending on the data source). Use the data source’s default name for the subfolder. You get a list of the data source names with <em>XXX</em>. These names are version-agnostic! The names of the <code>n2khab</code> ‘read’ function and their documentation make clear which data sources you will need.</p>
-<p>Below is an example of correctly organised N2KHAB data folders:</p>
+<p>From the cloud storage (links: <a href="https://zenodo.org/communities/n2khab-data-raw">raw data</a> | <a href="https://zenodo.org/communities/n2khab-data-processed">processed
+data</a>), <strong>download</strong> the respective data files of a data
+source. You can also use the function <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> to
+do that, using the DOI of each data source version. For each data
+source, put its file(s) in an appropriate subfolder either below
+<code>n2khab_data/10_raw</code> or <code>n2khab_data/20_processed</code>
+(depending on the data source). Use the data source’s default name for
+the subfolder. You get a list of the data source names with
+<em>XXX</em>. These names are version-agnostic! The names of the
+<code>n2khab</code> ‘read’ function and their documentation make clear
+which data sources you will need.</p>
+<p>Below is an example of correctly organised N2KHAB data
+folders:</p>
 </li>
 </ol>
 <pre><code>n2khab_data
@@ -184,11 +261,15 @@
           ├── habitatmap_stdized
           └── GRTSmh_diffres</code></pre>
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
-<li id="fn1"><p>N2KHAB data sources are a list of public, standard data sources, important to analytical workflows concerning Natura 2000 (n2k) habitats (hab) in Flanders. They are in a public repository in order to be easily findable and to be preserved in a durable way.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p> This also means that several previously published (<a href="https://opendefinition.org/licenses/">open</a>) data sources have been publicly redistributed at Zenodo.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>N2KHAB data sources are a list of public, standard data
+sources, important to analytical workflows concerning Natura 2000 (n2k)
+habitats (hab) in Flanders. They are in a public repository in order to
+be easily findable and to be preserved in a durable way.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p> This also means that several previously published (<a href="https://opendefinition.org/licenses/">open</a>) data sources have
+been publicly redistributed at Zenodo.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>

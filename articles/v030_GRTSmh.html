@@ -92,7 +92,7 @@
 
       
 
-      </header><script src="v030_GRTSmh_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><script src="v030_GRTSmh_files/header-attrs-2.18/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using the GRTS data sources</h1>
@@ -107,38 +107,79 @@
 
     
     
-<p><em>General note: the below vignette contains frozen output of 29 May 2019.</em> <em>This makes it possible to build the package with vignettes without access to the data sources.</em></p>
+<p><em>General note: the below vignette contains frozen output of 29 May
+2019.</em> <em>This makes it possible to build the package with
+vignettes without access to the data sources.</em></p>
 <div id="intro" class="section level2">
 <h2 class="hasAnchor">
 <a href="#intro" class="anchor"></a>Intro</h2>
-<p>With this vignette, you get acquainted with three functions that usually return a RasterLayer or a RasterBrick:</p>
+<p>With this vignette, you get acquainted with three functions that
+usually return a RasterLayer or a RasterBrick:</p>
 <ul>
 <li><code><a href="../reference/read_GRTSmh.html">read_GRTSmh()</a></code></li>
 <li><code><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac()</a></code></li>
 <li><code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code></li>
 </ul>
-<p>The data source <code>GRTSmaster_habitats</code>, provided and documented in <a href="https://doi.org/10.5281/zenodo.2611233">Zenodo</a>, is a monolayered GeoTIFF file covering the whole of Flanders and the Brussels Capital Region at a resolution of 32 m. Its values are unique decimal integer ranking numbers from the GRTS algorithm applied to the Flemish and Brussels area. Beware that not all GRTS ranking numbers are present in the data source, as the original GRTS raster has been clipped with the Flemish outer borders (i.e., not excluding the Brussels Capital Region).</p>
-<p>The GRTS algorithm uses a quadrant-recursive, hierarchically randomized function that maps the unit square to the unit interval, resulting in a base-4 GRTS address for each location. The ranking numbers in <code>GRTSmaster_habitats</code> are base-10 numbers and follow the reverse hierarchical order: <strong>each consecutive subset</strong> of ranking numbers corresponds to a <strong>spatially balanced</strong> sample of locations. Hence, it allows <strong>dynamical</strong> sample sizes. More information on the GRTS algorithm can be found in <span class="citation">Stevens and Olsen (2003, 2004)</span> and in the <a href="https://github.com/ThierryO/grts">GRTS</a> and <a href="https://CRAN.R-project.org/package=spsurvey">spsurvey</a> packages.</p>
+<p>The data source <code>GRTSmaster_habitats</code>, provided and
+documented in <a href="https://doi.org/10.5281/zenodo.2611233">Zenodo</a>, is a
+monolayered GeoTIFF file covering the whole of Flanders and the Brussels
+Capital Region at a resolution of 32 m. Its values are unique decimal
+integer ranking numbers from the GRTS algorithm applied to the Flemish
+and Brussels area. Beware that not all GRTS ranking numbers are present
+in the data source, as the original GRTS raster has been clipped with
+the Flemish outer borders (i.e., not excluding the Brussels Capital
+Region).</p>
+<p>The GRTS algorithm uses a quadrant-recursive, hierarchically
+randomized function that maps the unit square to the unit interval,
+resulting in a base-4 GRTS address for each location. The ranking
+numbers in <code>GRTSmaster_habitats</code> are base-10 numbers and
+follow the reverse hierarchical order: <strong>each consecutive
+subset</strong> of ranking numbers corresponds to a <strong>spatially
+balanced</strong> sample of locations. Hence, it allows
+<strong>dynamical</strong> sample sizes. More information on the GRTS
+algorithm can be found in <span class="citation">Stevens and Olsen
+(2003, 2004)</span> and in the <a href="https://github.com/ThierryO/grts">GRTS</a> and <a href="https://CRAN.R-project.org/package=spsurvey">spsurvey</a>
+packages.</p>
 </div>
 <div id="data-sources" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-sources" class="anchor"></a>Data sources</h2>
 <p>The following data sources are available:</p>
 <ul>
-<li>the raw data source <code>GRTSmaster_habitats</code>, discussed above and available at <a href="https://doi.org/10.5281/zenodo.2611233">Zenodo</a>
+<li>the raw data source <code>GRTSmaster_habitats</code>, discussed
+above and available at <a href="https://doi.org/10.5281/zenodo.2611233">Zenodo</a>
 </li>
 <li>processed data sources:
 <ul>
 <li>
-<code>GRTSmh_brick</code> (<a href="https://doi.org/10.5281/zenodo.3354403">Zenodo-link</a>): 10-layered GeoTIFF with the decimal integer ranking numbers of 10 hierarchical levels (0 - 9) of the GRTS cell addresses, including the one from <code>GRTSmaster_habitats</code> (i.e. level 0; for more details see the <code><a href="../reference/read_GRTSmh.html">read_GRTSmh()</a></code> documentation)</li>
+<code>GRTSmh_brick</code> (<a href="https://doi.org/10.5281/zenodo.3354403">Zenodo-link</a>):
+10-layered GeoTIFF with the decimal integer ranking numbers of 10
+hierarchical levels (0 - 9) of the GRTS cell addresses, including the
+one from <code>GRTSmaster_habitats</code> (i.e. level 0; for more
+details see the <code><a href="../reference/read_GRTSmh.html">read_GRTSmh()</a></code> documentation)</li>
 <li>
-<code>GRTSmh_diffres</code> (<a href="https://doi.org/10.5281/zenodo.3354405">Zenodo-link</a>): file collection composed of nine monolayered GeoTIFF files plus a GeoPackage with six polygon layers. They provide the hierarchical levels 1 to 9 of the <code>GRTSmh_brick</code> data source at the corresponding spatial resolution, i.e. at lower resolutions than <code>GRTSmaster_habitats</code> (for more details see the <code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code> documentation)</li>
+<code>GRTSmh_diffres</code> (<a href="https://doi.org/10.5281/zenodo.3354405">Zenodo-link</a>): file
+collection composed of nine monolayered GeoTIFF files plus a GeoPackage
+with six polygon layers. They provide the hierarchical levels 1 to 9 of
+the <code>GRTSmh_brick</code> data source at the corresponding spatial
+resolution, i.e. at lower resolutions than
+<code>GRTSmaster_habitats</code> (for more details see the
+<code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code> documentation)</li>
 <li>
-<code>GRTSmh_base4frac</code> (<a href="https://doi.org/10.5281/zenodo.3354401">Zenodo-link</a>): is like a mirror to <code>GRTSmaster_habitats</code>, holding the ranking numbers as base 4 fractions. These are numbers like <code>0.3213210231312</code>, representing the reverse-ordered base-4 GRTS address behind the decimal mark: the digit for level 0 is 2, for level 1 it is 1, …, for level 13 it is 3). Hence, it is a direct representation of the hierarchical GRTS addresses, allowing the derivation of other datasets. More details are in the <code><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac()</a></code> documentation.</li>
+<code>GRTSmh_base4frac</code> (<a href="https://doi.org/10.5281/zenodo.3354401">Zenodo-link</a>): is like
+a mirror to <code>GRTSmaster_habitats</code>, holding the ranking
+numbers as base 4 fractions. These are numbers like
+<code>0.3213210231312</code>, representing the reverse-ordered base-4
+GRTS address behind the decimal mark: the digit for level 0 is 2, for
+level 1 it is 1, …, for level 13 it is 3). Hence, it is a direct
+representation of the hierarchical GRTS addresses, allowing the
+derivation of other datasets. More details are in the
+<code><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac()</a></code> documentation.</li>
 </ul>
 </li>
 </ul>
-<p>For more information on data storage and locations, see <code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code>.</p>
+<p>For more information on data storage and locations, see
+<code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code>.</p>
 </div>
 <div id="get-the-data-in-r" class="section level2">
 <h2 class="hasAnchor">
@@ -146,36 +187,52 @@
 <div id="read_grtsmh" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read_grtsmh" class="anchor"></a>read_GRTSmh()</h3>
-<p>In the below R code, it is supposed that a <code>n2khab_data</code> folder is present in the current directory or up to 10 levels higher. See the <code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> for more information.</p>
-<p><code><a href="../reference/read_GRTSmh.html">read_GRTSmh()</a></code> by default returns the <code>GRTSmaster_habitats</code> dataset:</p>
+<p>In the below R code, it is supposed that a <code>n2khab_data</code>
+folder is present in the current directory or up to 10 levels higher.
+See the <code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> for more
+information.</p>
+<p><code><a href="../reference/read_GRTSmh.html">read_GRTSmh()</a></code> by default returns the
+<code>GRTSmaster_habitats</code> dataset:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; class      : RasterLayer </span>
-<span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span>
-<span class="co">#&gt; resolution : 32, 32  (x, y)</span>
-<span class="co">#&gt; extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)</span>
-<span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span>
-<span class="co">#&gt; source     : [...]/n2khab_data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif </span>
-<span class="co">#&gt; names      : GRTSmaster_habitats </span>
-<span class="co">#&gt; values     : 1, 67108857  (min, max)</span></code></pre></div>
-<p>With the argument <code>brick = TRUE</code> however, you will get the <code>GRTSmh_brick</code> data source, i.e. <code>GRTSmaster_habitats</code> plus 9 extra layers:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; class      : RasterLayer </span></span>
+<span><span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span></span>
+<span><span class="co">#&gt; resolution : 32, 32  (x, y)</span></span>
+<span><span class="co">#&gt; extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></span>
+<span><span class="co">#&gt; source     : [...]/n2khab_data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif </span></span>
+<span><span class="co">#&gt; names      : GRTSmaster_habitats </span></span>
+<span><span class="co">#&gt; values     : 1, 67108857  (min, max)</span></span></code></pre></div>
+<p>With the argument <code>brick = TRUE</code> however, you will get the
+<code>GRTSmh_brick</code> data source,
+i.e. <code>GRTSmaster_habitats</code> plus 9 extra layers:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span><span class="op">(</span>brick <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; class      : RasterBrick </span>
-<span class="co">#&gt; dimensions : 2843, 7401, 21041043, 10  (nrow, ncol, ncell, nlayers)</span>
-<span class="co">#&gt; resolution : 32, 32  (x, y)</span>
-<span class="co">#&gt; extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)</span>
-<span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span>
-<span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_brick/GRTSmh_brick.tif </span>
-<span class="co">#&gt; names      :   level0,   level1,   level2,   level3,   level4,   level5,   level6,   level7,   level8,   level9 </span>
-<span class="co">#&gt; min values :        1,        1,        1,        1,        1,        1,        1,        1,        1,        1 </span>
-<span class="co">#&gt; max values : 67108857, 16777209,  4194297,  1048569,   262137,    65529,    16377,     4089,     1017,      253</span></code></pre></div>
-<p>The higher-level ranking numbers of the RasterBrick allow spatially balanced samples at lower spatial resolution than that of 32 m, and can also be used for aggregation purposes. The provided hierarchical levels correspond to the resolution vector <code>32 * 2^(0:9)</code> (minimum: 32 meters, maximum: 16384 meters), with the corresponding RasterBrick layers named as <code>level0</code> to <code>level9</code>.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span><span class="op">(</span>brick <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; class      : RasterBrick </span></span>
+<span><span class="co">#&gt; dimensions : 2843, 7401, 21041043, 10  (nrow, ncol, ncell, nlayers)</span></span>
+<span><span class="co">#&gt; resolution : 32, 32  (x, y)</span></span>
+<span><span class="co">#&gt; extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></span>
+<span><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_brick/GRTSmh_brick.tif </span></span>
+<span><span class="co">#&gt; names      :   level0,   level1,   level2,   level3,   level4,   level5,   level6,   level7,   level8,   level9 </span></span>
+<span><span class="co">#&gt; min values :        1,        1,        1,        1,        1,        1,        1,        1,        1,        1 </span></span>
+<span><span class="co">#&gt; max values : 67108857, 16777209,  4194297,  1048569,   262137,    65529,    16377,     4089,     1017,      253</span></span></code></pre></div>
+<p>The higher-level ranking numbers of the RasterBrick allow spatially
+balanced samples at lower spatial resolution than that of 32 m, and can
+also be used for aggregation purposes. The provided hierarchical levels
+correspond to the resolution vector <code>32 * 2^(0:9)</code> (minimum:
+32 meters, maximum: 16384 meters), with the corresponding RasterBrick
+layers named as <code>level0</code> to <code>level9</code>.</p>
 </div>
 <div id="read_grtsmh_diffres" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read_grtsmh_diffres" class="anchor"></a>read_GRTSmh_diffres()</h3>
-<p><code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code> by default returns one RasterLayer from the <code>GRTSmh_diffres</code> data source, i.e. with the GRTS ranking numbers of the user-specified hierarchical level. This is done <em>at the corresponding spatial resolution</em> of the GRTS algorithm, which is the fundamental distinction from <code>read_GRTSmh(brick = TRUE)</code>.</p>
+<p><code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code> by default returns one RasterLayer
+from the <code>GRTSmh_diffres</code> data source, i.e. with the GRTS
+ranking numbers of the user-specified hierarchical level. This is done
+<em>at the corresponding spatial resolution</em> of the GRTS algorithm,
+which is the fundamental distinction from
+<code>read_GRTSmh(brick = TRUE)</code>.</p>
 <p>The resolutions of each level are the following (in meters):</p>
 <table class="table">
 <thead><tr class="header">
@@ -223,54 +280,61 @@
 </table>
 <p>An example with level 5:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-<span class="co">#&gt; class      : RasterLayer </span>
-<span class="co">#&gt; dimensions : 89, 232, 20648  (nrow, ncol, ncell)</span>
-<span class="co">#&gt; resolution : 1024, 1024  (x, y)</span>
-<span class="co">#&gt; extent     : 22030, 259598, 153054, 244190  (xmin, xmax, ymin, ymax)</span>
-<span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span>
-<span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif </span>
-<span class="co">#&gt; names      : level5 </span>
-<span class="co">#&gt; values     : 1, 65529  (min, max)</span></code></pre></div>
-<p>Alternatively, a dissolved, polygonized variant of the corresponding <code>GRTSmh_brick</code> level can be returned as an <code>sf</code> object. In order not to inflate the data source, this was only made available for levels 4 to 9.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; class      : RasterLayer </span></span>
+<span><span class="co">#&gt; dimensions : 89, 232, 20648  (nrow, ncol, ncell)</span></span>
+<span><span class="co">#&gt; resolution : 1024, 1024  (x, y)</span></span>
+<span><span class="co">#&gt; extent     : 22030, 259598, 153054, 244190  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></span>
+<span><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif </span></span>
+<span><span class="co">#&gt; names      : level5 </span></span>
+<span><span class="co">#&gt; values     : 1, 65529  (min, max)</span></span></code></pre></div>
+<p>Alternatively, a dissolved, polygonized variant of the corresponding
+<code>GRTSmh_brick</code> level can be returned as an <code>sf</code>
+object. In order not to inflate the data source, this was only made
+available for levels 4 to 9.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">5</span>, polygon <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 13791 features and 1 field</span>
-<span class="co">#&gt; geometry type:  POLYGON</span>
-<span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 22029.59 ymin: 153054.1 xmax: 258861.6 ymax: 244030.1</span>
-<span class="co">#&gt; epsg (SRID):    31370</span>
-<span class="co">#&gt; proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs</span>
-<span class="co">#&gt; First 10 features:</span>
-<span class="co">#&gt;    value                           geom</span>
-<span class="co">#&gt; 1  23390 POLYGON ((178093.6 244030.1...</span>
-<span class="co">#&gt; 2  56158 POLYGON ((178701.6 243646.1...</span>
-<span class="co">#&gt; 3  23134 POLYGON ((177581.6 243870.1...</span>
-<span class="co">#&gt; 4  60254 POLYGON ((179757.6 243454.1...</span>
-<span class="co">#&gt; 5   6750 POLYGON ((176621.6 243390.1...</span>
-<span class="co">#&gt; 6  60254 POLYGON ((180333.6 243230.1...</span>
-<span class="co">#&gt; 7  58718 POLYGON ((176653.6 243166.1...</span>
-<span class="co">#&gt; 8  52318 POLYGON ((177677.6 243166.1...</span>
-<span class="co">#&gt; 9   3166 POLYGON ((178701.6 243166.1...</span>
-<span class="co">#&gt; 10 15454 POLYGON ((179725.6 243166.1...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">5</span>, polygon <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple feature collection with 13791 features and 1 field</span></span>
+<span><span class="co">#&gt; geometry type:  POLYGON</span></span>
+<span><span class="co">#&gt; dimension:      XY</span></span>
+<span><span class="co">#&gt; bbox:           xmin: 22029.59 ymin: 153054.1 xmax: 258861.6 ymax: 244030.1</span></span>
+<span><span class="co">#&gt; epsg (SRID):    31370</span></span>
+<span><span class="co">#&gt; proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs</span></span>
+<span><span class="co">#&gt; First 10 features:</span></span>
+<span><span class="co">#&gt;    value                           geom</span></span>
+<span><span class="co">#&gt; 1  23390 POLYGON ((178093.6 244030.1...</span></span>
+<span><span class="co">#&gt; 2  56158 POLYGON ((178701.6 243646.1...</span></span>
+<span><span class="co">#&gt; 3  23134 POLYGON ((177581.6 243870.1...</span></span>
+<span><span class="co">#&gt; 4  60254 POLYGON ((179757.6 243454.1...</span></span>
+<span><span class="co">#&gt; 5   6750 POLYGON ((176621.6 243390.1...</span></span>
+<span><span class="co">#&gt; 6  60254 POLYGON ((180333.6 243230.1...</span></span>
+<span><span class="co">#&gt; 7  58718 POLYGON ((176653.6 243166.1...</span></span>
+<span><span class="co">#&gt; 8  52318 POLYGON ((177677.6 243166.1...</span></span>
+<span><span class="co">#&gt; 9   3166 POLYGON ((178701.6 243166.1...</span></span>
+<span><span class="co">#&gt; 10 15454 POLYGON ((179725.6 243166.1...</span></span></code></pre></div>
 </div>
 <div id="read_grtsmh_base4frac" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read_grtsmh_base4frac" class="anchor"></a>read_GRTSmh_base4frac()</h3>
-<p>Its use is just to return the base-4-fraction-converted <code>GRTSmaster_habitats</code> as a RasterLayer:</p>
+<p>Its use is just to return the base-4-fraction-converted
+<code>GRTSmaster_habitats</code> as a RasterLayer:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span>, digits <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
-<span class="fu"><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; class      : RasterLayer </span>
-<span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span>
-<span class="co">#&gt; resolution : 32, 32  (x, y)</span>
-<span class="co">#&gt; extent     : 22029.591973471, 258861.591973471, 153054.113583292, 244030.113583292  (xmin, xmax, ymin, ymax)</span>
-<span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span>
-<span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif </span>
-<span class="co">#&gt; names      : GRTSmh_base4frac </span>
-<span class="co">#&gt; values     : 0.0000000000001, 0.3333333333321  (min, max)</span></code></pre></div>
-<p>Note that the used options are necessary when treating these base-4-fraction GRTS addresses as characters; otherwise scientific notations will be used.</p>
-<p>Also, be warned that R does not actually regard the values as base 4, but as base 10. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span>, digits <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; class      : RasterLayer </span></span>
+<span><span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span></span>
+<span><span class="co">#&gt; resolution : 32, 32  (x, y)</span></span>
+<span><span class="co">#&gt; extent     : 22029.591973471, 258861.591973471, 153054.113583292, 244030.113583292  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></span>
+<span><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif </span></span>
+<span><span class="co">#&gt; names      : GRTSmh_base4frac </span></span>
+<span><span class="co">#&gt; values     : 0.0000000000001, 0.3333333333321  (min, max)</span></span></code></pre></div>
+<p>Note that the used options are necessary when treating these
+base-4-fraction GRTS addresses as characters; otherwise scientific
+notations will be used.</p>
+<p>Also, be warned that R does not actually regard the values as base 4,
+but as base 10. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
 </div>
 <div id="references" class="section level2 unnumbered">
@@ -278,17 +342,28 @@
 <a href="#references" class="anchor"></a>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-stevens_variance_2003" class="csl-entry">
-Stevens, Don L., and Anthony R. Olsen. 2003. <span>“Variance Estimation for Spatially Balanced Samples of Environmental Resources.”</span> <em>Environmetrics</em> 14 (6): 593–610. <a href="https://doi.org/10.1002/env.606">https://doi.org/10.1002/env.606</a>.
+Stevens, Don L., and Anthony R. Olsen. 2003. <span>“Variance Estimation
+for Spatially Balanced Samples of Environmental Resources.”</span>
+<em>Environmetrics</em> 14 (6): 593–610. <a href="https://doi.org/10.1002/env.606">https://doi.org/10.1002/env.606</a>.
 </div>
 <div id="ref-stevens_spatially_2004" class="csl-entry">
-———. 2004. <span>“Spatially <span>Balanced Sampling</span> of <span>Natural Resources</span>.”</span> <em>Journal of the American Statistical Association</em> 99 (465): 262–78. <a href="https://doi.org/10.1198/016214504000000250">https://doi.org/10.1198/016214504000000250</a>.
+———. 2004. <span>“Spatially <span>Balanced Sampling</span> of
+<span>Natural Resources</span>.”</span> <em>Journal of the American
+Statistical Association</em> 99 (465): 262–78. <a href="https://doi.org/10.1198/016214504000000250">https://doi.org/10.1198/016214504000000250</a>.
 </div>
 </div>
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
-<li id="fn1"><p>So, what really matters is only the notation with many digits, to be <em>regarded</em> as a base 4 fraction (and hence, handling it as a character in conversions is often necessary). The <code>n2khab</code> package also exports a <code><a href="../reference/convert_dec_to_base4frac.html">convert_dec_to_base4frac()</a></code> and a <code><a href="../reference/convert_base4frac_to_dec.html">convert_base4frac_to_dec()</a></code> function in its namespace. These functions will be relevant if you need to do such conversions yourself, and they are used in the code to generate the processed data sources.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>So, what really matters is only the notation with many
+digits, to be <em>regarded</em> as a base 4 fraction (and hence,
+handling it as a character in conversions is often necessary). The
+<code>n2khab</code> package also exports a
+<code><a href="../reference/convert_dec_to_base4frac.html">convert_dec_to_base4frac()</a></code> and a
+<code><a href="../reference/convert_base4frac_to_dec.html">convert_base4frac_to_dec()</a></code> function in its namespace. These
+functions will be relevant if you need to do such conversions yourself,
+and they are used in the code to generate the processed data sources.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>

@@ -92,11 +92,13 @@
 
       
 
-      </header><script src="v025_geospatial_hab_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><script src="v025_geospatial_hab_files/header-attrs-2.18/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Working with geospatial data sources of habitat (sub)types and RIBs</h1>
-                        <h4 class="author">Floris Vanderhaeghe, Toon Westra, Jan Wouters, Cécile Herr</h4>
+      <h1 data-toc-skip>Working with geospatial data sources of habitat
+(sub)types and RIBs</h1>
+                        <h4 class="author">Floris Vanderhaeghe, Toon
+Westra, Jan Wouters, Cécile Herr</h4>
             
             <h4 class="date">2021-05-12</h4>
       
@@ -107,49 +109,100 @@
 
     
     
-<p><em>General note: the below vignette contains frozen output of 12 May 2021.</em> <em>This makes it possible to build the package with vignettes without access to the data sources.</em></p>
+<p><em>General note: the below vignette contains frozen output of 12 May
+2021.</em> <em>This makes it possible to build the package with
+vignettes without access to the data sources.</em></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://inbo.github.io/n2khab">n2khab</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-quantities/units/">units</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://inbo.github.io/n2khab">n2khab</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-quantities/units/">units</a></span><span class="op">)</span></span></code></pre></div>
 <div id="intro" class="section level2">
 <h2 class="hasAnchor">
 <a href="#intro" class="anchor"></a>Intro</h2>
 <p>This vignette learns you:</p>
 <ul>
-<li>the difference between various geospatial N2KHAB data sources on the occurrence of types in Flanders (types being habitat (sub)types or regionally important biotopes (RIBs); see <code><a href="../reference/read_types.html">read_types()</a></code>);</li>
+<li>the difference between various geospatial N2KHAB data sources on the
+occurrence of types in Flanders (types being habitat (sub)types or
+regionally important biotopes (RIBs); see
+<code><a href="../reference/read_types.html">read_types()</a></code>);</li>
 <li>how to load these data sources into R;</li>
-<li>how to optimally match an interpreted data source with a ‘types’ column in your own dataframe.</li>
+<li>how to optimally match an interpreted data source with a ‘types’
+column in your own dataframe.</li>
 </ul>
 </div>
 <div id="data-sources" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-sources" class="anchor"></a>Data sources</h2>
-<p>The below N2KHAB data sources are available. For practical information on data storage and locations, see <code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code>.</p>
+<p>The below N2KHAB data sources are available. For practical
+information on data storage and locations, see
+<code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code>.</p>
 <ul>
 <li>
 <strong>raw data sources</strong>:
 <ul>
 <li>
-<strong><code>habitatmap</code></strong> (<a href="https://doi.org/10.5281/zenodo.3354381">Zenodo-link</a>): geospatial polygons of BWK and Natura 2000 habitat types in the Flemish Region, originally published by the Research Institute for Nature and Forest (INBO) <span class="citation">(De Saeger et al. 2020)</span> and distributed by ‘Informatie Vlaanderen’.</li>
+<strong><code>habitatmap</code></strong> (<a href="https://doi.org/10.5281/zenodo.3354381">Zenodo-link</a>):
+geospatial polygons of BWK and Natura 2000 habitat types in the Flemish
+Region, originally published by the Research Institute for Nature and
+Forest (INBO) <span class="citation">(De Saeger et al. 2020)</span> and
+distributed by ‘Informatie Vlaanderen’.</li>
 <li>
-<strong><code>habitatstreams</code></strong> (<a href="https://doi.org/10.5281/zenodo.3386245">Zenodo-link</a>): geospatial lines of the Natura 2000 habitat type <code>3260</code> that correspond with its presence in streaming water segments in the Flemish Region, originally published by INBO <span class="citation">(Leyssen, Smeekens, and Denys 2020)</span> and distributed by ‘Informatie Vlaanderen’.</li>
+<strong><code>habitatstreams</code></strong> (<a href="https://doi.org/10.5281/zenodo.3386245">Zenodo-link</a>):
+geospatial lines of the Natura 2000 habitat type <code>3260</code> that
+correspond with its presence in streaming water segments in the Flemish
+Region, originally published by INBO <span class="citation">(Leyssen,
+Smeekens, and Denys 2020)</span> and distributed by ‘Informatie
+Vlaanderen’.</li>
 <li>
-<strong><code>habitatsprings</code></strong> (<a href="https://doi.org/10.5281/zenodo.3550994">Zenodo-link</a>): geospatial points hat correspond with the presence or absence of the Natura 2000 habitat type <code>7220</code> in springs and streaming water segments in the Flemish Region. The data source is produced, owned and administered by INBO.</li>
+<strong><code>habitatsprings</code></strong> (<a href="https://doi.org/10.5281/zenodo.3550994">Zenodo-link</a>):
+geospatial points hat correspond with the presence or absence of the
+Natura 2000 habitat type <code>7220</code> in springs and streaming
+water segments in the Flemish Region. The data source is produced, owned
+and administered by INBO.</li>
 <li>
-<strong><code>habitatquarries</code></strong> (<a href="https://doi.org/10.5281/zenodo.4072967">Zenodo-link</a>): geospatial polygons that correspond with the presence or absence of the Natura 2000 habitat type <code>8310</code> in underground marl quarries in the Flemish Region (and border areas). The data source is produced, owned and administered by INBO.</li>
+<strong><code>habitatquarries</code></strong> (<a href="https://doi.org/10.5281/zenodo.4072967">Zenodo-link</a>):
+geospatial polygons that correspond with the presence or absence of the
+Natura 2000 habitat type <code>8310</code> in underground marl quarries
+in the Flemish Region (and border areas). The data source is produced,
+owned and administered by INBO.</li>
 </ul>
 </li>
 <li>
 <strong>processed data sources</strong>:
 <ul>
 <li>
-<strong><code>habitatmap_stdized</code></strong> (<a href="https://doi.org/10.5281/zenodo.3355192">Zenodo-link</a>): derived from <code>habitatmap</code>. This datasource only contains polygons with habitat (sub)type or RIB codes. All codes conform to the <code>types</code> reference list (see <code><a href="../reference/read_types.html">read_types()</a></code>). The datasource is a GeoPackage with essentially two objects: 1) the geospatial polygons; 2) a long-formatted table with the associated types (multiple records can occur per <code>polygon_id</code>). For more details see <code><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code>.</li>
+<strong><code>habitatmap_stdized</code></strong> (<a href="https://doi.org/10.5281/zenodo.3355192">Zenodo-link</a>): derived
+from <code>habitatmap</code>. This datasource only contains polygons
+with habitat (sub)type or RIB codes. All codes conform to the
+<code>types</code> reference list (see <code><a href="../reference/read_types.html">read_types()</a></code>). The
+datasource is a GeoPackage with essentially two objects: 1) the
+geospatial polygons; 2) a long-formatted table with the associated types
+(multiple records can occur per <code>polygon_id</code>). For more
+details see <code><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code>.</li>
 <li>
-<strong><code>habitatmap_terr</code></strong> (<a href="https://doi.org/10.5281/zenodo.3468948">Zenodo-link</a>): the further interpreted, terrestrial part of <code>habitatmap_stdized</code> (‘terrestrial’ includes ‘semi-terrestrial’). Amongst other properties, it excludes polygons <em>without</em> terrestrial types, it excludes rows which most probably are no habitat or RIB at all, and several main type codes were translated to a corresponding subtype which they almost always represent. The datasource is a GeoPackage, organized in the same way as <code>habitatmap_stdized</code>. For more details see <code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code>.</li>
+<strong><code>habitatmap_terr</code></strong> (<a href="https://doi.org/10.5281/zenodo.3468948">Zenodo-link</a>): the
+further interpreted, terrestrial part of <code>habitatmap_stdized</code>
+(‘terrestrial’ includes ‘semi-terrestrial’). Amongst other properties,
+it excludes polygons <em>without</em> terrestrial types, it excludes
+rows which most probably are no habitat or RIB at all, and several main
+type codes were translated to a corresponding subtype which they almost
+always represent. The datasource is a GeoPackage, organized in the same
+way as <code>habitatmap_stdized</code>. For more details see
+<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code>.</li>
 <li>
-<strong><code>watersurfaces_hab</code></strong> (<a href="https://doi.org/10.5281/zenodo.3374645">Zenodo-link</a>): a combination of the environmental data source <code>watersurfaces</code> (<span class="citation">Leyssen et al. (2020)</span>; see <code><a href="../reference/read_watersurfaces.html">read_watersurfaces()</a></code>) and the above data source <code>habitatmap_stdized</code>. It represents polygons (from <code>watersurfaces</code> or <code>habitatmap_stdized</code>) that completely or partly contain standing water habitat types or RIBs (i.e. <code>2190_a</code>, ‘<code>31..</code>’ types or <code>rbbah</code>; types <code>3260</code> and <code>7220</code> are not included). The datasource is a GeoPackage, organized in the same way as <code>habitatmap_stdized</code>. For more details see <code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code>.</li>
+<strong><code>watersurfaces_hab</code></strong> (<a href="https://doi.org/10.5281/zenodo.3374645">Zenodo-link</a>): a
+combination of the environmental data source <code>watersurfaces</code>
+(<span class="citation">Leyssen et al. (2020)</span>; see
+<code><a href="../reference/read_watersurfaces.html">read_watersurfaces()</a></code>) and the above data source
+<code>habitatmap_stdized</code>. It represents polygons (from
+<code>watersurfaces</code> or <code>habitatmap_stdized</code>) that
+completely or partly contain standing water habitat types or RIBs
+(i.e. <code>2190_a</code>, ‘<code>31..</code>’ types or
+<code>rbbah</code>; types <code>3260</code> and <code>7220</code> are
+not included). The datasource is a GeoPackage, organized in the same way
+as <code>habitatmap_stdized</code>. For more details see
+<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code>.</li>
 </ul>
 </li>
 </ul>
@@ -157,487 +210,569 @@
 <div id="using-the-read_----functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-the-read_----functions" class="anchor"></a>Using the <code>read_...()</code> functions</h2>
-<p>In the below R code, it is supposed that a <code>n2khab_data</code> folder is present in your working directory or a directory up to 10 levels higher, with the relevant data sources in the right place. See <code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> for the setup.</p>
-<p>The advantage of using the <code>read_...()</code> functions is the uniform approach to read the above data sources in R, enhancing collaboration and speeding up your work.</p>
+<p>In the below R code, it is supposed that a <code>n2khab_data</code>
+folder is present in your working directory or a directory up to 10
+levels higher, with the relevant data sources in the right place. See
+<code><a href="../articles/v020_datastorage.html">vignette("v020_datastorage")</a></code> for the setup.</p>
+<p>The advantage of using the <code>read_...()</code> functions is the
+uniform approach to read the above data sources in R, enhancing
+collaboration and speeding up your work.</p>
 <ul>
-<li>Geospatial layers are represented as an <code>sf</code> object, in the coordinate reference system (CRS) ‘Belge 1972 / Belgian Lambert 72’ (EPSG-code <a href="https://epsg.io/31370">31370</a>).</li>
+<li>Geospatial layers are represented as an <code>sf</code> object, in
+the coordinate reference system (CRS) ‘Belge 1972 / Belgian Lambert 72’
+(EPSG-code <a href="https://epsg.io/31370">31370</a>).</li>
 <li>Dataframes are presented as tibbles. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
 </li>
-<li>English &amp; <a href="https://style.tidyverse.org/">tidyverse-styled</a> names of variables stimulate you to always produce internationalized code, tables and figures.</li>
-<li>The <code>type</code> variable (if present) is a factor with the same levels as the <code>type</code> variable of the <code>types</code> reference list (see <code><a href="../reference/read_types.html">read_types()</a></code>).</li>
-<li>Some variables may be discarded that should normally have no added value, e.g. values that duplicate already existing information.</li>
+<li>English &amp; <a href="https://style.tidyverse.org/">tidyverse-styled</a> names of
+variables stimulate you to always produce internationalized code, tables
+and figures.</li>
+<li>The <code>type</code> variable (if present) is a factor with the
+same levels as the <code>type</code> variable of the <code>types</code>
+reference list (see <code><a href="../reference/read_types.html">read_types()</a></code>).</li>
+<li>Some variables may be discarded that should normally have no added
+value, e.g. values that duplicate already existing information.</li>
 </ul>
 <div id="returning-raw-data-sources" class="section level3">
 <h3 class="hasAnchor">
 <a href="#returning-raw-data-sources" class="anchor"></a>Returning raw data sources</h3>
-<p>The functions do just basic preprocessing, in order to return (by default) an object that well reflects the structure of the raw data source and returns all its records.</p>
+<p>The functions do just basic preprocessing, in order to return (by
+default) an object that well reflects the structure of the raw data
+source and returns all its records.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">habitatmap</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatmap.html">read_habitatmap</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">habitatmap</span>
-<span class="co">#&gt; Simple feature collection with 646589 features and 30 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 21991.38 ymin: 153058.3 xmax: 258871.8 ymax: 244027.3</span>
-<span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span>
-<span class="co">#&gt; # A tibble: 646,589 x 31</span>
-<span class="co">#&gt;    polygon_id  eval  eenh1 eenh2 eenh3 eenh4 eenh5 eenh6 eenh7 eenh8 v1    v2   </span>
-<span class="co">#&gt;  * &lt;chr&gt;       &lt;fct&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
-<span class="co">#&gt;  1 000098_v20… m     b     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span>
-<span class="co">#&gt;  2 000132_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span>
-<span class="co">#&gt;  3 000135_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span>
-<span class="co">#&gt;  4 000136_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span>
-<span class="co">#&gt;  5 000142_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span>
-<span class="co">#&gt;  6 000150_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span>
-<span class="co">#&gt;  7 000297_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span>
-<span class="co">#&gt;  8 000991_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span>
-<span class="co">#&gt;  9 000999_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span>
-<span class="co">#&gt; 10 001000_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span>
-<span class="co">#&gt; # … with 646,579 more rows, and 19 more variables: v3 &lt;chr&gt;, source &lt;chr&gt;,</span>
-<span class="co">#&gt; #   info &lt;chr&gt;, bwk_label &lt;chr&gt;, hab1 &lt;chr&gt;, phab1 &lt;int&gt;, hab2 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   phab2 &lt;int&gt;, hab3 &lt;chr&gt;, phab3 &lt;int&gt;, hab4 &lt;chr&gt;, phab4 &lt;int&gt;, hab5 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   phab5 &lt;int&gt;, source_hab &lt;chr&gt;, source_phab &lt;chr&gt;, hab_legend &lt;fct&gt;,</span>
-<span class="co">#&gt; #   area_m2 &lt;dbl&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></code></pre></div>
-<p>The <code>habitatmap</code> object is a very wide dataframe which is not so easy to handle in R. For analytical work on habitat types and RIBs, you’re advised to use the tidied data source <code>habitatmap_stdized</code>; see <a href="#processed">below</a>.</p>
-<p><code>read_habitatmap(filter_hab = TRUE)</code> will only retain the polygons that occur in <code>habitatmap_stdized</code>, i.e. those that contain habitat types or RIBs.</p>
-<p>The data sources <code>habitatstreams</code>, <code>habitatsprings</code> and <code>habitatquarries</code> have a straightforward data structure. There was no need to generate derived data sources. The meaning of their columns is described in the function documentation. Not all function arguments are discussed in this vignette: do take the time to look at the documentation!</p>
+<code class="sourceCode R"><span><span class="va">habitatmap</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatmap.html">read_habitatmap</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">habitatmap</span></span>
+<span><span class="co">#&gt; Simple feature collection with 646589 features and 30 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 21991.38 ymin: 153058.3 xmax: 258871.8 ymax: 244027.3</span></span>
+<span><span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span></span>
+<span><span class="co">#&gt; # A tibble: 646,589 x 31</span></span>
+<span><span class="co">#&gt;    polygon_id  eval  eenh1 eenh2 eenh3 eenh4 eenh5 eenh6 eenh7 eenh8 v1    v2   </span></span>
+<span><span class="co">#&gt;  * &lt;chr&gt;       &lt;fct&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt;  1 000098_v20… m     b     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt;  2 000132_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt;  3 000135_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt;  4 000136_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt;  5 000142_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt;  6 000150_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt;  7 000297_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt;  8 000991_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt;  9 000999_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 10 001000_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; # … with 646,579 more rows, and 19 more variables: v3 &lt;chr&gt;, source &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   info &lt;chr&gt;, bwk_label &lt;chr&gt;, hab1 &lt;chr&gt;, phab1 &lt;int&gt;, hab2 &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   phab2 &lt;int&gt;, hab3 &lt;chr&gt;, phab3 &lt;int&gt;, hab4 &lt;chr&gt;, phab4 &lt;int&gt;, hab5 &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   phab5 &lt;int&gt;, source_hab &lt;chr&gt;, source_phab &lt;chr&gt;, hab_legend &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   area_m2 &lt;dbl&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></span></code></pre></div>
+<p>The <code>habitatmap</code> object is a very wide dataframe which is
+not so easy to handle in R. For analytical work on habitat types and
+RIBs, you’re advised to use the tidied data source
+<code>habitatmap_stdized</code>; see <a href="#processed">below</a>.</p>
+<p><code>read_habitatmap(filter_hab = TRUE)</code> will only retain the
+polygons that occur in <code>habitatmap_stdized</code>, i.e. those that
+contain habitat types or RIBs.</p>
+<p>The data sources <code>habitatstreams</code>,
+<code>habitatsprings</code> and <code>habitatquarries</code> have a
+straightforward data structure. There was no need to generate derived
+data sources. The meaning of their columns is described in the function
+documentation. Not all function arguments are discussed in this
+vignette: do take the time to look at the documentation!</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">habitatstreams</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatstreams.html">read_habitatstreams</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">habitatstreams</span>
-<span class="co">#&gt; Simple feature collection with 560 features and 3 fields</span>
-<span class="co">#&gt; Geometry type: LINESTRING</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 33097.92 ymin: 157529.6 xmax: 254039 ymax: 243444.6</span>
-<span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span>
-<span class="co">#&gt; # A tibble: 560 x 4</span>
-<span class="co">#&gt;    river_name   source_id type                                          geometry</span>
-<span class="co">#&gt;    &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;                                 &lt;LINESTRING [m]&gt;</span>
-<span class="co">#&gt;  1 Wolfputbeek  VMM       3260  (127857.1 167681.2, 127854.9 167684.5, 127844 1…</span>
-<span class="co">#&gt;  2 Oude Kale    VMM       3260  (95737.01 196912.9, 95732.82 196912.4, 95710.38…</span>
-<span class="co">#&gt;  3 Venloop      EcoInv    3260  (169352.7 209314.9, 169358.8 209290.5, 169326.2…</span>
-<span class="co">#&gt;  4 Venloop      EcoInv    3260  (169633.6 209293.5, 169625 209289.2, 169594.4 2…</span>
-<span class="co">#&gt;  5 Kleine Nete  EcoInv    3260  (181087.1 208607.2, 181088.6 208608.1, 181089 2…</span>
-<span class="co">#&gt;  6 Kleine Nete  EcoInv    3260  (180037.4 208360.4, 180038.3 208377.5, 180038.3…</span>
-<span class="co">#&gt;  7 Kleine Nete  EcoInv    3260  (180520 208595.7, 180540.5 208607.4, 180541.2 2…</span>
-<span class="co">#&gt;  8 Kleine Nete  EcoInv    3260  (187379.9 209998.8, 187381.3 209998.5, 187381.6…</span>
-<span class="co">#&gt;  9 Raamdonkseb… extrapol  3260  (183545.5 192409, 183541.9 192406.7, 183541.9 1…</span>
-<span class="co">#&gt; 10 Kleine Nete  EcoInv    3260  (183516.4 208261.7, 183567.3 208279.2, 183567.3…</span>
-<span class="co">#&gt; # … with 550 more rows</span></code></pre></div>
-<p>With <code>read_habitatstreams(source_text = TRUE)</code> a second object <code>sources</code> is returned with the meaning of the <code>source_id</code> codes:</p>
+<code class="sourceCode R"><span><span class="va">habitatstreams</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatstreams.html">read_habitatstreams</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">habitatstreams</span></span>
+<span><span class="co">#&gt; Simple feature collection with 560 features and 3 fields</span></span>
+<span><span class="co">#&gt; Geometry type: LINESTRING</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 33097.92 ymin: 157529.6 xmax: 254039 ymax: 243444.6</span></span>
+<span><span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span></span>
+<span><span class="co">#&gt; # A tibble: 560 x 4</span></span>
+<span><span class="co">#&gt;    river_name   source_id type                                          geometry</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;                                 &lt;LINESTRING [m]&gt;</span></span>
+<span><span class="co">#&gt;  1 Wolfputbeek  VMM       3260  (127857.1 167681.2, 127854.9 167684.5, 127844 1…</span></span>
+<span><span class="co">#&gt;  2 Oude Kale    VMM       3260  (95737.01 196912.9, 95732.82 196912.4, 95710.38…</span></span>
+<span><span class="co">#&gt;  3 Venloop      EcoInv    3260  (169352.7 209314.9, 169358.8 209290.5, 169326.2…</span></span>
+<span><span class="co">#&gt;  4 Venloop      EcoInv    3260  (169633.6 209293.5, 169625 209289.2, 169594.4 2…</span></span>
+<span><span class="co">#&gt;  5 Kleine Nete  EcoInv    3260  (181087.1 208607.2, 181088.6 208608.1, 181089 2…</span></span>
+<span><span class="co">#&gt;  6 Kleine Nete  EcoInv    3260  (180037.4 208360.4, 180038.3 208377.5, 180038.3…</span></span>
+<span><span class="co">#&gt;  7 Kleine Nete  EcoInv    3260  (180520 208595.7, 180540.5 208607.4, 180541.2 2…</span></span>
+<span><span class="co">#&gt;  8 Kleine Nete  EcoInv    3260  (187379.9 209998.8, 187381.3 209998.5, 187381.6…</span></span>
+<span><span class="co">#&gt;  9 Raamdonkseb… extrapol  3260  (183545.5 192409, 183541.9 192406.7, 183541.9 1…</span></span>
+<span><span class="co">#&gt; 10 Kleine Nete  EcoInv    3260  (183516.4 208261.7, 183567.3 208279.2, 183567.3…</span></span>
+<span><span class="co">#&gt; # … with 550 more rows</span></span></code></pre></div>
+<p>With <code>read_habitatstreams(source_text = TRUE)</code> a second
+object <code>sources</code> is returned with the meaning of the
+<code>source_id</code> codes:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_habitatstreams.html">read_habitatstreams</a></span><span class="op">(</span>source_text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="va">.</span><span class="op">$</span><span class="va">sources</span>
-<span class="co">#&gt; # A tibble: 7 x 2</span>
-<span class="co">#&gt;   source_id          source_text                                                </span>
-<span class="co">#&gt;   &lt;fct&gt;              &lt;fct&gt;                                                      </span>
-<span class="co">#&gt; 1 VMM                "Gegevens afgeleid van macrofyteninventarisaties uitgevoer…</span>
-<span class="co">#&gt; 2 EcoInv             "Tijdens ecologische inventarisatiestudies uitgevoerd in o…</span>
-<span class="co">#&gt; 3 extrapol           "De conclusie van het nabijgelegen geïnventariseerde segme…</span>
-<span class="co">#&gt; 4 Van Belleghem (20… "Macrofytengegevens afgeleid van Van Belleghem S., Bal K.,…</span>
-<span class="co">#&gt; 5 Leyssen ea (2005)  "Macrofytengegevens afgeleid van Leyssen A., Adriaens P., …</span>
-<span class="co">#&gt; 6 WrnBe              "Waarnemingen afkomstig van Waarnemingen.be, de website vo…</span>
-<span class="co">#&gt; 7 INBO               "Tijdens veldbezoeken werd de aan- of afwezigheid van het …</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_habitatstreams.html">read_habitatstreams</a></span><span class="op">(</span>source_text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">.</span><span class="op">$</span><span class="va">sources</span></span>
+<span><span class="co">#&gt; # A tibble: 7 x 2</span></span>
+<span><span class="co">#&gt;   source_id          source_text                                                </span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;              &lt;fct&gt;                                                      </span></span>
+<span><span class="co">#&gt; 1 VMM                "Gegevens afgeleid van macrofyteninventarisaties uitgevoer…</span></span>
+<span><span class="co">#&gt; 2 EcoInv             "Tijdens ecologische inventarisatiestudies uitgevoerd in o…</span></span>
+<span><span class="co">#&gt; 3 extrapol           "De conclusie van het nabijgelegen geïnventariseerde segme…</span></span>
+<span><span class="co">#&gt; 4 Van Belleghem (20… "Macrofytengegevens afgeleid van Van Belleghem S., Bal K.,…</span></span>
+<span><span class="co">#&gt; 5 Leyssen ea (2005)  "Macrofytengegevens afgeleid van Leyssen A., Adriaens P., …</span></span>
+<span><span class="co">#&gt; 6 WrnBe              "Waarnemingen afkomstig van Waarnemingen.be, de website vo…</span></span>
+<span><span class="co">#&gt; 7 INBO               "Tijdens veldbezoeken werd de aan- of afwezigheid van het …</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">habitatsprings</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatsprings.html">read_habitatsprings</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">habitatsprings</span>
-<span class="co">#&gt; Simple feature collection with 104 features and 11 fields</span>
-<span class="co">#&gt; Geometry type: POINT</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 36407.84 ymin: 155249.7 xmax: 258371.1 ymax: 179732</span>
-<span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span>
-<span class="co">#&gt; # A tibble: 104 x 12</span>
-<span class="co">#&gt;    point_id name       system_type code_orig type  certain unit_id area_m2  year</span>
-<span class="co">#&gt;       &lt;dbl&gt; &lt;chr&gt;      &lt;fct&gt;       &lt;chr&gt;     &lt;fct&gt; &lt;lgl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt;  1        1 Steenputb… rivulet     7220      7220  TRUE          1      50  2014</span>
-<span class="co">#&gt;  2        2 Steenputb… rivulet     7220      7220  TRUE          1      20  2014</span>
-<span class="co">#&gt;  3        3 Duling     &lt;NA&gt;        7230      7230  TRUE         NA      NA  2014</span>
-<span class="co">#&gt;  4        4 Kapittelb… &lt;NA&gt;        gh        &lt;NA&gt;  TRUE         NA      NA  2014</span>
-<span class="co">#&gt;  5        5 Remersdaa… rivulet     7220      7220  TRUE          2     200  2014</span>
-<span class="co">#&gt;  6        6 Remersdaa… rivulet     7220      7220  TRUE          2     500  2014</span>
-<span class="co">#&gt;  7        7 Kesterbeek unknown     7220,gh   7220  FALSE        32      NA    NA</span>
-<span class="co">#&gt;  8        8 Krindaal   rivulet     7220      7220  TRUE          3     800  2014</span>
-<span class="co">#&gt;  9        9 Bois de B… rivulet     7220      7220  TRUE          4      50  2014</span>
-<span class="co">#&gt; 10       10 KwintenHo… mire        7220      7220  TRUE          5      10  2014</span>
-<span class="co">#&gt; # … with 94 more rows, and 3 more variables: in_sac &lt;lgl&gt;, source &lt;chr&gt;,</span>
-<span class="co">#&gt; #   geometry &lt;POINT [m]&gt;</span></code></pre></div>
-<p>Do note that both the <code>habitatsprings</code> and <code>habitatquarries</code> data sources also contain records which are no habitat type. You can filter the habitat types by setting the <code>filter_hab</code> argument as <code>TRUE</code> (not shown).</p>
+<code class="sourceCode R"><span><span class="va">habitatsprings</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatsprings.html">read_habitatsprings</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">habitatsprings</span></span>
+<span><span class="co">#&gt; Simple feature collection with 104 features and 11 fields</span></span>
+<span><span class="co">#&gt; Geometry type: POINT</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 36407.84 ymin: 155249.7 xmax: 258371.1 ymax: 179732</span></span>
+<span><span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span></span>
+<span><span class="co">#&gt; # A tibble: 104 x 12</span></span>
+<span><span class="co">#&gt;    point_id name       system_type code_orig type  certain unit_id area_m2  year</span></span>
+<span><span class="co">#&gt;       &lt;dbl&gt; &lt;chr&gt;      &lt;fct&gt;       &lt;chr&gt;     &lt;fct&gt; &lt;lgl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1        1 Steenputb… rivulet     7220      7220  TRUE          1      50  2014</span></span>
+<span><span class="co">#&gt;  2        2 Steenputb… rivulet     7220      7220  TRUE          1      20  2014</span></span>
+<span><span class="co">#&gt;  3        3 Duling     &lt;NA&gt;        7230      7230  TRUE         NA      NA  2014</span></span>
+<span><span class="co">#&gt;  4        4 Kapittelb… &lt;NA&gt;        gh        &lt;NA&gt;  TRUE         NA      NA  2014</span></span>
+<span><span class="co">#&gt;  5        5 Remersdaa… rivulet     7220      7220  TRUE          2     200  2014</span></span>
+<span><span class="co">#&gt;  6        6 Remersdaa… rivulet     7220      7220  TRUE          2     500  2014</span></span>
+<span><span class="co">#&gt;  7        7 Kesterbeek unknown     7220,gh   7220  FALSE        32      NA    NA</span></span>
+<span><span class="co">#&gt;  8        8 Krindaal   rivulet     7220      7220  TRUE          3     800  2014</span></span>
+<span><span class="co">#&gt;  9        9 Bois de B… rivulet     7220      7220  TRUE          4      50  2014</span></span>
+<span><span class="co">#&gt; 10       10 KwintenHo… mire        7220      7220  TRUE          5      10  2014</span></span>
+<span><span class="co">#&gt; # … with 94 more rows, and 3 more variables: in_sac &lt;lgl&gt;, source &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   geometry &lt;POINT [m]&gt;</span></span></code></pre></div>
+<p>Do note that both the <code>habitatsprings</code> and
+<code>habitatquarries</code> data sources also contain records which are
+no habitat type. You can filter the habitat types by setting the
+<code>filter_hab</code> argument as <code>TRUE</code> (not shown).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">habitatquarries</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatquarries.html">read_habitatquarries</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">habitatquarries</span>
-<span class="co">#&gt; Simple feature collection with 45 features and 6 fields</span>
-<span class="co">#&gt; Geometry type: POLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 221427.3 ymin: 160393.5 xmax: 243211.1 ymax: 168965.1</span>
-<span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span>
-<span class="co">#&gt; # A tibble: 45 x 7</span>
-<span class="co">#&gt;    polygon_id unit_id name        code_orig type  extra_reference               </span>
-<span class="co">#&gt;         &lt;int&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;fct&gt; &lt;fct&gt;                         </span>
-<span class="co">#&gt;  1          4       4 Avergat - … gh        &lt;NA&gt;  Lahaye 2018                   </span>
-<span class="co">#&gt;  2          6       6 Avergat - … 8310      8310  Lahaye 2018                   </span>
-<span class="co">#&gt;  3          5       5 Avergat - … gh        &lt;NA&gt;  Lahaye 2018                   </span>
-<span class="co">#&gt;  4         20      20 Coolen      8310      8310  Limburgs Landschap 2020; pers…</span>
-<span class="co">#&gt;  5         21      21 Coolen      gh        &lt;NA&gt;  Limburgs Landschap 2020       </span>
-<span class="co">#&gt;  6         29      29 Groeve Lin… 8310      8310  &lt;NA&gt;                          </span>
-<span class="co">#&gt;  7         31      31 Grote berg… 8310      8310  De Haan &amp; Lahaye 2018         </span>
-<span class="co">#&gt;  8         37      37 Grote berg… 8310      8310  De Haan &amp; Lahaye 2018         </span>
-<span class="co">#&gt;  9         24      24 Henisdael … 8310      8310  Dusar et al. 2007             </span>
-<span class="co">#&gt; 10         34      34 Henisdael … 8310      8310  Dusar et al. 2007             </span>
-<span class="co">#&gt; # … with 35 more rows, and 1 more variable: geom &lt;POLYGON [m]&gt;</span></code></pre></div>
-<p>The habitatquarries data source also includes the literature references. These can be added as a second dataframe – in that case a list is returned:</p>
+<code class="sourceCode R"><span><span class="va">habitatquarries</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatquarries.html">read_habitatquarries</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">habitatquarries</span></span>
+<span><span class="co">#&gt; Simple feature collection with 45 features and 6 fields</span></span>
+<span><span class="co">#&gt; Geometry type: POLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 221427.3 ymin: 160393.5 xmax: 243211.1 ymax: 168965.1</span></span>
+<span><span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span></span>
+<span><span class="co">#&gt; # A tibble: 45 x 7</span></span>
+<span><span class="co">#&gt;    polygon_id unit_id name        code_orig type  extra_reference               </span></span>
+<span><span class="co">#&gt;         &lt;int&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;fct&gt; &lt;fct&gt;                         </span></span>
+<span><span class="co">#&gt;  1          4       4 Avergat - … gh        &lt;NA&gt;  Lahaye 2018                   </span></span>
+<span><span class="co">#&gt;  2          6       6 Avergat - … 8310      8310  Lahaye 2018                   </span></span>
+<span><span class="co">#&gt;  3          5       5 Avergat - … gh        &lt;NA&gt;  Lahaye 2018                   </span></span>
+<span><span class="co">#&gt;  4         20      20 Coolen      8310      8310  Limburgs Landschap 2020; pers…</span></span>
+<span><span class="co">#&gt;  5         21      21 Coolen      gh        &lt;NA&gt;  Limburgs Landschap 2020       </span></span>
+<span><span class="co">#&gt;  6         29      29 Groeve Lin… 8310      8310  &lt;NA&gt;                          </span></span>
+<span><span class="co">#&gt;  7         31      31 Grote berg… 8310      8310  De Haan &amp; Lahaye 2018         </span></span>
+<span><span class="co">#&gt;  8         37      37 Grote berg… 8310      8310  De Haan &amp; Lahaye 2018         </span></span>
+<span><span class="co">#&gt;  9         24      24 Henisdael … 8310      8310  Dusar et al. 2007             </span></span>
+<span><span class="co">#&gt; 10         34      34 Henisdael … 8310      8310  Dusar et al. 2007             </span></span>
+<span><span class="co">#&gt; # … with 35 more rows, and 1 more variable: geom &lt;POLYGON [m]&gt;</span></span></code></pre></div>
+<p>The habitatquarries data source also includes the literature
+references. These can be added as a second dataframe – in that case a
+list is returned:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">habitatquarries2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatquarries.html">read_habitatquarries</a></span><span class="op">(</span>references <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">habitatquarries2</span><span class="op">)</span>
-<span class="co">#&gt; [1] "list"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">habitatquarries2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatquarries.html">read_habitatquarries</a></span><span class="op">(</span>references <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">habitatquarries2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "list"</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">habitatquarries2</span><span class="op">)</span>
-<span class="co">#&gt; [1] "habitatquarries"  "extra_references"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">habitatquarries2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "habitatquarries"  "extra_references"</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">habitatquarries</span>, <span class="va">habitatquarries2</span><span class="op">$</span><span class="va">habitatquarries</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">habitatquarries</span>, <span class="va">habitatquarries2</span><span class="op">$</span><span class="va">habitatquarries</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">habitatquarries2</span><span class="op">$</span><span class="va">extra_references</span>
-<span class="co">#&gt; # A tibble: 9 x 23</span>
-<span class="co">#&gt;   category bibtexkey address author booktitle journal month note  number pages</span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;</span>
-<span class="co">#&gt; 1 BOOK     de_haan_… Brusse… De Ha… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; </span>
-<span class="co">#&gt; 2 INCOLLE… dusar_me… Genk    Dusar… Likona j… &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   6-13 </span>
-<span class="co">#&gt; 3 BOOK     jenneken… Riemst  Jenne… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; </span>
-<span class="co">#&gt; 4 INCOLLE… lahaye_g… Riemst  Lahay… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   12   </span>
-<span class="co">#&gt; 5 BOOK     verhoeve… Weert   Verho… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  1769   &lt;NA&gt; </span>
-<span class="co">#&gt; 6 BOOK     walschot… &lt;NA&gt;    Walsc… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; </span>
-<span class="co">#&gt; 7 MISC     wikipedi… &lt;NA&gt;    {Wiki… &lt;NA&gt;      &lt;NA&gt;    jan   Page… &lt;NA&gt;   &lt;NA&gt; </span>
-<span class="co">#&gt; 8 MISC     limburgs… &lt;NA&gt;    {Limb… &lt;NA&gt;      &lt;NA&gt;    apr   Libr… &lt;NA&gt;   &lt;NA&gt; </span>
-<span class="co">#&gt; 9 ARTICLE  silverta… &lt;NA&gt;    Silve… &lt;NA&gt;      Natuur… &lt;NA&gt;  &lt;NA&gt;  12     334-…</span>
-<span class="co">#&gt; # … with 13 more variables: publisher &lt;chr&gt;, series &lt;chr&gt;, title &lt;chr&gt;,</span>
-<span class="co">#&gt; #   volume &lt;chr&gt;, year &lt;dbl&gt;, url &lt;chr&gt;, isbn &lt;chr&gt;, copyright &lt;chr&gt;,</span>
-<span class="co">#&gt; #   abstract &lt;chr&gt;, language &lt;chr&gt;, urldate &lt;chr&gt;, issn &lt;chr&gt;, keywords &lt;chr&gt;</span></code></pre></div>
-<p>These extra references can also be printed to the R console in BibTeX format, when specifying <code>bibtex = TRUE</code>.</p>
+<code class="sourceCode R"><span><span class="va">habitatquarries2</span><span class="op">$</span><span class="va">extra_references</span></span>
+<span><span class="co">#&gt; # A tibble: 9 x 23</span></span>
+<span><span class="co">#&gt;   category bibtexkey address author booktitle journal month note  number pages</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 BOOK     de_haan_… Brusse… De Ha… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 2 INCOLLE… dusar_me… Genk    Dusar… Likona j… &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   6-13 </span></span>
+<span><span class="co">#&gt; 3 BOOK     jenneken… Riemst  Jenne… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 4 INCOLLE… lahaye_g… Riemst  Lahay… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   12   </span></span>
+<span><span class="co">#&gt; 5 BOOK     verhoeve… Weert   Verho… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  1769   &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 6 BOOK     walschot… &lt;NA&gt;    Walsc… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 7 MISC     wikipedi… &lt;NA&gt;    {Wiki… &lt;NA&gt;      &lt;NA&gt;    jan   Page… &lt;NA&gt;   &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 8 MISC     limburgs… &lt;NA&gt;    {Limb… &lt;NA&gt;      &lt;NA&gt;    apr   Libr… &lt;NA&gt;   &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 9 ARTICLE  silverta… &lt;NA&gt;    Silve… &lt;NA&gt;      Natuur… &lt;NA&gt;  &lt;NA&gt;  12     334-…</span></span>
+<span><span class="co">#&gt; # … with 13 more variables: publisher &lt;chr&gt;, series &lt;chr&gt;, title &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   volume &lt;chr&gt;, year &lt;dbl&gt;, url &lt;chr&gt;, isbn &lt;chr&gt;, copyright &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   abstract &lt;chr&gt;, language &lt;chr&gt;, urldate &lt;chr&gt;, issn &lt;chr&gt;, keywords &lt;chr&gt;</span></span></code></pre></div>
+<p>These extra references can also be printed to the R console in BibTeX
+format, when specifying <code>bibtex = TRUE</code>.</p>
 </div>
 <div id="processed" class="section level3">
 <h3 class="hasAnchor">
 <a href="#processed" class="anchor"></a>Returning processed data sources</h3>
-<p>The reading functions for the three processed data sources will always return a <strong>list</strong>:</p>
+<p>The reading functions for the three processed data sources will
+always return a <strong>list</strong>:</p>
 <ul>
-<li>the first element holds the geospatial information as an <strong>sf object</strong>. It has unique feature IDs that can be joined with rows of the second element;</li>
-<li>the second element is a <strong>tibble</strong> that presents attributes of the features as <em><strong><a href="https://r4ds.had.co.nz/tidy-data.html#tidy-data-1">tidy</a> data</strong></em>.</li>
+<li>the first element holds the geospatial information as an <strong>sf
+object</strong>. It has unique feature IDs that can be joined with rows
+of the second element;</li>
+<li>the second element is a <strong>tibble</strong> that presents
+attributes of the features as <em><strong><a href="https://r4ds.had.co.nz/tidy-data.html#tidy-data-1">tidy</a>
+data</strong></em>.</li>
 </ul>
 <p>Let’s see how this works!</p>
 <div id="read_habitatmap_stdized" class="section level4">
 <h4 class="hasAnchor">
 <a href="#read_habitatmap_stdized" class="anchor"></a>read_habitatmap_stdized()</h4>
-<p>A tidy representation of the <code>habitatmap</code> data, restricted to the polygons that contain habitat types or RIBs, is returned by <code><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code>:</p>
+<p>A tidy representation of the <code>habitatmap</code> data, restricted
+to the polygons that contain habitat types or RIBs, is returned by
+<code><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hms_pol</span> <span class="op">&lt;-</span> <span class="va">hms</span><span class="op">$</span><span class="va">habitatmap_polygons</span>
-<span class="va">hms_pol</span>
-<span class="co">#&gt; Simple feature collection with 87781 features and 2 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243446.1</span>
-<span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span>
-<span class="co">#&gt; # A tibble: 87,781 x 3</span>
-<span class="co">#&gt;    polygon_id  description_orig                                             geom</span>
-<span class="co">#&gt;  * &lt;fct&gt;       &lt;chr&gt;                                          &lt;MULTIPOLYGON [m]&gt;</span>
-<span class="co">#&gt;  1 130153_v20… 70% 9120_qb; 30% … (((150669.4 227248.6, 150668.1 227242.9, 1505…</span>
-<span class="co">#&gt;  2 130815_v20… 70% gh; 30% 9160   (((258338.4 158696.1, 258336.5 158693.5, 2583…</span>
-<span class="co">#&gt;  3 137826_v20… 100% 6430,rbbhf    (((181587.2 234938, 181613.1 234933.1, 181646…</span>
-<span class="co">#&gt;  4 170624_v20… 100% rbbmr         (((145876.8 229686.8, 145701.7 229680.6, 1456…</span>
-<span class="co">#&gt;  5 203261_v20… 70% gh; 30% rbbmr  (((117137.2 210307.9, 117136.3 210288.3, 1171…</span>
-<span class="co">#&gt;  6 204352_v20… 80% gh; 20% rbbsp  (((116357.3 159278.3, 116340.5 159259.8, 1163…</span>
-<span class="co">#&gt;  7 204376_v20… 90% gh; 10% rbbsg  (((116110.1 210545.5, 116102.4 210541.1, 1160…</span>
-<span class="co">#&gt;  8 205188_v20… 60% rbbsp; 40% gh  (((232114.7 161594.5, 232122.7 161590.5, 2321…</span>
-<span class="co">#&gt;  9 205291_v20… 70% gh; 30% rbbsp  (((191253.5 160641.5, 191254.8 160636.1, 1912…</span>
-<span class="co">#&gt; 10 205756_v20… 70% gh; 30% rbbsf  (((216258.8 156749, 216260.9 156750, 216287.7…</span>
-<span class="co">#&gt; # … with 87,771 more rows</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hms_pol</span> <span class="op">&lt;-</span> <span class="va">hms</span><span class="op">$</span><span class="va">habitatmap_polygons</span></span>
+<span><span class="va">hms_pol</span></span>
+<span><span class="co">#&gt; Simple feature collection with 87781 features and 2 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243446.1</span></span>
+<span><span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span></span>
+<span><span class="co">#&gt; # A tibble: 87,781 x 3</span></span>
+<span><span class="co">#&gt;    polygon_id  description_orig                                             geom</span></span>
+<span><span class="co">#&gt;  * &lt;fct&gt;       &lt;chr&gt;                                          &lt;MULTIPOLYGON [m]&gt;</span></span>
+<span><span class="co">#&gt;  1 130153_v20… 70% 9120_qb; 30% … (((150669.4 227248.6, 150668.1 227242.9, 1505…</span></span>
+<span><span class="co">#&gt;  2 130815_v20… 70% gh; 30% 9160   (((258338.4 158696.1, 258336.5 158693.5, 2583…</span></span>
+<span><span class="co">#&gt;  3 137826_v20… 100% 6430,rbbhf    (((181587.2 234938, 181613.1 234933.1, 181646…</span></span>
+<span><span class="co">#&gt;  4 170624_v20… 100% rbbmr         (((145876.8 229686.8, 145701.7 229680.6, 1456…</span></span>
+<span><span class="co">#&gt;  5 203261_v20… 70% gh; 30% rbbmr  (((117137.2 210307.9, 117136.3 210288.3, 1171…</span></span>
+<span><span class="co">#&gt;  6 204352_v20… 80% gh; 20% rbbsp  (((116357.3 159278.3, 116340.5 159259.8, 1163…</span></span>
+<span><span class="co">#&gt;  7 204376_v20… 90% gh; 10% rbbsg  (((116110.1 210545.5, 116102.4 210541.1, 1160…</span></span>
+<span><span class="co">#&gt;  8 205188_v20… 60% rbbsp; 40% gh  (((232114.7 161594.5, 232122.7 161590.5, 2321…</span></span>
+<span><span class="co">#&gt;  9 205291_v20… 70% gh; 30% rbbsp  (((191253.5 160641.5, 191254.8 160636.1, 1912…</span></span>
+<span><span class="co">#&gt; 10 205756_v20… 70% gh; 30% rbbsf  (((216258.8 156749, 216260.9 156750, 216287.7…</span></span>
+<span><span class="co">#&gt; # … with 87,771 more rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hms_occ</span> <span class="op">&lt;-</span> <span class="va">hms</span><span class="op">$</span><span class="va">habitatmap_types</span>
-<span class="va">hms_occ</span>
-<span class="co">#&gt; # A tibble: 110,485 x 5</span>
-<span class="co">#&gt;    polygon_id   type     certain code_orig  phab</span>
-<span class="co">#&gt;    &lt;fct&gt;        &lt;fct&gt;    &lt;lgl&gt;   &lt;chr&gt;     &lt;int&gt;</span>
-<span class="co">#&gt;  1 000038_v2016 91E0_va  TRUE    91E0_va     100</span>
-<span class="co">#&gt;  2 000043_v2016 9130_end TRUE    9130_end    100</span>
-<span class="co">#&gt;  3 000064_v2020 9130_end TRUE    9130_end    100</span>
-<span class="co">#&gt;  4 000132_v2016 9130_end TRUE    9130_end    100</span>
-<span class="co">#&gt;  5 000204_v2016 91E0_vn  TRUE    91E0_vn     100</span>
-<span class="co">#&gt;  6 000255_v2016 91E0_vc  TRUE    91E0_vc     100</span>
-<span class="co">#&gt;  7 000297_v2016 rbbsp    TRUE    rbbsp        10</span>
-<span class="co">#&gt;  8 000311_v2016 9130_end TRUE    9130_end     70</span>
-<span class="co">#&gt;  9 000311_v2016 rbbsp    TRUE    rbbsp        30</span>
-<span class="co">#&gt; 10 000390_v2016 91E0_vn  TRUE    91E0_vn      70</span>
-<span class="co">#&gt; # … with 110,475 more rows</span></code></pre></div>
-<p>Let’s estimate the surface area per type, including uncertain occurrences of types and taking into account cover percentage per polygon (<code>phab</code>):</p>
+<code class="sourceCode R"><span><span class="va">hms_occ</span> <span class="op">&lt;-</span> <span class="va">hms</span><span class="op">$</span><span class="va">habitatmap_types</span></span>
+<span><span class="va">hms_occ</span></span>
+<span><span class="co">#&gt; # A tibble: 110,485 x 5</span></span>
+<span><span class="co">#&gt;    polygon_id   type     certain code_orig  phab</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;        &lt;fct&gt;    &lt;lgl&gt;   &lt;chr&gt;     &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1 000038_v2016 91E0_va  TRUE    91E0_va     100</span></span>
+<span><span class="co">#&gt;  2 000043_v2016 9130_end TRUE    9130_end    100</span></span>
+<span><span class="co">#&gt;  3 000064_v2020 9130_end TRUE    9130_end    100</span></span>
+<span><span class="co">#&gt;  4 000132_v2016 9130_end TRUE    9130_end    100</span></span>
+<span><span class="co">#&gt;  5 000204_v2016 91E0_vn  TRUE    91E0_vn     100</span></span>
+<span><span class="co">#&gt;  6 000255_v2016 91E0_vc  TRUE    91E0_vc     100</span></span>
+<span><span class="co">#&gt;  7 000297_v2016 rbbsp    TRUE    rbbsp        10</span></span>
+<span><span class="co">#&gt;  8 000311_v2016 9130_end TRUE    9130_end     70</span></span>
+<span><span class="co">#&gt;  9 000311_v2016 rbbsp    TRUE    rbbsp        30</span></span>
+<span><span class="co">#&gt; 10 000390_v2016 91E0_vn  TRUE    91E0_vn      70</span></span>
+<span><span class="co">#&gt; # … with 110,475 more rows</span></span></code></pre></div>
+<p>Let’s estimate the surface area per type, including uncertain
+occurrences of types and taking into account cover percentage per
+polygon (<code>phab</code>):</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hms_pol</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="va">st_drop_geometry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">hms_occ</span>, by <span class="op">=</span> <span class="st">"polygon_id"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-    <span class="co"># area of type within polygon:</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area_type <span class="op">=</span> <span class="va">area</span> <span class="op">*</span> <span class="va">phab</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area_type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-                    <span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="st">"ha"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-                    <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>
-            <span class="op">)</span>
-<span class="co">#&gt; # A tibble: 101 x 2</span>
-<span class="co">#&gt;    type        area</span>
-<span class="co">#&gt;    &lt;fct&gt;       [ha]</span>
-<span class="co">#&gt;  1 1130     5678.87</span>
-<span class="co">#&gt;  2 1140     2098.03</span>
-<span class="co">#&gt;  3 1310_pol   17.39</span>
-<span class="co">#&gt;  4 1310_zk    34.02</span>
-<span class="co">#&gt;  5 1310_zv    10.62</span>
-<span class="co">#&gt;  6 1320        2.41</span>
-<span class="co">#&gt;  7 1330_da   117.61</span>
-<span class="co">#&gt;  8 1330_hpr  138.12</span>
-<span class="co">#&gt;  9 2110       27.14</span>
-<span class="co">#&gt; 10 2120      462.54</span>
-<span class="co">#&gt; # … with 91 more rows</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hms_pol</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">st_drop_geometry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">hms_occ</span>, by <span class="op">=</span> <span class="st">"polygon_id"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="co"># area of type within polygon:</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area_type <span class="op">=</span> <span class="va">area</span> <span class="op">*</span> <span class="va">phab</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area_type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                    <span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="st">"ha"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                    <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
+<span>            <span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 101 x 2</span></span>
+<span><span class="co">#&gt;    type        area</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;       [ha]</span></span>
+<span><span class="co">#&gt;  1 1130     5678.87</span></span>
+<span><span class="co">#&gt;  2 1140     2098.03</span></span>
+<span><span class="co">#&gt;  3 1310_pol   17.39</span></span>
+<span><span class="co">#&gt;  4 1310_zk    34.02</span></span>
+<span><span class="co">#&gt;  5 1310_zv    10.62</span></span>
+<span><span class="co">#&gt;  6 1320        2.41</span></span>
+<span><span class="co">#&gt;  7 1330_da   117.61</span></span>
+<span><span class="co">#&gt;  8 1330_hpr  138.12</span></span>
+<span><span class="co">#&gt;  9 2110       27.14</span></span>
+<span><span class="co">#&gt; 10 2120      462.54</span></span>
+<span><span class="co">#&gt; # … with 91 more rows</span></span></code></pre></div>
 </div>
 <div id="read_habitatmap_terr" class="section level4">
 <h4 class="hasAnchor">
 <a href="#read_habitatmap_terr" class="anchor"></a>read_habitatmap_terr()</h4>
 <p><code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> behaves exactly the same way:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_polygons</span>
-<span class="co">#&gt; Simple feature collection with 78602 features and 4 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243351.8</span>
-<span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span>
-<span class="co">#&gt; # A tibble: 78,602 x 5</span>
-<span class="co">#&gt;    polygon_id  description_orig  description source                         geom</span>
-<span class="co">#&gt;  * &lt;fct&gt;       &lt;chr&gt;             &lt;chr&gt;       &lt;fct&gt;            &lt;MULTIPOLYGON [m]&gt;</span>
-<span class="co">#&gt;  1 130153_v20… 70% 9120_qb; 30%… 70% 9120_q… habita… (((150669.4 227248.6, 1506…</span>
-<span class="co">#&gt;  2 130815_v20… 70% gh; 30% 9160  70% gh; 30… habita… (((258338.4 158696.1, 2583…</span>
-<span class="co">#&gt;  3 137826_v20… 100% 6430,rbbhf   100% 6430_… habita… (((181587.2 234938, 181613…</span>
-<span class="co">#&gt;  4 170624_v20… 100% rbbmr        100% rbbmr  habita… (((145876.8 229686.8, 1457…</span>
-<span class="co">#&gt;  5 203261_v20… 70% gh; 30% rbbmr 70% gh; 30… habita… (((117137.2 210307.9, 1171…</span>
-<span class="co">#&gt;  6 204352_v20… 80% gh; 20% rbbsp 80% gh; 20… habita… (((116357.3 159278.3, 1163…</span>
-<span class="co">#&gt;  7 204376_v20… 90% gh; 10% rbbsg 90% gh; 10… habita… (((116110.1 210545.5, 1161…</span>
-<span class="co">#&gt;  8 205188_v20… 60% rbbsp; 40% gh 60% rbbsp;… habita… (((232114.7 161594.5, 2321…</span>
-<span class="co">#&gt;  9 205291_v20… 70% gh; 30% rbbsp 70% gh; 30… habita… (((191253.5 160641.5, 1912…</span>
-<span class="co">#&gt; 10 205756_v20… 70% gh; 30% rbbsf 70% gh; 30… habita… (((216258.8 156749, 216260…</span>
-<span class="co">#&gt; # … with 78,592 more rows</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_polygons</span></span>
+<span><span class="co">#&gt; Simple feature collection with 78602 features and 4 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 22003.2 ymin: 153084.4 xmax: 258871.8 ymax: 243351.8</span></span>
+<span><span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span></span>
+<span><span class="co">#&gt; # A tibble: 78,602 x 5</span></span>
+<span><span class="co">#&gt;    polygon_id  description_orig  description source                         geom</span></span>
+<span><span class="co">#&gt;  * &lt;fct&gt;       &lt;chr&gt;             &lt;chr&gt;       &lt;fct&gt;            &lt;MULTIPOLYGON [m]&gt;</span></span>
+<span><span class="co">#&gt;  1 130153_v20… 70% 9120_qb; 30%… 70% 9120_q… habita… (((150669.4 227248.6, 1506…</span></span>
+<span><span class="co">#&gt;  2 130815_v20… 70% gh; 30% 9160  70% gh; 30… habita… (((258338.4 158696.1, 2583…</span></span>
+<span><span class="co">#&gt;  3 137826_v20… 100% 6430,rbbhf   100% 6430_… habita… (((181587.2 234938, 181613…</span></span>
+<span><span class="co">#&gt;  4 170624_v20… 100% rbbmr        100% rbbmr  habita… (((145876.8 229686.8, 1457…</span></span>
+<span><span class="co">#&gt;  5 203261_v20… 70% gh; 30% rbbmr 70% gh; 30… habita… (((117137.2 210307.9, 1171…</span></span>
+<span><span class="co">#&gt;  6 204352_v20… 80% gh; 20% rbbsp 80% gh; 20… habita… (((116357.3 159278.3, 1163…</span></span>
+<span><span class="co">#&gt;  7 204376_v20… 90% gh; 10% rbbsg 90% gh; 10… habita… (((116110.1 210545.5, 1161…</span></span>
+<span><span class="co">#&gt;  8 205188_v20… 60% rbbsp; 40% gh 60% rbbsp;… habita… (((232114.7 161594.5, 2321…</span></span>
+<span><span class="co">#&gt;  9 205291_v20… 70% gh; 30% rbbsp 70% gh; 30… habita… (((191253.5 160641.5, 1912…</span></span>
+<span><span class="co">#&gt; 10 205756_v20… 70% gh; 30% rbbsf 70% gh; 30… habita… (((216258.8 156749, 216260…</span></span>
+<span><span class="co">#&gt; # … with 78,592 more rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span>
-<span class="co">#&gt; # A tibble: 99,784 x 6</span>
-<span class="co">#&gt;    polygon_id   type     certain code_orig  phab source            </span>
-<span class="co">#&gt;    &lt;fct&gt;        &lt;fct&gt;    &lt;lgl&gt;   &lt;chr&gt;     &lt;int&gt; &lt;fct&gt;             </span>
-<span class="co">#&gt;  1 000038_v2016 91E0_va  TRUE    91E0_va     100 habitatmap_stdized</span>
-<span class="co">#&gt;  2 000043_v2016 9130_end TRUE    9130_end    100 habitatmap_stdized</span>
-<span class="co">#&gt;  3 000064_v2020 9130_end TRUE    9130_end    100 habitatmap_stdized</span>
-<span class="co">#&gt;  4 000132_v2016 9130_end TRUE    9130_end    100 habitatmap_stdized</span>
-<span class="co">#&gt;  5 000204_v2016 91E0_vn  TRUE    91E0_vn     100 habitatmap_stdized</span>
-<span class="co">#&gt;  6 000255_v2016 91E0_vc  TRUE    91E0_vc     100 habitatmap_stdized</span>
-<span class="co">#&gt;  7 000297_v2016 rbbsp    TRUE    rbbsp        10 habitatmap_stdized</span>
-<span class="co">#&gt;  8 000311_v2016 9130_end TRUE    9130_end     70 habitatmap_stdized</span>
-<span class="co">#&gt;  9 000311_v2016 rbbsp    TRUE    rbbsp        30 habitatmap_stdized</span>
-<span class="co">#&gt; 10 000390_v2016 91E0_vn  TRUE    91E0_vn      70 habitatmap_stdized</span>
-<span class="co">#&gt; # … with 99,774 more rows</span></code></pre></div>
-<p>Compared to <code>habitatmap_stdized</code>, <em>purely</em> aquatic or non-habitat/RIB polygons were omitted, and a part of the type data were interpreted in a more specific way. Further, while type <code>7220</code> is present in <code>habitatmap_terr</code>, the <code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> function drops it by default because the <code>habitatsprings</code> data source is recommended for that. This can be controlled by the <code>drop_7220</code> argument.</p>
-<p>As a consequence, some type codes are completely absent from <code>habitatmap_terr_types</code>:</p>
+<code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span></span>
+<span><span class="co">#&gt; # A tibble: 99,784 x 6</span></span>
+<span><span class="co">#&gt;    polygon_id   type     certain code_orig  phab source            </span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;        &lt;fct&gt;    &lt;lgl&gt;   &lt;chr&gt;     &lt;int&gt; &lt;fct&gt;             </span></span>
+<span><span class="co">#&gt;  1 000038_v2016 91E0_va  TRUE    91E0_va     100 habitatmap_stdized</span></span>
+<span><span class="co">#&gt;  2 000043_v2016 9130_end TRUE    9130_end    100 habitatmap_stdized</span></span>
+<span><span class="co">#&gt;  3 000064_v2020 9130_end TRUE    9130_end    100 habitatmap_stdized</span></span>
+<span><span class="co">#&gt;  4 000132_v2016 9130_end TRUE    9130_end    100 habitatmap_stdized</span></span>
+<span><span class="co">#&gt;  5 000204_v2016 91E0_vn  TRUE    91E0_vn     100 habitatmap_stdized</span></span>
+<span><span class="co">#&gt;  6 000255_v2016 91E0_vc  TRUE    91E0_vc     100 habitatmap_stdized</span></span>
+<span><span class="co">#&gt;  7 000297_v2016 rbbsp    TRUE    rbbsp        10 habitatmap_stdized</span></span>
+<span><span class="co">#&gt;  8 000311_v2016 9130_end TRUE    9130_end     70 habitatmap_stdized</span></span>
+<span><span class="co">#&gt;  9 000311_v2016 rbbsp    TRUE    rbbsp        30 habitatmap_stdized</span></span>
+<span><span class="co">#&gt; 10 000390_v2016 91E0_vn  TRUE    91E0_vn      70 habitatmap_stdized</span></span>
+<span><span class="co">#&gt; # … with 99,774 more rows</span></span></code></pre></div>
+<p>Compared to <code>habitatmap_stdized</code>, <em>purely</em> aquatic
+or non-habitat/RIB polygons were omitted, and a part of the type data
+were interpreted in a more specific way. Further, while type
+<code>7220</code> is present in <code>habitatmap_terr</code>, the
+<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> function drops it by default because
+the <code>habitatsprings</code> data source is recommended for that.
+This can be controlled by the <code>drop_7220</code> argument.</p>
+<p>As a consequence, some type codes are completely absent from
+<code>habitatmap_terr_types</code>:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hms_occ</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span>, 
-            by <span class="op">=</span> <span class="st">"type"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 7 x 1</span>
-<span class="co">#&gt;   type </span>
-<span class="co">#&gt;   &lt;fct&gt;</span>
-<span class="co">#&gt; 1 2190 </span>
-<span class="co">#&gt; 2 6410 </span>
-<span class="co">#&gt; 3 6430 </span>
-<span class="co">#&gt; 4 6510 </span>
-<span class="co">#&gt; 5 7140 </span>
-<span class="co">#&gt; 6 7220 </span>
-<span class="co">#&gt; 7 9130</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hms_occ</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span>, </span>
+<span>            by <span class="op">=</span> <span class="st">"type"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 7 x 1</span></span>
+<span><span class="co">#&gt;   type </span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;</span></span>
+<span><span class="co">#&gt; 1 2190 </span></span>
+<span><span class="co">#&gt; 2 6410 </span></span>
+<span><span class="co">#&gt; 3 6430 </span></span>
+<span><span class="co">#&gt; 4 6510 </span></span>
+<span><span class="co">#&gt; 5 7140 </span></span>
+<span><span class="co">#&gt; 6 7220 </span></span>
+<span><span class="co">#&gt; 7 9130</span></span></code></pre></div>
 <p>About 3% of all type occurrences received a new type code:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pct <span class="op">=</span> <span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 2 x 3</span>
-<span class="co">#&gt;   source                                  n   pct</span>
-<span class="co">#&gt;   &lt;fct&gt;                               &lt;int&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 habitatmap_stdized                  96424    97</span>
-<span class="co">#&gt; 2 habitatmap_stdized + interpretation  3360     3</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pct <span class="op">=</span> <span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 2 x 3</span></span>
+<span><span class="co">#&gt;   source                                  n   pct</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;                               &lt;int&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 habitatmap_stdized                  96424    97</span></span>
+<span><span class="co">#&gt; 2 habitatmap_stdized + interpretation  3360     3</span></span></code></pre></div>
 </div>
 <div id="read_watersurfaces_hab" class="section level4">
 <h4 class="hasAnchor">
 <a href="#read_watersurfaces_hab" class="anchor"></a>read_watersurfaces_hab()</h4>
-<p>A similar story, this time for polygons that (could) have aquatic types:</p>
+<p>A similar story, this time for polygons that (could) have aquatic
+types:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">wsh</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">wsh</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_polygons</span>
-<span class="co">#&gt; Simple feature collection with 3233 features and 4 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 22546.57 ymin: 159273.1 xmax: 253896.9 ymax: 242960.1</span>
-<span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span>
-<span class="co">#&gt; # A tibble: 3,233 x 5</span>
-<span class="co">#&gt;    polygon_id polygon_id_ws polygon_id_habitatm… description_orig               </span>
-<span class="co">#&gt;  * &lt;fct&gt;      &lt;fct&gt;         &lt;fct&gt;                &lt;chr&gt;                          </span>
-<span class="co">#&gt;  1 ANTANT0082 ANTANT0082    596466_v2014         60% 3150; 20% rbbmr; 20% rbbsf </span>
-<span class="co">#&gt;  2 ANTANT0234 ANTANT0234    633396_v2020         100% 3130_na                   </span>
-<span class="co">#&gt;  3 ANTANT0251 ANTANT0251    113978_v2014         100% 3150                      </span>
-<span class="co">#&gt;  4 ANTANT0253 ANTANT0253    111606_v2014         100% 3150                      </span>
-<span class="co">#&gt;  5 ANTANT0297 ANTANT0297    409153_v2014+409153… 85% 3140; 15% 3150+85% 3140; 1…</span>
-<span class="co">#&gt;  6 ANTANT0315 ANTANT0315    519082_v2018         100% 3140                      </span>
-<span class="co">#&gt;  7 ANTANT0319 ANTANT0319    601958_v2014         100% 3150,gh                   </span>
-<span class="co">#&gt;  8 ANTANT0381 ANTANT0381    644003_v2014         85% gh; 15% 3140               </span>
-<span class="co">#&gt;  9 ANTANT0383 ANTANT0383    631879_v2014+593522… 50% 3150; 40% rbbmr; 10% rbbsf…</span>
-<span class="co">#&gt; 10 ANTANT0384 ANTANT0384    644003_v2014         85% gh; 15% 3140               </span>
-<span class="co">#&gt; # … with 3,223 more rows, and 1 more variable: geom &lt;MULTIPOLYGON [m]&gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_polygons</span></span>
+<span><span class="co">#&gt; Simple feature collection with 3233 features and 4 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 22546.57 ymin: 159273.1 xmax: 253896.9 ymax: 242960.1</span></span>
+<span><span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span></span>
+<span><span class="co">#&gt; # A tibble: 3,233 x 5</span></span>
+<span><span class="co">#&gt;    polygon_id polygon_id_ws polygon_id_habitatm… description_orig               </span></span>
+<span><span class="co">#&gt;  * &lt;fct&gt;      &lt;fct&gt;         &lt;fct&gt;                &lt;chr&gt;                          </span></span>
+<span><span class="co">#&gt;  1 ANTANT0082 ANTANT0082    596466_v2014         60% 3150; 20% rbbmr; 20% rbbsf </span></span>
+<span><span class="co">#&gt;  2 ANTANT0234 ANTANT0234    633396_v2020         100% 3130_na                   </span></span>
+<span><span class="co">#&gt;  3 ANTANT0251 ANTANT0251    113978_v2014         100% 3150                      </span></span>
+<span><span class="co">#&gt;  4 ANTANT0253 ANTANT0253    111606_v2014         100% 3150                      </span></span>
+<span><span class="co">#&gt;  5 ANTANT0297 ANTANT0297    409153_v2014+409153… 85% 3140; 15% 3150+85% 3140; 1…</span></span>
+<span><span class="co">#&gt;  6 ANTANT0315 ANTANT0315    519082_v2018         100% 3140                      </span></span>
+<span><span class="co">#&gt;  7 ANTANT0319 ANTANT0319    601958_v2014         100% 3150,gh                   </span></span>
+<span><span class="co">#&gt;  8 ANTANT0381 ANTANT0381    644003_v2014         85% gh; 15% 3140               </span></span>
+<span><span class="co">#&gt;  9 ANTANT0383 ANTANT0383    631879_v2014+593522… 50% 3150; 40% rbbmr; 10% rbbsf…</span></span>
+<span><span class="co">#&gt; 10 ANTANT0384 ANTANT0384    644003_v2014         85% gh; 15% 3140               </span></span>
+<span><span class="co">#&gt; # … with 3,223 more rows, and 1 more variable: geom &lt;MULTIPOLYGON [m]&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_types</span>
-<span class="co">#&gt; # A tibble: 3,669 x 4</span>
-<span class="co">#&gt;    polygon_id type    certain code_orig</span>
-<span class="co">#&gt;    &lt;fct&gt;      &lt;fct&gt;   &lt;lgl&gt;   &lt;chr&gt;    </span>
-<span class="co">#&gt;  1 ANTANT0082 3150    TRUE    3150     </span>
-<span class="co">#&gt;  2 ANTANT0234 3130_na TRUE    3130_na  </span>
-<span class="co">#&gt;  3 ANTANT0251 3150    TRUE    3150     </span>
-<span class="co">#&gt;  4 ANTANT0253 3150    TRUE    3150     </span>
-<span class="co">#&gt;  5 ANTANT0297 3140    TRUE    3140     </span>
-<span class="co">#&gt;  6 ANTANT0297 3150    TRUE    3150     </span>
-<span class="co">#&gt;  7 ANTANT0315 3140    TRUE    3140     </span>
-<span class="co">#&gt;  8 ANTANT0319 3150    FALSE   3150,gh  </span>
-<span class="co">#&gt;  9 ANTANT0381 3140    TRUE    3140     </span>
-<span class="co">#&gt; 10 ANTANT0383 3150    TRUE    3150     </span>
-<span class="co">#&gt; # … with 3,659 more rows</span></code></pre></div>
-<p>Let’s compute some statistics of standing water types (ignoring the value <code>certain</code>):</p>
+<code class="sourceCode R"><span><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_types</span></span>
+<span><span class="co">#&gt; # A tibble: 3,669 x 4</span></span>
+<span><span class="co">#&gt;    polygon_id type    certain code_orig</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;      &lt;fct&gt;   &lt;lgl&gt;   &lt;chr&gt;    </span></span>
+<span><span class="co">#&gt;  1 ANTANT0082 3150    TRUE    3150     </span></span>
+<span><span class="co">#&gt;  2 ANTANT0234 3130_na TRUE    3130_na  </span></span>
+<span><span class="co">#&gt;  3 ANTANT0251 3150    TRUE    3150     </span></span>
+<span><span class="co">#&gt;  4 ANTANT0253 3150    TRUE    3150     </span></span>
+<span><span class="co">#&gt;  5 ANTANT0297 3140    TRUE    3140     </span></span>
+<span><span class="co">#&gt;  6 ANTANT0297 3150    TRUE    3150     </span></span>
+<span><span class="co">#&gt;  7 ANTANT0315 3140    TRUE    3140     </span></span>
+<span><span class="co">#&gt;  8 ANTANT0319 3150    FALSE   3150,gh  </span></span>
+<span><span class="co">#&gt;  9 ANTANT0381 3140    TRUE    3140     </span></span>
+<span><span class="co">#&gt; 10 ANTANT0383 3150    TRUE    3150     </span></span>
+<span><span class="co">#&gt; # … with 3,659 more rows</span></span></code></pre></div>
+<p>Let’s compute some statistics of standing water types (ignoring the
+value <code>certain</code>):</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_polygons</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="va">st_drop_geometry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_types</span>,
-             by <span class="op">=</span> <span class="st">"polygon_id"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>nr_watersurfaces <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">polygon_id</span><span class="op">)</span>,
-            total_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span>,
-            area_min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span>,
-            area_Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.25</span><span class="op">)</span>,
-            area_Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.5</span><span class="op">)</span>,
-            area_Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.75</span><span class="op">)</span>,
-            max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span>
-            <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"area|max"</span><span class="op">)</span><span class="op">)</span>, 
-            <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 9 x 8</span>
-<span class="co">#&gt;   type     nr_watersurfaces total_area area_min area_Q1 area_Q2 area_Q3     max</span>
-<span class="co">#&gt;   &lt;fct&gt;               &lt;int&gt;        [a]      [a]     [a]     [a]     [a]     [a]</span>
-<span class="co">#&gt; 1 2190_a                318     3605.6      0.0     0.9     2.1     5.5   317.5</span>
-<span class="co">#&gt; 2 3110                    6     1876.8    111.7   139.7   216.9   330.3   849.3</span>
-<span class="co">#&gt; 3 3130                  219    33022.9      0.6    13.0    41.0   160.0  2807.2</span>
-<span class="co">#&gt; 4 3130_aom             1267   107732.6      0.1     2.3     9.7    44.1  7062.7</span>
-<span class="co">#&gt; 5 3130_na               354   120174.2      1.0    44.7   122.5   277.9 13668.2</span>
-<span class="co">#&gt; 6 3140                  104    72272.0      0.8    13.3    55.3   418.5 13668.2</span>
-<span class="co">#&gt; 7 3150                  475   105019.1      0.4     6.6    17.3    83.5 13668.2</span>
-<span class="co">#&gt; 8 3160                  379    27936.9      0.1     6.1    17.4    59.3  4179.1</span>
-<span class="co">#&gt; 9 rbbah                 517    33716.3      0.1     4.2    10.9    47.0  3748.6</span></code></pre></div>
-<p>A strong point of <code>sf</code> objects is that the geometry has explicit units. Consequently we can make use of tools like <code><a href="https://rdrr.io/pkg/units/man/units.html">set_units()</a></code> to convert units (e.g. surface area as <em>are</em> (a)).</p>
-<p>Because the main type code <code>3130</code> will mostly boil down to <code>3130_aom</code> in the field, a further interpreted flavour can be generated with <code>read_watersurfaces_hab(interpreted = TRUE)</code>.</p>
+<code class="sourceCode R"><span><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_polygons</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">st_drop_geometry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_types</span>,</span>
+<span>             by <span class="op">=</span> <span class="st">"polygon_id"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>nr_watersurfaces <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">polygon_id</span><span class="op">)</span>,</span>
+<span>            total_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span>,</span>
+<span>            area_min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span>,</span>
+<span>            area_Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.25</span><span class="op">)</span>,</span>
+<span>            area_Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>            area_Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.75</span><span class="op">)</span>,</span>
+<span>            max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span></span>
+<span>            <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"area|max"</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>            <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 9 x 8</span></span>
+<span><span class="co">#&gt;   type     nr_watersurfaces total_area area_min area_Q1 area_Q2 area_Q3     max</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;               &lt;int&gt;        [a]      [a]     [a]     [a]     [a]     [a]</span></span>
+<span><span class="co">#&gt; 1 2190_a                318     3605.6      0.0     0.9     2.1     5.5   317.5</span></span>
+<span><span class="co">#&gt; 2 3110                    6     1876.8    111.7   139.7   216.9   330.3   849.3</span></span>
+<span><span class="co">#&gt; 3 3130                  219    33022.9      0.6    13.0    41.0   160.0  2807.2</span></span>
+<span><span class="co">#&gt; 4 3130_aom             1267   107732.6      0.1     2.3     9.7    44.1  7062.7</span></span>
+<span><span class="co">#&gt; 5 3130_na               354   120174.2      1.0    44.7   122.5   277.9 13668.2</span></span>
+<span><span class="co">#&gt; 6 3140                  104    72272.0      0.8    13.3    55.3   418.5 13668.2</span></span>
+<span><span class="co">#&gt; 7 3150                  475   105019.1      0.4     6.6    17.3    83.5 13668.2</span></span>
+<span><span class="co">#&gt; 8 3160                  379    27936.9      0.1     6.1    17.4    59.3  4179.1</span></span>
+<span><span class="co">#&gt; 9 rbbah                 517    33716.3      0.1     4.2    10.9    47.0  3748.6</span></span></code></pre></div>
+<p>A strong point of <code>sf</code> objects is that the geometry has
+explicit units. Consequently we can make use of tools like
+<code><a href="https://rdrr.io/pkg/units/man/units.html">set_units()</a></code> to convert units (e.g. surface area as
+<em>are</em> (a)).</p>
+<p>Because the main type code <code>3130</code> will mostly boil down to
+<code>3130_aom</code> in the field, a further interpreted flavour can be
+generated with
+<code>read_watersurfaces_hab(interpreted = TRUE)</code>.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab</a></span><span class="op">(</span>interpreted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="va">.</span><span class="op">$</span><span class="va">watersurfaces_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"3130"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="va">nrow</span>
-<span class="co">#&gt; [1] 0</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab</a></span><span class="op">(</span>interpreted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">.</span><span class="op">$</span><span class="va">watersurfaces_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"3130"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">nrow</span></span>
+<span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 </div>
 </div>
 </div>
 <div id="matching-interpreted-data-sources-with-a-dataframe-column-of-types" class="section level2">
 <h2 class="hasAnchor">
-<a href="#matching-interpreted-data-sources-with-a-dataframe-column-of-types" class="anchor"></a>Matching interpreted data sources with a dataframe column of types</h2>
-<p>The <code><a href="../reference/expand_types.html">expand_types()</a></code> function helps us to join a type column of your own dataframe with the results of <code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> or <code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code>.</p>
-<p>For both of these datasets, the following conversions of your dataframe are supported in order to create optimal joins:</p>
+<a href="#matching-interpreted-data-sources-with-a-dataframe-column-of-types" class="anchor"></a>Matching interpreted data sources with a dataframe column of
+types</h2>
+<p>The <code><a href="../reference/expand_types.html">expand_types()</a></code> function helps us to join a type
+column of your own dataframe with the results of
+<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> or
+<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code>.</p>
+<p>For both of these datasets, the following conversions of your
+dataframe are supported in order to create optimal joins:</p>
 <ul>
-<li>adding extra <em>subtype</em> rows when main type codes occur for which subtypes exist;</li>
-<li>adding extra <em>main type</em> rows when certain subtypes of that main type are present (the conditions can be relaxed; see the function documentation). This is supported for 2330, 6230 and 91E0, for which this makes sense with the two mentioned data sources.</li>
+<li>adding extra <em>subtype</em> rows when main type codes occur for
+which subtypes exist;</li>
+<li>adding extra <em>main type</em> rows when certain subtypes of that
+main type are present (the conditions can be relaxed; see the function
+documentation). This is supported for 2330, 6230 and 91E0, for which
+this makes sense with the two mentioned data sources.</li>
 </ul>
 <p>An example (<code>df</code> is our dataframe):</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span>
-    <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
-        <span class="op">~</span><span class="va">mycode</span>, <span class="op">~</span><span class="va">obs</span>,
-        <span class="st">"2130"</span>, <span class="fl">5</span>,
-        <span class="st">"2190"</span>, <span class="fl">45</span>,
-        <span class="st">"2330_bu"</span>, <span class="fl">8</span>,
-        <span class="st">"2330_dw"</span>, <span class="fl">8</span>,
-        <span class="st">"6410_mo"</span>, <span class="fl">78</span>,
-        <span class="st">"6410_ve"</span>, <span class="fl">4</span>,
-        <span class="st">"91E0_vn"</span>, <span class="fl">10</span>
-    <span class="op">)</span>
-<span class="va">df</span>
-<span class="co">#&gt; # A tibble: 7 × 2</span>
-<span class="co">#&gt;   mycode    obs</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 2130        5</span>
-<span class="co">#&gt; 2 2190       45</span>
-<span class="co">#&gt; 3 2330_bu     8</span>
-<span class="co">#&gt; 4 2330_dw     8</span>
-<span class="co">#&gt; 5 6410_mo    78</span>
-<span class="co">#&gt; 6 6410_ve     4</span>
-<span class="co">#&gt; 7 91E0_vn    10</span></code></pre></div>
-<p>With the <code>type_var</code> argument you specify which variable of your dataframe represents type codes:</p>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span></span>
+<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<span>        <span class="op">~</span><span class="va">mycode</span>, <span class="op">~</span><span class="va">obs</span>,</span>
+<span>        <span class="st">"2130"</span>, <span class="fl">5</span>,</span>
+<span>        <span class="st">"2190"</span>, <span class="fl">45</span>,</span>
+<span>        <span class="st">"2330_bu"</span>, <span class="fl">8</span>,</span>
+<span>        <span class="st">"2330_dw"</span>, <span class="fl">8</span>,</span>
+<span>        <span class="st">"6410_mo"</span>, <span class="fl">78</span>,</span>
+<span>        <span class="st">"6410_ve"</span>, <span class="fl">4</span>,</span>
+<span>        <span class="st">"91E0_vn"</span>, <span class="fl">10</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="va">df</span></span>
+<span><span class="co">#&gt; # A tibble: 7 × 2</span></span>
+<span><span class="co">#&gt;   mycode    obs</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 2130        5</span></span>
+<span><span class="co">#&gt; 2 2190       45</span></span>
+<span><span class="co">#&gt; 3 2330_bu     8</span></span>
+<span><span class="co">#&gt; 4 2330_dw     8</span></span>
+<span><span class="co">#&gt; 5 6410_mo    78</span></span>
+<span><span class="co">#&gt; 6 6410_ve     4</span></span>
+<span><span class="co">#&gt; 7 91E0_vn    10</span></span></code></pre></div>
+<p>With the <code>type_var</code> argument you specify which variable of
+your dataframe represents type codes:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_exp</span> <span class="op">&lt;-</span> 
-    <span class="fu"><a href="../reference/expand_types.html">expand_types</a></span><span class="op">(</span><span class="va">df</span>, type_var <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span>
-<span class="va">df_exp</span>
-<span class="co">#&gt; # A tibble: 13 × 2</span>
-<span class="co">#&gt;    mycode        obs</span>
-<span class="co">#&gt;    &lt;chr&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 2130            5</span>
-<span class="co">#&gt;  2 2190           45</span>
-<span class="co">#&gt;  3 2330_bu         8</span>
-<span class="co">#&gt;  4 2330_dw         8</span>
-<span class="co">#&gt;  5 6410_mo        78</span>
-<span class="co">#&gt;  6 6410_ve         4</span>
-<span class="co">#&gt;  7 91E0_vn        10</span>
-<span class="co">#&gt;  8 2130_had        5</span>
-<span class="co">#&gt;  9 2130_hd         5</span>
-<span class="co">#&gt; 10 2190_a         45</span>
-<span class="co">#&gt; 11 2190_mp        45</span>
-<span class="co">#&gt; 12 2190_overig    45</span>
-<span class="co">#&gt; 13 2330            8</span></code></pre></div>
-<p>More examples and features are explained in the documentation of <code><a href="../reference/expand_types.html">expand_types()</a></code>.</p>
-<p>Obviously, more rows of <code>habitatmap_terr</code> will be retained by joining <code>df_exp</code>:</p>
+<code class="sourceCode R"><span><span class="va">df_exp</span> <span class="op">&lt;-</span> </span>
+<span>    <span class="fu"><a href="../reference/expand_types.html">expand_types</a></span><span class="op">(</span><span class="va">df</span>, type_var <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span></span>
+<span><span class="va">df_exp</span></span>
+<span><span class="co">#&gt; # A tibble: 13 × 2</span></span>
+<span><span class="co">#&gt;    mycode        obs</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;       &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 2130            5</span></span>
+<span><span class="co">#&gt;  2 2190           45</span></span>
+<span><span class="co">#&gt;  3 2330_bu         8</span></span>
+<span><span class="co">#&gt;  4 2330_dw         8</span></span>
+<span><span class="co">#&gt;  5 6410_mo        78</span></span>
+<span><span class="co">#&gt;  6 6410_ve         4</span></span>
+<span><span class="co">#&gt;  7 91E0_vn        10</span></span>
+<span><span class="co">#&gt;  8 2130_had        5</span></span>
+<span><span class="co">#&gt;  9 2130_hd         5</span></span>
+<span><span class="co">#&gt; 10 2190_a         45</span></span>
+<span><span class="co">#&gt; 11 2190_mp        45</span></span>
+<span><span class="co">#&gt; 12 2190_overig    45</span></span>
+<span><span class="co">#&gt; 13 2330            8</span></span></code></pre></div>
+<p>More examples and features are explained in the documentation of
+<code><a href="../reference/expand_types.html">expand_types()</a></code>.</p>
+<p>Obviously, more rows of <code>habitatmap_terr</code> will be retained
+by joining <code>df_exp</code>:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">df_exp</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="va">nrow</span>
-<span class="co">#&gt; [1] 6634</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">df_exp</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">nrow</span></span>
+<span><span class="co">#&gt; [1] 6634</span></span></code></pre></div>
 <p>When joining with <code>df</code>:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">df</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="va">nrow</span>
-<span class="co">#&gt; [1] 4984</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">df</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">nrow</span></span>
+<span><span class="co">#&gt; [1] 4984</span></span></code></pre></div>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-de_saeger_biologische_2020" class="csl-entry">
-De Saeger, Steven, Robin Guelinckx, Patrik Oosterlynck, Adinda De Bruyn, Klaas Debusschere, Pieter Dhaluin, Rémar Erens, et al. 2020. <em><span class="nocase">Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2020</span></em>. <span class="nocase">Reports of the Research Institute for Nature and Forest</span>. <span>Brussels</span>: <span>Research Institute for Nature and Forest (INBO)</span>. <a href="https://doi.org/10.21436/inbor.18840851">https://doi.org/10.21436/inbor.18840851</a>.
+De Saeger, Steven, Robin Guelinckx, Patrik Oosterlynck, Adinda De Bruyn,
+Klaas Debusschere, Pieter Dhaluin, Rémar Erens, et al. 2020. <em><span class="nocase">Biologische Waarderingskaart en Natura 2000 Habitatkaart,
+uitgave 2020</span></em>. <span class="nocase">Reports of the Research
+Institute for Nature and Forest</span>. <span>Brussels</span>:
+<span>Research Institute for Nature and Forest (INBO)</span>. <a href="https://doi.org/10.21436/inbor.18840851">https://doi.org/10.21436/inbor.18840851</a>.
 </div>
 <div id="ref-leyssen_watervlakken_2020" class="csl-entry">
-Leyssen, An, Kevin Scheers, Vincent Smeekens, Carine Wils, Jo Packet, Geert De Knijf, and Luc Denys. 2020. <em><span class="nocase">Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen: uitgave 2020</span></em>. <span class="nocase">Reports of the Research Institute for Nature and Forest</span>. <span>Brussels</span>: <span>Research Institute for Nature and Forest (INBO)</span>. <a href="https://doi.org/10.21436/inbor.19088385">https://doi.org/10.21436/inbor.19088385</a>.
+Leyssen, An, Kevin Scheers, Vincent Smeekens, Carine Wils, Jo Packet,
+Geert De Knijf, and Luc Denys. 2020. <em><span class="nocase">Watervlakken versie 1.1: polygonenkaart van stilstaand
+water in Vlaanderen: uitgave 2020</span></em>. <span class="nocase">Reports of the Research Institute for Nature and
+Forest</span>. <span>Brussels</span>: <span>Research Institute for
+Nature and Forest (INBO)</span>. <a href="https://doi.org/10.21436/inbor.19088385">https://doi.org/10.21436/inbor.19088385</a>.
 </div>
 <div id="ref-leyssen_indicatieve_2020" class="csl-entry">
-Leyssen, An, Vincent Smeekens, and Luc Denys. 2020. <em><span class="nocase">Indicatieve situering van het Natura 2000 habitattype 3260: Submontane en laaglandrivieren met vegetaties behorend tot het Ranunculion fluitantis en het Callitricho-Batrachion. Uitgave 2020 (versie 1.7)</span></em>. <span class="nocase">Reports of the Research Institute for Nature and Forest</span>. <span>Brussels</span>: <span>Research Institute for Nature and Forest (INBO)</span>. <a href="https://doi.org/10.21436/inbor.18903609">https://doi.org/10.21436/inbor.18903609</a>.
+Leyssen, An, Vincent Smeekens, and Luc Denys. 2020. <em><span class="nocase">Indicatieve situering van het Natura 2000 habitattype
+3260: Submontane en laaglandrivieren met vegetaties behorend tot het
+Ranunculion fluitantis en het Callitricho-Batrachion. Uitgave 2020
+(versie 1.7)</span></em>. <span class="nocase">Reports of the Research
+Institute for Nature and Forest</span>. <span>Brussels</span>:
+<span>Research Institute for Nature and Forest (INBO)</span>. <a href="https://doi.org/10.21436/inbor.18903609">https://doi.org/10.21436/inbor.18903609</a>.
 </div>
 </div>
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
-<li id="fn1"><p>A tibble is a dataframe that makes working in the tidyverse a little <a href="https://r4ds.had.co.nz/tibbles.html">easier</a>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>A tibble is a dataframe that makes working in the
+tidyverse a little <a href="https://r4ds.had.co.nz/tibbles.html">easier</a>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
