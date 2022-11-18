@@ -1,6 +1,7 @@
 # n2khab (development version)
 
 - Reference list `namelist` has been updated with improved type names (#163; thanks @jeroenvdborre).
+- Paper by De Saeger et al. (2017) is now referred in documentation of `read_habitatmap()` and derived functions (#165).
 
 # n2khab 0.7.0 (2022-05-23)
 
