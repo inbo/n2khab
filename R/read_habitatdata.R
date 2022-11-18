@@ -110,12 +110,20 @@
 #'
 #' @references
 #'
-#' De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
+#' \itemize{
+#' \item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A.,
+#' Debusschere, K.,
 #' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-#' Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+#' Opdebeeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
 #' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
 #' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
 #' \doi{10.21436/inbor.18840851}.
+#' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
+#' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
+#' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
+#' colloque de Saint-Mandé 2012 - Prodrome et cartographie des végétations de
+#' France - 2017. Vol. 6: 372-382.
+#' }
 #'
 #' @examples
 #' \dontrun{
@@ -768,12 +776,20 @@ read_watersurfaces <-
 #'
 #' @references
 #'
-#' De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
+#' \itemize{
+#' \item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A.,
+#' Debusschere, K.,
 #' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-#' Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+#' Opdebeeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
 #' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
 #' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
 #' \doi{10.21436/inbor.18840851}.
+#' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
+#' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
+#' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
+#' colloque de Saint-Mandé 2012 - Prodrome et cartographie des végétations de
+#' France - 2017. Vol. 6: 372-382.
+#' }
 #'
 #' @examples
 #' \dontrun{
@@ -914,7 +930,9 @@ read_habitatmap <-
 #' Lambert 72 CRS (EPSG-code \href{https://epsg.io/31370}{31370}), and
 #' \code{habitatmap_terr_types}.
 #' \code{habitatmap_terr} is the further interpreted, terrestrial part of
-#' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}).
+#' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}),
+#' which, in turn, is derived from the raw data source \code{habitatmap}
+#' (De Saeger et al., 2020).
 #' By default, occurrences of type \code{7220} are dropped because a more
 #' reliable data source is available for this habitat type (see \code{drop_7220}
 #' argument).
@@ -1015,6 +1033,23 @@ read_habitatmap <-
 #'     }
 #'
 #' @family functions involved in processing the 'habitatmap' data source
+#'
+#' @references
+#'
+#' \itemize{
+#' \item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A.,
+#' Debusschere, K.,
+#' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
+#' Opdebeeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
+#' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
+#' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
+#' \doi{10.21436/inbor.18840851}.
+#' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
+#' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
+#' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
+#' colloque de Saint-Mandé 2012 - Prodrome et cartographie des végétations de
+#' France - 2017. Vol. 6: 372-382.
+#' }
 #'
 #' @examples
 #' \dontrun{
