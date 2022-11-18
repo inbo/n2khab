@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
       </span>
     </div>
 
@@ -170,7 +170,9 @@ class (such as <code>data.frame</code> or <code>sf</code>)</p></td>
     any non-convertible bytes in the input.  (This would normally be a
     single character, but can be more.)  If <code>"byte"</code>, the indication is
     <code>"&lt;xx&gt;"</code> with the hex code of the byte.  If <code>"Unicode"</code>
-    and converting from UTF-8, the Unicode point in the form <code>"&lt;U+xxxx&gt;"</code>.</p></td>
+    and converting from UTF-8, the Unicode point in the form
+    <code>"&lt;U+xxxx&gt;"</code>, or if <code>c99</code>, a C99-style escape
+    <code>"\uxxxx"</code>.</p></td>
     </tr>
     <tr>
       <th>colnames</th>
