@@ -20,7 +20,7 @@ install.packages("devtools")
 
 #   Check Package:             'Ctrl + Shift + E' (same as RStudio button 'check')
         # Preferrably perform the package check before pushing! Add extra commits if needed.
-        # At least the master branch should always have a package with successful package check result,
+        # At least the main branch should always have a package with successful package check result,
         # i.e. without warnings/errors/notes. So try to solve in your own branch and ask help where needed.
         # The feedback from the check is often very helpful.
 
@@ -49,7 +49,7 @@ devtools::install()
     # With vignettes:
     devtools::install(build_vignettes = TRUE)
 
-# Doing a github-based package installation (defaults to the master branch):
+# Doing a github-based package installation (defaults to the main branch):
 
 remotes::install_github("inbo/n2khab")
 
