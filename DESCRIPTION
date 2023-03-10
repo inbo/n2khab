@@ -41,7 +41,6 @@ Imports:
     rprojroot,
     sf,
     stringr,
-    tibble,
     tidyr (>= 1.0.0),
     withr
 Encoding: UTF-8
