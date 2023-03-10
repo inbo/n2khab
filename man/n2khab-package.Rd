@@ -44,6 +44,7 @@ Other contributors:
   \item Luc Denys \email{luc.denys@inbo.be} (\href{https://orcid.org/0000-0002-1841-6579}{ORCID}) [contributor]
   \item An Leyssen \email{an.leyssen@inbo.be} (\href{https://orcid.org/0000-0003-3537-286X}{ORCID}) [contributor]
   \item Patrik Oosterlynck \email{patrik.oosterlynck@inbo.be} (\href{https://orcid.org/0000-0002-5712-0770}{ORCID}) [contributor]
+  \item Jeroen Vanden Borre \email{jeroen.vandenborre@inbo.be} (\href{https://orcid.org/0000-0002-0153-7243}{ORCID}) [contributor]
   \item Nathalie Cools \email{nathalie.cools@inbo.be} (\href{https://orcid.org/0000-0002-7059-2318}{ORCID}) [contributor]
   \item Bruno De Vos \email{bruno.devos@inbo.be} (\href{https://orcid.org/0000-0001-9523-3453}{ORCID}) [contributor]
   \item Suzanna Lettens \email{suzanna.lettens@inbo.be} (\href{https://orcid.org/0000-0001-5032-495X}{ORCID}) [contributor]
