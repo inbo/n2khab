@@ -539,19 +539,19 @@ read_watersurfaces_hab <-
 read_watersurfaces <-
     function(file = NULL,
              extended = FALSE,
-             version = c("watersurfaces_v1.1", "watersurfaces_v1.0")) {
+             version = c("watersurfaces_v1.2", "watersurfaces_v1.1", "watersurfaces_v1.0")) {
 
         version <- match.arg(version)
 
         if (missing(file)) {
 
-            if (version == "watersurfaces_v1.1") {
+            if (version != "watersurfaces_v1.0") {
                 file <- file.path(fileman_up("n2khab_data"),
                                   "10_raw/watersurfaces/watersurfaces.gpkg")
-                } else {
-                    file <- file.path(fileman_up("n2khab_data"),
-                                      "10_raw/watersurfaces/watersurfaces.shp")
-                }
+            } else {
+                file <- file.path(fileman_up("n2khab_data"),
+                                  "10_raw/watersurfaces/watersurfaces.shp")
+            }
 
             assert_that(file.exists(file),
                         msg =  paste("Path", file, "does not exist. Control the",
@@ -561,7 +561,7 @@ read_watersurfaces <-
 
             assert_that(file.exists(file))
 
-            if (version == "watersurfaces_v1.1") {
+            if (version != "watersurfaces_v1.0") {
                 if (substr(file, nchar(file) - 4, nchar(file)) != ".gpkg") {
                     stop(paste(version, "should be a GeoPackage (.gpkg).",
                                "Control the version and the path."))
@@ -621,6 +621,9 @@ read_watersurfaces <-
 
         watersurfaces <-
             watersurfaces %>%
+            {if (version == "watersurfaces_v1.2") {
+                rename(., water_level_management = .data$PEILBEHEER)
+            } else .} %>%
             select(polygon_id = .data$WVLC,
                    wfd_code = .data$WTRLICHC,
                    hyla_code = .data$HYLAC,
@@ -630,14 +633,16 @@ read_watersurfaces <-
                    wfd_type_certain = .data$KRWTYPES,
                    depth_class = .data$DIEPKL,
                    connectivity = .data$CONNECT,
-                   usage = .data$FUNCTIE) %>%
+                   usage = .data$FUNCTIE,
+                   matches("^water_level_management$")) %>%
             mutate(depth_class = str_replace(string = .data$depth_class,
                                              pattern = "\u2265",
                                              replacement = ">=")) %>%
             mutate(across(c(.data$area_name,
                             .data$depth_class,
                             .data$connectivity,
-                            .data$usage),
+                            .data$usage,
+                            matches("^water_level_management$")),
                           as.factor)) %>%
             mutate(wfd_type = .data$wfd_type %>%
                     factor(levels =
@@ -663,6 +668,11 @@ read_watersurfaces <-
         } else {
             watersurfaces <-
                 watersurfaces %>%
+                {if (version != "watersurfaces_v1.2") . else {
+                    mutate(., area_name = ifelse(.data$area_name == "<Null>",
+                                                 NA,
+                                                 .data$area_name))
+                }} %>%
                 mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
                                                  na_lgl,
                                                  .data$wfd_type_certain ==
@@ -709,6 +719,7 @@ read_watersurfaces <-
                         mapvalues(from = wfd_typetransl$wfd_type,
                                   to = wfd_typetransl$wfd_type_name)
                 ) %>%
+                # following match is only partial in case of v1.2
                 left_join(connectivitytransl, by = "connectivity") %>%
                 mutate(
                     connectivity_name =

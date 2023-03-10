@@ -7,7 +7,7 @@
 read_watersurfaces(
   file = NULL,
   extended = FALSE,
-  version = c("watersurfaces_v1.1", "watersurfaces_v1.0")
+  version = c("watersurfaces_v1.2", "watersurfaces_v1.1", "watersurfaces_v1.0")
 )
 }
 \arguments{
