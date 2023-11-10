@@ -7,6 +7,7 @@
 read_watersurfaces(
   file = NULL,
   extended = FALSE,
+  fix_geom = FALSE,
   version = c("watersurfaces_v1.2", "watersurfaces_v1.1", "watersurfaces_v1.0")
 )
 }
@@ -25,6 +26,15 @@ variables in the result?
 Currently only applies to \code{wfd_type} and \code{connectivity};
 if \code{TRUE}, the variables \code{wfd_type_name} and
 \code{connectivity_name} are added.
+Defaults to \code{FALSE}.}
+
+\item{fix_geom}{Logical.
+Should invalid or corrupt geometries be fixed in the resulting \code{sf}
+object in order to make them valid?
+This prevents potential problems in geospatial operations, but beware that
+fixed geometries are different from the original ones.
+\code{\link[sf:st_make_valid]{sf::st_make_valid()}} is used to fix
+geometries (with GEOS as backend).
 Defaults to \code{FALSE}.}
 
 \item{version}{Version ID of the data source.
@@ -49,11 +59,13 @@ variables (not mentioning extra 'name' variables for
   Is there high confidence about the \code{wfd_type} determination?
   \item \code{depth_class}: class of water depth;
   \item \code{connectivity}: connectivity class;
-  \item \code{usage}: usage class.
+  \item \code{usage}: usage class;
+  \item \code{water_level_management}: water-level management class (not in
+  older versions).
 }
 }
 \description{
-Returns the raw data source \code{watersurfaces} (Leyssen et al., 2020)
+Returns the raw data source \code{watersurfaces} (Scheers et al., 2022)
 as a standardized \code{sf} polygon layer
 (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -66,9 +78,9 @@ If you want to use another file or file structure than the default
 data storage, you can specify your own \code{file}.
 In both cases: always make sure to specify the correct \code{version}, that
 is the version corresponding to the \code{file} (note that the \code{version}
-defaults to the latest version, that is \code{watersurfaces_v1.1}).
+defaults to the latest version).
 
-See Leyssen et al. (2020) for an elaborate explanation of the data source
+See Scheers et al. (2022) for an elaborate explanation of the data source
 and its attributes.
 }
 \examples{
@@ -83,6 +95,12 @@ ws <- read_watersurfaces()
 ws
 summary(ws)
 
+ws_valid <- read_watersurfaces(fix_geom = TRUE)
+ws_valid
+
+all(sf::st_is_valid(ws))
+all(sf::st_is_valid(ws_valid))
+
 ws2 <- read_watersurfaces(extended = TRUE)
 ws2
 }
@@ -94,12 +112,10 @@ ws2
 wateren in Vlaanderen.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 Instituut voor Natuur- en Bosonderzoek, Brussel.
-\item Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &
-Denys L. (2020).
-Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
-Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
-(40). Instituut voor Natuur en Bosonderzoek, Brussel.
-\doi{10.21436/inbor.19088385}.
+\item Scheers K., Smeekens V., Wils C., Packet J., Leyssen A. & Denys L.
+(2022). Watervlakken versie 1.2: Polygonenkaart van stilstaand water in
+Vlaanderen. Uitgave 2022. Instituut voor Natuur- en Bosonderzoek.
+\doi{10.21436/inbor.87014272}.
 }
 }
 \seealso{
