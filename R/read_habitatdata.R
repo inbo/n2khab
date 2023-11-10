@@ -453,6 +453,14 @@ read_watersurfaces_hab <-
 #' if \code{TRUE}, the variables \code{wfd_type_name} and
 #' \code{connectivity_name} are added.
 #' Defaults to \code{FALSE}.
+#' @param fix_geom Logical.
+#' Should invalid or corrupt geometries be fixed in the resulting \code{sf}
+#' object in order to make them valid?
+#' This prevents potential problems in geospatial operations, but beware that
+#' fixed geometries are different from the original ones.
+#' \code{\link[sf:st_make_valid]{sf::st_make_valid()}} is used to fix
+#' geometries (with GEOS as backend).
+#' Defaults to \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -508,12 +516,20 @@ read_watersurfaces_hab <-
 #' ws
 #' summary(ws)
 #'
+#' ws_valid <- read_watersurfaces(fix_geom = TRUE)
+#' ws_valid
+#'
+#' all(sf::st_is_valid(ws))
+#' all(sf::st_is_valid(ws_valid))
+#'
 #' ws2 <- read_watersurfaces(extended = TRUE)
 #' ws2
 #' }
 #'
 #' @importFrom sf
 #' read_sf
+#' st_is_valid
+#' st_make_valid
 #' @importFrom plyr
 #' mapvalues
 #' @importFrom rlang
@@ -539,10 +555,12 @@ read_watersurfaces_hab <-
 read_watersurfaces <-
     function(file = NULL,
              extended = FALSE,
+             fix_geom = FALSE,
              version = c("watersurfaces_v1.2", "watersurfaces_v1.1", "watersurfaces_v1.0")) {
 
         version <- match.arg(version)
         assert_that(is.flag(extended), noNA(extended))
+        assert_that(is.flag(fix_geom), noNA(fix_geom))
 
         if (missing(file)) {
 
@@ -618,7 +636,15 @@ read_watersurfaces <-
 
         }
 
-
+        if (fix_geom) {
+            n_invalid <- sum(
+                !st_is_valid(watersurfaces) | is.na(st_is_valid(watersurfaces))
+            )
+            if (n_invalid > 0) {
+                watersurfaces <- st_make_valid(watersurfaces)
+                message("Fixed ", n_invalid, " invalid or corrupt geometries.")
+            }
+        }
 
         watersurfaces <-
             watersurfaces %>%
