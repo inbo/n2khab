@@ -542,6 +542,7 @@ read_watersurfaces <-
              version = c("watersurfaces_v1.2", "watersurfaces_v1.1", "watersurfaces_v1.0")) {
 
         version <- match.arg(version)
+        assert_that(is.flag(extended), noNA(extended))
 
         if (missing(file)) {
 
