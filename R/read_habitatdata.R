@@ -581,8 +581,8 @@ read_watersurfaces <-
                 mutate_if(., is.character,
                           .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
                 mutate(across(c(.data$Code), as.factor)) %>%
-                dplyr::rename(wfd_type = .data$Code,
-                              wfd_type_name = .data$Omschrijving)
+                rename(wfd_type = .data$Code,
+                       wfd_type_name = .data$Omschrijving)
 
         } else {
 
