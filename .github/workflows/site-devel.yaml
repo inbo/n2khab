@@ -8,11 +8,11 @@ name: site-devel
 
 jobs:
   site-devel:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -23,20 +23,15 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           cache-version: ${{ secrets.CACHE_VERSION }}
-          extra-packages: local::.
+          extra-packages: local::., pkgdown@1.6.1
           needs: website
-
-      - name: Install pkgdown version
-        run: |
-          remotes::install_version("pkgdown", "1.6.1")
-        shell: Rscript {0}
 
       - name: Build site
         run: |
           Rscript -e 'options(rmarkdown.html_vignette.check_title = FALSE); pkgdown::build_site()'
 
       - name: Upload pkgdown-site as artifact
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v3
         with:
           name: pkgdown-site
           path: docs
