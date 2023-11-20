@@ -422,7 +422,7 @@ read_watersurfaces_hab <-
 
 #' Return the data source \code{watersurfaces} as an \code{sf} polygon layer
 #'
-#' Returns the raw data source \code{watersurfaces} (Leyssen et al., 2020)
+#' Returns the raw data source \code{watersurfaces} (Scheers et al., 2022)
 #' as a standardized \code{sf} polygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -434,9 +434,9 @@ read_watersurfaces_hab <-
 #' data storage, you can specify your own \code{file}.
 #' In both cases: always make sure to specify the correct \code{version}, that
 #' is the version corresponding to the \code{file} (note that the \code{version}
-#' defaults to the latest version, that is \code{watersurfaces_v1.1}).
+#' defaults to the latest version).
 #'
-#' See Leyssen et al. (2020) for an elaborate explanation of the data source
+#' See Scheers et al. (2022) for an elaborate explanation of the data source
 #' and its attributes.
 #'
 #' @param file Optional string. An absolute or relative file path of
@@ -452,6 +452,14 @@ read_watersurfaces_hab <-
 #' Currently only applies to \code{wfd_type} and \code{connectivity};
 #' if \code{TRUE}, the variables \code{wfd_type_name} and
 #' \code{connectivity_name} are added.
+#' Defaults to \code{FALSE}.
+#' @param fix_geom Logical.
+#' Should invalid or corrupt geometries be fixed in the resulting \code{sf}
+#' object in order to make them valid?
+#' This prevents potential problems in geospatial operations, but beware that
+#' fixed geometries are different from the original ones.
+#' \code{\link[sf:st_make_valid]{sf::st_make_valid()}} is used to fix
+#' geometries (with GEOS as backend).
 #' Defaults to \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized
@@ -475,7 +483,9 @@ read_watersurfaces_hab <-
 #'   Is there high confidence about the \code{wfd_type} determination?
 #'   \item \code{depth_class}: class of water depth;
 #'   \item \code{connectivity}: connectivity class;
-#'   \item \code{usage}: usage class.
+#'   \item \code{usage}: usage class;
+#'   \item \code{water_level_management}: water-level management class (not in
+#'   older versions).
 #' }
 #'
 #' @family functions involved in processing the 'watersurfaces' data source
@@ -488,12 +498,10 @@ read_watersurfaces_hab <-
 #' wateren in Vlaanderen.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \item Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &
-#' Denys L. (2020).
-#' Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
-#' Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
-#' (40). Instituut voor Natuur en Bosonderzoek, Brussel.
-#' \doi{10.21436/inbor.19088385}.
+#' \item Scheers K., Smeekens V., Wils C., Packet J., Leyssen A. & Denys L.
+#' (2022). Watervlakken versie 1.2: Polygonenkaart van stilstaand water in
+#' Vlaanderen. Uitgave 2022. Instituut voor Natuur- en Bosonderzoek.
+#' \doi{10.21436/inbor.87014272}.
 #' }
 #'
 #' @examples
@@ -508,12 +516,20 @@ read_watersurfaces_hab <-
 #' ws
 #' summary(ws)
 #'
+#' ws_valid <- read_watersurfaces(fix_geom = TRUE)
+#' ws_valid
+#'
+#' all(sf::st_is_valid(ws))
+#' all(sf::st_is_valid(ws_valid))
+#'
 #' ws2 <- read_watersurfaces(extended = TRUE)
 #' ws2
 #' }
 #'
 #' @importFrom sf
 #' read_sf
+#' st_is_valid
+#' st_make_valid
 #' @importFrom plyr
 #' mapvalues
 #' @importFrom rlang
@@ -539,19 +555,22 @@ read_watersurfaces_hab <-
 read_watersurfaces <-
     function(file = NULL,
              extended = FALSE,
-             version = c("watersurfaces_v1.1", "watersurfaces_v1.0")) {
+             fix_geom = FALSE,
+             version = c("watersurfaces_v1.2", "watersurfaces_v1.1", "watersurfaces_v1.0")) {
 
         version <- match.arg(version)
+        assert_that(is.flag(extended), noNA(extended))
+        assert_that(is.flag(fix_geom), noNA(fix_geom))
 
         if (missing(file)) {
 
-            if (version == "watersurfaces_v1.1") {
+            if (version != "watersurfaces_v1.0") {
                 file <- file.path(fileman_up("n2khab_data"),
                                   "10_raw/watersurfaces/watersurfaces.gpkg")
-                } else {
-                    file <- file.path(fileman_up("n2khab_data"),
-                                      "10_raw/watersurfaces/watersurfaces.shp")
-                }
+            } else {
+                file <- file.path(fileman_up("n2khab_data"),
+                                  "10_raw/watersurfaces/watersurfaces.shp")
+            }
 
             assert_that(file.exists(file),
                         msg =  paste("Path", file, "does not exist. Control the",
@@ -561,7 +580,7 @@ read_watersurfaces <-
 
             assert_that(file.exists(file))
 
-            if (version == "watersurfaces_v1.1") {
+            if (version != "watersurfaces_v1.0") {
                 if (substr(file, nchar(file) - 4, nchar(file)) != ".gpkg") {
                     stop(paste(version, "should be a GeoPackage (.gpkg).",
                                "Control the version and the path."))
@@ -580,8 +599,8 @@ read_watersurfaces <-
                 mutate_if(., is.character,
                           .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}) %>%
                 mutate(across(c(.data$Code), as.factor)) %>%
-                dplyr::rename(wfd_type = .data$Code,
-                              wfd_type_name = .data$Omschrijving)
+                rename(wfd_type = .data$Code,
+                       wfd_type_name = .data$Omschrijving)
 
         } else {
 
@@ -617,10 +636,21 @@ read_watersurfaces <-
 
         }
 
-
+        if (fix_geom) {
+            n_invalid <- sum(
+                !st_is_valid(watersurfaces) | is.na(st_is_valid(watersurfaces))
+            )
+            if (n_invalid > 0) {
+                watersurfaces <- st_make_valid(watersurfaces)
+                message("Fixed ", n_invalid, " invalid or corrupt geometries.")
+            }
+        }
 
         watersurfaces <-
             watersurfaces %>%
+            {if (version == "watersurfaces_v1.2") {
+                rename(., water_level_management = .data$PEILBEHEER)
+            } else .} %>%
             select(polygon_id = .data$WVLC,
                    wfd_code = .data$WTRLICHC,
                    hyla_code = .data$HYLAC,
@@ -630,14 +660,16 @@ read_watersurfaces <-
                    wfd_type_certain = .data$KRWTYPES,
                    depth_class = .data$DIEPKL,
                    connectivity = .data$CONNECT,
-                   usage = .data$FUNCTIE) %>%
+                   usage = .data$FUNCTIE,
+                   matches("^water_level_management$")) %>%
             mutate(depth_class = str_replace(string = .data$depth_class,
                                              pattern = "\u2265",
                                              replacement = ">=")) %>%
             mutate(across(c(.data$area_name,
                             .data$depth_class,
                             .data$connectivity,
-                            .data$usage),
+                            .data$usage,
+                            matches("^water_level_management$")),
                           as.factor)) %>%
             mutate(wfd_type = .data$wfd_type %>%
                     factor(levels =
@@ -663,6 +695,11 @@ read_watersurfaces <-
         } else {
             watersurfaces <-
                 watersurfaces %>%
+                {if (version != "watersurfaces_v1.2") . else {
+                    mutate(., area_name = ifelse(.data$area_name == "<Null>",
+                                                 NA,
+                                                 .data$area_name))
+                }} %>%
                 mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
                                                  na_lgl,
                                                  .data$wfd_type_certain ==
@@ -709,6 +746,7 @@ read_watersurfaces <-
                         mapvalues(from = wfd_typetransl$wfd_type,
                                   to = wfd_typetransl$wfd_type_name)
                 ) %>%
+                # following match is only partial in case of v1.2
                 left_join(connectivitytransl, by = "connectivity") %>%
                 mutate(
                     connectivity_name =
