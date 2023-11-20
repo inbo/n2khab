@@ -61,7 +61,7 @@ convert_dec_to_base4frac <-
                   collapse = ""
                 )
               },
-              '0'
+              "0"
             )
           ) / 10^13
         )
@@ -149,9 +149,11 @@ convert_dec_to_base4frac <-
 #' # vector, level 5:
 #' convert_base4frac_to_dec(c(NA, 0.1010101010101), level = 5)
 #' # same vector, all sensible levels computed:
-#' sapply(0:12, function(i) convert_base4frac_to_dec(c(NA, 0.1010101010101),
-#'   level = i
-#' ))
+#' sapply(0:12, function(i) {
+#'   convert_base4frac_to_dec(c(NA, 0.1010101010101),
+#'     level = i
+#'   )
+#' })
 #' options(oldoption)
 #'
 #' @export
@@ -175,7 +177,7 @@ convert_base4frac_to_dec <-
               a <- x * 10^level2
               a <- round(a - floor(a), 13 - level2)
               a <- a %>%
-                as.character %>%
+                as.character() %>%
                 str_sub(start = 3) %>%
                 str_pad(
                   width = 13 - level2,
@@ -183,7 +185,7 @@ convert_base4frac_to_dec <-
                   pad = "0"
                 ) %>%
                 str_split("", simplify = TRUE) %>%
-                as.numeric
+                as.numeric()
               t(a) %*% multipliers
             })
           }

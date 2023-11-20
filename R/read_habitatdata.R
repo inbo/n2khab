@@ -688,7 +688,9 @@ read_watersurfaces <-
       {
         if (version == "watersurfaces_v1.2") {
           rename(., water_level_management = .data$PEILBEHEER)
-        } else .
+        } else {
+          .
+        }
       } %>%
       select(
         polygon_id = .data$WVLC,
@@ -752,7 +754,9 @@ read_watersurfaces <-
       watersurfaces <-
         watersurfaces %>%
         {
-          if (version != "watersurfaces_v1.2") . else {
+          if (version != "watersurfaces_v1.2") {
+            .
+          } else {
             mutate(., area_name = ifelse(.data$area_name == "<Null>",
               NA,
               .data$area_name
@@ -1368,8 +1372,8 @@ read_habitatmap_terr <-
 #' hs2 <- read_habitatstreams(source_text = TRUE)
 #' hs2
 #' all.equal(
-#'   hs %>% st_drop_geometry,
-#'   hs2$lines %>% st_drop_geometry
+#'   hs %>% st_drop_geometry(),
+#'   hs2$lines %>% st_drop_geometry()
 #' )
 #' }
 #'
@@ -1435,7 +1439,7 @@ read_habitatstreams <-
         type = "3260" %>%
           factor(levels = read_types() %>%
             .$type %>%
-            levels)
+            levels())
       ) %>%
       select(
         .data$river_name,
@@ -1446,7 +1450,7 @@ read_habitatstreams <-
     if (source_text) {
       sources <-
         habitatstreams %>%
-        st_drop_geometry %>%
+        st_drop_geometry() %>%
         distinct(
           source_id = .data$BRON,
           source_text = .data$OMSCHR
@@ -1454,7 +1458,7 @@ read_habitatstreams <-
         mutate(
           source_id = factor(.data$source_id,
             levels = lines %>% .$source_id %>%
-              levels
+              levels()
           ),
           source_text = fct_reorder(
             .data$source_text,
@@ -1609,7 +1613,7 @@ read_habitatsprings <-
     typelevels <-
       read_types() %>%
       .$type %>%
-      levels
+      levels()
 
     habitatsprings <-
       read_sf(file) %>%
@@ -1858,7 +1862,7 @@ read_habitatquarries <-
     typelevels <-
       read_types() %>%
       .$type %>%
-      levels
+      levels()
 
     habitatquarries <-
       suppressWarnings(

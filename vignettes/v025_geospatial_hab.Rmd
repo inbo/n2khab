@@ -335,7 +335,7 @@ Let's estimate the surface area per type, including uncertain occurrences of typ
 ```{r}
 hms_pol %>%
   mutate(area = st_area(.)) %>%
-  st_drop_geometry %>%
+  st_drop_geometry() %>%
   inner_join(hms_occ, by = "polygon_id") %>%
   # area of type within polygon:
   mutate(area_type = area * phab / 100) %>%
@@ -502,7 +502,7 @@ Let's compute some statistics of standing water types (ignoring the value `certa
 ```{r}
 wsh$watersurfaces_polygons %>%
   mutate(area = st_area(.)) %>%
-  st_drop_geometry %>%
+  st_drop_geometry() %>%
   inner_join(wsh$watersurfaces_types,
     by = "polygon_id"
   ) %>%
@@ -545,7 +545,7 @@ Because the main type code `3130` will mostly boil down to `3130_aom` in the fie
 read_watersurfaces_hab(interpreted = TRUE) %>%
   .$watersurfaces_types %>%
   filter(type == "3130") %>%
-  nrow
+  nrow()
 #> [1] 0
 ```
 
@@ -592,7 +592,7 @@ Obviously, more rows of `habitatmap_terr` will be retained by joining `df_exp`:
 ```{r warning=FALSE}
 hmt$habitatmap_terr_types %>%
   semi_join(df_exp, by = c(type = "mycode")) %>%
-  nrow
+  nrow()
 #> [1] 6634
 ```
 
@@ -601,7 +601,7 @@ When joining with `df`:
 ```{r warning=FALSE}
 hmt$habitatmap_terr_types %>%
   semi_join(df, by = c(type = "mycode")) %>%
-  nrow
+  nrow()
 #> [1] 4984
 ```
 

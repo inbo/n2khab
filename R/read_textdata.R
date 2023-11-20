@@ -71,7 +71,7 @@ read_namelist <-
     attr(result, "source") <- NULL
 
     result %>%
-      as_tibble
+      as_tibble()
   }
 
 
@@ -102,7 +102,7 @@ pkgdatasource_path <-
     system.file(str_c(file, extension),
       package = "n2khab"
     ) %>%
-      dirname
+      dirname()
   }
 
 
@@ -303,7 +303,7 @@ read_types <-
 
     suppressMessages(suppressWarnings({
       type_levels <-
-        tibble(codelevel = types_base$type %>% levels) %>%
+        tibble(codelevel = types_base$type %>% levels()) %>%
         left_join(namelist,
           by = c("codelevel" = "code")
         ) %>%
@@ -313,7 +313,7 @@ read_types <-
         )
 
       typeclass_levels <-
-        tibble(codelevel = types_base$typeclass %>% levels) %>%
+        tibble(codelevel = types_base$typeclass %>% levels()) %>%
         left_join(namelist %>% select(-.data$shortname),
           by = c("codelevel" = "code")
         ) %>%
@@ -328,7 +328,7 @@ read_types <-
         mutate(
           type = factor(.data$type,
             levels = types_base$type %>%
-              levels
+              levels()
           ),
           type_name =
             .data$type %>%
@@ -416,7 +416,7 @@ read_types <-
           9, 22:23,
           10, 24:25
         ) %>%
-        as_tibble
+        as_tibble()
     }))
   }
 
@@ -574,7 +574,7 @@ read_env_pressures <-
           ep_abbrev = .data$shortname
         ) %>%
         mutate(ep_code = .data$ep_code %>%
-          factor(levels = env_pressures_base$ep_code %>% levels))
+          factor(levels = env_pressures_base$ep_code %>% levels()))
     )
 
     ep_levels <-
@@ -587,7 +587,7 @@ read_env_pressures <-
       arrange(.data$ep_code)
 
     ep_class_levels <-
-      tibble(codelevel = env_pressures_base$ep_class %>% levels) %>%
+      tibble(codelevel = env_pressures_base$ep_class %>% levels()) %>%
       left_join(namelist %>% select(-.data$shortname),
         by = c("codelevel" = "code")
       ) %>%
@@ -615,7 +615,7 @@ read_env_pressures <-
         remarks = .data$shortname
       ) %>%
       mutate(ep_code = .data$ep_code %>%
-        factor(levels = env_pressures_base$ep_code %>% levels)) %>%
+        factor(levels = env_pressures_base$ep_code %>% levels())) %>%
       select(
         .data$ep_code,
         .data$ep_abbrev,
@@ -625,7 +625,7 @@ read_env_pressures <-
         .data$explanation,
         .data$remarks
       ) %>%
-      as_tibble
+      as_tibble()
   }
 
 
@@ -834,7 +834,7 @@ read_schemes <-
           .data$notes,
           contains("tag")
         ) %>%
-        as_tibble
+        as_tibble()
     )
   }
 
@@ -1063,9 +1063,9 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
           levels =
             read_vc(file = file, root = path) %>%
               pull(.data$type) %>%
-              levels
+              levels()
         )) %>%
-      as_tibble
+      as_tibble()
   } else {
     scheme_types %>%
       mutate(
@@ -1077,6 +1077,6 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
           codelist = namelist
         )
       ) %>%
-      as_tibble
+      as_tibble()
   }
 }

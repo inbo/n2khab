@@ -58,7 +58,7 @@ read_ecoregions <-
 
     er_levels <-
       ecoregions %>%
-      st_drop_geometry %>%
+      st_drop_geometry() %>%
       select(-.data$district_name)
 
     ecoregions <-

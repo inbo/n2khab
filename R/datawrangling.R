@@ -140,7 +140,7 @@ expand_types <- function(x,
   } else {
     x %>%
       nest(data = -!!(group_vars(x))) %>%
-      ungroup %>%
+      ungroup() %>%
       mutate(newdata = map(.data$data,
         expand_types_plain,
         type_var = type_var,
@@ -221,7 +221,9 @@ expand_types_plain <- function(x,
         by = c("type" = "orig_abcd")
       ) %>%
       group_by(.data$main_type) %>%
-      summarise(add = if (strict) all(!is.na(.data$present)) else {
+      summarise(add = if (strict) {
+        all(!is.na(.data$present))
+      } else {
         any(!is.na(.data$present))
       }) %>%
       filter(.data$add) %>%
@@ -264,9 +266,11 @@ expand_types_plain <- function(x,
         factor(.data$main_type_abcd,
           levels = levels(.data$orig_abcd)
         )
-      } else .data$main_type_abcd) %>%
+      } else {
+        .data$main_type_abcd
+      }) %>%
       select(-.data$main_type_abcd) %>%
-      distinct %>%
+      distinct() %>%
       set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
       bind_rows(x_expanded, .)
   )
@@ -327,7 +331,9 @@ convertdf_enc <- function(x,
   is_chfact <- function(vec) {
     if (is.factor(vec)) {
       is.character(levels(vec))
-    } else FALSE
+    } else {
+      FALSE
+    }
   }
 
   conv_levels <- function(fact, from, to, sub) {
@@ -359,6 +365,8 @@ convertdf_enc <- function(x,
           to = to,
           sub = sub
         ))
-      } else .
+      } else {
+        .
+      }
     }
 }

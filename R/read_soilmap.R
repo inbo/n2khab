@@ -233,10 +233,10 @@
 #' soilmap_simple
 #' soilmap_simple %>%
 #'   filter(!is.na(bsm_mo_substr)) %>%
-#'   glimpse
+#'   glimpse()
 #' soilmap_simple %>%
 #'   filter(bsm_converted) %>%
-#'   glimpse
+#'   glimpse()
 #' }
 #'
 #' @importFrom assertthat
@@ -448,14 +448,14 @@ read_soilmap <-
       keys <- list()
       soilmap_df <-
         soilmap %>%
-        st_drop_geometry
+        st_drop_geometry()
       for (i in keyvars) {
         temp_df <-
           soilmap_df %>%
           select(matches(str_c(i, ".*"))) %>%
           select(1:2) %>%
           filter_at(1, function(x) !is.na(x)) %>%
-          distinct
+          distinct()
         keys[[i]] <-
           setNames(
             temp_df %>% pull(2),
@@ -586,7 +586,9 @@ read_soilmap <-
         soilmap <-
           soilmap %>%
           {
-            if (standardize_coastalplain) . else {
+            if (standardize_coastalplain) {
+              .
+            } else {
               mutate(.,
                 bsm_converted = NA
               )
@@ -614,7 +616,9 @@ read_soilmap <-
             if (explan) . else select(., -matches("_explan"))
           } %>%
           {
-            if (standardize_coastalplain) . else {
+            if (standardize_coastalplain) {
+              .
+            } else {
               select(., -.data$bsm_converted)
             }
           }

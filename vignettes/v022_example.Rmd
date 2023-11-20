@@ -201,7 +201,7 @@ How many polygons are available per region?
 
 ```{r}
 sm_simple %>%
-  st_drop_geometry %>%
+  st_drop_geometry() %>%
   count(bsm_region)
 ```
 
@@ -210,7 +210,7 @@ Wat is the average polygon area per region?
 ```{r}
 sm_simple %>%
   mutate(area = st_area(.)) %>%
-  st_drop_geometry %>%
+  st_drop_geometry() %>%
   group_by(bsm_region) %>%
   summarise(mean_area = mean(area))
 ```
@@ -349,14 +349,14 @@ sm_mp %>%
 ```{r results='asis'}
 sm_mp %>%
   mutate(area = st_area(.) %>% set_units("ha")) %>%
-  st_drop_geometry %>%
+  st_drop_geometry() %>%
   group_by(bsm_ge_series, bsm_ge_series_explan) %>%
   summarise(
     area = sum(area) %>% round(2),
     nr_polygons = n()
   ) %>%
   arrange(desc(area)) %>%
-  kable
+  kable()
 ```
 
 |bsm_ge_series |bsm_ge_series_explan                                                                                                                                           |         area| nr_polygons|
@@ -376,14 +376,14 @@ sm_mp %>%
 sm_mp %>%
   filter(bsm_ge_series == "D") %>%
   mutate(area = st_area(.) %>% set_units("ha")) %>%
-  st_drop_geometry %>%
+  st_drop_geometry() %>%
   group_by(bsm_soilseries, bsm_soilseries_explan) %>%
   summarise(
     area = sum(area) %>% round(2),
     nr_polygons = n()
   ) %>%
   arrange(desc(area)) %>%
-  kable
+  kable()
 ```
 
 |bsm_soilseries |bsm_soilseries_explan                                            |         area| nr_polygons|

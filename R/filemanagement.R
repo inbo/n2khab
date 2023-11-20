@@ -146,7 +146,7 @@ download_zenodo <- function(doi,
   record <- str_remove(doi, fixed("10.5281/zenodo."))
 
   # Retrieve file name by records call
-  base_url <- 'https://zenodo.org/api/records/'
+  base_url <- "https://zenodo.org/api/records/"
   req <- curl::curl_fetch_memory(paste0(base_url, record))
   content <- jsonlite::fromJSON(rawToChar(req$content))
 
@@ -208,12 +208,14 @@ download_zenodo <- function(doi,
     md5 <- unname(tools::md5sum(destfile))
     zenodo_md5 <- str_split(file_md5[i], ":")[[1]][2]
     if (identical(md5, zenodo_md5)) {
-      if (!quiet) message(
-        filename,
-        " was downloaded and its integrity verified (md5sum: ",
-        md5,
-        ")"
-      )
+      if (!quiet) {
+        message(
+          filename,
+          " was downloaded and its integrity verified (md5sum: ",
+          md5,
+          ")"
+        )
+      }
     } else {
       warning(
         "Incorrect download! md5sum ",
@@ -255,7 +257,7 @@ human_filesize <- function(x) {
   assert_that(all(x %% 1 == 0 & x >= 0))
   magnitude <-
     log(x, base = 1024) %>%
-    floor %>%
+    floor() %>%
     pmin(8)
   unit <- factor(magnitude,
     levels = 0:8,
