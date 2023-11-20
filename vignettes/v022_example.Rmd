@@ -37,8 +37,9 @@ file.copy(source, ".")
 Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS = "true")
 library(remotes)
 install_github("inbo/n2khab",
-               build_vignettes = TRUE,
-               upgrade = TRUE)
+  build_vignettes = TRUE,
+  upgrade = TRUE
+)
 ```
 
 ```{r eval=TRUE}
@@ -72,8 +73,10 @@ It belongs to the collection of processed data ([Zenodo-link](https://zenodo.org
 ```{r}
 soilmap_simple_path <- file.path(n2khab_data_path, "20_processed/soilmap_simple")
 dir.create(soilmap_simple_path)
-download_zenodo(doi = "10.5281/zenodo.3732903",
-                path = soilmap_simple_path)
+download_zenodo(
+  doi = "10.5281/zenodo.3732903",
+  path = soilmap_simple_path
+)
 ```
 
 At some future time, the download will be performed automatically by `read_soilmap()` (if the `soilmap_simple` data source is missing).
@@ -106,17 +109,17 @@ sm_simple
 #> CRS:            31370
 #> # A tibble: 270,550 x 11
 #>    bsm_poly_id bsm_region bsm_converted bsm_mo_soilunit… bsm_mo_substr
-#>  *       <dbl> <fct>      <lgl>         <fct>            <fct>        
-#>  1      165740 Kunstmati… FALSE         OB               <NA>         
-#>  2      176046 Kunstmati… FALSE         OB               <NA>         
-#>  3      185239 Zandleems… FALSE         Ldc              <NA>         
-#>  4      162400 Kunstmati… FALSE         OB               <NA>         
-#>  5      173971 Kunstmati… FALSE         OB               <NA>         
-#>  6      173087 Zandleems… FALSE         Ldp              <NA>         
-#>  7      199453 Zandleems… FALSE         Lep              <NA>         
-#>  8      176922 Zandleems… FALSE         Ldc              <NA>         
-#>  9      227861 Zandleems… FALSE         Abp(c)           <NA>         
-#> 10      185390 Zandleems… FALSE         Lca              <NA>         
+#>  *       <dbl> <fct>      <lgl>         <fct>            <fct>
+#>  1      165740 Kunstmati… FALSE         OB               <NA>
+#>  2      176046 Kunstmati… FALSE         OB               <NA>
+#>  3      185239 Zandleems… FALSE         Ldc              <NA>
+#>  4      162400 Kunstmati… FALSE         OB               <NA>
+#>  5      173971 Kunstmati… FALSE         OB               <NA>
+#>  6      173087 Zandleems… FALSE         Ldp              <NA>
+#>  7      199453 Zandleems… FALSE         Lep              <NA>
+#>  8      176922 Zandleems… FALSE         Ldc              <NA>
+#>  9      227861 Zandleems… FALSE         Abp(c)           <NA>
+#> 10      185390 Zandleems… FALSE         Lca              <NA>
 #> # … with 270,540 more rows, and 6 more variables: bsm_mo_tex <fct>,
 #> #   bsm_mo_drain <fct>, bsm_mo_prof <fct>, bsm_mo_parentmat <fct>,
 #> #   bsm_mo_profvar <fct>, geom <MULTIPOLYGON [m]>
@@ -168,24 +171,26 @@ glimpse(sm_simple)
 
 
 ```{r paged.print=FALSE}
-tibble(drain_levels = levels(sm_simple$bsm_mo_drain),
-       drain_levels_explained = levels(sm_simple$bsm_mo_drain_explan))
+tibble(
+  drain_levels = levels(sm_simple$bsm_mo_drain),
+  drain_levels_explained = levels(sm_simple$bsm_mo_drain_explan)
+)
 #> # A tibble: 15 x 2
-#>    drain_levels drain_levels_explained                                          
-#>    <chr>        <chr>                                                           
-#>  1 a            zeer droog, niet gleyig                                         
-#>  2 a-b          complex van zeer droog, niet gleyig tot droog, niet gleyig      
-#>  3 a-d          complex van zeer droog, niet gleyig tot matig nat, matig gleyig 
-#>  4 b            droog, niet gleyig                                              
-#>  5 c            matig droog, zwak gleyig                                        
-#>  6 c-d          complex van droog, zwak gleyig tot matig droog, matig gleyig    
-#>  7 d            matig nat, matig gleyig                                         
-#>  8 e            nat, sterk gleyig met reductiehorizont                          
+#>    drain_levels drain_levels_explained
+#>    <chr>        <chr>
+#>  1 a            zeer droog, niet gleyig
+#>  2 a-b          complex van zeer droog, niet gleyig tot droog, niet gleyig
+#>  3 a-d          complex van zeer droog, niet gleyig tot matig nat, matig gleyig
+#>  4 b            droog, niet gleyig
+#>  5 c            matig droog, zwak gleyig
+#>  6 c-d          complex van droog, zwak gleyig tot matig droog, matig gleyig
+#>  7 d            matig nat, matig gleyig
+#>  8 e            nat, sterk gleyig met reductiehorizont
 #>  9 e-f          complex van nat, matig gleyig tot zeer nat, zeer sterk gleyig m…
 #> 10 e-i          complex nat, sterk gleyig met reductiehorizont tot zeer nat met…
-#> 11 f            zeer nat, zeer sterk gleyig met reductiehorizont                
-#> 12 g            uiterst nat, gereduceerd                                        
-#> 13 h            nat met relatief hoge ligging, sterk gleyig                     
+#> 11 f            zeer nat, zeer sterk gleyig met reductiehorizont
+#> 12 g            uiterst nat, gereduceerd
+#> 13 h            nat met relatief hoge ligging, sterk gleyig
 #> 14 h-i          complex van nat met relatief hoge ligging, sterk gleyig tot zee…
 #> 15 i            zeer nat met relatief hoge ligging, zeer sterk gleyig
 ```
@@ -196,28 +201,28 @@ How many polygons are available per region?
 
 ```{r}
 sm_simple %>%
-    st_drop_geometry %>%
-    count(bsm_region)
+  st_drop_geometry %>%
+  count(bsm_region)
 ```
 
 Wat is the average polygon area per region?
 
 ```{r}
 sm_simple %>%
-    mutate(area = st_area(.)) %>%
-    st_drop_geometry %>%
-    group_by(bsm_region) %>%
-    summarise(mean_area = mean(area))
+  mutate(area = st_area(.)) %>%
+  st_drop_geometry %>%
+  group_by(bsm_region) %>%
+  summarise(mean_area = mean(area))
 ```
 
 Plot polygons of the 'Zwin' region:
 
 ```{r}
 zwin_map <-
-    sm_simple %>%
-    filter(bsm_region == "Zwin") %>%
-    ggplot(aes(fill = bsm_mo_tex)) +
-    geom_sf()
+  sm_simple %>%
+  filter(bsm_region == "Zwin") %>%
+  ggplot(aes(fill = bsm_mo_tex)) +
+  geom_sf()
 ```
 
 - with WGS84 graticule (though plotted in Belgian Lambert 72 = CRS 31370):
@@ -236,11 +241,13 @@ zwin_map + coord_sf(datum = st_crs(31370))
 
 ```{r}
 sm_simple %>%
-        filter(bsm_region == "Zwin") %>%
-        mutate(bsm_mo_tex = as.character(bsm_mo_tex)) %>%
-        mapview(zcol = "bsm_mo_tex",
-                alpha.region = 0.2,
-                map.types = c("OpenStreetMap", "OpenTopoMap"))
+  filter(bsm_region == "Zwin") %>%
+  mutate(bsm_mo_tex = as.character(bsm_mo_tex)) %>%
+  mapview(
+    zcol = "bsm_mo_tex",
+    alpha.region = 0.2,
+    map.types = c("OpenStreetMap", "OpenTopoMap")
+  )
 ```
 
 Clicking a feature on the above generated map reveals all attributes.
@@ -261,9 +268,11 @@ The `soilmap` data source belongs to the raw data collection ([Zenodo-link](http
 ```{r}
 soilmap_path <- file.path(n2khab_data_path, "10_raw/soilmap")
 dir.create(soilmap_path)
-download_zenodo(doi = "10.5281/zenodo.3387008",
-                path = soilmap_path,
-                parallel = TRUE)
+download_zenodo(
+  doi = "10.5281/zenodo.3387008",
+  path = soilmap_path,
+  parallel = TRUE
+)
 ```
 
 At some time in future, the download will be performed automatically by `read_soilmap()` (if the `soilmap` data source is missing).
@@ -282,12 +291,12 @@ sm
 #> CRS:            EPSG:31370
 #> # A tibble: 270,550 x 38
 #>    bsm_poly_id bsm_map_id bsm_region bsm_ge_region bsm_legend bsm_legend_title
-#>  *       <dbl> <fct>      <fct>      <fct>         <fct>      <fct>           
-#>  1      165740 61E        Kunstmati… <NA>          Antropoge… bodemserie OB   
-#>  2      176046 78W        Kunstmati… <NA>          Antropoge… bodemserie OB   
+#>  *       <dbl> <fct>      <fct>      <fct>         <fct>      <fct>
+#>  1      165740 61E        Kunstmati… <NA>          Antropoge… bodemserie OB
+#>  2      176046 78W        Kunstmati… <NA>          Antropoge… bodemserie OB
 #>  3      185239 95W        Zandleems… <NA>          Vochtig z… bodemseries Lda…
-#>  4      162400 75E        Kunstmati… <NA>          Antropoge… bodemserie OB   
-#>  5      173971 63W        Kunstmati… <NA>          Antropoge… bodemserie OB   
+#>  4      162400 75E        Kunstmati… <NA>          Antropoge… bodemserie OB
+#>  5      173971 63W        Kunstmati… <NA>          Antropoge… bodemserie OB
 #>  6      173087 64W        Zandleems… <NA>          Vochtig z… bodemserie Ldp …
 #>  7      199453 98E        Zandleems… <NA>          Nat zandl… bodemserie Lep …
 #>  8      176922 81W        Zandleems… <NA>          Vochtig z… bodemseries Lda…
@@ -316,8 +325,8 @@ Extract features that belong to the 'Middellandpolders' region:
 
 ```{r}
 sm_mp <-
-    sm %>%
-    filter(bsm_region == "Middellandpolders")
+  sm %>%
+  filter(bsm_region == "Middellandpolders")
 dim(sm_mp)
 #> [1] 3991   38
 ```
@@ -326,24 +335,28 @@ dim(sm_mp)
 
 ```{r}
 sm_mp %>%
-    mutate(bsm_ge_series = as.character(bsm_ge_series)) %>%
-    mapview(zcol = "bsm_ge_series",
-            alpha.region = 0.2,
-            map.types = c("Wikimedia", "CartoDB.Positron"),
-            alpha = 0)
+  mutate(bsm_ge_series = as.character(bsm_ge_series)) %>%
+  mapview(
+    zcol = "bsm_ge_series",
+    alpha.region = 0.2,
+    map.types = c("Wikimedia", "CartoDB.Positron"),
+    alpha = 0
+  )
 ```
 
 - calculate surface area (ha) and polygon count per `bsm_ge_series`:
 
 ```{r results='asis'}
 sm_mp %>%
-    mutate(area = st_area(.) %>% set_units("ha")) %>%
-    st_drop_geometry %>%
-    group_by(bsm_ge_series, bsm_ge_series_explan) %>%
-    summarise(area = sum(area) %>% round(2),
-              nr_polygons = n()) %>%
-    arrange(desc(area)) %>%
-    kable
+  mutate(area = st_area(.) %>% set_units("ha")) %>%
+  st_drop_geometry %>%
+  group_by(bsm_ge_series, bsm_ge_series_explan) %>%
+  summarise(
+    area = sum(area) %>% round(2),
+    nr_polygons = n()
+  ) %>%
+  arrange(desc(area)) %>%
+  kable
 ```
 
 |bsm_ge_series |bsm_ge_series_explan                                                                                                                                           |         area| nr_polygons|
@@ -361,14 +374,16 @@ sm_mp %>%
 
 ```{r results='asis'}
 sm_mp %>%
-    filter(bsm_ge_series == "D") %>%
-    mutate(area = st_area(.) %>% set_units("ha")) %>%
-    st_drop_geometry %>%
-    group_by(bsm_soilseries, bsm_soilseries_explan) %>%
-    summarise(area = sum(area) %>% round(2),
-              nr_polygons = n()) %>%
-    arrange(desc(area)) %>%
-    kable
+  filter(bsm_ge_series == "D") %>%
+  mutate(area = st_area(.) %>% set_units("ha")) %>%
+  st_drop_geometry %>%
+  group_by(bsm_soilseries, bsm_soilseries_explan) %>%
+  summarise(
+    area = sum(area) %>% round(2),
+    nr_polygons = n()
+  ) %>%
+  arrange(desc(area)) %>%
+  kable
 ```
 
 |bsm_soilseries |bsm_soilseries_explan                                            |         area| nr_polygons|
@@ -394,9 +409,11 @@ sm_mp %>%
 
 ```{r}
 sm_mp %>%
-    filter(bsm_soilseries == "m.D5") %>%
-    mapview(color = "red",
-            alpha = 1,
-            alpha.region = 0)
+  filter(bsm_soilseries == "m.D5") %>%
+  mapview(
+    color = "red",
+    alpha = 1,
+    alpha.region = 0
+  )
 ```
 

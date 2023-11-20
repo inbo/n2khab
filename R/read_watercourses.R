@@ -100,29 +100,38 @@
 #' @importFrom sf
 #' read_sf
 read_watercourse_100mseg <-
-    function(file = file.path(fileman_up("n2khab_data"),
-                              "20_processed/watercourse_100mseg/watercourse_100mseg.gpkg"),
-             element = NULL,
-             version = "watercourse_100mseg_20200807v1"){
+  function(file = file.path(
+             fileman_up("n2khab_data"),
+             "20_processed/watercourse_100mseg/watercourse_100mseg.gpkg"
+           ),
+           element = NULL,
+           version = "watercourse_100mseg_20200807v1") {
+    assert_that(is.string(version))
 
-        assert_that(is.string(version))
-
-        if (!missing(element)) {
-            assert_that(is.string(element),
-                        element %in% c("lines", "points"))
-            res <-
-                switch(element,
-                       "lines" = read_sf(file,
-                                         layer = "watercourse_100mseg_lines"),
-                       "points" = read_sf(file,
-                                          layer = "watercourse_100mseg_points")
-                )
-        } else {
-            res <-
-                list("lines" = read_sf(file,
-                                       layer = "watercourse_100mseg_lines"),
-                     "points" = read_sf(file,
-                                        layer = "watercourse_100mseg_points"))
-        }
-        return(res)
+    if (!missing(element)) {
+      assert_that(
+        is.string(element),
+        element %in% c("lines", "points")
+      )
+      res <-
+        switch(element,
+          "lines" = read_sf(file,
+            layer = "watercourse_100mseg_lines"
+          ),
+          "points" = read_sf(file,
+            layer = "watercourse_100mseg_points"
+          )
+        )
+    } else {
+      res <-
+        list(
+          "lines" = read_sf(file,
+            layer = "watercourse_100mseg_lines"
+          ),
+          "points" = read_sf(file,
+            layer = "watercourse_100mseg_points"
+          )
+        )
     }
+    return(res)
+  }

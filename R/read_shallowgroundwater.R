@@ -193,17 +193,18 @@
 #' read_sf
 #' @export
 read_shallowgroundwater <-
-    function(file = file.path(fileman_up("n2khab_data"),
-                              "10_raw/shallowgroundwater/shallowgroundwater.gpkg")){
+  function(file = file.path(
+             fileman_up("n2khab_data"),
+             "10_raw/shallowgroundwater/shallowgroundwater.gpkg"
+           )) {
+    assert_that(file.exists(file))
 
-        assert_that(file.exists(file))
+    shallowgroundwater <-
+      suppressWarnings(
+        read_sf(file,
+          crs = 31370
+        )
+      )
 
-        shallowgroundwater <-
-            suppressWarnings(
-                read_sf(file,
-                        crs = 31370)
-            )
-
-        return(shallowgroundwater)
-
-    }
+    return(shallowgroundwater)
+  }

@@ -54,26 +54,25 @@
 #' is.string
 #' @importFrom dplyr %>% filter as_tibble
 read_namelist <-
-    function(path = pkgdatasource_path("textdata/namelist", ".yml"),
-             file = "namelist",
-             lang = "en") {
+  function(path = pkgdatasource_path("textdata/namelist", ".yml"),
+           file = "namelist",
+           lang = "en") {
+    assert_that(is.string(lang))
 
-        assert_that(is.string(lang))
-
-        if (lang == "all") {
-            result <-
-                read_vc(file = file, root = path)
-        } else {
-            result <-
-                read_vc(file = file, root = path) %>%
-                filter(lang == !!lang)
-        }
-
-        attr(result, "source") <- NULL
-
-        result %>%
-            as_tibble
+    if (lang == "all") {
+      result <-
+        read_vc(file = file, root = path)
+    } else {
+      result <-
+        read_vc(file = file, root = path) %>%
+        filter(lang == !!lang)
     }
+
+    attr(result, "source") <- NULL
+
+    result %>%
+      as_tibble
+  }
 
 
 
@@ -99,12 +98,12 @@ read_namelist <-
 #' @importFrom stringr str_c
 #' @keywords internal
 pkgdatasource_path <-
-    function(file, extension = "") {
-        system.file(str_c(file, extension),
-                    package = "n2khab"
-        ) %>%
-            dirname
-    }
+  function(file, extension = "") {
+    system.file(str_c(file, extension),
+      package = "n2khab"
+    ) %>%
+      dirname
+  }
 
 
 
@@ -131,21 +130,22 @@ pkgdatasource_path <-
 #' @importFrom plyr mapvalues
 #' @keywords internal
 namelist_factor <-
-    function(x, pick = "name", codelist) {
+  function(x, pick = "name", codelist) {
+    suppressWarnings(
+      mapped_levels <-
+        data.frame(code = levels(x)) %>%
+        left_join(codelist,
+          by = "code"
+        ) %>%
+        select(.data$code, !!pick)
+    )
 
-        suppressWarnings(
-            mapped_levels <-
-                data.frame(code = levels(x)) %>%
-                left_join(codelist,
-                          by = "code") %>%
-                select(.data$code, !!pick)
-        )
-
-        x %>%
-            mapvalues(from = mapped_levels$code,
-                      to = mapped_levels[,2])
-
-    }
+    x %>%
+      mapvalues(
+        from = mapped_levels$code,
+        to = mapped_levels[, 2]
+      )
+  }
 
 
 
@@ -267,115 +267,158 @@ namelist_factor <-
 #' @importFrom plyr mapvalues
 #' @importFrom rlang .data
 read_types <-
-    function(path = pkgdatasource_path("textdata/types", ".yml"),
-             file = "types",
-             file_namelist = "namelist",
-             lang = "en") {
+  function(path = pkgdatasource_path("textdata/types", ".yml"),
+           file = "types",
+           file_namelist = "namelist",
+           lang = "en") {
+    assert_that(is.string(lang))
 
-        assert_that(is.string(lang))
+    langs <-
+      read_namelist(
+        path = path,
+        file = file_namelist,
+        lang = "all"
+      ) %>%
+      distinct(.data$lang) %>%
+      pull(lang)
 
-        langs <-
-            read_namelist(path = path,
-                          file = file_namelist,
-                          lang = "all") %>%
-            distinct(.data$lang) %>%
-            pull(lang)
+    assert_that(any(lang %in% langs),
+      msg = "Your setting of lang is not supported."
+    )
 
-        assert_that(any(lang %in% langs),
-                    msg = "Your setting of lang is not supported.")
+    namelist <-
+      read_namelist(
+        path = path,
+        file = file_namelist,
+        lang = lang
+      ) %>%
+      select(
+        .data$code,
+        .data$name,
+        .data$shortname
+      )
 
-        namelist <-
-            read_namelist(path = path,
-                          file = file_namelist,
-                          lang = lang) %>%
-            select(.data$code,
-                   .data$name,
-                   .data$shortname)
+    types_base <-
+      read_vc(file = file, root = path)
 
-        types_base <-
-            read_vc(file = file, root = path)
+    suppressMessages(suppressWarnings({
+      type_levels <-
+        tibble(codelevel = types_base$type %>% levels) %>%
+        left_join(namelist,
+          by = c("codelevel" = "code")
+        ) %>%
+        rename(
+          namelevel = .data$name,
+          shortnamelevel = .data$shortname
+        )
 
-        suppressMessages(suppressWarnings({
-        type_levels <-
-            tibble(codelevel = types_base$type %>% levels) %>%
-            left_join(namelist,
-                      by = c("codelevel" = "code")) %>%
-            rename(namelevel = .data$name,
-                   shortnamelevel = .data$shortname)
+      typeclass_levels <-
+        tibble(codelevel = types_base$typeclass %>% levels) %>%
+        left_join(namelist %>% select(-.data$shortname),
+          by = c("codelevel" = "code")
+        ) %>%
+        rename(namelevel = .data$name)
 
-        typeclass_levels <-
-            tibble(codelevel = types_base$typeclass %>% levels) %>%
-            left_join(namelist %>% select(-.data$shortname),
-                       by = c("codelevel" = "code")) %>%
-            rename(namelevel = .data$name)
-
-        types_base %>%
-            left_join(namelist, by = c("type" = "code")) %>%
-            rename(type_name = .data$name,
-                   type_shortname = .data$shortname) %>%
-            mutate(type = factor(.data$type,
-                                 levels = types_base$type %>%
-                                     levels),
-                   type_name =
-                       .data$type %>%
-                       mapvalues(from = type_levels$codelevel,
-                                 to = type_levels$namelevel),
-                   type_shortname =
-                       .data$type %>%
-                       mapvalues(from = type_levels$codelevel,
-                                 to = type_levels$shortnamelevel),
-                   typeclass_name =
-                       .data$typeclass %>%
-                       mapvalues(from = typeclass_levels$codelevel,
-                                 to = typeclass_levels$namelevel),
-                   hydr_class_name =
-                       .data$hydr_class %>%
-                       mapvalues(from = namelist$code,
-                                 to = namelist$name),
-                   hydr_class_shortname =
-                       .data$hydr_class %>%
-                       mapvalues(from = namelist$code,
-                                 to = namelist$shortname),
-                   groundw_dep_name =
-                       .data$groundw_dep %>%
-                       mapvalues(from = namelist$code,
-                                 to = namelist$name),
-                   groundw_dep_shortname =
-                       .data$groundw_dep %>%
-                       mapvalues(from = namelist$code,
-                                 to = namelist$shortname),
-                   flood_dep_name =
-                       .data$flood_dep %>%
-                       mapvalues(from = namelist$code,
-                                 to = namelist$name),
-                   flood_dep_shortname =
-                       .data$flood_dep %>%
-                       mapvalues(from = namelist$code,
-                                 to = namelist$shortname)
-            ) %>%
-            left_join(namelist,
-                      by = c("tag_1" = "code")) %>%
-            rename(tag_1_name = .data$name,
-                   tag_1_shortname = .data$shortname) %>%
-            left_join(namelist,
-                      by = c("tag_2" = "code")) %>%
-            rename(tag_2_name = .data$name,
-                   tag_2_shortname = .data$shortname) %>%
-            left_join(namelist,
-                      by = c("tag_3" = "code")) %>%
-            rename(tag_3_name = .data$name,
-                   tag_3_shortname = .data$shortname) %>%
-            select(1:3, 11:12,
-                   4, 13,
-                   5, 14:15,
-                   6, 16:17,
-                   7, 18:19,
-                   8, 20:21,
-                   9, 22:23,
-                   10, 24:25) %>%
-            as_tibble
-        }))
-    }
+      types_base %>%
+        left_join(namelist, by = c("type" = "code")) %>%
+        rename(
+          type_name = .data$name,
+          type_shortname = .data$shortname
+        ) %>%
+        mutate(
+          type = factor(.data$type,
+            levels = types_base$type %>%
+              levels
+          ),
+          type_name =
+            .data$type %>%
+              mapvalues(
+                from = type_levels$codelevel,
+                to = type_levels$namelevel
+              ),
+          type_shortname =
+            .data$type %>%
+              mapvalues(
+                from = type_levels$codelevel,
+                to = type_levels$shortnamelevel
+              ),
+          typeclass_name =
+            .data$typeclass %>%
+              mapvalues(
+                from = typeclass_levels$codelevel,
+                to = typeclass_levels$namelevel
+              ),
+          hydr_class_name =
+            .data$hydr_class %>%
+              mapvalues(
+                from = namelist$code,
+                to = namelist$name
+              ),
+          hydr_class_shortname =
+            .data$hydr_class %>%
+              mapvalues(
+                from = namelist$code,
+                to = namelist$shortname
+              ),
+          groundw_dep_name =
+            .data$groundw_dep %>%
+              mapvalues(
+                from = namelist$code,
+                to = namelist$name
+              ),
+          groundw_dep_shortname =
+            .data$groundw_dep %>%
+              mapvalues(
+                from = namelist$code,
+                to = namelist$shortname
+              ),
+          flood_dep_name =
+            .data$flood_dep %>%
+              mapvalues(
+                from = namelist$code,
+                to = namelist$name
+              ),
+          flood_dep_shortname =
+            .data$flood_dep %>%
+              mapvalues(
+                from = namelist$code,
+                to = namelist$shortname
+              )
+        ) %>%
+        left_join(namelist,
+          by = c("tag_1" = "code")
+        ) %>%
+        rename(
+          tag_1_name = .data$name,
+          tag_1_shortname = .data$shortname
+        ) %>%
+        left_join(namelist,
+          by = c("tag_2" = "code")
+        ) %>%
+        rename(
+          tag_2_name = .data$name,
+          tag_2_shortname = .data$shortname
+        ) %>%
+        left_join(namelist,
+          by = c("tag_3" = "code")
+        ) %>%
+        rename(
+          tag_3_name = .data$name,
+          tag_3_shortname = .data$shortname
+        ) %>%
+        select(
+          1:3, 11:12,
+          4, 13,
+          5, 14:15,
+          6, 16:17,
+          7, 18:19,
+          8, 20:21,
+          9, 22:23,
+          10, 24:25
+        ) %>%
+        as_tibble
+    }))
+  }
 
 
 
@@ -488,85 +531,102 @@ read_types <-
 #' pull
 #' @importFrom rlang .data
 read_env_pressures <-
-    function(path = pkgdatasource_path("textdata/env_pressures", ".yml"),
-             file = "env_pressures",
-             file_namelist = "namelist",
-             lang = "en") {
+  function(path = pkgdatasource_path("textdata/env_pressures", ".yml"),
+           file = "env_pressures",
+           file_namelist = "namelist",
+           lang = "en") {
+    assert_that(is.string(lang))
 
-        assert_that(is.string(lang))
+    langs <-
+      read_namelist(
+        path = path,
+        file = file_namelist,
+        lang = "all"
+      ) %>%
+      distinct(.data$lang) %>%
+      pull(lang)
 
-        langs <-
-            read_namelist(path = path,
-                          file = file_namelist,
-                          lang = "all") %>%
-            distinct(.data$lang) %>%
-            pull(lang)
+    assert_that(any(lang %in% langs),
+      msg = "Your setting of lang is not supported."
+    )
 
-        assert_that(any(lang %in% langs),
-                    msg = "Your setting of lang is not supported.")
+    namelist <-
+      read_namelist(
+        path = path,
+        file = file_namelist,
+        lang = lang
+      ) %>%
+      select(
+        .data$code,
+        .data$name,
+        .data$shortname
+      )
 
-        namelist <-
-            read_namelist(path = path,
-                          file = file_namelist,
-                          lang = lang) %>%
-            select(.data$code,
-                   .data$name,
-                   .data$shortname)
+    env_pressures_base <-
+      read_vc(file = file, root = path)
 
-        env_pressures_base <-
-            read_vc(file = file, root = path)
+    suppressWarnings(
+      env_pressures_base2 <-
+        read_vc(file = file, root = path) %>%
+        left_join(namelist, by = c("ep_code" = "code")) %>%
+        rename(
+          ep_name = .data$name,
+          ep_abbrev = .data$shortname
+        ) %>%
+        mutate(ep_code = .data$ep_code %>%
+          factor(levels = env_pressures_base$ep_code %>% levels))
+    )
 
-        suppressWarnings(
-            env_pressures_base2 <-
-                read_vc(file = file, root = path) %>%
-                left_join(namelist, by = c("ep_code" = "code")) %>%
-                rename(ep_name = .data$name,
-                       ep_abbrev = .data$shortname) %>%
-                mutate(ep_code = .data$ep_code %>%
-                           factor(levels = env_pressures_base$ep_code %>% levels)
-                )
+    ep_levels <-
+      env_pressures_base2 %>%
+      distinct(
+        .data$ep_code,
+        .data$ep_name,
+        .data$ep_abbrev
+      ) %>%
+      arrange(.data$ep_code)
+
+    ep_class_levels <-
+      tibble(codelevel = env_pressures_base$ep_class %>% levels) %>%
+      left_join(namelist %>% select(-.data$shortname),
+        by = c("codelevel" = "code")
+      ) %>%
+      rename(namelevel = .data$name)
+
+    env_pressures_base2 %>%
+      mutate(
+        ep_name = .data$ep_name %>%
+          factor(levels = ep_levels$ep_name),
+        ep_abbrev = .data$ep_abbrev %>%
+          factor(levels = ep_levels$ep_abbrev),
+        ep_class_name =
+          .data$ep_class %>%
+            mapvalues(
+              from = ep_class_levels$codelevel,
+              to = ep_class_levels$namelevel
             )
-
-        ep_levels <-
-            env_pressures_base2 %>%
-            distinct(.data$ep_code,
-                     .data$ep_name,
-                     .data$ep_abbrev) %>%
-            arrange(.data$ep_code)
-
-        ep_class_levels <-
-            tibble(codelevel = env_pressures_base$ep_class %>% levels) %>%
-            left_join(namelist %>% select(-.data$shortname),
-                      by = c("codelevel" = "code")) %>%
-            rename(namelevel = .data$name)
-
-        env_pressures_base2 %>%
-            mutate(ep_name = .data$ep_name %>%
-                       factor(levels = ep_levels$ep_name),
-                   ep_abbrev = .data$ep_abbrev %>%
-                       factor(levels = ep_levels$ep_abbrev),
-                   ep_class_name =
-                       .data$ep_class %>%
-                       mapvalues(from = ep_class_levels$codelevel,
-                                 to = ep_class_levels$namelevel)
-            ) %>%
-            left_join(namelist,
-                      by = c("explanation" = "code")) %>%
-            select(-.data$explanation) %>%
-            rename(explanation = .data$name,
-                   remarks = .data$shortname) %>%
-            mutate(ep_code = .data$ep_code %>%
-                       factor(levels = env_pressures_base$ep_code %>% levels)
-            ) %>%
-            select(.data$ep_code,
-                   .data$ep_abbrev,
-                   .data$ep_name,
-                   .data$ep_class,
-                   .data$ep_class_name,
-                   .data$explanation,
-                   .data$remarks) %>%
-            as_tibble
-    }
+      ) %>%
+      left_join(namelist,
+        by = c("explanation" = "code")
+      ) %>%
+      select(-.data$explanation) %>%
+      rename(
+        explanation = .data$name,
+        remarks = .data$shortname
+      ) %>%
+      mutate(ep_code = .data$ep_code %>%
+        factor(levels = env_pressures_base$ep_code %>% levels)) %>%
+      select(
+        .data$ep_code,
+        .data$ep_abbrev,
+        .data$ep_name,
+        .data$ep_class,
+        .data$ep_class_name,
+        .data$explanation,
+        .data$remarks
+      ) %>%
+      as_tibble
+  }
 
 
 
@@ -679,79 +739,104 @@ read_env_pressures <-
 #' pull
 #' @importFrom rlang .data
 read_schemes <-
-    function(path = pkgdatasource_path("textdata/schemes", ".yml"),
-             file = "schemes",
-             file_namelist = "namelist",
-             lang = "en") {
+  function(path = pkgdatasource_path("textdata/schemes", ".yml"),
+           file = "schemes",
+           file_namelist = "namelist",
+           lang = "en") {
+    assert_that(is.string(lang))
 
-        assert_that(is.string(lang))
+    langs <-
+      read_namelist(
+        path = path,
+        file = file_namelist,
+        lang = "all"
+      ) %>%
+      distinct(.data$lang) %>%
+      pull(lang)
 
-        langs <-
-            read_namelist(path = path,
-                          file = file_namelist,
-                          lang = "all") %>%
-            distinct(.data$lang) %>%
-            pull(lang)
+    assert_that(any(lang %in% langs),
+      msg = "Your setting of lang is not supported."
+    )
 
-        assert_that(any(lang %in% langs),
-                    msg = "Your setting of lang is not supported.")
+    namelist <-
+      read_namelist(
+        path = path,
+        file = file_namelist,
+        lang = lang
+      ) %>%
+      select(
+        .data$code,
+        .data$name,
+        .data$shortname
+      )
 
-        namelist <-
-            read_namelist(path = path,
-                          file = file_namelist,
-                          lang = lang) %>%
-            select(.data$code,
-                   .data$name,
-                   .data$shortname)
-
-        suppressWarnings(
-        read_vc(file = file, root = path) %>%
-                mutate(
-                    scheme_name = namelist_factor(.data$scheme,
-                                                  codelist = namelist),
-                    scheme_shortname = namelist_factor(.data$scheme,
-                                                       "shortname",
-                                                       codelist = namelist),
-                    programme_name = namelist_factor(.data$programme,
-                                                     codelist = namelist),
-                    attribute_1_name = namelist_factor(.data$attribute_1,
-                                                       codelist = namelist),
-                    attribute_1_shortname = namelist_factor(.data$attribute_1,
-                                                            "shortname",
-                                                            codelist = namelist),
-                    attribute_2_name = namelist_factor(.data$attribute_2,
-                                                       codelist = namelist),
-                    attribute_2_shortname = namelist_factor(.data$attribute_2,
-                                                            "shortname",
-                                                            codelist = namelist),
-                    attribute_3_name = namelist_factor(.data$attribute_3,
-                                                       codelist = namelist),
-                    attribute_3_shortname = namelist_factor(.data$attribute_3,
-                                                            "shortname",
-                                                            codelist = namelist)
-                    ) %>%
-                left_join(namelist,
-                          by = c("tag_1" = "code")) %>%
-                rename(tag_1_name = .data$name,
-                       tag_1_shortname = .data$shortname) %>%
-                left_join(namelist,
-                          by = c("tag_2" = "code")) %>%
-                rename(tag_2_name = .data$name,
-                       tag_2_shortname = .data$shortname) %>%
-                left_join(namelist,
-                          by = c("tag_3" = "code")) %>%
-                rename(tag_3_name = .data$name,
-                       tag_3_shortname = .data$shortname) %>%
-                select(contains("scheme"),
-                       contains("programme"),
-                       contains("attribute"),
-                       .data$spatial_restriction,
-                       .data$notes,
-                       contains("tag")
-                       ) %>%
-                as_tibble)
-
-    }
+    suppressWarnings(
+      read_vc(file = file, root = path) %>%
+        mutate(
+          scheme_name = namelist_factor(.data$scheme,
+            codelist = namelist
+          ),
+          scheme_shortname = namelist_factor(.data$scheme,
+            "shortname",
+            codelist = namelist
+          ),
+          programme_name = namelist_factor(.data$programme,
+            codelist = namelist
+          ),
+          attribute_1_name = namelist_factor(.data$attribute_1,
+            codelist = namelist
+          ),
+          attribute_1_shortname = namelist_factor(.data$attribute_1,
+            "shortname",
+            codelist = namelist
+          ),
+          attribute_2_name = namelist_factor(.data$attribute_2,
+            codelist = namelist
+          ),
+          attribute_2_shortname = namelist_factor(.data$attribute_2,
+            "shortname",
+            codelist = namelist
+          ),
+          attribute_3_name = namelist_factor(.data$attribute_3,
+            codelist = namelist
+          ),
+          attribute_3_shortname = namelist_factor(.data$attribute_3,
+            "shortname",
+            codelist = namelist
+          )
+        ) %>%
+        left_join(namelist,
+          by = c("tag_1" = "code")
+        ) %>%
+        rename(
+          tag_1_name = .data$name,
+          tag_1_shortname = .data$shortname
+        ) %>%
+        left_join(namelist,
+          by = c("tag_2" = "code")
+        ) %>%
+        rename(
+          tag_2_name = .data$name,
+          tag_2_shortname = .data$shortname
+        ) %>%
+        left_join(namelist,
+          by = c("tag_3" = "code")
+        ) %>%
+        rename(
+          tag_3_name = .data$name,
+          tag_3_shortname = .data$shortname
+        ) %>%
+        select(
+          contains("scheme"),
+          contains("programme"),
+          contains("attribute"),
+          .data$spatial_restriction,
+          .data$notes,
+          contains("tag")
+        ) %>%
+        as_tibble
+    )
+  }
 
 
 
@@ -897,87 +982,101 @@ read_scheme_types <- function(path = pkgdatasource_path("textdata/scheme_types",
                               file_namelist = "namelist",
                               lang = "en",
                               extended = FALSE) {
+  assert_that(is.string(lang))
 
-    assert_that(is.string(lang))
+  langs <-
+    read_namelist(
+      path = path,
+      file = file_namelist,
+      lang = "all"
+    ) %>%
+    distinct(.data$lang) %>%
+    pull(lang)
 
-    langs <-
-        read_namelist(path = path,
-                      file = file_namelist,
-                      lang = "all") %>%
-        distinct(.data$lang) %>%
-        pull(lang)
+  assert_that(any(lang %in% langs),
+    msg = "Your setting of lang is not supported."
+  )
 
-    assert_that(any(lang %in% langs),
-                msg = "Your setting of lang is not supported.")
+  namelist <-
+    read_namelist(
+      path = path,
+      file = file_namelist,
+      lang = lang
+    ) %>%
+    select(
+      .data$code,
+      .data$name,
+      .data$shortname
+    )
 
-    namelist <-
-        read_namelist(path = path,
-                      file = file_namelist,
-                      lang = lang) %>%
-        select(.data$code,
-               .data$name,
-               .data$shortname)
+  scheme_types <- read_vc(file = file, root = path)
 
-    scheme_types <- read_vc(file = file, root = path)
-
-    if (extended) {
-
+  if (extended) {
     schemes <-
-        read_schemes(path = path,
-                     file = "schemes",
-                     file_namelist = file_namelist,
-                     lang = lang) %>%
-        gather(key = "key",
-               value = "value",
-               contains("tag")) %>%
-        mutate(key = str_c("scheme", .data$key)) %>%
-        spread(key = .data$key, value = .data$value)
+      read_schemes(
+        path = path,
+        file = "schemes",
+        file_namelist = file_namelist,
+        lang = lang
+      ) %>%
+      gather(
+        key = "key",
+        value = "value",
+        contains("tag")
+      ) %>%
+      mutate(key = str_c("scheme", .data$key)) %>%
+      spread(key = .data$key, value = .data$value)
 
     types <-
-        read_types(path = path,
-                   file = "types",
-                   file_namelist = file_namelist,
-                   lang = lang) %>%
-        gather(key = "key",
-               value = "value",
-               contains("tag")) %>%
-        mutate(key = str_c("type", .data$key)) %>%
-        spread(key = .data$key, value = .data$value)
+      read_types(
+        path = path,
+        file = "types",
+        file_namelist = file_namelist,
+        lang = lang
+      ) %>%
+      gather(
+        key = "key",
+        value = "value",
+        contains("tag")
+      ) %>%
+      mutate(key = str_c("type", .data$key)) %>%
+      spread(key = .data$key, value = .data$value)
 
     scheme_types %>%
-        mutate(typegroup_name = namelist_factor(.data$typegroup,
-                                                codelist = namelist),
-               typegroup_shortname = namelist_factor(.data$typegroup,
-                                                     "shortname",
-                                                     codelist = namelist)) %>%
-        left_join(schemes,
-                  by = "scheme") %>%
-        left_join(types,
-                  by = "type") %>%
-        mutate(type = .data$type %>%
-                        factor(levels =
-                                   read_vc(file = file, root = path) %>%
-                                   pull(.data$type) %>%
-                                   levels
-                                   )) %>%
-        as_tibble
-
-    } else {
-
-        scheme_types %>%
-            mutate(typegroup_name = namelist_factor(.data$typegroup,
-                                                    codelist = namelist),
-                   typegroup_shortname = namelist_factor(.data$typegroup,
-                                                         "shortname",
-                                                         codelist = namelist)) %>%
-            as_tibble
-
-    }
-
+      mutate(
+        typegroup_name = namelist_factor(.data$typegroup,
+          codelist = namelist
+        ),
+        typegroup_shortname = namelist_factor(.data$typegroup,
+          "shortname",
+          codelist = namelist
+        )
+      ) %>%
+      left_join(schemes,
+        by = "scheme"
+      ) %>%
+      left_join(types,
+        by = "type"
+      ) %>%
+      mutate(type = .data$type %>%
+        factor(
+          levels =
+            read_vc(file = file, root = path) %>%
+              pull(.data$type) %>%
+              levels
+        )) %>%
+      as_tibble
+  } else {
+    scheme_types %>%
+      mutate(
+        typegroup_name = namelist_factor(.data$typegroup,
+          codelist = namelist
+        ),
+        typegroup_shortname = namelist_factor(.data$typegroup,
+          "shortname",
+          codelist = namelist
+        )
+      ) %>%
+      as_tibble
+  }
 }
-
-
-
-
-
-

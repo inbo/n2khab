@@ -44,28 +44,30 @@
 #'
 #' @export
 convert_dec_to_base4frac <-
-    function(x) {
-
-        sapply(x,
-
-               function(x) {
-                   ifelse(is.na(x), NA,
-                          as.double(
-                              ifelse(x > 0,{
-                                  d <- floor(log(x, 4) + 1)
-                                  paste(c("0", "1", "2", "3")[
-                                      as.integer(abs(diff(x %% 4 ^ seq(d, 0))) %/%
-                                                     4 ^ seq(d - 1, 0) + 1)],
-                                      collapse = "")
-                              },
-                              '0'
-                              )) / 10 ^ 13
-                   )
-               }
-
-               )
-
-    }
+  function(x) {
+    sapply(
+      x,
+      function(x) {
+        ifelse(is.na(x), NA,
+          as.double(
+            ifelse(x > 0,
+              {
+                d <- floor(log(x, 4) + 1)
+                paste(
+                  c("0", "1", "2", "3")[
+                    as.integer(abs(diff(x %% 4^seq(d, 0))) %/%
+                      4^seq(d - 1, 0) + 1)
+                  ],
+                  collapse = ""
+                )
+              },
+              '0'
+            )
+          ) / 10^13
+        )
+      }
+    )
+  }
 
 
 
@@ -148,47 +150,47 @@ convert_dec_to_base4frac <-
 #' convert_base4frac_to_dec(c(NA, 0.1010101010101), level = 5)
 #' # same vector, all sensible levels computed:
 #' sapply(0:12, function(i) convert_base4frac_to_dec(c(NA, 0.1010101010101),
-#'                                           level = i)
-#'       )
+#'   level = i
+#' ))
 #' options(oldoption)
 #'
 #' @export
 #' @importFrom dplyr %>%
 #' @importFrom stringr str_sub str_pad str_split
 convert_base4frac_to_dec <-
-    function(x, level) {
+  function(x, level) {
+    require_pkgs("withr")
+    withr::with_options(
+      c(
+        scipen = 999,
+        digits = 15
+      ),
+      {
+        multipliers <- as.matrix(4^((13 - level - 1):0))
 
-        require_pkgs("withr")
-        withr::with_options(
-            c(scipen = 999,
-              digits = 15), {
-
-        multipliers <- as.matrix(4 ^ ((13 - level - 1):0))
-
-        sapply(x,
-
-               function(x, level2 = level) {
-                   ifelse(is.na(x), NA, {
-                       a <- x * 10 ^ level2
-                       a <- round(a - floor(a), 13 - level2)
-                       a <- a %>%
-                           as.character %>%
-                           str_sub(start = 3) %>%
-                           str_pad(width = 13 - level2,
-                                   side = "right",
-                                   pad = "0") %>%
-                           str_split("", simplify = TRUE) %>%
-                           as.numeric
-                       t(a) %*% multipliers
-                   }
-                   )
-               }
-
+        sapply(
+          x,
+          function(x, level2 = level) {
+            ifelse(is.na(x), NA, {
+              a <- x * 10^level2
+              a <- round(a - floor(a), 13 - level2)
+              a <- a %>%
+                as.character %>%
+                str_sub(start = 3) %>%
+                str_pad(
+                  width = 13 - level2,
+                  side = "right",
+                  pad = "0"
+                ) %>%
+                str_split("", simplify = TRUE) %>%
+                as.numeric
+              t(a) %*% multipliers
+            })
+          }
         )
-
-        })
-
-    }
+      }
+    )
+  }
 
 
 
@@ -311,30 +313,35 @@ convert_base4frac_to_dec <-
 #' @export
 #' @importFrom stringr str_c
 read_GRTSmh <-
-    function(file = file.path(fileman_up("n2khab_data"),
-                              c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
-                                "20_processed/GRTSmh_brick/GRTSmh_brick.tif")),
-             brick = FALSE) {
+  function(file = file.path(
+             fileman_up("n2khab_data"),
+             c(
+               "10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
+               "20_processed/GRTSmh_brick/GRTSmh_brick.tif"
+             )
+           ),
+           brick = FALSE) {
+    require_pkgs("raster")
 
-        require_pkgs("raster")
-
-        if (brick) {
-            if (missing(file)) {
-                    b <- raster::brick(file[2])} else {
-                    b <- raster::brick(file)
-                    }
-            names(b) <- str_c("level", 0:(raster::nlayers(b) - 1))
-            result <- b
-        } else {
-            if (missing(file)) {
-                   r <- raster::raster(file[1])} else {
-                   r <- raster::raster(file)
-                   }
-            result <- r
-        }
-        raster::crs(result) <- "EPSG:31370"
-        return(result)
+    if (brick) {
+      if (missing(file)) {
+        b <- raster::brick(file[2])
+      } else {
+        b <- raster::brick(file)
+      }
+      names(b) <- str_c("level", 0:(raster::nlayers(b) - 1))
+      result <- b
+    } else {
+      if (missing(file)) {
+        r <- raster::raster(file[1])
+      } else {
+        r <- raster::raster(file)
+      }
+      result <- r
     }
+    raster::crs(result) <- "EPSG:31370"
+    return(result)
+  }
 
 
 
@@ -423,15 +430,16 @@ read_GRTSmh <-
 #'
 #' @export
 read_GRTSmh_base4frac <-
-    function(file = file.path(fileman_up("n2khab_data"),
-                              "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif")) {
+  function(file = file.path(
+             fileman_up("n2khab_data"),
+             "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif"
+           )) {
+    require_pkgs("raster")
 
-        require_pkgs("raster")
-
-        r <- raster::raster(file)
-        raster::crs(r) <- "EPSG:31370"
-        return(r)
-    }
+    r <- raster::raster(file)
+    raster::crs(r) <- "EPSG:31370"
+    return(r)
+  }
 
 
 
@@ -574,56 +582,39 @@ read_GRTSmh_base4frac <-
 #' read_sf
 #' st_crs<-
 read_GRTSmh_diffres <-
-    function(dir = file.path(fileman_up("n2khab_data"), "20_processed/GRTSmh_diffres"),
-             level,
-             polygon = FALSE) {
-
-        if (!(level %in% 1:9 & level %% 1 == 0)) {
-            stop("level must be an integer in the range 1 to 9.")
-        }
-
-        if (polygon) {
-
-            if (!(level %in% 4:9)) {
-                stop("When polygon = TRUE, level must be an integer in the range 4 to 9.")
-            }
-
-            p <- read_sf(file.path(dir,
-                              "GRTSmh_diffres.gpkg"),
-                    layer = str_c("GRTSmh_polygonized_level", level))
-            suppressWarnings(st_crs(p) <- 31370)
-            p
-
-        } else {
-
-            require_pkgs("raster")
-
-            r <- raster::raster(file.path(dir,
-                                          str_c("GRTSmh_diffres.",
-                                                level, ".tif")))
-            names(r) <- str_c("level", level)
-            raster::crs(r) <- "EPSG:31370"
-            r
-
-        }
+  function(dir = file.path(fileman_up("n2khab_data"), "20_processed/GRTSmh_diffres"),
+           level,
+           polygon = FALSE) {
+    if (!(level %in% 1:9 & level %% 1 == 0)) {
+      stop("level must be an integer in the range 1 to 9.")
     }
 
+    if (polygon) {
+      if (!(level %in% 4:9)) {
+        stop("When polygon = TRUE, level must be an integer in the range 4 to 9.")
+      }
 
+      p <- read_sf(
+        file.path(
+          dir,
+          "GRTSmh_diffres.gpkg"
+        ),
+        layer = str_c("GRTSmh_polygonized_level", level)
+      )
+      suppressWarnings(st_crs(p) <- 31370)
+      p
+    } else {
+      require_pkgs("raster")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      r <- raster::raster(file.path(
+        dir,
+        str_c(
+          "GRTSmh_diffres.",
+          level, ".tif"
+        )
+      ))
+      names(r) <- str_c("level", level)
+      raster::crs(r) <- "EPSG:31370"
+      r
+    }
+  }

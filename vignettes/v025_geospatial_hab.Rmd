@@ -102,18 +102,18 @@ habitatmap
 #> Bounding box:  xmin: 21991.38 ymin: 153058.3 xmax: 258871.8 ymax: 244027.3
 #> Projected CRS: Belge 1972 / Belgian Lambert 72
 #> # A tibble: 646,589 x 31
-#>    polygon_id  eval  eenh1 eenh2 eenh3 eenh4 eenh5 eenh6 eenh7 eenh8 v1    v2   
+#>    polygon_id  eval  eenh1 eenh2 eenh3 eenh4 eenh5 eenh6 eenh7 eenh8 v1    v2
 #>  * <chr>       <fct> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>
-#>  1 000098_v20… m     b     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  2 000132_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  3 000135_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  4 000136_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  5 000142_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  6 000150_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  7 000297_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  8 000991_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  9 000999_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#> 10 001000_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+#>  1 000098_v20… m     b     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>
+#>  2 000132_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>
+#>  3 000135_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>
+#>  4 000136_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>
+#>  5 000142_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>
+#>  6 000150_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>
+#>  7 000297_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>
+#>  8 000991_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>
+#>  9 000999_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>
+#> 10 001000_v20… m     bl    <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>
 #> # … with 646,579 more rows, and 19 more variables: v3 <chr>, source <chr>,
 #> #   info <chr>, bwk_label <chr>, hab1 <chr>, phab1 <int>, hab2 <chr>,
 #> #   phab2 <int>, hab3 <chr>, phab3 <int>, hab4 <chr>, phab4 <int>, hab5 <chr>,
@@ -158,11 +158,11 @@ habitatstreams
 With `read_habitatstreams(source_text = TRUE)` a second object `sources` is returned with the meaning of the `source_id` codes:
 
 ```{r}
-read_habitatstreams(source_text = TRUE) %>% 
+read_habitatstreams(source_text = TRUE) %>%
   .$sources
 #> # A tibble: 7 x 2
-#>   source_id          source_text                                                
-#>   <fct>              <fct>                                                      
+#>   source_id          source_text
+#>   <fct>              <fct>
 #> 1 VMM                "Gegevens afgeleid van macrofyteninventarisaties uitgevoer…
 #> 2 EcoInv             "Tijdens ecologische inventarisatiestudies uitgevoerd in o…
 #> 3 extrapol           "De conclusie van het nabijgelegen geïnventariseerde segme…
@@ -210,18 +210,18 @@ habitatquarries
 #> Bounding box:  xmin: 221427.3 ymin: 160393.5 xmax: 243211.1 ymax: 168965.1
 #> Projected CRS: Belge 1972 / Belgian Lambert 72
 #> # A tibble: 45 x 7
-#>    polygon_id unit_id name        code_orig type  extra_reference               
-#>         <int>   <int> <chr>       <chr>     <fct> <fct>                         
-#>  1          4       4 Avergat - … gh        <NA>  Lahaye 2018                   
-#>  2          6       6 Avergat - … 8310      8310  Lahaye 2018                   
-#>  3          5       5 Avergat - … gh        <NA>  Lahaye 2018                   
+#>    polygon_id unit_id name        code_orig type  extra_reference
+#>         <int>   <int> <chr>       <chr>     <fct> <fct>
+#>  1          4       4 Avergat - … gh        <NA>  Lahaye 2018
+#>  2          6       6 Avergat - … 8310      8310  Lahaye 2018
+#>  3          5       5 Avergat - … gh        <NA>  Lahaye 2018
 #>  4         20      20 Coolen      8310      8310  Limburgs Landschap 2020; pers…
-#>  5         21      21 Coolen      gh        <NA>  Limburgs Landschap 2020       
-#>  6         29      29 Groeve Lin… 8310      8310  <NA>                          
-#>  7         31      31 Grote berg… 8310      8310  De Haan & Lahaye 2018         
-#>  8         37      37 Grote berg… 8310      8310  De Haan & Lahaye 2018         
-#>  9         24      24 Henisdael … 8310      8310  Dusar et al. 2007             
-#> 10         34      34 Henisdael … 8310      8310  Dusar et al. 2007             
+#>  5         21      21 Coolen      gh        <NA>  Limburgs Landschap 2020
+#>  6         29      29 Groeve Lin… 8310      8310  <NA>
+#>  7         31      31 Grote berg… 8310      8310  De Haan & Lahaye 2018
+#>  8         37      37 Grote berg… 8310      8310  De Haan & Lahaye 2018
+#>  9         24      24 Henisdael … 8310      8310  Dusar et al. 2007
+#> 10         34      34 Henisdael … 8310      8310  Dusar et al. 2007
 #> # … with 35 more rows, and 1 more variable: geom <POLYGON [m]>
 ```
 
@@ -252,14 +252,14 @@ habitatquarries2$extra_references
 #> # A tibble: 9 x 23
 #>   category bibtexkey address author booktitle journal month note  number pages
 #>   <chr>    <chr>     <chr>   <chr>  <chr>     <chr>   <chr> <chr> <chr>  <chr>
-#> 1 BOOK     de_haan_… Brusse… De Ha… <NA>      <NA>    <NA>  <NA>  <NA>   <NA> 
-#> 2 INCOLLE… dusar_me… Genk    Dusar… Likona j… <NA>    <NA>  <NA>  <NA>   6-13 
-#> 3 BOOK     jenneken… Riemst  Jenne… <NA>      <NA>    <NA>  <NA>  <NA>   <NA> 
-#> 4 INCOLLE… lahaye_g… Riemst  Lahay… <NA>      <NA>    <NA>  <NA>  <NA>   12   
-#> 5 BOOK     verhoeve… Weert   Verho… <NA>      <NA>    <NA>  <NA>  1769   <NA> 
-#> 6 BOOK     walschot… <NA>    Walsc… <NA>      <NA>    <NA>  <NA>  <NA>   <NA> 
-#> 7 MISC     wikipedi… <NA>    {Wiki… <NA>      <NA>    jan   Page… <NA>   <NA> 
-#> 8 MISC     limburgs… <NA>    {Limb… <NA>      <NA>    apr   Libr… <NA>   <NA> 
+#> 1 BOOK     de_haan_… Brusse… De Ha… <NA>      <NA>    <NA>  <NA>  <NA>   <NA>
+#> 2 INCOLLE… dusar_me… Genk    Dusar… Likona j… <NA>    <NA>  <NA>  <NA>   6-13
+#> 3 BOOK     jenneken… Riemst  Jenne… <NA>      <NA>    <NA>  <NA>  <NA>   <NA>
+#> 4 INCOLLE… lahaye_g… Riemst  Lahay… <NA>      <NA>    <NA>  <NA>  <NA>   12
+#> 5 BOOK     verhoeve… Weert   Verho… <NA>      <NA>    <NA>  <NA>  1769   <NA>
+#> 6 BOOK     walschot… <NA>    Walsc… <NA>      <NA>    <NA>  <NA>  <NA>   <NA>
+#> 7 MISC     wikipedi… <NA>    {Wiki… <NA>      <NA>    jan   Page… <NA>   <NA>
+#> 8 MISC     limburgs… <NA>    {Limb… <NA>      <NA>    apr   Libr… <NA>   <NA>
 #> 9 ARTICLE  silverta… <NA>    Silve… <NA>      Natuur… <NA>  <NA>  12     334-…
 #> # … with 13 more variables: publisher <chr>, series <chr>, title <chr>,
 #> #   volume <chr>, year <dbl>, url <chr>, isbn <chr>, copyright <chr>,
@@ -333,17 +333,16 @@ hms_occ
 Let's estimate the surface area per type, including uncertain occurrences of types and taking into account cover percentage per polygon (`phab`):
 
 ```{r}
-hms_pol %>% 
-  mutate(area = st_area(.)) %>% 
-  st_drop_geometry %>% 
-  inner_join(hms_occ, by = "polygon_id") %>% 
-    # area of type within polygon:
-  mutate(area_type = area * phab / 100) %>% 
-  group_by(type) %>% 
-  summarise(area = sum(area_type) %>% 
-                    set_units("ha") %>% 
-                    round(2)
-            )
+hms_pol %>%
+  mutate(area = st_area(.)) %>%
+  st_drop_geometry %>%
+  inner_join(hms_occ, by = "polygon_id") %>%
+  # area of type within polygon:
+  mutate(area_type = area * phab / 100) %>%
+  group_by(type) %>%
+  summarise(area = sum(area_type) %>%
+    set_units("ha") %>%
+    round(2))
 #> # A tibble: 101 x 2
 #>    type        area
 #>    <fct>       [ha]
@@ -394,8 +393,8 @@ hmt$habitatmap_terr_polygons
 ```{r}
 hmt$habitatmap_terr_types
 #> # A tibble: 99,784 x 6
-#>    polygon_id   type     certain code_orig  phab source            
-#>    <fct>        <fct>    <lgl>   <chr>     <int> <fct>             
+#>    polygon_id   type     certain code_orig  phab source
+#>    <fct>        <fct>    <lgl>   <chr>     <int> <fct>
 #>  1 000038_v2016 91E0_va  TRUE    91E0_va     100 habitatmap_stdized
 #>  2 000043_v2016 9130_end TRUE    9130_end    100 habitatmap_stdized
 #>  3 000064_v2020 9130_end TRUE    9130_end    100 habitatmap_stdized
@@ -416,29 +415,31 @@ This can be controlled by the `drop_7220` argument.
 As a consequence, some type codes are completely absent from `habitatmap_terr_types`:
 
 ```{r}
-hms_occ %>% 
-  distinct(type) %>% 
-  anti_join(hmt$habitatmap_terr_types %>% 
-              distinct(type), 
-            by = "type") %>% 
+hms_occ %>%
+  distinct(type) %>%
+  anti_join(
+    hmt$habitatmap_terr_types %>%
+      distinct(type),
+    by = "type"
+  ) %>%
   arrange(type)
 #> # A tibble: 7 x 1
-#>   type 
+#>   type
 #>   <fct>
-#> 1 2190 
-#> 2 6410 
-#> 3 6430 
-#> 4 6510 
-#> 5 7140 
-#> 6 7220 
+#> 1 2190
+#> 2 6410
+#> 3 6430
+#> 4 6510
+#> 5 7140
+#> 6 7220
 #> 7 9130
 ```
 
 About 3% of all type occurrences received a new type code:
 
 ```{r}
-hmt$habitatmap_terr_types %>%  
-  count(source) %>% 
+hmt$habitatmap_terr_types %>%
+  count(source) %>%
   mutate(pct = (n / sum(n) * 100) %>% round(0))
 #> # A tibble: 2 x 3
 #>   source                                  n   pct
@@ -463,18 +464,18 @@ wsh$watersurfaces_polygons
 #> Bounding box:  xmin: 22546.57 ymin: 159273.1 xmax: 253896.9 ymax: 242960.1
 #> Projected CRS: Belge 1972 / Belgian Lambert 72
 #> # A tibble: 3,233 x 5
-#>    polygon_id polygon_id_ws polygon_id_habitatm… description_orig               
-#>  * <fct>      <fct>         <fct>                <chr>                          
-#>  1 ANTANT0082 ANTANT0082    596466_v2014         60% 3150; 20% rbbmr; 20% rbbsf 
-#>  2 ANTANT0234 ANTANT0234    633396_v2020         100% 3130_na                   
-#>  3 ANTANT0251 ANTANT0251    113978_v2014         100% 3150                      
-#>  4 ANTANT0253 ANTANT0253    111606_v2014         100% 3150                      
+#>    polygon_id polygon_id_ws polygon_id_habitatm… description_orig
+#>  * <fct>      <fct>         <fct>                <chr>
+#>  1 ANTANT0082 ANTANT0082    596466_v2014         60% 3150; 20% rbbmr; 20% rbbsf
+#>  2 ANTANT0234 ANTANT0234    633396_v2020         100% 3130_na
+#>  3 ANTANT0251 ANTANT0251    113978_v2014         100% 3150
+#>  4 ANTANT0253 ANTANT0253    111606_v2014         100% 3150
 #>  5 ANTANT0297 ANTANT0297    409153_v2014+409153… 85% 3140; 15% 3150+85% 3140; 1…
-#>  6 ANTANT0315 ANTANT0315    519082_v2018         100% 3140                      
-#>  7 ANTANT0319 ANTANT0319    601958_v2014         100% 3150,gh                   
-#>  8 ANTANT0381 ANTANT0381    644003_v2014         85% gh; 15% 3140               
+#>  6 ANTANT0315 ANTANT0315    519082_v2018         100% 3140
+#>  7 ANTANT0319 ANTANT0319    601958_v2014         100% 3150,gh
+#>  8 ANTANT0381 ANTANT0381    644003_v2014         85% gh; 15% 3140
 #>  9 ANTANT0383 ANTANT0383    631879_v2014+593522… 50% 3150; 40% rbbmr; 10% rbbsf…
-#> 10 ANTANT0384 ANTANT0384    644003_v2014         85% gh; 15% 3140               
+#> 10 ANTANT0384 ANTANT0384    644003_v2014         85% gh; 15% 3140
 #> # … with 3,223 more rows, and 1 more variable: geom <MULTIPOLYGON [m]>
 ```
 
@@ -482,39 +483,45 @@ wsh$watersurfaces_polygons
 wsh$watersurfaces_types
 #> # A tibble: 3,669 x 4
 #>    polygon_id type    certain code_orig
-#>    <fct>      <fct>   <lgl>   <chr>    
-#>  1 ANTANT0082 3150    TRUE    3150     
-#>  2 ANTANT0234 3130_na TRUE    3130_na  
-#>  3 ANTANT0251 3150    TRUE    3150     
-#>  4 ANTANT0253 3150    TRUE    3150     
-#>  5 ANTANT0297 3140    TRUE    3140     
-#>  6 ANTANT0297 3150    TRUE    3150     
-#>  7 ANTANT0315 3140    TRUE    3140     
-#>  8 ANTANT0319 3150    FALSE   3150,gh  
-#>  9 ANTANT0381 3140    TRUE    3140     
-#> 10 ANTANT0383 3150    TRUE    3150     
+#>    <fct>      <fct>   <lgl>   <chr>
+#>  1 ANTANT0082 3150    TRUE    3150
+#>  2 ANTANT0234 3130_na TRUE    3130_na
+#>  3 ANTANT0251 3150    TRUE    3150
+#>  4 ANTANT0253 3150    TRUE    3150
+#>  5 ANTANT0297 3140    TRUE    3140
+#>  6 ANTANT0297 3150    TRUE    3150
+#>  7 ANTANT0315 3140    TRUE    3140
+#>  8 ANTANT0319 3150    FALSE   3150,gh
+#>  9 ANTANT0381 3140    TRUE    3140
+#> 10 ANTANT0383 3150    TRUE    3150
 #> # … with 3,659 more rows
 ```
 
 Let's compute some statistics of standing water types (ignoring the value `certain`):
 
 ```{r}
-wsh$watersurfaces_polygons %>% 
-  mutate(area = st_area(.)) %>% 
-  st_drop_geometry %>% 
+wsh$watersurfaces_polygons %>%
+  mutate(area = st_area(.)) %>%
+  st_drop_geometry %>%
   inner_join(wsh$watersurfaces_types,
-             by = "polygon_id") %>% 
-  group_by(type) %>% 
-  summarise(nr_watersurfaces = n_distinct(polygon_id),
-            total_area = sum(area),
-            area_min = min(area),
-            area_Q1 = quantile(area, 0.25),
-            area_Q2 = quantile(area, 0.5),
-            area_Q3 = quantile(area, 0.75),
-            max = max(area)
-            ) %>% 
-  mutate_at(vars(matches("area|max")), 
-            function(x) {set_units(x, "a") %>% round(1)})
+    by = "polygon_id"
+  ) %>%
+  group_by(type) %>%
+  summarise(
+    nr_watersurfaces = n_distinct(polygon_id),
+    total_area = sum(area),
+    area_min = min(area),
+    area_Q1 = quantile(area, 0.25),
+    area_Q2 = quantile(area, 0.5),
+    area_Q3 = quantile(area, 0.75),
+    max = max(area)
+  ) %>%
+  mutate_at(
+    vars(matches("area|max")),
+    function(x) {
+      set_units(x, "a") %>% round(1)
+    }
+  )
 #> # A tibble: 9 x 8
 #>   type     nr_watersurfaces total_area area_min area_Q1 area_Q2 area_Q3     max
 #>   <fct>               <int>        [a]      [a]     [a]     [a]     [a]     [a]
@@ -535,9 +542,9 @@ Consequently we can make use of tools like `set_units()` to convert units (e.g. 
 Because the main type code `3130` will mostly boil down to `3130_aom` in the field, a further interpreted flavour can be generated with `read_watersurfaces_hab(interpreted = TRUE)`.
 
 ```{r}
-read_watersurfaces_hab(interpreted = TRUE) %>% 
-  .$watersurfaces_types %>% 
-  filter(type == "3130") %>% 
+read_watersurfaces_hab(interpreted = TRUE) %>%
+  .$watersurfaces_types %>%
+  filter(type == "3130") %>%
   nrow
 #> [1] 0
 ```
@@ -557,24 +564,24 @@ An example (`df` is our dataframe):
 
 ```{r eval=TRUE}
 df <-
-    tribble(
-        ~mycode, ~obs,
-        "2130", 5,
-        "2190", 45,
-        "2330_bu", 8,
-        "2330_dw", 8,
-        "6410_mo", 78,
-        "6410_ve", 4,
-        "91E0_vn", 10
-    )
+  tribble(
+    ~mycode, ~obs,
+    "2130", 5,
+    "2190", 45,
+    "2330_bu", 8,
+    "2330_dw", 8,
+    "6410_mo", 78,
+    "6410_ve", 4,
+    "91E0_vn", 10
+  )
 df
 ```
 
 With the `type_var` argument you specify which variable of your dataframe represents type codes:
 
 ```{r eval=TRUE}
-df_exp <- 
-    expand_types(df, type_var = "mycode")
+df_exp <-
+  expand_types(df, type_var = "mycode")
 df_exp
 ```
 
@@ -583,8 +590,8 @@ More examples and features are explained in the documentation of `expand_types()
 Obviously, more rows of `habitatmap_terr` will be retained by joining `df_exp`:
 
 ```{r warning=FALSE}
-hmt$habitatmap_terr_types %>% 
-  semi_join(df_exp, by = c(type = "mycode")) %>% 
+hmt$habitatmap_terr_types %>%
+  semi_join(df_exp, by = c(type = "mycode")) %>%
   nrow
 #> [1] 6634
 ```
@@ -592,8 +599,8 @@ hmt$habitatmap_terr_types %>%
 When joining with `df`:
 
 ```{r warning=FALSE}
-hmt$habitatmap_terr_types %>% 
-  semi_join(df, by = c(type = "mycode")) %>% 
+hmt$habitatmap_terr_types %>%
+  semi_join(df, by = c(type = "mycode")) %>%
   nrow
 #> [1] 4984
 ```

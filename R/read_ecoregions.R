@@ -39,36 +39,42 @@
 #' @importFrom rlang .data
 #' @export
 read_ecoregions <-
-    function(file = file.path(fileman_up("n2khab_data"), "10_raw/ecoregions")) {
+  function(file = file.path(fileman_up("n2khab_data"), "10_raw/ecoregions")) {
+    suppressWarnings(
+      ecoregions <- read_sf(file,
+        crs = 31370
+      )
+    )
 
-        suppressWarnings(
-            ecoregions <- read_sf(file,
-                                  crs = 31370)
-        )
+    ecoregions <-
+      ecoregions %>%
+      select(
+        polygon_code = .data$CODE,
+        polygon_id = .data$NR,
+        region_name = .data$REGIO,
+        district_name = .data$DISTRICT
+      ) %>%
+      arrange(.data$polygon_code, .data$polygon_id)
 
-        ecoregions <-
-            ecoregions %>%
-            select(polygon_code = .data$CODE,
-                   polygon_id = .data$NR,
-                   region_name = .data$REGIO,
-                   district_name = .data$DISTRICT) %>%
-            arrange(.data$polygon_code, .data$polygon_id)
+    er_levels <-
+      ecoregions %>%
+      st_drop_geometry %>%
+      select(-.data$district_name)
 
-        er_levels <-
-            ecoregions %>%
-            st_drop_geometry %>%
-            select(-.data$district_name)
+    ecoregions <-
+      ecoregions %>%
+      mutate(
+        polygon_code = factor(.data$polygon_code,
+          levels = er_levels$polygon_code
+        ),
+        polygon_id = factor(.data$polygon_id,
+          levels = er_levels$polygon_id
+        ),
+        region_name = factor(.data$region_name,
+          levels = unique(er_levels$region_name)
+        ),
+        district_name = factor(.data$district_name)
+      )
 
-        ecoregions <-
-            ecoregions %>%
-            mutate(polygon_code = factor(.data$polygon_code,
-                                         levels = er_levels$polygon_code),
-                   polygon_id = factor(.data$polygon_id,
-                                       levels = er_levels$polygon_id),
-                   region_name = factor(.data$region_name,
-                                        levels = unique(er_levels$region_name)),
-                   district_name = factor(.data$district_name))
-
-        return(ecoregions)
-
-    }
+    return(ecoregions)
+  }
