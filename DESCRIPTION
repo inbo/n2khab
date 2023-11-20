@@ -42,7 +42,6 @@ Imports:
     sf,
     stringr,
     tidyr (>= 1.0.0),
-    withr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
@@ -55,13 +54,15 @@ Suggests:
     knitr,
     mapview,
     openssl,
-    parallel,
     raster (>= 3.3-16),
     readxl,
     remotes,
     rmarkdown,
+    testthat (>= 3.0.0),
     tidyverse,
     tools,
     units,
-    utils
+    utils,
+    withr
 VignetteBuilder: knitr
+Config/testthat/edition: 3

@@ -154,12 +154,12 @@ convert_dec_to_base4frac <-
 #'
 #' @export
 #' @importFrom dplyr %>%
-#' @importFrom withr with_options
 #' @importFrom stringr str_sub str_pad str_split
 convert_base4frac_to_dec <-
     function(x, level) {
 
-        with_options(
+        require_pkgs("withr")
+        withr::with_options(
             c(scipen = 999,
               digits = 15), {
 

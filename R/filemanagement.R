@@ -98,11 +98,9 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
 #' @param path Path where the data must be downloaded.
 #' Defaults to the working directory.
 #' @param doi a doi pointer to the Zenodo archive starting with '10.5281/zenodo.'. See examples.
-#' @param parallel Logical (\code{FALSE} by default).
-#' If \code{TRUE}, will run a number of parallel processes, each downloading
-#' another file.
-#' This is useful when multiple large files are present in the Zenodo
-#' record, which otherwise would be downloaded sequentially.
+#' @param parallel Logical.
+#' If \code{TRUE} (the default), files will be
+#' downloaded concurrently for multi-file records.
 #' Of course, the operation is limited by bandwidth and traffic limitations.
 #' @param quiet Logical (\code{FALSE} by default).
 #' Do you want to suppress informative messages (not warnings)?
@@ -135,7 +133,7 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
 #' }
 download_zenodo <- function(doi,
                             path = ".",
-                            parallel = FALSE,
+                            parallel = TRUE,
                             quiet = FALSE) {
 
     assert_that(is.string(doi), is.string(path))
@@ -159,7 +157,7 @@ download_zenodo <- function(doi,
 
     # extract individual file names and urls
     file_urls <- content$files$links$self
-    filenames <- str_match(file_urls, ".+/([^/]+)")[,2]
+    filenames <- basename(content$files$key)
     destfiles <- file.path(path, filenames)
 
     # extract check-sum(s)
@@ -186,36 +184,13 @@ download_zenodo <- function(doi,
         )
     }
 
-    if (parallel) {
+    if (length(file_urls) > 1 && parallel) {
 
-        require_pkgs("parallel")
-
-        nr_nodes <- min(10, length(file_urls))
-
-        if (!quiet) message("Initializing parallel download on ",
-                            nr_nodes,
-                            " R session nodes...\n")
-
-        clus <- parallel::makeCluster(nr_nodes)
-
-        if (!quiet) {
-            message("Starting parallel downloads. ",
-                    "This may take a while (and I can't show you the overall progress).\n",
-                    "Be patient...\n")
-        }
-
-        parallel::clusterMap(clus,
-                             function(src, dest) {
-                                 curl::curl_download(url = src,
-                                                     destfile = dest,
-                                                     quiet = quiet)
-                             },
-                             file_urls,
-                             destfiles)
-
-        parallel::stopCluster(clus)
-
-        if (!quiet) message("Ended parallel downloads.")
+        curl::multi_download(
+          urls = file_urls,
+          destfiles = destfiles,
+          progress = !quiet
+        )
 
     } else {
 
@@ -235,7 +210,7 @@ download_zenodo <- function(doi,
         destfile <- destfiles[i]
         md5 <- unname(tools::md5sum(destfile))
         zenodo_md5 <- str_split(file_md5[i], ":")[[1]][2]
-        if (all.equal(md5, zenodo_md5)) {
+        if (identical(md5, zenodo_md5)) {
             if (!quiet) message(filename,
                                 " was downloaded and its integrity verified (md5sum: ",
                                 md5,
