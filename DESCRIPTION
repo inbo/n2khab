@@ -59,9 +59,11 @@ Suggests:
     readxl,
     remotes,
     rmarkdown,
+    testthat (>= 3.0.0),
     tidyverse,
     tools,
     units,
     utils,
     withr
 VignetteBuilder: knitr
+Config/testthat/edition: 3
