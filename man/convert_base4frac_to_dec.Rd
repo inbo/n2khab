@@ -55,9 +55,11 @@ convert_base4frac_to_dec(c(NA, 0.1010101010101), level = 0)
 # vector, level 5:
 convert_base4frac_to_dec(c(NA, 0.1010101010101), level = 5)
 # same vector, all sensible levels computed:
-sapply(0:12, function(i) convert_base4frac_to_dec(c(NA, 0.1010101010101),
-                                          level = i)
-      )
+sapply(0:12, function(i) {
+  convert_base4frac_to_dec(c(NA, 0.1010101010101),
+    level = i
+  )
+})
 options(oldoption)
 
 }

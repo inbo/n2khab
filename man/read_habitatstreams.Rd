@@ -55,8 +55,10 @@ hs <- read_habitatstreams()
 hs
 hs2 <- read_habitatstreams(source_text = TRUE)
 hs2
-all.equal(hs \%>\% st_drop_geometry,
-          hs2$lines \%>\% st_drop_geometry)
+all.equal(
+  hs \%>\% st_drop_geometry(),
+  hs2$lines \%>\% st_drop_geometry()
+)
 }
 
 }

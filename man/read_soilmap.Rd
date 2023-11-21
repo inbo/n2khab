@@ -256,10 +256,10 @@ soilmap_simple <- read_soilmap()
 soilmap_simple
 soilmap_simple \%>\%
   filter(!is.na(bsm_mo_substr)) \%>\%
-  glimpse
+  glimpse()
 soilmap_simple \%>\%
   filter(bsm_converted) \%>\%
-  glimpse
+  glimpse()
 }
 
 }
