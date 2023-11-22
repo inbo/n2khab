@@ -1,4 +1,5 @@
 test_that("download_zenodo() works for a single-file record", {
+  skip_if_offline()
   zenodo_dir <- tempfile()
   withr::local_file(zenodo_dir)
   dir.create(zenodo_dir)
@@ -8,6 +9,7 @@ test_that("download_zenodo() works for a single-file record", {
 })
 
 test_that("download_zenodo() works for a GitHub code record", {
+  skip_if_offline()
   zenodo_dir <- tempfile()
   withr::local_file(zenodo_dir)
   dir.create(zenodo_dir)
@@ -17,6 +19,7 @@ test_that("download_zenodo() works for a GitHub code record", {
 })
 
 test_that("download_zenodo() works for a multi-file record", {
+  skip_if_offline()
   zenodo_dir <- tempfile()
   withr::local_file(zenodo_dir)
   dir.create(zenodo_dir)
@@ -29,6 +32,7 @@ test_that("download_zenodo() works for a multi-file record", {
 })
 
 test_that("download_zenodo() can work sequentially for a multi-file record", {
+  skip_if_offline()
   zenodo_dir <- tempfile()
   withr::local_file(zenodo_dir)
   dir.create(zenodo_dir)
