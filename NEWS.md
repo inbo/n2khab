@@ -1,3 +1,18 @@
+# n2khab 0.9.0 (2023-11-22)
+
+- `download_zenodo()` has been improved (#169):
+  - fixes in order to use the renewed Zenodo website;
+  - speedup the initiation of a multi-file download;
+  - set concurrent (parallel) downloading as default for multi-file records;
+  - add unit tests to regularly check that the function still works.
+- `read_watersurfaces()` gained extra capabilities (#168):
+  - data source version `watersurfaces_v1.2` is now supported;
+  - a new `fix_geom` argument allows to fix invalid or corrupt geometries on the fly.
+  This behaviour is turned off by default (see #60).
+- Package startup messages have been updated, including a check whether the latest release is being used (#170, [502c3a2](https://github.com/inbo/n2khab/commit/502c3a2)).
+- Internally, an update has been applied ([9691ec2](https://github.com/inbo/n2khab/commit/9691ec2)) to googlesheets authentication, used in updating the built-in textual data sources.
+These data sources have not changed since previous release.
+
 # n2khab 0.8.0 (2022-11-18)
 
 - Reference list `namelist` has been updated with improved type names (#163; thanks @jeroenvdborre).

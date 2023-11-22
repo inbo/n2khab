@@ -97,6 +97,7 @@ hq2 <- read_habitatquarries(filter_hab = TRUE)
 hq2
 hq3 <- read_habitatquarries(references = TRUE)
 hq3
-read_habitatquarries(bibtex = TRUE)}
+read_habitatquarries(bibtex = TRUE)
+}
 
 }

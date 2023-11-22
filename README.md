@@ -57,24 +57,14 @@ There is a major distinction between:
 - **raw data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-raw)), to be stored in a folder `n2khab_data/10_raw`;
 - **processed data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-processed)), to be stored in a folder `n2khab_data/20_processed`.
 
-### Suppressing `rgdal` warnings about proj4string degradation
+### Note: don't use proj4strings to define coordinate reference systems
 
-Setting coordinate reference systems (CRS) of geospatial R objects is taken care of by the package, in a way that is compatible with older and current versions of PROJ and GDAL backend libraries.
-This is done by gratefully implementing such features from the `sf` and `sp` packages.
-The functions never specify a CRS by means of a proj4string, which is an aged format not supported by the current backend versions.
+If you use `RasterLayer` or `RasterBrick` objects returned by **n2khab** functions, please make sure to not use the proj4string to represent its coordinate reference system (CRS), even while printing those objects will show a degraded (!) proj4string.
+The proj4string is an aged format which has lost most of its ability to represent a geodetic datum.
 
-Please note that nonetheless you will see warnings about degraded proj4strings when using certain `n2khab` functions or when converting resulting `sf` objects to `sp` objects.
-This is normal!
-It is the current default behaviour of `rgdal` to yield these warnings.
-However in the case of `n2khab` functions and resulting objects these warnings are trivial and unnecessary.
-You can suppress them in your R scripts by inserting below statement _before_ loading geospatial packages:
-
-```r
-options(rgdal_show_exportToProj4_warnings = "none")
-```
+The proper CRS representation is the WKT string, which is effectively returned by `raster::wkt()` and by `raster::crs()`.
 
 See [this](https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/) tutorial if you would like to learn more about this.
-In short: _don't_ use proj4strings to define CRSs!
 
 ## You are welcome to contribute!
 

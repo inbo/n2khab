@@ -41,16 +41,17 @@
 #' assert_that
 
 read_raster_runif <-
-    function(file = file.path(fileman_up("n2khab_data"),
-                              "10_raw/raster_runif/raster_runif.tif"),
-             version = "raster_runif_v1") {
+  function(file = file.path(
+             fileman_up("n2khab_data"),
+             "10_raw/raster_runif/raster_runif.tif"
+           ),
+           version = "raster_runif_v1") {
+    assert_that(file.exists(file))
 
-        assert_that(file.exists(file))
+    require_pkgs("raster")
 
-        require_pkgs("raster")
+    r <- raster::raster(file)
+    raster::crs(r) <- "EPSG:31370"
 
-        r <- raster::raster(file)
-        raster::crs(r) <- "EPSG:31370"
-
-        return(r)
-        }
+    return(r)
+  }

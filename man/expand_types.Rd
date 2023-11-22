@@ -78,30 +78,30 @@ main type but to an non-defined subtype with no specific code).
 \examples{
 library(dplyr)
 x <-
-    read_scheme_types() \%>\%
-    filter(scheme == "GW_05.1_terr")
+  read_scheme_types() \%>\%
+  filter(scheme == "GW_05.1_terr")
 expand_types(x)
 expand_types(x, strict = FALSE)
 
 x <-
-    read_scheme_types() \%>\%
-    filter(scheme == "GW_05.1_terr") \%>\%
-    group_by(typegroup)
+  read_scheme_types() \%>\%
+  filter(scheme == "GW_05.1_terr") \%>\%
+  group_by(typegroup)
 expand_types(x)
 expand_types(x, use_grouping = FALSE) # equals above example
 
 x <-
-    tribble(
-        ~mycode, ~obs,
-        "2130", 5,
-        "2190", 45,
-        "2330_bu", 8,
-        "2330_dw", 8,
-        "5130_hei", 7,
-        "6410_mo", 78,
-        "6410_ve", 4,
-        "91E0_vn", 10
-    )
+  tribble(
+    ~mycode, ~obs,
+    "2130", 5,
+    "2190", 45,
+    "2330_bu", 8,
+    "2330_dw", 8,
+    "5130_hei", 7,
+    "6410_mo", 78,
+    "6410_ve", 4,
+    "91E0_vn", 10
+  )
 expand_types(x, type_var = "mycode")
 expand_types(x, type_var = "mycode", strict = FALSE)
 

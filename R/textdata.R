@@ -431,12 +431,3 @@ NULL
 #'
 #' @name scheme_types
 NULL
-
-
-
-
-
-
-
-
-

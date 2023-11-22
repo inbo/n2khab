@@ -73,30 +73,30 @@
 #' @examples
 #' library(dplyr)
 #' x <-
-#'     read_scheme_types() %>%
-#'     filter(scheme == "GW_05.1_terr")
+#'   read_scheme_types() %>%
+#'   filter(scheme == "GW_05.1_terr")
 #' expand_types(x)
 #' expand_types(x, strict = FALSE)
 #'
 #' x <-
-#'     read_scheme_types() %>%
-#'     filter(scheme == "GW_05.1_terr") %>%
-#'     group_by(typegroup)
+#'   read_scheme_types() %>%
+#'   filter(scheme == "GW_05.1_terr") %>%
+#'   group_by(typegroup)
 #' expand_types(x)
 #' expand_types(x, use_grouping = FALSE) # equals above example
 #'
 #' x <-
-#'     tribble(
-#'         ~mycode, ~obs,
-#'         "2130", 5,
-#'         "2190", 45,
-#'         "2330_bu", 8,
-#'         "2330_dw", 8,
-#'         "5130_hei", 7,
-#'         "6410_mo", 78,
-#'         "6410_ve", 4,
-#'         "91E0_vn", 10
-#'     )
+#'   tribble(
+#'     ~mycode, ~obs,
+#'     "2130", 5,
+#'     "2190", 45,
+#'     "2330_bu", 8,
+#'     "2330_dw", 8,
+#'     "5130_hei", 7,
+#'     "6410_mo", 78,
+#'     "6410_ve", 4,
+#'     "91E0_vn", 10
+#'   )
 #' expand_types(x, type_var = "mycode")
 #' expand_types(x, type_var = "mycode", strict = FALSE)
 #'
@@ -123,37 +123,34 @@ expand_types <- function(x,
                          type_var = "type",
                          use_grouping = TRUE,
                          strict = TRUE) {
+  assert_that(inherits(x, "data.frame"))
+  assert_that(is.string(type_var))
+  assert_that(type_var %in% colnames(x),
+    msg = "type_var must be a variable name in x."
+  )
+  assert_that(is.flag(use_grouping), noNA(use_grouping))
+  assert_that(is.flag(strict), noNA(strict))
 
-    assert_that(inherits(x, "data.frame"))
-    assert_that(is.string(type_var))
-    assert_that(type_var %in% colnames(x),
-                msg = "type_var must be a variable name in x.")
-    assert_that(is.flag(use_grouping), noNA(use_grouping))
-    assert_that(is.flag(strict), noNA(strict))
-
-    if (!use_grouping) {
-
-        expand_types_plain(x = x,
-                           type_var = type_var,
-                           strict = strict)
-
-        } else {
-
+  if (!use_grouping) {
+    expand_types_plain(
+      x = x,
+      type_var = type_var,
+      strict = strict
+    )
+  } else {
     x %>%
-        nest(data = -!!(group_vars(x))) %>%
-        ungroup %>%
-        mutate(newdata = map(.data$data,
-                             expand_types_plain,
-                             type_var = type_var,
-                             strict = strict)
-        ) %>%
-        select(-.data$data) %>%
-        unnest(cols = .data$newdata) %>%
-        group_by_at(x %>% group_vars()) %>%
-        select(colnames(x))
-
-    }
-
+      nest(data = -!!(group_vars(x))) %>%
+      ungroup() %>%
+      mutate(newdata = map(.data$data,
+        expand_types_plain,
+        type_var = type_var,
+        strict = strict
+      )) %>%
+      select(-.data$data) %>%
+      unnest(cols = .data$newdata) %>%
+      group_by_at(x %>% group_vars()) %>%
+      select(colnames(x))
+  }
 }
 
 
@@ -189,85 +186,96 @@ expand_types <- function(x,
 #' @importFrom rlang .data
 #' @keywords internal
 expand_types_plain <- function(x,
-                         type_var = "type",
-                         strict = TRUE) {
-    types <-
-        read_types() %>%
-        select(1:3)
+                               type_var = "type",
+                               strict = TRUE) {
+  types <-
+    read_types() %>%
+    select(1:3)
 
-    subtypes <-
-        types %>%
-        filter(.data$typelevel == "subtype") %>%
-        select(1, 3)
+  subtypes <-
+    types %>%
+    filter(.data$typelevel == "subtype") %>%
+    select(1, 3)
 
-    orig_types <-
-        x[, type_var] %>%
-        rename(orig_abcd = type_var)
+  orig_types <-
+    x[, type_var] %>%
+    rename(orig_abcd = type_var)
 
-    if (!all(unique(orig_types$orig_abcd) %in% types$type)) {
-        warning("The dataframe contains type codes which are not standard.")
-    }
+  if (!all(unique(orig_types$orig_abcd) %in% types$type)) {
+    warning("The dataframe contains type codes which are not standard.")
+  }
 
-    # main types to add:
-    suppressWarnings(
+  # main types to add:
+  suppressWarnings(
     join_main_types <-
+      subtypes %>%
+      filter(.data$main_type == "2330" |
+        .data$type %in% c(
+          "6230_ha", "6230_hmo", "6230_hnk",
+          "5130_hei",
+          "91E0_va", "91E0_vm", "91E0_vn"
+        )) %>%
+      left_join(
+        orig_types %>%
+          mutate(present = 1),
+        by = c("type" = "orig_abcd")
+      ) %>%
+      group_by(.data$main_type) %>%
+      summarise(add = if (strict) {
+        all(!is.na(.data$present))
+      } else {
+        any(!is.na(.data$present))
+      }) %>%
+      filter(.data$add) %>%
+      # only adding codes absent from original dataframe:
+      anti_join(orig_types, by = c("main_type" = "orig_abcd")) %>%
+      pull(.data$main_type)
+  )
+
+  # expanding main types to their subtypes and adding the latter:
+  suppressWarnings(
+    x_expanded <-
+      x %>%
+      rename(orig_abcd = type_var) %>%
+      inner_join(subtypes %>% rename(type_abcd = .data$type),
+        by = c("orig_abcd" = "main_type")
+      ) %>%
+      mutate(orig_abcd = .data$type_abcd) %>%
+      select(-.data$type_abcd) %>%
+      anti_join(
+        x %>%
+          rename(orig_abcd = type_var),
+        by = "orig_abcd"
+      ) %>%
+      set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
+      bind_rows(x, .)
+  )
+
+  # adding main_types:
+  suppressWarnings(
+    x_expanded <-
+      x %>%
+      rename(orig_abcd = type_var) %>%
+      inner_join(
         subtypes %>%
-            filter(.data$main_type == "2330" |
-                       .data$type %in% c("6230_ha", "6230_hmo", "6230_hnk",
-                                         "5130_hei",
-                                     "91E0_va", "91E0_vm", "91E0_vn")) %>%
-        left_join(orig_types %>%
-                      mutate(present = 1),
-                    by = c("type" = "orig_abcd")) %>%
-        group_by(.data$main_type) %>%
-        summarise(add = if (strict) all(!is.na(.data$present)) else {
-                                    any(!is.na(.data$present))
-                                    }
-                  ) %>%
-        filter(.data$add) %>%
-        # only adding codes absent from original dataframe:
-        anti_join(orig_types, by = c("main_type" = "orig_abcd")) %>%
-        pull(.data$main_type)
-    )
+          rename(main_type_abcd = .data$main_type),
+        by = c("orig_abcd" = "type")
+      ) %>%
+      filter(.data$main_type_abcd %in% join_main_types) %>%
+      mutate(orig_abcd = if (is.factor(.data$orig_abcd)) {
+        factor(.data$main_type_abcd,
+          levels = levels(.data$orig_abcd)
+        )
+      } else {
+        .data$main_type_abcd
+      }) %>%
+      select(-.data$main_type_abcd) %>%
+      distinct() %>%
+      set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
+      bind_rows(x_expanded, .)
+  )
 
-    # expanding main types to their subtypes and adding the latter:
-    suppressWarnings(
-    x_expanded <-
-        x %>%
-        rename(orig_abcd = type_var) %>%
-        inner_join(subtypes %>% rename(type_abcd = .data$type),
-                   by = c("orig_abcd" = "main_type")) %>%
-        mutate(orig_abcd = .data$type_abcd) %>%
-        select(-.data$type_abcd) %>%
-        anti_join(x %>%
-                      rename(orig_abcd = type_var),
-                  by = "orig_abcd") %>%
-        set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
-        bind_rows(x, .)
-    )
-
-    # adding main_types:
-    suppressWarnings(
-    x_expanded <-
-        x %>%
-        rename(orig_abcd = type_var) %>%
-        inner_join(subtypes %>%
-                       rename(main_type_abcd = .data$main_type),
-                   by = c("orig_abcd" = "type")) %>%
-        filter(.data$main_type_abcd %in% join_main_types) %>%
-        mutate(orig_abcd = if (is.factor(.data$orig_abcd)) {
-                            factor(.data$main_type_abcd,
-                                  levels = levels(.data$orig_abcd))
-                        } else .data$main_type_abcd
-            ) %>%
-        select(-.data$main_type_abcd) %>%
-        distinct %>%
-        set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
-        bind_rows(x_expanded, .)
-    )
-
-    return(x_expanded)
-
+  return(x_expanded)
 }
 
 
@@ -311,44 +319,54 @@ convertdf_enc <- function(x,
                           to = "UTF-8",
                           sub = NA,
                           colnames = FALSE) {
+  assert_that(inherits(x, "data.frame"))
+  assert_that(
+    is.string(to),
+    is.string(from),
+    is.string(sub) | is.na(sub)
+  )
+  assert_that(is.flag(colnames), noNA(colnames))
 
-    assert_that(inherits(x, "data.frame"))
-    assert_that(is.string(to),
-                is.string(from),
-                is.string(sub) | is.na(sub))
-    assert_that(is.flag(colnames), noNA(colnames))
 
-
-    is_chfact <- function(vec) {
-        if (is.factor(vec)) {
-            is.character(levels(vec))
-        } else FALSE
+  is_chfact <- function(vec) {
+    if (is.factor(vec)) {
+      is.character(levels(vec))
+    } else {
+      FALSE
     }
+  }
 
-    conv_levels <- function(fact, from, to, sub) {
-        levels(fact) <- iconv(levels(fact),
-                              from = from,
-                              to = to,
-                              sub = sub)
-        return(fact)
+  conv_levels <- function(fact, from, to, sub) {
+    levels(fact) <- iconv(levels(fact),
+      from = from,
+      to = to,
+      sub = sub
+    )
+    return(fact)
+  }
+
+  x %>%
+    mutate_if(is.character,
+      iconv,
+      from = from,
+      to = to,
+      sub = sub
+    ) %>%
+    mutate_if(is_chfact,
+      conv_levels,
+      from = from,
+      to = to,
+      sub = sub
+    ) %>%
+    {
+      if (colnames) {
+        `colnames<-`(., iconv(colnames(.),
+          from = from,
+          to = to,
+          sub = sub
+        ))
+      } else {
+        .
+      }
     }
-
-    x %>%
-        mutate_if(is.character,
-                  iconv,
-                  from = from,
-                  to = to,
-                  sub = sub) %>%
-        mutate_if(is_chfact,
-                  conv_levels,
-                  from = from,
-                  to = to,
-                  sub = sub) %>%
-        {if (colnames) {
-            `colnames<-`(., iconv(colnames(.),
-                                  from = from,
-                                  to = to,
-                                  sub = sub))
-        } else .}
 }
-

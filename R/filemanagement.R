@@ -31,55 +31,55 @@
 #'
 #' @examples
 #' \dontrun{
-#'fileman_folders()
-#'datapath <- fileman_folders(root = "git")
+#' fileman_folders()
+#' datapath <- fileman_folders(root = "git")
 #' }
 #'
 fileman_folders <- function(root = c("rproj", "git"), path = NA) {
-    # directory setup
-    if (!is.na(path)) {
-        if (dir.exists(path)) {
-            datapath <- normalizePath(file.path(path, "n2khab_data"))
-        } else {
-            stop("The specified path does not exist.")
-        }
+  # directory setup
+  if (!is.na(path)) {
+    if (dir.exists(path)) {
+      datapath <- normalizePath(file.path(path, "n2khab_data"))
     } else {
-        root <- tolower(root)
-        root <- match.arg(root)
+      stop("The specified path does not exist.")
+    }
+  } else {
+    root <- tolower(root)
+    root <- match.arg(root)
 
-        if (root == "git") {
-            root <- find_root(is_git_root)
-        }
-
-        if (root == "rproj") {
-            root <- find_root(is_rstudio_project)
-        }
-
-        datapath <- file.path(root, "n2khab_data")
+    if (root == "git") {
+      root <- find_root(is_git_root)
     }
 
+    if (root == "rproj") {
+      root <- find_root(is_rstudio_project)
+    }
+
+    datapath <- file.path(root, "n2khab_data")
+  }
 
 
-    # check for existence of the folder
-    if (!dir.exists(datapath)) {
-        # create a new directory
-        dir.create(file.path(datapath))
-        message(paste0("Created ", datapath))
+
+  # check for existence of the folder
+  if (!dir.exists(datapath)) {
+    # create a new directory
+    dir.create(file.path(datapath))
+    message(paste0("Created ", datapath))
+  } else {
+    message(paste0("The path to ", datapath, " already exists"))
+  }
+
+  # create subfolders
+  subfolders <- c("10_raw", "20_processed")
+  for (subfolder in subfolders) {
+    if (!dir.exists(file.path(datapath, subfolder))) {
+      dir.create(file.path(datapath, subfolder))
+      message(paste0("Created subfolder ", subfolder))
     } else {
-        message(paste0("The path to ", datapath, " already exists"))
+      message(paste0("The subfolder ", subfolder, " already exists"))
     }
-
-    # create subfolders
-    subfolders <- c("10_raw", "20_processed")
-    for (subfolder in subfolders) {
-        if (!dir.exists(file.path(datapath, subfolder))) {
-            dir.create(file.path(datapath, subfolder))
-            message(paste0("Created subfolder ", subfolder))
-        } else {
-            message(paste0("The subfolder ", subfolder, " already exists"))
-        }
-    }
-    datapath
+  }
+  datapath
 }
 
 
@@ -98,11 +98,9 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
 #' @param path Path where the data must be downloaded.
 #' Defaults to the working directory.
 #' @param doi a doi pointer to the Zenodo archive starting with '10.5281/zenodo.'. See examples.
-#' @param parallel Logical (\code{FALSE} by default).
-#' If \code{TRUE}, will run a number of parallel processes, each downloading
-#' another file.
-#' This is useful when multiple large files are present in the Zenodo
-#' record, which otherwise would be downloaded sequentially.
+#' @param parallel Logical.
+#' If \code{TRUE} (the default), files will be
+#' downloaded concurrently for multi-file records.
 #' Of course, the operation is limited by bandwidth and traffic limitations.
 #' @param quiet Logical (\code{FALSE} by default).
 #' Do you want to suppress informative messages (not warnings)?
@@ -135,120 +133,100 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
 #' }
 download_zenodo <- function(doi,
                             path = ".",
-                            parallel = FALSE,
+                            parallel = TRUE,
                             quiet = FALSE) {
+  assert_that(is.string(doi), is.string(path))
+  assert_that(is.flag(parallel), noNA(parallel), is.flag(quiet), noNA(quiet))
 
-    assert_that(is.string(doi), is.string(path))
-    assert_that(is.flag(parallel), noNA(parallel), is.flag(quiet), noNA(quiet))
+  require_pkgs(c("jsonlite", "curl", "tools"))
 
-    require_pkgs(c("jsonlite", "curl", "tools"))
+  # check for existence of the folder
+  stopifnot(dir.exists(path))
 
-    # check for existence of the folder
-    stopifnot(dir.exists(path))
+  record <- str_remove(doi, fixed("10.5281/zenodo."))
 
-    record <- str_remove(doi, fixed("10.5281/zenodo."))
+  # Retrieve file name by records call
+  base_url <- "https://zenodo.org/api/records/"
+  req <- curl::curl_fetch_memory(paste0(base_url, record))
+  content <- jsonlite::fromJSON(rawToChar(req$content))
 
-    # Retrieve file name by records call
-    base_url <- 'https://zenodo.org/api/records/'
-    req <- curl::curl_fetch_memory(paste0(base_url, record))
-    content <- jsonlite::fromJSON(rawToChar(req$content))
+  # Calculate total file size
+  totalsize <- sum(content$files$size) %>%
+    human_filesize()
 
-    # Calculate total file size
-    totalsize <- sum(content$files$size) %>%
-        human_filesize()
+  # extract individual file names and urls
+  file_urls <- content$files$links$self
+  filenames <- basename(content$files$key)
+  destfiles <- file.path(path, filenames)
 
-    # extract individual file names and urls
-    file_urls <- content$files$links$self
-    filenames <- str_match(file_urls, ".+/([^/]+)")[,2]
-    destfiles <- file.path(path, filenames)
+  # extract check-sum(s)
+  file_md5 <- content$files$checksum
 
-    # extract check-sum(s)
-    file_md5 <- content$files$checksum
+  # download files
+  if (!quiet) {
+    message(
+      "Will download ",
+      (nrfiles <- length(filenames)),
+      " file",
+      ifelse(nrfiles > 1, "s", ""),
+      " (total size: ",
+      totalsize,
+      ") from https://doi.org/",
+      doi,
+      " (",
+      content$metadata$title,
+      "; version: ",
+      ifelse(!is.null(content$metadata$version),
+        content$metadata$version,
+        content$metadata$relations$version[1, 1]
+      ),
+      ")\n"
+    )
+  }
 
-    # download files
-    if (!quiet) {
-        message("Will download ",
-                (nrfiles <- length(filenames)),
-                " file",
-                ifelse(nrfiles > 1, "s", ""),
-                " (total size: ",
-                totalsize,
-                ") from https://doi.org/",
-                doi,
-                " (",
-                content$metadata$title,
-                "; version: ",
-                ifelse(!is.null(content$metadata$version),
-                       content$metadata$version,
-                       content$metadata$relations$version[1, 1]
-                ),
-                ")\n"
+  if (length(file_urls) > 1 && parallel) {
+    curl::multi_download(
+      urls = file_urls,
+      destfiles = destfiles,
+      progress = !quiet
+    )
+  } else {
+    mapply(curl::curl_download,
+      file_urls,
+      destfiles,
+      MoreArgs = list(quiet = quiet)
+    )
+  }
+
+  # check each of the files
+
+  if (!quiet) message("\nVerifying file integrity...\n")
+
+  for (i in seq_along(file_urls)) {
+    filename <- filenames[i]
+    destfile <- destfiles[i]
+    md5 <- unname(tools::md5sum(destfile))
+    zenodo_md5 <- str_split(file_md5[i], ":")[[1]][2]
+    if (identical(md5, zenodo_md5)) {
+      if (!quiet) {
+        message(
+          filename,
+          " was downloaded and its integrity verified (md5sum: ",
+          md5,
+          ")"
         )
-    }
-
-    if (parallel) {
-
-        require_pkgs("parallel")
-
-        nr_nodes <- min(10, length(file_urls))
-
-        if (!quiet) message("Initializing parallel download on ",
-                            nr_nodes,
-                            " R session nodes...\n")
-
-        clus <- parallel::makeCluster(nr_nodes)
-
-        if (!quiet) {
-            message("Starting parallel downloads. ",
-                    "This may take a while (and I can't show you the overall progress).\n",
-                    "Be patient...\n")
-        }
-
-        parallel::clusterMap(clus,
-                             function(src, dest) {
-                                 curl::curl_download(url = src,
-                                                     destfile = dest,
-                                                     quiet = quiet)
-                             },
-                             file_urls,
-                             destfiles)
-
-        parallel::stopCluster(clus)
-
-        if (!quiet) message("Ended parallel downloads.")
-
+      }
     } else {
-
-        mapply(curl::curl_download,
-               file_urls,
-               destfiles,
-               MoreArgs = list(quiet = quiet))
-
+      warning(
+        "Incorrect download! md5sum ",
+        md5,
+        " for file",
+        filename,
+        " does not match the Zenodo archived md5sum ",
+        zenodo_md5
+      )
     }
-
-    # check each of the files
-
-    if (!quiet) message("\nVerifying file integrity...\n")
-
-    for (i in seq_along(file_urls)) {
-        filename <- filenames[i]
-        destfile <- destfiles[i]
-        md5 <- unname(tools::md5sum(destfile))
-        zenodo_md5 <- str_split(file_md5[i], ":")[[1]][2]
-        if (all.equal(md5, zenodo_md5)) {
-            if (!quiet) message(filename,
-                                " was downloaded and its integrity verified (md5sum: ",
-                                md5,
-                                ")")
-        } else {
-            warning("Incorrect download! md5sum ",
-                    md5,
-                    " for file",
-                    filename,
-                    " does not match the Zenodo archived md5sum ",
-                    zenodo_md5)
-        }
-    }
+  }
 }
 
 
@@ -275,27 +253,28 @@ download_zenodo <- function(doi,
 #' @importFrom dplyr
 #' %>%
 human_filesize <- function(x) {
-    assert_that(is.numeric(x))
-    assert_that(all(x %% 1 == 0 & x >= 0))
-    magnitude <-
-        log(x, base = 1024) %>%
-        floor %>%
-        pmin(8)
-    unit <- factor(magnitude,
-                   levels = 0:8,
-                   labels = c(
-                       "B",
-                       "KiB",
-                       "MiB",
-                       "GiB",
-                       "TiB",
-                       "PiB",
-                       "EiB",
-                       "ZiB",
-                       "YiB")
+  assert_that(is.numeric(x))
+  assert_that(all(x %% 1 == 0 & x >= 0))
+  magnitude <-
+    log(x, base = 1024) %>%
+    floor() %>%
+    pmin(8)
+  unit <- factor(magnitude,
+    levels = 0:8,
+    labels = c(
+      "B",
+      "KiB",
+      "MiB",
+      "GiB",
+      "TiB",
+      "PiB",
+      "EiB",
+      "ZiB",
+      "YiB"
     )
-    size <- (x / 1024^magnitude) %>% round(1)
-    return(paste(size, unit))
+  )
+  size <- (x / 1024^magnitude) %>% round(1)
+  return(paste(size, unit))
 }
 
 
@@ -343,30 +322,31 @@ human_filesize <- function(x) {
 fileman_up <- function(name,
                        start = ".",
                        levels = 10) {
+  assert_that(is.string(name))
+  assert_that(dir.exists(start),
+    msg = "The start directory does not exist."
+  )
+  assert_that(levels %% 1 == 0 & levels >= 0,
+    msg = "levels must be a positive integer value."
+  )
 
-    assert_that(is.string(name))
-    assert_that(dir.exists(start),
-                msg = "The start directory does not exist.")
-    assert_that(levels %% 1 == 0 & levels >= 0,
-                msg = "levels must be a positive integer value.")
+  path <- start
 
-    path <- start
+  for (i in 0:levels) {
+    ff <- list.files(path,
+      all.files = TRUE,
+      include.dirs = TRUE
+    )
+    if (name %in% ff) break
+    path <- file.path(path, "..")
+  }
 
-    for (i in 0:levels) {
-        ff <- list.files(path,
-                         all.files = TRUE,
-                         include.dirs = TRUE)
-        if (name %in% ff) break
-        path <- file.path(path, "..")
-    }
-
-    if (name %in% ff) {
-        file.path(path, name) %>%
-            normalizePath()
-    } else {
-        stop(name, " was not found. Searched up to ", normalizePath(path))
-    }
-
+  if (name %in% ff) {
+    file.path(path, name) %>%
+      normalizePath()
+  } else {
+    stop(name, " was not found. Searched up to ", normalizePath(path))
+  }
 }
 
 
@@ -439,24 +419,26 @@ fileman_up <- function(name,
 #' @export
 checksum <- function(files,
                      hash_fun = c("xxh64", "md5", "sha256")) {
+  assert_that_allfiles_exist(files)
+  hash_fun <- match.arg(hash_fun)
 
-    assert_that_allfiles_exist(files)
-    hash_fun <- match.arg(hash_fun)
+  if (str_detect(hash_fun, "^xxh")) {
+    require_pkgs("digest")
+    checksums <- map_chr(
+      files,
+      ~ digest::digest(.,
+        algo = "xxhash64",
+        file = TRUE
+      )
+    )
+  } else {
+    require_pkgs("openssl")
+    fun <- eval(str2lang(paste0("openssl::", hash_fun)))
+    checksums <- map_chr(files, ~ paste(fun(file(.))))
+  }
 
-    if (str_detect(hash_fun, "^xxh")) {
-        require_pkgs("digest")
-        checksums <- map_chr(files,
-                             ~digest::digest(.,
-                                             algo = "xxhash64",
-                                             file = TRUE))
-    } else {
-        require_pkgs("openssl")
-        fun <- eval(str2lang(paste0("openssl::", hash_fun)))
-        checksums <- map_chr(files, ~paste(fun(file(.))))
-    }
-
-    names(checksums) <- basename(files)
-    return(checksums)
+  names(checksums) <- basename(files)
+  return(checksums)
 }
 
 #' @rdname checksum
@@ -476,16 +458,19 @@ sha256sum <- function(files) checksum(files, hash_fun = "sha256")
 #' assert_that
 #' @keywords internal
 assert_that_allfiles_exist <- function(x) {
-    exist <- file.exists(x)
-    assert_that(all(exist),
-                msg = paste0("The following path(s) do not exist:\n",
-                             paste0(x[!exist], collapse = "\n")))
-    isdir <- dir.exists(x)
-    assert_that(!any(isdir),
-                msg = paste0("Only files are accepted; ",
-                             "the following path(s) are directories:\n",
-                             paste0(x[isdir], collapse = "\n")))
+  exist <- file.exists(x)
+  assert_that(all(exist),
+    msg = paste0(
+      "The following path(s) do not exist:\n",
+      paste0(x[!exist], collapse = "\n")
+    )
+  )
+  isdir <- dir.exists(x)
+  assert_that(!any(isdir),
+    msg = paste0(
+      "Only files are accepted; ",
+      "the following path(s) are directories:\n",
+      paste0(x[isdir], collapse = "\n")
+    )
+  )
 }
-
-
-
