@@ -39,6 +39,15 @@ output:
 ```{r setup, include=FALSE}
 renv::restore()
 options(stringsAsFactors = FALSE)
+# Setup for googlesheets4 authentication. Set the appropriate env vars in
+# .Renviron and make sure you ran gs4_auth() interactively with these settings
+# for the first run (or to renew an expired Oauth token)
+if (Sys.getenv("GARGLE_OAUTH_EMAIL") != "") {
+    options(gargle_oauth_email = Sys.getenv("GARGLE_OAUTH_EMAIL"))
+}
+if (Sys.getenv("GARGLE_OAUTH_CACHE") != "") {
+    options(gargle_oauth_cache = Sys.getenv("GARGLE_OAUTH_CACHE"))
+}
 library(tidyverse)
 library(stringr)
 library(knitr)
