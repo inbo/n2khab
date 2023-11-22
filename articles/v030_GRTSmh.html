@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
 
       
 
-      </header><script src="v030_GRTSmh_files/header-attrs-2.18/header-attrs.js"></script><div class="row">
+      </header><script src="v030_GRTSmh_files/header-attrs-2.25/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using the GRTS data sources</h1>
@@ -195,27 +195,27 @@ information.</p>
 <code>GRTSmaster_habitats</code> dataset:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; class      : RasterLayer </span></span>
+<span><span class="co">#&gt; class      : RasterLayer</span></span>
 <span><span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span></span>
 <span><span class="co">#&gt; resolution : 32, 32  (x, y)</span></span>
 <span><span class="co">#&gt; extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)</span></span>
-<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></span>
-<span><span class="co">#&gt; source     : [...]/n2khab_data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif </span></span>
-<span><span class="co">#&gt; names      : GRTSmaster_habitats </span></span>
+<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs</span></span>
+<span><span class="co">#&gt; source     : [...]/n2khab_data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif</span></span>
+<span><span class="co">#&gt; names      : GRTSmaster_habitats</span></span>
 <span><span class="co">#&gt; values     : 1, 67108857  (min, max)</span></span></code></pre></div>
 <p>With the argument <code>brick = TRUE</code> however, you will get the
 <code>GRTSmh_brick</code> data source,
 i.e. <code>GRTSmaster_habitats</code> plus 9 extra layers:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/read_GRTSmh.html">read_GRTSmh</a></span><span class="op">(</span>brick <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; class      : RasterBrick </span></span>
+<span><span class="co">#&gt; class      : RasterBrick</span></span>
 <span><span class="co">#&gt; dimensions : 2843, 7401, 21041043, 10  (nrow, ncol, ncell, nlayers)</span></span>
 <span><span class="co">#&gt; resolution : 32, 32  (x, y)</span></span>
 <span><span class="co">#&gt; extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)</span></span>
-<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></span>
-<span><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_brick/GRTSmh_brick.tif </span></span>
-<span><span class="co">#&gt; names      :   level0,   level1,   level2,   level3,   level4,   level5,   level6,   level7,   level8,   level9 </span></span>
-<span><span class="co">#&gt; min values :        1,        1,        1,        1,        1,        1,        1,        1,        1,        1 </span></span>
+<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs</span></span>
+<span><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_brick/GRTSmh_brick.tif</span></span>
+<span><span class="co">#&gt; names      :   level0,   level1,   level2,   level3,   level4,   level5,   level6,   level7,   level8,   level9</span></span>
+<span><span class="co">#&gt; min values :        1,        1,        1,        1,        1,        1,        1,        1,        1,        1</span></span>
 <span><span class="co">#&gt; max values : 67108857, 16777209,  4194297,  1048569,   262137,    65529,    16377,     4089,     1017,      253</span></span></code></pre></div>
 <p>The higher-level ranking numbers of the RasterBrick allow spatially
 balanced samples at lower spatial resolution than that of 32 m, and can
@@ -281,13 +281,13 @@ which is the fundamental distinction from
 <p>An example with level 5:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; class      : RasterLayer </span></span>
+<span><span class="co">#&gt; class      : RasterLayer</span></span>
 <span><span class="co">#&gt; dimensions : 89, 232, 20648  (nrow, ncol, ncell)</span></span>
 <span><span class="co">#&gt; resolution : 1024, 1024  (x, y)</span></span>
 <span><span class="co">#&gt; extent     : 22030, 259598, 153054, 244190  (xmin, xmax, ymin, ymax)</span></span>
-<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></span>
-<span><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif </span></span>
-<span><span class="co">#&gt; names      : level5 </span></span>
+<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs</span></span>
+<span><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif</span></span>
+<span><span class="co">#&gt; names      : level5</span></span>
 <span><span class="co">#&gt; values     : 1, 65529  (min, max)</span></span></code></pre></div>
 <p>Alternatively, a dissolved, polygonized variant of the corresponding
 <code>GRTSmh_brick</code> level can be returned as an <code>sf</code>
@@ -322,13 +322,13 @@ available for levels 4 to 9.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span>, digits <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; class      : RasterLayer </span></span>
+<span><span class="co">#&gt; class      : RasterLayer</span></span>
 <span><span class="co">#&gt; dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)</span></span>
 <span><span class="co">#&gt; resolution : 32, 32  (x, y)</span></span>
 <span><span class="co">#&gt; extent     : 22029.591973471, 258861.591973471, 153054.113583292, 244030.113583292  (xmin, xmax, ymin, ymax)</span></span>
-<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs </span></span>
-<span><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif </span></span>
-<span><span class="co">#&gt; names      : GRTSmh_base4frac </span></span>
+<span><span class="co">#&gt; crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs</span></span>
+<span><span class="co">#&gt; source     : [...]/n2khab_data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif</span></span>
+<span><span class="co">#&gt; names      : GRTSmh_base4frac</span></span>
 <span><span class="co">#&gt; values     : 0.0000000000001, 0.3333333333321  (min, max)</span></span></code></pre></div>
 <p>Note that the used options are necessary when treating these
 base-4-fraction GRTS addresses as characters; otherwise scientific

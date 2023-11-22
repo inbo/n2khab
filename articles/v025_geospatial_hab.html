@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
 
       
 
-      </header><script src="v025_geospatial_hab_files/header-attrs-2.18/header-attrs.js"></script><div class="row">
+      </header><script src="v025_geospatial_hab_files/header-attrs-2.25/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Working with geospatial data sources of habitat
@@ -116,7 +116,7 @@ vignettes without access to the data sources.</em></p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://inbo.github.io/n2khab">n2khab</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-quantities/units/">units</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-quantities.github.io/units/">units</a></span><span class="op">)</span></span></code></pre></div>
 <div id="intro" class="section level2">
 <h2 class="hasAnchor">
 <a href="#intro" class="anchor"></a>Intro</h2>
@@ -247,18 +247,18 @@ source and returns all its records.</p>
 <span><span class="co">#&gt; Bounding box:  xmin: 21991.38 ymin: 153058.3 xmax: 258871.8 ymax: 244027.3</span></span>
 <span><span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span></span>
 <span><span class="co">#&gt; # A tibble: 646,589 x 31</span></span>
-<span><span class="co">#&gt;    polygon_id  eval  eenh1 eenh2 eenh3 eenh4 eenh5 eenh6 eenh7 eenh8 v1    v2   </span></span>
+<span><span class="co">#&gt;    polygon_id  eval  eenh1 eenh2 eenh3 eenh4 eenh5 eenh6 eenh7 eenh8 v1    v2</span></span>
 <span><span class="co">#&gt;  * &lt;chr&gt;       &lt;fct&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
-<span><span class="co">#&gt;  1 000098_v20… m     b     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  2 000132_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  3 000135_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  4 000136_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  5 000142_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  6 000150_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  7 000297_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  8 000991_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  9 000999_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span><span class="co">#&gt; 10 001000_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span><span class="co">#&gt;  1 000098_v20… m     b     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  2 000132_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  3 000135_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  4 000136_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  5 000142_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  6 000150_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  7 000297_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  8 000991_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  9 000999_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 10 001000_v20… m     bl    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; # … with 646,579 more rows, and 19 more variables: v3 &lt;chr&gt;, source &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   info &lt;chr&gt;, bwk_label &lt;chr&gt;, hab1 &lt;chr&gt;, phab1 &lt;int&gt;, hab2 &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   phab2 &lt;int&gt;, hab3 &lt;chr&gt;, phab3 &lt;int&gt;, hab4 &lt;chr&gt;, phab4 &lt;int&gt;, hab5 &lt;chr&gt;,</span></span>
@@ -303,11 +303,11 @@ vignette: do take the time to look at the documentation!</p>
 object <code>sources</code> is returned with the meaning of the
 <code>source_id</code> codes:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_habitatstreams.html">read_habitatstreams</a></span><span class="op">(</span>source_text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_habitatstreams.html">read_habitatstreams</a></span><span class="op">(</span>source_text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="va">.</span><span class="op">$</span><span class="va">sources</span></span>
 <span><span class="co">#&gt; # A tibble: 7 x 2</span></span>
-<span><span class="co">#&gt;   source_id          source_text                                                </span></span>
-<span><span class="co">#&gt;   &lt;fct&gt;              &lt;fct&gt;                                                      </span></span>
+<span><span class="co">#&gt;   source_id          source_text</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;              &lt;fct&gt;</span></span>
 <span><span class="co">#&gt; 1 VMM                "Gegevens afgeleid van macrofyteninventarisaties uitgevoer…</span></span>
 <span><span class="co">#&gt; 2 EcoInv             "Tijdens ecologische inventarisatiestudies uitgevoerd in o…</span></span>
 <span><span class="co">#&gt; 3 extrapol           "De conclusie van het nabijgelegen geïnventariseerde segme…</span></span>
@@ -351,18 +351,18 @@ no habitat type. You can filter the habitat types by setting the
 <span><span class="co">#&gt; Bounding box:  xmin: 221427.3 ymin: 160393.5 xmax: 243211.1 ymax: 168965.1</span></span>
 <span><span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span></span>
 <span><span class="co">#&gt; # A tibble: 45 x 7</span></span>
-<span><span class="co">#&gt;    polygon_id unit_id name        code_orig type  extra_reference               </span></span>
-<span><span class="co">#&gt;         &lt;int&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;fct&gt; &lt;fct&gt;                         </span></span>
-<span><span class="co">#&gt;  1          4       4 Avergat - … gh        &lt;NA&gt;  Lahaye 2018                   </span></span>
-<span><span class="co">#&gt;  2          6       6 Avergat - … 8310      8310  Lahaye 2018                   </span></span>
-<span><span class="co">#&gt;  3          5       5 Avergat - … gh        &lt;NA&gt;  Lahaye 2018                   </span></span>
+<span><span class="co">#&gt;    polygon_id unit_id name        code_orig type  extra_reference</span></span>
+<span><span class="co">#&gt;         &lt;int&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;fct&gt; &lt;fct&gt;</span></span>
+<span><span class="co">#&gt;  1          4       4 Avergat - … gh        &lt;NA&gt;  Lahaye 2018</span></span>
+<span><span class="co">#&gt;  2          6       6 Avergat - … 8310      8310  Lahaye 2018</span></span>
+<span><span class="co">#&gt;  3          5       5 Avergat - … gh        &lt;NA&gt;  Lahaye 2018</span></span>
 <span><span class="co">#&gt;  4         20      20 Coolen      8310      8310  Limburgs Landschap 2020; pers…</span></span>
-<span><span class="co">#&gt;  5         21      21 Coolen      gh        &lt;NA&gt;  Limburgs Landschap 2020       </span></span>
-<span><span class="co">#&gt;  6         29      29 Groeve Lin… 8310      8310  &lt;NA&gt;                          </span></span>
-<span><span class="co">#&gt;  7         31      31 Grote berg… 8310      8310  De Haan &amp; Lahaye 2018         </span></span>
-<span><span class="co">#&gt;  8         37      37 Grote berg… 8310      8310  De Haan &amp; Lahaye 2018         </span></span>
-<span><span class="co">#&gt;  9         24      24 Henisdael … 8310      8310  Dusar et al. 2007             </span></span>
-<span><span class="co">#&gt; 10         34      34 Henisdael … 8310      8310  Dusar et al. 2007             </span></span>
+<span><span class="co">#&gt;  5         21      21 Coolen      gh        &lt;NA&gt;  Limburgs Landschap 2020</span></span>
+<span><span class="co">#&gt;  6         29      29 Groeve Lin… 8310      8310  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  7         31      31 Grote berg… 8310      8310  De Haan &amp; Lahaye 2018</span></span>
+<span><span class="co">#&gt;  8         37      37 Grote berg… 8310      8310  De Haan &amp; Lahaye 2018</span></span>
+<span><span class="co">#&gt;  9         24      24 Henisdael … 8310      8310  Dusar et al. 2007</span></span>
+<span><span class="co">#&gt; 10         34      34 Henisdael … 8310      8310  Dusar et al. 2007</span></span>
 <span><span class="co">#&gt; # … with 35 more rows, and 1 more variable: geom &lt;POLYGON [m]&gt;</span></span></code></pre></div>
 <p>The habitatquarries data source also includes the literature
 references. These can be added as a second dataframe – in that case a
@@ -382,14 +382,14 @@ list is returned:</p>
 <span><span class="co">#&gt; # A tibble: 9 x 23</span></span>
 <span><span class="co">#&gt;   category bibtexkey address author booktitle journal month note  number pages</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 BOOK     de_haan_… Brusse… De Ha… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; </span></span>
-<span><span class="co">#&gt; 2 INCOLLE… dusar_me… Genk    Dusar… Likona j… &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   6-13 </span></span>
-<span><span class="co">#&gt; 3 BOOK     jenneken… Riemst  Jenne… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; </span></span>
-<span><span class="co">#&gt; 4 INCOLLE… lahaye_g… Riemst  Lahay… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   12   </span></span>
-<span><span class="co">#&gt; 5 BOOK     verhoeve… Weert   Verho… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  1769   &lt;NA&gt; </span></span>
-<span><span class="co">#&gt; 6 BOOK     walschot… &lt;NA&gt;    Walsc… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; </span></span>
-<span><span class="co">#&gt; 7 MISC     wikipedi… &lt;NA&gt;    {Wiki… &lt;NA&gt;      &lt;NA&gt;    jan   Page… &lt;NA&gt;   &lt;NA&gt; </span></span>
-<span><span class="co">#&gt; 8 MISC     limburgs… &lt;NA&gt;    {Limb… &lt;NA&gt;      &lt;NA&gt;    apr   Libr… &lt;NA&gt;   &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 1 BOOK     de_haan_… Brusse… De Ha… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2 INCOLLE… dusar_me… Genk    Dusar… Likona j… &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   6-13</span></span>
+<span><span class="co">#&gt; 3 BOOK     jenneken… Riemst  Jenne… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4 INCOLLE… lahaye_g… Riemst  Lahay… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   12</span></span>
+<span><span class="co">#&gt; 5 BOOK     verhoeve… Weert   Verho… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  1769   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6 BOOK     walschot… &lt;NA&gt;    Walsc… &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 7 MISC     wikipedi… &lt;NA&gt;    {Wiki… &lt;NA&gt;      &lt;NA&gt;    jan   Page… &lt;NA&gt;   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 8 MISC     limburgs… &lt;NA&gt;    {Limb… &lt;NA&gt;      &lt;NA&gt;    apr   Libr… &lt;NA&gt;   &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 9 ARTICLE  silverta… &lt;NA&gt;    Silve… &lt;NA&gt;      Natuur… &lt;NA&gt;  &lt;NA&gt;  12     334-…</span></span>
 <span><span class="co">#&gt; # … with 13 more variables: publisher &lt;chr&gt;, series &lt;chr&gt;, title &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   volume &lt;chr&gt;, year &lt;dbl&gt;, url &lt;chr&gt;, isbn &lt;chr&gt;, copyright &lt;chr&gt;,</span></span>
@@ -462,17 +462,16 @@ to the polygons that contain habitat types or RIBs, is returned by
 occurrences of types and taking into account cover percentage per
 polygon (<code>phab</code>):</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hms_pol</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="va">st_drop_geometry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">hms_occ</span>, by <span class="op">=</span> <span class="st">"polygon_id"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="co"># area of type within polygon:</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area_type <span class="op">=</span> <span class="va">area</span> <span class="op">*</span> <span class="va">phab</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area_type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>                    <span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="st">"ha"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>                    <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
-<span>            <span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hms_pol</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">hms_occ</span>, by <span class="op">=</span> <span class="st">"polygon_id"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># area of type within polygon:</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area_type <span class="op">=</span> <span class="va">area</span> <span class="op">*</span> <span class="va">phab</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area_type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html">set_units</a></span><span class="op">(</span><span class="st">"ha"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 101 x 2</span></span>
 <span><span class="co">#&gt;    type        area</span></span>
 <span><span class="co">#&gt;    &lt;fct&gt;       [ha]</span></span>
@@ -518,8 +517,8 @@ polygon (<code>phab</code>):</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span></span>
 <span><span class="co">#&gt; # A tibble: 99,784 x 6</span></span>
-<span><span class="co">#&gt;    polygon_id   type     certain code_orig  phab source            </span></span>
-<span><span class="co">#&gt;    &lt;fct&gt;        &lt;fct&gt;    &lt;lgl&gt;   &lt;chr&gt;     &lt;int&gt; &lt;fct&gt;             </span></span>
+<span><span class="co">#&gt;    polygon_id   type     certain code_orig  phab source</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;        &lt;fct&gt;    &lt;lgl&gt;   &lt;chr&gt;     &lt;int&gt; &lt;fct&gt;</span></span>
 <span><span class="co">#&gt;  1 000038_v2016 91E0_va  TRUE    91E0_va     100 habitatmap_stdized</span></span>
 <span><span class="co">#&gt;  2 000043_v2016 9130_end TRUE    9130_end    100 habitatmap_stdized</span></span>
 <span><span class="co">#&gt;  3 000064_v2020 9130_end TRUE    9130_end    100 habitatmap_stdized</span></span>
@@ -541,26 +540,28 @@ This can be controlled by the <code>drop_7220</code> argument.</p>
 <p>As a consequence, some type codes are completely absent from
 <code>habitatmap_terr_types</code>:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hms_occ</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span>, </span>
-<span>            by <span class="op">=</span> <span class="st">"type"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">hms_occ</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span></span>
+<span>    <span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span>,</span>
+<span>    by <span class="op">=</span> <span class="st">"type"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 7 x 1</span></span>
-<span><span class="co">#&gt;   type </span></span>
+<span><span class="co">#&gt;   type</span></span>
 <span><span class="co">#&gt;   &lt;fct&gt;</span></span>
-<span><span class="co">#&gt; 1 2190 </span></span>
-<span><span class="co">#&gt; 2 6410 </span></span>
-<span><span class="co">#&gt; 3 6430 </span></span>
-<span><span class="co">#&gt; 4 6510 </span></span>
-<span><span class="co">#&gt; 5 7140 </span></span>
-<span><span class="co">#&gt; 6 7220 </span></span>
+<span><span class="co">#&gt; 1 2190</span></span>
+<span><span class="co">#&gt; 2 6410</span></span>
+<span><span class="co">#&gt; 3 6430</span></span>
+<span><span class="co">#&gt; 4 6510</span></span>
+<span><span class="co">#&gt; 5 7140</span></span>
+<span><span class="co">#&gt; 6 7220</span></span>
 <span><span class="co">#&gt; 7 9130</span></span></code></pre></div>
 <p>About 3% of all type occurrences received a new type code:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pct <span class="op">=</span> <span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 x 3</span></span>
 <span><span class="co">#&gt;   source                                  n   pct</span></span>
@@ -583,54 +584,60 @@ types:</p>
 <span><span class="co">#&gt; Bounding box:  xmin: 22546.57 ymin: 159273.1 xmax: 253896.9 ymax: 242960.1</span></span>
 <span><span class="co">#&gt; Projected CRS: Belge 1972 / Belgian Lambert 72</span></span>
 <span><span class="co">#&gt; # A tibble: 3,233 x 5</span></span>
-<span><span class="co">#&gt;    polygon_id polygon_id_ws polygon_id_habitatm… description_orig               </span></span>
-<span><span class="co">#&gt;  * &lt;fct&gt;      &lt;fct&gt;         &lt;fct&gt;                &lt;chr&gt;                          </span></span>
-<span><span class="co">#&gt;  1 ANTANT0082 ANTANT0082    596466_v2014         60% 3150; 20% rbbmr; 20% rbbsf </span></span>
-<span><span class="co">#&gt;  2 ANTANT0234 ANTANT0234    633396_v2020         100% 3130_na                   </span></span>
-<span><span class="co">#&gt;  3 ANTANT0251 ANTANT0251    113978_v2014         100% 3150                      </span></span>
-<span><span class="co">#&gt;  4 ANTANT0253 ANTANT0253    111606_v2014         100% 3150                      </span></span>
+<span><span class="co">#&gt;    polygon_id polygon_id_ws polygon_id_habitatm… description_orig</span></span>
+<span><span class="co">#&gt;  * &lt;fct&gt;      &lt;fct&gt;         &lt;fct&gt;                &lt;chr&gt;</span></span>
+<span><span class="co">#&gt;  1 ANTANT0082 ANTANT0082    596466_v2014         60% 3150; 20% rbbmr; 20% rbbsf</span></span>
+<span><span class="co">#&gt;  2 ANTANT0234 ANTANT0234    633396_v2020         100% 3130_na</span></span>
+<span><span class="co">#&gt;  3 ANTANT0251 ANTANT0251    113978_v2014         100% 3150</span></span>
+<span><span class="co">#&gt;  4 ANTANT0253 ANTANT0253    111606_v2014         100% 3150</span></span>
 <span><span class="co">#&gt;  5 ANTANT0297 ANTANT0297    409153_v2014+409153… 85% 3140; 15% 3150+85% 3140; 1…</span></span>
-<span><span class="co">#&gt;  6 ANTANT0315 ANTANT0315    519082_v2018         100% 3140                      </span></span>
-<span><span class="co">#&gt;  7 ANTANT0319 ANTANT0319    601958_v2014         100% 3150,gh                   </span></span>
-<span><span class="co">#&gt;  8 ANTANT0381 ANTANT0381    644003_v2014         85% gh; 15% 3140               </span></span>
+<span><span class="co">#&gt;  6 ANTANT0315 ANTANT0315    519082_v2018         100% 3140</span></span>
+<span><span class="co">#&gt;  7 ANTANT0319 ANTANT0319    601958_v2014         100% 3150,gh</span></span>
+<span><span class="co">#&gt;  8 ANTANT0381 ANTANT0381    644003_v2014         85% gh; 15% 3140</span></span>
 <span><span class="co">#&gt;  9 ANTANT0383 ANTANT0383    631879_v2014+593522… 50% 3150; 40% rbbmr; 10% rbbsf…</span></span>
-<span><span class="co">#&gt; 10 ANTANT0384 ANTANT0384    644003_v2014         85% gh; 15% 3140               </span></span>
+<span><span class="co">#&gt; 10 ANTANT0384 ANTANT0384    644003_v2014         85% gh; 15% 3140</span></span>
 <span><span class="co">#&gt; # … with 3,223 more rows, and 1 more variable: geom &lt;MULTIPOLYGON [m]&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_types</span></span>
 <span><span class="co">#&gt; # A tibble: 3,669 x 4</span></span>
 <span><span class="co">#&gt;    polygon_id type    certain code_orig</span></span>
-<span><span class="co">#&gt;    &lt;fct&gt;      &lt;fct&gt;   &lt;lgl&gt;   &lt;chr&gt;    </span></span>
-<span><span class="co">#&gt;  1 ANTANT0082 3150    TRUE    3150     </span></span>
-<span><span class="co">#&gt;  2 ANTANT0234 3130_na TRUE    3130_na  </span></span>
-<span><span class="co">#&gt;  3 ANTANT0251 3150    TRUE    3150     </span></span>
-<span><span class="co">#&gt;  4 ANTANT0253 3150    TRUE    3150     </span></span>
-<span><span class="co">#&gt;  5 ANTANT0297 3140    TRUE    3140     </span></span>
-<span><span class="co">#&gt;  6 ANTANT0297 3150    TRUE    3150     </span></span>
-<span><span class="co">#&gt;  7 ANTANT0315 3140    TRUE    3140     </span></span>
-<span><span class="co">#&gt;  8 ANTANT0319 3150    FALSE   3150,gh  </span></span>
-<span><span class="co">#&gt;  9 ANTANT0381 3140    TRUE    3140     </span></span>
-<span><span class="co">#&gt; 10 ANTANT0383 3150    TRUE    3150     </span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;      &lt;fct&gt;   &lt;lgl&gt;   &lt;chr&gt;</span></span>
+<span><span class="co">#&gt;  1 ANTANT0082 3150    TRUE    3150</span></span>
+<span><span class="co">#&gt;  2 ANTANT0234 3130_na TRUE    3130_na</span></span>
+<span><span class="co">#&gt;  3 ANTANT0251 3150    TRUE    3150</span></span>
+<span><span class="co">#&gt;  4 ANTANT0253 3150    TRUE    3150</span></span>
+<span><span class="co">#&gt;  5 ANTANT0297 3140    TRUE    3140</span></span>
+<span><span class="co">#&gt;  6 ANTANT0297 3150    TRUE    3150</span></span>
+<span><span class="co">#&gt;  7 ANTANT0315 3140    TRUE    3140</span></span>
+<span><span class="co">#&gt;  8 ANTANT0319 3150    FALSE   3150,gh</span></span>
+<span><span class="co">#&gt;  9 ANTANT0381 3140    TRUE    3140</span></span>
+<span><span class="co">#&gt; 10 ANTANT0383 3150    TRUE    3150</span></span>
 <span><span class="co">#&gt; # … with 3,659 more rows</span></span></code></pre></div>
 <p>Let’s compute some statistics of standing water types (ignoring the
 value <code>certain</code>):</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_polygons</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="va">st_drop_geometry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_polygons</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">wsh</span><span class="op">$</span><span class="va">watersurfaces_types</span>,</span>
-<span>             by <span class="op">=</span> <span class="st">"polygon_id"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>nr_watersurfaces <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">polygon_id</span><span class="op">)</span>,</span>
-<span>            total_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span>,</span>
-<span>            area_min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span>,</span>
-<span>            area_Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.25</span><span class="op">)</span>,</span>
-<span>            area_Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span>            area_Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.75</span><span class="op">)</span>,</span>
-<span>            max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span></span>
-<span>            <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"area|max"</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>            <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span>
+<span>    by <span class="op">=</span> <span class="st">"polygon_id"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    nr_watersurfaces <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">polygon_id</span><span class="op">)</span>,</span>
+<span>    total_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span>,</span>
+<span>    area_min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span>,</span>
+<span>    area_Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.25</span><span class="op">)</span>,</span>
+<span>    area_Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>    area_Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">area</span>, <span class="fl">0.75</span><span class="op">)</span>,</span>
+<span>    max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"area|max"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html">set_units</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 9 x 8</span></span>
 <span><span class="co">#&gt;   type     nr_watersurfaces total_area area_min area_Q1 area_Q2 area_Q3     max</span></span>
 <span><span class="co">#&gt;   &lt;fct&gt;               &lt;int&gt;        [a]      [a]     [a]     [a]     [a]     [a]</span></span>
@@ -645,17 +652,17 @@ value <code>certain</code>):</p>
 <span><span class="co">#&gt; 9 rbbah                 517    33716.3      0.1     4.2    10.9    47.0  3748.6</span></span></code></pre></div>
 <p>A strong point of <code>sf</code> objects is that the geometry has
 explicit units. Consequently we can make use of tools like
-<code><a href="https://rdrr.io/pkg/units/man/units.html">set_units()</a></code> to convert units (e.g. surface area as
+<code><a href="https://r-quantities.github.io/units/reference/units.html">set_units()</a></code> to convert units (e.g. surface area as
 <em>are</em> (a)).</p>
 <p>Because the main type code <code>3130</code> will mostly boil down to
 <code>3130_aom</code> in the field, a further interpreted flavour can be
 generated with
 <code>read_watersurfaces_hab(interpreted = TRUE)</code>.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab</a></span><span class="op">(</span>interpreted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="va">.</span><span class="op">$</span><span class="va">watersurfaces_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"3130"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="va">nrow</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab</a></span><span class="op">(</span>interpreted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">.</span><span class="op">$</span><span class="va">watersurfaces_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"3130"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 </div>
 </div>
@@ -681,16 +688,16 @@ this makes sense with the two mentioned data sources.</li>
 <p>An example (<code>df</code> is our dataframe):</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span></span>
-<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
-<span>        <span class="op">~</span><span class="va">mycode</span>, <span class="op">~</span><span class="va">obs</span>,</span>
-<span>        <span class="st">"2130"</span>, <span class="fl">5</span>,</span>
-<span>        <span class="st">"2190"</span>, <span class="fl">45</span>,</span>
-<span>        <span class="st">"2330_bu"</span>, <span class="fl">8</span>,</span>
-<span>        <span class="st">"2330_dw"</span>, <span class="fl">8</span>,</span>
-<span>        <span class="st">"6410_mo"</span>, <span class="fl">78</span>,</span>
-<span>        <span class="st">"6410_ve"</span>, <span class="fl">4</span>,</span>
-<span>        <span class="st">"91E0_vn"</span>, <span class="fl">10</span></span>
-<span>    <span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<span>    <span class="op">~</span><span class="va">mycode</span>, <span class="op">~</span><span class="va">obs</span>,</span>
+<span>    <span class="st">"2130"</span>, <span class="fl">5</span>,</span>
+<span>    <span class="st">"2190"</span>, <span class="fl">45</span>,</span>
+<span>    <span class="st">"2330_bu"</span>, <span class="fl">8</span>,</span>
+<span>    <span class="st">"2330_dw"</span>, <span class="fl">8</span>,</span>
+<span>    <span class="st">"6410_mo"</span>, <span class="fl">78</span>,</span>
+<span>    <span class="st">"6410_ve"</span>, <span class="fl">4</span>,</span>
+<span>    <span class="st">"91E0_vn"</span>, <span class="fl">10</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="va">df</span></span>
 <span><span class="co">#&gt; # A tibble: 7 × 2</span></span>
 <span><span class="co">#&gt;   mycode    obs</span></span>
@@ -705,8 +712,8 @@ this makes sense with the two mentioned data sources.</li>
 <p>With the <code>type_var</code> argument you specify which variable of
 your dataframe represents type codes:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_exp</span> <span class="op">&lt;-</span> </span>
-<span>    <span class="fu"><a href="../reference/expand_types.html">expand_types</a></span><span class="op">(</span><span class="va">df</span>, type_var <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df_exp</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/expand_types.html">expand_types</a></span><span class="op">(</span><span class="va">df</span>, type_var <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span></span>
 <span><span class="va">df_exp</span></span>
 <span><span class="co">#&gt; # A tibble: 13 × 2</span></span>
 <span><span class="co">#&gt;    mycode        obs</span></span>
@@ -729,15 +736,15 @@ your dataframe represents type codes:</p>
 <p>Obviously, more rows of <code>habitatmap_terr</code> will be retained
 by joining <code>df_exp</code>:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">df_exp</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="va">nrow</span></span>
+<code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">df_exp</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 6634</span></span></code></pre></div>
 <p>When joining with <code>df</code>:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">df</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="va">nrow</span></span>
+<code class="sourceCode R"><span><span class="va">hmt</span><span class="op">$</span><span class="va">habitatmap_terr_types</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">df</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 4984</span></span></code></pre></div>
 </div>
 <div id="references" class="section level2 unnumbered">

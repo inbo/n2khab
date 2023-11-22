@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
 
       
 
-      </header><script src="v022_example_files/header-attrs-2.18/header-attrs.js"></script><div class="row">
+      </header><script src="v022_example_files/header-attrs-2.25/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Demonstrating package &amp; data setup and
@@ -129,23 +129,14 @@ put a copy of the vignette in your working directory:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>R_REMOTES_NO_ERRORS_FROM_WARNINGS <span class="op">=</span> <span class="st">"true"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"inbo/n2khab"</span>,</span>
-<span>               build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>               upgrade <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span>  build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  upgrade <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://inbo.github.io/n2khab">n2khab</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Attaching n2khab version 0.8.0.</span></span>
-<span><span class="co">#&gt; When working with raster objects returned by n2khab, you can safely</span></span>
-<span><span class="co">#&gt; mute proj4string degradation warnings:</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; options(rgdal_show_exportToProj4_warnings = "none")</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; You must do this before using the n2khab functions depending on </span></span>
-<span><span class="co">#&gt; rgdal or raster, and before loading the latter (or sp).</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Do note that those warnings are applicable: in the returned raster</span></span>
-<span><span class="co">#&gt; objects, the proj4string is effectively degraded and should not be used.</span></span>
-<span><span class="co">#&gt; See https://inbo.github.io/n2khab/#suppressing-rgdal-warnings-about-proj4string-degradation</span></span>
-<span><span class="co">#&gt; for more information.</span></span></code></pre></div>
+<span><span class="co">#&gt; Attaching n2khab 0.9.0.</span></span>
+<span><span class="co">#&gt; Will use sf 1.0-14.</span></span>
+<span><span class="co">#&gt; Will use terra 1.7-55 through raster.</span></span></code></pre></div>
 </div>
 <div id="create-or-locate-the-n2khab_data-directory-with-2-subdirectories" class="section level3">
 <h3 class="hasAnchor">
@@ -177,8 +168,10 @@ the collection of processed data (<a href="https://zenodo.org/communities/n2khab
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">soilmap_simple_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">n2khab_data_path</span>, <span class="st">"20_processed/soilmap_simple"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">soilmap_simple_path</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/download_zenodo.html">download_zenodo</a></span><span class="op">(</span>doi <span class="op">=</span> <span class="st">"10.5281/zenodo.3732903"</span>,</span>
-<span>                path <span class="op">=</span> <span class="va">soilmap_simple_path</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/download_zenodo.html">download_zenodo</a></span><span class="op">(</span></span>
+<span>  doi <span class="op">=</span> <span class="st">"10.5281/zenodo.3732903"</span>,</span>
+<span>  path <span class="op">=</span> <span class="va">soilmap_simple_path</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>At some future time, the download will be performed automatically by
 <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code> (if the <code>soilmap_simple</code> data
 source is missing).</p>
@@ -192,7 +185,7 @@ source is missing).</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/mapview">mapview</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-quantities/units/">units</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-quantities.github.io/units/">units</a></span><span class="op">)</span></span></code></pre></div>
 <p>Inspect documentation of <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">?</span><span class="va">read_soilmap</span></span></code></pre></div>
@@ -207,17 +200,17 @@ source is missing).</p>
 <span><span class="co">#&gt; CRS:            31370</span></span>
 <span><span class="co">#&gt; # A tibble: 270,550 x 11</span></span>
 <span><span class="co">#&gt;    bsm_poly_id bsm_region bsm_converted bsm_mo_soilunit… bsm_mo_substr</span></span>
-<span><span class="co">#&gt;  *       &lt;dbl&gt; &lt;fct&gt;      &lt;lgl&gt;         &lt;fct&gt;            &lt;fct&gt;        </span></span>
-<span><span class="co">#&gt;  1      165740 Kunstmati… FALSE         OB               &lt;NA&gt;         </span></span>
-<span><span class="co">#&gt;  2      176046 Kunstmati… FALSE         OB               &lt;NA&gt;         </span></span>
-<span><span class="co">#&gt;  3      185239 Zandleems… FALSE         Ldc              &lt;NA&gt;         </span></span>
-<span><span class="co">#&gt;  4      162400 Kunstmati… FALSE         OB               &lt;NA&gt;         </span></span>
-<span><span class="co">#&gt;  5      173971 Kunstmati… FALSE         OB               &lt;NA&gt;         </span></span>
-<span><span class="co">#&gt;  6      173087 Zandleems… FALSE         Ldp              &lt;NA&gt;         </span></span>
-<span><span class="co">#&gt;  7      199453 Zandleems… FALSE         Lep              &lt;NA&gt;         </span></span>
-<span><span class="co">#&gt;  8      176922 Zandleems… FALSE         Ldc              &lt;NA&gt;         </span></span>
-<span><span class="co">#&gt;  9      227861 Zandleems… FALSE         Abp(c)           &lt;NA&gt;         </span></span>
-<span><span class="co">#&gt; 10      185390 Zandleems… FALSE         Lca              &lt;NA&gt;         </span></span>
+<span><span class="co">#&gt;  *       &lt;dbl&gt; &lt;fct&gt;      &lt;lgl&gt;         &lt;fct&gt;            &lt;fct&gt;</span></span>
+<span><span class="co">#&gt;  1      165740 Kunstmati… FALSE         OB               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  2      176046 Kunstmati… FALSE         OB               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  3      185239 Zandleems… FALSE         Ldc              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  4      162400 Kunstmati… FALSE         OB               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  5      173971 Kunstmati… FALSE         OB               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  6      173087 Zandleems… FALSE         Ldp              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  7      199453 Zandleems… FALSE         Lep              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  8      176922 Zandleems… FALSE         Ldc              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  9      227861 Zandleems… FALSE         Abp(c)           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 10      185390 Zandleems… FALSE         Lca              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; # … with 270,540 more rows, and 6 more variables: bsm_mo_tex &lt;fct&gt;,</span></span>
 <span><span class="co">#&gt; #   bsm_mo_drain &lt;fct&gt;, bsm_mo_prof &lt;fct&gt;, bsm_mo_parentmat &lt;fct&gt;,</span></span>
 <span><span class="co">#&gt; #   bsm_mo_profvar &lt;fct&gt;, geom &lt;MULTIPOLYGON [m]&gt;</span></span></code></pre></div>
@@ -265,24 +258,26 @@ factor level order). To do that, you must read the data source with
 <span><span class="co">#&gt; $ bsm_mo_profvar_explan   &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, Bedolven text…</span></span>
 <span><span class="co">#&gt; $ geom                    &lt;MULTIPOLYGON [m]&gt; MULTIPOLYGON (((204667.9 19..., …</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>drain_levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">sm_simple</span><span class="op">$</span><span class="va">bsm_mo_drain</span><span class="op">)</span>,</span>
-<span>       drain_levels_explained <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">sm_simple</span><span class="op">$</span><span class="va">bsm_mo_drain_explan</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  drain_levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">sm_simple</span><span class="op">$</span><span class="va">bsm_mo_drain</span><span class="op">)</span>,</span>
+<span>  drain_levels_explained <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">sm_simple</span><span class="op">$</span><span class="va">bsm_mo_drain_explan</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 15 x 2</span></span>
-<span><span class="co">#&gt;    drain_levels drain_levels_explained                                          </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;                                                           </span></span>
-<span><span class="co">#&gt;  1 a            zeer droog, niet gleyig                                         </span></span>
-<span><span class="co">#&gt;  2 a-b          complex van zeer droog, niet gleyig tot droog, niet gleyig      </span></span>
-<span><span class="co">#&gt;  3 a-d          complex van zeer droog, niet gleyig tot matig nat, matig gleyig </span></span>
-<span><span class="co">#&gt;  4 b            droog, niet gleyig                                              </span></span>
-<span><span class="co">#&gt;  5 c            matig droog, zwak gleyig                                        </span></span>
-<span><span class="co">#&gt;  6 c-d          complex van droog, zwak gleyig tot matig droog, matig gleyig    </span></span>
-<span><span class="co">#&gt;  7 d            matig nat, matig gleyig                                         </span></span>
-<span><span class="co">#&gt;  8 e            nat, sterk gleyig met reductiehorizont                          </span></span>
+<span><span class="co">#&gt;    drain_levels drain_levels_explained</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;</span></span>
+<span><span class="co">#&gt;  1 a            zeer droog, niet gleyig</span></span>
+<span><span class="co">#&gt;  2 a-b          complex van zeer droog, niet gleyig tot droog, niet gleyig</span></span>
+<span><span class="co">#&gt;  3 a-d          complex van zeer droog, niet gleyig tot matig nat, matig gleyig</span></span>
+<span><span class="co">#&gt;  4 b            droog, niet gleyig</span></span>
+<span><span class="co">#&gt;  5 c            matig droog, zwak gleyig</span></span>
+<span><span class="co">#&gt;  6 c-d          complex van droog, zwak gleyig tot matig droog, matig gleyig</span></span>
+<span><span class="co">#&gt;  7 d            matig nat, matig gleyig</span></span>
+<span><span class="co">#&gt;  8 e            nat, sterk gleyig met reductiehorizont</span></span>
 <span><span class="co">#&gt;  9 e-f          complex van nat, matig gleyig tot zeer nat, zeer sterk gleyig m…</span></span>
 <span><span class="co">#&gt; 10 e-i          complex nat, sterk gleyig met reductiehorizont tot zeer nat met…</span></span>
-<span><span class="co">#&gt; 11 f            zeer nat, zeer sterk gleyig met reductiehorizont                </span></span>
-<span><span class="co">#&gt; 12 g            uiterst nat, gereduceerd                                        </span></span>
-<span><span class="co">#&gt; 13 h            nat met relatief hoge ligging, sterk gleyig                     </span></span>
+<span><span class="co">#&gt; 11 f            zeer nat, zeer sterk gleyig met reductiehorizont</span></span>
+<span><span class="co">#&gt; 12 g            uiterst nat, gereduceerd</span></span>
+<span><span class="co">#&gt; 13 h            nat met relatief hoge ligging, sterk gleyig</span></span>
 <span><span class="co">#&gt; 14 h-i          complex van nat met relatief hoge ligging, sterk gleyig tot zee…</span></span>
 <span><span class="co">#&gt; 15 i            zeer nat met relatief hoge ligging, zeer sterk gleyig</span></span></code></pre></div>
 <p><em>Note: for the following chunks, it doesn’t matter whether you
@@ -290,22 +285,22 @@ used <code>explan = TRUE</code> or not.</em></p>
 <p>How many polygons are available per region?</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sm_simple</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="va">st_drop_geometry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">bsm_region</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">bsm_region</span><span class="op">)</span></span></code></pre></div>
 <p>Wat is the average polygon area per region?</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sm_simple</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="va">st_drop_geometry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bsm_region</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bsm_region</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Plot polygons of the ‘Zwin’ region:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">zwin_map</span> <span class="op">&lt;-</span></span>
-<span>    <span class="va">sm_simple</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_region</span> <span class="op">==</span> <span class="st">"Zwin"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">bsm_mo_tex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="va">sm_simple</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_region</span> <span class="op">==</span> <span class="st">"Zwin"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">bsm_mo_tex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>with WGS84 graticule (though plotted in Belgian Lambert 72 = CRS
 31370):</li>
@@ -323,11 +318,13 @@ basemaps:</li>
 </ul>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sm_simple</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_region</span> <span class="op">==</span> <span class="st">"Zwin"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>bsm_mo_tex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">bsm_mo_tex</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>        <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span>zcol <span class="op">=</span> <span class="st">"bsm_mo_tex"</span>,</span>
-<span>                alpha.region <span class="op">=</span> <span class="fl">0.2</span>,</span>
-<span>                map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"OpenStreetMap"</span>, <span class="st">"OpenTopoMap"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_region</span> <span class="op">==</span> <span class="st">"Zwin"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>bsm_mo_tex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">bsm_mo_tex</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span></span>
+<span>    zcol <span class="op">=</span> <span class="st">"bsm_mo_tex"</span>,</span>
+<span>    alpha.region <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>    map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"OpenStreetMap"</span>, <span class="st">"OpenTopoMap"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p>Clicking a feature on the above generated map reveals all
 attributes.</p>
 </div>
@@ -347,9 +344,11 @@ belongs to the raw data collection (<a href="https://zenodo.org/communities/n2kh
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">soilmap_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">n2khab_data_path</span>, <span class="st">"10_raw/soilmap"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">soilmap_path</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/download_zenodo.html">download_zenodo</a></span><span class="op">(</span>doi <span class="op">=</span> <span class="st">"10.5281/zenodo.3387008"</span>,</span>
-<span>                path <span class="op">=</span> <span class="va">soilmap_path</span>,</span>
-<span>                parallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/download_zenodo.html">download_zenodo</a></span><span class="op">(</span></span>
+<span>  doi <span class="op">=</span> <span class="st">"10.5281/zenodo.3387008"</span>,</span>
+<span>  path <span class="op">=</span> <span class="va">soilmap_path</span>,</span>
+<span>  parallel <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>At some time in future, the download will be performed automatically
 by <code><a href="../reference/read_soilmap.html">read_soilmap()</a></code> (if the <code>soilmap</code> data source
 is missing).</p>
@@ -369,12 +368,12 @@ inspect its contents:</p>
 <span><span class="co">#&gt; CRS:            EPSG:31370</span></span>
 <span><span class="co">#&gt; # A tibble: 270,550 x 38</span></span>
 <span><span class="co">#&gt;    bsm_poly_id bsm_map_id bsm_region bsm_ge_region bsm_legend bsm_legend_title</span></span>
-<span><span class="co">#&gt;  *       &lt;dbl&gt; &lt;fct&gt;      &lt;fct&gt;      &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;           </span></span>
-<span><span class="co">#&gt;  1      165740 61E        Kunstmati… &lt;NA&gt;          Antropoge… bodemserie OB   </span></span>
-<span><span class="co">#&gt;  2      176046 78W        Kunstmati… &lt;NA&gt;          Antropoge… bodemserie OB   </span></span>
+<span><span class="co">#&gt;  *       &lt;dbl&gt; &lt;fct&gt;      &lt;fct&gt;      &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;</span></span>
+<span><span class="co">#&gt;  1      165740 61E        Kunstmati… &lt;NA&gt;          Antropoge… bodemserie OB</span></span>
+<span><span class="co">#&gt;  2      176046 78W        Kunstmati… &lt;NA&gt;          Antropoge… bodemserie OB</span></span>
 <span><span class="co">#&gt;  3      185239 95W        Zandleems… &lt;NA&gt;          Vochtig z… bodemseries Lda…</span></span>
-<span><span class="co">#&gt;  4      162400 75E        Kunstmati… &lt;NA&gt;          Antropoge… bodemserie OB   </span></span>
-<span><span class="co">#&gt;  5      173971 63W        Kunstmati… &lt;NA&gt;          Antropoge… bodemserie OB   </span></span>
+<span><span class="co">#&gt;  4      162400 75E        Kunstmati… &lt;NA&gt;          Antropoge… bodemserie OB</span></span>
+<span><span class="co">#&gt;  5      173971 63W        Kunstmati… &lt;NA&gt;          Antropoge… bodemserie OB</span></span>
 <span><span class="co">#&gt;  6      173087 64W        Zandleems… &lt;NA&gt;          Vochtig z… bodemserie Ldp …</span></span>
 <span><span class="co">#&gt;  7      199453 98E        Zandleems… &lt;NA&gt;          Nat zandl… bodemserie Lep …</span></span>
 <span><span class="co">#&gt;  8      176922 81W        Zandleems… &lt;NA&gt;          Vochtig z… bodemseries Lda…</span></span>
@@ -398,8 +397,8 @@ inspect its contents:</p>
 <p>Extract features that belong to the ‘Middellandpolders’ region:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sm_mp</span> <span class="op">&lt;-</span></span>
-<span>    <span class="va">sm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_region</span> <span class="op">==</span> <span class="st">"Middellandpolders"</span><span class="op">)</span></span>
+<span>  <span class="va">sm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_region</span> <span class="op">==</span> <span class="st">"Middellandpolders"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">sm_mp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 3991   38</span></span></code></pre></div>
 <ul>
@@ -408,24 +407,28 @@ two alternative base maps:</li>
 </ul>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sm_mp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>bsm_ge_series <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">bsm_ge_series</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span>zcol <span class="op">=</span> <span class="st">"bsm_ge_series"</span>,</span>
-<span>            alpha.region <span class="op">=</span> <span class="fl">0.2</span>,</span>
-<span>            map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Wikimedia"</span>, <span class="st">"CartoDB.Positron"</span><span class="op">)</span>,</span>
-<span>            alpha <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>bsm_ge_series <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">bsm_ge_series</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span></span>
+<span>    zcol <span class="op">=</span> <span class="st">"bsm_ge_series"</span>,</span>
+<span>    alpha.region <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>    map.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Wikimedia"</span>, <span class="st">"CartoDB.Positron"</span><span class="op">)</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">0</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <ul>
 <li>calculate surface area (ha) and polygon count per
 <code>bsm_ge_series</code>:</li>
 </ul>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sm_mp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="st">"ha"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="va">st_drop_geometry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bsm_ge_series</span>, <span class="va">bsm_ge_series_explan</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span>              nr_polygons <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="va">kable</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html">set_units</a></span><span class="op">(</span><span class="st">"ha"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bsm_ge_series</span>, <span class="va">bsm_ge_series_explan</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>    nr_polygons <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="7%">
@@ -504,14 +507,16 @@ materiaal over Oudland kreekrugmateriaal</td>
 </ul>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sm_mp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_ge_series</span> <span class="op">==</span> <span class="st">"D"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="st">"ha"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="va">st_drop_geometry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bsm_soilseries</span>, <span class="va">bsm_soilseries_explan</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span>              nr_polygons <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="va">kable</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_ge_series</span> <span class="op">==</span> <span class="st">"D"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html">set_units</a></span><span class="op">(</span><span class="st">"ha"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bsm_soilseries</span>, <span class="va">bsm_soilseries_explan</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>    nr_polygons <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="14%">
@@ -638,10 +643,12 @@ materiaal over Oudland kreekrugmateriaal</td>
 </ul>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sm_mp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_soilseries</span> <span class="op">==</span> <span class="st">"m.D5"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span>,</span>
-<span>            alpha <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>            alpha.region <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bsm_soilseries</span> <span class="op">==</span> <span class="st">"m.D5"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span></span>
+<span>    color <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    alpha.region <span class="op">=</span> <span class="fl">0</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </div>

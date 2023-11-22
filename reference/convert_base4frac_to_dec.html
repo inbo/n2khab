@@ -82,7 +82,7 @@ resolution." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -225,9 +225,11 @@ Resources. Journal of the American Statistical Association 99 (465):
 <span class='r-in'><span><span class='fu'>convert_base4frac_to_dec</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>0.1010101010101</span><span class='op'>)</span>, level <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1]   NA 4369</span>
 <span class='r-in'><span><span class='co'># same vector, all sensible levels computed:</span></span></span>
-<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>12</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>i</span><span class='op'>)</span> <span class='fu'>convert_base4frac_to_dec</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>0.1010101010101</span><span class='op'>)</span>,</span></span>
-<span class='r-in'><span>                                          level <span class='op'>=</span> <span class='va'>i</span><span class='op'>)</span></span></span>
-<span class='r-in'><span>      <span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>12</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>i</span><span class='op'>)</span> <span class='op'>{</span></span></span>
+<span class='r-in'><span>  <span class='fu'>convert_base4frac_to_dec</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>0.1010101010101</span><span class='op'>)</span>,</span></span>
+<span class='r-in'><span>    level <span class='op'>=</span> <span class='va'>i</span></span></span>
+<span class='r-in'><span>  <span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='op'>}</span><span class='op'>)</span></span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>          [,1]    [,2]    [,3]  [,4]  [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]       NA      NA      NA    NA    NA   NA   NA   NA   NA    NA    NA    NA</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 17895697 1118481 1118481 69905 69905 4369 4369  273  273    17    17     1</span>

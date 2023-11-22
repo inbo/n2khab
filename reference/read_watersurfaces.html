@@ -42,7 +42,7 @@
   
 
 <meta property="og:title" content="Return the data source watersurfaces as an sf polygon layer — read_watersurfaces" />
-<meta property="og:description" content="Returns the raw data source watersurfaces (Leyssen et al., 2020)
+<meta property="og:description" content="Returns the raw data source watersurfaces (Scheers et al., 2022)
 as a standardized sf polygon layer
 (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 (EPSG-code 31370)." />
@@ -77,7 +77,7 @@ as a standardized sf polygon layer
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -146,7 +146,7 @@ as a standardized sf polygon layer
     </div>
 
     <div class="ref-description">
-    <p>Returns the raw data source <code>watersurfaces</code> (Leyssen et al., 2020)
+    <p>Returns the raw data source <code>watersurfaces</code> (Scheers et al., 2022)
 as a standardized <code>sf</code> polygon layer
 (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 (EPSG-code <a href='https://epsg.io/31370'>31370</a>).</p>
@@ -155,7 +155,8 @@ as a standardized <code>sf</code> polygon layer
     <pre class="usage"><span><span class='fu'>read_watersurfaces</span><span class='op'>(</span></span>
 <span>  file <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
 <span>  extended <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
-<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_v1.1"</span>, <span class='st'>"watersurfaces_v1.0"</span><span class='op'>)</span></span>
+<span>  fix_geom <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_v1.2"</span>, <span class='st'>"watersurfaces_v1.1"</span>, <span class='st'>"watersurfaces_v1.0"</span><span class='op'>)</span></span>
 <span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -179,6 +180,17 @@ variables in the result?
 Currently only applies to <code>wfd_type</code> and <code>connectivity</code>;
 if <code>TRUE</code>, the variables <code>wfd_type_name</code> and
 <code>connectivity_name</code> are added.
+Defaults to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>fix_geom</th>
+      <td><p>Logical.
+Should invalid or corrupt geometries be fixed in the resulting <code>sf</code>
+object in order to make them valid?
+This prevents potential problems in geospatial operations, but beware that
+fixed geometries are different from the original ones.
+<code><a href='https://r-spatial.github.io/sf/reference/valid.html'>sf::st_make_valid()</a></code> is used to fix
+geometries (with GEOS as backend).
 Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
@@ -207,7 +219,9 @@ variables (not mentioning extra 'name' variables for
   Is there high confidence about the <code>wfd_type</code> determination?</p></li>
 <li><p><code>depth_class</code>: class of water depth;</p></li>
 <li><p><code>connectivity</code>: connectivity class;</p></li>
-<li><p><code>usage</code>: usage class.</p></li>
+<li><p><code>usage</code>: usage class;</p></li>
+<li><p><code>water_level_management</code>: water-level management class (not in
+  older versions).</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -219,8 +233,8 @@ If you want to use another file or file structure than the default
 data storage, you can specify your own <code>file</code>.
 In both cases: always make sure to specify the correct <code>version</code>, that
 is the version corresponding to the <code>file</code> (note that the <code>version</code>
-defaults to the latest version, that is <code>watersurfaces_v1.1</code>).</p>
-<p>See Leyssen et al. (2020) for an elaborate explanation of the data source
+defaults to the latest version).</p>
+<p>See Scheers et al. (2022) for an elaborate explanation of the data source
 and its attributes.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -230,12 +244,10 @@ and its attributes.</p>
 wateren in Vlaanderen.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 Instituut voor Natuur- en Bosonderzoek, Brussel.</p></li>
-<li><p>Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &amp;
-Denys L. (2020).
-Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
-Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
-(40). Instituut voor Natuur en Bosonderzoek, Brussel.
-<a href='https://doi.org/10.21436/inbor.19088385'>doi:10.21436/inbor.19088385</a>
+<li><p>Scheers K., Smeekens V., Wils C., Packet J., Leyssen A. &amp; Denys L.
+(2022). Watervlakken versie 1.2: Polygonenkaart van stilstaand water in
+Vlaanderen. Uitgave 2022. Instituut voor Natuur- en Bosonderzoek.
+<a href='https://doi.org/10.21436/inbor.87014272'>doi:10.21436/inbor.87014272</a>
 .</p></li>
 </ul>
 
@@ -259,6 +271,12 @@ Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
 <span class='r-in'><span><span class='va'>ws</span> <span class='op'>&lt;-</span> <span class='fu'>read_watersurfaces</span><span class='op'>(</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='va'>ws</span></span></span>
 <span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>ws</span><span class='op'>)</span></span></span>
+<span class='r-in'><span></span></span>
+<span class='r-in'><span><span class='va'>ws_valid</span> <span class='op'>&lt;-</span> <span class='fu'>read_watersurfaces</span><span class='op'>(</span>fix_geom <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>ws_valid</span></span></span>
+<span class='r-in'><span></span></span>
+<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/all.html'>all</a></span><span class='op'>(</span><span class='fu'>sf</span><span class='fu'>::</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/valid.html'>st_is_valid</a></span><span class='op'>(</span><span class='va'>ws</span><span class='op'>)</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/all.html'>all</a></span><span class='op'>(</span><span class='fu'>sf</span><span class='fu'>::</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/valid.html'>st_is_valid</a></span><span class='op'>(</span><span class='va'>ws_valid</span><span class='op'>)</span><span class='op'>)</span></span></span>
 <span class='r-in'><span></span></span>
 <span class='r-in'><span><span class='va'>ws2</span> <span class='op'>&lt;-</span> <span class='fu'>read_watersurfaces</span><span class='op'>(</span>extended <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='va'>ws2</span></span></span>

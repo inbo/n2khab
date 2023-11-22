@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -140,6 +140,39 @@
       <small>Source: <a href='https://github.com/inbo/n2khab/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="n2khab-090-2023-11-22" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.0">
+<a href="#n2khab-090-2023-11-22" class="anchor"></a>n2khab 0.9.0 (2023-11-22)</h1>
+<ul>
+<li>
+<code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> has been improved (<a href='https://github.com/inbo/n2khab/issues/169'>#169</a>):
+<ul>
+<li>fixes in order to use the renewed Zenodo website;</li>
+<li>speedup the initiation of a multi-file download;</li>
+<li>set concurrent (parallel) downloading as default for multi-file
+records;</li>
+<li>add unit tests to regularly check that the function still
+works.</li>
+</ul>
+</li>
+<li>
+<code><a href="../reference/read_watersurfaces.html">read_watersurfaces()</a></code> gained extra capabilities (<a href='https://github.com/inbo/n2khab/issues/168'>#168</a>):
+<ul>
+<li>data source version <code>watersurfaces_v1.2</code> is now
+supported;</li>
+<li>a new <code>fix_geom</code> argument allows to fix invalid or
+corrupt geometries on the fly. This behaviour is turned off by default
+(see <a href='https://github.com/inbo/n2khab/issues/60'>#60</a>).</li>
+</ul>
+</li>
+<li>Package startup messages have been updated, including a check
+whether the latest release is being used (<a href='https://github.com/inbo/n2khab/issues/170'>#170</a>, <a href="https://github.com/inbo/n2khab/commit/502c3a2">502c3a2</a>).</li>
+<li>Internally, an update has been applied (<a href="https://github.com/inbo/n2khab/commit/9691ec2">9691ec2</a>) to
+googlesheets authentication, used in updating the built-in textual data
+sources. These data sources have not changed since previous
+release.</li>
+</ul>
+</div>
     <div id="n2khab-080-2022-11-18" class="section level1">
 <h1 class="page-header" data-toc-text="0.8.0">
 <a href="#n2khab-080-2022-11-18" class="anchor"></a>n2khab 0.8.0 (2022-11-18)</h1>

@@ -76,7 +76,7 @@ example derived from Zookeys.)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -150,7 +150,7 @@ It only works for Zenodo created DOI (not when the DOI is for
 example derived from Zookeys.)</p>
     </div>
 
-    <pre class="usage"><span><span class='fu'>download_zenodo</span><span class='op'>(</span><span class='va'>doi</span>, path <span class='op'>=</span> <span class='st'>"."</span>, parallel <span class='op'>=</span> <span class='cn'>FALSE</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span></pre>
+    <pre class="usage"><span><span class='fu'>download_zenodo</span><span class='op'>(</span><span class='va'>doi</span>, path <span class='op'>=</span> <span class='st'>"."</span>, parallel <span class='op'>=</span> <span class='cn'>TRUE</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,11 +166,9 @@ Defaults to the working directory.</p></td>
     </tr>
     <tr>
       <th>parallel</th>
-      <td><p>Logical (<code>FALSE</code> by default).
-If <code>TRUE</code>, will run a number of parallel processes, each downloading
-another file.
-This is useful when multiple large files are present in the Zenodo
-record, which otherwise would be downloaded sequentially.
+      <td><p>Logical.
+If <code>TRUE</code> (the default), files will be
+downloaded concurrently for multi-file records.
 Of course, the operation is limited by bandwidth and traffic limitations.</p></td>
     </tr>
     <tr>

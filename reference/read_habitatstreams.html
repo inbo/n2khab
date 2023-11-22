@@ -81,7 +81,7 @@ with textual explanation of the values of the source_id variable." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -219,8 +219,10 @@ Bosonderzoek 2020 (34). Research Institute for Nature and Forest, Brussels.
 <span class='r-in'><span><span class='va'>hs</span></span></span>
 <span class='r-in'><span><span class='va'>hs2</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatstreams</span><span class='op'>(</span>source_text <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='va'>hs2</span></span></span>
-<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>hs</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>st_drop_geometry</span>,</span></span>
-<span class='r-in'><span>          <span class='va'>hs2</span><span class='op'>$</span><span class='va'>lines</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>st_drop_geometry</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span></span></span>
+<span class='r-in'><span>  <span class='va'>hs</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_geometry.html'>st_drop_geometry</a></span><span class='op'>(</span><span class='op'>)</span>,</span></span>
+<span class='r-in'><span>  <span class='va'>hs2</span><span class='op'>$</span><span class='va'>lines</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_geometry.html'>st_drop_geometry</a></span><span class='op'>(</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='op'>}</span></span></span>
 <span class='r-in'><span></span></span>
 </pre>

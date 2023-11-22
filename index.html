@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -160,31 +160,21 @@ to be stored in a folder <code>n2khab_data/10_raw</code>;</li>
 to be stored in a folder <code>n2khab_data/20_processed</code>.</li>
 </ul>
 </div>
-<div id="suppressing-rgdal-warnings-about-proj4string-degradation" class="section level3">
+<div id="note-dont-use-proj4strings-to-define-coordinate-reference-systems" class="section level3">
 <h3 class="hasAnchor">
-<a href="#suppressing-rgdal-warnings-about-proj4string-degradation" class="anchor"></a>Suppressing <code>rgdal</code> warnings about proj4string
-degradation</h3>
-<p>Setting coordinate reference systems (CRS) of geospatial R objects is
-taken care of by the package, in a way that is compatible with older and
-current versions of PROJ and GDAL backend libraries. This is done by
-gratefully implementing such features from the <code>sf</code> and
-<code>sp</code> packages. The functions never specify a CRS by means of
-a proj4string, which is an aged format not supported by the current
-backend versions.</p>
-<p>Please note that nonetheless you will see warnings about degraded
-proj4strings when using certain <code>n2khab</code> functions or when
-converting resulting <code>sf</code> objects to <code>sp</code> objects.
-This is normal! It is the current default behaviour of
-<code>rgdal</code> to yield these warnings. However in the case of
-<code>n2khab</code> functions and resulting objects these warnings are
-trivial and unnecessary. You can suppress them in your R scripts by
-inserting below statement <em>before</em> loading geospatial
-packages:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>rgdal_show_exportToProj4_warnings <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
+<a href="#note-dont-use-proj4strings-to-define-coordinate-reference-systems" class="anchor"></a>Note: don’t use proj4strings to define coordinate reference
+systems</h3>
+<p>If you use <code>RasterLayer</code> or <code>RasterBrick</code>
+objects returned by <strong>n2khab</strong> functions, please make sure
+to not use the proj4string to represent its coordinate reference system
+(CRS), even while printing those objects will show a degraded (!)
+proj4string. The proj4string is an aged format which has lost most of
+its ability to represent a geodetic datum.</p>
+<p>The proper CRS representation is the WKT string, which is effectively
+returned by <code><a href="https://rdrr.io/pkg/sp/man/is.projected.html">raster::wkt()</a></code> and by
+<code><a href="https://rdrr.io/pkg/terra/man/crs.html">raster::crs()</a></code>.</p>
 <p>See <a href="https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/">this</a>
-tutorial if you would like to learn more about this. In short:
-<em>don’t</em> use proj4strings to define CRSs!</p>
+tutorial if you would like to learn more about this.</p>
 </div>
 </div>
 <div id="you-are-welcome-to-contribute" class="section level2">
