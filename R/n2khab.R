@@ -10,10 +10,44 @@
 
 utils::globalVariables(c("."))
 
-#' @importFrom utils packageVersion
+#' @importFrom utils packageVersion packageDescription
+#' @importFrom curl nslookup
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(
-    "Attaching n2khab version ",
-    packageVersion("n2khab")
+    "Attaching n2khab ",
+    packageVersion("n2khab"),
+    "."
   )
+  packageStartupMessage("Will use sf ", packageDescription("sf")$Version, ".")
+  if (
+    length(find.package("raster", quiet = TRUE) > 0) &&
+      packageVersion("raster") >= package_version("3.6-3") &&
+      length(find.package("terra", quiet = TRUE) > 0)
+  ) {
+    packageStartupMessage(
+      "Will use terra ",
+      packageDescription("terra")$Version,
+      " through raster."
+    )
+  }
+  if (!is.null(nslookup("api.github.com", error = FALSE))) {
+    ref <- remotes::github_remote(
+      "inbo/n2khab",
+      ref = remotes::github_release()
+    )$ref
+    release <- package_version(gsub("\\p{L}*", "", ref, perl = TRUE))
+    if (packageVersion("n2khab") < release) {
+      packageStartupMessage(
+        "\n",
+        rep("=", getOption("width")),
+        "\nIt is advised to upgrade n2khab to its current version ",
+        release,
+        ". Run:\n",
+        'install.packages("n2khab", repos = c(inbo = "https://inbo.r-universe.dev",
+                                     CRAN = "https://cloud.r-project.org"))',
+        "\n",
+        rep("=", getOption("width"))
+      )
+    }
+  }
 }

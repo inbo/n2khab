@@ -31,12 +31,14 @@ Depends:
     R (>= 3.5.0)
 Imports:
     assertthat,
+    curl,
     dplyr,
     forcats,
     git2rdata (>= 0.4.0),
     magrittr,
     plyr,
     purrr,
+    remotes,
     rlang,
     rprojroot,
     sf,
@@ -47,16 +49,14 @@ LazyData: true
 RoxygenNote: 7.2.3
 Suggests: 
     bib2df,
-    curl,
     digest,
     googledrive,
     jsonlite,
     knitr,
     mapview,
     openssl,
-    raster (>= 3.3-16),
+    raster (>= 3.6-3),
     readxl,
-    remotes,
     rmarkdown,
     testthat (>= 3.0.0),
     tidyverse,
