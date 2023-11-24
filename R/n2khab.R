@@ -42,10 +42,12 @@ utils::globalVariables(c("."))
         rep("=", getOption("width")),
         "\nIt is advised to upgrade n2khab to its current version ",
         release,
-        ". Run:\n",
+        ". Run:\n\n",
+        'detach("package:n2khab", unload = TRUE)\n',
         'install.packages("n2khab", repos = c(inbo = "https://inbo.r-universe.dev",
                                      CRAN = "https://cloud.r-project.org"))',
         "\n",
+        "library(n2khab)\n",
         rep("=", getOption("width"))
       )
     }
