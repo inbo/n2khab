@@ -1,3 +1,8 @@
+# n2khab 0.9.1 (2023-11-24)
+
+- Added workaround for a note during package installation ([d300e4a](https://github.com/inbo/n2khab/commit/d300e4a)).
+- Package startup message: improve recommended code to update package ([793e303](https://github.com/inbo/n2khab/commit/793e303)).
+
 # n2khab 0.9.0 (2023-11-22)
 
 - `download_zenodo()` has been improved (#169):
