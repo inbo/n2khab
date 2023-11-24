@@ -18,6 +18,7 @@ utils::globalVariables(c("."))
     packageVersion("n2khab"),
     "."
   )
+  invisible(n2khab_options())
   packageStartupMessage("Will use sf ", packageDescription("sf")$Version, ".")
   if (
     length(find.package("raster", quiet = TRUE) > 0) &&
