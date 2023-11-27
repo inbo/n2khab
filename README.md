@@ -57,14 +57,6 @@ There is a major distinction between:
 - **raw data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-raw)), to be stored in a folder `n2khab_data/10_raw`;
 - **processed data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-processed)), to be stored in a folder `n2khab_data/20_processed`.
 
-### Note: don't use proj4strings to define coordinate reference systems
-
-If you use `RasterLayer` or `RasterBrick` objects returned by **n2khab** functions, please make sure to not use the proj4string to represent its coordinate reference system (CRS), even while printing those objects will show a degraded (!) proj4string.
-The proj4string is an aged format which has lost most of its ability to represent a geodetic datum.
-
-The proper CRS representation is the WKT string, which is effectively returned by `raster::wkt()` and by `raster::crs()`.
-
-See [this](https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/) tutorial if you would like to learn more about this.
 
 ## You are welcome to contribute!
 
