@@ -5,7 +5,7 @@
 \title{Documentation of included data source 'scheme_types'}
 \format{
 A vc-formatted data source. As such, it corresponds to
-a dataframe with 3 variables:
+a data frame with 3 variables:
 \describe{
   \item{scheme}{Code of the scheme, as a factor, and explained by
   \code{\link{namelist}}.

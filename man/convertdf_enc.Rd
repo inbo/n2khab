@@ -2,7 +2,7 @@
 % Please edit documentation in R/datawrangling.R
 \name{convertdf_enc}
 \alias{convertdf_enc}
-\title{Convert encoding of character and factor variables in a dataframe}
+\title{Convert encoding of character and factor variables in a data frame}
 \usage{
 convertdf_enc(x, from = "", to = "UTF-8", sub = NA, colnames = FALSE)
 }
@@ -29,7 +29,7 @@ The original object, with character variables (and levels of
 (character) factor variables) converted to the specified encoding.
 }
 \description{
-Convert encoding of character and factor variables in a dataframe
+Convert encoding of character and factor variables in a data frame
 }
 \details{
 Encoding strings: all \code{R} platforms support \code{""} (for the

@@ -6,7 +6,7 @@
 #' Multiple languages are supported.
 #'
 #' @format A vc-formatted data source. As such, it corresponds to
-#' a dataframe with many rows and 4 variables:
+#' a data frame with many rows and 4 variables:
 #' \describe{
 #'   \item{code}{A code used elsewhere.}
 #'   \item{lang}{An
@@ -56,7 +56,7 @@ NULL
 #' languages).
 #'
 #' @format A vc-formatted data source. As such, it corresponds to
-#' a dataframe with several variables:
+#' a data frame with several variables:
 #' \describe{
 #'   \item{type}{Code of the type, as a factor.
 #'   This is the ID for use in diverse workflows and datasets.
@@ -154,7 +154,7 @@ NULL
 #' languages).
 #'
 #' @format A vc-formatted data source. As such, it corresponds to
-#' a dataframe with 35 rows and 3 variables:
+#' a data frame with 35 rows and 3 variables:
 #' \describe{
 #'   \item{ep_code}{Code of the environmental pressure, as a factor.
 #'   This is the ID for use in diverse workflows and datasets.
@@ -221,7 +221,7 @@ NULL
 #'
 #'
 #' @format A vc-formatted data source. As such, it corresponds to
-#' a dataframe with 10 variables:
+#' a data frame with 10 variables:
 #' \describe{
 #'   \item{scheme}{Code of the scheme, as a factor.
 #'   This is the ID for use in diverse workflows and datasets.
@@ -364,7 +364,7 @@ NULL
 #'
 #'
 #' @format A vc-formatted data source. As such, it corresponds to
-#' a dataframe with 3 variables:
+#' a data frame with 3 variables:
 #' \describe{
 #'   \item{scheme}{Code of the scheme, as a factor, and explained by
 #'   \code{\link{namelist}}.

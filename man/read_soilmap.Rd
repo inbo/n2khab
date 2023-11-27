@@ -92,7 +92,7 @@ factors.
 When a variable is a one-to-one translation of another (e.g. code vs.
 explanation), the order of factor levels is aligned.
 
-Three types of dataframe variables are returned when reading \code{soilmap}:
+Three types of data frame variables are returned when reading \code{soilmap}:
 \itemize{
 \item \strong{variables with \code{mo_} in their name}: their categories follow the
 Belgian Morphogenetic System.

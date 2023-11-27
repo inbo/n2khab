@@ -1743,7 +1743,7 @@ read_habitatsprings <-
 #' @param filter_hab If \code{TRUE}, only polygons with (known) habitat `8310`
 #' are returned.
 #' @param references If \code{TRUE}, a list is returned with both the `sf`
-#' object (element `habitatquarries`) and a dataframe of bibliographic
+#' object (element `habitatquarries`) and a data frame of bibliographic
 #' references (element `extra_references`).
 #' @param bibtex If \code{TRUE}, all that happens is bibliographic references
 #' being printed to the console, formatted for usage in a BibTeX file (`*.bib`).
@@ -1766,10 +1766,10 @@ read_habitatsprings <-
 #'     \item \code{type}: habitat type listed in \code{\link{types}} - in this
 #'     case either `8310` or missing (`NA`).
 #'     \item \code{extra_reference}: site-specific bibliographic reference(s).
-#'     Values refer to rows in the non-spatial dataframe `extra_references`.
+#'     Values refer to rows in the non-spatial data frame `extra_references`.
 #'   }
 #' \item \emph{if `references = TRUE`:} a list with both the `sf`
-#' object (element `habitatquarries`) and a dataframe of bibliographic
+#' object (element `habitatquarries`) and a data frame of bibliographic
 #' references (element `extra_references`).
 #' \item \emph{if `bibtex = TRUE`:} `NULL` (invisibly).
 #' }

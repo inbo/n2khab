@@ -9,7 +9,7 @@ The concerned data sources are:
 
 ### Collecting information for `schemes` and `scheme_types`
 
-Reading dataframe coming from the [n2khab-mne-selections](https://gitlab.com/florisvdh/n2khab-mne-selections) repo (a git LFS repo on Gitlab):
+Reading data frame coming from the [n2khab-mne-selections](https://gitlab.com/florisvdh/n2khab-mne-selections) repo (a git LFS repo on Gitlab):
 
 ```{r}
 schemes_types_nl <- 
@@ -36,7 +36,7 @@ ep_codes <-
            )
 ```
 
-Making a dataframe that combines the information of `schemes` and `scheme_types`:
+Making a data frame that combines the information of `schemes` and `scheme_types`:
 
 ```{r}
 types <- read_vc(types_path, root)

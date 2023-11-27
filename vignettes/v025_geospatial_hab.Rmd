@@ -41,7 +41,7 @@ This vignette learns you:
 
 - the difference between various geospatial N2KHAB data sources on the occurrence of types in Flanders (types being habitat (sub)types or regionally important biotopes (RIBs); see `read_types()`);
 - how to load these data sources into R;
-- how to optimally match an interpreted data source with a 'types' column in your own dataframe.
+- how to optimally match an interpreted data source with a 'types' column in your own data frame.
 
 ## Data sources
 
@@ -84,7 +84,7 @@ See `vignette("v020_datastorage")` for the setup.
 The advantage of using the `read_...()` functions is the uniform approach to read the above data sources in R, enhancing collaboration and speeding up your work.
 
 - Geospatial layers are represented as an `sf` object, in the coordinate reference system (CRS) 'Belge 1972 / Belgian Lambert 72' (EPSG-code [31370](https://epsg.io/31370)).
-- Dataframes are presented as tibbles. ^[A tibble is a dataframe that makes working in the tidyverse a little [easier](https://r4ds.had.co.nz/tibbles.html).]
+- Dataframes are presented as tibbles. ^[A tibble is a data frame that makes working in the tidyverse a little [easier](https://r4ds.had.co.nz/tibbles.html).]
 - English & [tidyverse-styled](https://style.tidyverse.org/) names of variables stimulate you to always produce internationalized code, tables and figures.
 - The `type` variable (if present) is a factor with the same levels as the `type` variable of the `types` reference list (see `read_types()`).
 - Some variables may be discarded that should normally have no added value, e.g. values that duplicate already existing information.
@@ -121,7 +121,7 @@ habitatmap
 #> #   area_m2 <dbl>, geometry <MULTIPOLYGON [m]>
 ```
 
-The `habitatmap` object is a very wide dataframe which is not so easy to handle in R.
+The `habitatmap` object is a very wide data frame which is not so easy to handle in R.
 For analytical work on habitat types and RIBs, you're advised to use the tidied data source `habitatmap_stdized`; see [below](#processed).
 
 `read_habitatmap(filter_hab = TRUE)` will only retain the polygons that occur in `habitatmap_stdized`, i.e. those that contain habitat types or RIBs.
@@ -226,7 +226,7 @@ habitatquarries
 ```
 
 The habitatquarries data source also includes the literature references.
-These can be added as a second dataframe -- in that case a list is returned:
+These can be added as a second data frame -- in that case a list is returned:
 
 ```{r}
 habitatquarries2 <- read_habitatquarries(references = TRUE)
@@ -550,17 +550,17 @@ read_watersurfaces_hab(interpreted = TRUE) %>%
 ```
 
 
-## Matching interpreted data sources with a dataframe column of types
+## Matching interpreted data sources with a data frame column of types
 
-The `expand_types()` function helps us to join a type column of your own dataframe with the results of `read_habitatmap_terr()` or `read_watersurfaces_hab()`.
+The `expand_types()` function helps us to join a type column of your own data frame with the results of `read_habitatmap_terr()` or `read_watersurfaces_hab()`.
 
-For both of these datasets, the following conversions of your dataframe are supported in order to create optimal joins:
+For both of these datasets, the following conversions of your data frame are supported in order to create optimal joins:
 
 - adding extra _subtype_ rows when main type codes occur for which subtypes exist;
 - adding extra _main type_ rows when certain subtypes of that main type are present (the conditions can be relaxed; see the function documentation).
 This is supported for 2330, 6230 and 91E0, for which this makes sense with the two mentioned data sources.
 
-An example (`df` is our dataframe):
+An example (`df` is our data frame):
 
 ```{r eval=TRUE}
 df <-
@@ -577,7 +577,7 @@ df <-
 df
 ```
 
-With the `type_var` argument you specify which variable of your dataframe represents type codes:
+With the `type_var` argument you specify which variable of your data frame represents type codes:
 
 ```{r eval=TRUE}
 df_exp <-

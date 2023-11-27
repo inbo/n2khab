@@ -10,7 +10,7 @@
 #'
 #' \code{read_namelist()} reads it and returns it as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
-#' A tibble is a dataframe that makes working in the tidyverse a little
+#' A tibble is a data frame that makes working in the tidyverse a little
 #' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 #' By default, the data version delivered with the package is used and only English
 #' names (\code{lang = "en"}) are returned.
@@ -28,7 +28,7 @@
 #'   containing all languages.
 #'
 #' @return
-#' The \code{namelist} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+#' The \code{namelist} data frame as a \code{\link[tibble:tbl_df-class]{tibble}},
 #' filtered according to the \code{lang} argument.
 #' See \code{\link{namelist}} for documentation of the tibble's contents.
 #'
@@ -179,7 +179,7 @@ namelist_factor <-
 #' names + shortnames
 #' and returns it as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
-#' A tibble is a dataframe that makes working in the tidyverse a little
+#' A tibble is a data frame that makes working in the tidyverse a little
 #' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 #' By default, the data version delivered with the package is used and English
 #' names (\code{lang = "en"}) are returned for types, attributes and tags.
@@ -204,7 +204,7 @@ namelist_factor <-
 #'   the language of names & shortnames to be returned in the tibble.
 #'
 #' @return
-#' The \code{types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+#' The \code{types} data frame as a \code{\link[tibble:tbl_df-class]{tibble}},
 #' with names & shortnames added for types, attributes and tags
 #' according to the \code{lang} argument.
 #' See \code{\link{types}} for documentation of the data-source's contents.
@@ -450,7 +450,7 @@ read_types <-
 #' source, adds
 #' human-readable attributes and returns it as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
-#' A tibble is a dataframe that makes working in the tidyverse a little
+#' A tibble is a data frame that makes working in the tidyverse a little
 #' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 #' By default, the data version delivered with the package is used and English
 #' text (\code{lang = "en"}) is returned for names of environmental pressures and
@@ -471,7 +471,7 @@ read_types <-
 #' @inheritParams read_types
 #'
 #' @return
-#' The \code{env_pressures} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+#' The \code{env_pressures} data frame as a \code{\link[tibble:tbl_df-class]{tibble}},
 #' with human-readable text added for environmental pressures,
 #' pressure-classes and textual explanations and remarks
 #' according to the \code{lang} argument.
@@ -660,7 +660,7 @@ read_env_pressures <-
 #' \code{read_schemes()} reads the \code{\link{schemes}} data source, adds
 #' names + shortnames and returns it as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
-#' A tibble is a dataframe that makes working in the tidyverse a little
+#' A tibble is a data frame that makes working in the tidyverse a little
 #' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 #' By default, the data version delivered with the package is used and English
 #' names (\code{lang = "en"}) are returned for scheme, programme, attributes
@@ -676,7 +676,7 @@ read_env_pressures <-
 #' @inheritParams read_env_pressures
 #'
 #' @return
-#' The \code{schemes} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+#' The \code{schemes} data frame as a \code{\link[tibble:tbl_df-class]{tibble}},
 #' with names & shortnames added for scheme, programme, attributes and tags
 #' according to the \code{lang} argument.
 #' The tibble has 25 variables.
@@ -876,7 +876,7 @@ read_schemes <-
 #' source, optionally adds names + shortnames (always done for the typegroup)
 #' and returns it as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
-#' A tibble is a dataframe that makes working in the tidyverse a little
+#' A tibble is a data frame that makes working in the tidyverse a little
 #' \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 #' By default, the data version delivered with the package is used and English
 #' names (\code{lang = "en"}) are returned.
@@ -895,7 +895,7 @@ read_schemes <-
 #' scheme attributes, type, typeclass and tags of scheme and type?
 #'
 #' @return
-#' The \code{scheme_types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+#' The \code{scheme_types} data frame as a \code{\link[tibble:tbl_df-class]{tibble}},
 #' with names & shortnames added for the typegroup variable and optionally for
 #' scheme, programme,
 #' scheme attributes, type and attributes & tags of scheme and type, all

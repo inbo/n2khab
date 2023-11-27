@@ -34,7 +34,7 @@ the language of names & shortnames to be returned in the tibble.}
 scheme attributes, type, typeclass and tags of scheme and type?}
 }
 \value{
-The \code{scheme_types} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+The \code{scheme_types} data frame as a \code{\link[tibble:tbl_df-class]{tibble}},
 with names & shortnames added for the typegroup variable and optionally for
 scheme, programme,
 scheme attributes, type and attributes & tags of scheme and type, all
@@ -103,7 +103,7 @@ if applicable.
 source, optionally adds names + shortnames (always done for the typegroup)
 and returns it as a
 \code{\link[tibble:tbl_df-class]{tibble}}.
-A tibble is a dataframe that makes working in the tidyverse a little
+A tibble is a data frame that makes working in the tidyverse a little
 \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 By default, the data version delivered with the package is used and English
 names (\code{lang = "en"}) are returned.

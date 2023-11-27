@@ -5,7 +5,7 @@
 \title{Documentation of included data source 'namelist'}
 \format{
 A vc-formatted data source. As such, it corresponds to
-a dataframe with many rows and 4 variables:
+a data frame with many rows and 4 variables:
 \describe{
   \item{code}{A code used elsewhere.}
   \item{lang}{An

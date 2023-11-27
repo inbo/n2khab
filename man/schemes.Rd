@@ -5,7 +5,7 @@
 \title{Documentation of included data source 'schemes'}
 \format{
 A vc-formatted data source. As such, it corresponds to
-a dataframe with 10 variables:
+a data frame with 10 variables:
 \describe{
   \item{scheme}{Code of the scheme, as a factor.
   This is the ID for use in diverse workflows and datasets.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/datawrangling.R
 \name{expand_types}
 \alias{expand_types}
-\title{Expand a 'type' column in a dataframe}
+\title{Expand a 'type' column in a data frame}
 \usage{
 expand_types(x, type_var = "type", use_grouping = TRUE, strict = TRUE)
 }
@@ -10,11 +10,11 @@ expand_types(x, type_var = "type", use_grouping = TRUE, strict = TRUE)
 \item{x}{An object of class \code{data.frame}.}
 
 \item{type_var}{A string.
-The name of the dataframe variable that holds the type codes.
+The name of the data frame variable that holds the type codes.
 Defaults to \code{type}.}
 
 \item{use_grouping}{Logical.
-If the dataframe has one or more grouping variables
+If the data frame has one or more grouping variables
 (class \code{grouped_df}),
 is the operation to be performed independently
 for each group in turn?}
@@ -23,10 +23,10 @@ for each group in turn?}
 Apply conditions before expanding subtype codes to main type codes?}
 }
 \value{
-A dataframe, either identical or longer than the input dataframe.
+A data frame, either identical or longer than the input data frame.
 }
 \description{
-Takes a dataframe with a column of type codes
+Takes a data frame with a column of type codes
 (\emph{main type} or \emph{subtype }codes),
 and, under certain conditions, adds new rows with codes of the associated
 \emph{subtypes} and \emph{main types}, respectively.
@@ -34,14 +34,14 @@ It allows to do sensible selections and joins with interpreted forms of the
 \code{habitatmap_stdized} and \code{watersurfaces_hab} data sources:
 \code{habitatmap_terr},
 \code{read_watersurfaces_hab(interpreted = TRUE)}.
-If the dataframe has one or more grouping variables, by default the
+If the data frame has one or more grouping variables, by default the
 operation is done independently for each group in turn.
 }
 \details{
-The extra rows in the dataframe take the values for other variables
+The extra rows in the data frame take the values for other variables
 from the rows with which they are associated, based on the
 subtype - main type relation.
-Type codes in the dataframe are verified to comply with the codes from the
+Type codes in the data frame are verified to comply with the codes from the
 \code{\link{types}} data source.
 A warning is given when they don't.
 

@@ -32,7 +32,7 @@ IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
 the language of human-readable attributes to be returned in the tibble.}
 }
 \value{
-The \code{env_pressures} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+The \code{env_pressures} data frame as a \code{\link[tibble:tbl_df-class]{tibble}},
 with human-readable text added for environmental pressures,
 pressure-classes and textual explanations and remarks
 according to the \code{lang} argument.
@@ -75,7 +75,7 @@ with the pressure-class and the textual explanation.
 source, adds
 human-readable attributes and returns it as a
 \code{\link[tibble:tbl_df-class]{tibble}}.
-A tibble is a dataframe that makes working in the tidyverse a little
+A tibble is a data frame that makes working in the tidyverse a little
 \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 By default, the data version delivered with the package is used and English
 text (\code{lang = "en"}) is returned for names of environmental pressures and

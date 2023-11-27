@@ -60,7 +60,7 @@ n2khab_options()
 options(oldopt)
 
 # Unacceptable values yield an error message;
-# the dataframe is still returned with NA:
+# the data frame is still returned with NA:
 oldopt <- options(n2khab_data_path = 0, n2khab_use_raster = TRUE)
 n2khab_options()
 options(oldopt)

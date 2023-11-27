@@ -26,7 +26,7 @@ If \code{lang = "all"}, the full \code{namelist} tibble is returned, i.e.
 containing all languages.}
 }
 \value{
-The \code{namelist} dataframe as a \code{\link[tibble:tbl_df-class]{tibble}},
+The \code{namelist} data frame as a \code{\link[tibble:tbl_df-class]{tibble}},
 filtered according to the \code{lang} argument.
 See \code{\link{namelist}} for documentation of the tibble's contents.
 }
@@ -42,7 +42,7 @@ names and (optionally) shortnames for IDs/codes used in other data sources.
 
 \code{read_namelist()} reads it and returns it as a
 \code{\link[tibble:tbl_df-class]{tibble}}.
-A tibble is a dataframe that makes working in the tidyverse a little
+A tibble is a data frame that makes working in the tidyverse a little
 \href{https://r4ds.had.co.nz/tibbles.html}{easier}.
 By default, the data version delivered with the package is used and only English
 names (\code{lang = "en"}) are returned.
