@@ -56,7 +56,7 @@ This is because reading functions of `n2khab` will by default use the first `n2k
 If you already have an existing `n2khab_data` directory in place, instead run:
 
 ```{r}
-n2khab_data_path <- fileman_up("n2khab_data")
+n2khab_data_path <- locate_n2khab_data()
 ```
 
 
