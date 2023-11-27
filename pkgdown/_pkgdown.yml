@@ -52,12 +52,13 @@ reference:
       - n2khab_options
   - title: "Managing files and directories"
     contents:
-      - fileman_folders
       - download_zenodo
+      - locate_n2khab_data
+      - fileman_folders
+      - fileman_up
   - title: "Utilities and helpers"
     contents:
       - read_namelist
-      - fileman_up
       - convert_dec_to_base4frac
       - convert_base4frac_to_dec
       - checksum
