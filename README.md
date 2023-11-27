@@ -73,3 +73,7 @@ At a later date, the intention is to incorporate functionality to enhance workfl
 
 Currently these aspects must be taken care of in a more manual fashion.
 See `vignette("v022_example")` for example code to currently accomplish specific aspects.
+
+## Code of Conduct
+
+Please note that the n2khab package is released with a [Contributor Code of Conduct](https://inbo.github.io/n2khab/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

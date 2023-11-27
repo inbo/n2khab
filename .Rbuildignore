@@ -10,3 +10,4 @@ pkgdown/
 ^appveyor\.yml$
 ^\.zenodo\.json$
 ^\.github$
+^CODE_OF_CONDUCT\.md$
