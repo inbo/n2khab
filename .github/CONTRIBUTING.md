@@ -108,7 +108,7 @@ This is the structure of the [repo]:
 
 When writing functions for `n2khab`:
 
-- please use `tidyverse`, `sf` and `raster` packages for data reading.
+- please use `sf` and `terra` packages for reading geospatial data.
 Discover the human-friendly way of coding a data processing pipeline through the use of [pipes](https://r4ds.had.co.nz/pipes.html)!
 Organise data in R in a [tidy](https://r4ds.had.co.nz/tidy-data.html#tidy-data-1) way in order to avoid troubles later on.
 Recommended resources to get started are:
