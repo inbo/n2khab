@@ -34,12 +34,8 @@ file.copy(source, ".")
 ### Install and load `n2khab`
 
 ```{r}
-Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS = "true")
-library(remotes)
-install_github("inbo/n2khab",
-  build_vignettes = TRUE,
-  upgrade = TRUE
-)
+install.packages("n2khab", repos = c(inbo = "https://inbo.r-universe.dev", 
+                                     CRAN = "https://cloud.r-project.org"))
 ```
 
 ```{r eval=TRUE}
