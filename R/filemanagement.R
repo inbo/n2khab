@@ -353,6 +353,45 @@ fileman_up <- function(name,
 
 
 
+#' Locate the \code{n2khab_data} directory
+#'
+#' Returns the absolute path of the \code{n2khab_data} directory by searching
+#' upwards in the directory hierarchy (starting in the working directory); the
+#' first hit will be returned.
+#'
+#' If the \code{n2khab_data_path} option (or environment variable
+#' \code{N2KHAB_DATA_PATH}) is set, that value will be returned instead (see
+#' [`n2khab_options()`]).
+#'
+#' See the data management advice in the
+#' vignette on data storage (run \code{vignette("v020_datastorage")})
+#' for more information.
+#'
+#' @md
+#'
+#' @family functions regarding file management for N2KHAB projects
+#'
+#' @examples
+#' \dontrun{
+#' locate_n2khab_data()
+#' }
+#'
+#' @importFrom rprojroot
+#' find_root_file
+#' has_dir
+#'
+#' @export
+locate_n2khab_data <- function() {
+  opt <- n2khab_data_path()
+  if (!is.na(opt)) {
+    return(opt)
+  }
+  find_root_file("n2khab_data", criterion = has_dir("n2khab_data"))
+}
+
+
+
+
 #' Calculate file checksums
 #'
 #' The functions calculate the checksum (digest; hash value) of

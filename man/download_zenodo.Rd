@@ -42,7 +42,8 @@ download_zenodo(doi = "10.5281/zenodo.168478")
 Other functions regarding file management for N2KHAB projects: 
 \code{\link{checksum}()},
 \code{\link{fileman_folders}()},
-\code{\link{fileman_up}()}
+\code{\link{fileman_up}()},
+\code{\link{locate_n2khab_data}()}
 }
 \author{
 Hans Van Calster, \email{hans.vancalster@inbo.be}
