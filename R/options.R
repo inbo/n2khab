@@ -97,6 +97,13 @@ n2khab_data_path <- function() {
       dir.exists(opt),
       msg = "Option 'n2khab_data_path' must be an existing directory."
     )
+    assert_that(
+      identical(basename(opt), "n2khab_data"),
+      msg = paste(
+        "Option 'n2khab_data_path' must point to a directory",
+        "named 'n2khab_data'."
+      )
+    )
   }
   opt
 }
