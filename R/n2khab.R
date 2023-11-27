@@ -28,7 +28,7 @@ utils::globalVariables(c("."))
     packageStartupMessage(
       "Will use terra ",
       packageDescription("terra")$Version,
-      " through raster."
+      ifelse(isTRUE(n2khab_using_raster()), " through raster.", ".")
     )
   }
   if (!is.null(nslookup("api.github.com", error = FALSE))) {
