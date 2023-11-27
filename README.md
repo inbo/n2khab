@@ -73,19 +73,3 @@ At a later date, the intention is to incorporate functionality to enhance workfl
 
 Currently these aspects must be taken care of in a more manual fashion.
 See `vignette("v022_example")` for example code to currently accomplish specific aspects.
-
-
-## Background information
-
-From its aim, it follows that the package supports various _N2KHAB_ projects, i.e. projects that focus on Natura 2000 habitat (and which may as well use the _n2khab_-prefix for their git repository name, such as [this one](https://github.com/inbo/n2khab-monitoring)).
-
-The package is a companion to the [n2khab-preprocessing](https://github.com/inbo/n2khab-preprocessing) repo.
-Beside direct preprocessing functions, **n2khab** provides several functions that return datasets, generated in `n2khab-preprocessing`, as standardized R-objects.
-Having processed datasets readily available is useful in the case of time-consuming calculations to produce them.
-
-The data definitions & standard checklists (reference data) provided by the package are textual files in the [vc-format](https://ropensci.github.io/git2rdata/index.html).
-Some of them come over from another repository.
-Others may be written as the result of a synchronization script to give them a start.
-The code to reproduce these files is inside the `misc` folder of the [source code](https://github.com/inbo/n2khab).
-The package provides the necessary functions to return these as standardized tibbles (`vignette("v010_reference_lists")`).
-
