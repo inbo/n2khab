@@ -1,4 +1,4 @@
-#' Return the data source \code{raster_runif} as a RasterLayer
+#' Return the data source \code{raster_runif} as a SpatRaster
 #'
 #' The \code{raster_runif} data source covers Flanders and the Brussels
 #' Capital Region
@@ -21,7 +21,11 @@
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
-#' A RasterLayer.
+#' A SpatRaster.
+#'
+#' If the package is configured to use the raster package
+#' (see \code{\link[=n2khab_options]{n2khab_options()}}), a RasterLayer is
+#' returned instead.
 #'
 #' @examples
 #' \dontrun{
@@ -33,7 +37,6 @@
 #' # what to do.
 #' r <- read_raster_runif()
 #' r
-#' raster::spplot(r)
 #' }
 #'
 #' @export
@@ -48,10 +51,15 @@ read_raster_runif <-
            version = "raster_runif_v1") {
     assert_that(file.exists(file))
 
-    require_pkgs("raster")
+    if (isTRUE(n2khab_using_raster())) {
+      require_pkgs("raster")
+      r <- raster::raster(file)
+      raster::crs(r) <- "EPSG:31370"
+    } else {
+      require_pkgs("terra")
+      r <- terra::rast(file)
+      terra::crs(r) <- "EPSG:31370"
+    }
 
-    r <- raster::raster(file)
-    raster::crs(r) <- "EPSG:31370"
-
-    return(r)
+    r
   }

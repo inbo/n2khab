@@ -58,6 +58,7 @@ Suggests:
     raster (>= 3.6-3),
     readxl,
     rmarkdown,
+    terra,
     testthat (>= 3.0.0),
     tidyverse,
     tools,
