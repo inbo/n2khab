@@ -101,7 +101,7 @@ This is the structure of the [repo]:
 ├── n2khab.Rproj        <- Main RStudio project file.
 ├── NAMESPACE
 ├── NEWS.md             <- The changelog.
-└── README.md
+└── README.md           <- The package homepage.
 ```
 
 ### Coding tools
