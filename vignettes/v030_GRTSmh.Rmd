@@ -70,14 +70,14 @@ See the `vignette("v020_datastorage")` for more information.
 
 ```{r}
 read_GRTSmh()
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 2843, 7401, 1  (nrow, ncol, nlyr)
 #> resolution  : 32, 32  (x, y)
 #> extent      : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
-#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370) 
-#> source      : GRTSmaster_habitats.tif 
-#> name        : GRTSmaster_habitats 
-#> min value   :                   1 
+#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370)
+#> source      : GRTSmaster_habitats.tif
+#> name        : GRTSmaster_habitats
+#> min value   :                   1
 #> max value   :            67108857
 ```
 
@@ -86,14 +86,14 @@ With the argument `brick = TRUE` however, you will get the `GRTSmh_brick` data s
 ```{r}
 r10 <- read_GRTSmh(brick = TRUE)
 r10
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 2843, 7401, 10  (nrow, ncol, nlyr)
 #> resolution  : 32, 32  (x, y)
 #> extent      : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
-#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370) 
-#> source      : GRTSmh_brick.tif 
-#> names       :   level0,   level1,  level2,  level3, level4, level5, ... 
-#> min values  :        1,        1,       1,       1,      1,      1, ... 
+#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370)
+#> source      : GRTSmh_brick.tif
+#> names       :   level0,   level1,  level2,  level3, level4, level5, ...
+#> min values  :        1,        1,       1,       1,      1,      1, ...
 #> max values  : 67108857, 16777209, 4194297, 1048569, 262137,  65529, ...
 terra::minmax(r10)
 #>       level0   level1  level2  level3 level4 level5 level6 level7 level8 level9
@@ -123,14 +123,14 @@ An example with level 5:
 
 ```{r}
 read_GRTSmh_diffres(level = 5)
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 89, 232, 1  (nrow, ncol, nlyr)
 #> resolution  : 1024, 1024  (x, y)
 #> extent      : 22030, 259598, 153054, 244190  (xmin, xmax, ymin, ymax)
-#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370) 
-#> source      : GRTSmh_diffres.5.tif 
-#> name        : level5 
-#> min value   :      1 
+#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370)
+#> source      : GRTSmh_diffres.5.tif
+#> name        : level5
+#> min value   :      1
 #> max value   :  65529
 ```
 
@@ -168,14 +168,14 @@ Its use is just to return the base-4-fraction-converted `GRTSmaster_habitats` as
 ```{r}
 options(scipen = 999, digits = 15)
 read_GRTSmh_base4frac()
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 2843, 7401, 1  (nrow, ncol, nlyr)
 #> resolution  : 32, 32  (x, y)
 #> extent      : 22029.591973471, 258861.591973471, 153054.113583292, 244030.113583292  (xmin, xmax, ymin, ymax)
-#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370) 
-#> source      : GRTSmh_base4frac.tif 
-#> name        : GRTSmh_base4frac 
-#> min value   :  0.0000000000001 
+#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370)
+#> source      : GRTSmh_base4frac.tif
+#> name        : GRTSmh_base4frac
+#> min value   :  0.0000000000001
 #> max value   :  0.3333333333321
 ```
 

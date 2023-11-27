@@ -34,8 +34,10 @@ file.copy(source, ".")
 ### Install and load `n2khab`
 
 ```{r}
-install.packages("n2khab", repos = c(inbo = "https://inbo.r-universe.dev", 
-                                     CRAN = "https://cloud.r-project.org"))
+install.packages("n2khab", repos = c(
+  inbo = "https://inbo.r-universe.dev",
+  CRAN = "https://cloud.r-project.org"
+))
 ```
 
 ```{r eval=TRUE}

@@ -332,7 +332,6 @@ read_GRTSmh <-
              )
            ),
            brick = FALSE) {
-
     if (isTRUE(n2khab_using_raster())) {
       require_pkgs("raster")
       read1 <- raster::raster

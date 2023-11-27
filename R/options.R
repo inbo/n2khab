@@ -70,12 +70,18 @@ n2khab_options <- function() {
     "n2khab_data_path",
     tryCatch(
       n2khab_data_path(),
-      error = function(e) {message(as.character(e)); NA}
+      error = function(e) {
+        message(as.character(e))
+        NA
+      }
     ),
     "n2khab_use_raster",
     tryCatch(
       n2khab_using_raster(),
-      error = function(e) {message(as.character(e)); NA}
+      error = function(e) {
+        message(as.character(e))
+        NA
+      }
     )
   )
 }
@@ -121,8 +127,3 @@ n2khab_using_raster <- function() {
   }
   opt || grepl("TRUE|true", opt)
 }
-
-
-
-
-
