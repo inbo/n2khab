@@ -101,7 +101,7 @@
 #' read_sf
 read_watercourse_100mseg <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "20_processed/watercourse_100mseg/watercourse_100mseg.gpkg"
            ),
            element = NULL,

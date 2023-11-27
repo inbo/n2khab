@@ -156,7 +156,7 @@
 #'
 read_habitatmap_stdized <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"
            ),
            version = c(
@@ -354,7 +354,7 @@ read_habitatmap_stdized <-
 #'
 read_watersurfaces_hab <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"
            ),
            interpreted = FALSE,
@@ -589,12 +589,12 @@ read_watersurfaces <-
     if (missing(file)) {
       if (version != "watersurfaces_v1.0") {
         file <- file.path(
-          fileman_up("n2khab_data"),
+          locate_n2khab_data(),
           "10_raw/watersurfaces/watersurfaces.gpkg"
         )
       } else {
         file <- file.path(
-          fileman_up("n2khab_data"),
+          locate_n2khab_data(),
           "10_raw/watersurfaces/watersurfaces.shp"
         )
       }
@@ -935,7 +935,7 @@ read_watersurfaces <-
 #' starts_with
 #'
 read_habitatmap <-
-  function(file = file.path(fileman_up("n2khab_data"), "10_raw/habitatmap"),
+  function(file = file.path(locate_n2khab_data(), "10_raw/habitatmap"),
            filter_hab = FALSE,
            version = c(
              "habitatmap_2020",
@@ -948,7 +948,7 @@ read_habitatmap <-
     if (filter_hab) {
       # version control: version habitatmap == version habitatmap_stdized
       xxh64sum_habitatmap_stdized_present <- xxh64sum(file.path(
-        fileman_up("n2khab_data"),
+        locate_n2khab_data(),
         "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"
       ))
 
@@ -1205,7 +1205,7 @@ read_habitatmap <-
 #' relocate
 read_habitatmap_terr <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "20_processed/habitatmap_terr/habitatmap_terr.gpkg"
            ),
            keep_aq_types = TRUE,
@@ -1399,7 +1399,7 @@ read_habitatmap_terr <-
 #' @export
 read_habitatstreams <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "10_raw/habitatstreams"
            ),
            source_text = FALSE) {
@@ -1599,7 +1599,7 @@ read_habitatstreams <-
 #' @export
 read_habitatsprings <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "10_raw/habitatsprings/habitatsprings.geojson"
            ),
            filter_hab = FALSE,
@@ -1814,7 +1814,7 @@ read_habitatsprings <-
 #' @export
 read_habitatquarries <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "10_raw/habitatquarries/habitatquarries.gpkg"
            ),
            filter_hab = FALSE,

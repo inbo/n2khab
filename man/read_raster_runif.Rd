@@ -5,7 +5,7 @@
 \title{Return the data source \code{raster_runif} as a SpatRaster}
 \usage{
 read_raster_runif(
-  file = file.path(fileman_up("n2khab_data"), "10_raw/raster_runif/raster_runif.tif"),
+  file = file.path(locate_n2khab_data(), "10_raw/raster_runif/raster_runif.tif"),
   version = "raster_runif_v1"
 )
 }

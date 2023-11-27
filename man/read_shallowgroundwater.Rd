@@ -6,7 +6,7 @@
 multipolygon layer}
 \usage{
 read_shallowgroundwater(
-  file = file.path(fileman_up("n2khab_data"),
+  file = file.path(locate_n2khab_data(),
     "10_raw/shallowgroundwater/shallowgroundwater.gpkg")
 )
 }

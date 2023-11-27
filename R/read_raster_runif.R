@@ -45,7 +45,7 @@
 
 read_raster_runif <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "10_raw/raster_runif/raster_runif.tif"
            ),
            version = "raster_runif_v1") {

@@ -325,7 +325,7 @@ convert_base4frac_to_dec <-
 #' @importFrom stringr str_c
 read_GRTSmh <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              c(
                "10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
                "20_processed/GRTSmh_brick/GRTSmh_brick.tif"
@@ -460,7 +460,7 @@ read_GRTSmh <-
 #' @export
 read_GRTSmh_base4frac <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif"
            )) {
     if (isTRUE(n2khab_using_raster())) {
@@ -618,7 +618,7 @@ read_GRTSmh_base4frac <-
 #' read_sf
 #' st_crs<-
 read_GRTSmh_diffres <-
-  function(dir = file.path(fileman_up("n2khab_data"), "20_processed/GRTSmh_diffres"),
+  function(dir = file.path(locate_n2khab_data(), "20_processed/GRTSmh_diffres"),
            level,
            polygon = FALSE) {
     if (!(level %in% 1:9 & level %% 1 == 0)) {

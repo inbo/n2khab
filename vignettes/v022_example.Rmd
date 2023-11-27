@@ -34,12 +34,8 @@ file.copy(source, ".")
 ### Install and load `n2khab`
 
 ```{r}
-Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS = "true")
-library(remotes)
-install_github("inbo/n2khab",
-  build_vignettes = TRUE,
-  upgrade = TRUE
-)
+install.packages("n2khab", repos = c(inbo = "https://inbo.r-universe.dev", 
+                                     CRAN = "https://cloud.r-project.org"))
 ```
 
 ```{r eval=TRUE}
@@ -60,7 +56,7 @@ This is because reading functions of `n2khab` will by default use the first `n2k
 If you already have an existing `n2khab_data` directory in place, instead run:
 
 ```{r}
-n2khab_data_path <- fileman_up("n2khab_data")
+n2khab_data_path <- locate_n2khab_data()
 ```
 
 

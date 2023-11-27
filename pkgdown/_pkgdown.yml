@@ -21,9 +21,6 @@ reference:
       - schemes
       - scheme_types
       - namelist
-  - title: "Package configuration"
-    contents:
-      - n2khab_options
   - title: "Using the raw spatial data sources of habitats/RIBs"
     contents:
       - read_habitatmap
@@ -50,14 +47,18 @@ reference:
       - read_GRTSmh_base4frac
       - read_GRTSmh_diffres
       - read_raster_runif
+  - title: "Package configuration"
+    contents:
+      - n2khab_options
   - title: "Managing files and directories"
     contents:
-      - fileman_folders
       - download_zenodo
+      - locate_n2khab_data
+      - fileman_folders
+      - fileman_up
   - title: "Utilities and helpers"
     contents:
       - read_namelist
-      - fileman_up
       - convert_dec_to_base4frac
       - convert_base4frac_to_dec
       - checksum

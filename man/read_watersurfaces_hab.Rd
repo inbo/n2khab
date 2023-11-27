@@ -6,7 +6,7 @@
 objects}
 \usage{
 read_watersurfaces_hab(
-  file = file.path(fileman_up("n2khab_data"),
+  file = file.path(locate_n2khab_data(),
     "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
   interpreted = FALSE,
   version = c("watersurfaces_hab_v4", "watersurfaces_hab_v3", "watersurfaces_hab_v2",

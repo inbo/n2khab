@@ -5,7 +5,7 @@
 \title{Return the processed data source \code{watercourse_100mseg}}
 \usage{
 read_watercourse_100mseg(
-  file = file.path(fileman_up("n2khab_data"),
+  file = file.path(locate_n2khab_data(),
     "20_processed/watercourse_100mseg/watercourse_100mseg.gpkg"),
   element = NULL,
   version = "watercourse_100mseg_20200807v1"

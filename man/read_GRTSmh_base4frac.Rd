@@ -6,7 +6,7 @@
 SpatRaster}
 \usage{
 read_GRTSmh_base4frac(
-  file = file.path(fileman_up("n2khab_data"),
+  file = file.path(locate_n2khab_data(),
     "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif")
 )
 }
