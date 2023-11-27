@@ -270,10 +270,10 @@
 #' @export
 read_soilmap <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "20_processed/soilmap_simple/soilmap_simple.gpkg"
            ),
-           file_raw = file.path(fileman_up("n2khab_data"), "10_raw/soilmap"),
+           file_raw = file.path(locate_n2khab_data(), "10_raw/soilmap"),
            use_processed = TRUE,
            version_processed = "soilmap_simple_v2",
            standardize_coastalplain = FALSE,

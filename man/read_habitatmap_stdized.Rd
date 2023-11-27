@@ -6,7 +6,7 @@
 objects}
 \usage{
 read_habitatmap_stdized(
-  file = file.path(fileman_up("n2khab_data"),
+  file = file.path(locate_n2khab_data(),
     "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"),
   version = c("habitatmap_stdized_2020_v1", "habitatmap_stdized_2018_v2",
     "habitatmap_stdized_2018_v1")

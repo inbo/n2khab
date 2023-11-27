@@ -6,7 +6,7 @@
 source \code{GRTSmh_diffres}}
 \usage{
 read_GRTSmh_diffres(
-  dir = file.path(fileman_up("n2khab_data"), "20_processed/GRTSmh_diffres"),
+  dir = file.path(locate_n2khab_data(), "20_processed/GRTSmh_diffres"),
   level,
   polygon = FALSE
 )

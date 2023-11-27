@@ -5,8 +5,7 @@
 \title{Return the data source \code{habitatquarries}}
 \usage{
 read_habitatquarries(
-  file = file.path(fileman_up("n2khab_data"),
-    "10_raw/habitatquarries/habitatquarries.gpkg"),
+  file = file.path(locate_n2khab_data(), "10_raw/habitatquarries/habitatquarries.gpkg"),
   filter_hab = FALSE,
   references = FALSE,
   bibtex = FALSE,

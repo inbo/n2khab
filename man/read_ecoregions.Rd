@@ -4,9 +4,7 @@
 \alias{read_ecoregions}
 \title{Return the \code{ecoregions} data source as an \code{sf} object}
 \usage{
-read_ecoregions(
-  file = file.path(fileman_up("n2khab_data"), "10_raw/ecoregions")
-)
+read_ecoregions(file = file.path(locate_n2khab_data(), "10_raw/ecoregions"))
 }
 \arguments{
 \item{file}{The absolute or relative file path of the data source.

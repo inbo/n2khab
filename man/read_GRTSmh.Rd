@@ -6,7 +6,7 @@
 10-layered variant as a SpatRaster object}
 \usage{
 read_GRTSmh(
-  file = file.path(fileman_up("n2khab_data"),
+  file = file.path(locate_n2khab_data(),
     c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
     "20_processed/GRTSmh_brick/GRTSmh_brick.tif")),
   brick = FALSE
