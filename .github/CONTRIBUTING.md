@@ -109,12 +109,11 @@ This is the structure of the [repo]:
 When writing functions for `n2khab`:
 
 - please use `sf` and `terra` packages for reading geospatial data.
-Discover the human-friendly way of coding a data processing pipeline through the use of [pipes](https://r4ds.had.co.nz/pipes.html)!
 Organise data in R in a [tidy](https://r4ds.had.co.nz/tidy-data.html#tidy-data-1) way in order to avoid troubles later on.
 Recommended resources to get started are:
     - [R for Data Science](https://r4ds.had.co.nz/)
     - [Geocomputation with R](https://geocompr.robinlovelace.net)
-    - [R packages](https://r-pkgs.org/) (by Hadley Wickham and Jenny Bryan)
+    - [R packages](https://r-pkgs.org/)
     - [`vignette("rd-formatting", package = "roxygen2")`](https://roxygen2.r-lib.org/articles/formatting.html) for documentation syntax.
     Or use markdown support in function documentation after adding the `@md` tag.
 - have a quick look at the [tidyverse style guide](https://style.tidyverse.org/).
