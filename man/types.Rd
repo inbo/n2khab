@@ -96,8 +96,6 @@ languages).
 
 Other n2khab-referencelists: 
 \code{\link{env_pressures}},
-\code{\link{namelist}},
-\code{\link{scheme_types}},
-\code{\link{schemes}}
+\code{\link{namelist}}
 }
 \concept{n2khab-referencelists}
