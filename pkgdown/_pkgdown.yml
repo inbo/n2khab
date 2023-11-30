@@ -12,14 +12,10 @@ reference:
     contents:
       - read_types
       - read_env_pressures
-      - read_schemes
-      - read_scheme_types
   - title: "Documentation of included data sources"
     contents:
       - types
       - env_pressures
-      - schemes
-      - scheme_types
       - namelist
   - title: "Using the raw spatial data sources of habitats/RIBs"
     contents:
