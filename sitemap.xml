@@ -37,7 +37,16 @@
     <loc>https://inbo.github.io/n2khab/reference/human_filesize.html</loc>
   </url>
   <url>
+    <loc>https://inbo.github.io/n2khab/reference/locate_n2khab_data.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/n2khab/reference/n2khab-deprecated.html</loc>
+  </url>
+  <url>
     <loc>https://inbo.github.io/n2khab/reference/n2khab-package.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/n2khab/reference/n2khab_options.html</loc>
   </url>
   <url>
     <loc>https://inbo.github.io/n2khab/reference/namelist.html</loc>
@@ -91,12 +100,6 @@
     <loc>https://inbo.github.io/n2khab/reference/read_raster_runif.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/n2khab/reference/read_scheme_types.html</loc>
-  </url>
-  <url>
-    <loc>https://inbo.github.io/n2khab/reference/read_schemes.html</loc>
-  </url>
-  <url>
     <loc>https://inbo.github.io/n2khab/reference/read_shallowgroundwater.html</loc>
   </url>
   <url>
@@ -116,12 +119,6 @@
   </url>
   <url>
     <loc>https://inbo.github.io/n2khab/reference/require_pkgs.html</loc>
-  </url>
-  <url>
-    <loc>https://inbo.github.io/n2khab/reference/scheme_types.html</loc>
-  </url>
-  <url>
-    <loc>https://inbo.github.io/n2khab/reference/schemes.html</loc>
   </url>
   <url>
     <loc>https://inbo.github.io/n2khab/reference/types.html</loc>

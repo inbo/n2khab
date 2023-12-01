@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return a RasterLayer or an sf polygon layer from the processed data
+<title>Return a SpatRaster or an sf polygon layer from the processed data
 source GRTSmh_diffres — read_GRTSmh_diffres • n2khab</title>
 
 
@@ -42,13 +42,13 @@ source GRTSmh_diffres — read_GRTSmh_diffres • n2khab</title>
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return a RasterLayer or an sf polygon layer from the processed data
+<meta property="og:title" content="Return a SpatRaster or an sf polygon layer from the processed data
 source GRTSmh_diffres — read_GRTSmh_diffres" />
 <meta property="og:description" content="The GRTSmh_diffres data source is derived from
 GRTSmh_brick.
 It provides the hierarchical levels 1 to 9 of the
 GRTS cell addresses at the corresponding spatial resolution.
-The function returns one selected level, either as a RasterLayer or as an
+The function returns one selected level, either as a SpatRaster or as an
 sf polygon layer (in the latter case, only levels 4 to 9 are
 provided).
 The coordinate reference system is 'BD72 / Belgian Lambert 72'
@@ -84,7 +84,7 @@ The coordinate reference system is 'BD72 / Belgian Lambert 72'
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -147,7 +147,7 @@ The coordinate reference system is 'BD72 / Belgian Lambert 72'
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return a RasterLayer or an <code>sf</code> polygon layer from the processed data
+    <h1>Return a SpatRaster or an <code>sf</code> polygon layer from the processed data
 source <code>GRTSmh_diffres</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/GRTSmh.R'><code>R/GRTSmh.R</code></a></small>
     <div class="hidden name"><code>read_GRTSmh_diffres.Rd</code></div>
@@ -158,7 +158,7 @@ source <code>GRTSmh_diffres</code></h1>
 <code>GRTSmh_brick</code>.
 It provides the hierarchical levels 1 to 9 of the
 GRTS cell addresses at the corresponding spatial resolution.
-The function returns one selected level, either as a RasterLayer or as an
+The function returns one selected level, either as a SpatRaster or as an
 <code>sf</code> polygon layer (in the latter case, only levels 4 to 9 are
 provided).
 The coordinate reference system is 'BD72 / Belgian Lambert 72'
@@ -166,7 +166,7 @@ The coordinate reference system is 'BD72 / Belgian Lambert 72'
     </div>
 
     <pre class="usage"><span><span class='fu'>read_GRTSmh_diffres</span><span class='op'>(</span></span>
-<span>  dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"20_processed/GRTSmh_diffres"</span><span class='op'>)</span>,</span>
+<span>  dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"20_processed/GRTSmh_diffres"</span><span class='op'>)</span>,</span>
 <span>  <span class='va'>level</span>,</span>
 <span>  polygon <span class='op'>=</span> <span class='cn'>FALSE</span></span>
 <span><span class='op'>)</span></span></pre>
@@ -191,14 +191,17 @@ resolution. See the Details section.</p></td>
     <tr>
       <th>polygon</th>
       <td><p>Logical; determines whether a polygon layer or a
-RasterLayer is returned. See the Details section.</p></td>
+SpatRaster is returned. See the Details section.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Either a RasterLayer or a Simple feature collection of geometry type
+    <p>Either a SpatRaster or a Simple feature collection of geometry type
 <code>POLYGON</code>.</p>
+<p>If the package is configured to use the raster package
+(see <code><a href='n2khab_options.html'>n2khab_options()</a></code>), a RasterLayer is
+returned instead of a SpatRaster.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>GRTSmh_diffres</code> data source file is a file collection (available
@@ -229,7 +232,7 @@ Flanders are covered by non-<code>NA</code> cells along the border.</p></li>
 </ul>
 
 <p>The function returns the selected <code>level</code> either as an <code>sf</code> polygon
-layer or as a RasterLayer, depending on the
+layer or as a SpatRaster, depending on the
 <code>polygon</code> argument.</p>
 <p>The higher-level ranking numbers (compared to the original level 0) allow
 spatially balanced samples at lower spatial resolution than that of 32 m,
@@ -274,10 +277,8 @@ outer borders (i.e., not excluding the Brussels Capital Region).</p>
 <span class='r-in'><span><span class='co'># what to do.</span></span></span>
 <span class='r-in'><span><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>read_GRTSmh_diffres</span><span class='op'>(</span>level <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='va'>r</span></span></span>
-<span class='r-in'><span><span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sp/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>read_GRTSmh_diffres</span><span class='op'>(</span>level <span class='op'>=</span> <span class='fl'>7</span>, polygon <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='va'>p</span></span></span>
-<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='op'>}</span></span></span>
 <span class='r-in'><span></span></span>
 </pre>

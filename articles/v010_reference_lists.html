@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -124,15 +124,6 @@ regionally important biotopes) (documentation links: <a href="../reference/types
 <li>
 <code>env_pressures</code>: checklist of environmental pressures,
 represented by codes (documentation links: <a href="../reference/env_pressures.html">this website</a> / <a href="../html/env_pressures.html">installed package</a>)</li>
-<li>
-<code>schemes</code>: list of schemes <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> for N2KHAB monitoring
-programmes or other N2KHAB projects (documentation links: <a href="../reference/schemes.html">this website</a> / <a href="../html/schemes.html">installed package</a>)</li>
-<li>
-<code>scheme_types</code>: lists the types that belong to each
-N2KHAB scheme, and optionally defines typegroups within a scheme
-(documentation links: <a href="../reference/scheme_types.html">this
-website</a> / <a href="../html/scheme_types.html">installed
-package</a>)</li>
 </ul>
 <p>Additionally, <code>namelist</code> provides names and (optionally)
 shortnames for IDs/codes used in the above lists (documentation links:
@@ -148,7 +139,7 @@ defining nature (and obligate), or may just provide useful categories
 and tags to filter by.</p>
 <p>Reading functions of the <code>n2khab</code> package return the
 reference lists as <strong>tibbles</strong>, with appropriate text from
-<code>namelist</code> added. A tibble is a dataframe that makes working
+<code>namelist</code> added. A tibble is a data frame that makes working
 in the tidyverse a little <a href="https://r4ds.had.co.nz/tibbles.html">easier</a>.</p>
 </div>
 <div id="multilanguage-support" class="section level3">
@@ -240,78 +231,7 @@ well.</p>
 <span><span class="co">#&gt; 10 ep_04.1 04.1_acidif_air  4.1 Acid… ep_clas… 4 Acidificat… &lt;NA&gt;        &lt;NA&gt;   </span></span>
 <span><span class="co">#&gt; # ℹ 25 more rows</span></span></code></pre></div>
 <p>When actually using these reading functions, you will – of course –
-assign its result to an object. E.g. with the <code>schemes</code>
-reference list:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">schemes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_schemes.html">read_schemes</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">schemes</span></span>
-<span><span class="co">#&gt; # A tibble: 64 × 25</span></span>
-<span><span class="co">#&gt;    scheme      scheme_name scheme_shortname programme programme_name attribute_1</span></span>
-<span><span class="co">#&gt;    &lt;fct&gt;       &lt;fct&gt;       &lt;fct&gt;            &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;      </span></span>
-<span><span class="co">#&gt;  1 ATM_03.1    Atmospheri… ATM: 03.1_eutr_… MNE       Monitoring pr… ATM        </span></span>
-<span><span class="co">#&gt;  2 ATM_04.1    Atmospheri… ATM: 04.1_acidi… MNE       Monitoring pr… ATM        </span></span>
-<span><span class="co">#&gt;  3 ATM_08.1    Atmospheri… ATM: 08.1_poll_… MNE       Monitoring pr… ATM        </span></span>
-<span><span class="co">#&gt;  4 ATM_101     Atmospheri… ATM: 101_clim_d… MNE       Monitoring pr… ATM        </span></span>
-<span><span class="co">#&gt;  5 ATM_102     Atmospheri… ATM: 102_clim_w… MNE       Monitoring pr… ATM        </span></span>
-<span><span class="co">#&gt;  6 GW_03.3     Groundwate… GW: 03.3_eutr_gw MNE       Monitoring pr… GW         </span></span>
-<span><span class="co">#&gt;  7 GW_04.2     Groundwate… GW: 04.2_acidif… MNE       Monitoring pr… GW         </span></span>
-<span><span class="co">#&gt;  8 GW_05.1_aq  Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span></span>
-<span><span class="co">#&gt;  9 GW_05.1_qu… Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span></span>
-<span><span class="co">#&gt; 10 GW_05.1_te… Groundwate… GW: 05.1_des_gw… MNE       Monitoring pr… GW         </span></span>
-<span><span class="co">#&gt; # ℹ 54 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 19 more variables: attribute_2 &lt;fct&gt;, attribute_3 &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   attribute_1_name &lt;fct&gt;, attribute_1_shortname &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   attribute_2_name &lt;fct&gt;, attribute_2_shortname &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   attribute_3_name &lt;fct&gt;, attribute_3_shortname &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   spatial_restriction &lt;chr&gt;, notes &lt;chr&gt;, tag_1 &lt;chr&gt;, tag_2 &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   tag_3 &lt;chr&gt;, tag_1_name &lt;chr&gt;, tag_1_shortname &lt;chr&gt;, tag_2_name &lt;chr&gt;, …</span></span></code></pre></div>
-<p>The <code><a href="../reference/read_scheme_types.html">read_scheme_types()</a></code> function provides the extra
-ability to <em>toggle</em> the presence of most textual information,
-because these comprise many extra variables (combining all additional
-information of the concerned schemes <em>and</em> the types). This
-behaviour is controlled by the argument <code>extended</code>, which is
-<code>FALSE</code> by default.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 764 × 5</span></span>
-<span><span class="co">#&gt;    scheme   type     typegroup       typegroup_name          typegroup_shortname</span></span>
-<span><span class="co">#&gt;    &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;           &lt;fct&gt;                   &lt;fct&gt;              </span></span>
-<span><span class="co">#&gt;  1 ATM_03.1 1310_pol ATM_03.1_group2 sensitive non-forest t… sensitive non-fore…</span></span>
-<span><span class="co">#&gt;  2 ATM_03.1 1310_zk  ATM_03.1_group2 sensitive non-forest t… sensitive non-fore…</span></span>
-<span><span class="co">#&gt;  3 ATM_03.1 1310_zv  ATM_03.1_group2 sensitive non-forest t… sensitive non-fore…</span></span>
-<span><span class="co">#&gt;  4 ATM_03.1 1320     ATM_03.1_group2 sensitive non-forest t… sensitive non-fore…</span></span>
-<span><span class="co">#&gt;  5 ATM_03.1 1330_da  ATM_03.1_group2 sensitive non-forest t… sensitive non-fore…</span></span>
-<span><span class="co">#&gt;  6 ATM_03.1 1330_hpr ATM_03.1_group2 sensitive non-forest t… sensitive non-fore…</span></span>
-<span><span class="co">#&gt;  7 ATM_03.1 2110     ATM_03.1_group2 sensitive non-forest t… sensitive non-fore…</span></span>
-<span><span class="co">#&gt;  8 ATM_03.1 2120     ATM_03.1_group2 sensitive non-forest t… sensitive non-fore…</span></span>
-<span><span class="co">#&gt;  9 ATM_03.1 2130_had ATM_03.1_group1 very sensitive non-for… very sensitive non…</span></span>
-<span><span class="co">#&gt; 10 ATM_03.1 2130_hd  ATM_03.1_group1 very sensitive non-for… very sensitive non…</span></span>
-<span><span class="co">#&gt; # ℹ 754 more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/read_scheme_types.html">read_scheme_types</a></span><span class="op">(</span>extended <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 764 × 53</span></span>
-<span><span class="co">#&gt;    scheme   type     typegroup    typegroup_name typegroup_shortname scheme_name</span></span>
-<span><span class="co">#&gt;    &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;        &lt;fct&gt;          &lt;fct&gt;               &lt;fct&gt;      </span></span>
-<span><span class="co">#&gt;  1 ATM_03.1 1310_pol ATM_03.1_gr… sensitive non… sensitive non-fore… Atmospheri…</span></span>
-<span><span class="co">#&gt;  2 ATM_03.1 1310_zk  ATM_03.1_gr… sensitive non… sensitive non-fore… Atmospheri…</span></span>
-<span><span class="co">#&gt;  3 ATM_03.1 1310_zv  ATM_03.1_gr… sensitive non… sensitive non-fore… Atmospheri…</span></span>
-<span><span class="co">#&gt;  4 ATM_03.1 1320     ATM_03.1_gr… sensitive non… sensitive non-fore… Atmospheri…</span></span>
-<span><span class="co">#&gt;  5 ATM_03.1 1330_da  ATM_03.1_gr… sensitive non… sensitive non-fore… Atmospheri…</span></span>
-<span><span class="co">#&gt;  6 ATM_03.1 1330_hpr ATM_03.1_gr… sensitive non… sensitive non-fore… Atmospheri…</span></span>
-<span><span class="co">#&gt;  7 ATM_03.1 2110     ATM_03.1_gr… sensitive non… sensitive non-fore… Atmospheri…</span></span>
-<span><span class="co">#&gt;  8 ATM_03.1 2120     ATM_03.1_gr… sensitive non… sensitive non-fore… Atmospheri…</span></span>
-<span><span class="co">#&gt;  9 ATM_03.1 2130_had ATM_03.1_gr… very sensitiv… very sensitive non… Atmospheri…</span></span>
-<span><span class="co">#&gt; 10 ATM_03.1 2130_hd  ATM_03.1_gr… very sensitiv… very sensitive non… Atmospheri…</span></span>
-<span><span class="co">#&gt; # ℹ 754 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 47 more variables: scheme_shortname &lt;fct&gt;, programme &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   programme_name &lt;fct&gt;, attribute_1 &lt;fct&gt;, attribute_2 &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   attribute_3 &lt;fct&gt;, attribute_1_name &lt;fct&gt;, attribute_1_shortname &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   attribute_2_name &lt;fct&gt;, attribute_2_shortname &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   attribute_3_name &lt;fct&gt;, attribute_3_shortname &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   spatial_restriction &lt;chr&gt;, notes &lt;chr&gt;, schemetag_1 &lt;chr&gt;, …</span></span></code></pre></div>
-<p>When you request all this extra information (some of which is
-currently empty), you will want to select the columns that you need with
-<code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code>.</p>
+assign its result to an object.</p>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr>
@@ -319,9 +239,6 @@ currently empty), you will want to select the columns that you need with
 <li id="fn1"><p>With N2KHAB projects, we mean scientific monitoring
 programmes and research projects regarding Flemish Natura 2000 habitats
 and regionally important biotopes (RIBs).<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>A ‘scheme’ refers to a monitoring or research setup that
-determines which types (habitat/RIBs) are to be investigated for a
-question or for a bunch of related questions.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>

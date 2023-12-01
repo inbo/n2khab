@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check availability of required packages — require_pkgs • n2khab</title>
+<title>Locate the n2khab_data directory — locate_n2khab_data • n2khab</title>
 
 
 <!-- jquery -->
@@ -41,11 +41,10 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Check availability of required packages — require_pkgs" />
-<meta property="og:description" content="Takes a vector of package names and passes each name to
-requireNamespace();
-if package(s) are missing, returns an error message providing the basic
-install.packages() command to install them." />
+<meta property="og:title" content="Locate the n2khab_data directory — locate_n2khab_data" />
+<meta property="og:description" content="Returns the absolute path of the n2khab_data directory by searching
+upwards in the directory hierarchy (starting in the working directory); the
+first hit will be returned." />
 
 
 
@@ -140,33 +139,39 @@ install.packages() command to install them." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check availability of required packages</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/misc.R'><code>R/misc.R</code></a></small>
-    <div class="hidden name"><code>require_pkgs.Rd</code></div>
+    <h1>Locate the <code>n2khab_data</code> directory</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/filemanagement.R'><code>R/filemanagement.R</code></a></small>
+    <div class="hidden name"><code>locate_n2khab_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Takes a vector of package names and passes each name to
-<code><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace()</a></code>;
-if package(s) are missing, returns an error message providing the basic
-<code><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages()</a></code> command to install them.</p>
+    <p>Returns the absolute path of the <code>n2khab_data</code> directory by searching
+upwards in the directory hierarchy (starting in the working directory); the
+first hit will be returned.</p>
     </div>
 
-    <pre class="usage"><span><span class='fu'>require_pkgs</span><span class='op'>(</span><span class='va'>pkgs</span><span class='op'>)</span></span></pre>
+    <pre class="usage"><span><span class='fu'>locate_n2khab_data</span><span class='op'>(</span><span class='op'>)</span></span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>pkgs</th>
-      <td><p>A character vector of package names.</p></td>
-    </tr>
-    </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If the <code>n2khab_data_path</code> option (or environment variable
+<code>N2KHAB_DATA_PATH</code>) is set, that value will be returned instead (see
+<code><a href='n2khab_options.html'>n2khab_options()</a></code>).</p>
+<p>See the data management advice in the
+vignette on data storage (run <code><a href='../articles/v020_datastorage.html'>vignette("v020_datastorage")</a></code>)
+for more information.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other functions regarding file management for N2KHAB projects: 
+<code><a href='checksum.html'>checksum</a>()</code>,
+<code><a href='download_zenodo.html'>download_zenodo</a>()</code>,
+<code><a href='fileman_folders.html'>fileman_folders</a>()</code>,
+<code><a href='fileman_up.html'>fileman_up</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>
-<span class='r-in'><span><span class='fu'>require_pkgs</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"base"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span><span class='op'>)</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='fu'>locate_n2khab_data</span><span class='op'>(</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='op'>}</span></span></span>
 <span class='r-in'><span></span></span>
 </pre>

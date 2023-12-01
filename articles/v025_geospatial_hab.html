@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -128,7 +128,7 @@ regionally important biotopes (RIBs); see
 <code><a href="../reference/read_types.html">read_types()</a></code>);</li>
 <li>how to load these data sources into R;</li>
 <li>how to optimally match an interpreted data source with a ‘types’
-column in your own dataframe.</li>
+column in your own data frame.</li>
 </ul>
 </div>
 <div id="data-sources" class="section level2">
@@ -264,7 +264,7 @@ source and returns all its records.</p>
 <span><span class="co">#&gt; #   phab2 &lt;int&gt;, hab3 &lt;chr&gt;, phab3 &lt;int&gt;, hab4 &lt;chr&gt;, phab4 &lt;int&gt;, hab5 &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   phab5 &lt;int&gt;, source_hab &lt;chr&gt;, source_phab &lt;chr&gt;, hab_legend &lt;fct&gt;,</span></span>
 <span><span class="co">#&gt; #   area_m2 &lt;dbl&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></span></code></pre></div>
-<p>The <code>habitatmap</code> object is a very wide dataframe which is
+<p>The <code>habitatmap</code> object is a very wide data frame which is
 not so easy to handle in R. For analytical work on habitat types and
 RIBs, you’re advised to use the tidied data source
 <code>habitatmap_stdized</code>; see <a href="#processed">below</a>.</p>
@@ -365,7 +365,7 @@ no habitat type. You can filter the habitat types by setting the
 <span><span class="co">#&gt; 10         34      34 Henisdael … 8310      8310  Dusar et al. 2007</span></span>
 <span><span class="co">#&gt; # … with 35 more rows, and 1 more variable: geom &lt;POLYGON [m]&gt;</span></span></code></pre></div>
 <p>The habitatquarries data source also includes the literature
-references. These can be added as a second dataframe – in that case a
+references. These can be added as a second data frame – in that case a
 list is returned:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">habitatquarries2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_habitatquarries.html">read_habitatquarries</a></span><span class="op">(</span>references <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -667,16 +667,16 @@ generated with
 </div>
 </div>
 </div>
-<div id="matching-interpreted-data-sources-with-a-dataframe-column-of-types" class="section level2">
+<div id="matching-interpreted-data-sources-with-a-data-frame-column-of-types" class="section level2">
 <h2 class="hasAnchor">
-<a href="#matching-interpreted-data-sources-with-a-dataframe-column-of-types" class="anchor"></a>Matching interpreted data sources with a dataframe column of
+<a href="#matching-interpreted-data-sources-with-a-data-frame-column-of-types" class="anchor"></a>Matching interpreted data sources with a data frame column of
 types</h2>
 <p>The <code><a href="../reference/expand_types.html">expand_types()</a></code> function helps us to join a type
-column of your own dataframe with the results of
+column of your own data frame with the results of
 <code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> or
 <code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code>.</p>
-<p>For both of these datasets, the following conversions of your
-dataframe are supported in order to create optimal joins:</p>
+<p>For both of these datasets, the following conversions of your data
+frame are supported in order to create optimal joins:</p>
 <ul>
 <li>adding extra <em>subtype</em> rows when main type codes occur for
 which subtypes exist;</li>
@@ -685,7 +685,7 @@ main type are present (the conditions can be relaxed; see the function
 documentation). This is supported for 2330, 6230 and 91E0, for which
 this makes sense with the two mentioned data sources.</li>
 </ul>
-<p>An example (<code>df</code> is our dataframe):</p>
+<p>An example (<code>df</code> is our data frame):</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
@@ -710,7 +710,7 @@ this makes sense with the two mentioned data sources.</li>
 <span><span class="co">#&gt; 6 6410_ve     4</span></span>
 <span><span class="co">#&gt; 7 91E0_vn    10</span></span></code></pre></div>
 <p>With the <code>type_var</code> argument you specify which variable of
-your dataframe represents type codes:</p>
+your data frame represents type codes:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_exp</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/expand_types.html">expand_types</a></span><span class="op">(</span><span class="va">df</span>, type_var <span class="op">=</span> <span class="st">"mycode"</span><span class="op">)</span></span>
@@ -778,7 +778,7 @@ Institute for Nature and Forest</span>. <span>Brussels</span>:
 <div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
-<li id="fn1"><p>A tibble is a dataframe that makes working in the
+<li id="fn1"><p>A tibble is a data frame that makes working in the
 tidyverse a little <a href="https://r4ds.had.co.nz/tibbles.html">easier</a>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

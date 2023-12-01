@@ -83,7 +83,7 @@ takes a bit longer than usual to run." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -164,9 +164,9 @@ takes a bit longer than usual to run.</p>
     </div>
 
     <pre class="usage"><span><span class='fu'>read_soilmap</span><span class='op'>(</span></span>
-<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,</span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
 <span>    <span class='st'>"20_processed/soilmap_simple/soilmap_simple.gpkg"</span><span class='op'>)</span>,</span>
-<span>  file_raw <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/soilmap"</span><span class='op'>)</span>,</span>
+<span>  file_raw <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"10_raw/soilmap"</span><span class='op'>)</span>,</span>
 <span>  use_processed <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
 <span>  version_processed <span class='op'>=</span> <span class='st'>"soilmap_simple_v2"</span>,</span>
 <span>  standardize_coastalplain <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
@@ -264,7 +264,7 @@ derived from other maps or field observations.</p>
 factors.
 When a variable is a one-to-one translation of another (e.g. code vs.
 explanation), the order of factor levels is aligned.</p>
-<p>Three types of dataframe variables are returned when reading <code>soilmap</code>:</p><ul>
+<p>Three types of data frame variables are returned when reading <code>soilmap</code>:</p><ul>
 <li><p><strong>variables with <code>mo_</code> in their name</strong>: their categories follow the
 Belgian Morphogenetic System.</p><ul>
 <li><p>With <code>standardize_coastalplain = FALSE</code>, these are only available <em>outside

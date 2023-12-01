@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the GRTSmaster_habitats data source as a RasterLayer or a
-10-layered variant as a RasterBrick — read_GRTSmh • n2khab</title>
+<title>Return the GRTSmaster_habitats data source or a
+10-layered variant as a SpatRaster object — read_GRTSmh • n2khab</title>
 
 
 <!-- jquery -->
@@ -42,11 +42,11 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return the GRTSmaster_habitats data source as a RasterLayer or a
-10-layered variant as a RasterBrick — read_GRTSmh" />
+<meta property="og:title" content="Return the GRTSmaster_habitats data source or a
+10-layered variant as a SpatRaster object — read_GRTSmh" />
 <meta property="og:description" content="By default, the GRTSmaster_habitats data source is returned as a
-RasterLayer with decimal integer ranking numbers as values.
-If brick = TRUE, a 10-layered RasterBrick is
+single-layered SpatRaster object with decimal integer ranking numbers as values.
+If brick = TRUE, a ten-layered SpatRaster is
 returned (data source GRTSmh_brick; resolution 32 m)
 with the decimal integer ranking numbers of 10 hierarchical levels of the
 GRTS cell addresses, including the one from GRTSmaster_habitats
@@ -84,7 +84,7 @@ The coordinate reference system is 'BD72 / Belgian Lambert 72'
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -147,16 +147,16 @@ The coordinate reference system is 'BD72 / Belgian Lambert 72'
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the <code>GRTSmaster_habitats</code> data source as a RasterLayer or a
-10-layered variant as a RasterBrick</h1>
+    <h1>Return the <code>GRTSmaster_habitats</code> data source or a
+10-layered variant as a SpatRaster object</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/GRTSmh.R'><code>R/GRTSmh.R</code></a></small>
     <div class="hidden name"><code>read_GRTSmh.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>By default, the <code>GRTSmaster_habitats</code> data source is returned as a
-RasterLayer with decimal integer ranking numbers as values.
-If <code>brick = TRUE</code>, a 10-layered RasterBrick is
+single-layered SpatRaster object with decimal integer ranking numbers as values.
+If <code>brick = TRUE</code>, a ten-layered SpatRaster is
 returned (data source <code>GRTSmh_brick</code>; resolution 32 m)
 with the decimal integer ranking numbers of 10 hierarchical levels of the
 GRTS cell addresses, including the one from <code>GRTSmaster_habitats</code>
@@ -166,7 +166,7 @@ The coordinate reference system is 'BD72 / Belgian Lambert 72'
     </div>
 
     <pre class="usage"><span><span class='fu'>read_GRTSmh</span><span class='op'>(</span></span>
-<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,</span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
 <span>    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif"</span>,</span>
 <span>    <span class='st'>"20_processed/GRTSmh_brick/GRTSmh_brick.tif"</span><span class='op'>)</span><span class='op'>)</span>,</span>
 <span>  brick <span class='op'>=</span> <span class='cn'>FALSE</span></span>
@@ -186,14 +186,18 @@ starting from the working directory.</p></td>
     </tr>
     <tr>
       <th>brick</th>
-      <td><p>Logical; determines whether the RasterLayer or RasterBrick data
-source is returned. See the Details section.</p></td>
+      <td><p>Logical; determines whether the single- or ten-layered
+SpatRaster is returned. See the Details section.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Either a RasterLayer or a 10-layered RasterBrick, always with 21041043 cells.</p>
+    <p>A single- or a ten-layered SpatRaster object, always with 21041043
+cells.</p>
+<p>If the package is configured to use the raster package
+(see <code><a href='n2khab_options.html'>n2khab_options()</a></code>), a RasterLayer is
+returned if <code>brick = FALSE</code> and a RasterBrick if <code>brick = TRUE</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The data source <code>GRTSmaster_habitats</code>, provided and documented in
@@ -219,12 +223,13 @@ More information on the GRTS algorithm can be found in Stevens &amp; Olsen (2003
 <a href='https://CRAN.R-project.org/package=spsurvey'>spsurvey</a> packages.</p>
 <p>Depending on the value of the <code>brick</code> argument, the function either
 returns the <code>GRTSmaster_habitats</code> data source as a
-RasterLayer (<code>brick = FALSE</code>), or (<code>brick = TRUE</code>) returns the
-10-layered RasterBrick <code>GRTSmh_brick</code> (resolution 32 m)
+single-layered SpatRaster (<code>brick = FALSE</code>), or (<code>brick = TRUE</code>)
+returns the <code>GRTSmh_brick</code> data source as a
+ten-layered SpatRaster (resolution 32 m)
 with the decimal integer ranking numbers of 10 hierarchical levels of the
 GRTS cell addresses, including the one from <code>GRTSmaster_habitats</code>
 (with GRTS cell addresses at the resolution level).
-The <code>GRTSmh_brick</code> data source is a processed dataset (10-layered
+The <code>GRTSmh_brick</code> data source is a processed dataset (ten-layered
 GeoTIFF), available at
 <a href='https://doi.org/10.5281/zenodo.3354403'>Zenodo</a>, and can only be
 returned by the function when it is already present as a file.
@@ -233,12 +238,13 @@ n2khab-preprocessing</a> repository for its creation from
 the <code>GRTSmaster_habitats</code> data source.</p>
 <p>Both GeoTIFFs (<code>GRTSmaster_habitats</code>, <code>GRTSmh_brick</code>) use the
 <code>INT4S</code> datatype.</p>
-<p>The higher-level ranking numbers of the RasterBrick allow spatially balanced
+<p>The higher-level ranking numbers of the ten-layered variant allow spatially
+balanced
 samples at lower spatial resolution than that of 32 m, and can also be
 used for aggregation purposes.
 The provided hierarchical levels correspond to the resolutions vector
 <code>32 * 2^(0:9)</code> (minimum: 32 meters, maximum: 16384 meters), with
-the corresponding RasterBrick layers named as <code>level0</code> to <code>level9</code>.</p>
+the corresponding SpatRaster layers named as <code>level0</code> to <code>level9</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Stevens D.L. &amp; Olsen A.R. (2003). Variance estimation for spatially balanced
@@ -267,6 +273,8 @@ Resources. Journal of the American Statistical Association 99 (465):
 <span class='r-in'><span><span class='co'># what to do.</span></span></span>
 <span class='r-in'><span><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>read_GRTSmh</span><span class='op'>(</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='va'>r</span></span></span>
+<span class='r-in'><span><span class='va'>r10</span> <span class='op'>&lt;-</span> <span class='fu'>read_GRTSmh</span><span class='op'>(</span>brick <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>r10</span></span></span>
 <span class='r-in'><span><span class='op'>}</span></span></span>
 <span class='r-in'><span></span></span>
 </pre>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check availability of required packages — require_pkgs • n2khab</title>
+<title>Deprecated functions — n2khab-deprecated • n2khab</title>
 
 
 <!-- jquery -->
@@ -41,11 +41,15 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Check availability of required packages — require_pkgs" />
-<meta property="og:description" content="Takes a vector of package names and passes each name to
-requireNamespace();
-if package(s) are missing, returns an error message providing the basic
-install.packages() command to install them." />
+<meta property="og:title" content="Deprecated functions — n2khab-deprecated" />
+<meta property="og:description" content="
+
+read_schemes() has moved to package n2khabmon.
+Use n2khabmon::read_schemes() instead.
+read_scheme_types() has moved to package n2khabmon.
+Use n2khabmon::read_scheme_types() instead.
+
+" />
 
 
 
@@ -140,36 +144,36 @@ install.packages() command to install them." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check availability of required packages</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/misc.R'><code>R/misc.R</code></a></small>
-    <div class="hidden name"><code>require_pkgs.Rd</code></div>
+    <h1>Deprecated functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/n2khab-deprecated.R'><code>R/n2khab-deprecated.R</code></a></small>
+    <div class="hidden name"><code>n2khab-deprecated.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Takes a vector of package names and passes each name to
-<code><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace()</a></code>;
-if package(s) are missing, returns an error message providing the basic
-<code><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages()</a></code> command to install them.</p>
+    
+<ul>
+<li><p><code>read_schemes()</code> has moved to package <code>n2khabmon</code>.
+Use <code><a href='https://inbo.github.io/n2khabmon/reference/read_schemes.html'>n2khabmon::read_schemes()</a></code> instead.</p></li>
+<li><p><code>read_scheme_types()</code> has moved to package <code>n2khabmon</code>.
+Use <code><a href='https://inbo.github.io/n2khabmon/reference/read_scheme_types.html'>n2khabmon::read_scheme_types()</a></code> instead.</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span><span class='fu'>require_pkgs</span><span class='op'>(</span><span class='va'>pkgs</span><span class='op'>)</span></span></pre>
+    <pre class="usage"><span><span class='fu'>read_schemes</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>read_scheme_types</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pkgs</th>
-      <td><p>A character vector of package names.</p></td>
+      <th>...</th>
+      <td><p>arguments passed to the new function</p></td>
     </tr>
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>
-<span class='r-in'><span><span class='fu'>require_pkgs</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"base"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span><span class='op'>)</span><span class='op'>)</span></span></span>
-<span class='r-in'><span><span class='op'>}</span></span></span>
-<span class='r-in'><span></span></span>
-</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

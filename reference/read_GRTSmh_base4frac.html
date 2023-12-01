@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Return the processed data source GRTSmh_base4frac as a
-RasterLayer — read_GRTSmh_base4frac • n2khab</title>
+SpatRaster — read_GRTSmh_base4frac • n2khab</title>
 
 
 <!-- jquery -->
@@ -43,10 +43,10 @@ RasterLayer — read_GRTSmh_base4frac • n2khab</title>
   
 
 <meta property="og:title" content="Return the processed data source GRTSmh_base4frac as a
-RasterLayer — read_GRTSmh_base4frac" />
+SpatRaster — read_GRTSmh_base4frac" />
 <meta property="og:description" content="The GRTSmh_base4frac data source is like a mirror to
 GRTSmaster_habitats, holding the ranking numbers as base 4 fractions.
-The function returns it as a RasterLayer in the Belgian Lambert 72 CRS
+The function returns it as a SpatRaster in the Belgian Lambert 72 CRS
 (EPSG-code 31370)." />
 
 
@@ -79,7 +79,7 @@ The function returns it as a RasterLayer in the Belgian Lambert 72 CRS
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -143,7 +143,7 @@ The function returns it as a RasterLayer in the Belgian Lambert 72 CRS
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Return the processed data source <code>GRTSmh_base4frac</code> as a
-RasterLayer</h1>
+SpatRaster</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/GRTSmh.R'><code>R/GRTSmh.R</code></a></small>
     <div class="hidden name"><code>read_GRTSmh_base4frac.Rd</code></div>
     </div>
@@ -151,12 +151,12 @@ RasterLayer</h1>
     <div class="ref-description">
     <p>The <code>GRTSmh_base4frac</code> data source is like a mirror to
 <code>GRTSmaster_habitats</code>, holding the ranking numbers as base 4 fractions.
-The function returns it as a RasterLayer in the Belgian Lambert 72 CRS
+The function returns it as a SpatRaster in the Belgian Lambert 72 CRS
 (EPSG-code <a href='https://epsg.io/31370'>31370</a>).</p>
     </div>
 
     <pre class="usage"><span><span class='fu'>read_GRTSmh_base4frac</span><span class='op'>(</span></span>
-<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,</span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
 <span>    <span class='st'>"20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif"</span><span class='op'>)</span></span>
 <span><span class='op'>)</span></span></pre>
 
@@ -176,7 +176,10 @@ starting from the working directory.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A RasterLayer with 21041043 cells.</p>
+    <p>A SpatRaster with 21041043 cells.</p>
+<p>If the package is configured to use the raster package
+(see <code><a href='n2khab_options.html'>n2khab_options()</a></code>), a RasterLayer is
+returned instead.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The data source file, read by the function, is a monolayered GeoTIFF in the
@@ -227,8 +230,10 @@ Resources. Journal of the American Statistical Association 99 (465):
 <span class='r-in'><span><span class='co'># 'GRTSmh_base4frac' data source is present in the default subdirectory.</span></span></span>
 <span class='r-in'><span><span class='co'># In all other cases, this example won't work but at least you can consider</span></span></span>
 <span class='r-in'><span><span class='co'># what to do.</span></span></span>
+<span class='r-in'><span><span class='va'>oldopt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen <span class='op'>=</span> <span class='fl'>999</span>, digits <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>read_GRTSmh_base4frac</span><span class='op'>(</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='va'>r</span></span></span>
+<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='va'>oldopt</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='op'>}</span></span></span>
 <span class='r-in'><span></span></span>
 </pre>

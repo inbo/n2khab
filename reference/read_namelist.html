@@ -76,7 +76,7 @@ by default filtered according to English names and shortnames." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -183,7 +183,7 @@ containing all languages.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The <code>namelist</code> dataframe as a <code><a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tibble</a></code>,
+    <p>The <code>namelist</code> data frame as a <code><a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tibble</a></code>,
 filtered according to the <code>lang</code> argument.
 See <code><a href='namelist.html'>namelist</a></code> for documentation of the tibble's contents.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -193,7 +193,7 @@ See <code><a href='namelist.html'>namelist</a></code> for documentation of the t
 names and (optionally) shortnames for IDs/codes used in other data sources.</p>
 <p><code>read_namelist()</code> reads it and returns it as a
 <code><a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tibble</a></code>.
-A tibble is a dataframe that makes working in the tidyverse a little
+A tibble is a data frame that makes working in the tidyverse a little
 <a href='https://r4ds.had.co.nz/tibbles.html'>easier</a>.
 By default, the data version delivered with the package is used and only English
 names (<code>lang = "en"</code>) are returned.</p>
@@ -209,13 +209,11 @@ names (<code>lang = "en"</code>) are returned.</p>
     <div class='dont-index'><p><code><a href='namelist.html'>namelist</a></code></p>
 <p>Other reading functions for n2khab-referencelists: 
 <code><a href='read_env_pressures.html'>read_env_pressures</a>()</code>,
-<code><a href='read_scheme_types.html'>read_scheme_types</a>()</code>,
-<code><a href='read_schemes.html'>read_schemes</a>()</code>,
 <code><a href='read_types.html'>read_types</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span><span class='fu'>read_namelist</span><span class='op'>(</span><span class='op'>)</span></span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 297 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 189 × 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    code     lang  name                                                 shortname</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                                <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 1130     en    Estuaries                                            Estuaries</span>
@@ -228,9 +226,9 @@ names (<code>lang = "en"</code>) are returned.</p>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 1330     en    Atlantic salt meadows (Glauco-Puccinellietalia mari… Atlantic…</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 1330_da  en    Saltmarshes dike outward                             Saltmars…</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 1330_hpr en    Halophytic grasslands dike inward                    Halophyt…</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># ℹ 287 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># ℹ 179 more rows</span></span>
 <span class='r-in'><span><span class='fu'>read_namelist</span><span class='op'>(</span>lang <span class='op'>=</span> <span class='st'>"nl"</span><span class='op'>)</span></span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 325 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 217 × 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    code     lang  name                                                 shortname</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                                <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 1130     nl    Estuaria                                             estuaria </span>
@@ -243,7 +241,7 @@ names (<code>lang = "en"</code>) are returned.</p>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 1330     nl    Atlantische schorren (Glauco-Puccinellietalia marit… Atlantis…</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 1330_da  nl    Buitendijkse schorren                                buitendi…</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 1330_hpr nl    Binnendijkse zilte vegetaties: zilte graslanden      zilte gr…</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># ℹ 315 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># ℹ 207 more rows</span></span>
 <span class='r-in'><span></span></span>
 </pre>
   </div>

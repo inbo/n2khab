@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Expand a 'type' column in a dataframe — expand_types • n2khab</title>
+<title>Expand a 'type' column in a data frame — expand_types • n2khab</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Expand a 'type' column in a dataframe — expand_types" />
-<meta property="og:description" content="Takes a dataframe with a column of type codes
+<meta property="og:title" content="Expand a 'type' column in a data frame — expand_types" />
+<meta property="og:description" content="Takes a data frame with a column of type codes
 (main type or subtype codes),
 and, under certain conditions, adds new rows with codes of the associated
 subtypes and main types, respectively.
@@ -50,7 +50,7 @@ It allows to do sensible selections and joins with interpreted forms of the
 habitatmap_stdized and watersurfaces_hab data sources:
 habitatmap_terr,
 read_watersurfaces_hab(interpreted = TRUE).
-If the dataframe has one or more grouping variables, by default the
+If the data frame has one or more grouping variables, by default the
 operation is done independently for each group in turn." />
 
 
@@ -83,7 +83,7 @@ operation is done independently for each group in turn." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -146,13 +146,13 @@ operation is done independently for each group in turn." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Expand a 'type' column in a dataframe</h1>
+    <h1>Expand a 'type' column in a data frame</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/datawrangling.R'><code>R/datawrangling.R</code></a></small>
     <div class="hidden name"><code>expand_types.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Takes a dataframe with a column of type codes
+    <p>Takes a data frame with a column of type codes
 (<em>main type</em> or <em>subtype </em>codes),
 and, under certain conditions, adds new rows with codes of the associated
 <em>subtypes</em> and <em>main types</em>, respectively.
@@ -160,7 +160,7 @@ It allows to do sensible selections and joins with interpreted forms of the
 <code>habitatmap_stdized</code> and <code>watersurfaces_hab</code> data sources:
 <code>habitatmap_terr</code>,
 <code>read_watersurfaces_hab(interpreted = TRUE)</code>.
-If the dataframe has one or more grouping variables, by default the
+If the data frame has one or more grouping variables, by default the
 operation is done independently for each group in turn.</p>
     </div>
 
@@ -176,13 +176,13 @@ operation is done independently for each group in turn.</p>
     <tr>
       <th>type_var</th>
       <td><p>A string.
-The name of the dataframe variable that holds the type codes.
+The name of the data frame variable that holds the type codes.
 Defaults to <code>type</code>.</p></td>
     </tr>
     <tr>
       <th>use_grouping</th>
       <td><p>Logical.
-If the dataframe has one or more grouping variables
+If the data frame has one or more grouping variables
 (class <code>grouped_df</code>),
 is the operation to be performed independently
 for each group in turn?</p></td>
@@ -196,13 +196,13 @@ Apply conditions before expanding subtype codes to main type codes?</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A dataframe, either identical or longer than the input dataframe.</p>
+    <p>A data frame, either identical or longer than the input data frame.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The extra rows in the dataframe take the values for other variables
+    <p>The extra rows in the data frame take the values for other variables
 from the rows with which they are associated, based on the
 subtype - main type relation.
-Type codes in the dataframe are verified to comply with the codes from the
+Type codes in the data frame are verified to comply with the codes from the
 <code><a href='types.html'>types</a></code> data source.
 A warning is given when they don't.</p>
 <p>Main type codes are always expanded with the subtype codes that belong to it.</p>
@@ -232,8 +232,7 @@ and because it makes no sense in other cases
 main type but to an non-defined subtype with no specific code).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='read_scheme_types.html'>read_scheme_types</a></code>,
-<code><a href='read_types.html'>read_types</a></code>,
+    <div class='dont-index'><p><code><a href='read_types.html'>read_types</a></code>,
 <code><a href='read_habitatmap_terr.html'>read_habitatmap_terr</a></code>,
 <code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a></code></p></div>
 
@@ -248,7 +247,7 @@ main type but to an non-defined subtype with no specific code).</p>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span>     intersect, setdiff, setequal, union</span>
 <span class='r-in'><span><span class='va'>x</span> <span class='op'>&lt;-</span></span></span>
-<span class='r-in'><span>  <span class='fu'><a href='read_scheme_types.html'>read_scheme_types</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span></span>
+<span class='r-in'><span>  <span class='fu'>n2khabmon</span><span class='fu'>::</span><span class='fu'><a href='https://inbo.github.io/n2khabmon/reference/read_scheme_types.html'>read_scheme_types</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span></span>
 <span class='r-in'><span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>scheme</span> <span class='op'>==</span> <span class='st'>"GW_05.1_terr"</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='fu'>expand_types</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 62 × 5</span></span>
@@ -282,7 +281,7 @@ main type but to an non-defined subtype with no specific code).</p>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># ℹ 53 more rows</span></span>
 <span class='r-in'><span></span></span>
 <span class='r-in'><span><span class='va'>x</span> <span class='op'>&lt;-</span></span></span>
-<span class='r-in'><span>  <span class='fu'><a href='read_scheme_types.html'>read_scheme_types</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span></span>
+<span class='r-in'><span>  <span class='fu'>n2khabmon</span><span class='fu'>::</span><span class='fu'><a href='https://inbo.github.io/n2khabmon/reference/read_scheme_types.html'>read_scheme_types</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span></span>
 <span class='r-in'><span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>scheme</span> <span class='op'>==</span> <span class='st'>"GW_05.1_terr"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span></span>
 <span class='r-in'><span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>typegroup</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='fu'>expand_types</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span></span>

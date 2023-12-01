@@ -78,7 +78,7 @@ references or bibtex)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -155,8 +155,7 @@ Optionally, associated bibliographic references can be returned (arguments
     </div>
 
     <pre class="usage"><span><span class='fu'>read_habitatquarries</span><span class='op'>(</span></span>
-<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>,</span>
-<span>    <span class='st'>"10_raw/habitatquarries/habitatquarries.gpkg"</span><span class='op'>)</span>,</span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"10_raw/habitatquarries/habitatquarries.gpkg"</span><span class='op'>)</span>,</span>
 <span>  filter_hab <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
 <span>  references <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
 <span>  bibtex <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
@@ -183,7 +182,7 @@ are returned.</p></td>
     <tr>
       <th>references</th>
       <td><p>If <code>TRUE</code>, a list is returned with both the <code>sf</code>
-object (element <code>habitatquarries</code>) and a dataframe of bibliographic
+object (element <code>habitatquarries</code>) and a data frame of bibliographic
 references (element <code>extra_references</code>).</p></td>
     </tr>
     <tr>
@@ -213,10 +212,10 @@ source <code>habitatquarries</code>.</p></li>
 <li><p><code>type</code>: habitat type listed in <code><a href='types.html'>types</a></code> - in this
 case either <code>8310</code> or missing (<code>NA</code>).</p></li>
 <li><p><code>extra_reference</code>: site-specific bibliographic reference(s).
-Values refer to rows in the non-spatial dataframe <code>extra_references</code>.</p></li>
+Values refer to rows in the non-spatial data frame <code>extra_references</code>.</p></li>
 </ul></li>
 <li><p><em>if <code>references = TRUE</code>:</em> a list with both the <code>sf</code>
-object (element <code>habitatquarries</code>) and a dataframe of bibliographic
+object (element <code>habitatquarries</code>) and a data frame of bibliographic
 references (element <code>extra_references</code>).</p></li>
 <li><p><em>if <code>bibtex = TRUE</code>:</em> <code>NULL</code> (invisibly).</p></li>
 </ul>

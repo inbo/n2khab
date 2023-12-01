@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the data source raster_runif as a RasterLayer — read_raster_runif • n2khab</title>
+<title>Return the data source raster_runif as a SpatRaster — read_raster_runif • n2khab</title>
 
 
 <!-- jquery -->
@@ -41,7 +41,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return the data source raster_runif as a RasterLayer — read_raster_runif" />
+<meta property="og:title" content="Return the data source raster_runif as a SpatRaster — read_raster_runif" />
 <meta property="og:description" content="The raster_runif data source covers Flanders and the Brussels
 Capital Region
 and has a resolution of 32 meters.
@@ -83,7 +83,7 @@ The coordinate reference system is 'BD72 / Belgian Lambert 72'
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -146,7 +146,7 @@ The coordinate reference system is 'BD72 / Belgian Lambert 72'
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the data source <code>raster_runif</code> as a RasterLayer</h1>
+    <h1>Return the data source <code>raster_runif</code> as a SpatRaster</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_raster_runif.R'><code>R/read_raster_runif.R</code></a></small>
     <div class="hidden name"><code>read_raster_runif.Rd</code></div>
     </div>
@@ -165,7 +165,7 @@ The coordinate reference system is 'BD72 / Belgian Lambert 72'
     </div>
 
     <pre class="usage"><span><span class='fu'>read_raster_runif</span><span class='op'>(</span></span>
-<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='fileman_up.html'>fileman_up</a></span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span>, <span class='st'>"10_raw/raster_runif/raster_runif.tif"</span><span class='op'>)</span>,</span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"10_raw/raster_runif/raster_runif.tif"</span><span class='op'>)</span>,</span>
 <span>  version <span class='op'>=</span> <span class='st'>"raster_runif_v1"</span></span>
 <span><span class='op'>)</span></span></pre>
 
@@ -190,7 +190,10 @@ Defaults to the latest available version defined by the package.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A RasterLayer.</p>
+    <p>A SpatRaster.</p>
+<p>If the package is configured to use the raster package
+(see <code><a href='n2khab_options.html'>n2khab_options()</a></code>), a RasterLayer is
+returned instead.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>raster_runif</code> data source is a GeoTIFF file (available at
@@ -209,7 +212,6 @@ n2khab-preprocessing</a> repository.</p>
 <span class='r-in'><span><span class='co'># what to do.</span></span></span>
 <span class='r-in'><span><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>read_raster_runif</span><span class='op'>(</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='va'>r</span></span></span>
-<span class='r-in'><span><span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sp/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='op'>}</span></span></span>
 <span class='r-in'><span></span></span>
 </pre>

@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -160,22 +160,6 @@ to be stored in a folder <code>n2khab_data/10_raw</code>;</li>
 to be stored in a folder <code>n2khab_data/20_processed</code>.</li>
 </ul>
 </div>
-<div id="note-dont-use-proj4strings-to-define-coordinate-reference-systems" class="section level3">
-<h3 class="hasAnchor">
-<a href="#note-dont-use-proj4strings-to-define-coordinate-reference-systems" class="anchor"></a>Note: don’t use proj4strings to define coordinate reference
-systems</h3>
-<p>If you use <code>RasterLayer</code> or <code>RasterBrick</code>
-objects returned by <strong>n2khab</strong> functions, please make sure
-to not use the proj4string to represent its coordinate reference system
-(CRS), even while printing those objects will show a degraded (!)
-proj4string. The proj4string is an aged format which has lost most of
-its ability to represent a geodetic datum.</p>
-<p>The proper CRS representation is the WKT string, which is effectively
-returned by <code><a href="https://rdrr.io/pkg/sp/man/is.projected.html">raster::wkt()</a></code> and by
-<code><a href="https://rdrr.io/pkg/terra/man/crs.html">raster::crs()</a></code>.</p>
-<p>See <a href="https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/">this</a>
-tutorial if you would like to learn more about this.</p>
-</div>
 </div>
 <div id="you-are-welcome-to-contribute" class="section level2">
 <h2 class="hasAnchor">
@@ -199,26 +183,12 @@ collections.</li>
 fashion. See <code><a href="articles/v022_example.html">vignette("v022_example")</a></code> for example code to
 currently accomplish specific aspects.</p>
 </div>
-<div id="background-information" class="section level2">
+<div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
-<a href="#background-information" class="anchor"></a>Background information</h2>
-<p>From its aim, it follows that the package supports various
-<em>N2KHAB</em> projects, i.e. projects that focus on Natura 2000
-habitat (and which may as well use the <em>n2khab</em>-prefix for their
-git repository name, such as <a href="https://github.com/inbo/n2khab-monitoring">this one</a>).</p>
-<p>The package is a companion to the <a href="https://github.com/inbo/n2khab-preprocessing">n2khab-preprocessing</a>
-repo. Beside direct preprocessing functions, <strong>n2khab</strong>
-provides several functions that return datasets, generated in
-<code>n2khab-preprocessing</code>, as standardized R-objects. Having
-processed datasets readily available is useful in the case of
-time-consuming calculations to produce them.</p>
-<p>The data definitions &amp; standard checklists (reference data)
-provided by the package are textual files in the <a href="https://ropensci.github.io/git2rdata/index.html">vc-format</a>.
-Some of them come over from another repository. Others may be written as
-the result of a synchronization script to give them a start. The code to
-reproduce these files is inside the <code>misc</code> folder of the <a href="https://github.com/inbo/n2khab">source code</a>. The package
-provides the necessary functions to return these as standardized tibbles
-(<code><a href="articles/v010_reference_lists.html">vignette("v010_reference_lists")</a></code>).</p>
+<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<p>Please note that the n2khab package is released with a <a href="https://inbo.github.io/n2khab/CODE_OF_CONDUCT.html">Contributor
+Code of Conduct</a>. By contributing to this project, you agree to abide
+by its terms.</p>
 </div>
 
   </div>
