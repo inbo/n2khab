@@ -1,4 +1,28 @@
-# n2khab (development version)
+# n2khab 0.10.0 (2023-12-01)
+
+## Breaking change
+
+`read_GRTSmh()`, `read_GRTSmh_base4frac()`, `read_GRTSmh_diffres()` and `read_raster_runif()` now return a `SpatRaster` object from {[terra](https://rspatial.github.io/terra)} by default (#173).
+Previous behaviour using {raster} can still be restored; see below.
+However do note that {raster} is a legacy package and {terra} is its successor.
+
+## New feature
+
+The package can be configured using `options()` or corresponding environment variables.
+Current configuration state is returned by `n2khab_options()`.
+See `?n2khab_options` for information on package configuration.
+
+Two settings are now available:
+
+- optionally use {raster} instead of {terra} (#173);
+- optionally set a custom `n2khab_data` path, affecting all functions that need this path (#174).
+
+## Deprecated functions
+
+`read_schemes()` and `read_scheme_types()` were moved to a new package {[n2khabmon](https://inbo.github.io/n2khabmon)}.
+In {n2khab} they are still functional but deprecated, and will eventually disappear (#175).
+The accompanying data sources `schemes` and `scheme_types` have moved to {n2khabmon}.
+{n2khab} 0.10.0 will be the minimum version required by {n2khabmon}.
 
 # n2khab 0.9.1 (2023-11-24)
 
@@ -28,7 +52,7 @@ These data sources have not changed since previous release.
 
 # n2khab 0.7.0 (2022-05-23)
 
-- Upgrade most [vc-formatted](https://ropensci.github.io/git2rdata) data sources to the format of **git2rdata** version 0.4.0. In this version, files not optimized for version control (but rather for readability), are saved as csv instead of tsv files. For **n2khab**, this applies to the `types` and `env_pressures` data sources. Since it is expected that this upgrade is not compatible with older **git2rdata** versions, the version dependency for **git2rdata** has been updated (#161).
+- Upgrade most [vc-formatted](https://ropensci.github.io/git2rdata) data sources to the format of {git2rdata} version 0.4.0. In this version, files not optimized for version control (but rather for readability), are saved as csv instead of tsv files. For {n2khab}, this applies to the `types` and `env_pressures` data sources. Since it is expected that this upgrade is not compatible with older {git2rdata} versions, the version dependency for {git2rdata} has been updated (#161).
 - `scheme_types` data source: update typegroup membership of type `7210` in scheme `GW_03.3` (#161).
 
 # n2khab 0.6.0 (2022-02-03)
@@ -178,5 +202,5 @@ Further, a number of smaller fixes and enhancements were made.
 This package is the successor of the 'n2khabutils' package.
 Previous to commit `c8608d9`, the code was part of the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (formerly 'n2khab-inputs'), where the original version history remains stored.
 At that time, the package was called 'n2khabutils'.
-As a convenience, the **n2khab** repo still holds the rewritten (shrinked) package history from before commit `c8608d9`, as defined by the related files and folders.
+As a convenience, the {n2khab} repo still holds the rewritten (shrinked) package history from before commit `c8608d9`, as defined by the related files and folders.
 See [this](https://github.com/inbo/n2khab-monitoring/issues/28) issue in the 'n2khab-monitoring' repo, where the migration is documented.
