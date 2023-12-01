@@ -5,7 +5,7 @@
 \title{Documentation of included data source 'env_pressures'}
 \format{
 A vc-formatted data source. As such, it corresponds to
-a dataframe with 35 rows and 3 variables:
+a data frame with 35 rows and 3 variables:
 \describe{
   \item{ep_code}{Code of the environmental pressure, as a factor.
   This is the ID for use in diverse workflows and datasets.
@@ -61,8 +61,6 @@ languages).
 
 Other n2khab-referencelists: 
 \code{\link{namelist}},
-\code{\link{scheme_types}},
-\code{\link{schemes}},
 \code{\link{types}}
 }
 \concept{n2khab-referencelists}

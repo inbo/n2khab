@@ -5,8 +5,7 @@
 \title{Return the data source \code{habitatquarries}}
 \usage{
 read_habitatquarries(
-  file = file.path(fileman_up("n2khab_data"),
-    "10_raw/habitatquarries/habitatquarries.gpkg"),
+  file = file.path(locate_n2khab_data(), "10_raw/habitatquarries/habitatquarries.gpkg"),
   filter_hab = FALSE,
   references = FALSE,
   bibtex = FALSE,
@@ -25,7 +24,7 @@ starting from the working directory.}
 are returned.}
 
 \item{references}{If \code{TRUE}, a list is returned with both the \code{sf}
-object (element \code{habitatquarries}) and a dataframe of bibliographic
+object (element \code{habitatquarries}) and a data frame of bibliographic
 references (element \code{extra_references}).}
 
 \item{bibtex}{If \code{TRUE}, all that happens is bibliographic references
@@ -50,10 +49,10 @@ source \code{habitatquarries}.
 \item \code{type}: habitat type listed in \code{\link{types}} - in this
 case either \code{8310} or missing (\code{NA}).
 \item \code{extra_reference}: site-specific bibliographic reference(s).
-Values refer to rows in the non-spatial dataframe \code{extra_references}.
+Values refer to rows in the non-spatial data frame \code{extra_references}.
 }
 \item \emph{if \code{references = TRUE}:} a list with both the \code{sf}
-object (element \code{habitatquarries}) and a dataframe of bibliographic
+object (element \code{habitatquarries}) and a data frame of bibliographic
 references (element \code{extra_references}).
 \item \emph{if \code{bibtex = TRUE}:} \code{NULL} (invisibly).
 }

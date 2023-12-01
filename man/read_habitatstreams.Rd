@@ -6,7 +6,7 @@
 layer or as a list}
 \usage{
 read_habitatstreams(
-  file = file.path(fileman_up("n2khab_data"), "10_raw/habitatstreams"),
+  file = file.path(locate_n2khab_data(), "10_raw/habitatstreams"),
   source_text = FALSE
 )
 }

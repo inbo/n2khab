@@ -1,6 +1,6 @@
-#' Expand a 'type' column in a dataframe
+#' Expand a 'type' column in a data frame
 #'
-#' Takes a dataframe with a column of type codes
+#' Takes a data frame with a column of type codes
 #' (\emph{main type} or \emph{subtype }codes),
 #' and, under certain conditions, adds new rows with codes of the associated
 #' \emph{subtypes} and \emph{main types}, respectively.
@@ -8,13 +8,13 @@
 #' \code{habitatmap_stdized} and \code{watersurfaces_hab} data sources:
 #' \code{habitatmap_terr},
 #' \code{read_watersurfaces_hab(interpreted = TRUE)}.
-#' If the dataframe has one or more grouping variables, by default the
+#' If the data frame has one or more grouping variables, by default the
 #' operation is done independently for each group in turn.
 #'
-#' The extra rows in the dataframe take the values for other variables
+#' The extra rows in the data frame take the values for other variables
 #' from the rows with which they are associated, based on the
 #' subtype - main type relation.
-#' Type codes in the dataframe are verified to comply with the codes from the
+#' Type codes in the data frame are verified to comply with the codes from the
 #' \code{\link{types}} data source.
 #' A warning is given when they don't.
 #'
@@ -51,10 +51,10 @@
 #'
 #' @param x An object of class \code{data.frame}.
 #' @param type_var A string.
-#' The name of the dataframe variable that holds the type codes.
+#' The name of the data frame variable that holds the type codes.
 #' Defaults to \code{type}.
 #' @param use_grouping Logical.
-#' If the dataframe has one or more grouping variables
+#' If the data frame has one or more grouping variables
 #' (class \code{grouped_df}),
 #' is the operation to be performed independently
 #' for each group in turn?
@@ -62,10 +62,9 @@
 #' Apply conditions before expanding subtype codes to main type codes?
 #'
 #' @return
-#' A dataframe, either identical or longer than the input dataframe.
+#' A data frame, either identical or longer than the input data frame.
 #'
 #' @seealso
-#' \code{\link{read_scheme_types}},
 #' \code{\link{read_types}},
 #' \code{\link{read_habitatmap_terr}},
 #' \code{\link{read_watersurfaces_hab}}
@@ -73,13 +72,13 @@
 #' @examples
 #' library(dplyr)
 #' x <-
-#'   read_scheme_types() %>%
+#'   n2khabmon::read_scheme_types() %>%
 #'   filter(scheme == "GW_05.1_terr")
 #' expand_types(x)
 #' expand_types(x, strict = FALSE)
 #'
 #' x <-
-#'   read_scheme_types() %>%
+#'   n2khabmon::read_scheme_types() %>%
 #'   filter(scheme == "GW_05.1_terr") %>%
 #'   group_by(typegroup)
 #' expand_types(x)
@@ -159,13 +158,13 @@ expand_types <- function(x,
 
 
 
-#' Expand a 'type' column in a dataframe (grouping not taken into account)
+#' Expand a 'type' column in a data frame (grouping not taken into account)
 #'
 #' This is the workhorse for \code{\link{expand_types}}.
 #'
 #' @inheritParams expand_types
 #'
-#' @return A dataframe.
+#' @return A data frame.
 #'
 #' @importFrom dplyr
 #' %>%
@@ -202,7 +201,7 @@ expand_types_plain <- function(x,
     rename(orig_abcd = type_var)
 
   if (!all(unique(orig_types$orig_abcd) %in% types$type)) {
-    warning("The dataframe contains type codes which are not standard.")
+    warning("The data frame contains type codes which are not standard.")
   }
 
   # main types to add:
@@ -227,7 +226,7 @@ expand_types_plain <- function(x,
         any(!is.na(.data$present))
       }) %>%
       filter(.data$add) %>%
-      # only adding codes absent from original dataframe:
+      # only adding codes absent from original data frame:
       anti_join(orig_types, by = c("main_type" = "orig_abcd")) %>%
       pull(.data$main_type)
   )
@@ -285,7 +284,7 @@ expand_types_plain <- function(x,
 
 
 
-#' Convert encoding of character and factor variables in a dataframe
+#' Convert encoding of character and factor variables in a data frame
 #'
 #' @details
 #' Encoding strings: all \code{R} platforms support \code{""} (for the

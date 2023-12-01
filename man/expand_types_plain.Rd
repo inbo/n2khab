@@ -2,7 +2,7 @@
 % Please edit documentation in R/datawrangling.R
 \name{expand_types_plain}
 \alias{expand_types_plain}
-\title{Expand a 'type' column in a dataframe (grouping not taken into account)}
+\title{Expand a 'type' column in a data frame (grouping not taken into account)}
 \usage{
 expand_types_plain(x, type_var = "type", strict = TRUE)
 }
@@ -10,14 +10,14 @@ expand_types_plain(x, type_var = "type", strict = TRUE)
 \item{x}{An object of class \code{data.frame}.}
 
 \item{type_var}{A string.
-The name of the dataframe variable that holds the type codes.
+The name of the data frame variable that holds the type codes.
 Defaults to \code{type}.}
 
 \item{strict}{Logical.
 Apply conditions before expanding subtype codes to main type codes?}
 }
 \value{
-A dataframe.
+A data frame.
 }
 \description{
 This is the workhorse for \code{\link{expand_types}}.

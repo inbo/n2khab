@@ -111,7 +111,7 @@
 #' When a variable is a one-to-one translation of another (e.g. code vs.
 #' explanation), the order of factor levels is aligned.
 #'
-#' Three types of dataframe variables are returned when reading `soilmap`:
+#' Three types of data frame variables are returned when reading `soilmap`:
 #' - **variables with `mo_` in their name**: their categories follow the
 #' Belgian Morphogenetic System.
 #'   - With `standardize_coastalplain = FALSE`, these are only available _outside
@@ -270,10 +270,10 @@
 #' @export
 read_soilmap <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "20_processed/soilmap_simple/soilmap_simple.gpkg"
            ),
-           file_raw = file.path(fileman_up("n2khab_data"), "10_raw/soilmap"),
+           file_raw = file.path(locate_n2khab_data(), "10_raw/soilmap"),
            use_processed = TRUE,
            version_processed = "soilmap_simple_v2",
            standardize_coastalplain = FALSE,

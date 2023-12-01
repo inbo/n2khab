@@ -57,14 +57,6 @@ There is a major distinction between:
 - **raw data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-raw)), to be stored in a folder `n2khab_data/10_raw`;
 - **processed data** ([Zenodo-link](https://zenodo.org/communities/n2khab-data-processed)), to be stored in a folder `n2khab_data/20_processed`.
 
-### Note: don't use proj4strings to define coordinate reference systems
-
-If you use `RasterLayer` or `RasterBrick` objects returned by **n2khab** functions, please make sure to not use the proj4string to represent its coordinate reference system (CRS), even while printing those objects will show a degraded (!) proj4string.
-The proj4string is an aged format which has lost most of its ability to represent a geodetic datum.
-
-The proper CRS representation is the WKT string, which is effectively returned by `raster::wkt()` and by `raster::crs()`.
-
-See [this](https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/) tutorial if you would like to learn more about this.
 
 ## You are welcome to contribute!
 
@@ -82,18 +74,6 @@ At a later date, the intention is to incorporate functionality to enhance workfl
 Currently these aspects must be taken care of in a more manual fashion.
 See `vignette("v022_example")` for example code to currently accomplish specific aspects.
 
+## Code of Conduct
 
-## Background information
-
-From its aim, it follows that the package supports various _N2KHAB_ projects, i.e. projects that focus on Natura 2000 habitat (and which may as well use the _n2khab_-prefix for their git repository name, such as [this one](https://github.com/inbo/n2khab-monitoring)).
-
-The package is a companion to the [n2khab-preprocessing](https://github.com/inbo/n2khab-preprocessing) repo.
-Beside direct preprocessing functions, **n2khab** provides several functions that return datasets, generated in `n2khab-preprocessing`, as standardized R-objects.
-Having processed datasets readily available is useful in the case of time-consuming calculations to produce them.
-
-The data definitions & standard checklists (reference data) provided by the package are textual files in the [vc-format](https://ropensci.github.io/git2rdata/index.html).
-Some of them come over from another repository.
-Others may be written as the result of a synchronization script to give them a start.
-The code to reproduce these files is inside the `misc` folder of the [source code](https://github.com/inbo/n2khab).
-The package provides the necessary functions to return these as standardized tibbles (`vignette("v010_reference_lists")`).
-
+Please note that the n2khab package is released with a [Contributor Code of Conduct](https://inbo.github.io/n2khab/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

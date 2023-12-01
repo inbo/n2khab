@@ -3,10 +3,10 @@
 \name{read_GRTSmh_base4frac}
 \alias{read_GRTSmh_base4frac}
 \title{Return the processed data source \code{GRTSmh_base4frac} as a
-RasterLayer}
+SpatRaster}
 \usage{
 read_GRTSmh_base4frac(
-  file = file.path(fileman_up("n2khab_data"),
+  file = file.path(locate_n2khab_data(),
     "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif")
 )
 }
@@ -19,12 +19,16 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
 }
 \value{
-A RasterLayer with 21041043 cells.
+A SpatRaster with 21041043 cells.
+
+If the package is configured to use the raster package
+(see \code{\link[=n2khab_options]{n2khab_options()}}), a RasterLayer is
+returned instead.
 }
 \description{
 The \code{GRTSmh_base4frac} data source is like a mirror to
 \code{GRTSmaster_habitats}, holding the ranking numbers as base 4 fractions.
-The function returns it as a RasterLayer in the Belgian Lambert 72 CRS
+The function returns it as a SpatRaster in the Belgian Lambert 72 CRS
 (EPSG-code \href{https://epsg.io/31370}{31370}).
 }
 \details{
@@ -67,8 +71,10 @@ So, what really matters is only the notation with many digits, to be
 # 'GRTSmh_base4frac' data source is present in the default subdirectory.
 # In all other cases, this example won't work but at least you can consider
 # what to do.
+oldopt <- options(scipen = 999, digits = 15)
 r <- read_GRTSmh_base4frac()
 r
+options(oldopt)
 }
 
 }

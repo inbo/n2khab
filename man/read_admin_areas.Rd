@@ -6,7 +6,7 @@
 administrative areas}
 \usage{
 read_admin_areas(
-  file = file.path(fileman_up("n2khab_data"), c("10_raw/flanders", "10_raw/provinces",
+  file = file.path(locate_n2khab_data(), c("10_raw/flanders", "10_raw/provinces",
     "10_raw/sac")),
   dsn = c("flanders", "provinces", "sac")
 )

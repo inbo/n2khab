@@ -1,7 +1,7 @@
 ---
 title: "Using the GRTS data sources"
 author: "Floris Vanderhaeghe"
-date: "2019-05-29"
+date: "2023-11-24"
 bibliography: references.bib
 output: 
   rmarkdown::html_vignette:
@@ -18,19 +18,20 @@ vignette: >
 options(stringsAsFactors = FALSE)
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
 library(n2khab)
 library(magrittr)
 library(knitr)
 ```
 
-_General note: the below vignette contains frozen output of 29 May 2019._
+_General note: the below vignette contains frozen output of 24 November 2023._
 _This makes it possible to build the package with vignettes without access to the data sources._
 
 ## Intro
 
-With this vignette, you get acquainted with three functions that usually return a RasterLayer or a RasterBrick:
+With this vignette, you get acquainted with three functions that usually return a SpatRaster object from the {terra} package:
 
 - `read_GRTSmh()`
 - `read_GRTSmh_base4frac()`
@@ -67,44 +68,50 @@ See the `vignette("v020_datastorage")` for more information.
 
 `read_GRTSmh()` by default returns the `GRTSmaster_habitats` dataset:
 
-```{r eval=FALSE}
+```{r}
 read_GRTSmh()
-#> class      : RasterLayer
-#> dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)
-#> resolution : 32, 32  (x, y)
-#> extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
-#> crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
-#> source     : [...]/n2khab_data/10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif
-#> names      : GRTSmaster_habitats
-#> values     : 1, 67108857  (min, max)
+#> class       : SpatRaster
+#> dimensions  : 2843, 7401, 1  (nrow, ncol, nlyr)
+#> resolution  : 32, 32  (x, y)
+#> extent      : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
+#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370)
+#> source      : GRTSmaster_habitats.tif
+#> name        : GRTSmaster_habitats
+#> min value   :                   1
+#> max value   :            67108857
 ```
 
 With the argument `brick = TRUE` however, you will get the `GRTSmh_brick` data source, i.e. `GRTSmaster_habitats` plus 9 extra layers:
 
-```{r eval=FALSE}
-read_GRTSmh(brick = TRUE)
-#> class      : RasterBrick
-#> dimensions : 2843, 7401, 21041043, 10  (nrow, ncol, ncell, nlayers)
-#> resolution : 32, 32  (x, y)
-#> extent     : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
-#> crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
-#> source     : [...]/n2khab_data/20_processed/GRTSmh_brick/GRTSmh_brick.tif
-#> names      :   level0,   level1,   level2,   level3,   level4,   level5,   level6,   level7,   level8,   level9
-#> min values :        1,        1,        1,        1,        1,        1,        1,        1,        1,        1
-#> max values : 67108857, 16777209,  4194297,  1048569,   262137,    65529,    16377,     4089,     1017,      253
+```{r}
+r10 <- read_GRTSmh(brick = TRUE)
+r10
+#> class       : SpatRaster
+#> dimensions  : 2843, 7401, 10  (nrow, ncol, nlyr)
+#> resolution  : 32, 32  (x, y)
+#> extent      : 22029.59, 258861.6, 153054.1, 244030.1  (xmin, xmax, ymin, ymax)
+#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370)
+#> source      : GRTSmh_brick.tif
+#> names       :   level0,   level1,  level2,  level3, level4, level5, ...
+#> min values  :        1,        1,       1,       1,      1,      1, ...
+#> max values  : 67108857, 16777209, 4194297, 1048569, 262137,  65529, ...
+terra::minmax(r10)
+#>       level0   level1  level2  level3 level4 level5 level6 level7 level8 level9
+#> min        1        1       1       1      1      1      1      1      1      1
+#> max 67108857 16777209 4194297 1048569 262137  65529  16377   4089   1017    253
 ```
 
-The higher-level ranking numbers of the RasterBrick allow spatially balanced samples at lower spatial resolution than that of 32 m, and can also be used for aggregation purposes.
-The provided hierarchical levels correspond to the resolution vector `32 * 2^(0:9)` (minimum: 32 meters, maximum: 16384 meters), with the corresponding RasterBrick layers named as `level0` to `level9`.
+The layers with higher-level ranking numbers allow spatially balanced samples at lower spatial resolution than that of 32 m, and can also be used for aggregation purposes.
+The provided hierarchical levels correspond to the resolution vector `32 * 2^(0:9)` (minimum: 32 meters, maximum: 16384 meters), with the corresponding layers named as `level0` to `level9`.
 
 ### read_GRTSmh_diffres()
 
-`read_GRTSmh_diffres()` by default returns one RasterLayer from the `GRTSmh_diffres` data source, i.e. with the GRTS ranking numbers of the user-specified hierarchical level.
+`read_GRTSmh_diffres()` by default returns one raster layer from the `GRTSmh_diffres` data source, i.e. with the GRTS ranking numbers of the user-specified hierarchical level.
 This is done _at the corresponding spatial resolution_ of the GRTS algorithm, which is the fundamental distinction from `read_GRTSmh(brick = TRUE)`.
 
 The resolutions of each level are the following (in meters):
 
-```{r warning = FALSE, echo = FALSE}
+```{r warning = FALSE, echo = FALSE, eval = TRUE}
 data.frame(
   level = 1:9,
   resolution = 32 * 2^(1:9)
@@ -114,59 +121,62 @@ data.frame(
 
 An example with level 5:
 
-```{r eval=FALSE}
+```{r}
 read_GRTSmh_diffres(level = 5)
-#> class      : RasterLayer
-#> dimensions : 89, 232, 20648  (nrow, ncol, ncell)
-#> resolution : 1024, 1024  (x, y)
-#> extent     : 22030, 259598, 153054, 244190  (xmin, xmax, ymin, ymax)
-#> crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
-#> source     : [...]/n2khab_data/20_processed/GRTSmh_diffres/GRTSmh_diffres.5.tif
-#> names      : level5
-#> values     : 1, 65529  (min, max)
+#> class       : SpatRaster
+#> dimensions  : 89, 232, 1  (nrow, ncol, nlyr)
+#> resolution  : 1024, 1024  (x, y)
+#> extent      : 22030, 259598, 153054, 244190  (xmin, xmax, ymin, ymax)
+#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370)
+#> source      : GRTSmh_diffres.5.tif
+#> name        : level5
+#> min value   :      1
+#> max value   :  65529
 ```
 
 Alternatively, a dissolved, polygonized variant of the corresponding `GRTSmh_brick` level can be returned as an `sf` object.
 In order not to inflate the data source, this was only made available for levels 4 to 9.
 
-```{r eval=FALSE}
+```{r}
 read_GRTSmh_diffres(level = 5, polygon = TRUE)
 #> Simple feature collection with 13791 features and 1 field
-#> geometry type:  POLYGON
-#> dimension:      XY
-#> bbox:           xmin: 22029.59 ymin: 153054.1 xmax: 258861.6 ymax: 244030.1
-#> epsg (SRID):    31370
-#> proj4string:    +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
-#> First 10 features:
-#>    value                           geom
-#> 1  23390 POLYGON ((178093.6 244030.1...
-#> 2  56158 POLYGON ((178701.6 243646.1...
-#> 3  23134 POLYGON ((177581.6 243870.1...
-#> 4  60254 POLYGON ((179757.6 243454.1...
-#> 5   6750 POLYGON ((176621.6 243390.1...
-#> 6  60254 POLYGON ((180333.6 243230.1...
-#> 7  58718 POLYGON ((176653.6 243166.1...
-#> 8  52318 POLYGON ((177677.6 243166.1...
-#> 9   3166 POLYGON ((178701.6 243166.1...
-#> 10 15454 POLYGON ((179725.6 243166.1...
+#> Geometry type: POLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: 22029.59 ymin: 153054.1 xmax: 258861.6 ymax: 244030.1
+#> Projected CRS: BD72 / Belgian Lambert 72
+#> # A tibble: 13,791 × 2
+#>    value                                                                    geom
+#>  * <int>                                                           <POLYGON [m]>
+#>  1 23390 ((178093.6 244030.1, 178093.6 243998.1, 178061.6 243998.1, 177997.6 24…
+#>  2 56158 ((178701.6 243646.1, 178701.6 243166.1, 179725.6 243166.1, 179725.6 24…
+#>  3 23134 ((177581.6 243870.1, 177581.6 243838.1, 177549.6 243838.1, 177485.6 24…
+#>  4 60254 ((179757.6 243454.1, 179757.6 243422.1, 179725.6 243422.1, 179725.6 24…
+#>  5  6750 ((176621.6 243390.1, 176621.6 243358.1, 176589.6 243358.1, 176589.6 24…
+#>  6 60254 ((180333.6 243230.1, 180333.6 243198.1, 180365.6 243198.1, 180365.6 24…
+#>  7 58718 ((176653.6 243166.1, 176653.6 242142.1, 177677.6 242142.1, 177677.6 24…
+#>  8 52318 ((177677.6 243166.1, 177677.6 242142.1, 178701.6 242142.1, 178701.6 24…
+#>  9  3166 ((178701.6 243166.1, 178701.6 242142.1, 179725.6 242142.1, 179725.6 24…
+#> 10 15454 ((179725.6 243166.1, 179725.6 242142.1, 180749.6 242142.1, 180749.6 24…
+#> # ℹ 13,781 more rows
 ```
 
 
 ### read_GRTSmh_base4frac()
 
-Its use is just to return the base-4-fraction-converted `GRTSmaster_habitats` as a RasterLayer:
+Its use is just to return the base-4-fraction-converted `GRTSmaster_habitats` as a SpatRaster object:
 
-```{r eval=FALSE}
+```{r}
 options(scipen = 999, digits = 15)
 read_GRTSmh_base4frac()
-#> class      : RasterLayer
-#> dimensions : 2843, 7401, 21041043  (nrow, ncol, ncell)
-#> resolution : 32, 32  (x, y)
-#> extent     : 22029.591973471, 258861.591973471, 153054.113583292, 244030.113583292  (xmin, xmax, ymin, ymax)
-#> crs        : +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs
-#> source     : [...]/n2khab_data/20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif
-#> names      : GRTSmh_base4frac
-#> values     : 0.0000000000001, 0.3333333333321  (min, max)
+#> class       : SpatRaster
+#> dimensions  : 2843, 7401, 1  (nrow, ncol, nlyr)
+#> resolution  : 32, 32  (x, y)
+#> extent      : 22029.591973471, 258861.591973471, 153054.113583292, 244030.113583292  (xmin, xmax, ymin, ymax)
+#> coord. ref. : BD72 / Belgian Lambert 72 (EPSG:31370)
+#> source      : GRTSmh_base4frac.tif
+#> name        : GRTSmh_base4frac
+#> min value   :  0.0000000000001
+#> max value   :  0.3333333333321
 ```
 
 Note that the used options are necessary when treating these base-4-fraction GRTS addresses as characters; otherwise scientific notations will be used.

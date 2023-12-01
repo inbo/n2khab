@@ -194,7 +194,7 @@
 #' @export
 read_shallowgroundwater <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "10_raw/shallowgroundwater/shallowgroundwater.gpkg"
            )) {
     assert_that(file.exists(file))

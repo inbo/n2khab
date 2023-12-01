@@ -2,11 +2,11 @@
 % Please edit documentation in R/GRTSmh.R
 \name{read_GRTSmh}
 \alias{read_GRTSmh}
-\title{Return the \code{GRTSmaster_habitats} data source as a RasterLayer or a
-10-layered variant as a RasterBrick}
+\title{Return the \code{GRTSmaster_habitats} data source or a
+10-layered variant as a SpatRaster object}
 \usage{
 read_GRTSmh(
-  file = file.path(fileman_up("n2khab_data"),
+  file = file.path(locate_n2khab_data(),
     c("10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
     "20_processed/GRTSmh_brick/GRTSmh_brick.tif")),
   brick = FALSE
@@ -20,16 +20,21 @@ It uses the first \code{n2khab_data} folder that is found when
 sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
 
-\item{brick}{Logical; determines whether the RasterLayer or RasterBrick data
-source is returned. See the Details section.}
+\item{brick}{Logical; determines whether the single- or ten-layered
+SpatRaster is returned. See the Details section.}
 }
 \value{
-Either a RasterLayer or a 10-layered RasterBrick, always with 21041043 cells.
+A single- or a ten-layered SpatRaster object, always with 21041043
+cells.
+
+If the package is configured to use the raster package
+(see \code{\link[=n2khab_options]{n2khab_options()}}), a RasterLayer is
+returned if \code{brick = FALSE} and a RasterBrick if \code{brick = TRUE}.
 }
 \description{
 By default, the \code{GRTSmaster_habitats} data source is returned as a
-RasterLayer with decimal integer ranking numbers as values.
-If \code{brick = TRUE}, a 10-layered RasterBrick is
+single-layered SpatRaster object with decimal integer ranking numbers as values.
+If \code{brick = TRUE}, a ten-layered SpatRaster is
 returned (data source \code{GRTSmh_brick}; resolution 32 m)
 with the decimal integer ranking numbers of 10 hierarchical levels of the
 GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
@@ -63,12 +68,13 @@ More information on the GRTS algorithm can be found in Stevens & Olsen (2003,
 
 Depending on the value of the \code{brick} argument, the function either
 returns the \code{GRTSmaster_habitats} data source as a
-RasterLayer (\code{brick = FALSE}), or (\code{brick = TRUE}) returns the
-10-layered RasterBrick \code{GRTSmh_brick} (resolution 32 m)
+single-layered SpatRaster (\code{brick = FALSE}), or (\code{brick = TRUE})
+returns the \code{GRTSmh_brick} data source as a
+ten-layered SpatRaster (resolution 32 m)
 with the decimal integer ranking numbers of 10 hierarchical levels of the
 GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
 (with GRTS cell addresses at the resolution level).
-The \code{GRTSmh_brick} data source is a processed dataset (10-layered
+The \code{GRTSmh_brick} data source is a processed dataset (ten-layered
 GeoTIFF), available at
 \href{https://doi.org/10.5281/zenodo.3354403}{Zenodo}, and can only be
 returned by the function when it is already present as a file.
@@ -79,12 +85,13 @@ the \code{GRTSmaster_habitats} data source.
 Both GeoTIFFs (\code{GRTSmaster_habitats}, \code{GRTSmh_brick}) use the
 \code{INT4S} datatype.
 
-The higher-level ranking numbers of the RasterBrick allow spatially balanced
+The higher-level ranking numbers of the ten-layered variant allow spatially
+balanced
 samples at lower spatial resolution than that of 32 m, and can also be
 used for aggregation purposes.
 The provided hierarchical levels correspond to the resolutions vector
 \code{32 * 2^(0:9)} (minimum: 32 meters, maximum: 16384 meters), with
-the corresponding RasterBrick layers named as \code{level0} to \code{level9}.
+the corresponding SpatRaster layers named as \code{level0} to \code{level9}.
 }
 \examples{
 \dontrun{
@@ -96,6 +103,8 @@ the corresponding RasterBrick layers named as \code{level0} to \code{level9}.
 # what to do.
 r <- read_GRTSmh()
 r
+r10 <- read_GRTSmh(brick = TRUE)
+r10
 }
 
 }

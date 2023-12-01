@@ -2,11 +2,11 @@
 % Please edit documentation in R/GRTSmh.R
 \name{read_GRTSmh_diffres}
 \alias{read_GRTSmh_diffres}
-\title{Return a RasterLayer or an \code{sf} polygon layer from the processed data
+\title{Return a SpatRaster or an \code{sf} polygon layer from the processed data
 source \code{GRTSmh_diffres}}
 \usage{
 read_GRTSmh_diffres(
-  dir = file.path(fileman_up("n2khab_data"), "20_processed/GRTSmh_diffres"),
+  dir = file.path(locate_n2khab_data(), "20_processed/GRTSmh_diffres"),
   level,
   polygon = FALSE
 )
@@ -23,18 +23,22 @@ starting from the working directory.}
 resolution. See the Details section.}
 
 \item{polygon}{Logical; determines whether a polygon layer or a
-RasterLayer is returned. See the Details section.}
+SpatRaster is returned. See the Details section.}
 }
 \value{
-Either a RasterLayer or a Simple feature collection of geometry type
+Either a SpatRaster or a Simple feature collection of geometry type
 \code{POLYGON}.
+
+If the package is configured to use the raster package
+(see \code{\link[=n2khab_options]{n2khab_options()}}), a RasterLayer is
+returned instead of a SpatRaster.
 }
 \description{
 The \code{GRTSmh_diffres} data source is derived from
 \code{GRTSmh_brick}.
 It provides the hierarchical levels 1 to 9 of the
 GRTS cell addresses at the corresponding spatial resolution.
-The function returns one selected level, either as a RasterLayer or as an
+The function returns one selected level, either as a SpatRaster or as an
 \code{sf} polygon layer (in the latter case, only levels 4 to 9 are
 provided).
 The coordinate reference system is 'BD72 / Belgian Lambert 72'
@@ -72,7 +76,7 @@ Flanders are covered by non-\code{NA} cells along the border.
 }
 
 The function returns the selected \code{level} either as an \code{sf} polygon
-layer or as a RasterLayer, depending on the
+layer or as a SpatRaster, depending on the
 \code{polygon} argument.
 
 The higher-level ranking numbers (compared to the original level 0) allow
@@ -113,10 +117,8 @@ outer borders (i.e., not excluding the Brussels Capital Region).
 # what to do.
 r <- read_GRTSmh_diffres(level = 7)
 r
-raster::spplot(r)
 p <- read_GRTSmh_diffres(level = 7, polygon = TRUE)
 p
-plot(p)
 }
 
 }

@@ -219,12 +219,12 @@ convert_base4frac_to_dec <-
 
 
 
-#' Return the \code{GRTSmaster_habitats} data source as a RasterLayer or a
-#' 10-layered variant as a RasterBrick
+#' Return the \code{GRTSmaster_habitats} data source or a
+#' 10-layered variant as a SpatRaster object
 #'
 #' By default, the \code{GRTSmaster_habitats} data source is returned as a
-#' RasterLayer with decimal integer ranking numbers as values.
-#' If \code{brick = TRUE}, a 10-layered RasterBrick is
+#' single-layered SpatRaster object with decimal integer ranking numbers as values.
+#' If \code{brick = TRUE}, a ten-layered SpatRaster is
 #' returned (data source \code{GRTSmh_brick}; resolution 32 m)
 #' with the decimal integer ranking numbers of 10 hierarchical levels of the
 #' GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
@@ -257,12 +257,13 @@ convert_base4frac_to_dec <-
 #'
 #' Depending on the value of the \code{brick} argument, the function either
 #' returns the \code{GRTSmaster_habitats} data source as a
-#' RasterLayer (\code{brick = FALSE}), or (\code{brick = TRUE}) returns the
-#' 10-layered RasterBrick \code{GRTSmh_brick} (resolution 32 m)
+#' single-layered SpatRaster (\code{brick = FALSE}), or (\code{brick = TRUE})
+#' returns the \code{GRTSmh_brick} data source as a
+#' ten-layered SpatRaster (resolution 32 m)
 #' with the decimal integer ranking numbers of 10 hierarchical levels of the
 #' GRTS cell addresses, including the one from \code{GRTSmaster_habitats}
 #' (with GRTS cell addresses at the resolution level).
-#' The \code{GRTSmh_brick} data source is a processed dataset (10-layered
+#' The \code{GRTSmh_brick} data source is a processed dataset (ten-layered
 #' GeoTIFF), available at
 #' \href{https://doi.org/10.5281/zenodo.3354403}{Zenodo}, and can only be
 #' returned by the function when it is already present as a file.
@@ -273,20 +274,26 @@ convert_base4frac_to_dec <-
 #' Both GeoTIFFs (\code{GRTSmaster_habitats}, \code{GRTSmh_brick}) use the
 #' \code{INT4S} datatype.
 #'
-#' The higher-level ranking numbers of the RasterBrick allow spatially balanced
+#' The higher-level ranking numbers of the ten-layered variant allow spatially
+#' balanced
 #' samples at lower spatial resolution than that of 32 m, and can also be
 #' used for aggregation purposes.
 #' The provided hierarchical levels correspond to the resolutions vector
 #' \code{32 * 2^(0:9)} (minimum: 32 meters, maximum: 16384 meters), with
-#' the corresponding RasterBrick layers named as \code{level0} to \code{level9}.
+#' the corresponding SpatRaster layers named as \code{level0} to \code{level9}.
 #'
-#' @param brick Logical; determines whether the RasterLayer or RasterBrick data
-#' source is returned. See the Details section.
+#' @param brick Logical; determines whether the single- or ten-layered
+#' SpatRaster is returned. See the Details section.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
-#' Either a RasterLayer or a 10-layered RasterBrick, always with 21041043 cells.
+#' A single- or a ten-layered SpatRaster object, always with 21041043
+#' cells.
+#'
+#' If the package is configured to use the raster package
+#' (see \code{\link[=n2khab_options]{n2khab_options()}}), a RasterLayer is
+#' returned if \code{brick = FALSE} and a RasterBrick if \code{brick = TRUE}.
 #'
 #' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
@@ -310,39 +317,52 @@ convert_base4frac_to_dec <-
 #' # what to do.
 #' r <- read_GRTSmh()
 #' r
+#' r10 <- read_GRTSmh(brick = TRUE)
+#' r10
 #' }
 #'
 #' @export
 #' @importFrom stringr str_c
 read_GRTSmh <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              c(
                "10_raw/GRTSmaster_habitats/GRTSmaster_habitats.tif",
                "20_processed/GRTSmh_brick/GRTSmh_brick.tif"
              )
            ),
            brick = FALSE) {
-    require_pkgs("raster")
+    if (isTRUE(n2khab_using_raster())) {
+      require_pkgs("raster")
+      read1 <- raster::raster
+      read2 <- raster::brick
+      nl <- raster::nlayers
+      `crsystem<-` <- raster::`crs<-`
+    } else {
+      require_pkgs("terra")
+      read1 <- read2 <- terra::rast
+      nl <- terra::nlyr
+      `crsystem<-` <- terra::`crs<-`
+    }
 
     if (brick) {
       if (missing(file)) {
-        b <- raster::brick(file[2])
+        b <- read2(file[2])
       } else {
-        b <- raster::brick(file)
+        b <- read2(file)
       }
-      names(b) <- str_c("level", 0:(raster::nlayers(b) - 1))
+      names(b) <- str_c("level", 0:(nl(b) - 1))
       result <- b
     } else {
       if (missing(file)) {
-        r <- raster::raster(file[1])
+        r <- read1(file[1])
       } else {
-        r <- raster::raster(file)
+        r <- read1(file)
       }
       result <- r
     }
-    raster::crs(result) <- "EPSG:31370"
-    return(result)
+    crsystem(result) <- "EPSG:31370"
+    result
   }
 
 
@@ -367,11 +387,11 @@ read_GRTSmh <-
 
 
 #' Return the processed data source \code{GRTSmh_base4frac} as a
-#' RasterLayer
+#' SpatRaster
 #'
 #' The \code{GRTSmh_base4frac} data source is like a mirror to
 #' \code{GRTSmaster_habitats}, holding the ranking numbers as base 4 fractions.
-#' The function returns it as a RasterLayer in the Belgian Lambert 72 CRS
+#' The function returns it as a SpatRaster in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
 #'
 #' The data source file, read by the function, is a monolayered GeoTIFF in the
@@ -408,7 +428,11 @@ read_GRTSmh <-
 #' @inheritParams read_habitatmap_stdized
 #'
 #' @return
-#' A RasterLayer with 21041043 cells.
+#' A SpatRaster with 21041043 cells.
+#'
+#' If the package is configured to use the raster package
+#' (see \code{\link[=n2khab_options]{n2khab_options()}}), a RasterLayer is
+#' returned instead.
 #'
 #' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
@@ -426,21 +450,28 @@ read_GRTSmh <-
 #' # 'GRTSmh_base4frac' data source is present in the default subdirectory.
 #' # In all other cases, this example won't work but at least you can consider
 #' # what to do.
+#' oldopt <- options(scipen = 999, digits = 15)
 #' r <- read_GRTSmh_base4frac()
 #' r
+#' options(oldopt)
 #' }
 #'
 #' @export
 read_GRTSmh_base4frac <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              "20_processed/GRTSmh_base4frac/GRTSmh_base4frac.tif"
            )) {
-    require_pkgs("raster")
-
-    r <- raster::raster(file)
-    raster::crs(r) <- "EPSG:31370"
-    return(r)
+    if (isTRUE(n2khab_using_raster())) {
+      require_pkgs("raster")
+      r <- raster::raster(file)
+      raster::crs(r) <- "EPSG:31370"
+    } else {
+      require_pkgs("terra")
+      r <- terra::rast(file)
+      terra::crs(r) <- "EPSG:31370"
+    }
+    r
   }
 
 
@@ -470,14 +501,14 @@ read_GRTSmh_base4frac <-
 
 
 
-#' Return a RasterLayer or an \code{sf} polygon layer from the processed data
+#' Return a SpatRaster or an \code{sf} polygon layer from the processed data
 #' source \code{GRTSmh_diffres}
 #'
 #' The \code{GRTSmh_diffres} data source is derived from
 #' \code{GRTSmh_brick}.
 #' It provides the hierarchical levels 1 to 9 of the
 #' GRTS cell addresses at the corresponding spatial resolution.
-#' The function returns one selected level, either as a RasterLayer or as an
+#' The function returns one selected level, either as a SpatRaster or as an
 #' \code{sf} polygon layer (in the latter case, only levels 4 to 9 are
 #' provided).
 #' The coordinate reference system is 'BD72 / Belgian Lambert 72'
@@ -514,7 +545,7 @@ read_GRTSmh_base4frac <-
 #' }
 #'
 #' The function returns the selected \code{level} either as an \code{sf} polygon
-#' layer or as a RasterLayer, depending on the
+#' layer or as a SpatRaster, depending on the
 #' \code{polygon} argument.
 #'
 #' The higher-level ranking numbers (compared to the original level 0) allow
@@ -554,11 +585,15 @@ read_GRTSmh_base4frac <-
 #' @param level Integer in the range from 1 to 9; determines the spatial
 #' resolution. See the Details section.
 #' @param polygon Logical; determines whether a polygon layer or a
-#' RasterLayer is returned. See the Details section.
+#' SpatRaster is returned. See the Details section.
 #'
 #' @return
-#' Either a RasterLayer or a Simple feature collection of geometry type
+#' Either a SpatRaster or a Simple feature collection of geometry type
 #' \code{POLYGON}.
+#'
+#' If the package is configured to use the raster package
+#' (see \code{\link[=n2khab_options]{n2khab_options()}}), a RasterLayer is
+#' returned instead of a SpatRaster.
 #'
 #' @family functions involved in processing the 'GRTSmaster_habitats' data source
 #'
@@ -572,10 +607,8 @@ read_GRTSmh_base4frac <-
 #' # what to do.
 #' r <- read_GRTSmh_diffres(level = 7)
 #' r
-#' raster::spplot(r)
 #' p <- read_GRTSmh_diffres(level = 7, polygon = TRUE)
 #' p
-#' plot(p)
 #' }
 #'
 #' @export
@@ -584,7 +617,7 @@ read_GRTSmh_base4frac <-
 #' read_sf
 #' st_crs<-
 read_GRTSmh_diffres <-
-  function(dir = file.path(fileman_up("n2khab_data"), "20_processed/GRTSmh_diffres"),
+  function(dir = file.path(locate_n2khab_data(), "20_processed/GRTSmh_diffres"),
            level,
            polygon = FALSE) {
     if (!(level %in% 1:9 & level %% 1 == 0)) {
@@ -606,9 +639,16 @@ read_GRTSmh_diffres <-
       suppressWarnings(st_crs(p) <- 31370)
       p
     } else {
-      require_pkgs("raster")
-
-      r <- raster::raster(file.path(
+      if (isTRUE(n2khab_using_raster())) {
+        require_pkgs("raster")
+        read <- raster::raster
+        `crsystem<-` <- raster::`crs<-`
+      } else {
+        require_pkgs("terra")
+        read <- terra::rast
+        `crsystem<-` <- terra::`crs<-`
+      }
+      r <- read(file.path(
         dir,
         str_c(
           "GRTSmh_diffres.",
@@ -616,7 +656,7 @@ read_GRTSmh_diffres <-
         )
       ))
       names(r) <- str_c("level", level)
-      raster::crs(r) <- "EPSG:31370"
+      crsystem(r) <- "EPSG:31370"
       r
     }
   }

@@ -101,31 +101,30 @@ This is the structure of the [repo]:
 ├── n2khab.Rproj        <- Main RStudio project file.
 ├── NAMESPACE
 ├── NEWS.md             <- The changelog.
-└── README.md
+└── README.md           <- The package homepage.
 ```
 
 ### Coding tools
 
 When writing functions for `n2khab`:
 
-- please use `tidyverse`, `sf` and `raster` packages for data reading.
-Discover the human-friendly way of coding a data processing pipeline through the use of [pipes](https://r4ds.had.co.nz/pipes.html)!
+- please use `sf` and `terra` packages for reading geospatial data.
 Organise data in R in a [tidy](https://r4ds.had.co.nz/tidy-data.html#tidy-data-1) way in order to avoid troubles later on.
 Recommended resources to get started are:
     - [R for Data Science](https://r4ds.had.co.nz/)
     - [Geocomputation with R](https://geocompr.robinlovelace.net)
-    - [R packages](https://r-pkgs.org/) (by Hadley Wickham and Jenny Bryan)
+    - [R packages](https://r-pkgs.org/)
     - [`vignette("rd-formatting", package = "roxygen2")`](https://roxygen2.r-lib.org/articles/formatting.html) for documentation syntax.
     Or use markdown support in function documentation after adding the `@md` tag.
 - have a quick look at the [tidyverse style guide](https://style.tidyverse.org/).
 There you see how to style object, variable and function names, as well as the documentation.
 At least keep in mind: **use lower case and 'snake_case'** for object, variable and function names.
-- if your function returns a dataframe, use `dplyr::as_tibble()` to return it as a tibble instead.
-A tibble is a dataframe that makes working in the tidyverse a little [easier](https://r4ds.had.co.nz/tibbles.html).
+- if your function returns a data frame, use `dplyr::as_tibble()` to return it as a tibble instead.
+A tibble is a data frame that makes working in the tidyverse a little [easier](https://r4ds.had.co.nz/tibbles.html).
 - functions that read or process data should return data as much as possible internationalized:
     - availability of English names for types, environmental pressures, ...
     Other languages can be accommodated as well;
-    - English names for table headings (dataframe variables).
+    - English names for table headings (data frame variables).
 
 
 ### How to contribute code? 

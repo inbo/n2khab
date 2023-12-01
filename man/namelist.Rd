@@ -5,7 +5,7 @@
 \title{Documentation of included data source 'namelist'}
 \format{
 A vc-formatted data source. As such, it corresponds to
-a dataframe with many rows and 4 variables:
+a data frame with many rows and 4 variables:
 \describe{
   \item{code}{A code used elsewhere.}
   \item{lang}{An
@@ -46,8 +46,6 @@ Multiple languages are supported.
 
 Other n2khab-referencelists: 
 \code{\link{env_pressures}},
-\code{\link{scheme_types}},
-\code{\link{schemes}},
 \code{\link{types}}
 }
 \concept{n2khab-referencelists}

@@ -30,15 +30,10 @@ relevant to N2KHAB projects [^N2KHAB]:
 - `types`: checklist of types (habitat (sub)types and regionally important biotopes) (documentation links: [this website](../reference/types.html) / [installed package](../html/types.html)), 
 represented by their *current* codes
 - `env_pressures`: checklist of environmental pressures, represented by codes (documentation links: [this website](../reference/env_pressures.html) / [installed package](../html/env_pressures.html))
-- `schemes`: list of schemes [^scheme] for N2KHAB monitoring programmes or other N2KHAB projects (documentation links: [this website](../reference/schemes.html) / [installed package](../html/schemes.html))
-- `scheme_types`: lists the types that belong to each N2KHAB scheme, and optionally defines typegroups within a scheme (documentation links: [this website](../reference/scheme_types.html) / [installed package](../html/scheme_types.html))
 
 Additionally, `namelist` provides names and (optionally) shortnames for IDs/codes used in the above lists (documentation links: [this website](../reference/namelist.html) / [installed package](../html/namelist.html)).
 
 [^N2KHAB]: With N2KHAB projects, we mean scientific monitoring programmes and research projects regarding Flemish Natura 2000 habitats and regionally important biotopes (RIBs).
-
-[^scheme]: A 'scheme' refers to a monitoring or research setup that determines which types (habitat/RIBs) are to be investigated for a question or for a bunch of related questions.
-
 
 
 ### More on list contents and package functionality
@@ -47,7 +42,7 @@ Beside enlisting all items, the reference lists provide additional information o
 This information may be of a defining nature (and obligate), or may just provide useful categories and tags to filter by.
 
 Reading functions of the `n2khab` package return the reference lists as **tibbles**, with appropriate text from `namelist` added.
-A tibble is a dataframe that makes working in the tidyverse a little [easier](https://r4ds.had.co.nz/tibbles.html).
+A tibble is a data frame that makes working in the tidyverse a little [easier](https://r4ds.had.co.nz/tibbles.html).
 
 
 
@@ -87,22 +82,3 @@ read_env_pressures()
 ```
 
 When actually using these reading functions, you will -- of course -- assign its result to an object.
-E.g. with the `schemes` reference list:
-
-```{r}
-schemes <- read_schemes()
-schemes
-```
-
-The `read_scheme_types()` function provides the extra ability to _toggle_ the presence of most textual information, because these comprise many extra variables (combining all additional information of the concerned schemes _and_ the types).
-This behaviour is controlled by the argument `extended`, which is `FALSE` by default.
-
-```{r}
-read_scheme_types()
-```
-
-```{r}
-read_scheme_types(extended = TRUE)
-```
-
-When you request all this extra information (some of which is currently empty), you will want to select the columns that you need with `dplyr::select()`.

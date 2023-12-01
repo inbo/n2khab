@@ -6,8 +6,7 @@
 layer}
 \usage{
 read_habitatsprings(
-  file = file.path(fileman_up("n2khab_data"),
-    "10_raw/habitatsprings/habitatsprings.geojson"),
+  file = file.path(locate_n2khab_data(), "10_raw/habitatsprings/habitatsprings.geojson"),
   filter_hab = FALSE,
   units_7220 = FALSE,
   version = "habitatsprings_2020v2"

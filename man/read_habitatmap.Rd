@@ -5,7 +5,7 @@
 \title{Return the data source \code{habitatmap} as an \code{sf} multipolygon layer}
 \usage{
 read_habitatmap(
-  file = file.path(fileman_up("n2khab_data"), "10_raw/habitatmap"),
+  file = file.path(locate_n2khab_data(), "10_raw/habitatmap"),
   filter_hab = FALSE,
   version = c("habitatmap_2020", "habitatmap_2018")
 )

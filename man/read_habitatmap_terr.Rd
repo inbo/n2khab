@@ -6,7 +6,7 @@
 objects}
 \usage{
 read_habitatmap_terr(
-  file = file.path(fileman_up("n2khab_data"),
+  file = file.path(locate_n2khab_data(),
     "20_processed/habitatmap_terr/habitatmap_terr.gpkg"),
   keep_aq_types = TRUE,
   drop_7220 = TRUE,

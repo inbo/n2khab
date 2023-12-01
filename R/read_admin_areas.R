@@ -57,7 +57,7 @@
 #' @export
 read_admin_areas <-
   function(file = file.path(
-             fileman_up("n2khab_data"),
+             locate_n2khab_data(),
              c(
                "10_raw/flanders",
                "10_raw/provinces",

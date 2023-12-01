@@ -2,10 +2,10 @@
 % Please edit documentation in R/read_raster_runif.R
 \name{read_raster_runif}
 \alias{read_raster_runif}
-\title{Return the data source \code{raster_runif} as a RasterLayer}
+\title{Return the data source \code{raster_runif} as a SpatRaster}
 \usage{
 read_raster_runif(
-  file = file.path(fileman_up("n2khab_data"), "10_raw/raster_runif/raster_runif.tif"),
+  file = file.path(locate_n2khab_data(), "10_raw/raster_runif/raster_runif.tif"),
   version = "raster_runif_v1"
 )
 }
@@ -21,7 +21,11 @@ starting from the working directory.}
 Defaults to the latest available version defined by the package.}
 }
 \value{
-A RasterLayer.
+A SpatRaster.
+
+If the package is configured to use the raster package
+(see \code{\link[=n2khab_options]{n2khab_options()}}), a RasterLayer is
+returned instead.
 }
 \description{
 The \code{raster_runif} data source covers Flanders and the Brussels
@@ -53,7 +57,6 @@ n2khab-preprocessing} repository.
 # what to do.
 r <- read_raster_runif()
 r
-raster::spplot(r)
 }
 
 }
