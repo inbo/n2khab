@@ -54,6 +54,7 @@ Suggests:
     jsonlite,
     knitr,
     mapview,
+    n2khabmon,
     openssl,
     raster (>= 3.6-3),
     readxl,
@@ -65,5 +66,7 @@ Suggests:
     units,
     utils,
     withr
+Remotes:
+    inbo/n2khabmon
 VignetteBuilder: knitr
 Config/testthat/edition: 3

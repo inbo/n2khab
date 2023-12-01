@@ -65,7 +65,6 @@
 #' A data frame, either identical or longer than the input data frame.
 #'
 #' @seealso
-#' \code{\link{read_scheme_types}},
 #' \code{\link{read_types}},
 #' \code{\link{read_habitatmap_terr}},
 #' \code{\link{read_watersurfaces_hab}}
@@ -73,13 +72,13 @@
 #' @examples
 #' library(dplyr)
 #' x <-
-#'   read_scheme_types() %>%
+#'   n2khabmon::read_scheme_types() %>%
 #'   filter(scheme == "GW_05.1_terr")
 #' expand_types(x)
 #' expand_types(x, strict = FALSE)
 #'
 #' x <-
-#'   read_scheme_types() %>%
+#'   n2khabmon::read_scheme_types() %>%
 #'   filter(scheme == "GW_05.1_terr") %>%
 #'   group_by(typegroup)
 #' expand_types(x)
