@@ -152,7 +152,7 @@ Existing R code will continue to run normally if you complied with the recommend
 ## Internal changes
 
 - Harden CRS representations (#84)
-- Re-integrate `download_zenodo()` (from `inborutils`) (#89)
+- Re-integrate `download_zenodo()` (from {inborutils}) (#89)
 - Drop some package dependencies to speed up package loading (#89, #90)
 
 
@@ -196,13 +196,13 @@ Further, a number of smaller fixes and enhancements were made.
 - Several built-in checklists (among which: `types` and `env_pressures`)
 - Function documentation
 - 4 tutorials (vignettes / articles)
-- A reexport of `download_zenodo()` from `inborutils`
+- A reexport of `download_zenodo()` from {inborutils}
 - Website built with `pkgdown`
 
 ## Historical note
 
-This package is the successor of the 'n2khabutils' package.
+This package is the successor of the {n2khabutils} package.
 Previous to commit `c8608d9`, the code was part of the [n2khab-monitoring](https://github.com/inbo/n2khab-monitoring) repo (formerly 'n2khab-inputs'), where the original version history remains stored.
-At that time, the package was called 'n2khabutils'.
+At that time, the package was called {n2khabutils}.
 As a convenience, the {n2khab} repo still holds the rewritten (shrinked) package history from before commit `c8608d9`, as defined by the related files and folders.
 See [this](https://github.com/inbo/n2khab-monitoring/issues/28) issue in the 'n2khab-monitoring' repo, where the migration is documented.
