@@ -63,6 +63,10 @@ pre, code {
 	font-family: "Ubuntu mono",Menlo,Monaco,Consolas,monospace;
 }
 
+a code, a pre {
+	color: #AD3C78;
+}
+
 code a, pre a {
 	color: #AD3C78;
 }
