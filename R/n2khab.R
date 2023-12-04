@@ -32,25 +32,30 @@ utils::globalVariables(c("."))
     )
   }
   if (!is.null(nslookup("api.github.com", error = FALSE))) {
-    ref <- remotes::github_remote(
-      "inbo/n2khab",
-      ref = remotes::github_release()
-    )$ref
-    release <- package_version(gsub("\\p{L}*", "", ref, perl = TRUE))
-    if (packageVersion("n2khab") < release) {
-      packageStartupMessage(
-        "\n",
-        rep("=", getOption("width")),
-        "\nIt is advised to upgrade n2khab to its current version ",
-        release,
-        ". Run:\n\n",
-        'detach("package:n2khab", unload = TRUE)\n',
-        'install.packages("n2khab", repos = c(inbo = "https://inbo.r-universe.dev",
+    tryCatch(
+      {
+        ref <- remotes::github_remote(
+          "inbo/n2khab",
+          ref = remotes::github_release()
+        )$ref
+        release <- package_version(gsub("\\p{L}*", "", ref, perl = TRUE))
+        if (packageVersion("n2khab") < release) {
+          packageStartupMessage(
+            "\n",
+            rep("=", getOption("width")),
+            "\nIt is advised to upgrade n2khab to its current version ",
+            release,
+            ". Run:\n\n",
+            'detach("package:n2khab", unload = TRUE)\n',
+            'install.packages("n2khab", repos = c(inbo = "https://inbo.r-universe.dev",
                                      CRAN = "https://cloud.r-project.org"))',
-        "\n",
-        "library(n2khab)\n",
-        rep("=", getOption("width"))
-      )
-    }
+            "\n",
+            "library(n2khab)\n",
+            rep("=", getOption("width"))
+          )
+        }
+      },
+      error = function(e) {}
+    )
   }
 }
