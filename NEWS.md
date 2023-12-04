@@ -1,4 +1,6 @@
-# n2khab (development version)
+# n2khab 0.10.1 (2023-12-04)
+
+- Silently ignore errors from package {remotes} during package loading ([56e9c06](https://github.com/inbo/n2khab/commit/56e9c06)).
 
 # n2khab 0.10.0 (2023-12-01)
 
