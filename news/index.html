@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.1</span>
       </span>
     </div>
 
@@ -140,6 +140,14 @@
       <small>Source: <a href='https://github.com/inbo/n2khab/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="n2khab-0101-2023-12-04" class="section level1">
+<h1 class="page-header" data-toc-text="0.10.1">
+<a href="#n2khab-0101-2023-12-04" class="anchor"></a>n2khab 0.10.1 (2023-12-04)</h1>
+<ul>
+<li>Silently ignore errors from package {remotes} during package loading
+(<a href="https://github.com/inbo/n2khab/commit/56e9c06">56e9c06</a>).</li>
+</ul>
+</div>
     <div id="n2khab-0100-2023-12-01" class="section level1">
 <h1 class="page-header" data-toc-text="0.10.0">
 <a href="#n2khab-0100-2023-12-01" class="anchor"></a>n2khab 0.10.0 (2023-12-01)</h1>
@@ -449,8 +457,8 @@ defining the schemes’ target populations);</li>
 <a href="#internal-changes" class="anchor"></a>Internal changes</h2>
 <ul>
 <li>Harden CRS representations (<a href='https://github.com/inbo/n2khab/issues/84'>#84</a>)</li>
-<li>Re-integrate <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> (from
-<code>inborutils</code>) (<a href='https://github.com/inbo/n2khab/issues/89'>#89</a>)</li>
+<li>Re-integrate <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> (from {inborutils})
+(<a href='https://github.com/inbo/n2khab/issues/89'>#89</a>)</li>
 <li>Drop some package dependencies to speed up package loading (<a href='https://github.com/inbo/n2khab/issues/89'>#89</a>,
 <a href='https://github.com/inbo/n2khab/issues/90'>#90</a>)</li>
 </ul>
@@ -546,9 +554,7 @@ GDAL/PROJ.4 installations (<a href='https://github.com/inbo/n2khab/issues/61'>#6
 <code>env_pressures</code>)</li>
 <li>Function documentation</li>
 <li>4 tutorials (vignettes / articles)</li>
-<li>A reexport of <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> from
-<code>inborutils</code>
-</li>
+<li>A reexport of <code><a href="../reference/download_zenodo.html">download_zenodo()</a></code> from {inborutils}</li>
 <li>Website built with <code>pkgdown</code>
 </li>
 </ul>
@@ -556,10 +562,10 @@ GDAL/PROJ.4 installations (<a href='https://github.com/inbo/n2khab/issues/61'>#6
 <div id="historical-note" class="section level2">
 <h2 class="hasAnchor">
 <a href="#historical-note" class="anchor"></a>Historical note</h2>
-<p>This package is the successor of the ‘n2khabutils’ package. Previous
+<p>This package is the successor of the {n2khabutils} package. Previous
 to commit <code>c8608d9</code>, the code was part of the <a href="https://github.com/inbo/n2khab-monitoring">n2khab-monitoring</a>
 repo (formerly ‘n2khab-inputs’), where the original version history
-remains stored. At that time, the package was called ‘n2khabutils’. As a
+remains stored. At that time, the package was called {n2khabutils}. As a
 convenience, the {n2khab} repo still holds the rewritten (shrinked)
 package history from before commit <code>c8608d9</code>, as defined by
 the related files and folders. See <a href="https://github.com/inbo/n2khab-monitoring/issues/28">this</a>
