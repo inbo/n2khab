@@ -125,5 +125,7 @@ n2khab_using_raster <- function() {
   if (identical(opt, "")) {
     opt <- NA
   }
-  opt || grepl("TRUE|true", opt)
+  (is.logical(opt) && length(opt) == 1 && opt) ||
+    identical(opt, "TRUE") ||
+    identical(opt, "true")
 }
