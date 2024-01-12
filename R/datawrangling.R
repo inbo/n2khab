@@ -31,7 +31,7 @@
 #' \item{for 2330: both subtype codes must be present}
 #' \item{for 5130: 5130_hei must be present (note that only the main type code
 #' occurs in the targeted data sources)}
-#' \item{for 6230: 6230_ha, 6230_hmo and 6230_hnk must be present
+#' \item{for 6230: 6230_ha, 6230_hmo and 6230_hn must be present
 #' (not the rare 6230_hnk)}
 #' \item{for 91E0: 91E0_va, 91E0_vm and 91E0_vn must be present
 #' (not the rarer 91E0_sf, 91E0_vc and 91E0_vo)}
@@ -210,7 +210,7 @@ expand_types_plain <- function(x,
       subtypes %>%
       filter(.data$main_type == "2330" |
         .data$type %in% c(
-          "6230_ha", "6230_hmo", "6230_hnk",
+          "6230_ha", "6230_hmo", "6230_hn",
           "5130_hei",
           "91E0_va", "91E0_vm", "91E0_vn"
         )) %>%
