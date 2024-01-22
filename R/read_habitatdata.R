@@ -1647,7 +1647,12 @@ read_habitatsprings <-
         everything(),
         -.data$validity_status,
         -.data$sbz
+      ) %>%
+      mutate(
+        point_id = as.integer(.data$point_id),
+        unit_id = as.integer(.data$unit_id)
       )
+
 
     if (version != "habitatsprings_2019v1") {
       habitatsprings <-
