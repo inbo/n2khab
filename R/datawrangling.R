@@ -130,11 +130,26 @@ expand_types <- function(x,
   assert_that(is.flag(use_grouping), noNA(use_grouping))
   assert_that(is.flag(strict), noNA(strict))
 
+  types <-
+    read_types() %>%
+    select(1:3)
+
+  subtypes <-
+    types %>%
+    filter(.data$typelevel == "subtype") %>%
+    select(1, 3)
+
+  if (!all(unique(x[[type_var]]) %in% types$type)) {
+    warning("The data frame contains type codes which are not standard.")
+  }
+
   if (!use_grouping) {
     expand_types_plain(
       x = x,
       type_var = type_var,
-      strict = strict
+      strict = strict,
+      types = types,
+      subtypes = subtypes
     )
   } else {
     x %>%
@@ -143,7 +158,9 @@ expand_types <- function(x,
       mutate(newdata = map(.data$data,
         expand_types_plain,
         type_var = type_var,
-        strict = strict
+        strict = strict,
+        types = types,
+        subtypes = subtypes
       )) %>%
       select(-.data$data) %>%
       unnest(cols = .data$newdata) %>%
@@ -186,23 +203,12 @@ expand_types <- function(x,
 #' @keywords internal
 expand_types_plain <- function(x,
                                type_var = "type",
-                               strict = TRUE) {
-  types <-
-    read_types() %>%
-    select(1:3)
-
-  subtypes <-
-    types %>%
-    filter(.data$typelevel == "subtype") %>%
-    select(1, 3)
-
+                               strict = TRUE,
+                               types,
+                               subtypes) {
   orig_types <-
     x[, type_var] %>%
     rename(orig_abcd = type_var)
-
-  if (!all(unique(orig_types$orig_abcd) %in% types$type)) {
-    warning("The data frame contains type codes which are not standard.")
-  }
 
   # main types to add:
   suppressWarnings(

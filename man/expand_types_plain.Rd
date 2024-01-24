@@ -4,7 +4,7 @@
 \alias{expand_types_plain}
 \title{Expand a 'type' column in a data frame (grouping not taken into account)}
 \usage{
-expand_types_plain(x, type_var = "type", strict = TRUE)
+expand_types_plain(x, type_var = "type", strict = TRUE, types, subtypes)
 }
 \arguments{
 \item{x}{An object of class \code{data.frame}.}
