@@ -122,9 +122,9 @@ Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
 }
 \seealso{
 Other functions involved in processing the 'habitatmap' data source: 
+\code{\link{read_habitatmap}()},
 \code{\link{read_habitatmap_stdized}()},
-\code{\link{read_habitatmap_terr}()},
-\code{\link{read_habitatmap}()}
+\code{\link{read_habitatmap_terr}()}
 
 Other functions involved in processing the 'watersurfaces' data source: 
 \code{\link{read_watersurfaces}()}
