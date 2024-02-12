@@ -65,8 +65,8 @@ occurs in the targeted data sources)}
 }
 However, it is possible to relax this requirement by setting
 \code{strict = FALSE}.
-This will add the main type code whenever \emph{one} corresponding subtype
-code is present.
+This will add the main type code whenever \emph{one} of the above required
+subtype codes is present.
 In all cases no other main type codes are added apart from
 2330, 5130, 6230 and 91E0.
 This is because the data sources with which the result
