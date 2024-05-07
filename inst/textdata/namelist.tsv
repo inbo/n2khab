@@ -181,7 +181,6 @@ rbbsm	en	Myrica gale scrubs	Myrica gale scrubs
 rbbso	en	Wet Salix scrubs on acid peaty soil	Wet Salix scrubs on acid peaty soil
 rbbsp	en	Thorny scrubs	Thorny scrubs
 rbbvos	en	Alopecurion grasslands (no 6510 habitat type)	Alopecurion grasslands (not 6510)
-rbbvos+	en	Species-rich Alopecurion grasslands (no 6510 habitat type)	Species-rich Alopecurion grasslands (not 6510)
 rbbzil	en	Potentilla anserina grasslands	Potentilla anserina grasslands
 rbbzil+	en	Species-rich Potentilla anserina grasslands	Species-rich Potentilla anserina grasslands
 RC	en	Rocky habitats and caves	NA
@@ -398,7 +397,6 @@ rbbsm	nl	Gagelstruweel	gagelstruweel
 rbbso	nl	Vochtig wilgenstruweel op venige en zure grond	vochtig wilgenstruweel op venige of zure grond
 rbbsp	nl	Doornstruweel	doornstruweel
 rbbvos	nl	Grote vossenstaartgrasland niet vervat in 6510	grote vossenstaartgrasland
-rbbvos+	nl	Soortenrijk grote vossenstaartgrasland	soortenrijk grote vossenstaartgrasland
 rbbzil	nl	Zilverschoongrasland	zilverschoongrasland
 rbbzil+	nl	Soortenrijk zilverschoongrasland	soortenrijk zilverschoongrasland
 RC	nl	Rotsachtige habitats en grotten	NA

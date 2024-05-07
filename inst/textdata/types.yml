@@ -5,8 +5,8 @@
   sorting:
   - typeclass
   - type
-  hash: 3716361494fa7d0742afaf7cb987f8ad91e0fb52
-  data_hash: 45a6fbd03ba5f6587fda5553f2c734fedc609387
+  hash: 99bf28ab22dace825d359ca9eb45e9893df454b3
+  data_hash: faf29949772e836dc80bb289c1739786d0a759ed
 type:
   class: factor
   labels:
@@ -83,7 +83,6 @@ type:
   - rbbkam
   - rbbkam+
   - rbbvos
-  - rbbvos+
   - rbbzil
   - rbbzil+
   - '7110'
@@ -195,7 +194,6 @@ type:
   - 71
   - 72
   - 73
-  - 74
   - 75
   - 76
   - 77
