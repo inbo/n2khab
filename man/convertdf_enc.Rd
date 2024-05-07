@@ -17,10 +17,13 @@ class (such as \code{data.frame} or \code{sf})}
 \item{sub}{character string.  If not \code{NA} it is used to replace
     any non-convertible bytes in the input.  (This would normally be a
     single character, but can be more.)  If \code{"byte"}, the indication is
-    \code{"<xx>"} with the hex code of the byte.  If \code{"Unicode"}
-    and converting from UTF-8, the Unicode point in the form
-    \code{"<U+xxxx>"}, or if \code{c99}, a C99-style escape
-    \code{"\uxxxx"}.}
+    \code{"<xx>"} with the hex code of the byte.
+    %% as from R 4.4.0 always zero-pads to 4 hex digits.
+    If \code{"Unicode"} and converting from UTF-8, the Unicode point in
+    the form \code{"<U+xxxx>"}, or if \code{c99}, a C99-style escape
+    \code{"\uxxxx"}. (For points in a \sQuote{supplementary plane},
+    %% zero-padding to eight hex digits is as prescribed by C99.
+    \code{"\Uxxxxxxxx"} is used, with zero-padding)}
 
 \item{colnames}{Should column names be converted as well?}
 }
