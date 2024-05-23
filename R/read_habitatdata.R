@@ -882,6 +882,14 @@ read_watersurfaces <-
 #' requires the corresponding version of the processed data source
 #' \code{habitatmap_stdized} to be present in its default location inside the
 #' \code{n2khab_data} folder.
+#' @param fix_geom Logical.
+#' Should invalid or corrupt geometries be fixed in the resulting \code{sf}
+#' object in order to make them valid?
+#' This prevents potential problems in geospatial operations, but beware that
+#' fixed geometries are different from the original ones.
+#' \code{\link[sf:st_make_valid]{sf::st_make_valid()}} is used to fix
+#' geometries (with GEOS as backend).
+#' Defaults to \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -919,6 +927,12 @@ read_watersurfaces <-
 #'
 #' hm <- read_habitatmap()
 #' hm
+#'
+#' hm_valid <- read_habitatmap(fix_geom = TRUE)
+#' hm_valid
+#'
+#' all(sf::st_is_valid(hm))
+#' all(sf::st_is_valid(hm_valid))
 #' }
 #'
 #' @export
@@ -928,6 +942,8 @@ read_watersurfaces <-
 #' noNA
 #' @importFrom sf
 #' read_sf
+#' st_is_valid
+#' st_make_valid
 #' st_crs<-
 #' @importFrom rlang .data
 #' @importFrom dplyr
@@ -940,12 +956,15 @@ read_watersurfaces <-
 read_habitatmap <-
   function(file = file.path(locate_n2khab_data(), "10_raw/habitatmap"),
            filter_hab = FALSE,
+           fix_geom = FALSE,
            version = c(
+             "habitatmap_2023",
              "habitatmap_2020",
              "habitatmap_2018"
            )) {
     assert_that(file.exists(file))
     assert_that(is.flag(filter_hab), noNA(filter_hab))
+    assert_that(is.flag(fix_geom), noNA(fix_geom))
     version <- match.arg(version)
 
     if (filter_hab) {
@@ -1030,6 +1049,18 @@ read_habitatmap <-
       habitatmap <- habitatmap %>%
         filter(.data$polygon_id %in% hab_stdized$polygon_id) %>%
         mutate(polygon_id = factor(.data$polygon_id, levels = hab_stdized$polygon_id))
+    }
+
+    if (fix_geom) {
+      # temporarily dropped because st_is_valid takes too long
+      # n_invalid <- sum(
+      #   !st_is_valid(habitatmap) | is.na(st_is_valid(habitatmap))
+      # )
+      # if (n_invalid > 0) {
+        habitatmap <- st_make_valid(habitatmap)
+        # message("Fixed ", n_invalid, " invalid or corrupt geometries.")
+        message("Fixed invalid or corrupt geometries.")
+      # }
     }
 
     suppressWarnings(st_crs(habitatmap) <- 31370)
