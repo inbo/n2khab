@@ -405,8 +405,8 @@ read_watersurfaces_hab <-
 
     watersurfaces_types <- watersurfaces_types %>%
       mutate(
-        polygon_id = factor(.data$polygon_id, levels = levels(watersurfaces_polygons$polygon_id)),
-        certain = .data$certain == 1,
+        polygon_id = factor(polygon_id, levels = levels(watersurfaces_polygons$polygon_id)),
+        certain = certain == 1,
         type = factor(.data$type,
           levels = levels(types$type)
         )
@@ -1468,8 +1468,8 @@ read_habitatstreams <-
     lines <-
       habitatstreams %>%
       select(
-        river_name = .data$NAAM,
-        source_id = .data$BRON
+        river_name = NAAM,
+        source_id = BRON
       ) %>%
       mutate(
         river_name = factor(
@@ -1478,7 +1478,7 @@ read_habitatstreams <-
             replacement = "\\1\\U\\2",
             str_replace(
               str_to_title(
-                str_squish(.data$river_name)
+                str_squish(river_name)
               ),
               pattern = "Ij",
               replacement = "IJ"
@@ -1486,7 +1486,7 @@ read_habitatstreams <-
             perl = TRUE
           )
         ),
-        source_id = factor(.data$source_id),
+        source_id = factor(source_id),
         type = "3260" %>%
           factor(levels = read_types() %>%
             .$type %>%
@@ -1508,8 +1508,8 @@ read_habitatstreams <-
         ) %>%
         mutate(
           source_id = factor(.data$source_id,
-            levels = lines %>% .$source_id %>%
-              levels()
+                             levels = lines %>% .$source_id %>%
+                               levels()
           ),
           source_text = fct_reorder(
             .data$source_text,
