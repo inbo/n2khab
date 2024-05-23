@@ -33,12 +33,16 @@ variable in the \code{sf} object.
 }
 }
 \description{
-Returns the raw data source \code{habitatstreams} (Leyssen et al., 2020)
-as an \code{sf} linestring
+Returns the raw data source \code{habitatstreams}(section 'habitat 3260' from
+De Saeger et al., 2023) as an \code{sf} linestring
 layer or as a list of two objects: the \code{sf} object (CRS:
 Belgian Lambert 72 (EPSG-code \href{https://epsg.io/31370}{31370}))
 plus a data frame
 with textual explanation of the values of the \code{source_id} variable.
+}
+\details{
+For more information about this map, see also the documentation of the
+previous version (Leyssen et al., 2020).
 }
 \examples{
 \dontrun{
@@ -63,11 +67,20 @@ all.equal(
 
 }
 \references{
-Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
+\itemize{
+\item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+Van Dam G., Van Hove M., Wils C. (red.) (2023).
+Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+Instituut voor Natuur- en Bosonderzoek (INBO).
+\doi{10.21436/inbor.96375305}.
+\item Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
 Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 behorend tot het \emph{Ranunculion fluitantis} en het
 \emph{Callitricho-Batrachion}.
 Uitgave 2020 (versie 1.7). Rapporten van het Instituut voor Natuur- en
 Bosonderzoek 2020 (34). Research Institute for Nature and Forest, Brussels.
 \doi{10.21436/inbor.18903609}.
+}
 }
