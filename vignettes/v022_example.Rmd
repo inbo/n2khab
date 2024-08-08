@@ -70,7 +70,7 @@ It belongs to the collection of processed data ([Zenodo-link](https://zenodo.org
 
 ```{r}
 soilmap_simple_path <- file.path(n2khab_data_path, "20_processed/soilmap_simple")
-dir.create(soilmap_simple_path)
+dir.create(soilmap_simple_path, recursive = TRUE)
 download_zenodo(
   doi = "10.5281/zenodo.3732903",
   path = soilmap_simple_path
