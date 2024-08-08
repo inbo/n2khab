@@ -679,6 +679,8 @@ read_watersurfaces <-
       if (n_invalid > 0) {
         watersurfaces <- st_make_valid(watersurfaces)
         message("Fixed ", n_invalid, " invalid or corrupt geometries.")
+      } else {
+        message("No invalid or corrupt geometries found.")
       }
     }
 
