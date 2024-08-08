@@ -674,12 +674,13 @@ read_watersurfaces <-
     }
 
     if (fix_geom) {
-      n_invalid <- sum(
-        !st_is_valid(watersurfaces) | is.na(st_is_valid(watersurfaces))
-      )
+      validities <- st_is_valid(watersurfaces)
+      n_invalid <- sum(!validities | is.na(validities))
       if (n_invalid > 0) {
         watersurfaces <- st_make_valid(watersurfaces)
         message("Fixed ", n_invalid, " invalid or corrupt geometries.")
+      } else {
+        message("No invalid or corrupt geometries found.")
       }
     }
 
