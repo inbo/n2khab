@@ -1053,8 +1053,9 @@ read_habitatmap <-
 
     if (fix_geom) {
       # temporarily dropped because st_is_valid takes too long
+      # validities <- st_is_valid(habitatmap)
       # n_invalid <- sum(
-      #   !st_is_valid(habitatmap) | is.na(st_is_valid(habitatmap))
+      #   !validities | is.na(validities)
       # )
       # if (n_invalid > 0) {
         habitatmap <- st_make_valid(habitatmap)
