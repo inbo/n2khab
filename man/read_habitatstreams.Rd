@@ -33,7 +33,7 @@ variable in the \code{sf} object.
 }
 }
 \description{
-Returns the raw data source \code{habitatstreams}(section 'habitat 3260' from
+Returns the raw data source \code{habitatstreams} (section 'habitat 3260' from
 De Saeger et al., 2023) as an \code{sf} linestring
 layer or as a list of two objects: the \code{sf} object (CRS:
 Belgian Lambert 72 (EPSG-code \href{https://epsg.io/31370}{31370}))
