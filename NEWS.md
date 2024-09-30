@@ -1,5 +1,34 @@
 # n2khab (development version)
 
+## Support for new data source versions
+
+The following new data source versions are now supported by the corresponding functions (#184):
+
+- `habitatmap_2023` (`read_habitatmap()`)
+- `habitatmap_stdized_2023_v1` (`read_habitatmap_stdized()`)
+- `habitatmap_terr_2023_v1` (`read_habitatmap_terr()`)
+- `habitatstreams_2023` (`read_habitatstreams()`)
+- `watersurfaces_hab_v5` (`read_watersurfaces_hab()`)
+
+Function documentation was updated accordingly.
+
+## Drop `rbbvos+` from built-in data sources
+
+- Type `rbbvos+` has been considered too loosely defined, as an intermediate between `rbbvos` and `6510_hua`, and it has not been mapped consistently.
+Hence this type is considered obsolete and it has been dropped from the `types` and `namelist` data sources (#182).
+However do note that it exists in versions of the raw habitatmap data source.
+- `expand_types()` has been adjusted accordingly (#182).
+
+## Other updates
+
+Including:
+
+- the `fix_geom` implementation in `read_watersurfaces()` is now more efficient (#185);
+- `read_habitatmap()` also gained a `fix_geom` argument (#184);
+- `read_habitatsprings()` now returns integer IDs as integers (#180);
+- `expand_types()` with a grouped data frame is now more efficient ([13d05ec](https://github.com/inbo/n2khab/commit/13d05ec));
+- several fixes (#186, [88f0e19](https://github.com/inbo/n2khab/commit/88f0e19)).
+
 # n2khab 0.10.1 (2023-12-04)
 
 - Silently ignore errors from package {remotes} during package loading ([56e9c06](https://github.com/inbo/n2khab/commit/56e9c06)).
