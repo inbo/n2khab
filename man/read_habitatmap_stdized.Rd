@@ -8,8 +8,8 @@ objects}
 read_habitatmap_stdized(
   file = file.path(locate_n2khab_data(),
     "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"),
-  version = c("habitatmap_stdized_2020_v1", "habitatmap_stdized_2018_v2",
-    "habitatmap_stdized_2018_v1")
+  version = c("habitatmap_stdized_2023_v1", "habitatmap_stdized_2020_v1",
+    "habitatmap_stdized_2018_v2", "habitatmap_stdized_2018_v1")
 )
 }
 \arguments{
@@ -61,7 +61,7 @@ A list of two objects:
 }
 \details{
 The data source \code{habitatmap_stdized} is the processed version
-of the raw data source \code{habitatmap} (De Saeger et al., 2020).
+of the raw data source \code{habitatmap} (De Saeger et al., 2023).
 Every polygon in the \code{habitatmap} can consist of maximum 5
 different types. This information is stored in the
 columns 'HAB1', HAB2',..., 'HAB5' of the attribute table. The
@@ -138,13 +138,13 @@ hms_types
 }
 \references{
 \itemize{
-\item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A.,
-Debusschere, K.,
-Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-Opdebeeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
-Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
-en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
-\doi{10.21436/inbor.18840851}.
+\item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+Van Dam G., Van Hove M., Wils C. (red.) (2023).
+Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+Instituut voor Natuur- en Bosonderzoek (INBO).
+\doi{10.21436/inbor.96375305}.
 \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 the Flemish Region of Belgium. Documents phytosociologiques - Actes du
