@@ -45,8 +45,8 @@
 #' This is because the data sources with which the result
 #' is to be matched (see Description) don't contain certain main type codes,
 #' and because it makes no sense in other cases
-#' (rbbkam, rbbvos, rbbzil & 9120 in the \code{habitatmap} do not refer to a
-#' main type but to an non-defined subtype with no specific code).
+#' (rbbkam, rbbzil & 9120 in the \code{habitatmap} do not refer to a
+#' main type but to a non-defined subtype with no specific code).
 #'
 #'
 #' @param x An object of class \code{data.frame}.
