@@ -16,7 +16,7 @@ Function documentation was updated accordingly.
 
 - Type `rbbvos+` has been considered too loosely defined, as an intermediate between `rbbvos` and `6510_hua`, and it has not been mapped consistently.
 Hence this type is considered obsolete and it has been dropped from the `types` and `namelist` data sources (#182).
-However do note that it exists in versions of the raw habitatmap data source.
+However do note that it exists in versions of `habitatmap` and derived data sources.
 - `expand_types()` has been adjusted accordingly (#182).
 
 ## Other updates
