@@ -58,22 +58,22 @@ to be met:
 \item{for 2330: both subtype codes must be present}
 \item{for 5130: 5130_hei must be present (note that only the main type code
 occurs in the targeted data sources)}
-\item{for 6230: 6230_ha, 6230_hmo and 6230_hnk must be present
+\item{for 6230: 6230_ha, 6230_hmo and 6230_hn must be present
 (not the rare 6230_hnk)}
 \item{for 91E0: 91E0_va, 91E0_vm and 91E0_vn must be present
 (not the rarer 91E0_sf, 91E0_vc and 91E0_vo)}
 }
 However, it is possible to relax this requirement by setting
 \code{strict = FALSE}.
-This will add the main type code whenever \emph{one} corresponding subtype
-code is present.
+This will add the main type code whenever \emph{one} of the above required
+subtype codes is present.
 In all cases no other main type codes are added apart from
 2330, 5130, 6230 and 91E0.
 This is because the data sources with which the result
 is to be matched (see Description) don't contain certain main type codes,
 and because it makes no sense in other cases
-(rbbkam, rbbvos, rbbzil & 9120 in the \code{habitatmap} do not refer to a
-main type but to an non-defined subtype with no specific code).
+(rbbkam, rbbzil & 9120 in the \code{habitatmap} do not refer to a
+main type but to a non-defined subtype with no specific code).
 }
 \examples{
 library(dplyr)

@@ -9,8 +9,8 @@ read_watersurfaces_hab(
   file = file.path(locate_n2khab_data(),
     "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
   interpreted = FALSE,
-  version = c("watersurfaces_hab_v4", "watersurfaces_hab_v3", "watersurfaces_hab_v2",
-    "watersurfaces_hab_v1")
+  version = c("watersurfaces_hab_v5", "watersurfaces_hab_v4", "watersurfaces_hab_v3",
+    "watersurfaces_hab_v2", "watersurfaces_hab_v1")
 )
 }
 \arguments{
@@ -105,26 +105,25 @@ wsh_types
 }
 \references{
 \itemize{
-\item Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &
-Denys L. (2020).
-Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
-Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
-(40). Instituut voor Natuur en Bosonderzoek, Brussel.
-\doi{10.21436/inbor.19088385}.
-\item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
-Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
-Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
-en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor
-Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
-\doi{10.21436/inbor.18840851}.
+\item Scheers K., Smeekens V., Wils C., Packet J., Leyssen A. & Denys L. (2022).
+Watervlakken versie 1.2: polygonenkaart van stilstaand water in Vlaanderen.
+Uitgave 2022. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2022
+(31). Instituut voor Natuur en Bosonderzoek, Brussel.
+\doi{10.21436/inbor.87014272}.
+#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+Van Dam G., Van Hove M., Wils C. (red.) (2023).
+Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+Instituut voor Natuur- en Bosonderzoek (INBO).
+\doi{10.21436/inbor.96375305}.
 }
 }
 \seealso{
 Other functions involved in processing the 'habitatmap' data source: 
+\code{\link{read_habitatmap}()},
 \code{\link{read_habitatmap_stdized}()},
-\code{\link{read_habitatmap_terr}()},
-\code{\link{read_habitatmap}()}
+\code{\link{read_habitatmap_terr}()}
 
 Other functions involved in processing the 'watersurfaces' data source: 
 \code{\link{read_watersurfaces}()}

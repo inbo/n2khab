@@ -13,7 +13,7 @@
 #'   }
 #'
 #' The data source \code{habitatmap_stdized} is the processed version
-#' of the raw data source \code{habitatmap} (De Saeger et al., 2020).
+#' of the raw data source \code{habitatmap} (De Saeger et al., 2023).
 #' Every polygon in the \code{habitatmap} can consist of maximum 5
 #' different types. This information is stored in the
 #' columns 'HAB1', HAB2',..., 'HAB5' of the attribute table. The
@@ -111,13 +111,13 @@
 #' @references
 #'
 #' \itemize{
-#' \item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A.,
-#' Debusschere, K.,
-#' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-#' Opdebeeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
-#' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
-#' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.18840851}.
+#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
+#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+#' Instituut voor Natuur- en Bosonderzoek (INBO).
+#' \doi{10.21436/inbor.96375305}.
 #' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 #' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 #' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
@@ -160,6 +160,7 @@ read_habitatmap_stdized <-
              "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"
            ),
            version = c(
+             "habitatmap_stdized_2023_v1",
              "habitatmap_stdized_2020_v1",
              "habitatmap_stdized_2018_v2",
              "habitatmap_stdized_2018_v1"
@@ -306,19 +307,18 @@ read_habitatmap_stdized <-
 #'
 #' @references
 #' \itemize{
-#' \item Leyssen A., Scheers K., Smeekens V., Wils C., Packet J., De Knijf G. &
-#' Denys L. (2020).
-#' Watervlakken versie 1.1: polygonenkaart van stilstaand water in Vlaanderen.
-#' Uitgave 2020. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2020
-#' (40). Instituut voor Natuur en Bosonderzoek, Brussel.
-#' \doi{10.21436/inbor.19088385}.
-#' \item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A., Debusschere, K.,
-#' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-#' Op De Beeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
-#' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
-#' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor
-#' Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.18840851}.
+#' \item Scheers K., Smeekens V., Wils C., Packet J., Leyssen A. & Denys L. (2022).
+#' Watervlakken versie 1.2: polygonenkaart van stilstaand water in Vlaanderen.
+#' Uitgave 2022. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2022
+#' (31). Instituut voor Natuur en Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.87014272}.
+#' #' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
+#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+#' Instituut voor Natuur- en Bosonderzoek (INBO).
+#' \doi{10.21436/inbor.96375305}.
 #' }
 #'
 #' @examples
@@ -359,6 +359,7 @@ read_watersurfaces_hab <-
            ),
            interpreted = FALSE,
            version = c(
+             "watersurfaces_hab_v5",
              "watersurfaces_hab_v4",
              "watersurfaces_hab_v3",
              "watersurfaces_hab_v2",
@@ -581,7 +582,9 @@ read_watersurfaces <-
   function(file = NULL,
            extended = FALSE,
            fix_geom = FALSE,
-           version = c("watersurfaces_v1.2", "watersurfaces_v1.1", "watersurfaces_v1.0")) {
+           version = c("watersurfaces_v1.2",
+                       "watersurfaces_v1.1",
+                       "watersurfaces_v1.0")) {
     version <- match.arg(version)
     assert_that(is.flag(extended), noNA(extended))
     assert_that(is.flag(fix_geom), noNA(fix_geom))
@@ -674,12 +677,13 @@ read_watersurfaces <-
     }
 
     if (fix_geom) {
-      n_invalid <- sum(
-        !st_is_valid(watersurfaces) | is.na(st_is_valid(watersurfaces))
-      )
+      validities <- st_is_valid(watersurfaces)
+      n_invalid <- sum(!validities | is.na(validities))
       if (n_invalid > 0) {
         watersurfaces <- st_make_valid(watersurfaces)
         message("Fixed ", n_invalid, " invalid or corrupt geometries.")
+      } else {
+        message("No invalid or corrupt geometries found.")
       }
     }
 
@@ -867,7 +871,7 @@ read_watersurfaces <-
 
 #' Return the data source \code{habitatmap} as an \code{sf} multipolygon layer
 #'
-#' Returns the raw data source \code{habitatmap} (De Saeger et al., 2020)
+#' Returns the raw data source \code{habitatmap} (De Saeger et al., 2023)
 #' as a standardized \code{sf} multipolygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -879,6 +883,14 @@ read_watersurfaces <-
 #' requires the corresponding version of the processed data source
 #' \code{habitatmap_stdized} to be present in its default location inside the
 #' \code{n2khab_data} folder.
+#' @param fix_geom Logical.
+#' Should invalid or corrupt geometries be fixed in the resulting \code{sf}
+#' object in order to make them valid?
+#' This prevents potential problems in geospatial operations, but beware that
+#' fixed geometries are different from the original ones.
+#' \code{\link[sf:st_make_valid]{sf::st_make_valid()}} is used to fix
+#' geometries (with GEOS as backend).
+#' Defaults to \code{FALSE}.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -891,13 +903,13 @@ read_watersurfaces <-
 #' @references
 #'
 #' \itemize{
-#' \item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A.,
-#' Debusschere, K.,
-#' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-#' Opdebeeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
-#' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
-#' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.18840851}.
+#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
+#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+#' Instituut voor Natuur- en Bosonderzoek (INBO).
+#' \doi{10.21436/inbor.96375305}.
 #' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 #' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 #' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
@@ -916,6 +928,12 @@ read_watersurfaces <-
 #'
 #' hm <- read_habitatmap()
 #' hm
+#'
+#' hm_valid <- read_habitatmap(fix_geom = TRUE)
+#' hm_valid
+#'
+#' all(sf::st_is_valid(hm))
+#' all(sf::st_is_valid(hm_valid))
 #' }
 #'
 #' @export
@@ -925,6 +943,8 @@ read_watersurfaces <-
 #' noNA
 #' @importFrom sf
 #' read_sf
+#' st_is_valid
+#' st_make_valid
 #' st_crs<-
 #' @importFrom rlang .data
 #' @importFrom dplyr
@@ -937,12 +957,15 @@ read_watersurfaces <-
 read_habitatmap <-
   function(file = file.path(locate_n2khab_data(), "10_raw/habitatmap"),
            filter_hab = FALSE,
+           fix_geom = FALSE,
            version = c(
+             "habitatmap_2023",
              "habitatmap_2020",
              "habitatmap_2018"
            )) {
     assert_that(file.exists(file))
     assert_that(is.flag(filter_hab), noNA(filter_hab))
+    assert_that(is.flag(fix_geom), noNA(fix_geom))
     version <- match.arg(version)
 
     if (filter_hab) {
@@ -952,7 +975,9 @@ read_habitatmap <-
         "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"
       ))
 
-      if (version == "habitatmap_2020") {
+      if (version == "habitatmap_2023") {
+        xxh64sum_habitatmap_stdized_expected <- "5c32f9b5d74eac23"
+      } else if (version == "habitatmap_2020") {
         xxh64sum_habitatmap_stdized_expected <- "3109c26f0a27a0f3"
       } else {
         xxh64sum_habitatmap_stdized_expected <- c("b80f469f33636c8b", "8e9c4e09f5f67c3e")
@@ -1027,6 +1052,19 @@ read_habitatmap <-
         mutate(polygon_id = factor(.data$polygon_id, levels = hab_stdized$polygon_id))
     }
 
+    if (fix_geom) {
+      # temporarily dropped because st_is_valid takes too long
+      # validities <- st_is_valid(habitatmap)
+      # n_invalid <- sum(
+      #   !validities | is.na(validities)
+      # )
+      # if (n_invalid > 0) {
+        habitatmap <- st_make_valid(habitatmap)
+        # message("Fixed ", n_invalid, " invalid or corrupt geometries.")
+        message("Fixed invalid or corrupt geometries.")
+      # }
+    }
+
     suppressWarnings(st_crs(habitatmap) <- 31370)
 
     return(habitatmap)
@@ -1051,7 +1089,7 @@ read_habitatmap <-
 #' \code{habitatmap_terr} is the further interpreted, terrestrial part of
 #' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}),
 #' which, in turn, is derived from the raw data source \code{habitatmap}
-#' (De Saeger et al., 2020).
+#' (De Saeger et al., 2023).
 #' By default, occurrences of type \code{7220} are dropped because a more
 #' reliable data source is available for this habitat type (see \code{drop_7220}
 #' argument).
@@ -1156,13 +1194,13 @@ read_habitatmap <-
 #' @references
 #'
 #' \itemize{
-#' \item De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A.,
-#' Debusschere, K.,
-#' Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-#' Opdebeeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
-#' Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
-#' en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.18840851}.
+#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
+#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+#' Instituut voor Natuur- en Bosonderzoek (INBO).
+#' \doi{10.21436/inbor.96375305}.
 #' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 #' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 #' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
@@ -1211,6 +1249,8 @@ read_habitatmap_terr <-
            keep_aq_types = TRUE,
            drop_7220 = TRUE,
            version = c(
+             "habitatmap_terr_2023_v1",
+             "habitatmap_terr_2020_v2",
              "habitatmap_terr_2020_v1",
              "habitatmap_terr_2018_v2",
              "habitatmap_terr_2018_v1"
@@ -1324,12 +1364,15 @@ read_habitatmap_terr <-
 #' Return the data source \code{habitatstreams} as an \code{sf} linestring
 #' layer or as a list
 #'
-#' Returns the raw data source \code{habitatstreams} (Leyssen et al., 2020)
-#' as an \code{sf} linestring
+#' Returns the raw data source \code{habitatstreams} (section 'habitat 3260' from
+#' De Saeger et al., 2023) as an \code{sf} linestring
 #' layer or as a list of two objects: the \code{sf} object (CRS:
 #' Belgian Lambert 72 (EPSG-code \href{https://epsg.io/31370}{31370}))
 #' plus a data frame
 #' with textual explanation of the values of the \code{source_id} variable.
+#'
+#' For more information about this map, see also the documentation of the
+#' previous version (Leyssen et al., 2020).
 #'
 #' @param source_text Logical, defaults to \code{FALSE}.
 #' If \code{TRUE}, a list is returned (see \emph{Value}).
@@ -1348,13 +1391,23 @@ read_habitatmap_terr <-
 #' }
 #'
 #' @references
-#' Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
+#'
+#' \itemize{
+#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
+#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+#' Instituut voor Natuur- en Bosonderzoek (INBO).
+#' \doi{10.21436/inbor.96375305}.
+#' \item Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
 #' Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 #' behorend tot het \emph{Ranunculion fluitantis} en het
 #' \emph{Callitricho-Batrachion}.
 #' Uitgave 2020 (versie 1.7). Rapporten van het Instituut voor Natuur- en
 #' Bosonderzoek 2020 (34). Research Institute for Nature and Forest, Brussels.
 #' \doi{10.21436/inbor.18903609}.
+#' }
 #'
 #' @examples
 #' \dontrun{
@@ -1647,7 +1700,12 @@ read_habitatsprings <-
         everything(),
         -.data$validity_status,
         -.data$sbz
+      ) %>%
+      mutate(
+        point_id = as.integer(.data$point_id),
+        unit_id = as.integer(.data$unit_id)
       )
+
 
     if (version != "habitatsprings_2019v1") {
       habitatsprings <-

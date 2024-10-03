@@ -11,7 +11,7 @@ read_schemes(...)
 read_scheme_types(...)
 }
 \arguments{
-\item{...}{arguments passed to the new function}
+\item{...}{Arguments passed to the new function.}
 }
 \description{
 \itemize{
@@ -20,5 +20,13 @@ Use \code{\link[n2khabmon:read_schemes]{n2khabmon::read_schemes()}} instead.
 \item \code{\link[=read_scheme_types]{read_scheme_types()}} has moved to package \code{n2khabmon}.
 Use \code{\link[n2khabmon:read_scheme_types]{n2khabmon::read_scheme_types()}} instead.
 }
+}
+\details{
+An efficient way with base R to avoid function masking and conflict warnings
+when attaching both \code{{n2khab}} and \code{{n2khabmon}}, regardless of the order
+in which they're loaded, is by specifying something as below in your
+script, at least \emph{before} loading \code{{n2khab}}:
+
+\code{conflictRules("n2khab", exclude = c("read_schemes", "read_scheme_types"))}
 }
 \keyword{internal}

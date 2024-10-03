@@ -77,7 +77,7 @@ n2khab_options <- function() {
     ),
     "n2khab_use_raster",
     tryCatch(
-      n2khab_using_raster(),
+      as.character(n2khab_using_raster()),
       error = function(e) {
         message(as.character(e))
         NA
@@ -125,5 +125,7 @@ n2khab_using_raster <- function() {
   if (identical(opt, "")) {
     opt <- NA
   }
-  opt || grepl("TRUE|true", opt)
+  (is.logical(opt) && length(opt) == 1 && opt) ||
+    identical(opt, "TRUE") ||
+    identical(opt, "true")
 }

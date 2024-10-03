@@ -31,22 +31,22 @@
 #' \item{for 2330: both subtype codes must be present}
 #' \item{for 5130: 5130_hei must be present (note that only the main type code
 #' occurs in the targeted data sources)}
-#' \item{for 6230: 6230_ha, 6230_hmo and 6230_hnk must be present
+#' \item{for 6230: 6230_ha, 6230_hmo and 6230_hn must be present
 #' (not the rare 6230_hnk)}
 #' \item{for 91E0: 91E0_va, 91E0_vm and 91E0_vn must be present
 #' (not the rarer 91E0_sf, 91E0_vc and 91E0_vo)}
 #' }
 #' However, it is possible to relax this requirement by setting
 #' \code{strict = FALSE}.
-#' This will add the main type code whenever \emph{one} corresponding subtype
-#' code is present.
+#' This will add the main type code whenever \emph{one} of the above required
+#' subtype codes is present.
 #' In all cases no other main type codes are added apart from
 #' 2330, 5130, 6230 and 91E0.
 #' This is because the data sources with which the result
 #' is to be matched (see Description) don't contain certain main type codes,
 #' and because it makes no sense in other cases
-#' (rbbkam, rbbvos, rbbzil & 9120 in the \code{habitatmap} do not refer to a
-#' main type but to an non-defined subtype with no specific code).
+#' (rbbkam, rbbzil & 9120 in the \code{habitatmap} do not refer to a
+#' main type but to a non-defined subtype with no specific code).
 #'
 #'
 #' @param x An object of class \code{data.frame}.
@@ -130,11 +130,26 @@ expand_types <- function(x,
   assert_that(is.flag(use_grouping), noNA(use_grouping))
   assert_that(is.flag(strict), noNA(strict))
 
+  types <-
+    read_types() %>%
+    select(1:3)
+
+  subtypes <-
+    types %>%
+    filter(.data$typelevel == "subtype") %>%
+    select(1, 3)
+
+  if (!all(unique(x[[type_var]]) %in% types$type)) {
+    warning("The data frame contains type codes which are not standard.")
+  }
+
   if (!use_grouping) {
     expand_types_plain(
       x = x,
       type_var = type_var,
-      strict = strict
+      strict = strict,
+      types = types,
+      subtypes = subtypes
     )
   } else {
     x %>%
@@ -143,7 +158,9 @@ expand_types <- function(x,
       mutate(newdata = map(.data$data,
         expand_types_plain,
         type_var = type_var,
-        strict = strict
+        strict = strict,
+        types = types,
+        subtypes = subtypes
       )) %>%
       select(-.data$data) %>%
       unnest(cols = .data$newdata) %>%
@@ -186,23 +203,12 @@ expand_types <- function(x,
 #' @keywords internal
 expand_types_plain <- function(x,
                                type_var = "type",
-                               strict = TRUE) {
-  types <-
-    read_types() %>%
-    select(1:3)
-
-  subtypes <-
-    types %>%
-    filter(.data$typelevel == "subtype") %>%
-    select(1, 3)
-
+                               strict = TRUE,
+                               types,
+                               subtypes) {
   orig_types <-
     x[, type_var] %>%
     rename(orig_abcd = type_var)
-
-  if (!all(unique(orig_types$orig_abcd) %in% types$type)) {
-    warning("The data frame contains type codes which are not standard.")
-  }
 
   # main types to add:
   suppressWarnings(
@@ -210,7 +216,7 @@ expand_types_plain <- function(x,
       subtypes %>%
       filter(.data$main_type == "2330" |
         .data$type %in% c(
-          "6230_ha", "6230_hmo", "6230_hnk",
+          "6230_ha", "6230_hmo", "6230_hn",
           "5130_hei",
           "91E0_va", "91E0_vm", "91E0_vn"
         )) %>%
