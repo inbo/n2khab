@@ -42,7 +42,7 @@
   
 
 <meta property="og:title" content="Return the data source habitatmap as an sf multipolygon layer — read_habitatmap" />
-<meta property="og:description" content="Returns the raw data source habitatmap (De Saeger et al., 2020)
+<meta property="og:description" content="Returns the raw data source habitatmap (De Saeger et al., 2023)
 as a standardized sf multipolygon layer
 (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 (EPSG-code 31370).
@@ -79,7 +79,7 @@ takes a bit longer than usual to run." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
       </span>
     </div>
 
@@ -148,7 +148,7 @@ takes a bit longer than usual to run." />
     </div>
 
     <div class="ref-description">
-    <p>Returns the raw data source <code>habitatmap</code> (De Saeger et al., 2020)
+    <p>Returns the raw data source <code>habitatmap</code> (De Saeger et al., 2023)
 as a standardized <code>sf</code> multipolygon layer
 (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 (EPSG-code <a href='https://epsg.io/31370'>31370</a>).
@@ -159,7 +159,8 @@ takes a bit longer than usual to run.</p>
     <pre class="usage"><span><span class='fu'>read_habitatmap</span><span class='op'>(</span></span>
 <span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"10_raw/habitatmap"</span><span class='op'>)</span>,</span>
 <span>  filter_hab <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
-<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"habitatmap_2020"</span>, <span class='st'>"habitatmap_2018"</span><span class='op'>)</span></span>
+<span>  fix_geom <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"habitatmap_2023"</span>, <span class='st'>"habitatmap_2020"</span>, <span class='st'>"habitatmap_2018"</span><span class='op'>)</span></span>
 <span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -183,6 +184,17 @@ requires the corresponding version of the processed data source
 <code>n2khab_data</code> folder.</p></td>
     </tr>
     <tr>
+      <th>fix_geom</th>
+      <td><p>Logical.
+Should invalid or corrupt geometries be fixed in the resulting <code>sf</code>
+object in order to make them valid?
+This prevents potential problems in geospatial operations, but beware that
+fixed geometries are different from the original ones.
+<code><a href='https://r-spatial.github.io/sf/reference/valid.html'>sf::st_make_valid()</a></code> is used to fix
+geometries (with GEOS as backend).
+Defaults to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
       <th>version</th>
       <td><p>Version ID of the data source.
 Defaults to the latest available version defined by the package.</p></td>
@@ -197,13 +209,13 @@ type <code>MULTIPOLYGON</code>.</p>
 
     
 <ul>
-<li><p>De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A.,
-Debusschere, K.,
-Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-Opdebeeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
-Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
-en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
-<a href='https://doi.org/10.21436/inbor.18840851'>doi:10.21436/inbor.18840851</a>
+<li><p>De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+Van Dam G., Van Hove M., Wils C. (red.) (2023).
+Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+Instituut voor Natuur- en Bosonderzoek (INBO).
+<a href='https://doi.org/10.21436/inbor.96375305'>doi:10.21436/inbor.96375305</a>
 .</p></li>
 <li><p>De Saeger, S., Oosterlynck, P. &amp; Paelinckx, D. (2017). The Biological
 Valuation Map (BVM): a field-driven survey of land cover and vegetation in
@@ -230,6 +242,12 @@ France - 2017. Vol. 6: 372-382.</p></li>
 <span class='r-in'><span></span></span>
 <span class='r-in'><span><span class='va'>hm</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatmap</span><span class='op'>(</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='va'>hm</span></span></span>
+<span class='r-in'><span></span></span>
+<span class='r-in'><span><span class='va'>hm_valid</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatmap</span><span class='op'>(</span>fix_geom <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='va'>hm_valid</span></span></span>
+<span class='r-in'><span></span></span>
+<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/all.html'>all</a></span><span class='op'>(</span><span class='fu'>sf</span><span class='fu'>::</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/valid.html'>st_is_valid</a></span><span class='op'>(</span><span class='va'>hm</span><span class='op'>)</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='fu'><a href='https://rdrr.io/r/base/all.html'>all</a></span><span class='op'>(</span><span class='fu'>sf</span><span class='fu'>::</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/valid.html'>st_is_valid</a></span><span class='op'>(</span><span class='va'>hm_valid</span><span class='op'>)</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='op'>}</span></span></span>
 <span class='r-in'><span></span></span>
 </pre>

@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
 
       
 
-      </header><script src="v010_reference_lists_files/header-attrs-2.25/header-attrs.js"></script><div class="row">
+      </header><script src="v010_reference_lists_files/header-attrs-2.28/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Reference lists and using them</h1>
@@ -167,7 +167,7 @@ systematic way).</p>
 environment is as easy as:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/read_types.html">read_types</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 111 × 25</span></span>
+<span><span class="co">#&gt; # A tibble: 110 × 25</span></span>
 <span><span class="co">#&gt;    type    typelevel main_type type_name type_shortname typeclass typeclass_name</span></span>
 <span><span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;     &lt;fct&gt;         </span></span>
 <span><span class="co">#&gt;  1 1130    main_type 1130      Estuaries Estuaries      CH        Coastal and h…</span></span>
@@ -180,7 +180,7 @@ environment is as easy as:</p>
 <span><span class="co">#&gt;  8 1330    main_type 1330      Atlantic… Atlantic salt… CH        Coastal and h…</span></span>
 <span><span class="co">#&gt;  9 1330_da subtype   1330      Saltmars… Saltmarshes d… CH        Coastal and h…</span></span>
 <span><span class="co">#&gt; 10 1330_h… subtype   1330      Halophyt… Halophytic gr… CH        Coastal and h…</span></span>
-<span><span class="co">#&gt; # ℹ 101 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 100 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 18 more variables: hydr_class &lt;fct&gt;, hydr_class_name &lt;fct&gt;,</span></span>
 <span><span class="co">#&gt; #   hydr_class_shortname &lt;fct&gt;, groundw_dep &lt;fct&gt;, groundw_dep_name &lt;fct&gt;,</span></span>
 <span><span class="co">#&gt; #   groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;, flood_dep_name &lt;fct&gt;,</span></span>
@@ -191,7 +191,7 @@ environment is as easy as:</p>
 in another language:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/read_types.html">read_types</a></span><span class="op">(</span>lang <span class="op">=</span> <span class="st">"nl"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 111 × 25</span></span>
+<span><span class="co">#&gt; # A tibble: 110 × 25</span></span>
 <span><span class="co">#&gt;    type    typelevel main_type type_name type_shortname typeclass typeclass_name</span></span>
 <span><span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;     &lt;fct&gt;         </span></span>
 <span><span class="co">#&gt;  1 1130    main_type 1130      Estuaria  estuaria       CH        Kust- en zilt…</span></span>
@@ -204,7 +204,7 @@ in another language:</p>
 <span><span class="co">#&gt;  8 1330    main_type 1330      Atlantis… Atlantische s… CH        Kust- en zilt…</span></span>
 <span><span class="co">#&gt;  9 1330_da subtype   1330      Buitendi… buitendijks s… CH        Kust- en zilt…</span></span>
 <span><span class="co">#&gt; 10 1330_h… subtype   1330      Binnendi… zilte graslan… CH        Kust- en zilt…</span></span>
-<span><span class="co">#&gt; # ℹ 101 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 100 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 18 more variables: hydr_class &lt;fct&gt;, hydr_class_name &lt;fct&gt;,</span></span>
 <span><span class="co">#&gt; #   hydr_class_shortname &lt;fct&gt;, groundw_dep &lt;fct&gt;, groundw_dep_name &lt;fct&gt;,</span></span>
 <span><span class="co">#&gt; #   groundw_dep_shortname &lt;fct&gt;, flood_dep &lt;fct&gt;, flood_dep_name &lt;fct&gt;,</span></span>

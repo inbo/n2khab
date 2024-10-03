@@ -51,7 +51,7 @@ habitatmap_terr_types.
 habitatmap_terr is the further interpreted, terrestrial part of
 habitatmap_stdized (see read_habitatmap_stdized),
 which, in turn, is derived from the raw data source habitatmap
-(De Saeger et al., 2020).
+(De Saeger et al., 2023).
 By default, occurrences of type 7220 are dropped because a more
 reliable data source is available for this habitat type (see drop_7220
 argument).
@@ -88,7 +88,7 @@ important biotope (RIB)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
       </span>
     </div>
 
@@ -165,7 +165,7 @@ Lambert 72 CRS (EPSG-code <a href='https://epsg.io/31370'>31370</a>), and
 <code>habitatmap_terr</code> is the further interpreted, terrestrial part of
 <code>habitatmap_stdized</code> (see <code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a></code>),
 which, in turn, is derived from the raw data source <code>habitatmap</code>
-(De Saeger et al., 2020).
+(De Saeger et al., 2023).
 By default, occurrences of type <code>7220</code> are dropped because a more
 reliable data source is available for this habitat type (see <code>drop_7220</code>
 argument).
@@ -178,8 +178,8 @@ important biotope (RIB).</p>
 <span>    <span class='st'>"20_processed/habitatmap_terr/habitatmap_terr.gpkg"</span><span class='op'>)</span>,</span>
 <span>  keep_aq_types <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
 <span>  drop_7220 <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
-<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"habitatmap_terr_2020_v1"</span>, <span class='st'>"habitatmap_terr_2018_v2"</span>,</span>
-<span>    <span class='st'>"habitatmap_terr_2018_v1"</span><span class='op'>)</span></span>
+<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"habitatmap_terr_2023_v1"</span>, <span class='st'>"habitatmap_terr_2020_v2"</span>,</span>
+<span>    <span class='st'>"habitatmap_terr_2020_v1"</span>, <span class='st'>"habitatmap_terr_2018_v2"</span>, <span class='st'>"habitatmap_terr_2018_v1"</span><span class='op'>)</span></span>
 <span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -298,13 +298,13 @@ repository.</p>
 
     
 <ul>
-<li><p>De Saeger, S., Guelinckx, R., Oosterlynck, P., De Bruyn, A.,
-Debusschere, K.,
-Dhaluin, P., Erens, R., Hendrickx, P., Hennebel, D., Jacobs, I., Kumpen, M.,
-Opdebeeck, J., Spanhove, T., Tamsyn, W., Van Oost, F., Van Dam, G.,
-Van Hove, M., Wils, C., Paelinckx, D. (2020). Biologische Waarderingskaart
-en Natura 2000 Habitatkaart, uitgave 2020. (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 35). Instituut voor Natuur- en Bosonderzoek (INBO).
-<a href='https://doi.org/10.21436/inbor.18840851'>doi:10.21436/inbor.18840851</a>
+<li><p>De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+Van Dam G., Van Hove M., Wils C. (red.) (2023).
+Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+Instituut voor Natuur- en Bosonderzoek (INBO).
+<a href='https://doi.org/10.21436/inbor.96375305'>doi:10.21436/inbor.96375305</a>
 .</p></li>
 <li><p>De Saeger, S., Oosterlynck, P. &amp; Paelinckx, D. (2017). The Biological
 Valuation Map (BVM): a field-driven survey of land cover and vegetation in
@@ -316,8 +316,8 @@ France - 2017. Vol. 6: 372-382.</p></li>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other functions involved in processing the 'habitatmap' data source: 
-<code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a>()</code>,
 <code><a href='read_habitatmap.html'>read_habitatmap</a>()</code>,
+<code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a>()</code>,
 <code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

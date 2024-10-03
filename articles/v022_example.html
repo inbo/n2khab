@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
 
       
 
-      </header><script src="v022_example_files/header-attrs-2.25/header-attrs.js"></script><div class="row">
+      </header><script src="v022_example_files/header-attrs-2.28/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Demonstrating package &amp; data setup and
@@ -132,9 +132,9 @@ put a copy of the vignette in your working directory:</p>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://inbo.github.io/n2khab">n2khab</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Attaching n2khab 0.10.1.</span></span>
-<span><span class="co">#&gt; Will use sf 1.0-14.</span></span>
-<span><span class="co">#&gt; Will use terra 1.7-55.</span></span></code></pre></div>
+<span><span class="co">#&gt; Attaching n2khab 0.11.0.</span></span>
+<span><span class="co">#&gt; Will use sf 1.0-17.</span></span>
+<span><span class="co">#&gt; Will use terra 1.7-78.</span></span></code></pre></div>
 </div>
 <div id="create-or-locate-the-n2khab_data-directory-with-2-subdirectories" class="section level3">
 <h3 class="hasAnchor">
@@ -165,7 +165,7 @@ and documented at <a href="https://doi.org/10.5281/zenodo.3732903">Zenodo</a>. I
 the collection of processed data (<a href="https://zenodo.org/communities/n2khab-data-processed">Zenodo-link</a>).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">soilmap_simple_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">n2khab_data_path</span>, <span class="st">"20_processed/soilmap_simple"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">soilmap_simple_path</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">soilmap_simple_path</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/download_zenodo.html">download_zenodo</a></span><span class="op">(</span></span>
 <span>  doi <span class="op">=</span> <span class="st">"10.5281/zenodo.3732903"</span>,</span>
 <span>  path <span class="op">=</span> <span class="va">soilmap_simple_path</span></span>

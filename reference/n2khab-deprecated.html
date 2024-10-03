@@ -81,7 +81,7 @@ Use n2khabmon::read_scheme_types() instead.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
       </span>
     </div>
 
@@ -169,10 +169,17 @@ Use <code><a href='https://inbo.github.io/n2khabmon/reference/read_scheme_types.
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>arguments passed to the new function</p></td>
+      <td><p>Arguments passed to the new function.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>An efficient way with base R to avoid function masking and conflict warnings
+when attaching both <code>{n2khab}</code> and <code>{n2khabmon}</code>, regardless of the order
+in which they're loaded, is by specifying something as below in your
+script, at least <em>before</em> loading <code>{n2khab}</code>:</p>
+<p><code>conflictRules("n2khab", exclude = c("read_schemes", "read_scheme_types"))</code></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -44,8 +44,8 @@ layer or as a list — read_habitatstreams • n2khab</title>
 
 <meta property="og:title" content="Return the data source habitatstreams as an sf linestring
 layer or as a list — read_habitatstreams" />
-<meta property="og:description" content="Returns the raw data source habitatstreams (Leyssen et al., 2020)
-as an sf linestring
+<meta property="og:description" content="Returns the raw data source habitatstreams (section 'habitat 3260' from
+De Saeger et al., 2023) as an sf linestring
 layer or as a list of two objects: the sf object (CRS:
 Belgian Lambert 72 (EPSG-code 31370))
 plus a data frame
@@ -81,7 +81,7 @@ with textual explanation of the values of the source_id variable." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
       </span>
     </div>
 
@@ -151,8 +151,8 @@ layer or as a list</h1>
     </div>
 
     <div class="ref-description">
-    <p>Returns the raw data source <code>habitatstreams</code> (Leyssen et al., 2020)
-as an <code>sf</code> linestring
+    <p>Returns the raw data source <code>habitatstreams</code> (section 'habitat 3260' from
+De Saeger et al., 2023) as an <code>sf</code> linestring
 layer or as a list of two objects: the <code>sf</code> object (CRS:
 Belgian Lambert 72 (EPSG-code <a href='https://epsg.io/31370'>31370</a>))
 plus a data frame
@@ -193,16 +193,32 @@ type <code>LINESTRING</code>.</p>
 variable in the <code>sf</code> object.</p></li>
 </ul>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>For more information about this map, see also the documentation of the
+previous version (Leyssen et al., 2020).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
+    
+<ul>
+<li><p>De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+Van Dam G., Van Hove M., Wils C. (red.) (2023).
+Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+Instituut voor Natuur- en Bosonderzoek (INBO).
+<a href='https://doi.org/10.21436/inbor.96375305'>doi:10.21436/inbor.96375305</a>
+.</p></li>
+<li><p>Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
 Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 behorend tot het <em>Ranunculion fluitantis</em> en het
 <em>Callitricho-Batrachion</em>.
 Uitgave 2020 (versie 1.7). Rapporten van het Instituut voor Natuur- en
 Bosonderzoek 2020 (34). Research Institute for Nature and Forest, Brussels.
 <a href='https://doi.org/10.21436/inbor.18903609'>doi:10.21436/inbor.18903609</a>
-.</p>
+.</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>

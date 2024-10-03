@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
       </span>
     </div>
 
@@ -140,6 +140,68 @@
       <small>Source: <a href='https://github.com/inbo/n2khab/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="n2khab-0110-2024-10-03" class="section level1">
+<h1 class="page-header" data-toc-text="0.11.0">
+<a href="#n2khab-0110-2024-10-03" class="anchor"></a>n2khab 0.11.0 (2024-10-03)</h1>
+<div id="support-for-new-data-source-versions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#support-for-new-data-source-versions" class="anchor"></a>Support for new data source versions</h2>
+<p>The following new data source versions are now supported by the
+corresponding functions (<a href='https://github.com/inbo/n2khab/issues/184'>#184</a>):</p>
+<ul>
+<li>
+<code>habitatmap_2023</code> (<code><a href="../reference/read_habitatmap.html">read_habitatmap()</a></code>)</li>
+<li>
+<code>habitatmap_stdized_2023_v1</code>
+(<code><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code>)</li>
+<li>
+<code>habitatmap_terr_2023_v1</code>
+(<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code>)</li>
+<li>
+<code>habitatstreams_2023</code>
+(<code><a href="../reference/read_habitatstreams.html">read_habitatstreams()</a></code>)</li>
+<li>
+<code>watersurfaces_hab_v5</code>
+(<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code>)</li>
+</ul>
+<p>Function documentation was updated accordingly.</p>
+</div>
+<div id="drop-rbbvos-from-built-in-data-sources" class="section level2">
+<h2 class="hasAnchor">
+<a href="#drop-rbbvos-from-built-in-data-sources" class="anchor"></a>Drop <code>rbbvos+</code> from built-in data sources</h2>
+<ul>
+<li>Type <code>rbbvos+</code> has been considered too loosely defined,
+as an intermediate between <code>rbbvos</code> and
+<code>6510_hua</code>, and it has not been mapped consistently. Hence
+this type is considered obsolete and it has been dropped from the
+<code>types</code> and <code>namelist</code> data sources (<a href='https://github.com/inbo/n2khab/issues/182'>#182</a>).
+However do note that it exists in versions of <code>habitatmap</code>
+and derived data sources.</li>
+<li>
+<code><a href="../reference/expand_types.html">expand_types()</a></code> has been adjusted accordingly
+(<a href='https://github.com/inbo/n2khab/issues/182'>#182</a>).</li>
+</ul>
+</div>
+<div id="other-updates" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-updates" class="anchor"></a>Other updates</h2>
+<p>Including:</p>
+<ul>
+<li>the <code>fix_geom</code> implementation in
+<code><a href="../reference/read_watersurfaces.html">read_watersurfaces()</a></code> is now more efficient (<a href='https://github.com/inbo/n2khab/issues/185'>#185</a>);</li>
+<li>
+<code><a href="../reference/read_habitatmap.html">read_habitatmap()</a></code> also gained a <code>fix_geom</code>
+argument (<a href='https://github.com/inbo/n2khab/issues/184'>#184</a>);</li>
+<li>
+<code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code> now returns integer IDs as
+integers (<a href='https://github.com/inbo/n2khab/issues/180'>#180</a>);</li>
+<li>
+<code><a href="../reference/expand_types.html">expand_types()</a></code> with a grouped data frame is now more
+efficient (<a href="https://github.com/inbo/n2khab/commit/13d05ec">13d05ec</a>);</li>
+<li>several fixes (<a href='https://github.com/inbo/n2khab/issues/186'>#186</a>, <a href="https://github.com/inbo/n2khab/commit/88f0e19">88f0e19</a>).</li>
+</ul>
+</div>
+</div>
     <div id="n2khab-0101-2023-12-04" class="section level1">
 <h1 class="page-header" data-toc-text="0.10.1">
 <a href="#n2khab-0101-2023-12-04" class="anchor"></a>n2khab 0.10.1 (2023-12-04)</h1>
@@ -299,9 +361,9 @@ added and is recommended (<a href='https://github.com/inbo/n2khab/issues/153'>#1
     <div id="n2khab-050-2021-05-12" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.0">
 <a href="#n2khab-050-2021-05-12" class="anchor"></a>n2khab 0.5.0 (2021-05-12)</h1>
-<div id="support-for-new-data-source-versions" class="section level2">
+<div id="support-for-new-data-source-versions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#support-for-new-data-source-versions" class="anchor"></a>Support for new data source versions</h2>
+<a href="#support-for-new-data-source-versions-1" class="anchor"></a>Support for new data source versions</h2>
 <p>The following new data source versions are now supported by their
 associated reading functions:</p>
 <ul>
