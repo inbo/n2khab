@@ -1,4 +1,4 @@
-# n2khab (development version)
+# n2khab 0.11.0 (2024-10-03)
 
 ## Support for new data source versions
 
