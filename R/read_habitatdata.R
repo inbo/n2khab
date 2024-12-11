@@ -570,6 +570,7 @@ read_watersurfaces_hab <-
 #' across
 #' arrange
 #' mutate
+#' na_if
 #' rename
 #' select
 #' left_join
@@ -584,7 +585,8 @@ read_watersurfaces <-
   function(file = NULL,
            extended = FALSE,
            fix_geom = FALSE,
-           version = c("watersurfaces_v1.2",
+           version = c("watersurfaces_v2024",
+                       "watersurfaces_v1.2",
                        "watersurfaces_v1.1",
                        "watersurfaces_v1.0")) {
     version <- match.arg(version)
@@ -664,6 +666,7 @@ read_watersurfaces <-
           "C", "circumneutraal",
           "Cb", "circumneutraal, sterk gebufferd",
           "CbFe", "circumneutraal, sterk gebufferd, ijzerrijk",
+          "CFe", "circumneutraal, ijzerrijk",
           "Czb", "circumneutraal, zwak gebufferd",
           "Z", "zuur",
           "Zm", "zwak zuur",
@@ -672,6 +675,21 @@ read_watersurfaces <-
         mutate(
           wfd_type = factor(.data$wfd_type,
             levels = .$wfd_type
+          )
+        )
+    }
+
+    if (version == "watersurfaces_v2024") {
+      wfd_type_alttransl <- data.frame(wfd_type = "-", wfd_type_name = "geen ander watertype") %>%
+        bind_rows(wfd_typetransl) %>%
+        bind_rows(wfd_typetransl %>%
+                    mutate(wfd_type = paste0("(",wfd_type,")"),
+                           wfd_type_name = paste(wfd_type_name, "(weinig waarschijnlijk)"))) %>%
+        rename(wfd_type_alt_name = wfd_type_name,
+               wfd_type_alternative = wfd_type) %>%
+        mutate(
+          wfd_type_alternative = factor(.data$wfd_type_alternative,
+                                        levels = .$wfd_type_alternative
           )
         )
     }
@@ -691,18 +709,25 @@ read_watersurfaces <-
       watersurfaces %>%
       {
         if (version == "watersurfaces_v1.2") {
-          rename(., water_level_management = .data$PEILBEHEER)
+          rename(., water_level_management = .data$PEILBEHEER,
+                 hyla_code = .data$HYLAC)
+        } else if (version == "watersurfaces_v2024") {
+          rename(.,
+                 wfd_type_alternative = .data$KRWTYPEA,
+                 water_level_management = .data$PEILBEHEER) %>%
+            mutate(across(where(is.character), ~na_if(., "")))
         } else {
-          .
+          rename(., hyla_code = .data$HYLAC)
         }
       } %>%
       select(
         polygon_id = .data$WVLC,
         wfd_code = .data$WTRLICHC,
-        hyla_code = .data$HYLAC,
+        matches("^hyla_code$"),
         name = .data$NAAM,
         area_name = .data$GEBIED,
         wfd_type = .data$KRWTYPE,
+        matches("^wfd_type_alternative$"),
         wfd_type_certain = .data$KRWTYPES,
         depth_class = .data$DIEPKL,
         connectivity = .data$CONNECT,
@@ -729,12 +754,21 @@ read_watersurfaces <-
           factor(
             levels =
               levels(wfd_typetransl$wfd_type)
-          ),
-        hyla_code = ifelse(.data$hyla_code == 0,
-          NA,
-          .data$hyla_code
-        )
+            )
       ) %>%
+      mutate(across(
+        matches("^wfd_type_alternative$"),
+        ~ factor(.,
+                 levels =
+                   levels(wfd_type_alttransl$wfd_type_alternative)
+        )
+      )) %>%
+      mutate(across(
+        matches("^hyla_code$"),
+        ~ ifelse(.data$hyla_code == 0,
+                 NA,
+                 .data$hyla_code)
+      )) %>%
       arrange(.data$polygon_id)
 
     if (version == "watersurfaces_v1.0") {
@@ -818,8 +852,23 @@ read_watersurfaces <-
                 to = wfd_typetransl$wfd_type_name
               )
         ) %>%
-        # following match is only partial in case of v1.2
-        left_join(connectivitytransl, by = "connectivity") %>%
+        {
+          if (version == "watersurfaces_v2024") {
+            left_join(., wfd_type_alttransl, by = "wfd_type_alternative") %>%
+              mutate(
+                wfd_type_alt_name =
+                  .data$wfd_type_alternative %>%
+                  mapvalues(
+                    from = wfd_type_alttransl$wfd_type_alternative,
+                    to = wfd_type_alttransl$wfd_type_alt_name
+                    )
+              )
+          } else {
+            .
+          }
+        } %>%
+        #following match is only partial in case of v1.2
+        left_join(., connectivitytransl, by = "connectivity") %>%
         mutate(
           connectivity_name =
             .data$connectivity %>%
@@ -829,10 +878,19 @@ read_watersurfaces <-
               )
         ) %>%
         select(
-          1:6,
-          .data$wfd_type_name,
-          7:9,
-          .data$connectivity_name,
+          polygon_id,
+          wfd_code,
+          matches("^hyla_code$"),
+          name,
+          area_name,
+          wfd_type,
+          wfd_type_name,
+          matches("^wfd_type_alternative$"),
+          matches("^wfd_type_alt_name$"),
+          wfd_type_certain,
+          depth_class,
+          connectivity,
+          connectivity_name,
           everything()
         )
     }
