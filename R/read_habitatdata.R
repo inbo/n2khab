@@ -448,7 +448,7 @@ read_watersurfaces_hab <-
 
 #' Return the data source \code{watersurfaces} as an \code{sf} polygon layer
 #'
-#' Returns the raw data source \code{watersurfaces} (Scheers et al., 2022)
+#' Returns the raw data source \code{watersurfaces} (Leyssen et al., 2024)
 #' as a standardized \code{sf} polygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -462,7 +462,7 @@ read_watersurfaces_hab <-
 #' is the version corresponding to the \code{file} (note that the \code{version}
 #' defaults to the latest version).
 #'
-#' See Scheers et al. (2022) for an elaborate explanation of the data source
+#' See Leyssen et al. (2024) for an elaborate explanation of the data source
 #' and its attributes.
 #'
 #' @param file Optional string. An absolute or relative file path of
@@ -499,19 +499,23 @@ read_watersurfaces_hab <-
 #'   \item \code{polygon_id}: code of the polygon;
 #'   \item \code{wfd_code}: optional; Flemish code of the water body with
 #'   regard to the Water Framework Directive (WFD);
-#'   \item \code{hyla_code}: optional; code of the watersurface according to the
-#'   Flemish working group 'Hyla', a working group on amphibians & reptiles;
+#'   \item \code{hyla_code}: optional (only v1.2 and earlier); code of the
+#'   watersurface according to the Flemish working group 'Hyla', a working group
+#'   on amphibians & reptiles;
 #'   \item \code{name}: name of the watersurface;
 #'   \item \code{area_name}: name of the area;
 #'   \item \code{wfd_type}: type code according to the Flemish WFD typology
 #'   (Denys, 2009);
+#'   \item \code{wfd_type_alternative}: alternative type code according to the
+#'   Flemish WFD typology, in case there is a gradient between different types
+#'   (only version 2024);
 #'   \item \code{wfd_type_certain}: Logical.
 #'   Is there high confidence about the \code{wfd_type} determination?
 #'   \item \code{depth_class}: class of water depth;
 #'   \item \code{connectivity}: connectivity class;
 #'   \item \code{usage}: usage class;
-#'   \item \code{water_level_management}: water-level management class (not in
-#'   older versions).
+#'   \item \code{water_level_management}: water-level management class (only
+#'   since v1.2).
 #' }
 #'
 #' @family functions involved in processing the 'watersurfaces' data source
@@ -524,10 +528,10 @@ read_watersurfaces_hab <-
 #' wateren in Vlaanderen.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \item Scheers K., Smeekens V., Wils C., Packet J., Leyssen A. & Denys L.
-#' (2022). Watervlakken versie 1.2: Polygonenkaart van stilstaand water in
-#' Vlaanderen. Uitgave 2022. Instituut voor Natuur- en Bosonderzoek.
-#' \doi{10.21436/inbor.87014272}.
+#' \item Leyssen A., Scheers K., Packet J., Van Hecke F., Wils C. (2024).
+#' Watervlakken 2024: Polygonenkaart van stilstaand water in
+#' Vlaanderen. Uitgave 2024. Instituut voor Natuur- en Bosonderzoek.
+#' \doi{10.21436/inbor.114075267}.
 #' }
 #'
 #' @examples
