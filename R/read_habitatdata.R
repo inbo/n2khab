@@ -570,8 +570,6 @@ read_watersurfaces_hab <-
 #' across
 #' arrange
 #' mutate
-#' mutate_at
-#' mutate_if
 #' rename
 #' select
 #' left_join
@@ -635,11 +633,9 @@ read_watersurfaces <-
       )
 
       wfd_typetransl <- read_sf(file, layer = "LktKRWTYPE") %>%
-        mutate_if(., is.character,
-          .funs = function(x) {
-            return(`Encoding<-`(x, "UTF-8"))
-          }
-        ) %>%
+        mutate(across(where(is.character),
+                      ~ return(`Encoding<-`(.x, "UTF-8"))
+        )) %>%
         mutate(across(c(.data$Code), as.factor)) %>%
         rename(
           wfd_type = .data$Code,
@@ -744,12 +740,9 @@ read_watersurfaces <-
     if (version == "watersurfaces_v1.0") {
       watersurfaces <-
         watersurfaces %>%
-        mutate_at(
-          .vars = c("wfd_code", "name"),
-          .funs = function(x) {
-            ifelse(x == "<Null>", NA, x)
-          }
-        ) %>%
+        mutate(across(c("wfd_code", "name"),
+                      ~ ifelse(.x == "<Null>", NA, .x)
+        )) %>%
         mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
           na_lgl,
           .data$wfd_type_certain %in%
@@ -781,11 +774,9 @@ read_watersurfaces <-
     if (extended) {
       if (version == "watersurfaces_v1.1") {
         connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
-          mutate_if(., is.character,
-            .funs = function(x) {
-              return(`Encoding<-`(x, "UTF-8"))
-            }
-          ) %>%
+          mutate(across(where(is.character),
+                        ~ return(`Encoding<-`(.x, "UTF-8"))
+          )) %>%
           mutate(across(c(.data$Code), as.factor)) %>%
           rename(
             connectivity = .data$Code,
