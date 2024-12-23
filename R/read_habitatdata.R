@@ -412,9 +412,9 @@ read_watersurfaces_hab <-
         )
       ) %>%
       relocate(
-        .data$polygon_id,
-        .data$type,
-        .data$certain
+        "polygon_id",
+        "type",
+        "certain"
       )
 
     if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
