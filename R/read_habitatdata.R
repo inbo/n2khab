@@ -689,10 +689,10 @@ read_watersurfaces <-
       wfd_type_alttransl <- data.frame(wfd_type = "-", wfd_type_name = "geen ander watertype") %>%
         bind_rows(wfd_typetransl) %>%
         bind_rows(wfd_typetransl %>%
-                    mutate(wfd_type = paste0("(",wfd_type,")"),
-                           wfd_type_name = paste(wfd_type_name, "(weinig waarschijnlijk)"))) %>%
-        rename(wfd_type_alt_name = wfd_type_name,
-               wfd_type_alternative = wfd_type) %>%
+                    mutate(wfd_type = paste0("(",.data$wfd_type,")"),
+                           wfd_type_name = paste(.data$wfd_type_name, "(weinig waarschijnlijk)"))) %>%
+        rename(wfd_type_alt_name = "wfd_type_name",
+               wfd_type_alternative = "wfd_type") %>%
         mutate(
           wfd_type_alternative = factor(.data$wfd_type_alternative,
                                         levels = .$wfd_type_alternative
@@ -878,19 +878,19 @@ read_watersurfaces <-
               )
         ) %>%
         select(
-          polygon_id,
-          wfd_code,
+          "polygon_id",
+          "wfd_code",
           matches("^hyla_code$"),
-          name,
-          area_name,
-          wfd_type,
-          wfd_type_name,
+          "name",
+          "area_name",
+          "wfd_type",
+          "wfd_type_name",
           matches("^wfd_type_alternative$"),
           matches("^wfd_type_alt_name$"),
-          wfd_type_certain,
-          depth_class,
-          connectivity,
-          connectivity_name,
+          "wfd_type_certain",
+          "depth_class",
+          "connectivity",
+          "connectivity_name",
           everything()
         )
     }
