@@ -639,10 +639,12 @@ read_watersurfaces <-
       )
 
       wfd_typetransl <- read_sf(file, layer = "LktKRWTYPE") %>%
-        mutate(across(where(is.character),
-                      ~ return(`Encoding<-`(.x, "UTF-8"))
-        )) %>%
-        mutate(across(c(.data$Code), as.factor)) %>%
+        mutate(
+          across(where(is.character),
+                 ~ return(`Encoding<-`(.x, "UTF-8"))),
+          across(c(.data$Code),
+                 as.factor)
+          ) %>%
         rename(
           wfd_type = .data$Code,
           wfd_type_name = .data$Omschrijving
@@ -738,57 +740,50 @@ read_watersurfaces <-
         usage = .data$FUNCTIE,
         matches("^water_level_management$")
       ) %>%
-      mutate(depth_class = str_replace(
-        string = .data$depth_class,
-        pattern = "\u2265",
-        replacement = ">="
-      )) %>%
-      mutate(across(
-        c(
-          .data$area_name,
-          .data$depth_class,
-          .data$connectivity,
-          .data$usage,
-          matches("^water_level_management$")
-        ),
-        as.factor
-      )) %>%
       mutate(
+        depth_class = str_replace(
+          string = .data$depth_class,
+          pattern = "\u2265",
+          replacement = ">="),
+        across(
+          c(
+            .data$area_name,
+            .data$depth_class,
+            .data$connectivity,
+            .data$usage,
+            matches("^water_level_management$")
+            ),
+          as.factor),
         wfd_type = .data$wfd_type %>%
           factor(
             levels =
               levels(wfd_typetransl$wfd_type)
-            )
-      ) %>%
-      mutate(across(
-        matches("^wfd_type_alternative$"),
-        ~ factor(.,
-                 levels =
-                   levels(wfd_type_alttransl$wfd_type_alternative)
-        )
-      )) %>%
-      mutate(across(
-        matches("^hyla_code$"),
-        ~ ifelse(.data$hyla_code == 0,
-                 NA,
-                 .data$hyla_code)
-      )) %>%
+            ),
+        across(
+          matches("^wfd_type_alternative$"),
+          ~ factor(.,
+                   levels =
+                     levels(wfd_type_alttransl$wfd_type_alternative)
+                   )),
+        across(
+          matches("^hyla_code$"),
+          ~ ifelse(.data$hyla_code == 0,
+                   NA,
+                   .data$hyla_code))
+        ) %>%
       arrange(.data$polygon_id)
 
     if (version == "watersurfaces_v1.0") {
       watersurfaces <-
         watersurfaces %>%
-        mutate(across(c("wfd_code", "name"),
-                      ~ ifelse(.x == "<Null>", NA, .x)
-        )) %>%
-        mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
-          na_lgl,
-          .data$wfd_type_certain %in%
-            c(
-              "zeker",
-              "definitief"
-            )
-        ))
+        mutate(
+          across(c("wfd_code", "name"),
+                 ~ ifelse(.x == "<Null>", NA, .x)),
+          wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+                                    na_lgl,
+                                    .data$wfd_type_certain %in%
+                                      c("zeker","definitief"))
+        )
     } else {
       watersurfaces <-
         watersurfaces %>%
@@ -812,10 +807,11 @@ read_watersurfaces <-
     if (extended) {
       if (version == "watersurfaces_v1.1") {
         connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
-          mutate(across(where(is.character),
-                        ~ return(`Encoding<-`(.x, "UTF-8"))
-          )) %>%
-          mutate(across(c(.data$Code), as.factor)) %>%
+          mutate(
+            across(where(is.character),
+                   ~ return(`Encoding<-`(.x, "UTF-8"))),
+            across(c(.data$Code), as.factor)
+          ) %>%
           rename(
             connectivity = .data$Code,
             connectivity_name = .data$Omschr
