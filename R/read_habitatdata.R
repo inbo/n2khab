@@ -345,9 +345,8 @@ read_habitatmap_stdized <-
 #' @importFrom rlang .data
 #' @importFrom dplyr
 #' %>%
+#' across
 #' mutate
-#' mutate_at
-#' vars
 #' relocate
 #' @importFrom assertthat
 #' assert_that
@@ -375,10 +374,9 @@ read_watersurfaces_hab <-
     )
 
     watersurfaces_polygons <- watersurfaces_polygons %>%
-      mutate_at(
-        .vars = vars(starts_with("polygon_id")),
-        .funs = factor
-      )
+      mutate(
+        across(starts_with("polygon_id"),
+               factor))
 
     suppressWarnings(st_crs(watersurfaces_polygons) <- 31370)
 
