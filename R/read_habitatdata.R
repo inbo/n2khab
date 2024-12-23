@@ -719,9 +719,10 @@ read_watersurfaces <-
                  hyla_code = "HYLAC")
         } else if (version == "watersurfaces_v2024") {
           rename(.,
-            mutate(across(where(is.character), ~na_if(., "")))
                  wfd_type_alternative = "KRWTYPEA",
                  water_level_management = "PEILBEHEER") %>%
+            mutate(
+              across(where(is.character), ~na_if(., "")))
         } else {
           rename(., hyla_code = "HYLAC")
         }
