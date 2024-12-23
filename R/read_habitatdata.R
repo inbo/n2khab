@@ -868,7 +868,7 @@ read_watersurfaces <-
           }
         } %>%
         #following match is only partial in case of v1.2
-        left_join(., connectivitytransl, by = "connectivity") %>%
+        left_join(connectivitytransl, by = "connectivity") %>%
         mutate(
           connectivity_name =
             .data$connectivity %>%
