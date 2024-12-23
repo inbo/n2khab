@@ -646,9 +646,9 @@ read_watersurfaces <-
                  as.factor)
           ) %>%
         rename(
-          wfd_type = .data$Code,
-          wfd_type_name = .data$Omschrijving
-        )
+          wfd_type = "Code",
+          wfd_type_name = "Omschrijving"
+          )
     } else {
       suppressWarnings(
         watersurfaces <- read_sf(file,
@@ -715,29 +715,29 @@ read_watersurfaces <-
       watersurfaces %>%
       {
         if (version == "watersurfaces_v1.2") {
-          rename(., water_level_management = .data$PEILBEHEER,
-                 hyla_code = .data$HYLAC)
+          rename(., water_level_management = "PEILBEHEER",
+                 hyla_code = "HYLAC")
         } else if (version == "watersurfaces_v2024") {
           rename(.,
-                 wfd_type_alternative = .data$KRWTYPEA,
-                 water_level_management = .data$PEILBEHEER) %>%
             mutate(across(where(is.character), ~na_if(., "")))
+                 wfd_type_alternative = "KRWTYPEA",
+                 water_level_management = "PEILBEHEER") %>%
         } else {
-          rename(., hyla_code = .data$HYLAC)
+          rename(., hyla_code = "HYLAC")
         }
       } %>%
       select(
-        polygon_id = .data$WVLC,
-        wfd_code = .data$WTRLICHC,
+        polygon_id = "WVLC",
+        wfd_code = "WTRLICHC",
         matches("^hyla_code$"),
-        name = .data$NAAM,
-        area_name = .data$GEBIED,
-        wfd_type = .data$KRWTYPE,
+        name = "NAAM",
+        area_name = "GEBIED",
+        wfd_type = "KRWTYPE",
         matches("^wfd_type_alternative$"),
-        wfd_type_certain = .data$KRWTYPES,
-        depth_class = .data$DIEPKL,
-        connectivity = .data$CONNECT,
-        usage = .data$FUNCTIE,
+        wfd_type_certain = "KRWTYPES",
+        depth_class = "DIEPKL",
+        connectivity = "CONNECT",
+        usage = "FUNCTIE",
         matches("^water_level_management$")
       ) %>%
       mutate(
@@ -771,7 +771,7 @@ read_watersurfaces <-
                    NA,
                    .data$hyla_code))
         ) %>%
-      arrange(.data$polygon_id)
+      arrange("polygon_id")
 
     if (version == "watersurfaces_v1.0") {
       watersurfaces <-
@@ -813,8 +813,8 @@ read_watersurfaces <-
             across(c(.data$Code), as.factor)
           ) %>%
           rename(
-            connectivity = .data$Code,
-            connectivity_name = .data$Omschr
+            connectivity = "Code",
+            connectivity_name = "Omschr"
           )
       } else {
         connectivitytransl <-
