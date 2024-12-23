@@ -582,6 +582,8 @@ read_watersurfaces_hab <-
 #' assert_that
 #' @importFrom stringr
 #' str_replace
+#' @importFrom tidyselect
+#' where
 #' @export
 read_watersurfaces <-
   function(file = NULL,
