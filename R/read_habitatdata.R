@@ -640,7 +640,7 @@ read_watersurfaces <-
         mutate(
           across(where(is.character),
                  ~ return(`Encoding<-`(.x, "UTF-8"))),
-          across(c(.data$Code),
+          across("Code",
                  as.factor)
           ) %>%
         rename(
@@ -746,12 +746,12 @@ read_watersurfaces <-
           replacement = ">="),
         across(
           c(
-            .data$area_name,
-            .data$depth_class,
-            .data$connectivity,
-            .data$usage,
+            "area_name",
+            "depth_class",
+            "connectivity",
+            "usage",
             matches("^water_level_management$")
-            ),
+          ),
           as.factor),
         wfd_type = .data$wfd_type %>%
           factor(
@@ -809,7 +809,7 @@ read_watersurfaces <-
           mutate(
             across(where(is.character),
                    ~ return(`Encoding<-`(.x, "UTF-8"))),
-            across(c(.data$Code), as.factor)
+            across("Code", as.factor)
           ) %>%
           rename(
             connectivity = "Code",
