@@ -767,9 +767,9 @@ read_watersurfaces <-
                    )),
         across(
           any_of("hyla_code"),
-          ~ ifelse(.data$hyla_code == 0,
+          ~ ifelse(.x == 0,
                    NA,
-                   .data$hyla_code))
+                   .x))
         ) %>%
       arrange("polygon_id")
 
