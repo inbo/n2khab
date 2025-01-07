@@ -582,6 +582,7 @@ read_watersurfaces_hab <-
 #' str_replace
 #' @importFrom tidyselect
 #' where
+#' any_of
 #' @export
 read_watersurfaces <-
   function(file = NULL,
@@ -640,7 +641,7 @@ read_watersurfaces <-
         mutate(
           across(where(is.character),
                  ~ return(`Encoding<-`(.x, "UTF-8"))),
-          across(c(.data$Code),
+          across("Code",
                  as.factor)
           ) %>%
         rename(
@@ -728,16 +729,16 @@ read_watersurfaces <-
       select(
         polygon_id = "WVLC",
         wfd_code = "WTRLICHC",
-        matches("^hyla_code$"),
+        any_of("hyla_code"),
         name = "NAAM",
         area_name = "GEBIED",
         wfd_type = "KRWTYPE",
-        matches("^wfd_type_alternative$"),
+        any_of("wfd_type_alternative"),
         wfd_type_certain = "KRWTYPES",
         depth_class = "DIEPKL",
         connectivity = "CONNECT",
         usage = "FUNCTIE",
-        matches("^water_level_management$")
+        any_of("water_level_management")
       ) %>%
       mutate(
         depth_class = str_replace(
@@ -746,12 +747,12 @@ read_watersurfaces <-
           replacement = ">="),
         across(
           c(
-            .data$area_name,
-            .data$depth_class,
-            .data$connectivity,
-            .data$usage,
-            matches("^water_level_management$")
-            ),
+            "area_name",
+            "depth_class",
+            "connectivity",
+            "usage",
+            any_of("water_level_management")
+          ),
           as.factor),
         wfd_type = .data$wfd_type %>%
           factor(
@@ -759,13 +760,13 @@ read_watersurfaces <-
               levels(wfd_typetransl$wfd_type)
             ),
         across(
-          matches("^wfd_type_alternative$"),
+          any_of("wfd_type_alternative"),
           ~ factor(.,
                    levels =
                      levels(wfd_type_alttransl$wfd_type_alternative)
                    )),
         across(
-          matches("^hyla_code$"),
+          any_of("hyla_code"),
           ~ ifelse(.data$hyla_code == 0,
                    NA,
                    .data$hyla_code))
@@ -809,7 +810,7 @@ read_watersurfaces <-
           mutate(
             across(where(is.character),
                    ~ return(`Encoding<-`(.x, "UTF-8"))),
-            across(c(.data$Code), as.factor)
+            across("Code", as.factor)
           ) %>%
           rename(
             connectivity = "Code",
@@ -879,13 +880,13 @@ read_watersurfaces <-
         select(
           "polygon_id",
           "wfd_code",
-          matches("^hyla_code$"),
+          any_of("hyla_code"),
           "name",
           "area_name",
           "wfd_type",
           "wfd_type_name",
-          matches("^wfd_type_alternative$"),
-          matches("^wfd_type_alt_name$"),
+          any_of("wfd_type_alternative"),
+          any_of("wfd_type_alt_name"),
           "wfd_type_certain",
           "depth_class",
           "connectivity",
