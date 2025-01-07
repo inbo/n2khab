@@ -804,6 +804,16 @@ read_watersurfaces <-
         ))
     }
 
+    # corrections per record
+    # 2024: wrong polygon_id "d"
+    if (version == "watersurfaces_v2024") {
+      watersurfaces <-
+        watersurfaces %>%
+        mutate(polygon_id = ifelse(.data$polygon_id == "d",
+                                   "WVLKNO0072",
+                                   .data$polygon_id))
+    }
+
     if (extended) {
       if (version == "watersurfaces_v1.1") {
         connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
