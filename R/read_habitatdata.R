@@ -307,11 +307,12 @@ read_habitatmap_stdized <-
 #'
 #' @references
 #' \itemize{
-#' \item Scheers K., Smeekens V., Wils C., Packet J., Leyssen A. & Denys L. (2022).
-#' Watervlakken versie 1.2: polygonenkaart van stilstaand water in Vlaanderen.
-#' Uitgave 2022. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2022
-#' (31). Instituut voor Natuur en Bosonderzoek, Brussel.
-#' \doi{10.21436/inbor.87014272}.
+#' \item Leyssen A., Scheers K., Packet J., Van Hecke F., Wils C. (2024).
+#' Watervlakken 2024: Polygonenkaart van stilstaand water in
+#' Vlaanderen. Uitgave 2024.
+#' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2024
+#' (52). Instituut voor Natuur en Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.114075267}.
 #' #' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
 #' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
 #' Van Dam G., Van Hove M., Wils C. (red.) (2023).
@@ -344,9 +345,8 @@ read_habitatmap_stdized <-
 #' @importFrom rlang .data
 #' @importFrom dplyr
 #' %>%
+#' across
 #' mutate
-#' mutate_at
-#' vars
 #' relocate
 #' @importFrom assertthat
 #' assert_that
@@ -359,6 +359,7 @@ read_watersurfaces_hab <-
            ),
            interpreted = FALSE,
            version = c(
+             "watersurfaces_hab_v6",
              "watersurfaces_hab_v5",
              "watersurfaces_hab_v4",
              "watersurfaces_hab_v3",
@@ -373,9 +374,11 @@ read_watersurfaces_hab <-
     )
 
     watersurfaces_polygons <- watersurfaces_polygons %>%
-      mutate_at(
-        .vars = vars(starts_with("polygon_id")),
-        .funs = factor
+      mutate(
+        across(
+          starts_with("polygon_id"),
+          factor
+        )
       )
 
     suppressWarnings(st_crs(watersurfaces_polygons) <- 31370)
@@ -412,9 +415,9 @@ read_watersurfaces_hab <-
         )
       ) %>%
       relocate(
-        .data$polygon_id,
-        .data$type,
-        .data$certain
+        "polygon_id",
+        "type",
+        "certain"
       )
 
     if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
@@ -448,7 +451,7 @@ read_watersurfaces_hab <-
 
 #' Return the data source \code{watersurfaces} as an \code{sf} polygon layer
 #'
-#' Returns the raw data source \code{watersurfaces} (Scheers et al., 2022)
+#' Returns the raw data source \code{watersurfaces} (Leyssen et al., 2024)
 #' as a standardized \code{sf} polygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -462,7 +465,7 @@ read_watersurfaces_hab <-
 #' is the version corresponding to the \code{file} (note that the \code{version}
 #' defaults to the latest version).
 #'
-#' See Scheers et al. (2022) for an elaborate explanation of the data source
+#' See Leyssen et al. (2024) for an elaborate explanation of the data source
 #' and its attributes.
 #'
 #' @param file Optional string. An absolute or relative file path of
@@ -499,19 +502,23 @@ read_watersurfaces_hab <-
 #'   \item \code{polygon_id}: code of the polygon;
 #'   \item \code{wfd_code}: optional; Flemish code of the water body with
 #'   regard to the Water Framework Directive (WFD);
-#'   \item \code{hyla_code}: optional; code of the watersurface according to the
-#'   Flemish working group 'Hyla', a working group on amphibians & reptiles;
+#'   \item \code{hyla_code}: optional (only v1.2 and earlier); code of the
+#'   watersurface according to the Flemish working group 'Hyla', a working group
+#'   on amphibians & reptiles;
 #'   \item \code{name}: name of the watersurface;
 #'   \item \code{area_name}: name of the area;
 #'   \item \code{wfd_type}: type code according to the Flemish WFD typology
 #'   (Denys, 2009);
+#'   \item \code{wfd_type_alternative}: alternative type code according to the
+#'   Flemish WFD typology, in case there is a gradient between different types
+#'   (only version 2024);
 #'   \item \code{wfd_type_certain}: Logical.
 #'   Is there high confidence about the \code{wfd_type} determination?
 #'   \item \code{depth_class}: class of water depth;
 #'   \item \code{connectivity}: connectivity class;
 #'   \item \code{usage}: usage class;
-#'   \item \code{water_level_management}: water-level management class (not in
-#'   older versions).
+#'   \item \code{water_level_management}: water-level management class (only
+#'   since v1.2).
 #' }
 #'
 #' @family functions involved in processing the 'watersurfaces' data source
@@ -524,10 +531,10 @@ read_watersurfaces_hab <-
 #' wateren in Vlaanderen.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \item Scheers K., Smeekens V., Wils C., Packet J., Leyssen A. & Denys L.
-#' (2022). Watervlakken versie 1.2: Polygonenkaart van stilstaand water in
-#' Vlaanderen. Uitgave 2022. Instituut voor Natuur- en Bosonderzoek.
-#' \doi{10.21436/inbor.87014272}.
+#' \item Leyssen A., Scheers K., Packet J., Van Hecke F., Wils C. (2024).
+#' Watervlakken 2024: Polygonenkaart van stilstaand water in
+#' Vlaanderen. Uitgave 2024. Instituut voor Natuur- en Bosonderzoek.
+#' \doi{10.21436/inbor.114075267}.
 #' }
 #'
 #' @examples
@@ -566,8 +573,7 @@ read_watersurfaces_hab <-
 #' across
 #' arrange
 #' mutate
-#' mutate_at
-#' mutate_if
+#' na_if
 #' rename
 #' select
 #' left_join
@@ -577,14 +583,20 @@ read_watersurfaces_hab <-
 #' assert_that
 #' @importFrom stringr
 #' str_replace
+#' @importFrom tidyselect
+#' where
+#' any_of
 #' @export
 read_watersurfaces <-
   function(file = NULL,
            extended = FALSE,
            fix_geom = FALSE,
-           version = c("watersurfaces_v1.2",
-                       "watersurfaces_v1.1",
-                       "watersurfaces_v1.0")) {
+           version = c(
+             "watersurfaces_v2024",
+             "watersurfaces_v1.2",
+             "watersurfaces_v1.1",
+             "watersurfaces_v1.0"
+           )) {
     version <- match.arg(version)
     assert_that(is.flag(extended), noNA(extended))
     assert_that(is.flag(fix_geom), noNA(fix_geom))
@@ -631,15 +643,19 @@ read_watersurfaces <-
       )
 
       wfd_typetransl <- read_sf(file, layer = "LktKRWTYPE") %>%
-        mutate_if(., is.character,
-          .funs = function(x) {
-            return(`Encoding<-`(x, "UTF-8"))
-          }
+        mutate(
+          across(
+            where(is.character),
+            ~ return(`Encoding<-`(.x, "UTF-8"))
+          ),
+          across(
+            "Code",
+            as.factor
+          )
         ) %>%
-        mutate(across(c(.data$Code), as.factor)) %>%
         rename(
-          wfd_type = .data$Code,
-          wfd_type_name = .data$Omschrijving
+          wfd_type = "Code",
+          wfd_type_name = "Omschrijving"
         )
     } else {
       suppressWarnings(
@@ -664,6 +680,7 @@ read_watersurfaces <-
           "C", "circumneutraal",
           "Cb", "circumneutraal, sterk gebufferd",
           "CbFe", "circumneutraal, sterk gebufferd, ijzerrijk",
+          "CFe", "circumneutraal, ijzerrijk",
           "Czb", "circumneutraal, zwak gebufferd",
           "Z", "zuur",
           "Zm", "zwak zuur",
@@ -672,6 +689,25 @@ read_watersurfaces <-
         mutate(
           wfd_type = factor(.data$wfd_type,
             levels = .$wfd_type
+          )
+        )
+    }
+
+    if (version == "watersurfaces_v2024") {
+      wfd_type_alttransl <- data.frame(wfd_type = "-", wfd_type_name = "geen ander watertype") %>%
+        bind_rows(wfd_typetransl) %>%
+        bind_rows(wfd_typetransl %>%
+          mutate(
+            wfd_type = paste0("(", .data$wfd_type, ")"),
+            wfd_type_name = paste(.data$wfd_type_name, "(weinig waarschijnlijk)")
+          )) %>%
+        rename(
+          wfd_type_alt_name = "wfd_type_name",
+          wfd_type_alternative = "wfd_type"
+        ) %>%
+        mutate(
+          wfd_type_alternative = factor(.data$wfd_type_alternative,
+            levels = .$wfd_type_alternative
           )
         )
     }
@@ -691,69 +727,88 @@ read_watersurfaces <-
       watersurfaces %>%
       {
         if (version == "watersurfaces_v1.2") {
-          rename(., water_level_management = .data$PEILBEHEER)
+          rename(.,
+            water_level_management = "PEILBEHEER",
+            hyla_code = "HYLAC"
+          )
+        } else if (version == "watersurfaces_v2024") {
+          rename(.,
+            wfd_type_alternative = "KRWTYPEA",
+            water_level_management = "PEILBEHEER"
+          ) %>%
+            mutate(
+              across(where(is.character), ~ na_if(., ""))
+            )
         } else {
-          .
+          rename(., hyla_code = "HYLAC")
         }
       } %>%
       select(
-        polygon_id = .data$WVLC,
-        wfd_code = .data$WTRLICHC,
-        hyla_code = .data$HYLAC,
-        name = .data$NAAM,
-        area_name = .data$GEBIED,
-        wfd_type = .data$KRWTYPE,
-        wfd_type_certain = .data$KRWTYPES,
-        depth_class = .data$DIEPKL,
-        connectivity = .data$CONNECT,
-        usage = .data$FUNCTIE,
-        matches("^water_level_management$")
+        polygon_id = "WVLC",
+        wfd_code = "WTRLICHC",
+        any_of("hyla_code"),
+        name = "NAAM",
+        area_name = "GEBIED",
+        wfd_type = "KRWTYPE",
+        any_of("wfd_type_alternative"),
+        wfd_type_certain = "KRWTYPES",
+        depth_class = "DIEPKL",
+        connectivity = "CONNECT",
+        usage = "FUNCTIE",
+        any_of("water_level_management")
       ) %>%
-      mutate(depth_class = str_replace(
-        string = .data$depth_class,
-        pattern = "\u2265",
-        replacement = ">="
-      )) %>%
-      mutate(across(
-        c(
-          .data$area_name,
-          .data$depth_class,
-          .data$connectivity,
-          .data$usage,
-          matches("^water_level_management$")
-        ),
-        as.factor
-      )) %>%
       mutate(
+        depth_class = str_replace(
+          string = .data$depth_class,
+          pattern = "\u2265",
+          replacement = ">="
+        ),
+        across(
+          c(
+            "area_name",
+            "depth_class",
+            "connectivity",
+            "usage",
+            any_of("water_level_management")
+          ),
+          as.factor
+        ),
         wfd_type = .data$wfd_type %>%
           factor(
             levels =
               levels(wfd_typetransl$wfd_type)
           ),
-        hyla_code = ifelse(.data$hyla_code == 0,
-          NA,
-          .data$hyla_code
+        across(
+          any_of("wfd_type_alternative"),
+          ~ factor(.,
+            levels =
+              levels(wfd_type_alttransl$wfd_type_alternative)
+          )
+        ),
+        across(
+          any_of("hyla_code"),
+          ~ ifelse(.x == 0,
+            NA,
+            .x
+          )
         )
       ) %>%
-      arrange(.data$polygon_id)
+      arrange("polygon_id")
 
     if (version == "watersurfaces_v1.0") {
       watersurfaces <-
         watersurfaces %>%
-        mutate_at(
-          .vars = c("wfd_code", "name"),
-          .funs = function(x) {
-            ifelse(x == "<Null>", NA, x)
-          }
-        ) %>%
-        mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
-          na_lgl,
-          .data$wfd_type_certain %in%
-            c(
-              "zeker",
-              "definitief"
-            )
-        ))
+        mutate(
+          across(
+            c("wfd_code", "name"),
+            ~ ifelse(.x == "<Null>", NA, .x)
+          ),
+          wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+            na_lgl,
+            .data$wfd_type_certain %in%
+              c("zeker", "definitief")
+          )
+        )
     } else {
       watersurfaces <-
         watersurfaces %>%
@@ -774,18 +829,30 @@ read_watersurfaces <-
         ))
     }
 
+    # corrections per record
+    # 2024: wrong polygon_id "d"
+    if (version == "watersurfaces_v2024") {
+      watersurfaces <-
+        watersurfaces %>%
+        mutate(polygon_id = ifelse(.data$polygon_id == "d",
+          "WVLKNO0072",
+          .data$polygon_id
+        ))
+    }
+
     if (extended) {
       if (version == "watersurfaces_v1.1") {
         connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
-          mutate_if(., is.character,
-            .funs = function(x) {
-              return(`Encoding<-`(x, "UTF-8"))
-            }
+          mutate(
+            across(
+              where(is.character),
+              ~ return(`Encoding<-`(.x, "UTF-8"))
+            ),
+            across("Code", as.factor)
           ) %>%
-          mutate(across(c(.data$Code), as.factor)) %>%
           rename(
-            connectivity = .data$Code,
-            connectivity_name = .data$Omschr
+            connectivity = "Code",
+            connectivity_name = "Omschr"
           )
       } else {
         connectivitytransl <-
@@ -823,6 +890,21 @@ read_watersurfaces <-
                 to = wfd_typetransl$wfd_type_name
               )
         ) %>%
+        {
+          if (version == "watersurfaces_v2024") {
+            left_join(., wfd_type_alttransl, by = "wfd_type_alternative") %>%
+              mutate(
+                wfd_type_alt_name =
+                  .data$wfd_type_alternative %>%
+                    mapvalues(
+                      from = wfd_type_alttransl$wfd_type_alternative,
+                      to = wfd_type_alttransl$wfd_type_alt_name
+                    )
+              )
+          } else {
+            .
+          }
+        } %>%
         # following match is only partial in case of v1.2
         left_join(connectivitytransl, by = "connectivity") %>%
         mutate(
@@ -834,10 +916,19 @@ read_watersurfaces <-
               )
         ) %>%
         select(
-          1:6,
-          .data$wfd_type_name,
-          7:9,
-          .data$connectivity_name,
+          "polygon_id",
+          "wfd_code",
+          any_of("hyla_code"),
+          "name",
+          "area_name",
+          "wfd_type",
+          "wfd_type_name",
+          any_of("wfd_type_alternative"),
+          any_of("wfd_type_alt_name"),
+          "wfd_type_certain",
+          "depth_class",
+          "connectivity",
+          "connectivity_name",
           everything()
         )
     }
@@ -1059,9 +1150,9 @@ read_habitatmap <-
       #   !validities | is.na(validities)
       # )
       # if (n_invalid > 0) {
-        habitatmap <- st_make_valid(habitatmap)
-        # message("Fixed ", n_invalid, " invalid or corrupt geometries.")
-        message("Fixed invalid or corrupt geometries.")
+      habitatmap <- st_make_valid(habitatmap)
+      # message("Fixed ", n_invalid, " invalid or corrupt geometries.")
+      message("Fixed invalid or corrupt geometries.")
       # }
     }
 
