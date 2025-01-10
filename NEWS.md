@@ -1,3 +1,12 @@
+# n2khab 0.12.0 (2025-01-10)
+
+## Support for new data source versions
+
+The following new data source versions are now supported by the corresponding functions (#192):
+
+- `watersurfaces_2024` (`read_watersurfaces()`)
+- `watersurfaces_hab_v6` (`read_watersurfaces_hab()`)
+
 # n2khab 0.11.0 (2024-10-03)
 
 ## Support for new data source versions
