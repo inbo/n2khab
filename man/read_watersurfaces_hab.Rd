@@ -9,8 +9,8 @@ read_watersurfaces_hab(
   file = file.path(locate_n2khab_data(),
     "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
   interpreted = FALSE,
-  version = c("watersurfaces_hab_v5", "watersurfaces_hab_v4", "watersurfaces_hab_v3",
-    "watersurfaces_hab_v2", "watersurfaces_hab_v1")
+  version = c("watersurfaces_hab_v6", "watersurfaces_hab_v5", "watersurfaces_hab_v4",
+    "watersurfaces_hab_v3", "watersurfaces_hab_v2", "watersurfaces_hab_v1")
 )
 }
 \arguments{
@@ -105,11 +105,12 @@ wsh_types
 }
 \references{
 \itemize{
-\item Scheers K., Smeekens V., Wils C., Packet J., Leyssen A. & Denys L. (2022).
-Watervlakken versie 1.2: polygonenkaart van stilstaand water in Vlaanderen.
-Uitgave 2022. Rapporten van het Instituut voor Natuur- en Bosonderzoek 2022
-(31). Instituut voor Natuur en Bosonderzoek, Brussel.
-\doi{10.21436/inbor.87014272}.
+\item Leyssen A., Scheers K., Packet J., Van Hecke F., Wils C. (2024).
+Watervlakken 2024: Polygonenkaart van stilstaand water in
+Vlaanderen. Uitgave 2024.
+Rapporten van het Instituut voor Natuur- en Bosonderzoek 2024
+(52). Instituut voor Natuur en Bosonderzoek, Brussel.
+\doi{10.21436/inbor.114075267}.
 #' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
 Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
 Van Dam G., Van Hove M., Wils C. (red.) (2023).
