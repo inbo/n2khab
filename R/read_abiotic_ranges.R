@@ -91,6 +91,8 @@
 #' @importFrom assertthat
 #' assert_that
 #' is.string
+#' @importFrom dplyr
+#' as_tibble
 #' @importFrom fs
 #' is_file
 #' file_exists
@@ -128,7 +130,31 @@ read_abiotic_ranges <- function(
   favenv <- read.delim(
     file = file, header = TRUE, sep = "\t", dec = ",", na.strings = c("NA", "")
   )
-  favenv <- favenv |> convertdf_enc(from = "latin1", to = "UTF-8")
+
+  favenv <- favenv |>
+    convertdf_enc(from = "latin1", to = "UTF-8") |>
+    as_tibble() |>
+    rename(
+      type = Habitatsubtype,
+      subtype = Subtype,
+      milieucompartiment = Milieucompartiment,
+      variabele = Variabele,
+      afkorting = Afkorting,
+      eenheid = Eenheid,
+      toetswijze_bepaling = `Toetswijze...bepaling`,
+      teken = Teken,
+      abiotisch_bereik = Abiotisch.bereik,
+      waarde_1 = Waarde.1,
+      waarde_2 = Waarde.2,
+      waarde_num_1 = WaardeNum1,
+      waarde_num_2 = WaardeNum2,
+      n_gunstig = N.gunstig,
+      status = Status,
+      referentie = Referentie,
+      opmerking = Opmerking,
+      wijziging = Wijziging
+    )
+
   return(favenv)
 }
 
