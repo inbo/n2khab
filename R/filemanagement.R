@@ -229,6 +229,47 @@ download_zenodo <- function(doi,
   }
 }
 
+#' Get version IDS from a Zenodo archive
+#'
+#' The function queries the Zenodo API to find the version ID's and
+#' corresponding doi's.
+#'
+#' @param doi a doi pointer to the Cite-all-versions doi for a Zenodo archive.
+#' A Zenodo archive starts with '10.5281/zenodo.'
+#'
+#' @export
+#' @family functions regarding file management for N2KHAB projects
+#'
+#' @return A named vector. The names correspond to version IDs, the values
+#' correspond to doi's.
+#'
+#' @importFrom stringr
+#' fixed
+#' str_remove
+#' @importFrom curl
+#' curl_fetch_memory
+#' @importFrom jsonlite
+#' fromJSON
+#'
+get_zenodo_versions <- function(doi) {
+  assert_that(is.string(doi))
+
+  # Retrieve versions url from metadata
+  record <- str_remove(doi, fixed("10.5281/zenodo."))
+  base_url <- "https://zenodo.org/api/records/"
+  req <- curl::curl_fetch_memory(paste0(base_url, record))
+  content <- jsonlite::fromJSON(rawToChar(req$content))
+  url_versions <- content$links$versions
+
+  # Retrieve versions info
+  req <- curl::curl_fetch_memory(url_versions)
+  content <- jsonlite::fromJSON(rawToChar(req$content))
+  md <- content$hits$hits
+  versions <- md$metadata$doi
+  names(versions) <- md$metadata$version
+  return(versions)
+}
+
 
 
 #' Human-readable binary file size
