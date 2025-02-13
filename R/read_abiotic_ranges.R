@@ -128,7 +128,7 @@ read_abiotic_ranges <- function(
   favenv <- read.delim(
     file = file, header = TRUE, sep = "\t", dec = ","
   )
-
+  favenv <- favenv |> convertdf_enc(from = "latin1", to = "UTF-8")
   return(favenv)
 }
 
