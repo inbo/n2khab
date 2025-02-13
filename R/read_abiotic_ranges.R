@@ -87,12 +87,48 @@
 #' \dontrun{
 #' far <- read_abiotic_ranges()
 #' }
-read_abiotic_ranges <- function(doi = "10.5281/zenodo.10533791") {
-  td <- tempdir()
-  download_zenodo(doi = doi, path = td, quiet = TRUE)
-  file <- list.files(path = td, pattern = "txt$")
-  far <- read.delim(
-    file = file.path(td, file), header = TRUE, sep = "\t", dec = ","
+#'
+#' @importFrom assertthat
+#' assert_that
+#' is.string
+#' @importFrom fs
+#' is_file
+#' file_exists
+#' dir_create
+read_abiotic_ranges <- function(
+    file = file.path(
+      locate_n2khab_data(),
+      "10_raw/favenv",
+      "VanCalster_etal_2020_Gunstig_abiotisch_bereik_per_milieuvariabele_en_habitatsubtype_v01_00.txt"
+    ),
+    version = c("01.00")) {
+
+  version <- match.arg(version)
+
+  # if file does not exist, download it from Zenodo
+  if (!fs::file_exists(file)) {
+    assert_that(
+      curl::has_internet(),
+      msg =
+        paste0(
+          "The file does not exists and there is no internet connection.\n",
+          "Aborting attempt to dowload the necessary file from Zenodo."
+        )
+    )
+    doi <- switch(
+      version,
+      `01.00` = "10.5281/zenodo.10533792",
+      "10.5281/zenodo.10533791" # default resolves to latest
+    )
+    dir <- fs::path_dir(file)
+    fs::dir_create(dir)
+    download_zenodo(doi = doi, path = dir, quiet = TRUE)
+  }
+
+  favenv <- read.delim(
+    file = file, header = TRUE, sep = "\t", dec = ","
   )
-  return(far)
+
+  return(favenv)
 }
+
