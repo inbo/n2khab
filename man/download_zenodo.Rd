@@ -43,6 +43,7 @@ Other functions regarding file management for N2KHAB projects:
 \code{\link{checksum}()},
 \code{\link{fileman_folders}()},
 \code{\link{fileman_up}()},
+\code{\link{get_zenodo_versions}()},
 \code{\link{locate_n2khab_data}()}
 }
 \author{
