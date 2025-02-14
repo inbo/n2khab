@@ -95,6 +95,10 @@
 #' is.string
 #' @importFrom dplyr
 #' as_tibble
+#' filter
+#' rename
+#' if_all
+#' everything
 #' @importFrom fs
 #' is_file
 #' file_exists
@@ -134,7 +138,12 @@ read_favenv <- function(
   }
 
   favenv <- read.delim(
-    file = file, header = TRUE, sep = "\t", dec = ",", na.strings = c("NA", "")
+    file = file,
+    header = TRUE,
+    sep = "\t",
+    dec = ",",
+    na.strings = c("NA", ""),
+    blank.lines.skip = TRUE
   )
 
   favenv <- favenv |>
@@ -159,11 +168,18 @@ read_favenv <- function(
       referentie = Referentie,
       opmerking = Opmerking,
       wijziging = Wijziging
+    ) |>
+    filter(
+      !if_all(everything(), is.na)
     )
 
-  # align first three columns with read_types() and read_schemes()
+  # align with read_types() and read_schemes()
   types <- read_types(lang = lang)
   schemes <- n2khabmon::read_schemes(lang = lang)
+  favenv <- favenv |>
+    mutate(
+      type = factor(type, levels = sort(unique(type)))
+    )
 
   return(favenv)
 }
