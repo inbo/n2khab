@@ -60,6 +60,9 @@
 #' for each group in turn?
 #' @param strict Logical.
 #' Apply conditions before expanding subtype codes to main type codes?
+#' @param mark Logical.
+#' Adds a column \code{expanded_to} that marks if the row has been added.
+#' The column documents which expansion was applied: to subtype or to main type.
 #'
 #' @return
 #' A data frame, either identical or longer than the input data frame.
@@ -96,8 +99,8 @@
 #'     "6410_ve", 4,
 #'     "91E0_vn", 10
 #'   )
-#' expand_types(x, type_var = "mycode")
-#' expand_types(x, type_var = "mycode", strict = FALSE)
+#' expand_types(x, type_var = "mycode", mark = TRUE)
+#' expand_types(x, type_var = "mycode", strict = FALSE, mark = TRUE)
 #'
 #' @importFrom assertthat
 #' assert_that
@@ -121,7 +124,8 @@
 expand_types <- function(x,
                          type_var = "type",
                          use_grouping = TRUE,
-                         strict = TRUE) {
+                         strict = TRUE,
+                         mark = FALSE) {
   assert_that(inherits(x, "data.frame"))
   assert_that(is.string(type_var))
   assert_that(type_var %in% colnames(x),
@@ -129,6 +133,7 @@ expand_types <- function(x,
   )
   assert_that(is.flag(use_grouping), noNA(use_grouping))
   assert_that(is.flag(strict), noNA(strict))
+  assert_that(is.flag(mark), noNA(mark))
 
   types <-
     read_types() %>%
@@ -149,7 +154,8 @@ expand_types <- function(x,
       type_var = type_var,
       strict = strict,
       types = types,
-      subtypes = subtypes
+      subtypes = subtypes,
+      mark = mark
     )
   } else {
     x %>%
@@ -160,12 +166,13 @@ expand_types <- function(x,
         type_var = type_var,
         strict = strict,
         types = types,
-        subtypes = subtypes
+        subtypes = subtypes,
+        mark = mark
       )) %>%
       select(-.data$data) %>%
       unnest(cols = .data$newdata) %>%
       group_by_at(x %>% group_vars()) %>%
-      select(colnames(x))
+      select(colnames(x), any_of("expanded_to"))
   }
 }
 
@@ -205,7 +212,8 @@ expand_types_plain <- function(x,
                                type_var = "type",
                                strict = TRUE,
                                types,
-                               subtypes) {
+                               subtypes,
+                               mark) {
   orig_types <-
     x[, type_var] %>%
     rename(orig_abcd = type_var)
@@ -253,6 +261,11 @@ expand_types_plain <- function(x,
         by = "orig_abcd"
       ) %>%
       set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
+      {if (mark) {
+        mutate(., expanded_to = "subtype")
+      } else {
+        .
+      }} %>%
       bind_rows(x, .)
   )
 
@@ -277,7 +290,20 @@ expand_types_plain <- function(x,
       select(-.data$main_type_abcd) %>%
       distinct() %>%
       set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
-      bind_rows(x_expanded, .)
+      {if (mark) {
+        mutate(., expanded_to = "main_type")
+      } else {
+        .
+      }} %>%
+      bind_rows(x_expanded, .) %>%
+      {if (mark) {
+        mutate(., expanded_to = factor(
+          .data$expanded_to,
+          levels = levels(types$typelevel)
+          ))
+      } else {
+        .
+      }}
   )
 
   return(x_expanded)

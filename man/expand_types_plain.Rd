@@ -4,7 +4,7 @@
 \alias{expand_types_plain}
 \title{Expand a 'type' column in a data frame (grouping not taken into account)}
 \usage{
-expand_types_plain(x, type_var = "type", strict = TRUE, types, subtypes)
+expand_types_plain(x, type_var = "type", strict = TRUE, types, subtypes, mark)
 }
 \arguments{
 \item{x}{An object of class \code{data.frame}.}
@@ -15,6 +15,10 @@ Defaults to \code{type}.}
 
 \item{strict}{Logical.
 Apply conditions before expanding subtype codes to main type codes?}
+
+\item{mark}{Logical.
+Adds a column \code{expanded_to} that marks if the row has been added.
+The column documents which expansion was applied: to subtype or to main type.}
 }
 \value{
 A data frame.
