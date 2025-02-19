@@ -161,7 +161,8 @@ expand_types <- function(x,
     x %>%
       nest(data = -!!(group_vars(x))) %>%
       ungroup() %>%
-      mutate(newdata = map(.data$data,
+      mutate(newdata = map(
+        .data$data,
         expand_types_plain,
         type_var = type_var,
         strict = strict,
@@ -222,12 +223,14 @@ expand_types_plain <- function(x,
   suppressWarnings(
     join_main_types <-
       subtypes %>%
-      filter(.data$main_type == "2330" |
-        .data$type %in% c(
-          "6230_ha", "6230_hmo", "6230_hn",
-          "5130_hei",
-          "91E0_va", "91E0_vm", "91E0_vn"
-        )) %>%
+      filter(
+        .data$main_type == "2330" |
+          .data$type %in% c(
+            "6230_ha", "6230_hmo", "6230_hn",
+            "5130_hei",
+            "91E0_va", "91E0_vm", "91E0_vn"
+          )
+      ) %>%
       left_join(
         orig_types %>%
           mutate(present = 1),
@@ -250,7 +253,8 @@ expand_types_plain <- function(x,
     x_expanded <-
       x %>%
       rename(orig_abcd = type_var) %>%
-      inner_join(subtypes %>% rename(type_abcd = "type"),
+      inner_join(
+        subtypes %>% rename(type_abcd = "type"),
         by = c("orig_abcd" = "main_type")
       ) %>%
       mutate(orig_abcd = .data$type_abcd) %>%
@@ -261,11 +265,13 @@ expand_types_plain <- function(x,
         by = "orig_abcd"
       ) %>%
       set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
-      {if (mark) {
-        mutate(., expanded_to = "subtype")
-      } else {
-        .
-      }} %>%
+      {
+        if (mark) {
+          mutate(., expanded_to = "subtype")
+        } else {
+          .
+        }
+      } %>%
       bind_rows(x, .)
   )
 
@@ -281,7 +287,8 @@ expand_types_plain <- function(x,
       ) %>%
       filter(.data$main_type_abcd %in% join_main_types) %>%
       mutate(orig_abcd = if (is.factor(.data$orig_abcd)) {
-        factor(.data$main_type_abcd,
+        factor(
+          .data$main_type_abcd,
           levels = levels(.data$orig_abcd)
         )
       } else {
@@ -290,20 +297,24 @@ expand_types_plain <- function(x,
       select(-"main_type_abcd") %>%
       distinct() %>%
       set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
-      {if (mark) {
-        mutate(., expanded_to = "main_type")
-      } else {
-        .
-      }} %>%
+      {
+        if (mark) {
+          mutate(., expanded_to = "main_type")
+        } else {
+          .
+        }
+      } %>%
       bind_rows(x_expanded, .) %>%
-      {if (mark) {
-        mutate(., expanded_to = factor(
-          .data$expanded_to,
-          levels = levels(types$typelevel)
+      {
+        if (mark) {
+          mutate(., expanded_to = factor(
+            .data$expanded_to,
+            levels = levels(types$typelevel)
           ))
-      } else {
-        .
-      }}
+        } else {
+          .
+        }
+      }
   )
 
   return(x_expanded)
