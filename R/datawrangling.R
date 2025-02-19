@@ -116,7 +116,7 @@
 #' %>%
 #' mutate
 #' select
-#' group_by_at
+#' pick
 #' group_vars
 #' ungroup
 #' @importFrom rlang .data
@@ -169,9 +169,9 @@ expand_types <- function(x,
         subtypes = subtypes,
         mark = mark
       )) %>%
-      select(-.data$data) %>%
-      unnest(cols = .data$newdata) %>%
-      group_by_at(x %>% group_vars()) %>%
+      select(-"data") %>%
+      unnest(cols = "newdata") %>%
+      group_by(pick(x %>% group_vars())) %>%
       select(colnames(x), any_of("expanded_to"))
   }
 }
@@ -242,7 +242,7 @@ expand_types_plain <- function(x,
       filter(.data$add) %>%
       # only adding codes absent from original data frame:
       anti_join(orig_types, by = c("main_type" = "orig_abcd")) %>%
-      pull(.data$main_type)
+      pull("main_type")
   )
 
   # expanding main types to their subtypes and adding the latter:
@@ -250,11 +250,11 @@ expand_types_plain <- function(x,
     x_expanded <-
       x %>%
       rename(orig_abcd = type_var) %>%
-      inner_join(subtypes %>% rename(type_abcd = .data$type),
+      inner_join(subtypes %>% rename(type_abcd = "type"),
         by = c("orig_abcd" = "main_type")
       ) %>%
       mutate(orig_abcd = .data$type_abcd) %>%
-      select(-.data$type_abcd) %>%
+      select(-"type_abcd") %>%
       anti_join(
         x %>%
           rename(orig_abcd = type_var),
@@ -276,7 +276,7 @@ expand_types_plain <- function(x,
       rename(orig_abcd = type_var) %>%
       inner_join(
         subtypes %>%
-          rename(main_type_abcd = .data$main_type),
+          rename(main_type_abcd = "main_type"),
         by = c("orig_abcd" = "type")
       ) %>%
       filter(.data$main_type_abcd %in% join_main_types) %>%
@@ -287,7 +287,7 @@ expand_types_plain <- function(x,
       } else {
         .data$main_type_abcd
       }) %>%
-      select(-.data$main_type_abcd) %>%
+      select(-"main_type_abcd") %>%
       distinct() %>%
       set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
       {if (mark) {
