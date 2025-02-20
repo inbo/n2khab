@@ -137,12 +137,12 @@ expand_types <- function(x,
 
   types <-
     read_types() %>%
-    select(1:3)
+    select(c("type", "typelevel", "main_type"))
 
   subtypes <-
     types %>%
     filter(.data$typelevel == "subtype") %>%
-    select(1, 3)
+    select(c("type", "main_type"))
 
   if (!all(unique(x[[type_var]]) %in% types$type)) {
     warning("The data frame contains type codes which are not standard.")
