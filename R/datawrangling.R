@@ -61,11 +61,20 @@
 #' @param strict Logical.
 #' Apply conditions before expanding subtype codes to main type codes?
 #' @param mark Logical.
-#' Adds a column \code{expanded_to} that marks if the row has been added.
-#' The column documents which expansion was applied: to subtype or to main type.
+#' If \code{TRUE}, two extra columns are added to the result:
+#' \itemize{
+#' \item{
+#' \code{expanded}: marks which existing rows have been expanded.
+#' }
+#' \item{
+#' \code{expanded_to}: marks if the row has been added.
+#' It documents which expansion was applied: to subtype or to main type.
+#' }
+#' }
 #'
 #' @return
 #' A data frame, either identical or longer than the input data frame.
+#' If \code{mark} is \code{TRUE}, the data frame has two extra columns.
 #'
 #' @seealso
 #' \code{\link{read_types}},
@@ -110,6 +119,8 @@
 #' @importFrom tidyr
 #' nest
 #' unnest
+#' @importFrom tidyselect
+#' any_of
 #' @importFrom purrr
 #' map
 #' @importFrom dplyr
@@ -173,7 +184,7 @@ expand_types <- function(x,
       select(-"data") %>%
       unnest(cols = "newdata") %>%
       group_by(pick(x %>% group_vars())) %>%
-      select(colnames(x), any_of("expanded_to"))
+      select(colnames(x), any_of(c("expanded", "expanded_to")))
   }
 }
 
@@ -200,11 +211,13 @@ expand_types <- function(x,
 #' group_by
 #' summarise
 #' anti_join
+#' join_by
 #' pull
 #' inner_join
 #' bind_rows
 #' mutate
 #' distinct
+#' case_when
 #' @importFrom magrittr
 #' set_colnames
 #' @importFrom rlang .data
@@ -248,6 +261,23 @@ expand_types_plain <- function(x,
       pull("main_type")
   )
 
+  # marking rows that will be expanded
+  if (mark) {
+    x <-
+      x %>%
+      left_join(
+        subtypes %>%
+          rename(main_type_abcd = "main_type"),
+        join_by({{ type_var }} == "type")
+      ) %>%
+      mutate(expanded = case_when(
+        .data[[type_var]] %in% subtypes$main_type ~ TRUE,
+        .data$main_type_abcd %in% join_main_types ~ TRUE,
+        .default = FALSE
+      )) %>%
+      select(-"main_type_abcd")
+  }
+
   # expanding main types to their subtypes and adding the latter:
   suppressWarnings(
     x_expanded <-
@@ -267,7 +297,7 @@ expand_types_plain <- function(x,
       set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
       {
         if (mark) {
-          mutate(., expanded_to = "subtype")
+          mutate(., expanded = FALSE, expanded_to = "subtype")
         } else {
           .
         }
@@ -299,7 +329,7 @@ expand_types_plain <- function(x,
       set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
       {
         if (mark) {
-          mutate(., expanded_to = "main_type")
+          mutate(., expanded = FALSE, expanded_to = "main_type")
         } else {
           .
         }

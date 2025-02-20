@@ -17,8 +17,16 @@ Defaults to \code{type}.}
 Apply conditions before expanding subtype codes to main type codes?}
 
 \item{mark}{Logical.
-Adds a column \code{expanded_to} that marks if the row has been added.
-The column documents which expansion was applied: to subtype or to main type.}
+If \code{TRUE}, two extra columns are added to the result:
+\itemize{
+\item{
+\code{expanded}: marks which existing rows have been expanded.
+}
+\item{
+\code{expanded_to}: marks if the row has been added.
+It documents which expansion was applied: to subtype or to main type.
+}
+}}
 }
 \value{
 A data frame.
