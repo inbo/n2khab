@@ -230,7 +230,7 @@ expand_types_plain <- function(x,
                                mark) {
   orig_types <-
     x[, type_var] %>%
-    rename(orig_abcd = type_var)
+    rename(orig_abcd = all_of(type_var))
 
   # main types to add:
   suppressWarnings(
@@ -282,7 +282,7 @@ expand_types_plain <- function(x,
   suppressWarnings(
     x_expanded <-
       x %>%
-      rename(orig_abcd = type_var) %>%
+      rename(orig_abcd = all_of(type_var)) %>%
       inner_join(
         subtypes %>% rename(type_abcd = "type"),
         by = c("orig_abcd" = "main_type")
@@ -309,7 +309,7 @@ expand_types_plain <- function(x,
   suppressWarnings(
     x_expanded <-
       x %>%
-      rename(orig_abcd = type_var) %>%
+      rename(orig_abcd = all_of(type_var)) %>%
       inner_join(
         subtypes %>%
           rename(main_type_abcd = "main_type"),
