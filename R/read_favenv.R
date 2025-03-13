@@ -104,7 +104,7 @@ read_favenv <- function(
       "10_raw/favenv",
       "VanCalster_etal_2020_Gunstig_abiotisch_bereik_per_milieuvariabele_en_habitatsubtype_v01_00.txt"
     ),
-    version = c("01.00"),
+    version = c("favenv_v1.0"),
     lang = c("nl")) {
   require_pkgs(c("fs"))
 
@@ -123,7 +123,7 @@ read_favenv <- function(
     )
     doi <- switch(
       version,
-      `01.00` = "10.5281/zenodo.10533792",
+      `favenv_v1.0` = "10.5281/zenodo.10533792",
       "10.5281/zenodo.10533791" # default resolves to latest
     )
     dir <- fs::path_dir(file)
