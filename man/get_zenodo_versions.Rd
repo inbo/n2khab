@@ -7,16 +7,16 @@
 get_zenodo_versions(doi)
 }
 \arguments{
-\item{doi}{a doi pointer to the Cite-all-versions doi for a Zenodo archive.
-A Zenodo archive starts with '10.5281/zenodo.'}
+\item{doi}{A DOI pointer to the Cite-all-versions DOI for a Zenodo archive.
+A Zenodo archive starts with '10.5281/zenodo.'.}
 }
 \value{
 A named vector. The names correspond to version IDs, the values
-correspond to doi's.
+correspond to DOIs.
 }
 \description{
-The function queries the Zenodo API to find the version ID's and
-corresponding doi's.
+The function queries the Zenodo API to find the version IDs and
+corresponding DOIs.
 }
 \seealso{
 Other functions regarding file management for N2KHAB projects: 
