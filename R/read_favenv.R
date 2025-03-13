@@ -99,10 +99,6 @@
 #' rename
 #' if_all
 #' everything
-#' @importFrom fs
-#' is_file
-#' file_exists
-#' dir_create
 #' @importFrom n2khabmon
 #' read_schemes
 read_favenv <- function(
@@ -113,6 +109,7 @@ read_favenv <- function(
     ),
     version = c("01.00"),
     lang = c("nl")) {
+  require_pkgs(c("fs"))
 
   version <- match.arg(version)
   lang <- match.arg(lang)
