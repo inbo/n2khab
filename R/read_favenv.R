@@ -178,7 +178,7 @@ read_favenv <- function(
   schemes <- n2khabmon::read_schemes(lang = lang)
   favenv <- favenv |>
     mutate(
-      type = factor(type, levels = sort(unique(type)))
+      type = factor(type, levels = levels(types$type))
     )
 
   return(favenv)
