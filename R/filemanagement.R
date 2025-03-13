@@ -246,13 +246,10 @@ download_zenodo <- function(doi,
 #' @importFrom stringr
 #' fixed
 #' str_remove
-#' @importFrom curl
-#' curl_fetch_memory
-#' @importFrom jsonlite
-#' fromJSON
 #'
 get_zenodo_versions <- function(doi) {
   assert_that(is.string(doi))
+  require_pkgs(c("jsonlite", "curl"))
 
   # Retrieve versions url from metadata
   record <- str_remove(doi, fixed("10.5281/zenodo."))
