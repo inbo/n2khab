@@ -135,7 +135,8 @@ download_zenodo <- function(doi,
                             path = ".",
                             parallel = TRUE,
                             quiet = FALSE) {
-  assert_that(is.string(doi), is.string(path))
+  assert_that(is.string(doi), grepl("^10\\.5281/zenodo", doi))
+  assert_that(is.string(path))
   assert_that(is.flag(parallel), noNA(parallel), is.flag(quiet), noNA(quiet))
 
   require_pkgs(c("jsonlite", "curl", "tools"))
@@ -248,7 +249,7 @@ download_zenodo <- function(doi,
 #' str_remove
 #'
 get_zenodo_versions <- function(doi) {
-  assert_that(is.string(doi))
+  assert_that(is.string(doi), grepl("^10\\.5281/zenodo", doi))
   require_pkgs(c("jsonlite", "curl"))
 
   # Retrieve versions url from metadata
