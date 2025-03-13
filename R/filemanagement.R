@@ -235,7 +235,7 @@ download_zenodo <- function(doi,
 #' corresponding DOIs.
 #'
 #' @param doi A DOI pointer to the Cite-all-versions DOI for a Zenodo archive.
-#' A Zenodo archive starts with '10.5281/zenodo.'
+#' A Zenodo archive starts with '10.5281/zenodo.'.
 #'
 #' @export
 #' @family functions regarding file management for N2KHAB projects
