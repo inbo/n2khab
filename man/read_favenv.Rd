@@ -7,7 +7,7 @@
 read_favenv(
   file = file.path(locate_n2khab_data(), "10_raw/favenv",
     "VanCalster_etal_2020_Gunstig_abiotisch_bereik_per_milieuvariabele_en_habitatsubtype_v01_00.txt"),
-  version = c("01.00"),
+  version = c("favenv_v1.0"),
   lang = c("nl")
 )
 }
@@ -91,7 +91,7 @@ et al. (2020) and how
 The function reads the data into the current R session if `file` exists.
 If the `file` does not exist, it will attempt to download it and read it
 after the download has completed.
-The original source for the data is the report 10.21436/inbor.19362510.
+The original source for the data is Van Calster et al. (2020).
 }
 \examples{
 \dontrun{
