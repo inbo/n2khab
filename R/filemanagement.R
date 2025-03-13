@@ -241,7 +241,7 @@ download_zenodo <- function(doi,
 #' @family functions regarding file management for N2KHAB projects
 #'
 #' @return A named vector. The names correspond to version IDs, the values
-#' correspond to doi's.
+#' correspond to DOIs.
 #'
 #' @importFrom stringr
 #' fixed
