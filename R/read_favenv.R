@@ -11,7 +11,7 @@
 #'   IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
 #'   the language of names & shortnames to be returned in the tibble.
 #'#'
-#' @return A `data.frame`.
+#' @return A `tibble`.
 #'
 #' The table contains 950 rows and 19 columns.
 #' The first row is a column header and represents the variable name.
