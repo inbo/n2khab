@@ -23,13 +23,12 @@ starting from the working directory.}
 Defaults to the latest available version defined by the package.}
 
 \item{lang}{An
-  \href{https://www.w3.org/International/articles/language-tags/index.en}{
-  IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
-  the language of names & shortnames to be returned in the tibble.
-#'}
+\href{https://www.w3.org/International/articles/language-tags/index.en}{
+IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
+the language of names & shortnames to be returned in the tibble.}
 }
 \value{
-A `data.frame`.
+A `tibble`.
 
 The table contains 950 rows and 19 columns.
 The first row is a column header and represents the variable name.
@@ -89,7 +88,7 @@ Oosterlynck et al. (2020, version 3).
 et al. (2020) and how
 }
 \description{
-The function read the data into the current R session if `file` exists.
+The function reads the data into the current R session if `file` exists.
 If the `file` does not exist, it will attempt to download it and read it
 after the download has completed.
 The original source for the data is the report 10.21436/inbor.19362510.

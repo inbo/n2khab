@@ -6,11 +6,8 @@
 #' The original source for the data is the report 10.21436/inbor.19362510.
 #'
 #' @inheritParams read_habitatmap_stdized
-#' @param lang An
-#'   \href{https://www.w3.org/International/articles/language-tags/index.en}{
-#'   IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
-#'   the language of names & shortnames to be returned in the tibble.
-#'#'
+#' @inheritParams read_types
+#'
 #' @return A `tibble`.
 #'
 #' The table contains 950 rows and 19 columns.
