@@ -1,6 +1,6 @@
 #' Read favourable environmental ranges for vegetation types of Flanders
 #'
-#' The function read the data into the current R session if `file` exists.
+#' The function reads the data into the current R session if `file` exists.
 #' If the `file` does not exist, it will attempt to download it and read it
 #' after the download has completed.
 #' The original source for the data is the report 10.21436/inbor.19362510.
