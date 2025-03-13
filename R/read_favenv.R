@@ -3,7 +3,7 @@
 #' The function reads the data into the current R session if `file` exists.
 #' If the `file` does not exist, it will attempt to download it and read it
 #' after the download has completed.
-#' The original source for the data is the report 10.21436/inbor.19362510.
+#' The original source for the data is Van Calster et al. (2020).
 #'
 #' @inheritParams read_habitatmap_stdized
 #' @inheritParams read_types
