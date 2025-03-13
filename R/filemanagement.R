@@ -231,8 +231,8 @@ download_zenodo <- function(doi,
 
 #' Get version IDS from a Zenodo archive
 #'
-#' The function queries the Zenodo API to find the version ID's and
-#' corresponding doi's.
+#' The function queries the Zenodo API to find the version IDs and
+#' corresponding DOIs.
 #'
 #' @param doi a doi pointer to the Cite-all-versions doi for a Zenodo archive.
 #' A Zenodo archive starts with '10.5281/zenodo.'
