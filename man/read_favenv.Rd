@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_favenv.R
 \name{read_favenv}
 \alias{read_favenv}
-\title{Read favourable environmental ranges for vegetation types of Flanders}
+\title{Read favourable environmental ranges for 'types'}
 \usage{
 read_favenv(
   file = file.path(locate_n2khab_data(), "10_raw/favenv",
@@ -30,7 +30,6 @@ the language of names & shortnames to be returned in the tibble.}
 \value{
 A `tibble`.
 
-The table contains 950 rows and 19 columns.
 The first row is a column header and represents the variable name.
 The following list provides a brief description for each variable:
 
@@ -40,33 +39,33 @@ The following list provides a brief description for each variable:
 For aquatic types, the Flemish water type is listed
 (according to Water Framework Directive-Integrated Water Policy Objectives)
 
-`milieucompartiment`: soil, groundwater, inundation water (flooding with
+`compartment`: soil, groundwater, inundation water (flooding with
 water of external origin), water column/surface water, air
 
-`variabele`: name of the environmental variable.
+`variable`: name of the environmental variable.
 
-`afkorting`: abbreviation used for the environmental variable
+`abbreviation`: abbreviation used for the environmental variable
 
-`eenheid`: unit used for the environmental variable
+`unit`: unit used for the environmental variable
 
-`toetswijze_bepaling`: for aquatic types, measurements are first summarized
+`summary_statistic`: for aquatic types, measurements are first summarized
  using certain statistics such as percentiles, mean, etc. (in accordance with
  Water Framework Directive-Integrated Water Policy Objectives)
 
-`teken`: range type
+`range_type`: range type
 - LL-UL: lower limit-upper limit
 - 10-90 perc: 10-90 percentile values
 - min-max: minimum - maximum
 - < - >: less than - greater than
 
-`abiotisch_bereik`: overall measurement range of an environmental variable
+`environmental_range`: overall measurement range of an environmental variable
  within which a habitat type can function sustainably:
-- `abiotisch_bereik`: range as text field
-- `waarde_1` - `waarde_2`: lower and upper limit as text field
-- `waarde_num_1` - `waarde_num_2`: lower and upper limit as numerical value
+- `environmental_range`: range as text field
+- `value_1` - `value_2`: lower and upper limit as text field
+- `value_num_1` - `value_num_2`: lower and upper limit as numerical value
  (where conversion was possible)
 
-`n_gunstig`: number of test plots in favorable conservation status used for
+`n_favorable`: number of test plots in favorable conservation status used for
 the calculation. The definition of favorable conservation status is based on
 Oosterlynck et al. (2020, version 3).
 
@@ -80,14 +79,16 @@ Oosterlynck et al. (2020, version 3).
 - Lk: ranges derived from literature (LCS derived, based on site
   characteristics)
 
-`referentie`: references based on which the abiotic range was determined
+`reference`: references based on which the abiotic range was determined
 
-`opmerking`: remarks
+`remarks`: remarks
 
-`wijziging`: whether this record has been modified compared to Van Calster
+`changes`: whether this record has been modified compared to Van Calster
 et al. (2020) and how
 }
 \description{
+A 'type' refers to either a (main) habitat type, a
+habitat subtype or a regionally important biotope (RIB).
 The function reads the data into the current R session if `file` exists.
 If the `file` does not exist, it will attempt to download it and read it
 after the download has completed.
