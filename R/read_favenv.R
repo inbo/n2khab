@@ -99,9 +99,6 @@
 #' everything
 #' @importFrom curl
 #' has_internet
-#'
-#' @importFrom n2khabmon
-#' read_schemes
 read_favenv <- function(
     file = file.path(
       locate_n2khab_data(),
@@ -171,9 +168,8 @@ read_favenv <- function(
       !if_all(everything(), is.na)
     )
 
-  # align with read_types() and read_schemes()
+  # align with read_types()
   types <- read_types(lang = lang)
-  schemes <- n2khabmon::read_schemes(lang = lang)
   favenv <- favenv |>
     mutate(
       type = factor(type, levels = levels(types$type))
