@@ -132,48 +132,59 @@ read_favenv <- function(
     download_zenodo(doi = doi, path = dir, quiet = TRUE)
   }
 
-  favenv <- read.delim(
-    file = file,
-    header = TRUE,
-    sep = "\t",
-    dec = ",",
-    na.strings = c("NA", ""),
-    blank.lines.skip = TRUE
-  )
-
-  favenv <- favenv |>
-    convertdf_enc(from = "latin1", to = "UTF-8") |>
-    as_tibble() |>
-    rename(
-      type = Habitatsubtype,
-      subtype = Subtype,
-      compartment = Milieucompartiment,
-      variable = Variabele,
-      abbreviation = Afkorting,
-      unit = Eenheid,
-      summary_statistic = `Toetswijze...bepaling`,
-      range_type = Teken,
-      environmental_range = Abiotisch.bereik,
-      value_1 = Waarde.1,
-      value_2 = Waarde.2,
-      value_num_1 = WaardeNum1,
-      value_num_2 = WaardeNum2,
-      n_favorable = N.gunstig,
-      status = Status,
-      reference = Referentie,
-      remarks = Opmerking,
-      changes = Wijziging
-    ) |>
-    filter(
-      !if_all(everything(), is.na)
+  if (version == "favenv_v1.0") {
+    favenv <- read.delim(
+      file = file,
+      header = TRUE,
+      sep = "\t",
+      dec = ",",
+      na.strings = c("NA", ""),
+      strip.white = TRUE,
+      blank.lines.skip = TRUE
     )
 
-  # align with read_types()
-  types <- read_types(lang = lang)
-  favenv <- favenv |>
-    mutate(
-      type = factor(type, levels = levels(types$type))
-    )
+    favenv <- favenv |>
+      convertdf_enc(from = "latin1", to = "UTF-8") |>
+      as_tibble() |>
+      rename(
+        type = Habitatsubtype,
+        subtype = Subtype,
+        compartment = Milieucompartiment,
+        variable = Variabele,
+        abbreviation = Afkorting,
+        unit = Eenheid,
+        summary_statistic = `Toetswijze...bepaling`,
+        range_type = Teken,
+        environmental_range = Abiotisch.bereik,
+        value_1 = Waarde.1,
+        value_2 = Waarde.2,
+        value_num_1 = WaardeNum1,
+        value_num_2 = WaardeNum2,
+        n_favorable = N.gunstig,
+        status = Status,
+        reference = Referentie,
+        remarks = Opmerking,
+        changes = Wijziging
+      ) |>
+      filter(
+        !if_all(everything(), is.na)
+      )
+
+    # fix numerical values
+    # contains mix of . and , as decimal mark
+    favenv$value_num_1 <- as.numeric(gsub(",", ".", favenv$value_num_1))
+    favenv$value_num_2 <- as.numeric(gsub(",", ".", favenv$value_num_2))
+
+    # align with read_types()
+    types <- read_types(lang = lang)
+    favenv <- favenv |>
+      mutate(
+        type = factor(type, levels = levels(types$type))
+      )
+
+  } else {
+    stop(paste0("Reading version ", version, " is not yet implemented."))
+  }
 
   return(favenv)
 }
