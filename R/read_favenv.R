@@ -96,6 +96,9 @@
 #' rename
 #' if_all
 #' everything
+#' @importFrom curl
+#' has_internet
+#'
 #' @importFrom n2khabmon
 #' read_schemes
 read_favenv <- function(
@@ -114,7 +117,7 @@ read_favenv <- function(
   # if file does not exist, download it from Zenodo
   if (!fs::file_exists(file)) {
     assert_that(
-      curl::has_internet(),
+      has_internet(),
       msg =
         paste0(
           "The file does not exists and there is no internet connection.\n",
