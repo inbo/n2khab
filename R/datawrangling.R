@@ -64,11 +64,10 @@
 #' If \code{TRUE}, two extra columns are added to the result:
 #' \itemize{
 #' \item{
-#' \code{expanded}: marks which existing rows have been expanded.
+#' \code{has_been_expanded}: marks which existing rows have been expanded.
 #' }
 #' \item{
-#' \code{expanded_to}: marks if the row has been added.
-#' It documents which expansion was applied: to subtype or to main type.
+#' \code{added_by_expansion}: marks if the row has been added.
 #' }
 #' }
 #'
@@ -184,7 +183,7 @@ expand_types <- function(x,
       select(-"data") %>%
       unnest(cols = "newdata") %>%
       group_by(pick(x %>% group_vars())) %>%
-      select(colnames(x), any_of(c("expanded", "expanded_to")))
+      select(colnames(x), any_of(c("has_been_expanded", "added_by_expansion")))
   }
 }
 
@@ -270,13 +269,14 @@ expand_types_plain <- function(x,
           rename(main_type_abcd = "main_type"),
         join_by({{ type_var }} == "type")
       ) %>%
-      mutate(expanded = case_when(
+      mutate(has_been_expanded = case_when(
         .data[[type_var]] %in% subtypes$main_type ~ TRUE,
         .data$main_type_abcd %in% join_main_types ~ TRUE,
         .default = FALSE
       )) %>%
       select(-"main_type_abcd")
   }
+
 
   # expanding main types to their subtypes and adding the latter:
   suppressWarnings(
@@ -297,7 +297,7 @@ expand_types_plain <- function(x,
       set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
       {
         if (mark) {
-          mutate(., expanded = FALSE, expanded_to = "subtype")
+          mutate(., has_been_expanded = FALSE, added_by_expansion = TRUE)
         } else {
           .
         }
@@ -329,7 +329,7 @@ expand_types_plain <- function(x,
       set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
       {
         if (mark) {
-          mutate(., expanded = FALSE, expanded_to = "main_type")
+          mutate(., has_been_expanded = FALSE, added_by_expansion = TRUE)
         } else {
           .
         }
@@ -337,9 +337,10 @@ expand_types_plain <- function(x,
       bind_rows(x_expanded, .) %>%
       {
         if (mark) {
-          mutate(., expanded_to = factor(
-            .data$expanded_to,
-            levels = levels(types$typelevel)
+          mutate(., added_by_expansion = ifelse(
+            is.na(.data$added_by_expansion),
+            FALSE,
+            .data$added_by_expansion
           ))
         } else {
           .

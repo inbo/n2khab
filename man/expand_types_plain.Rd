@@ -20,11 +20,10 @@ Apply conditions before expanding subtype codes to main type codes?}
 If \code{TRUE}, two extra columns are added to the result:
 \itemize{
 \item{
-\code{expanded}: marks which existing rows have been expanded.
+\code{has_been_expanded}: marks which existing rows have been expanded.
 }
 \item{
-\code{expanded_to}: marks if the row has been added.
-It documents which expansion was applied: to subtype or to main type.
+\code{added_by_expansion}: marks if the row has been added.
 }
 }}
 }
