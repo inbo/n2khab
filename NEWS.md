@@ -1,5 +1,9 @@
 # n2khab (development version)
 
+- `expand_types()` gains an argument `mark`.
+If set as `TRUE`, the logical columns `has_been_expanded` and `added_by_expansion` are added.
+These mark rows as origin or destination of type expansion, respectively.
+
 # n2khab 0.12.0 (2025-01-10)
 
 ## Support for new data source versions
