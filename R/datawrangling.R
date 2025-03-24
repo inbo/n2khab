@@ -217,6 +217,8 @@ expand_types <- function(x,
 #' mutate
 #' distinct
 #' case_when
+#' @importFrom tidyselect
+#' all_of
 #' @importFrom magrittr
 #' set_colnames
 #' @importFrom rlang .data
