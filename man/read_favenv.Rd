@@ -36,8 +36,11 @@ The following list provides a brief description for each variable:
 `type`: Natura 2000 (sub)type habitat code
 
 `subtype`: code/name of possible vegetation variants.
-For aquatic types, the Flemish water type is listed
-(according to Water Framework Directive-Integrated Water Policy Objectives)
+For aquatic habitats: this is the watertype as used in the Water Framework
+Directive and thus also in the Flemish law texts (main use of this field).
+In other cases: a subtype that is not officially recognized in the list of
+Natura 2000 habitat subtypes in Flanders, for instance a phytosociological
+association or a variant like acidophilous or calcarophilous, ...
 
 `compartment`: soil, groundwater, inundation water (flooding with
 water of external origin), water column/surface water, air
