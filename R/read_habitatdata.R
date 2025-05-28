@@ -213,9 +213,9 @@ read_habitatmap_stdized <-
       habmap_types <-
         habmap_types %>%
         relocate(
-          .data$polygon_id,
-          .data$type,
-          .data$certain
+          "polygon_id",
+          "type",
+          "certain"
         )
     }
 
