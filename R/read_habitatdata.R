@@ -80,6 +80,8 @@
 #' starting from the working directory.
 #' @param version Version ID of the data source.
 #' Defaults to the latest available version defined by the package.
+#' Versions with the 'interim' suffix are designed to be used within the Research
+#' Institute for Nature and Forest (INBO) only.
 #'
 #' @return
 #' A list of two objects:
@@ -163,7 +165,8 @@ read_habitatmap_stdized <-
              "habitatmap_stdized_2023_v1",
              "habitatmap_stdized_2020_v1",
              "habitatmap_stdized_2018_v2",
-             "habitatmap_stdized_2018_v1"
+             "habitatmap_stdized_2018_v1",
+             "habitatmap_stdized_2025_interim"
            )) {
     version <- match.arg(version)
 
