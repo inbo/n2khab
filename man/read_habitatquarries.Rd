@@ -31,7 +31,9 @@ references (element \code{extra_references}).}
 being printed to the console, formatted for usage in a BibTeX file (\verb{*.bib}).}
 
 \item{version}{Version ID of the data source.
-Defaults to the latest available version defined by the package.}
+Defaults to the latest available version defined by the package.
+Versions with the 'interim' suffix are designed to be used within the Research
+Institute for Nature and Forest (INBO) only.}
 }
 \value{
 Depending on the arguments, one of:

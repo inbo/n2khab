@@ -44,7 +44,9 @@ to use the \code{habitatsprings} data source and not
 \code{\link[=read_habitatsprings]{read_habitatsprings()}}.}
 
 \item{version}{Version ID of the data source.
-Defaults to the latest available version defined by the package.}
+Defaults to the latest available version defined by the package.
+Versions with the 'interim' suffix are designed to be used within the Research
+Institute for Nature and Forest (INBO) only.}
 }
 \value{
 A list of two objects:

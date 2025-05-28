@@ -26,7 +26,9 @@ If set, either the \code{lines} or the \code{points} object will be
 returned, respectively.}
 
 \item{version}{Version ID of the data source.
-Defaults to the latest available version defined by the package.}
+Defaults to the latest available version defined by the package.
+Versions with the 'interim' suffix are designed to be used within the Research
+Institute for Nature and Forest (INBO) only.}
 }
 \value{
 By default, a list of two \code{sf} objects (see 'Description').

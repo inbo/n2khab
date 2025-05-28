@@ -18,7 +18,9 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
 
 \item{version}{Version ID of the data source.
-Defaults to the latest available version defined by the package.}
+Defaults to the latest available version defined by the package.
+Versions with the 'interim' suffix are designed to be used within the Research
+Institute for Nature and Forest (INBO) only.}
 }
 \value{
 A SpatRaster.

@@ -39,7 +39,9 @@ geometries (with GEOS as backend).
 Defaults to \code{FALSE}.}
 
 \item{version}{Version ID of the data source.
-Defaults to the latest available version defined by the package.}
+Defaults to the latest available version defined by the package.
+Versions with the 'interim' suffix are designed to be used within the Research
+Institute for Nature and Forest (INBO) only.}
 }
 \value{
 A Simple feature collection of

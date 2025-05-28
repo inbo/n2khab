@@ -31,7 +31,9 @@ centroid, their area attribute is summed (if all values are known)
 and for other attributes the maximum value is returned.}
 
 \item{version}{Version ID of the data source.
-Defaults to the latest available version defined by the package.}
+Defaults to the latest available version defined by the package.
+Versions with the 'interim' suffix are designed to be used within the Research
+Institute for Nature and Forest (INBO) only.}
 }
 \value{
 A Simple feature collection of
