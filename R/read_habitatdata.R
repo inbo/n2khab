@@ -367,7 +367,8 @@ read_watersurfaces_hab <-
              "watersurfaces_hab_v4",
              "watersurfaces_hab_v3",
              "watersurfaces_hab_v2",
-             "watersurfaces_hab_v1"
+             "watersurfaces_hab_v1",
+             "watersurfaces_hab_v6.1_interim"
            )) {
     version <- match.arg(version)
 
