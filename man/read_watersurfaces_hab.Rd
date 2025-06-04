@@ -10,7 +10,8 @@ read_watersurfaces_hab(
     "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
   interpreted = FALSE,
   version = c("watersurfaces_hab_v6", "watersurfaces_hab_v5", "watersurfaces_hab_v4",
-    "watersurfaces_hab_v3", "watersurfaces_hab_v2", "watersurfaces_hab_v1")
+    "watersurfaces_hab_v3", "watersurfaces_hab_v2", "watersurfaces_hab_v1",
+    "watersurfaces_hab_v6.1_interim")
 )
 }
 \arguments{
