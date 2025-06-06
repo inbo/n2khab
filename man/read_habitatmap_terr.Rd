@@ -12,7 +12,7 @@ read_habitatmap_terr(
   drop_7220 = TRUE,
   version = c("habitatmap_terr_2023_v1", "habitatmap_terr_2020_v2",
     "habitatmap_terr_2020_v1", "habitatmap_terr_2018_v2", "habitatmap_terr_2018_v1",
-    "habitatmap_terr_2025_interim")
+    "habitatmap_terr_2024_v99_interim")
 )
 }
 \arguments{

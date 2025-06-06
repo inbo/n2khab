@@ -166,7 +166,7 @@ read_habitatmap_stdized <-
              "habitatmap_stdized_2020_v1",
              "habitatmap_stdized_2018_v2",
              "habitatmap_stdized_2018_v1",
-             "habitatmap_stdized_2025_interim"
+             "habitatmap_stdized_2024_v99_interim"
            )) {
     version <- match.arg(version)
 
@@ -1349,7 +1349,7 @@ read_habitatmap_terr <-
              "habitatmap_terr_2020_v1",
              "habitatmap_terr_2018_v2",
              "habitatmap_terr_2018_v1",
-             "habitatmap_terr_2025_interim"
+             "habitatmap_terr_2024_v99_interim"
            )) {
     assert_that(is.flag(keep_aq_types), noNA(keep_aq_types))
     assert_that(is.flag(drop_7220), noNA(drop_7220))

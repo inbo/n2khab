@@ -10,7 +10,7 @@ read_habitatmap_stdized(
     "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"),
   version = c("habitatmap_stdized_2023_v1", "habitatmap_stdized_2020_v1",
     "habitatmap_stdized_2018_v2", "habitatmap_stdized_2018_v1",
-    "habitatmap_stdized_2025_interim")
+    "habitatmap_stdized_2024_v99_interim")
 )
 }
 \arguments{
