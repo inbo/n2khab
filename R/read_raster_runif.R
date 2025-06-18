@@ -18,7 +18,7 @@
 #' the \href{https://github.com/inbo/n2khab-preprocessing}{
 #' n2khab-preprocessing} repository.
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' A SpatRaster.
