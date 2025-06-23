@@ -10,7 +10,8 @@ read_watersurfaces_hab(
     "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
   interpreted = FALSE,
   version = c("watersurfaces_hab_v6", "watersurfaces_hab_v5", "watersurfaces_hab_v4",
-    "watersurfaces_hab_v3", "watersurfaces_hab_v2", "watersurfaces_hab_v1")
+    "watersurfaces_hab_v3", "watersurfaces_hab_v2", "watersurfaces_hab_v1",
+    "watersurfaces_hab_v6.1_interim")
 )
 }
 \arguments{
@@ -25,7 +26,9 @@ starting from the working directory.}
 applies to type 3130. When the subtype is missing for 3130, we interpret it as 3130_aom.}
 
 \item{version}{Version ID of the data source.
-Defaults to the latest available version defined by the package.}
+Defaults to the latest available version defined by the package.
+Versions with the 'interim' suffix are designed to be used within the Research
+Institute for Nature and Forest (INBO) only.}
 }
 \value{
 A list of two objects:

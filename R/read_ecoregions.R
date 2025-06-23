@@ -17,7 +17,7 @@
 #' Apart from the label, there is no complementary information between
 #' \code{polygon_code} and \code{polygon_id}.
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' A Simple feature collection of geometry type \code{MULTIPOLYGON}.

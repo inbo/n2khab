@@ -59,7 +59,7 @@
 #' \code{"points"}.
 #' If set, either the \code{lines} or the \code{points} object will be
 #' returned, respectively.
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' By default, a list of two \code{sf} objects (see 'Description').

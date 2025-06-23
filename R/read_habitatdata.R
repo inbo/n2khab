@@ -80,6 +80,8 @@
 #' starting from the working directory.
 #' @param version Version ID of the data source.
 #' Defaults to the latest available version defined by the package.
+#' Versions with the 'interim' suffix are designed to be used within the Research
+#' Institute for Nature and Forest (INBO) only.
 #'
 #' @return
 #' A list of two objects:
@@ -163,7 +165,8 @@ read_habitatmap_stdized <-
              "habitatmap_stdized_2023_v1",
              "habitatmap_stdized_2020_v1",
              "habitatmap_stdized_2018_v2",
-             "habitatmap_stdized_2018_v1"
+             "habitatmap_stdized_2018_v1",
+             "habitatmap_stdized_2024_v99_interim"
            )) {
     version <- match.arg(version)
 
@@ -210,9 +213,9 @@ read_habitatmap_stdized <-
       habmap_types <-
         habmap_types %>%
         relocate(
-          .data$polygon_id,
-          .data$type,
-          .data$certain
+          "polygon_id",
+          "type",
+          "certain"
         )
     }
 
@@ -364,7 +367,8 @@ read_watersurfaces_hab <-
              "watersurfaces_hab_v4",
              "watersurfaces_hab_v3",
              "watersurfaces_hab_v2",
-             "watersurfaces_hab_v1"
+             "watersurfaces_hab_v1",
+             "watersurfaces_hab_v6.1_interim"
            )) {
     version <- match.arg(version)
 
@@ -491,7 +495,7 @@ read_watersurfaces_hab <-
 #' geometries (with GEOS as backend).
 #' Defaults to \code{FALSE}.
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' A Simple feature collection of
@@ -982,6 +986,8 @@ read_watersurfaces <-
 #' \code{\link[sf:st_make_valid]{sf::st_make_valid()}} is used to fix
 #' geometries (with GEOS as backend).
 #' Defaults to \code{FALSE}.
+#' @param version Version ID of the data source.
+#' Defaults to the latest available version defined by the package.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -1344,7 +1350,8 @@ read_habitatmap_terr <-
              "habitatmap_terr_2020_v2",
              "habitatmap_terr_2020_v1",
              "habitatmap_terr_2018_v2",
-             "habitatmap_terr_2018_v1"
+             "habitatmap_terr_2018_v1",
+             "habitatmap_terr_2024_v99_interim"
            )) {
     assert_that(is.flag(keep_aq_types), noNA(keep_aq_types))
     assert_that(is.flag(drop_7220), noNA(drop_7220))
@@ -1421,9 +1428,9 @@ read_habitatmap_terr <-
       habmap_terr_types <-
         habmap_terr_types %>%
         relocate(
-          .data$polygon_id,
-          .data$type,
-          .data$certain
+          "polygon_id",
+          "type",
+          "certain"
         )
     }
 
@@ -1468,7 +1475,7 @@ read_habitatmap_terr <-
 #' @param source_text Logical, defaults to \code{FALSE}.
 #' If \code{TRUE}, a list is returned (see \emph{Value}).
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' With \code{source_text = FALSE} (default): a Simple feature collection of
@@ -1662,7 +1669,7 @@ read_habitatstreams <-
 #' centroid, their area attribute is summed (if all values are known)
 #' and for other attributes the maximum value is returned.
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' A Simple feature collection of
@@ -1897,7 +1904,7 @@ read_habitatsprings <-
 #' @param bibtex If \code{TRUE}, all that happens is bibliographic references
 #' being printed to the console, formatted for usage in a BibTeX file (`*.bib`).
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' Depending on the arguments, one of:
