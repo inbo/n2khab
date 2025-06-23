@@ -495,7 +495,7 @@ read_watersurfaces_hab <-
 #' geometries (with GEOS as backend).
 #' Defaults to \code{FALSE}.
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' A Simple feature collection of
@@ -986,6 +986,8 @@ read_watersurfaces <-
 #' \code{\link[sf:st_make_valid]{sf::st_make_valid()}} is used to fix
 #' geometries (with GEOS as backend).
 #' Defaults to \code{FALSE}.
+#' @param version Version ID of the data source.
+#' Defaults to the latest available version defined by the package.
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -1473,7 +1475,7 @@ read_habitatmap_terr <-
 #' @param source_text Logical, defaults to \code{FALSE}.
 #' If \code{TRUE}, a list is returned (see \emph{Value}).
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' With \code{source_text = FALSE} (default): a Simple feature collection of
@@ -1667,7 +1669,7 @@ read_habitatstreams <-
 #' centroid, their area attribute is summed (if all values are known)
 #' and for other attributes the maximum value is returned.
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' A Simple feature collection of
@@ -1902,7 +1904,7 @@ read_habitatsprings <-
 #' @param bibtex If \code{TRUE}, all that happens is bibliographic references
 #' being printed to the console, formatted for usage in a BibTeX file (`*.bib`).
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' Depending on the arguments, one of:
