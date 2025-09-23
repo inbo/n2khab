@@ -436,8 +436,9 @@ read_watersurfaces_hab <-
     if (collapse) {
       watersurfaces_types <- watersurfaces_types %>%
         summarize(
+          certain = any(.data$certain),
           code_orig = str_flatten(.data$code_orig, collapse = " + "),
-          .by = c("polygon_id", "type", "certain")
+          .by = c("polygon_id", "type")
         )
     }
 
