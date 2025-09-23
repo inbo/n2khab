@@ -280,10 +280,14 @@ read_habitatmap_stdized <-
 #' applies to type 3130. When the subtype is missing for 3130, we interpret it as 3130_aom.
 #' @param collapse Logical.
 #' Should the resulting \code{watersurfaces_types} list element have a single
-#' row for each combination of \code{polygon_id}, \code{type} and
-#' \code{certain}?
-#' This causes the collapsing as a single string of different values of
-#' \code{code_orig} that led to the same \code{type}.
+#' row for each combination of \code{polygon_id} and \code{type}?
+#' This causes collapsing:
+#' \itemize{
+#'   \item as a single string of different values of \code{code_orig} that led
+#'   to the same \code{type};
+#'   \item of values of \code{certain}, using the \code{\link{any}} summary
+#'   function.
+#' }
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
