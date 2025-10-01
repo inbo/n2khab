@@ -1,5 +1,19 @@
 # n2khab (development version)
 
+## Support for interim data source versions
+
+The following _interim_ data source versions are now supported by the corresponding functions (#200):
+
+- `habitatmap_stdized_2024_v99_interim` (`read_habitatmap_stdized()`)
+- `habitatmap_terr_2024_v99_interim` (`read_habitatmap_terr()`)
+- `watersurfaces_hab_v6.1_interim` (`read_watersurfaces_hab()`)
+
+Function documentation was updated accordingly.
+Interim versions are added only at the end of the `version` argument of the read functions, since they do not receive the same level of quality control.
+Please note that it is advised to use a regular version of these data sources instead.
+
+## New features
+
 - `expand_types()` gains an argument `mark`.
 If set as `TRUE`, the logical columns `has_been_expanded` and `added_by_expansion` are added.
 These mark rows as origin or destination of type expansion, respectively.
