@@ -473,6 +473,130 @@ read_watersurfaces_hab <-
 
 
 
+#' Return the \code{watersurfaces_refpoints} data source as an
+#' \code{sf} points object or as a tibble
+#'
+#' @export
+#' @importFrom git2rdata
+#' read_vc
+#' @importFrom sf
+#' st_as_sf
+#' st_drop_geometry
+#' @importFrom dplyr
+#' %>%
+#' as_tibble
+#' semi_join
+#' tribble
+#' mutate
+#' @importFrom assertthat
+#' assert_that
+#' is.flag
+#' noNA
+read_watersurfaces_refpoints <-
+  function(
+    file = file.path(
+      locate_n2khab_data(),
+      "20_processed/watersurfaces_refpoints"
+    ),
+    spatial = TRUE,
+    version = c(
+      "watersurfaces_refpoints_v6",
+      "watersurfaces_refpoints_v5",
+      "watersurfaces_refpoints_v4",
+      "watersurfaces_refpoints_v6.1_interim"
+    ),
+    single_wsh_version = TRUE,
+    file_wsh = file.path(
+      locate_n2khab_data(),
+      "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"
+    ),
+    version_wsh = NULL,
+    ...
+  ) {
+    version <- match.arg(version)
+    assert_that(file.exists(file))
+    assert_that(is.flag(spatial), noNA(spatial))
+
+    ws_refpts <-
+      read_vc(basename(file), root = file) %>%
+      as_tibble()
+
+    if (single_wsh_version) {
+      assert_that(file.exists(file_wsh))
+      # verify version consistency
+      checksums_expected <- tribble(
+        ~version, ~checksum_wsh, ~checksum_refpts_tsv,
+        "v6", "e2920c4932008387", "01275d8cb15546c4",
+        "v5", "bd860c4d8b2b1de7", "8b74e5f80082595b",
+        "v4", "5792b496a94d0524", "2243f3cf20478b52",
+        "v6.1_interim", "d35532db5c4b41ff", "e71bf84c960e5666"
+      )
+      checksum_wsh_obs <- xxh64sum(file_wsh)
+      checksum_refpts_tsv_obs <- xxh64sum(file.path(
+        file,
+        paste0(basename(file), ".tsv")
+      ))
+      if (
+        !(checksum_wsh_obs %in% checksums_expected$checksum_wsh) |
+        !(checksum_refpts_tsv_obs %in% checksums_expected$checksum_refpts_tsv)
+      ) {
+        warning(
+          "You seem to be using a version of watersurfaces_hab and/or ",
+          "watersurfaces_refpoints that is not recognized by the function. ",
+          "Double-check the versions you use and beware about consequences."
+        )
+      } else {
+        assert_that(
+          checksums_expected %>%
+            filter(checksum_refpts_tsv == checksum_refpts_tsv_obs) %>%
+            pull(checksum_wsh) == checksum_wsh_obs,
+          msg = paste0(
+            "Version mismatch detected between watersurfaces_hab ",
+            "and watersurfaces_refpoints, based on file checksums."
+          )
+        )
+      }
+
+      # limit ws_refpts to single-version wsh polygons
+      if (is.null(version_wsh)) {
+        wsh <- read_watersurfaces_hab(file = file_wsh, ...)
+      } else {
+        wsh <- read_watersurfaces_hab(
+          file = file_wsh,
+          version = version_wsh,
+          ...
+        )
+      }
+      wsh_pol <- wsh$watersurfaces_polygons
+      ws_refpts <-
+        ws_refpts %>%
+        semi_join(
+          st_drop_geometry(wsh_pol),
+          join_by(polygon_id)
+        ) %>%
+        mutate(
+          polygon_id = factor(polygon_id, levels = levels(wsh_pol$polygon_id))
+        )
+    }
+
+    if (spatial) {
+      ws_refpts <-
+        ws_refpts %>%
+        st_as_sf(coords = c("x", "y"), crs = 31370)
+    }
+
+    return(ws_refpts)
+  }
+
+
+
+
+
+
+
+
+
+
 
 
 #' Return the data source \code{watersurfaces} as an \code{sf} polygon layer
