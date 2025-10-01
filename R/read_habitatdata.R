@@ -278,6 +278,16 @@ read_habitatmap_stdized <-
 #'
 #' @param interpreted If \code{TRUE}, the interpreted subtype is provided when the subtype is missing. This only
 #' applies to type 3130. When the subtype is missing for 3130, we interpret it as 3130_aom.
+#' @param collapse Logical.
+#' Should the resulting \code{watersurfaces_types} list element have a single
+#' row for each combination of \code{polygon_id} and \code{type}?
+#' This causes collapsing:
+#' \itemize{
+#'   \item as a single string of different values of \code{code_orig} that led
+#'   to the same \code{type};
+#'   \item of values of \code{certain}, using the \code{\link{any}} summary
+#'   function.
+#' }
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
@@ -351,6 +361,8 @@ read_habitatmap_stdized <-
 #' across
 #' mutate
 #' relocate
+#' summarize
+#' @importFrom stringr str_flatten
 #' @importFrom assertthat
 #' assert_that
 #' is.string
@@ -361,6 +373,7 @@ read_watersurfaces_hab <-
              "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"
            ),
            interpreted = FALSE,
+           collapse = TRUE,
            version = c(
              "watersurfaces_hab_v6",
              "watersurfaces_hab_v5",
@@ -423,6 +436,15 @@ read_watersurfaces_hab <-
         "type",
         "certain"
       )
+
+    if (collapse) {
+      watersurfaces_types <- watersurfaces_types %>%
+        summarize(
+          certain = any(.data$certain),
+          code_orig = str_flatten(.data$code_orig, collapse = " + "),
+          .by = c("polygon_id", "type")
+        )
+    }
 
     if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
       result <- list(

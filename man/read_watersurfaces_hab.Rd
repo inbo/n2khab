@@ -9,6 +9,7 @@ read_watersurfaces_hab(
   file = file.path(locate_n2khab_data(),
     "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
   interpreted = FALSE,
+  collapse = TRUE,
   version = c("watersurfaces_hab_v6", "watersurfaces_hab_v5", "watersurfaces_hab_v4",
     "watersurfaces_hab_v3", "watersurfaces_hab_v2", "watersurfaces_hab_v1",
     "watersurfaces_hab_v6.1_interim")
@@ -24,6 +25,17 @@ starting from the working directory.}
 
 \item{interpreted}{If \code{TRUE}, the interpreted subtype is provided when the subtype is missing. This only
 applies to type 3130. When the subtype is missing for 3130, we interpret it as 3130_aom.}
+
+\item{collapse}{Logical.
+Should the resulting \code{watersurfaces_types} list element have a single
+row for each combination of \code{polygon_id} and \code{type}?
+This causes collapsing:
+\itemize{
+  \item as a single string of different values of \code{code_orig} that led
+  to the same \code{type};
+  \item of values of \code{certain}, using the \code{\link{any}} summary
+  function.
+}}
 
 \item{version}{Version ID of the data source.
 Defaults to the latest available version defined by the package.
