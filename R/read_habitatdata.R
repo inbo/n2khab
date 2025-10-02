@@ -474,7 +474,101 @@ read_watersurfaces_hab <-
 
 
 #' Return the \code{watersurfaces_refpoints} data source as an
-#' \code{sf} points object or as a tibble
+#' \code{sf} point layer or as a tibble
+#'
+#' Returns the data source \code{watersurfaces_refpoints} as an \code{sf}
+#' point layer (CRS: \code{EPSG:31370}) or as a
+#' \code{\link[tibble:tbl_df-class]{tibble}} with easting
+#' (\code{x}) and northing (\code{y}) columns for the same coordinate reference
+#' system (CRS).
+#' By default, the data source is filtered so that only the rows are returned
+#' that match the polygons of a single version of \code{watersurfaces_hab}.
+#'
+#' \code{watersurfaces_refpoints} is a data source in the
+#' \href{https://ropensci.github.io/git2rdata}{vc-format}, available at
+#' \href{https://doi.org/XXXXXXXXXXXXXXXXXXXXXXXXXXXX}{Zenodo}, which provides
+#' points that uniquely represent polygons from the \code{watersurfaces_hab}
+#' data source.
+#' It represents multiple versions of \code{watersurfaces_hab}, and it is
+#' complete at least since version \code{watersurfaces_hab_v4}.
+#' This is accomplished by adding new rows for all polygons with a new ID in a
+#' new version of \code{watersurfaces_hab}, hereby recycling existing points
+#' that are overlapped by such polygons (so new IDs don't necessarily mean new
+#' watersurfaces).
+#'
+#' The R-code for creating the \code{watersurfaces_refpoints} data source can be
+#' found in the
+#' \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
+#' repository.
+#'
+#' @param spatial Should the result be a spatial (\code{sf}) layer?
+#' @param single_wsh_version Logical.
+#' Should \code{watersurfaces_refpoints} be limited to the polygons of a
+#' single version of \code{watersurfaces_hab}?
+#' @param file_wsh The absolute or relative file path of the
+#' \code{watersurfaces_hab} data source.
+#' Ignored if \code{single_wsh_version} is \code{FALSE}.
+#' @param version_wsh Version ID of the \code{watersurfaces_hab} data source;
+#'  passed to the \code{version} argument of
+#'  \code{\link{read_watersurfaces_hab}}.
+#' Ignored if \code{single_wsh_version} is \code{FALSE}.
+#' The default is to take the default of \code{\link{read_watersurfaces_hab}}.
+#' It is required that the version of \code{watersurfaces_refpoints} is equal
+#' to or larger than that of \code{watersurfaces_hab}, and this
+#' is verified directly with the file checksums.
+#' @param ... Further arguments passed to \code{\link{read_watersurfaces_hab}}.
+#'
+#' @inheritParams read_habitatmap_stdized
+#'
+#' @return
+#' By default, a Simple feature collection of type \code{POINT}
+#' (CRS: \code{EPSG:31370}), otherwise a
+#' tibble with easting (\code{x}) and northing (\code{y}) columns for the same
+#' coordinate reference system (CRS).
+#' Further attributes are the same:
+#' \describe{
+#' \item{\code{polygon_id}}{The \code{polygon_id} from \code{watersurfaces_hab}.
+#' If \code{single_wsh_version} is \code{TRUE}, then this is a factor, otherwise
+#' a character.}
+#' \item{\code{in_polygon}}{Logical. Did the point lie inside the polygon it
+#' refers, at the time of creation? Note that the polygon's geometry may have
+#' changed since then; it may not currently hold.}
+#' }
+#'
+#' @family functions involved in processing the 'habitatmap' data source
+#'
+#' @family functions involved in processing the 'watersurfaces' data source
+#'
+#' @references
+#' \itemize{
+#' \item Leyssen A., Scheers K., Packet J., Van Hecke F., Wils C. (2024).
+#' Watervlakken 2024: Polygonenkaart van stilstaand water in
+#' Vlaanderen. Uitgave 2024.
+#' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2024
+#' (52). Instituut voor Natuur en Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.114075267}.
+#' #' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
+#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
+#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
+#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
+#' Instituut voor Natuur- en Bosonderzoek (INBO).
+#' \doi{10.21436/inbor.96375305}.
+#' }
+#'
+#' @examples
+#' \dontrun{
+#' # This example supposes that your working directory or a directory up to 10
+#' # levels above has the 'n2khab_data' folder AND that the latest version of
+#' # the 'watersurfaces_hab'
+#' # data source is present in the default subdirectory.
+#' # In all other cases, this example won't work but at least you can
+#' # consider what to do.
+#'
+#' read_watersurfaces_refpoints()
+#' read_watersurfaces_refpoints(spatial = FALSE)
+#' read_watersurfaces_refpoints(single_wsh_version = FALSE)
+#' }
 #'
 #' @export
 #' @importFrom git2rdata
