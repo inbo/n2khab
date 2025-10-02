@@ -488,6 +488,8 @@ read_watersurfaces_hab <-
 #' semi_join
 #' tribble
 #' mutate
+#' filter
+#' pull
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
@@ -526,10 +528,10 @@ read_watersurfaces_refpoints <-
       # verify version consistency
       checksums_expected <- tribble(
         ~version, ~checksum_wsh, ~checksum_refpts_tsv,
-        "v6", "e2920c4932008387", "01275d8cb15546c4",
-        "v5", "bd860c4d8b2b1de7", "8b74e5f80082595b",
-        "v4", "5792b496a94d0524", "2243f3cf20478b52",
-        "v6.1_interim", "d35532db5c4b41ff", "e71bf84c960e5666"
+        "6", "e2920c4932008387", "01275d8cb15546c4",
+        "5", "bd860c4d8b2b1de7", "8b74e5f80082595b",
+        "4", "5792b496a94d0524", "2243f3cf20478b52",
+        "6.1", "d35532db5c4b41ff", "e71bf84c960e5666"
       )
       checksum_wsh_obs <- xxh64sum(file_wsh)
       checksum_refpts_tsv_obs <- xxh64sum(file.path(
@@ -546,13 +548,23 @@ read_watersurfaces_refpoints <-
           "Double-check the versions you use and beware about consequences."
         )
       } else {
-        assert_that(
+        version_refpts_obs <-
           checksums_expected %>%
-            filter(checksum_refpts_tsv == checksum_refpts_tsv_obs) %>%
-            pull(checksum_wsh) == checksum_wsh_obs,
+          filter(checksum_refpts_tsv == checksum_refpts_tsv_obs) %>%
+          pull(version) %>%
+          as.numeric_version()
+        version_wsh_obs <-
+          checksums_expected %>%
+          filter(checksum_wsh == checksum_wsh_obs) %>%
+          pull(version) %>%
+          as.numeric_version()
+        assert_that(
+          version_refpts_obs >= version_wsh_obs,
           msg = paste0(
             "Version mismatch detected between watersurfaces_hab ",
-            "and watersurfaces_refpoints, based on file checksums."
+            "and watersurfaces_refpoints, based on file checksums. The ",
+            "version of watersurfaces_refpoints must be the version of ",
+            "watersurfaces_hab or larger."
           )
         )
       }
