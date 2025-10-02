@@ -2,7 +2,7 @@
 
 ## Breaking change
 
-- `read_watersurfaces_hab()` has gained an argument `collapse`, which is `TRUE` by default.
+- `read_watersurfaces_hab()` has gained an argument `collapse`, which is `TRUE` by default (#203).
 It reduces the `watersurfaces_types` element of the list output to unique combinations of `polygon_id` and `type`, hereby collapsing the `code_orig` and `certain` columns as needed.
   - This form better reflects the user's needs.
   Since this breaks previous behaviour, you may want to check for changed (improved?) results of existing code when using this version of {n2khab}.
@@ -25,7 +25,7 @@ Please note that it is advised to use a regular version of these data sources in
 
 ## New features
 
-- `expand_types()` gains an argument `mark`.
+- `expand_types()` gains an argument `mark` (#198).
 If set as `TRUE`, the logical columns `has_been_expanded` and `added_by_expansion` are added.
 These mark rows as origin or destination of type expansion, respectively.
 
