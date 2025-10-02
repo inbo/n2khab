@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_textdata.R
 \name{read_namelist}
 \alias{read_namelist}
-\title{Return the 'namelist' data source as a tibble}
+\title{Return the \code{namelist} data source as a tibble}
 \usage{
 read_namelist(
   path = pkgdatasource_path("textdata/namelist", ".yml"),

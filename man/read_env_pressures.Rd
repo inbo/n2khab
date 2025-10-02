@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_textdata.R
 \name{read_env_pressures}
 \alias{read_env_pressures}
-\title{Return the 'env_pressures' data source as a tibble with human-readable
+\title{Return the \code{env_pressures} data source as a tibble with human-readable
 attributes}
 \usage{
 read_env_pressures(
