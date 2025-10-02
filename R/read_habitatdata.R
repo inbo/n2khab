@@ -571,6 +571,8 @@ read_watersurfaces_hab <-
 #' }
 #'
 #' @export
+#' @importFrom rlang
+#' .data
 #' @importFrom git2rdata
 #' read_vc
 #' @importFrom sf
@@ -644,13 +646,13 @@ read_watersurfaces_refpoints <-
       } else {
         version_refpts_obs <-
           checksums_expected %>%
-          filter(checksum_refpts_tsv == checksum_refpts_tsv_obs) %>%
-          pull(version) %>%
+          filter(.data$checksum_refpts_tsv == checksum_refpts_tsv_obs) %>%
+          pull("version") %>%
           as.numeric_version()
         version_wsh_obs <-
           checksums_expected %>%
-          filter(checksum_wsh == checksum_wsh_obs) %>%
-          pull(version) %>%
+          filter(.data$checksum_wsh == checksum_wsh_obs) %>%
+          pull("version") %>%
           as.numeric_version()
         assert_that(
           version_refpts_obs >= version_wsh_obs,
@@ -678,10 +680,13 @@ read_watersurfaces_refpoints <-
         ws_refpts %>%
         semi_join(
           st_drop_geometry(wsh_pol),
-          join_by(polygon_id)
+          join_by("polygon_id")
         ) %>%
         mutate(
-          polygon_id = factor(polygon_id, levels = levels(wsh_pol$polygon_id))
+          polygon_id = factor(
+            .data$polygon_id,
+            levels = levels(wsh_pol$polygon_id)
+          )
         )
     }
 
