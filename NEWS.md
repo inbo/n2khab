@@ -11,6 +11,12 @@ It reduces the `watersurfaces_types` element of the list output to unique combin
 
   Refer to [inbo/n2khab-preprocessing/issues/78](https://github.com/inbo/n2khab-preprocessing/issues/78) for more information.
 
+## New features
+
+- `expand_types()` gains an argument `mark` (#198).
+If set as `TRUE`, the logical columns `has_been_expanded` and `added_by_expansion` are added.
+These mark rows as origin or destination of type expansion, respectively.
+
 ## Support for interim data source versions
 
 The following _interim_ data source versions are now supported by the corresponding functions (#200):
@@ -22,12 +28,6 @@ The following _interim_ data source versions are now supported by the correspond
 Function documentation was updated accordingly.
 Interim versions are added only at the end of the `version` argument of the read functions, since they do not receive the same level of quality control.
 Please note that it is advised to use a regular version of these data sources instead.
-
-## New features
-
-- `expand_types()` gains an argument `mark` (#198).
-If set as `TRUE`, the logical columns `has_been_expanded` and `added_by_expansion` are added.
-These mark rows as origin or destination of type expansion, respectively.
 
 # n2khab 0.12.0 (2025-01-10)
 
