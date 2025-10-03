@@ -24,7 +24,7 @@
 #' It is also used to determine \code{file} if that argument is not specified,
 #' in order to select the right data file(s) from the \code{n2khab_data} folder.
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' A Simple feature collection of geometry type \code{MULTIPOLYGON} or

@@ -9,7 +9,8 @@ read_habitatmap_stdized(
   file = file.path(locate_n2khab_data(),
     "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"),
   version = c("habitatmap_stdized_2023_v1", "habitatmap_stdized_2020_v1",
-    "habitatmap_stdized_2018_v2", "habitatmap_stdized_2018_v1")
+    "habitatmap_stdized_2018_v2", "habitatmap_stdized_2018_v1",
+    "habitatmap_stdized_2024_v99_interim")
 )
 }
 \arguments{
@@ -21,7 +22,9 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
 
 \item{version}{Version ID of the data source.
-Defaults to the latest available version defined by the package.}
+Defaults to the latest available version defined by the package.
+Versions with the 'interim' suffix are designed to be used within the Research
+Institute for Nature and Forest (INBO) only.}
 }
 \value{
 A list of two objects:
