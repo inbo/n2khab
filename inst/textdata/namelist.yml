@@ -1,12 +1,12 @@
 ..generic:
-  git2rdata: 0.4.0
+  git2rdata: 0.5.0
   optimize: yes
   NA string: NA
   sorting:
   - lang
   - code
   hash: 3345146f5a5902a684bc1b965f00486c82952d94
-  data_hash: ba4a21468fee501892a4ee5903fd0ff20fadc493
+  data_hash: 40e5e5aa762a3db9d9fccff8fa38e1a7e1aef34c
 code:
   class: character
 lang:
