@@ -185,6 +185,13 @@ read_favenv <- function(
         type = factor(type, levels = levels(types$type))
       )
 
+    # Elektrisch Geleidingsvermogen -> Geleidbaarheid
+    favenv$variable[favenv$variable == "Elektrisch Geleidingsvermogen"] <-
+      "Geleidbaarheid"
+    favenv$abbreviation[favenv$abbreviation == "EGV"] <-
+      "EC"
+
+
   } else {
     stop(paste0("Reading version ", version, " is not yet implemented."))
   }
