@@ -112,9 +112,6 @@ read_favenv <- function(
     lang = c("nl")) {
   require_pkgs(c("fs"))
 
-  version <- match.arg(version)
-  lang <- match.arg(lang)
-
   # if file does not exist, download it from Zenodo
   if (!fs::file_exists(file)) {
     assert_that(
@@ -125,11 +122,10 @@ read_favenv <- function(
           "Aborting attempt to dowload the necessary file from Zenodo."
         )
     )
-    doi <- switch(
-      version,
-      `favenv_v1.0` = "10.5281/zenodo.10533792",
-      "10.5281/zenodo.10533791" # default resolves to latest
-    )
+    doi_versions <- get_zenodo_versions("10.5281/zenodo.10533791")
+    version <- match.arg(version)
+    lang <- match.arg(lang)
+    doi <- doi_versions[version]
     dir <- fs::path_dir(file)
     fs::dir_create(dir)
     download_zenodo(doi = doi, path = dir, quiet = TRUE)
