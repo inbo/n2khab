@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_textdata.R
 \name{read_types}
 \alias{read_types}
-\title{Return the 'types' data source as a tibble with names & shortnames}
+\title{Return the \code{types} data source as a tibble with names & shortnames}
 \usage{
 read_types(
   path = pkgdatasource_path("textdata/types", ".yml"),

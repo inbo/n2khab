@@ -20,7 +20,9 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
 
 \item{version}{Version ID of the data source.
-Defaults to the latest available version defined by the package.}
+Defaults to the latest available version defined by the package.
+Versions with the 'interim' suffix are designed to be used within the Research
+Institute for Nature and Forest (INBO) only.}
 
 \item{lang}{An
 \href{https://www.w3.org/International/articles/language-tags/index.en}{
@@ -68,9 +70,9 @@ water of external origin), water column/surface water, air
 - `value_num_1` - `value_num_2`: lower and upper limit as numerical value
  (where conversion was possible)
 
-`n_favorable`: number of test plots in favorable conservation status used for
-the calculation. The definition of favorable conservation status is based on
-Oosterlynck et al. (2020, version 3).
+`n_favourable`: number of test plots in favourable conservation status used
+for the calculation. The definition of favourable conservation status is
+based on Oosterlynck et al. (2020, version 3).
 
 `status`: source and method by which the range was derived:
 - Dp: ranges calculated with INBO data, prediction intervals, local
