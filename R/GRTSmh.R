@@ -285,7 +285,7 @@ convert_base4frac_to_dec <-
 #' @param brick Logical; determines whether the single- or ten-layered
 #' SpatRaster is returned. See the Details section.
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' A single- or a ten-layered SpatRaster object, always with 21041043
@@ -425,7 +425,7 @@ read_GRTSmh <-
 #' So, what really matters is only the notation with many digits, to be
 #' \emph{regarded} as a base 4 fraction.
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #'
 #' @return
 #' A SpatRaster with 21041043 cells.

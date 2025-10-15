@@ -1,5 +1,34 @@
 # n2khab (development version)
 
+## Breaking change
+
+- `read_watersurfaces_hab()` has gained an argument `collapse`, which is `TRUE` by default.
+It reduces the `watersurfaces_types` element of the list output to unique combinations of `polygon_id` and `type`, hereby collapsing the `code_orig` and `certain` columns as needed.
+  - This form better reflects the user's needs.
+  Since this breaks previous behaviour, you may want to check for changed (improved?) results of existing code when using this version of {n2khab}.
+  If needed, use `collapse = FALSE`.
+  - Future versions of `watersurfaces_hab` are expected to implement this in the data source itself, but with `interpreted = TRUE` further collapsing by the function remains necessary to maintain uniqueness by `polygon_id` and `type`.
+
+  Refer to [inbo/n2khab-preprocessing/issues/78](https://github.com/inbo/n2khab-preprocessing/issues/78) for more information.
+
+## Support for interim data source versions
+
+The following _interim_ data source versions are now supported by the corresponding functions (#200):
+
+- `habitatmap_stdized_2024_v99_interim` (`read_habitatmap_stdized()`)
+- `habitatmap_terr_2024_v99_interim` (`read_habitatmap_terr()`)
+- `watersurfaces_hab_v6.1_interim` (`read_watersurfaces_hab()`)
+
+Function documentation was updated accordingly.
+Interim versions are added only at the end of the `version` argument of the read functions, since they do not receive the same level of quality control.
+Please note that it is advised to use a regular version of these data sources instead.
+
+## New features
+
+- `expand_types()` gains an argument `mark`.
+If set as `TRUE`, the logical columns `has_been_expanded` and `added_by_expansion` are added.
+These mark rows as origin or destination of type expansion, respectively.
+
 # n2khab 0.12.0 (2025-01-10)
 
 ## Support for new data source versions

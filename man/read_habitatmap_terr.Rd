@@ -11,7 +11,8 @@ read_habitatmap_terr(
   keep_aq_types = TRUE,
   drop_7220 = TRUE,
   version = c("habitatmap_terr_2023_v1", "habitatmap_terr_2020_v2",
-    "habitatmap_terr_2020_v1", "habitatmap_terr_2018_v2", "habitatmap_terr_2018_v1")
+    "habitatmap_terr_2020_v1", "habitatmap_terr_2018_v2", "habitatmap_terr_2018_v1",
+    "habitatmap_terr_2024_v99_interim")
 )
 }
 \arguments{
@@ -44,7 +45,9 @@ to use the \code{habitatsprings} data source and not
 \code{\link[=read_habitatsprings]{read_habitatsprings()}}.}
 
 \item{version}{Version ID of the data source.
-Defaults to the latest available version defined by the package.}
+Defaults to the latest available version defined by the package.
+Versions with the 'interim' suffix are designed to be used within the Research
+Institute for Nature and Forest (INBO) only.}
 }
 \value{
 A list of two objects:

@@ -1,4 +1,4 @@
-#' Return the 'namelist' data source as a tibble
+#' Return the \code{namelist} data source as a tibble
 #'
 #' Returns the included data source \code{\link{namelist}} as a
 #' \code{\link[tibble:tbl_df-class]{tibble}},
@@ -161,7 +161,7 @@ namelist_factor <-
 
 
 
-#' Return the 'types' data source as a tibble with names & shortnames
+#' Return the \code{types} data source as a tibble with names & shortnames
 #'
 #' Returns the included data source \code{\link{types}} as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
@@ -432,7 +432,7 @@ read_types <-
 
 
 
-#' Return the 'env_pressures' data source as a tibble with human-readable
+#' Return the \code{env_pressures} data source as a tibble with human-readable
 #' attributes
 #'
 #' Returns the included data source \code{\link{env_pressures}} as a
