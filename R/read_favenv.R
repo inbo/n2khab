@@ -50,9 +50,9 @@
 #' - `value_num_1` - `value_num_2`: lower and upper limit as numerical value
 #'  (where conversion was possible)
 #'
-#' `n_favorable`: number of test plots in favorable conservation status used for
-#' the calculation. The definition of favorable conservation status is based on
-#' Oosterlynck et al. (2020, version 3).
+#' `n_favourable`: number of test plots in favourable conservation status used
+#' for the calculation. The definition of favourable conservation status is
+#' based on Oosterlynck et al. (2020, version 3).
 #'
 #' `status`: source and method by which the range was derived:
 #' - Dp: ranges calculated with INBO data, prediction intervals, local
@@ -163,7 +163,7 @@ read_favenv <- function(
         value_2 = Waarde.2,
         value_num_1 = WaardeNum1,
         value_num_2 = WaardeNum2,
-        n_favorable = N.gunstig,
+        n_favourable = N.gunstig,
         status = Status,
         reference = Referentie,
         remarks = Opmerking,
