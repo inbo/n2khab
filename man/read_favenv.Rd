@@ -37,7 +37,7 @@ The following list provides a brief description for each variable:
 
 `type`: Natura 2000 (sub)type habitat code
 
-`subtype`: code/name of possible vegetation variants.
+`subspecification`: code/name of possible vegetation variants.
 For aquatic habitats: this is the watertype as used in the Water Framework
 Directive and thus also in the Flemish law texts (main use of this field).
 In other cases: a subtype that is not officially recognized in the list of
@@ -66,8 +66,8 @@ water of external origin), water column/surface water, air
 `environmental_range`: overall measurement range of an environmental variable
  within which a habitat type can function sustainably:
 - `environmental_range`: range as text field
-- `value_1` - `value_2`: lower and upper limit as text field
-- `value_num_1` - `value_num_2`: lower and upper limit as numerical value
+- `lower_limit_text` - `upper_limit_text`: lower and upper limit as text field
+- `lower_limit` - `upper_limit`: lower and upper limit as numerical value
  (where conversion was possible)
 
 `n_favourable`: number of test plots in favourable conservation status used

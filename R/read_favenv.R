@@ -17,7 +17,7 @@
 #'
 #' `type`: Natura 2000 (sub)type habitat code
 #'
-#' `subtype`: code/name of possible vegetation variants.
+#' `subspecification`: code/name of possible vegetation variants.
 #' For aquatic habitats: this is the watertype as used in the Water Framework
 #' Directive and thus also in the Flemish law texts (main use of this field).
 #' In other cases: a subtype that is not officially recognized in the list of
@@ -46,8 +46,8 @@
 #' `environmental_range`: overall measurement range of an environmental variable
 #'  within which a habitat type can function sustainably:
 #' - `environmental_range`: range as text field
-#' - `value_1` - `value_2`: lower and upper limit as text field
-#' - `value_num_1` - `value_num_2`: lower and upper limit as numerical value
+#' - `lower_limit_text` - `upper_limit_text`: lower and upper limit as text field
+#' - `lower_limit` - `upper_limit`: lower and upper limit as numerical value
 #'  (where conversion was possible)
 #'
 #' `n_favourable`: number of test plots in favourable conservation status used
@@ -147,7 +147,7 @@ read_favenv <- function(
       as_tibble() |>
       rename(
         type = Habitatsubtype,
-        subtype = Subtype,
+        subspecification = Subtype,
         compartment = Milieucompartiment,
         variable = Variabele,
         abbreviation = Afkorting,
@@ -155,10 +155,10 @@ read_favenv <- function(
         summary_statistic = `Toetswijze...bepaling`,
         range_type = Teken,
         environmental_range = Abiotisch.bereik,
-        value_1 = Waarde.1,
-        value_2 = Waarde.2,
-        value_num_1 = WaardeNum1,
-        value_num_2 = WaardeNum2,
+        lower_limit_text = Waarde.1,
+        upper_limit_text = Waarde.2,
+        lower_limit = WaardeNum1,
+        upper_limit = WaardeNum2,
         n_favourable = N.gunstig,
         status = Status,
         reference = Referentie,
@@ -171,8 +171,8 @@ read_favenv <- function(
 
     # fix numerical values
     # contains mix of . and , as decimal mark
-    favenv$value_num_1 <- as.numeric(gsub(",", ".", favenv$value_num_1))
-    favenv$value_num_2 <- as.numeric(gsub(",", ".", favenv$value_num_2))
+    favenv$lower_limit <- as.numeric(gsub(",", ".", favenv$lower_limit))
+    favenv$upper_limit <- as.numeric(gsub(",", ".", favenv$upper_limit))
 
     # align with read_types()
     types <- read_types(lang = lang)
