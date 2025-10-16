@@ -186,6 +186,10 @@ read_favenv <- function(
       "Geleidbaarheid"
     favenv$abbreviation[favenv$abbreviation == "EGV"] <-
       "EC"
+    # compartment align with systeemschema
+    favenv$compartment[favenv$compartment == "Lucht"] <- "Atmosfeer"
+    favenv$compartment[favenv$compartment == "Diep grondwater"] <- "Grondwater"
+    favenv$compartment[favenv$compartment == "Ondiep grondwater"] <- "Grondwater"
 
 
   } else {
