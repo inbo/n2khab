@@ -189,7 +189,19 @@ read_favenv <- function(
     # compartment align with systeemschema
     favenv$compartment[favenv$compartment == "Lucht"] <- "Atmosfeer"
     favenv$compartment[favenv$compartment == "Diep grondwater"] <- "Grondwater"
-    favenv$compartment[favenv$compartment == "Ondiep grondwater"] <- "Grondwater"
+    favenv$compartment[favenv$compartment == "Ondiep grondwater"] <-
+      "Grondwater"
+
+    # convert to factors where appropriate
+    # note: in this version not possible to align levels of variable and
+    # abbreviation, because not one-to-one mapping
+    favenv <- favenv |>
+      mutate(
+        across(
+          where(is.character),
+          \(x) factor(x, levels = sort(unique(x)))
+        )
+      )
 
 
   } else {
