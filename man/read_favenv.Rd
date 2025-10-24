@@ -20,9 +20,7 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.}
 
 \item{version}{Version ID of the data source.
-Defaults to the latest available version defined by the package.
-Versions with the 'interim' suffix are designed to be used within the Research
-Institute for Nature and Forest (INBO) only.}
+Defaults to the latest available version defined by the package.}
 
 \item{lang}{An
 \href{https://www.w3.org/International/articles/language-tags/index.en}{
@@ -30,72 +28,78 @@ IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
 the language of names & shortnames to be returned in the tibble.}
 }
 \value{
-A `tibble`.
+A \code{tibble}.
 
 The first row is a column header and represents the variable name.
 The following list provides a brief description for each variable:
 
-`type`: Natura 2000 (sub)type habitat code
+\code{type}: Natura 2000 (sub)type habitat code
 
-`subspecification`: code/name of possible vegetation variants.
+\code{subspecification}: code/name of possible vegetation variants.
 For aquatic habitats: this is the watertype as used in the Water Framework
 Directive and thus also in the Flemish law texts (main use of this field).
 In other cases: a subtype that is not officially recognized in the list of
 Natura 2000 habitat subtypes in Flanders, for instance a phytosociological
 association or a variant like acidophilous or calcarophilous, ...
 
-`compartment`: soil, groundwater, inundation water (flooding with
+\code{compartment}: soil, groundwater, inundation water (flooding with
 water of external origin), water column/surface water, air
 
-`variable`: name of the environmental variable.
+\code{variable}: name of the environmental variable.
 
-`abbreviation`: abbreviation used for the environmental variable
+\code{abbreviation}: abbreviation used for the environmental variable
 
-`unit`: unit used for the environmental variable
+\code{unit}: unit used for the environmental variable
 
-`summary_statistic`: for aquatic types, measurements are first summarized
- using certain statistics such as percentiles, mean, etc. (in accordance with
- Water Framework Directive-Integrated Water Policy Objectives)
+\code{summary_statistic}: for aquatic types, measurements are first summarized
+using certain statistics such as percentiles, mean, etc. (in accordance with
+Water Framework Directive-Integrated Water Policy Objectives)
 
-`range_type`: range type
-- LL-UL: lower limit-upper limit
-- 10-90 perc: 10-90 percentile values
-- min-max: minimum - maximum
-- < - >: less than - greater than
+\code{range_type}: range type
+\itemize{
+\item LL-UL: lower limit-upper limit
+\item 10-90 perc: 10-90 percentile values
+\item min-max: minimum - maximum
+\item < - >: less than - greater than
+}
 
-`environmental_range`: overall measurement range of an environmental variable
- within which a habitat type can function sustainably:
-- `environmental_range`: range as text field
-- `lower_limit_text` - `upper_limit_text`: lower and upper limit as text field
-- `lower_limit` - `upper_limit`: lower and upper limit as numerical value
- (where conversion was possible)
+\code{environmental_range}: overall measurement range of an environmental variable
+within which a habitat type can function sustainably:
+\itemize{
+\item \code{environmental_range}: range as text field
+\item \code{lower_limit_text} - \code{upper_limit_text}: lower and upper limit as text field
+\item \code{lower_limit} - \code{upper_limit}: lower and upper limit as numerical value
+(where conversion was possible)
+}
 
-`n_favourable`: number of test plots in favourable conservation status used
+\code{n_favourable}: number of test plots in favourable conservation status used
 for the calculation. The definition of favourable conservation status is
 based on Oosterlynck et al. (2020, version 3).
 
-`status`: source and method by which the range was derived:
-- Dp: ranges calculated with INBO data, prediction intervals, local
-  conservation status (LCS) known
-- Dt: ranges determined using Titan method (Baker & King 2010), LCS unknown
-- Dk: ranges calculated with INBO data, quantiles, insufficient data to
-  calculate prediction intervals
-- Lg: ranges derived from literature (LCS clearly indicated)
-- Lk: ranges derived from literature (LCS derived, based on site
-  characteristics)
+\code{status}: source and method by which the range was derived:
+\itemize{
+\item Dp: ranges calculated with INBO data, prediction intervals, local
+conservation status (LCS) known
+\item Dt: ranges determined using Titan method (Baker & King 2010), LCS unknown
+\item Dk: ranges calculated with INBO data, quantiles, insufficient data to
+calculate prediction intervals
+\item Lg: ranges derived from literature (LCS clearly indicated)
+\item Lk: ranges derived from literature (LCS derived, based on site
+characteristics)
+}
 
-`reference`: references based on which the abiotic range was determined
+\code{reference}: references based on which the abiotic range was determined
 
-`remarks`: remarks
+\code{remarks}: remarks
 
-`changes`: whether this record has been modified compared to Van Calster
+\code{changes}: whether this record has been modified compared to Van Calster
 et al. (2020) and how
 }
 \description{
 A 'type' refers to either a (main) habitat type, a
 habitat subtype or a regionally important biotope (RIB).
-The function reads the data into the current R session if `file` exists.
-If the `file` does not exist, it will attempt to download it and read it
+The function reads the data into the current R session if \code{file} exists.
+If the \code{file} does not exist, it will attempt to download it and read it
 after the download has completed.
 The original source for the data is Van Calster et al. (2020).
 }
@@ -106,15 +110,17 @@ favenv <- read_favenv()
 
 }
 \references{
-- Van Calster H., Cools N., De Keersmaeker L., Denys L., Herr C., Leyssen A.,
+\itemize{
+\item Van Calster H., Cools N., De Keersmaeker L., Denys L., Herr C., Leyssen A.,
 Provoost S., Vanderhaeghe F., Vandevoorde B., Wouters J. en M. Raman (2020).
 Gunstige abiotische bereiken voor vegetatietypes in Vlaanderen. Rapporten van
 het Instituut voor Natuur- en Bosonderzoek 2020 (44). Instituut voor Natuur-
 en Bosonderzoek, Brussel. DOI: doi.org/10.21436/inbor.19362510D
-- Oosterlynck P., De Saeger S., Leyssen A., Provoost S., Thomaes A.,
+\item Oosterlynck P., De Saeger S., Leyssen A., Provoost S., Thomaes A.,
 Vandevoorde B., Wouters J., & Paelinckx D. (2020). Criteria voor de
 beoordeling van de lokale staat van instandhouding van de Natura2000
 habitattypen in Vlaanderen. Rapporten van het Instituut voor Natuur- en
 Bosonderzoek 2020 (27). Instituut voor Natuur- en Bosonderzoek, Brussel.
 DOI: doi.org/10.21436/inbor.14061248
+}
 }
