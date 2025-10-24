@@ -71,6 +71,8 @@
 #' `changes`: whether this record has been modified compared to Van Calster
 #' et al. (2020) and how
 #'
+#' @md
+#'
 #' @export
 #'
 #' @references
