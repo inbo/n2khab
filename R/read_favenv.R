@@ -7,7 +7,7 @@
 #' after the download has completed.
 #' The original source for the data is Van Calster et al. (2020).
 #'
-#' @inheritParams read_habitatmap_stdized
+#' @inheritParams read_habitatmap
 #' @inheritParams read_types
 #'
 #' @return A `tibble`.
