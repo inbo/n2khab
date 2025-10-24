@@ -32,38 +32,30 @@ A \code{tibble}.
 
 The first row is a column header and represents the variable name.
 The following list provides a brief description for each variable:
-
-\code{type}: Natura 2000 (sub)type habitat code
-
-\code{subspecification}: code/name of possible vegetation variants.
+\itemize{
+\item \code{type}: Natura 2000 (sub)type habitat code
+\item \code{subspecification}: code/name of possible vegetation variants.
 For aquatic habitats: this is the watertype as used in the Water Framework
 Directive and thus also in the Flemish law texts (main use of this field).
 In other cases: a subtype that is not officially recognized in the list of
 Natura 2000 habitat subtypes in Flanders, for instance a phytosociological
 association or a variant like acidophilous or calcarophilous, ...
-
-\code{compartment}: soil, groundwater, inundation water (flooding with
+\item \code{compartment}: soil, groundwater, inundation water (flooding with
 water of external origin), water column/surface water, air
-
-\code{variable}: name of the environmental variable.
-
-\code{abbreviation}: abbreviation used for the environmental variable
-
-\code{unit}: unit used for the environmental variable
-
-\code{summary_statistic}: for aquatic types, measurements are first summarized
+\item \code{variable}: name of the environmental variable.
+\item \code{abbreviation}: abbreviation used for the environmental variable
+\item \code{unit}: unit used for the environmental variable
+\item \code{summary_statistic}: for aquatic types, measurements are first summarized
 using certain statistics such as percentiles, mean, etc. (in accordance with
 Water Framework Directive-Integrated Water Policy Objectives)
-
-\code{range_type}: range type
+\item \code{range_type}: range type
 \itemize{
 \item LL-UL: lower limit-upper limit
 \item 10-90 perc: 10-90 percentile values
 \item min-max: minimum - maximum
 \item < - >: less than - greater than
 }
-
-\code{environmental_range}: overall measurement range of an environmental variable
+\item \code{environmental_range}: overall measurement range of an environmental variable
 within which a habitat type can function sustainably:
 \itemize{
 \item \code{environmental_range}: range as text field
@@ -71,12 +63,10 @@ within which a habitat type can function sustainably:
 \item \code{lower_limit} - \code{upper_limit}: lower and upper limit as numerical value
 (where conversion was possible)
 }
-
-\code{n_favourable}: number of test plots in favourable conservation status used
+\item \code{n_favourable}: number of test plots in favourable conservation status used
 for the calculation. The definition of favourable conservation status is
 based on Oosterlynck et al. (2020, version 3).
-
-\code{status}: source and method by which the range was derived:
+\item \code{status}: source and method by which the range was derived:
 \itemize{
 \item Dp: ranges calculated with INBO data, prediction intervals, local
 conservation status (LCS) known
@@ -87,13 +77,11 @@ calculate prediction intervals
 \item Lk: ranges derived from literature (LCS derived, based on site
 characteristics)
 }
-
-\code{reference}: references based on which the abiotic range was determined
-
-\code{remarks}: remarks
-
-\code{changes}: whether this record has been modified compared to Van Calster
+\item \code{reference}: references based on which the abiotic range was determined
+\item \code{remarks}: remarks
+\item \code{changes}: whether this record has been modified compared to Van Calster
 et al. (2020) and how
+}
 }
 \description{
 A 'type' refers to either a (main) habitat type, a

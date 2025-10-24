@@ -15,60 +15,60 @@
 #' The first row is a column header and represents the variable name.
 #' The following list provides a brief description for each variable:
 #'
-#' `type`: Natura 2000 (sub)type habitat code
+#' - `type`: Natura 2000 (sub)type habitat code
 #'
-#' `subspecification`: code/name of possible vegetation variants.
+#' - `subspecification`: code/name of possible vegetation variants.
 #' For aquatic habitats: this is the watertype as used in the Water Framework
 #' Directive and thus also in the Flemish law texts (main use of this field).
 #' In other cases: a subtype that is not officially recognized in the list of
 #' Natura 2000 habitat subtypes in Flanders, for instance a phytosociological
 #' association or a variant like acidophilous or calcarophilous, ...
 #'
-#' `compartment`: soil, groundwater, inundation water (flooding with
+#' - `compartment`: soil, groundwater, inundation water (flooding with
 #' water of external origin), water column/surface water, air
 #'
-#' `variable`: name of the environmental variable.
+#' - `variable`: name of the environmental variable.
 #'
-#' `abbreviation`: abbreviation used for the environmental variable
+#' - `abbreviation`: abbreviation used for the environmental variable
 #'
-#' `unit`: unit used for the environmental variable
+#' - `unit`: unit used for the environmental variable
 #'
-#' `summary_statistic`: for aquatic types, measurements are first summarized
+#' - `summary_statistic`: for aquatic types, measurements are first summarized
 #'  using certain statistics such as percentiles, mean, etc. (in accordance with
 #'  Water Framework Directive-Integrated Water Policy Objectives)
 #'
-#' `range_type`: range type
-#' - LL-UL: lower limit-upper limit
-#' - 10-90 perc: 10-90 percentile values
-#' - min-max: minimum - maximum
-#' - < - >: less than - greater than
+#' - `range_type`: range type
+#'   - LL-UL: lower limit-upper limit
+#'   - 10-90 perc: 10-90 percentile values
+#'   - min-max: minimum - maximum
+#'   - < - >: less than - greater than
 #'
-#' `environmental_range`: overall measurement range of an environmental variable
+#' - `environmental_range`: overall measurement range of an environmental variable
 #'  within which a habitat type can function sustainably:
-#' - `environmental_range`: range as text field
-#' - `lower_limit_text` - `upper_limit_text`: lower and upper limit as text field
-#' - `lower_limit` - `upper_limit`: lower and upper limit as numerical value
+#'   - `environmental_range`: range as text field
+#'   - `lower_limit_text` - `upper_limit_text`: lower and upper limit as text field
+#'   - `lower_limit` - `upper_limit`: lower and upper limit as numerical value
 #'  (where conversion was possible)
 #'
-#' `n_favourable`: number of test plots in favourable conservation status used
+#' - `n_favourable`: number of test plots in favourable conservation status used
 #' for the calculation. The definition of favourable conservation status is
 #' based on Oosterlynck et al. (2020, version 3).
 #'
-#' `status`: source and method by which the range was derived:
-#' - Dp: ranges calculated with INBO data, prediction intervals, local
-#'   conservation status (LCS) known
-#' - Dt: ranges determined using Titan method (Baker & King 2010), LCS unknown
-#' - Dk: ranges calculated with INBO data, quantiles, insufficient data to
-#'   calculate prediction intervals
-#' - Lg: ranges derived from literature (LCS clearly indicated)
-#' - Lk: ranges derived from literature (LCS derived, based on site
+#' - `status`: source and method by which the range was derived:
+#'   - Dp: ranges calculated with INBO data, prediction intervals, local
+#'     conservation status (LCS) known
+#'   - Dt: ranges determined using Titan method (Baker & King 2010), LCS unknown
+#'   - Dk: ranges calculated with INBO data, quantiles, insufficient data to
+#'     calculate prediction intervals
+#'   - Lg: ranges derived from literature (LCS clearly indicated)
+#'   - Lk: ranges derived from literature (LCS derived, based on site
 #'   characteristics)
 #'
-#' `reference`: references based on which the abiotic range was determined
+#' - `reference`: references based on which the abiotic range was determined
 #'
-#' `remarks`: remarks
+#' - `remarks`: remarks
 #'
-#' `changes`: whether this record has been modified compared to Van Calster
+#' - `changes`: whether this record has been modified compared to Van Calster
 #' et al. (2020) and how
 #'
 #' @md
