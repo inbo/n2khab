@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_textdata.R
 \name{read_types}
 \alias{read_types}
-\title{Return the 'types' data source as a tibble with names & shortnames}
+\title{Return the \code{types} data source as a tibble with names & shortnames}
 \usage{
 read_types(
   path = pkgdatasource_path("textdata/types", ".yml"),
@@ -25,8 +25,8 @@ The default is to use the file delivered by the installed package.}
 
 \item{lang}{An
 \href{https://www.w3.org/International/articles/language-tags/index.en}{
-IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
-the language of names & shortnames to be returned in the tibble.}
+IETF BCP 47 language tag}, such as \code{"nl"} or \code{"en"}, to specify
+the language in which the fields in the tibble should be returned.}
 }
 \value{
 The \code{types} data frame as a \code{\link[tibble:tbl_df-class]{tibble}},

@@ -115,6 +115,10 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
 #' is.string
 #' is.flag
 #' noNA
+#' @importFrom curl
+#' curl_download
+#' curl_fetch_memory
+#' multi_download
 #'
 #' @export
 #' @family functions regarding file management for N2KHAB projects
@@ -135,10 +139,11 @@ download_zenodo <- function(doi,
                             path = ".",
                             parallel = TRUE,
                             quiet = FALSE) {
-  assert_that(is.string(doi), is.string(path))
+  assert_that(is.string(doi), grepl("^10\\.5281/zenodo", doi))
+  assert_that(is.string(path))
   assert_that(is.flag(parallel), noNA(parallel), is.flag(quiet), noNA(quiet))
 
-  require_pkgs(c("jsonlite", "curl", "tools"))
+  require_pkgs(c("jsonlite", "tools"))
 
   # check for existence of the folder
   stopifnot(dir.exists(path))
@@ -147,7 +152,7 @@ download_zenodo <- function(doi,
 
   # Retrieve file name by records call
   base_url <- "https://zenodo.org/api/records/"
-  req <- curl::curl_fetch_memory(paste0(base_url, record))
+  req <- curl_fetch_memory(paste0(base_url, record))
   content <- jsonlite::fromJSON(rawToChar(req$content))
 
   # Calculate total file size
@@ -185,13 +190,13 @@ download_zenodo <- function(doi,
   }
 
   if (length(file_urls) > 1 && parallel) {
-    curl::multi_download(
+    multi_download(
       urls = file_urls,
       destfiles = destfiles,
       progress = !quiet
     )
   } else {
-    mapply(curl::curl_download,
+    mapply(curl_download,
       file_urls,
       destfiles,
       MoreArgs = list(quiet = quiet)
@@ -227,6 +232,46 @@ download_zenodo <- function(doi,
       )
     }
   }
+}
+
+#' Get version IDS from a Zenodo archive
+#'
+#' The function queries the Zenodo API to find the version IDs and
+#' corresponding DOIs.
+#'
+#' @param doi A DOI pointer to the Cite-all-versions DOI for a Zenodo archive.
+#' A Zenodo archive starts with '10.5281/zenodo.'.
+#'
+#' @export
+#' @family functions regarding file management for N2KHAB projects
+#'
+#' @return A named vector. The names correspond to version IDs, the values
+#' correspond to DOIs.
+#'
+#' @importFrom stringr
+#' fixed
+#' str_remove
+#' @importFrom curl
+#' curl_fetch_memory
+#'
+get_zenodo_versions <- function(doi) {
+  assert_that(is.string(doi), grepl("^10\\.5281/zenodo", doi))
+  require_pkgs(c("jsonlite"))
+
+  # Retrieve versions url from metadata
+  record <- str_remove(doi, fixed("10.5281/zenodo."))
+  base_url <- "https://zenodo.org/api/records/"
+  req <- curl_fetch_memory(paste0(base_url, record))
+  content <- jsonlite::fromJSON(rawToChar(req$content))
+  url_versions <- content$links$versions
+
+  # Retrieve versions info
+  req <- curl_fetch_memory(url_versions)
+  content <- jsonlite::fromJSON(rawToChar(req$content))
+  md <- content$hits$hits
+  versions <- md$metadata$doi
+  names(versions) <- md$metadata$version
+  return(versions)
 }
 
 
