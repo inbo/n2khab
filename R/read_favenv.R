@@ -156,24 +156,24 @@ read_favenv <- function(
       convertdf_enc(from = "latin1", to = "UTF-8") |>
       as_tibble() |>
       rename(
-        type = .data$Habitatsubtype,
-        subspecification = .data$Subtype,
-        compartment = .data$Milieucompartiment,
-        variable = .data$Variabele,
-        abbreviation = .data$Afkorting,
-        unit = .data$Eenheid,
-        summary_statistic = .data$`Toetswijze...bepaling`,
-        range_type = .data$Teken,
-        environmental_range = .data$Abiotisch.bereik,
-        lower_limit_text = .data$Waarde.1,
-        upper_limit_text = .data$Waarde.2,
-        lower_limit = .data$WaardeNum1,
-        upper_limit = .data$WaardeNum2,
-        n_favourable = .data$N.gunstig,
-        status = .data$Status,
-        reference = .data$Referentie,
-        remarks = .data$Opmerking,
-        changes = .data$Wijziging
+        type = "Habitatsubtype",
+        subspecification = "Subtype",
+        compartment = "Milieucompartiment",
+        variable = "Variabele",
+        abbreviation = "Afkorting",
+        unit = "Eenheid",
+        summary_statistic = "Toetswijze...bepaling",
+        range_type = "Teken",
+        environmental_range = "Abiotisch.bereik",
+        lower_limit_text = "Waarde.1",
+        upper_limit_text = "Waarde.2",
+        lower_limit = "WaardeNum1",
+        upper_limit = "WaardeNum2",
+        n_favourable = "N.gunstig",
+        status = "Status",
+        reference = "Referentie",
+        remarks = "Opmerking",
+        changes = "Wijziging"
       ) |>
       filter(
         !if_all(everything(), is.na)
