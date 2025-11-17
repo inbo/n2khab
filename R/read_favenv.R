@@ -112,7 +112,9 @@ read_favenv <- function(
     ),
     version = c("favenv_v1.0"),
     lang = c("nl")) {
+
   require_pkgs(c("fs"))
+  lang <- match.arg(lang)
 
   # if file does not exist, download it from Zenodo
   if (!fs::file_exists(file)) {
@@ -126,7 +128,6 @@ read_favenv <- function(
     )
     doi_versions <- get_zenodo_versions("10.5281/zenodo.10533791")
     version <- match.arg(version)
-    lang <- match.arg(lang)
     doi <- doi_versions[version]
     dir <- fs::path_dir(file)
     fs::dir_create(dir)

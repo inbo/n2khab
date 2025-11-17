@@ -199,9 +199,9 @@ namelist_factor <-
 #' without extension.
 #' The default is to use the file delivered by the installed package.
 #' @param lang An
-#'   \href{https://www.w3.org/International/articles/language-tags/index.en}{
-#'   IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
-#'   the language of names & shortnames to be returned in the tibble.
+#' \href{https://www.w3.org/International/articles/language-tags/index.en}{
+#' IETF BCP 47 language tag}, such as \code{"nl"} or \code{"en"}, to specify
+#' the language in which the fields in the tibble should be returned.
 #'
 #' @return
 #' The \code{types} data frame as a \code{\link[tibble:tbl_df-class]{tibble}},
