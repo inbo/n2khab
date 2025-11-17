@@ -104,11 +104,18 @@
 #' everything
 #' @importFrom curl
 #' has_internet
+#' @importFrom rlang
+#' .data
+#' @importFrom utils
+#' read.delim
 read_favenv <- function(
     file = file.path(
       locate_n2khab_data(),
       "10_raw/favenv",
-      "VanCalster_etal_2020_Gunstig_abiotisch_bereik_per_milieuvariabele_en_habitatsubtype_v01_00.txt"
+      paste0(
+        "VanCalster_etal_2020_Gunstig_abiotisch_bereik_per_milieuvariabele",
+        "_en_habitatsubtype_v01_00.txt"
+      )
     ),
     version = c("favenv_v1.0"),
     lang = c("nl")) {
@@ -149,24 +156,24 @@ read_favenv <- function(
       convertdf_enc(from = "latin1", to = "UTF-8") |>
       as_tibble() |>
       rename(
-        type = Habitatsubtype,
-        subspecification = Subtype,
-        compartment = Milieucompartiment,
-        variable = Variabele,
-        abbreviation = Afkorting,
-        unit = Eenheid,
-        summary_statistic = `Toetswijze...bepaling`,
-        range_type = Teken,
-        environmental_range = Abiotisch.bereik,
-        lower_limit_text = Waarde.1,
-        upper_limit_text = Waarde.2,
-        lower_limit = WaardeNum1,
-        upper_limit = WaardeNum2,
-        n_favourable = N.gunstig,
-        status = Status,
-        reference = Referentie,
-        remarks = Opmerking,
-        changes = Wijziging
+        type = "Habitatsubtype",
+        subspecification = "Subtype",
+        compartment = "Milieucompartiment",
+        variable = "Variabele",
+        abbreviation = "Afkorting",
+        unit = "Eenheid",
+        summary_statistic = "Toetswijze...bepaling",
+        range_type = "Teken",
+        environmental_range = "Abiotisch.bereik",
+        lower_limit_text = "Waarde.1",
+        upper_limit_text = "Waarde.2",
+        lower_limit = "WaardeNum1",
+        upper_limit = "WaardeNum2",
+        n_favourable = "N.gunstig",
+        status = "Status",
+        reference = "Referentie",
+        remarks = "Opmerking",
+        changes = "Wijziging"
       ) |>
       filter(
         !if_all(everything(), is.na)
@@ -181,7 +188,7 @@ read_favenv <- function(
     types <- read_types(lang = lang)
     favenv <- favenv |>
       mutate(
-        type = factor(type, levels = levels(types$type))
+        type = factor(.data$type, levels = levels(types$type))
       )
 
     # Elektrisch Geleidingsvermogen -> Geleidbaarheid
