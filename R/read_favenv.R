@@ -122,7 +122,7 @@ read_favenv <- function(
       has_internet(),
       msg =
         paste0(
-          "The file does not exists and there is no internet connection.\n",
+          "The file does not exist and there is no internet connection.\n",
           "Aborting attempt to dowload the necessary file from Zenodo."
         )
     )
