@@ -13,6 +13,7 @@ It reduces the `watersurfaces_types` element of the list output to unique combin
 
 ## New features
 
+- New function `read_favenv()` to return favourable environmental ranges of types (#195).
 - `expand_types()` gains an argument `mark` (#198).
 If set as `TRUE`, the logical columns `has_been_expanded` and `added_by_expansion` are added.
 These mark rows as origin or destination of type expansion, respectively.
