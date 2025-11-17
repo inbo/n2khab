@@ -6,7 +6,8 @@
 \usage{
 read_favenv(
   file = file.path(locate_n2khab_data(), "10_raw/favenv",
-    "VanCalster_etal_2020_Gunstig_abiotisch_bereik_per_milieuvariabele_en_habitatsubtype_v01_00.txt"),
+    paste0("VanCalster_etal_2020_Gunstig_abiotisch_bereik_per_milieuvariabele",
+    "_en_habitatsubtype_v01_00.txt")),
   version = c("favenv_v1.0"),
   lang = c("nl")
 )
