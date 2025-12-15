@@ -558,3 +558,120 @@ assert_that_allfiles_exist <- function(x) {
     )
   )
 }
+
+
+
+
+
+
+#' Convert line endings of text files
+#'
+#' Converts line endings of text files from CRLF (`\r\n`) to LF (`\n`) or the
+#' reverse.
+#'
+#' The conversion to LF is especially helpful to maintain file integrity across
+#' platforms in combination with a distributed version control system like
+#' `git`.
+#'
+#' To prevent unneeded rewriting, the `"to_lf"` direction is only executed in
+#' Windows systems, unless `force = TRUE`.
+#'
+#' To prevent `git` from automatically replacing line endings in specific files
+#' when checking out new versions of those files, set LF as the required line
+#' ending of specific file types in a `.gitattributes` file in the root of the
+#' git repository, and commit this file so that collaborators use the same
+#' setting. An example line in `.gitattributes` looks like this (this example
+#' makes line endings of yml files always use LF):
+#'
+#' `*.yml text eol=lf`
+#'
+#' Note that, with this setting, to have existing files updated by `git` they
+#' first need to be removed from the working directory, after which you can do a
+#' checkout again for these files.
+#'
+#' The function is designed so that it can take the output of
+#' [git2rdata::write_vc()] as input in a pipeline; still its `root` argument may
+#' need to be repeated in such case.
+#'
+#' @param files Character vector of file paths; these may be relative to `root`.
+#' @param direction Whether conversion is to LF (`"to_lf"`) or to CLRF
+#'   (`"to_crlf"`).
+#' @param root An optional directory path; if present the `files` argument is
+#'   considered relative to `root`.
+#' @param force Logical; `TRUE` will only have effect in non-Windows
+#'   systems. See Details.
+#' @param silent Logical. Whether to print the result to the console.
+#'
+#' @returns The `files` argument; invisibly unless `silent = FALSE`.
+#'
+#' @note The function borrows from `TAF::dos2unix()` and `TAF::unix2dos()`,
+#'   which work on single files.
+#'
+#' @md
+#'
+#' @family functions regarding file management for N2KHAB projects
+#'
+#' @importFrom assertthat
+#' assert_that
+#' is.string
+#' noNA
+#' is.flag
+#'
+#' @examples
+#' \dontrun{
+#' files <- c(file1, file2)
+#' convert_line_endings(files)
+#' }
+#'
+#'
+#' @export
+convert_line_endings <- function(files,
+                                 direction = c("to_lf", "to_crlf"),
+                                 root = NULL,
+                                 force = FALSE,
+                                 silent = TRUE) {
+  assert_that(is.character(files))
+  assert_that(is.flag(force), noNA(force))
+  assert_that(is.flag(silent), noNA(silent))
+  if (!is.null(root)) {
+    assert_that(is.string(root))
+    assert_that(dir.exists(root))
+    files_def <- file.path(root, files)
+  } else {
+    files_def <- files
+  }
+  assert_that(all(file.exists(files_def)))
+  direction <- match.arg(direction)
+  # don't rewrite LF in non-Windows systems since it's already there, unless
+  # force is TRUE
+  if (!force && direction == "to_lf" && .Platform$OS.type != "windows") {
+    if (silent) {
+      return(invisible(files))
+    } else {
+      return(files)
+    }
+
+  }
+  # treat warnings from readLines() as errors:
+  owarn <- options(warn = 2)
+  on.exit(options(owarn))
+
+  for (i in files_def) {
+    txt <- try(readLines(i), silent = TRUE)
+    if (inherits(txt, "try-error")) {
+      stop(i, " is not a standard text file.")
+    }
+    con <- file(i, open = "wb")
+    if (direction == "to_lf") {
+      writeLines(txt, con, sep = "\n")
+    } else if (direction == "to_crlf") {
+      writeLines(txt, con, sep = "\r\n")
+    }
+    close(con)
+  }
+  if (silent) {
+    return(invisible(files))
+  } else {
+    return(files)
+  }
+}
