@@ -576,6 +576,15 @@ assert_that_allfiles_exist <- function(x) {
 #' To prevent unneeded rewriting, the `"to_lf"` direction is only executed in
 #' Windows systems, unless `force = TRUE`.
 #'
+#' The function is designed so that it can take the output of
+#' [git2rdata::write_vc()] as input in a pipeline; still the `root` argument may
+#' need to be repeated in such case.
+#'
+#' @note The function borrows from `TAF::dos2unix()` and `TAF::unix2dos()`,
+#'   which work on single files.
+#'
+#' @section Git configuration to prevent auto-replacement of line endings:
+#'
 #' To prevent `git` from automatically replacing line endings in specific files
 #' when checking out new versions of those files, set LF as the required line
 #' ending of specific file types in a `.gitattributes` file in the root of the
@@ -589,10 +598,6 @@ assert_that_allfiles_exist <- function(x) {
 #' first need to be removed from the working directory, after which you can do a
 #' checkout again for these files.
 #'
-#' The function is designed so that it can take the output of
-#' [git2rdata::write_vc()] as input in a pipeline; still its `root` argument may
-#' need to be repeated in such case.
-#'
 #' @param files Character vector of file paths; these may be relative to `root`.
 #' @param direction Whether conversion is to LF (`"to_lf"`) or to CLRF
 #'   (`"to_crlf"`).
@@ -600,12 +605,9 @@ assert_that_allfiles_exist <- function(x) {
 #'   considered relative to `root`.
 #' @param force Logical; `TRUE` will only have effect in non-Windows
 #'   systems. See Details.
-#' @param silent Logical. Whether to print the result to the console.
+#' @param silent Logical. Whether to print the return value to the console.
 #'
 #' @returns The `files` argument; invisibly unless `silent = FALSE`.
-#'
-#' @note The function borrows from `TAF::dos2unix()` and `TAF::unix2dos()`,
-#'   which work on single files.
 #'
 #' @md
 #'

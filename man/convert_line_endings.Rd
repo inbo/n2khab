@@ -24,7 +24,7 @@ considered relative to \code{root}.}
 \item{force}{Logical; \code{TRUE} will only have effect in non-Windows
 systems. See Details.}
 
-\item{silent}{Logical. Whether to print the result to the console.}
+\item{silent}{Logical. Whether to print the return value to the console.}
 }
 \value{
 The \code{files} argument; invisibly unless \code{silent = FALSE}.
@@ -41,6 +41,17 @@ platforms in combination with a distributed version control system like
 To prevent unneeded rewriting, the \code{"to_lf"} direction is only executed in
 Windows systems, unless \code{force = TRUE}.
 
+The function is designed so that it can take the output of
+\code{\link[git2rdata:write_vc]{git2rdata::write_vc()}} as input in a pipeline; still the \code{root} argument may
+need to be repeated in such case.
+}
+\note{
+The function borrows from \code{TAF::dos2unix()} and \code{TAF::unix2dos()},
+which work on single files.
+}
+\section{Git configuration to prevent auto-replacement of line endings}{
+
+
 To prevent \code{git} from automatically replacing line endings in specific files
 when checking out new versions of those files, set LF as the required line
 ending of specific file types in a \code{.gitattributes} file in the root of the
@@ -53,15 +64,8 @@ makes line endings of yml files always use LF):
 Note that, with this setting, to have existing files updated by \code{git} they
 first need to be removed from the working directory, after which you can do a
 checkout again for these files.
+}
 
-The function is designed so that it can take the output of
-\code{\link[git2rdata:write_vc]{git2rdata::write_vc()}} as input in a pipeline; still its \code{root} argument may
-need to be repeated in such case.
-}
-\note{
-The function borrows from \code{TAF::dos2unix()} and \code{TAF::unix2dos()},
-which work on single files.
-}
 \examples{
 \dontrun{
 files <- c(file1, file2)
