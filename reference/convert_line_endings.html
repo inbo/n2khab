@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Documentation of included data source 'namelist' — namelist • n2khab</title>
+<title>Convert line endings of text files — convert_line_endings • n2khab</title>
 
 
 <!-- jquery -->
@@ -41,11 +41,9 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Documentation of included data source 'namelist' — namelist" />
-<meta property="og:description" content="'namelist' is a data source in the
-vc-format which provides
-names and (optionally) shortnames for IDs/codes used in other data sources.
-Multiple languages are supported." />
+<meta property="og:title" content="Convert line endings of text files — convert_line_endings" />
+<meta property="og:description" content="Converts line endings of text files from CRLF (\r\n) to LF (\n) or the
+reverse." />
 
 
 
@@ -140,58 +138,102 @@ Multiple languages are supported." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Documentation of included data source 'namelist'</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/textdata.R'><code>R/textdata.R</code></a></small>
-    <div class="hidden name"><code>namelist.Rd</code></div>
+    <h1>Convert line endings of text files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/filemanagement.R'><code>R/filemanagement.R</code></a></small>
+    <div class="hidden name"><code>convert_line_endings.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>'namelist' is a data source in the
-<a href='https://ropensci.github.io/git2rdata'>vc-format</a> which provides
-names and (optionally) shortnames for IDs/codes used in other data sources.
-Multiple languages are supported.</p>
+    <p>Converts line endings of text files from CRLF (<code>\r\n</code>) to LF (<code>\n</code>) or the
+reverse.</p>
     </div>
 
+    <pre class="usage"><span><span class='fu'>convert_line_endings</span><span class='op'>(</span></span>
+<span>  <span class='va'>files</span>,</span>
+<span>  direction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"to_lf"</span>, <span class='st'>"to_crlf"</span><span class='op'>)</span>,</span>
+<span>  root <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>  force <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span>  silent <span class='op'>=</span> <span class='cn'>TRUE</span></span>
+<span><span class='op'>)</span></span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>files</th>
+      <td><p>Character vector of file paths; these may be relative to <code>root</code>.</p></td>
+    </tr>
+    <tr>
+      <th>direction</th>
+      <td><p>Whether conversion is to LF (<code>"to_lf"</code>) or to CLRF
+(<code>"to_crlf"</code>).</p></td>
+    </tr>
+    <tr>
+      <th>root</th>
+      <td><p>An optional directory path; if present the <code>files</code> argument is
+considered relative to <code>root</code>.</p></td>
+    </tr>
+    <tr>
+      <th>force</th>
+      <td><p>Logical; <code>TRUE</code> will only have effect in non-Windows
+systems. See Details.</p></td>
+    </tr>
+    <tr>
+      <th>silent</th>
+      <td><p>Logical. Whether to print the return value to the console.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A vc-formatted data source. As such, it corresponds to
-a data frame with many rows and 4 variables:</p><dl>
-  <dt>code</dt><dd><p>A code used elsewhere.</p></dd>
-  <dt>lang</dt><dd><p>An
-  <a href='https://www.w3.org/International/articles/language-tags/index.en'>IETF BCP
-  47 language tag</a>, such as <code>"en"</code> or <code>"nl"</code>, to identify
-  the language of <code>name</code> and <code>shortname</code>.</p></dd>
-  <dt>name</dt><dd><p>The name corresponding to <code>code</code> and <code>lang</code>.</p></dd>
-  <dt>shortname</dt><dd><p>Optionally, a shorter variant of <code>name</code>.</p></dd> 
-</dl>
+    <p>The <code>files</code> argument; invisibly unless <code>silent = FALSE</code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+    <p>The conversion to LF is especially helpful to maintain file integrity across
+platforms in combination with a distributed version control system like
+<code>git</code>.</p>
+<p>To prevent unneeded rewriting, the <code>"to_lf"</code> direction is only executed in
+Windows systems, unless <code>force = TRUE</code>.</p>
+<p>The function is designed so that it can take the output of
+<code><a href='https://ropensci.github.io/git2rdata/reference/write_vc.html'>git2rdata::write_vc()</a></code> as input in a pipeline; still the <code>root</code> argument may
+need to be repeated in such case.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>The 'namelist' data source has got its contents from the sources of
-several other n2khab-referencelists (see the source of those).</p>
-    <h2 class="hasAnchor" id="typical-way-of-loading"><a class="anchor" href="#typical-way-of-loading"></a>Typical way of loading</h2>
+    <p>The function borrows from <code>TAF::dos2unix()</code> and <code>TAF::unix2dos()</code>,
+which work on single files.</p>
+    <h2 class="hasAnchor" id="git-configuration-to-prevent-auto-replacement-of-line-endings"><a class="anchor" href="#git-configuration-to-prevent-auto-replacement-of-line-endings"></a>Git configuration to prevent auto-replacement of line endings</h2>
 
     
 
 
-<p><code><a href='read_namelist.html'>read_namelist()</a></code></p>
-<p><code>read_namelist(lang = "nl")</code></p>
-    <h2 class="hasAnchor" id="corresponding-datafiles-in-the-installed-package"><a class="anchor" href="#corresponding-datafiles-in-the-installed-package"></a>Corresponding datafiles in the installed package</h2>
-
-    
-
-
-<p><code>textdata/namelist.tsv</code></p>
-<p><code>textdata/namelist.yml</code></p>
+<p>To prevent <code>git</code> from automatically replacing line endings in specific files
+when checking out new versions of those files, set LF as the required line
+ending of specific file types in a <code>.gitattributes</code> file in the root of the
+git repository, and commit this file so that collaborators use the same
+setting. An example line in <code>.gitattributes</code> looks like this (this example
+makes line endings of yml files always use LF):</p>
+<p><code>*.yml text eol=lf</code></p>
+<p>Note that, with this setting, to have existing files updated by <code>git</code> they
+first need to be removed from the working directory, after which you can do a
+checkout again for these files.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='read_namelist.html'>read_namelist</a></code></p>
-<p>Other n2khab-referencelists: 
-<code><a href='env_pressures.html'>env_pressures</a></code>,
-<code><a href='types.html'>types</a></code></p></div>
+    <div class='dont-index'><p>Other functions regarding file management for N2KHAB projects: 
+<code><a href='checksum.html'>checksum</a>()</code>,
+<code><a href='download_zenodo.html'>download_zenodo</a>()</code>,
+<code><a href='fileman_folders.html'>fileman_folders</a>()</code>,
+<code><a href='fileman_up.html'>fileman_up</a>()</code>,
+<code><a href='get_zenodo_versions.html'>get_zenodo_versions</a>()</code>,
+<code><a href='locate_n2khab_data.html'>locate_n2khab_data</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>
+<span class='r-in'><span><span class='va'>files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>file1</span>, <span class='va'>file2</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='fu'>convert_line_endings</span><span class='op'>(</span><span class='va'>files</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='op'>}</span></span></span>
+<span class='r-in'><span></span></span>
+<span class='r-in'><span></span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

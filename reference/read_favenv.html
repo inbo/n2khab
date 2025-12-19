@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the data source habitatsprings as an sf point
-layer — read_habitatsprings • n2khab</title>
+<title>Read favourable environmental ranges for 'types' — read_favenv • n2khab</title>
 
 
 <!-- jquery -->
@@ -42,13 +41,13 @@ layer — read_habitatsprings • n2khab</title>
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return the data source habitatsprings as an sf point
-layer — read_habitatsprings" />
-<meta property="og:description" content="Returns the raw data source habitatsprings as an sf point
-layer in the Belgian Lambert 72 CRS (EPSG-code
-31370).
-Optionally, a derived sf object of type-7220-locations can be
-returned at the population unit level, through aggregation by unit_id." />
+<meta property="og:title" content="Read favourable environmental ranges for 'types' — read_favenv" />
+<meta property="og:description" content="A 'type' refers to either a (main) habitat type, a
+habitat subtype or a regionally important biotope (RIB).
+The function reads the data into the current R session if file exists.
+If the file does not exist, it will attempt to download it and read it
+after the download has completed.
+The original source for the data is Van Calster et al. (2020)." />
 
 
 
@@ -143,25 +142,26 @@ returned at the population unit level, through aggregation by unit_id." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the data source <code>habitatsprings</code> as an <code>sf</code> point
-layer</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_habitatdata.R'><code>R/read_habitatdata.R</code></a></small>
-    <div class="hidden name"><code>read_habitatsprings.Rd</code></div>
+    <h1>Read favourable environmental ranges for 'types'</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_favenv.R'><code>R/read_favenv.R</code></a></small>
+    <div class="hidden name"><code>read_favenv.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns the raw data source <code>habitatsprings</code> as an <code>sf</code> point
-layer in the Belgian Lambert 72 CRS (EPSG-code
-<a href='https://epsg.io/31370'>31370</a>).
-Optionally, a derived <code>sf</code> object of type-<code>7220</code>-locations can be
-returned at the population unit level, through aggregation by <code>unit_id</code>.</p>
+    <p>A 'type' refers to either a (main) habitat type, a
+habitat subtype or a regionally important biotope (RIB).
+The function reads the data into the current R session if <code>file</code> exists.
+If the <code>file</code> does not exist, it will attempt to download it and read it
+after the download has completed.
+The original source for the data is Van Calster et al. (2020).</p>
     </div>
 
-    <pre class="usage"><span><span class='fu'>read_habitatsprings</span><span class='op'>(</span></span>
-<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"10_raw/habitatsprings/habitatsprings.geojson"</span><span class='op'>)</span>,</span>
-<span>  filter_hab <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
-<span>  units_7220 <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
-<span>  version <span class='op'>=</span> <span class='st'>"habitatsprings_2020v2"</span></span>
+    <pre class="usage"><span><span class='fu'>read_favenv</span><span class='op'>(</span></span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"10_raw/favenv"</span>,</span>
+<span>    <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"VanCalster_etal_2020_Gunstig_abiotisch_bereik_per_milieuvariabele"</span>,</span>
+<span>    <span class='st'>"_en_habitatsubtype_v01_00.txt"</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"favenv_v1.0"</span><span class='op'>)</span>,</span>
+<span>  lang <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nl"</span><span class='op'>)</span></span>
 <span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -177,83 +177,92 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.</p></td>
     </tr>
     <tr>
-      <th>filter_hab</th>
-      <td><p>If <code>TRUE</code>, only points with (potential) habitat
-are returned. The default value is <code>FALSE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>units_7220</th>
-      <td><p>If <code>TRUE</code>, an <code>sf</code> object of type-<code>7220</code>-locations is
-returned at the population unit level.
-To accomplish this, the data source is aggregated by <code>unit_id</code>.
-Multiple points belonging to the same unit are replaced by their
-centroid, their area attribute is summed (if all values are known)
-and for other attributes the maximum value is returned.</p></td>
-    </tr>
-    <tr>
       <th>version</th>
       <td><p>Version ID of the data source.
 Defaults to the latest available version defined by the package.</p></td>
+    </tr>
+    <tr>
+      <th>lang</th>
+      <td><p>An
+<a href='https://www.w3.org/International/articles/language-tags/index.en'>
+IETF BCP 47 language tag</a>, such as <code>"nl"</code> or <code>"en"</code>, to specify
+the language in which the columns of the tibble should be returned.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Simple feature collection of
-type <code>POINT</code>, with attribute variables:</p><ul>
-<li><p><code>point_id</code></p></li>
-<li><p><code>name</code>: site name.</p></li>
-<li><p><code>system_type</code>: environmental typology of <code>7220</code>: <code>mire</code>,
-<code>rivulet</code> or <code>unknown</code> (non-<code>7220</code> types are <code>NA</code>)</p></li>
-<li><p><code>code_orig</code>: original type code in raw
-<code>habitatsprings</code>.</p></li>
-<li><p><code>type</code>: habitat type listed in <code><a href='types.html'>types</a></code>.</p></li>
-<li><p><code>certain</code>: <code>TRUE</code> when the type is certain and
-<code>FALSE</code> when the type is uncertain.</p></li>
-<li><p><code>unit_id</code>: population unit id for large scale sampling
-events.
-Spatially close points have the same value.</p></li>
-<li><p><code>area_m2</code>: area as square meters.</p></li>
-<li><p><code>year</code>: year of field inventory.</p></li>
-<li><p><code>in_sac</code>: logical.
-Is the site situated within a Special Area of Conservation?</p></li>
-<li><p><code>source</code>: original data source of the record.</p></li>
+    <p>A <code>tibble</code>.</p>
+<p>The first row is a column header and represents the variable name.
+The following list provides a brief description for each variable:</p><ul>
+<li><p><code>type</code>: Natura 2000 (sub)type habitat code</p></li>
+<li><p><code>subspecification</code>: code/name of possible vegetation variants.
+For aquatic habitats: this is the watertype as used in the Water Framework
+Directive and thus also in the Flemish law texts (main use of this field).
+In other cases: a subtype that is not officially recognized in the list of
+Natura 2000 habitat subtypes in Flanders, for instance a phytosociological
+association or a variant like acidophilous or calcarophilous, ...</p></li>
+<li><p><code>compartment</code>: soil, groundwater, inundation water (flooding with
+water of external origin), water column/surface water, air</p></li>
+<li><p><code>variable</code>: name of the environmental variable.</p></li>
+<li><p><code>abbreviation</code>: abbreviation used for the environmental variable</p></li>
+<li><p><code>unit</code>: unit used for the environmental variable</p></li>
+<li><p><code>summary_statistic</code>: for aquatic types, measurements are first summarized
+using certain statistics such as percentiles, mean, etc. (in accordance with
+Water Framework Directive-Integrated Water Policy Objectives)</p></li>
+<li><p><code>range_type</code>: range type</p><ul>
+<li><p>LL-UL: lower limit-upper limit</p></li>
+<li><p>10-90 perc: 10-90 percentile values</p></li>
+<li><p>min-max: minimum - maximum</p></li>
+<li><p>&lt; - &gt;: less than - greater than</p></li>
+</ul></li>
+<li><p><code>environmental_range</code>: overall measurement range of an environmental variable
+within which a habitat type can function sustainably:</p><ul>
+<li><p><code>environmental_range</code>: range as text field</p></li>
+<li><p><code>lower_limit_text</code> - <code>upper_limit_text</code>: lower and upper limit as text field</p></li>
+<li><p><code>lower_limit</code> - <code>upper_limit</code>: lower and upper limit as numerical value
+(where conversion was possible)</p></li>
+</ul></li>
+<li><p><code>n_favourable</code>: number of test plots in favourable conservation status used
+for the calculation. The definition of favourable conservation status is
+based on Oosterlynck et al. (2020, version 3).</p></li>
+<li><p><code>status</code>: source and method by which the range was derived:</p><ul>
+<li><p>Dp: ranges calculated with INBO data, prediction intervals, local
+conservation status (LCS) known</p></li>
+<li><p>Dt: ranges determined using Titan method (Baker &amp; King 2010), LCS unknown</p></li>
+<li><p>Dk: ranges calculated with INBO data, quantiles, insufficient data to
+calculate prediction intervals</p></li>
+<li><p>Lg: ranges derived from literature (LCS clearly indicated)</p></li>
+<li><p>Lk: ranges derived from literature (LCS derived, based on site
+characteristics)</p></li>
+</ul></li>
+<li><p><code>reference</code>: references based on which the abiotic range was determined</p></li>
+<li><p><code>remarks</code>: remarks</p></li>
+<li><p><code>changes</code>: whether this record has been modified compared to Van Calster
+et al. (2020) and how</p></li>
 </ul>
 
-<p>Note that the <code>type</code> and <code>system_type</code> variables have
-implicit <code>NA</code> values
-(i.e. there is
-no factor level to represent the missing values).
-If you want this category to appear in certain results, you can add
-it as a level with
-<code><a href='https://forcats.tidyverse.org/reference/fct_explicit_na.html'>forcats::fct_explicit_na()</a></code>.</p>
-<p>With <code>units_7220 = TRUE</code>, variable <code>point_id</code> is dropped and
-an extra attribute variable <code>nr_of_points</code> is
-added.
-It represents the number of points that belong to each unit.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>The data source <code>habitatsprings</code> is a GeoJSON file (conforming to
-the RFC7946 specifications), available at
-<a href='https://doi.org/10.5281/zenodo.3550994'>Zenodo</a>.
-It represents sites that correspond with presence or absence
-of the Natura 2000 habitat type <code>7220</code> (Petrifying springs with tufa
-formation (<em>Cratoneurion</em>)) in springs and streaming water segments in
-the Flemish Region, Belgium.</p>
+    
+<ul>
+<li><p>Van Calster H., Cools N., De Keersmaeker L., Denys L., Herr C., Leyssen A.,
+Provoost S., Vanderhaeghe F., Vandevoorde B., Wouters J. en M. Raman (2020).
+Gunstige abiotische bereiken voor vegetatietypes in Vlaanderen. Rapporten van
+het Instituut voor Natuur- en Bosonderzoek 2020 (44). Instituut voor Natuur-
+en Bosonderzoek, Brussel. DOI: doi.org/10.21436/inbor.19362510D</p></li>
+<li><p>Oosterlynck P., De Saeger S., Leyssen A., Provoost S., Thomaes A.,
+Vandevoorde B., Wouters J., &amp; Paelinckx D. (2020). Criteria voor de
+beoordeling van de lokale staat van instandhouding van de Natura2000
+habitattypen in Vlaanderen. Rapporten van het Instituut voor Natuur- en
+Bosonderzoek 2020 (27). Instituut voor Natuur- en Bosonderzoek, Brussel.
+DOI: doi.org/10.21436/inbor.14061248</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>
-<span class='r-in'><span><span class='co'># This example supposes that your working directory or a directory up to 10</span></span></span>
-<span class='r-in'><span><span class='co'># levels above has the 'n2khab_data' folder AND that the latest version of</span></span></span>
-<span class='r-in'><span><span class='co'># the 'habitatsprings'</span></span></span>
-<span class='r-in'><span><span class='co'># data source is present in the default subdirectory.</span></span></span>
-<span class='r-in'><span><span class='co'># In all other cases, this example won't work but at least you can</span></span></span>
-<span class='r-in'><span><span class='co'># consider what to do.</span></span></span>
-<span class='r-in'><span></span></span>
-<span class='r-in'><span><span class='va'>hs</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatsprings</span><span class='op'>(</span><span class='op'>)</span></span></span>
-<span class='r-in'><span><span class='va'>hs</span></span></span>
-<span class='r-in'><span><span class='va'>hs2</span> <span class='op'>&lt;-</span> <span class='fu'>read_habitatsprings</span><span class='op'>(</span>units_7220 <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
-<span class='r-in'><span><span class='va'>hs2</span></span></span>
+<span class='r-in'><span><span class='va'>favenv</span> <span class='op'>&lt;-</span> <span class='fu'>read_favenv</span><span class='op'>(</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='op'>}</span></span></span>
 <span class='r-in'><span></span></span>
 </pre>

@@ -13,6 +13,9 @@
     <loc>https://inbo.github.io/n2khab/reference/convert_dec_to_base4frac.html</loc>
   </url>
   <url>
+    <loc>https://inbo.github.io/n2khab/reference/convert_line_endings.html</loc>
+  </url>
+  <url>
     <loc>https://inbo.github.io/n2khab/reference/convertdf_enc.html</loc>
   </url>
   <url>
@@ -32,6 +35,9 @@
   </url>
   <url>
     <loc>https://inbo.github.io/n2khab/reference/fileman_up.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/n2khab/reference/get_zenodo_versions.html</loc>
   </url>
   <url>
     <loc>https://inbo.github.io/n2khab/reference/human_filesize.html</loc>
@@ -74,6 +80,9 @@
   </url>
   <url>
     <loc>https://inbo.github.io/n2khab/reference/read_env_pressures.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/n2khab/reference/read_favenv.html</loc>
   </url>
   <url>
     <loc>https://inbo.github.io/n2khab/reference/read_habitatmap.html</loc>

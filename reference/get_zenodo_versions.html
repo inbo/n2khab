@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • n2khab</title>
+<title>Get version IDS from a Zenodo archive — get_zenodo_versions • n2khab</title>
 
 
 <!-- jquery -->
@@ -41,7 +41,9 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Get version IDS from a Zenodo archive — get_zenodo_versions" />
+<meta property="og:description" content="The function queries the Zenodo API to find the version IDs and
+corresponding DOIs." />
 
 
 
@@ -60,7 +62,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -136,26 +138,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Get version IDS from a Zenodo archive</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/filemanagement.R'><code>R/filemanagement.R</code></a></small>
+    <div class="hidden name"><code>get_zenodo_versions.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="v010_reference_lists.html">Reference lists and using them</a></dt>
-        <dd></dt>
-        <dt><a href="v020_datastorage.html">Where to store the N2KHAB input data sources</a></dt>
-        <dd></dt>
-        <dt><a href="v022_example.html">Demonstrating package &amp; data setup and handling of sf objects: a case with read_soilmap()</a></dt>
-        <dd></dt>
-        <dt><a href="v025_geospatial_hab.html">Working with geospatial data sources of habitat (sub)types and RIBs</a></dt>
-        <dd></dt>
-        <dt><a href="v030_GRTSmh.html">Using the GRTS data sources</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>The function queries the Zenodo API to find the version IDs and
+corresponding DOIs.</p>
     </div>
+
+    <pre class="usage"><span><span class='fu'>get_zenodo_versions</span><span class='op'>(</span><span class='va'>doi</span><span class='op'>)</span></span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>doi</th>
+      <td><p>A DOI pointer to the Cite-all-versions DOI for a Zenodo archive.
+A Zenodo archive starts with '10.5281/zenodo.'.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A named vector. The names correspond to version IDs, the values
+correspond to DOIs.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other functions regarding file management for N2KHAB projects: 
+<code><a href='checksum.html'>checksum</a>()</code>,
+<code><a href='convert_line_endings.html'>convert_line_endings</a>()</code>,
+<code><a href='download_zenodo.html'>download_zenodo</a>()</code>,
+<code><a href='fileman_folders.html'>fileman_folders</a>()</code>,
+<code><a href='fileman_up.html'>fileman_up</a>()</code>,
+<code><a href='locate_n2khab_data.html'>locate_n2khab_data</a>()</code></p></div>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

@@ -85,7 +85,7 @@ habitatmap_types: a tibble with information on the
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.12.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.13.0</span>
       </span>
     </div>
 
@@ -171,7 +171,8 @@ objects</h1>
 <span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
 <span>    <span class='st'>"20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"</span><span class='op'>)</span>,</span>
 <span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"habitatmap_stdized_2023_v1"</span>, <span class='st'>"habitatmap_stdized_2020_v1"</span>,</span>
-<span>    <span class='st'>"habitatmap_stdized_2018_v2"</span>, <span class='st'>"habitatmap_stdized_2018_v1"</span><span class='op'>)</span></span>
+<span>    <span class='st'>"habitatmap_stdized_2018_v2"</span>, <span class='st'>"habitatmap_stdized_2018_v1"</span>,</span>
+<span>    <span class='st'>"habitatmap_stdized_2024_v99_interim"</span><span class='op'>)</span></span>
 <span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -189,7 +190,9 @@ starting from the working directory.</p></td>
     <tr>
       <th>version</th>
       <td><p>Version ID of the data source.
-Defaults to the latest available version defined by the package.</p></td>
+Defaults to the latest available version defined by the package.
+Versions with the 'interim' suffix are designed to be used within the Research
+Institute for Nature and Forest (INBO) only.</p></td>
     </tr>
     </table>
 

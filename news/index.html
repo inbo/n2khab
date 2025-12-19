@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.12.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.13.0</span>
       </span>
     </div>
 
@@ -140,6 +140,77 @@
       <small>Source: <a href='https://github.com/inbo/n2khab/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="n2khab-0130-2025-12-19" class="section level1">
+<h1 class="page-header" data-toc-text="0.13.0">
+<a href="#n2khab-0130-2025-12-19" class="anchor"></a>n2khab 0.13.0 (2025-12-19)</h1>
+<div id="breaking-change" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-change" class="anchor"></a>Breaking change</h2>
+<ul>
+<li>
+<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code> has gained an argument
+<code>collapse</code>, which is <code>TRUE</code> by default (<a href='https://github.com/inbo/n2khab/issues/203'>#203</a>). It
+reduces the <code>watersurfaces_types</code> element of the list output
+to unique combinations of <code>polygon_id</code> and <code>type</code>,
+hereby collapsing the <code>code_orig</code> and <code>certain</code>
+columns as needed.
+<ul>
+<li>This form better reflects the user’s needs. Since this breaks
+previous behaviour, you may want to check for changed (improved?)
+results of existing code when using this version of {n2khab}. If needed,
+use <code>collapse = FALSE</code>.</li>
+<li>Future versions of <code>watersurfaces_hab</code> are expected to
+implement this in the data source itself, but with
+<code>interpreted = TRUE</code> further collapsing by the function
+remains necessary to maintain uniqueness by <code>polygon_id</code> and
+<code>type</code>.</li>
+</ul>
+Refer to <a href="https://github.com/inbo/n2khab-preprocessing/issues/78">inbo/n2khab-preprocessing/issues/78</a>
+for more information.</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>New function <code><a href="../reference/read_favenv.html">read_favenv()</a></code> to return favourable
+environmental ranges of types (<a href='https://github.com/inbo/n2khab/issues/195'>#195</a>).</li>
+<li>
+<code><a href="../reference/expand_types.html">expand_types()</a></code> gains an argument <code>mark</code>
+(<a href='https://github.com/inbo/n2khab/issues/198'>#198</a>). If set as <code>TRUE</code>, the logical columns
+<code>has_been_expanded</code> and <code>added_by_expansion</code> are
+added. These mark rows as origin or destination of type expansion,
+respectively.</li>
+<li>New utility <code><a href="../reference/convert_line_endings.html">convert_line_endings()</a></code> to maintain text
+file integrity (checksums) across platforms (<a href='https://github.com/inbo/n2khab/issues/208'>#208</a>). See its
+documentation for advice on line endings management in combination with
+a distributed version control system like Git, or with text file
+generating functions such as <code><a href="https://ropensci.github.io/git2rdata/reference/write_vc.html">git2rdata::write_vc()</a></code>.</li>
+</ul>
+</div>
+<div id="support-for-interim-data-source-versions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#support-for-interim-data-source-versions" class="anchor"></a>Support for interim data source versions</h2>
+<p>The following <em>interim</em> data source versions are now supported
+by the corresponding functions (<a href='https://github.com/inbo/n2khab/issues/200'>#200</a>):</p>
+<ul>
+<li>
+<code>habitatmap_stdized_2024_v99_interim</code>
+(<code><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code>)</li>
+<li>
+<code>habitatmap_terr_2024_v99_interim</code>
+(<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code>)</li>
+<li>
+<code>watersurfaces_hab_v6.1_interim</code>
+(<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code>)</li>
+</ul>
+<p>Function documentation was updated accordingly. Interim versions are
+added only at the end of the <code>version</code> argument of the read
+functions, since they do not receive the same level of quality control.
+Please note that it is advised to use a regular version of these data
+sources instead.</p>
+</div>
+</div>
     <div id="n2khab-0120-2025-01-10" class="section level1">
 <h1 class="page-header" data-toc-text="0.12.0">
 <a href="#n2khab-0120-2025-01-10" class="anchor"></a>n2khab 0.12.0 (2025-01-10)</h1>
@@ -231,9 +302,9 @@ efficient (<a href="https://github.com/inbo/n2khab/commit/13d05ec">13d05ec</a>);
     <div id="n2khab-0100-2023-12-01" class="section level1">
 <h1 class="page-header" data-toc-text="0.10.0">
 <a href="#n2khab-0100-2023-12-01" class="anchor"></a>n2khab 0.10.0 (2023-12-01)</h1>
-<div id="breaking-change" class="section level2">
+<div id="breaking-change-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-change" class="anchor"></a>Breaking change</h2>
+<a href="#breaking-change-1" class="anchor"></a>Breaking change</h2>
 <p><code><a href="../reference/read_GRTSmh.html">read_GRTSmh()</a></code>, <code><a href="../reference/read_GRTSmh_base4frac.html">read_GRTSmh_base4frac()</a></code>,
 <code><a href="../reference/read_GRTSmh_diffres.html">read_GRTSmh_diffres()</a></code> and <code><a href="../reference/read_raster_runif.html">read_raster_runif()</a></code>
 now return a <code>SpatRaster</code> object from {<a href="https://rspatial.github.io/terra">terra</a>} by default (<a href='https://github.com/inbo/n2khab/issues/173'>#173</a>).
@@ -341,9 +412,9 @@ of type <code>7210</code> in scheme <code>GW_03.3</code> (<a href='https://githu
     <div id="n2khab-060-2022-02-03" class="section level1">
 <h1 class="page-header" data-toc-text="0.6.0">
 <a href="#n2khab-060-2022-02-03" class="anchor"></a>n2khab 0.6.0 (2022-02-03)</h1>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>Function <code><a href="../reference/read_shallowgroundwater.html">read_shallowgroundwater()</a></code> to return the
 <code>shallowgroundwater</code> data source (<a href='https://github.com/inbo/n2khab/issues/156'>#156</a>).
@@ -500,9 +571,9 @@ newer ‘watersurfaces_v1.1’ is planned for later.</li>
     <div id="n2khab-030-2020-10-16" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
 <a href="#n2khab-030-2020-10-16" class="anchor"></a>n2khab 0.3.0 (2020-10-16)</h1>
-<div id="breaking-change-1" class="section level2">
+<div id="breaking-change-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-change-1" class="anchor"></a>Breaking change</h2>
+<a href="#breaking-change-2" class="anchor"></a>Breaking change</h2>
 <ul>
 <li>Functions that preprocess (non-included) N2KHAB data sources have
 been simplified by dropping their <code>path</code> argument (<a href='https://github.com/inbo/n2khab/issues/92'>#92</a>).
@@ -513,9 +584,9 @@ recommended file organization (see
 <code>path</code> and <code>file</code> arguments.</li>
 </ul>
 </div>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>New function <code><a href="../reference/read_habitatquarries.html">read_habitatquarries()</a></code> for reading the
 <code>habitatquarries</code> data source (<a href='https://github.com/inbo/n2khab/issues/83'>#83</a>, <a href='https://github.com/inbo/n2khab/issues/94'>#94</a>, <a href="https://github.com/inbo/n2khab-preprocessing/pull/41">inbo/n2khab-preprocessing/pull/41</a>).</li>
@@ -547,9 +618,9 @@ defining the schemes’ target populations);</li>
     <div id="n2khab-020-2020-05-08" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
 <a href="#n2khab-020-2020-05-08" class="anchor"></a>n2khab 0.2.0 (2020-05-08)</h1>
-<div id="new-features-2" class="section level2">
+<div id="new-features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-2" class="anchor"></a>New features</h2>
+<a href="#new-features-3" class="anchor"></a>New features</h2>
 <ul>
 <li>Updates in reference lists (<a href='https://github.com/inbo/n2khab/issues/64'>#64</a>, <a href='https://github.com/inbo/n2khab/issues/65'>#65</a>, <a href='https://github.com/inbo/n2khab/issues/69'>#69</a>, <a href="https://github.com/inbo/n2khab/pull/73/commits/e69cd52">e69cd52</a>):
 <ul>
