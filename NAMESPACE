@@ -3,6 +3,7 @@
 export(checksum)
 export(convert_base4frac_to_dec)
 export(convert_dec_to_base4frac)
+export(convert_line_endings)
 export(download_zenodo)
 export(expand_types)
 export(fileman_folders)
