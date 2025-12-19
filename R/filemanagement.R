@@ -59,7 +59,6 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
   }
 
 
-
   # check for existence of the folder
   if (!dir.exists(datapath)) {
     # create a new directory
@@ -81,9 +80,6 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
   }
   datapath
 }
-
-
-
 
 
 #' Get data from a Zenodo archive
@@ -625,7 +621,6 @@ assert_that_allfiles_exist <- function(x) {
 #' convert_line_endings(files)
 #' }
 #'
-#'
 #' @export
 convert_line_endings <- function(files,
                                  direction = c("to_lf", "to_crlf"),
@@ -652,7 +647,6 @@ convert_line_endings <- function(files,
     } else {
       return(files)
     }
-
   }
   # treat warnings from readLines() as errors:
   owarn <- options(warn = 2)

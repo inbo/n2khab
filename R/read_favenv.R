@@ -109,17 +109,17 @@
 #' @importFrom utils
 #' read.delim
 read_favenv <- function(
-    file = file.path(
-      locate_n2khab_data(),
-      "10_raw/favenv",
-      paste0(
-        "VanCalster_etal_2020_Gunstig_abiotisch_bereik_per_milieuvariabele",
-        "_en_habitatsubtype_v01_00.txt"
-      )
-    ),
-    version = c("favenv_v1.0"),
-    lang = c("nl")) {
-
+  file = file.path(
+    locate_n2khab_data(),
+    "10_raw/favenv",
+    paste0(
+      "VanCalster_etal_2020_Gunstig_abiotisch_bereik_per_milieuvariabele",
+      "_en_habitatsubtype_v01_00.txt"
+    )
+  ),
+  version = c("favenv_v1.0"),
+  lang = c("nl")
+) {
   require_pkgs(c("fs"))
   lang <- match.arg(lang)
 
@@ -212,12 +212,9 @@ read_favenv <- function(
           \(x) factor(x, levels = sort(unique(x)))
         )
       )
-
-
   } else {
     stop(paste0("Reading version ", version, " is not yet implemented."))
   }
 
   return(favenv)
 }
-
