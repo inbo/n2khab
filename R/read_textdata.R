@@ -1,4 +1,4 @@
-#' Return the 'namelist' data source as a tibble
+#' Return the \code{namelist} data source as a tibble
 #'
 #' Returns the included data source \code{\link{namelist}} as a
 #' \code{\link[tibble:tbl_df-class]{tibble}},
@@ -161,7 +161,7 @@ namelist_factor <-
 
 
 
-#' Return the 'types' data source as a tibble with names & shortnames
+#' Return the \code{types} data source as a tibble with names & shortnames
 #'
 #' Returns the included data source \code{\link{types}} as a
 #' \code{\link[tibble:tbl_df-class]{tibble}}.
@@ -199,9 +199,9 @@ namelist_factor <-
 #' without extension.
 #' The default is to use the file delivered by the installed package.
 #' @param lang An
-#'   \href{https://www.w3.org/International/articles/language-tags/index.en}{
-#'   IETF BCP 47 language tag}, such as \code{"en"} or \code{"nl"}, to specify
-#'   the language of names & shortnames to be returned in the tibble.
+#' \href{https://www.w3.org/International/articles/language-tags/index.en}{
+#' IETF BCP 47 language tag}, such as \code{"nl"} or \code{"en"}, to specify
+#' the language in which the columns of the tibble should be returned.
 #'
 #' @return
 #' The \code{types} data frame as a \code{\link[tibble:tbl_df-class]{tibble}},
@@ -432,7 +432,7 @@ read_types <-
 
 
 
-#' Return the 'env_pressures' data source as a tibble with human-readable
+#' Return the \code{env_pressures} data source as a tibble with human-readable
 #' attributes
 #'
 #' Returns the included data source \code{\link{env_pressures}} as a

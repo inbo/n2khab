@@ -41,8 +41,10 @@ download_zenodo(doi = "10.5281/zenodo.168478")
 \seealso{
 Other functions regarding file management for N2KHAB projects: 
 \code{\link{checksum}()},
+\code{\link{convert_line_endings}()},
 \code{\link{fileman_folders}()},
 \code{\link{fileman_up}()},
+\code{\link{get_zenodo_versions}()},
 \code{\link{locate_n2khab_data}()}
 }
 \author{

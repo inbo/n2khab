@@ -4,7 +4,13 @@
 \alias{expand_types}
 \title{Expand a 'type' column in a data frame}
 \usage{
-expand_types(x, type_var = "type", use_grouping = TRUE, strict = TRUE)
+expand_types(
+  x,
+  type_var = "type",
+  use_grouping = TRUE,
+  strict = TRUE,
+  mark = FALSE
+)
 }
 \arguments{
 \item{x}{An object of class \code{data.frame}.}
@@ -21,9 +27,21 @@ for each group in turn?}
 
 \item{strict}{Logical.
 Apply conditions before expanding subtype codes to main type codes?}
+
+\item{mark}{Logical.
+If \code{TRUE}, two extra columns are added to the result:
+\itemize{
+\item{
+\code{has_been_expanded}: marks which existing rows have been expanded.
+}
+\item{
+\code{added_by_expansion}: marks if the row has been added.
+}
+}}
 }
 \value{
 A data frame, either identical or longer than the input data frame.
+If \code{mark} is \code{TRUE}, the data frame has two extra columns.
 }
 \description{
 Takes a data frame with a column of type codes
@@ -102,8 +120,8 @@ x <-
     "6410_ve", 4,
     "91E0_vn", 10
   )
-expand_types(x, type_var = "mycode")
-expand_types(x, type_var = "mycode", strict = FALSE)
+expand_types(x, type_var = "mycode", mark = TRUE)
+expand_types(x, type_var = "mycode", strict = FALSE, mark = TRUE)
 
 }
 \seealso{
