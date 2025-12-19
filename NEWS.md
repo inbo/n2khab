@@ -1,4 +1,4 @@
-# n2khab (development version)
+# n2khab 0.13.0 (2025-12-19)
 
 ## Breaking change
 
