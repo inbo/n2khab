@@ -17,6 +17,8 @@ It reduces the `watersurfaces_types` element of the list output to unique combin
 - `expand_types()` gains an argument `mark` (#198).
 If set as `TRUE`, the logical columns `has_been_expanded` and `added_by_expansion` are added.
 These mark rows as origin or destination of type expansion, respectively.
+- New utility `convert_line_endings()` to maintain text file integrity (checksums) across platforms (#208).
+See its documentation for advice on line endings management in combination with a distributed version control system like Git, or with text file generating functions such as `git2rdata::write_vc()`.
 
 ## Support for interim data source versions
 
