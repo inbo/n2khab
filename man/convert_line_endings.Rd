@@ -72,7 +72,6 @@ files <- c(file1, file2)
 convert_line_endings(files)
 }
 
-
 }
 \seealso{
 Other functions regarding file management for N2KHAB projects: 
