@@ -1,5 +1,7 @@
 # n2khab (development version)
 
+# n2khab 0.13.0 (2025-12-19)
+
 ## Breaking change
 
 - `read_watersurfaces_hab()` has gained an argument `collapse`, which is `TRUE` by default (#203).
@@ -13,9 +15,12 @@ It reduces the `watersurfaces_types` element of the list output to unique combin
 
 ## New features
 
+- New function `read_favenv()` to return favourable environmental ranges of types (#195).
 - `expand_types()` gains an argument `mark` (#198).
 If set as `TRUE`, the logical columns `has_been_expanded` and `added_by_expansion` are added.
 These mark rows as origin or destination of type expansion, respectively.
+- New utility `convert_line_endings()` to maintain text file integrity (checksums) across platforms (#208).
+See its documentation for advice on line endings management in combination with a distributed version control system like Git, or with text file generating functions such as `git2rdata::write_vc()`.
 
 ## Support for interim data source versions
 

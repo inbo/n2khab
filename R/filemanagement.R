@@ -59,7 +59,6 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
   }
 
 
-
   # check for existence of the folder
   if (!dir.exists(datapath)) {
     # create a new directory
@@ -81,9 +80,6 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
   }
   datapath
 }
-
-
-
 
 
 #' Get data from a Zenodo archive
@@ -115,6 +111,10 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
 #' is.string
 #' is.flag
 #' noNA
+#' @importFrom curl
+#' curl_download
+#' curl_fetch_memory
+#' multi_download
 #'
 #' @export
 #' @family functions regarding file management for N2KHAB projects
@@ -135,10 +135,11 @@ download_zenodo <- function(doi,
                             path = ".",
                             parallel = TRUE,
                             quiet = FALSE) {
-  assert_that(is.string(doi), is.string(path))
+  assert_that(is.string(doi), grepl("^10\\.5281/zenodo", doi))
+  assert_that(is.string(path))
   assert_that(is.flag(parallel), noNA(parallel), is.flag(quiet), noNA(quiet))
 
-  require_pkgs(c("jsonlite", "curl", "tools"))
+  require_pkgs(c("jsonlite", "tools"))
 
   # check for existence of the folder
   stopifnot(dir.exists(path))
@@ -147,7 +148,7 @@ download_zenodo <- function(doi,
 
   # Retrieve file name by records call
   base_url <- "https://zenodo.org/api/records/"
-  req <- curl::curl_fetch_memory(paste0(base_url, record))
+  req <- curl_fetch_memory(paste0(base_url, record))
   content <- jsonlite::fromJSON(rawToChar(req$content))
 
   # Calculate total file size
@@ -185,13 +186,13 @@ download_zenodo <- function(doi,
   }
 
   if (length(file_urls) > 1 && parallel) {
-    curl::multi_download(
+    multi_download(
       urls = file_urls,
       destfiles = destfiles,
       progress = !quiet
     )
   } else {
-    mapply(curl::curl_download,
+    mapply(curl_download,
       file_urls,
       destfiles,
       MoreArgs = list(quiet = quiet)
@@ -227,6 +228,46 @@ download_zenodo <- function(doi,
       )
     }
   }
+}
+
+#' Get version IDS from a Zenodo archive
+#'
+#' The function queries the Zenodo API to find the version IDs and
+#' corresponding DOIs.
+#'
+#' @param doi A DOI pointer to the Cite-all-versions DOI for a Zenodo archive.
+#' A Zenodo archive starts with '10.5281/zenodo.'.
+#'
+#' @export
+#' @family functions regarding file management for N2KHAB projects
+#'
+#' @return A named vector. The names correspond to version IDs, the values
+#' correspond to DOIs.
+#'
+#' @importFrom stringr
+#' fixed
+#' str_remove
+#' @importFrom curl
+#' curl_fetch_memory
+#'
+get_zenodo_versions <- function(doi) {
+  assert_that(is.string(doi), grepl("^10\\.5281/zenodo", doi))
+  require_pkgs(c("jsonlite"))
+
+  # Retrieve versions url from metadata
+  record <- str_remove(doi, fixed("10.5281/zenodo."))
+  base_url <- "https://zenodo.org/api/records/"
+  req <- curl_fetch_memory(paste0(base_url, record))
+  content <- jsonlite::fromJSON(rawToChar(req$content))
+  url_versions <- content$links$versions
+
+  # Retrieve versions info
+  req <- curl_fetch_memory(url_versions)
+  content <- jsonlite::fromJSON(rawToChar(req$content))
+  md <- content$hits$hits
+  versions <- md$metadata$doi
+  names(versions) <- md$metadata$version
+  return(versions)
 }
 
 
@@ -512,4 +553,121 @@ assert_that_allfiles_exist <- function(x) {
       paste0(x[isdir], collapse = "\n")
     )
   )
+}
+
+
+
+
+
+
+#' Convert line endings of text files
+#'
+#' Converts line endings of text files from CRLF (`\r\n`) to LF (`\n`) or the
+#' reverse.
+#'
+#' The conversion to LF is especially helpful to maintain file integrity across
+#' platforms in combination with a distributed version control system like
+#' `git`.
+#'
+#' To prevent unneeded rewriting, the `"to_lf"` direction is only executed in
+#' Windows systems, unless `force = TRUE`.
+#'
+#' The function is designed so that it can take the output of
+#' [git2rdata::write_vc()] as input in a pipeline; still the `root` argument may
+#' need to be repeated in such case.
+#'
+#' @note The function borrows from `TAF::dos2unix()` and `TAF::unix2dos()`,
+#'   which work on single files.
+#'
+#' @section Git configuration to prevent auto-replacement of line endings:
+#'
+#' To prevent `git` from automatically replacing line endings in specific files
+#' when checking out new versions of those files, set LF as the required line
+#' ending of specific file types in a `.gitattributes` file in the root of the
+#' git repository, and commit this file so that collaborators use the same
+#' setting. An example line in `.gitattributes` looks like this (this example
+#' makes line endings of yml files always use LF):
+#'
+#' `*.yml text eol=lf`
+#'
+#' Note that, with this setting, to have existing files updated by `git` they
+#' first need to be removed from the working directory, after which you can do a
+#' checkout again for these files.
+#'
+#' @param files Character vector of file paths; these may be relative to `root`.
+#' @param direction Whether conversion is to LF (`"to_lf"`) or to CLRF
+#'   (`"to_crlf"`).
+#' @param root An optional directory path; if present the `files` argument is
+#'   considered relative to `root`.
+#' @param force Logical; `TRUE` will only have effect in non-Windows
+#'   systems. See Details.
+#' @param silent Logical. Whether to print the return value to the console.
+#'
+#' @returns The `files` argument; invisibly unless `silent = FALSE`.
+#'
+#' @md
+#'
+#' @family functions regarding file management for N2KHAB projects
+#'
+#' @importFrom assertthat
+#' assert_that
+#' is.string
+#' noNA
+#' is.flag
+#'
+#' @examples
+#' \dontrun{
+#' files <- c(file1, file2)
+#' convert_line_endings(files)
+#' }
+#'
+#' @export
+convert_line_endings <- function(files,
+                                 direction = c("to_lf", "to_crlf"),
+                                 root = NULL,
+                                 force = FALSE,
+                                 silent = TRUE) {
+  assert_that(is.character(files))
+  assert_that(is.flag(force), noNA(force))
+  assert_that(is.flag(silent), noNA(silent))
+  if (!is.null(root)) {
+    assert_that(is.string(root))
+    assert_that(dir.exists(root))
+    files_def <- file.path(root, files)
+  } else {
+    files_def <- files
+  }
+  assert_that(all(file.exists(files_def)))
+  direction <- match.arg(direction)
+  # don't rewrite LF in non-Windows systems since it's already there, unless
+  # force is TRUE
+  if (!force && direction == "to_lf" && .Platform$OS.type != "windows") {
+    if (silent) {
+      return(invisible(files))
+    } else {
+      return(files)
+    }
+  }
+  # treat warnings from readLines() as errors:
+  owarn <- options(warn = 2)
+  on.exit(options(owarn))
+
+  for (i in files_def) {
+    txt <- try(readLines(i), silent = TRUE)
+    if (inherits(txt, "try-error")) {
+      stop(i, " is not a standard text file.")
+    }
+    con <- file(i, open = "wb")
+    if (direction == "to_lf") {
+      writeLines(txt, con, sep = "\n")
+    } else if (direction == "to_crlf") {
+      writeLines(txt, con, sep = "\r\n")
+    }
+    close(con)
+  }
+  if (silent) {
+    return(invisible(files))
+  } else {
+    return(files)
+  }
 }
