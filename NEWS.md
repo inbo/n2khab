@@ -1,4 +1,4 @@
-# n2khab (development version)
+# n2khab 0.14.0 (2026-02-20)
 
 A new function `read_watersurfaces_refpoints()` has been added to read the `watersurfaces_refpoints` data source (#204).
 
