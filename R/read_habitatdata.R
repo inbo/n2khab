@@ -625,10 +625,10 @@ read_watersurfaces_refpoints <-
       # verify version consistency
       checksums_expected <- tribble(
         ~version, ~checksum_wsh, ~checksum_refpts_tsv,
-        "6", "e2920c4932008387", "01275d8cb15546c4",
+        "6", "e2920c4932008387", "b075fbc80c0b55a4",
         "5", "bd860c4d8b2b1de7", "8b74e5f80082595b",
         "4", "5792b496a94d0524", "2243f3cf20478b52",
-        "6.1", "d35532db5c4b41ff", "e71bf84c960e5666"
+        "6.1", "d35532db5c4b41ff", "6265212c91eca006"
       )
       checksum_wsh_obs <- xxh64sum(file_wsh)
       checksum_refpts_tsv_obs <- xxh64sum(file.path(
