@@ -1,3 +1,13 @@
+# n2khab 0.14.0 (2026-02-20)
+
+A new function `read_watersurfaces_refpoints()` has been added to read the `watersurfaces_refpoints` data source (#204).
+
+`watersurfaces_refpoints` is a newly published processed data source ([inbo/n2khab-preprocessing/pull/79](https://github.com/inbo/n2khab-preprocessing/pull/79); <https://doi.org/10.5281/zenodo.18700793>).
+Apart from the latest version `watersurfaces_refpoints_v6`, two older versions have have been made available at Zenodo and are also supported by the function.
+An _interim_ version `watersurfaces_refpoints_v6.1_interim` is supported as well.
+Interim versions do not receive the same level of quality control.
+It is advised to use a regular version instead.
+
 # n2khab 0.13.0 (2025-12-19)
 
 ## Breaking change

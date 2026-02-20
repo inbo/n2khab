@@ -29,6 +29,7 @@ reference:
       - read_habitatmap_stdized
       - read_habitatmap_terr
       - read_watersurfaces_hab
+      - read_watersurfaces_refpoints
       - expand_types
   - title: "Using the administrative & environmental data sources"
     contents:
