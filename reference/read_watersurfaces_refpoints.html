@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the data source watersurfaces_hab as a list of two
-objects — read_watersurfaces_hab • n2khab</title>
+<title>Return the watersurfaces_refpoints data source as an
+sf point layer or as a tibble — read_watersurfaces_refpoints • n2khab</title>
 
 
 <!-- jquery -->
@@ -42,17 +42,15 @@ objects — read_watersurfaces_hab • n2khab</title>
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return the data source watersurfaces_hab as a list of two
-objects — read_watersurfaces_hab" />
-<meta property="og:description" content="read_watersurfaces_hab returns the data source watersurfaces_hab as a list of two objects:
-watersurfaces_polygons: an sf object in the Belgian Lambert 72
-  CRS (EPSG-code 31370) with all polygons
-  that contain standing water types (habitat or RIB).
-watersurfaces_types: a tibble with information on the
-  standing water types (HAB1, HAB2,..., HAB5) that occur within
-  each polygon of watersurfaces_polygons.
-
-" />
+<meta property="og:title" content="Return the watersurfaces_refpoints data source as an
+sf point layer or as a tibble — read_watersurfaces_refpoints" />
+<meta property="og:description" content="Returns the data source watersurfaces_refpoints as an sf
+point layer (CRS: EPSG:31370) or as a
+tibble with easting
+(x) and northing (y) columns for the same coordinate reference
+system (CRS).
+By default, the data source is filtered so that only the rows are returned
+that match the polygons of a single version of watersurfaces_hab." />
 
 
 
@@ -147,32 +145,32 @@ watersurfaces_types: a tibble with information on the
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the data source <code>watersurfaces_hab</code> as a list of two
-objects</h1>
+    <h1>Return the <code>watersurfaces_refpoints</code> data source as an
+<code>sf</code> point layer or as a tibble</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_habitatdata.R'><code>R/read_habitatdata.R</code></a></small>
-    <div class="hidden name"><code>read_watersurfaces_hab.Rd</code></div>
+    <div class="hidden name"><code>read_watersurfaces_refpoints.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>read_watersurfaces_hab</code> returns the data source <code>watersurfaces_hab</code> as a list of two objects:</p><ul>
-<li><p><code>watersurfaces_polygons</code>: an sf object in the Belgian Lambert 72
-  CRS (EPSG-code <a href='https://epsg.io/31370'>31370</a>) with all polygons
-  that contain standing water types (habitat or RIB).</p></li>
-<li><p><code>watersurfaces_types</code>: a tibble with information on the
-  standing water <a href='types.html'>types</a> (HAB1, HAB2,..., HAB5) that occur within
-  each polygon of <code>watersurfaces_polygons</code>.</p></li>
-</ul>
-
+    <p>Returns the data source <code>watersurfaces_refpoints</code> as an <code>sf</code>
+point layer (CRS: <code>EPSG:31370</code>) or as a
+<code><a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tibble</a></code> with easting
+(<code>x</code>) and northing (<code>y</code>) columns for the same coordinate reference
+system (CRS).
+By default, the data source is filtered so that only the rows are returned
+that match the polygons of a single version of <code>watersurfaces_hab</code>.</p>
     </div>
 
-    <pre class="usage"><span><span class='fu'>read_watersurfaces_hab</span><span class='op'>(</span></span>
-<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
+    <pre class="usage"><span><span class='fu'>read_watersurfaces_refpoints</span><span class='op'>(</span></span>
+<span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"20_processed/watersurfaces_refpoints"</span><span class='op'>)</span>,</span>
+<span>  spatial <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
+<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_refpoints_v6"</span>, <span class='st'>"watersurfaces_refpoints_v5"</span>,</span>
+<span>    <span class='st'>"watersurfaces_refpoints_v4"</span>, <span class='st'>"watersurfaces_refpoints_v6.1_interim"</span><span class='op'>)</span>,</span>
+<span>  single_wsh_version <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
+<span>  file_wsh <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
 <span>    <span class='st'>"20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"</span><span class='op'>)</span>,</span>
-<span>  interpreted <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
-<span>  collapse <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
-<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_hab_v6"</span>, <span class='st'>"watersurfaces_hab_v5"</span>, <span class='st'>"watersurfaces_hab_v4"</span>,</span>
-<span>    <span class='st'>"watersurfaces_hab_v3"</span>, <span class='st'>"watersurfaces_hab_v2"</span>, <span class='st'>"watersurfaces_hab_v1"</span>,</span>
-<span>    <span class='st'>"watersurfaces_hab_v6.1_interim"</span><span class='op'>)</span></span>
+<span>  version_wsh <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>  <span class='va'>...</span></span>
 <span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -188,21 +186,8 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.</p></td>
     </tr>
     <tr>
-      <th>interpreted</th>
-      <td><p>If <code>TRUE</code>, the interpreted subtype is provided when the subtype is missing. This only
-applies to type 3130. When the subtype is missing for 3130, we interpret it as 3130_aom.</p></td>
-    </tr>
-    <tr>
-      <th>collapse</th>
-      <td><p>Logical.
-Should the resulting <code>watersurfaces_types</code> list element have a single
-row for each combination of <code>polygon_id</code> and <code>type</code>?
-This causes collapsing:</p><ul>
-<li><p>as a single string of different values of <code>code_orig</code> that led
-  to the same <code>type</code>;</p></li>
-<li><p>of values of <code>certain</code>, using the <code><a href='https://rdrr.io/r/base/any.html'>any</a></code> summary
-  function.</p></li>
-</ul></td>
+      <th>spatial</th>
+      <td><p>Should the result be a spatial (<code>sf</code>) layer?</p></td>
     </tr>
     <tr>
       <th>version</th>
@@ -211,49 +196,68 @@ Defaults to the latest available version defined by the package.
 Versions with the 'interim' suffix are designed to be used within the Research
 Institute for Nature and Forest (INBO) only.</p></td>
     </tr>
+    <tr>
+      <th>single_wsh_version</th>
+      <td><p>Logical.
+Should <code>watersurfaces_refpoints</code> be limited to the polygons of a
+single version of <code>watersurfaces_hab</code>, as returned by
+<code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a></code>?</p></td>
+    </tr>
+    <tr>
+      <th>file_wsh</th>
+      <td><p>The absolute or relative file path of the
+<code>watersurfaces_hab</code> data source.
+Ignored if <code>single_wsh_version</code> is <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>version_wsh</th>
+      <td><p>Version ID of the <code>watersurfaces_hab</code> data source;
+ passed to the <code>version</code> argument of
+ <code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a></code>.
+Ignored if <code>single_wsh_version</code> is <code>FALSE</code>.
+The default is to take the default of <code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a></code>.
+It is required that the version of <code>watersurfaces_refpoints</code> is equal
+to or larger than that of <code>watersurfaces_hab</code>, and this
+is verified directly with the file checksums.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further arguments passed to <code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a></code>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of two objects:</p><ul>
-<li><p><code>watersurfaces_polygons</code>: an sf object of standing water polygons with four attribute variables:</p><ul>
-<li><p><code>polygon_id</code></p></li>
-<li><p><code>polygon_id_ws</code>: id for the polygon in the <code>watersurface map</code></p></li>
-<li><p><code>polygon_id_habitatmap</code>: id's of all overlapping polygons of <code>habitatmap_stdized</code> that
-    contain standing water habitat. The different id's are separated by '+'.</p></li>
-<li><p><code>description_orig</code>: descriptions of all overlapping polygons of <code>habitatmap_stdized</code> that
-    contain standing water habitat. The different descriptions are separated by '+'.</p></li>
-</ul></li>
-</ul><p></p><ul>
-<li><p><code>watersurfaces_types</code>: a tibble with following variables:</p><ul>
-<li><p><code>polygon_id</code></p></li>
-<li><p><code>type</code>: habitat or RIB type listed in <code><a href='types.html'>types</a></code>.</p></li>
-<li><p><code>certain</code>: <code>TRUE</code> when the type is certain and
-     <code>FALSE</code> when the type is uncertain.</p></li>
-<li><p><code>code_orig</code>: original type code in raw <code>habitatmap</code>.</p></li>
-</ul></li>
-</ul>
+    <p>By default, a Simple feature collection of type <code>POINT</code>
+(CRS: <code>EPSG:31370</code>), otherwise a
+tibble with easting (<code>x</code>) and northing (<code>y</code>) columns for the same
+coordinate reference system (CRS).
+Further attributes are the same:</p><dl>
+<dt><code>polygon_id</code></dt><dd><p>The <code>polygon_id</code> from <code>watersurfaces_hab</code>.
+If <code>single_wsh_version</code> is <code>TRUE</code>, then this is a factor, otherwise
+a character.</p></dd>
+<dt><code>in_polygon</code></dt><dd><p>Logical. Did the point lie inside the polygon it
+refers, at the time of creation? Note that the polygon's geometry may have
+changed since then; it may not currently hold.</p></dd>
+
+</dl>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The data source <code>watersurfaces_hab</code> is a combination of <code>habitatmap_stdized</code> (see
-<code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a></code>) and the
-<a href='https://doi.org/10.5281/zenodo.3386857'>watersurface map of Flanders</a>.
-It contains all standing water types in Flanders.</p>
-
-<p>The data source <code>watersurfaces_hab</code> is a GeoPackage, available at
-<a href='https://doi.org/10.5281/zenodo.3374645'>Zenodo</a>, that contains:</p><ul>
-<li><p><code>watersurfaces_hab_polygons</code>: a spatial layer with all polygons that contain standing water types listed in <code><a href='types.html'>types</a></code>.</p></li>
-<li><p><code>watersurfaces_hab_types</code>: a table in which every row corresponds with a combination of polygon and type.</p></li>
-</ul>
-
-<p>The polygons with 2190_a habitat (dune slack ponds) are generated by selecting all watersurface polygons that
-overlap with dune habitat polygons (21xx) of the standardized habitat map.</p>
-<p>For each of the other considered habitat types (31xx and rbbah) we select the watersurface polygons that
-overlap with the selected habitat type polygons of the standardized habitat map. We also select polygons of the
-standardized habitat map that contain standing water types but do not overlap with any watersurface polygon of the
-watersurface map.</p>
-<p>The R-code for creating the <code>watersurfaces_hab</code> data source can be found in the <a href='https://github.com/inbo/n2khab-preprocessing'>n2khab-preprocessing</a>
+    <p><code>watersurfaces_refpoints</code> is a data source in the
+<a href='https://ropensci.github.io/git2rdata'>vc-format</a>, available at
+<a href='https://doi.org/10.5281/zenodo.18700793'>Zenodo</a>, which provides
+points that uniquely represent polygons from the <code>watersurfaces_hab</code>
+data source.
+It represents multiple versions of <code>watersurfaces_hab</code>, and it is
+complete at least since version <code>watersurfaces_hab_v4</code>.
+This is accomplished by adding new rows for all polygons with a new ID in a
+new version of <code>watersurfaces_hab</code>, hereby recycling existing points
+that are overlapped by such polygons (because new IDs don't necessarily mean
+new watersurfaces).</p>
+<p>The R-code for creating the <code>watersurfaces_refpoints</code> data source can be
+found in the
+<a href='https://github.com/inbo/n2khab-preprocessing'>n2khab-preprocessing</a>
 repository.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -283,10 +287,10 @@ Instituut voor Natuur- en Bosonderzoek (INBO).
 <code><a href='read_habitatmap.html'>read_habitatmap</a>()</code>,
 <code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a>()</code>,
 <code><a href='read_habitatmap_terr.html'>read_habitatmap_terr</a>()</code>,
-<code><a href='read_watersurfaces_refpoints.html'>read_watersurfaces_refpoints</a>()</code></p>
+<code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a>()</code></p>
 <p>Other functions involved in processing the 'watersurfaces' data source: 
 <code><a href='read_watersurfaces.html'>read_watersurfaces</a>()</code>,
-<code><a href='read_watersurfaces_refpoints.html'>read_watersurfaces_refpoints</a>()</code></p></div>
+<code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>
@@ -297,11 +301,9 @@ Instituut voor Natuur- en Bosonderzoek (INBO).
 <span class='r-in'><span><span class='co'># In all other cases, this example won't work but at least you can</span></span></span>
 <span class='r-in'><span><span class='co'># consider what to do.</span></span></span>
 <span class='r-in'><span></span></span>
-<span class='r-in'><span><span class='va'>wsh</span> <span class='op'>&lt;-</span> <span class='fu'>read_watersurfaces_hab</span><span class='op'>(</span><span class='op'>)</span></span></span>
-<span class='r-in'><span><span class='va'>wsh_polygons</span> <span class='op'>&lt;-</span> <span class='va'>wsh</span><span class='op'>$</span><span class='va'>watersurfaces_polygons</span></span></span>
-<span class='r-in'><span><span class='va'>wsh_types</span> <span class='op'>&lt;-</span> <span class='va'>wsh</span><span class='op'>$</span><span class='va'>watersurfaces_types</span></span></span>
-<span class='r-in'><span><span class='va'>wsh_polygons</span></span></span>
-<span class='r-in'><span><span class='va'>wsh_types</span></span></span>
+<span class='r-in'><span><span class='fu'>read_watersurfaces_refpoints</span><span class='op'>(</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='fu'>read_watersurfaces_refpoints</span><span class='op'>(</span>spatial <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span></span>
+<span class='r-in'><span><span class='fu'>read_watersurfaces_refpoints</span><span class='op'>(</span>single_wsh_version <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='op'>}</span></span></span>
 <span class='r-in'><span></span></span>
 </pre>
