@@ -493,8 +493,8 @@ read_watersurfaces_hab <-
 #' complete at least since version \code{watersurfaces_hab_v4}.
 #' This is accomplished by adding new rows for all polygons with a new ID in a
 #' new version of \code{watersurfaces_hab}, hereby recycling existing points
-#' that are overlapped by such polygons (so new IDs don't necessarily mean new
-#' watersurfaces).
+#' that are overlapped by such polygons (because new IDs don't necessarily mean
+#' new watersurfaces).
 #'
 #' The R-code for creating the \code{watersurfaces_refpoints} data source can be
 #' found in the
@@ -504,7 +504,8 @@ read_watersurfaces_hab <-
 #' @param spatial Should the result be a spatial (\code{sf}) layer?
 #' @param single_wsh_version Logical.
 #' Should \code{watersurfaces_refpoints} be limited to the polygons of a
-#' single version of \code{watersurfaces_hab}?
+#' single version of \code{watersurfaces_hab}, as returned by
+#' \code{\link{read_watersurfaces_hab}}?
 #' @param file_wsh The absolute or relative file path of the
 #' \code{watersurfaces_hab} data source.
 #' Ignored if \code{single_wsh_version} is \code{FALSE}.
