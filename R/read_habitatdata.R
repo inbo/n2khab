@@ -614,6 +614,7 @@ read_watersurfaces_refpoints <-
     version <- match.arg(version)
     assert_that(file.exists(file))
     assert_that(is.flag(spatial), noNA(spatial))
+    assert_that(is.flag(single_wsh_version), noNA(single_wsh_version))
 
     ws_refpts <-
       read_vc(basename(file), root = file) %>%
