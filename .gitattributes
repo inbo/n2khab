@@ -1,0 +1,7 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Declare files that will always have LF line endings on checkout.
+*.tsv text eol=lf
+*.csv text eol=lf
+*.yml text eol=lf
