@@ -691,6 +691,16 @@ read_watersurfaces_refpoints <-
         )
     }
 
+    if (version %in% c(
+      "watersurfaces_refpoints_v4",
+      "watersurfaces_refpoints_v5"
+    )) {
+      ws_refpts <-
+        ws_refpts %>%
+        select(-"grts_address") %>%
+        rename(in_polygon = "in_object")
+    }
+
     if (spatial) {
       ws_refpts <-
         ws_refpts %>%
