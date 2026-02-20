@@ -34,7 +34,8 @@ Institute for Nature and Forest (INBO) only.}
 
 \item{single_wsh_version}{Logical.
 Should \code{watersurfaces_refpoints} be limited to the polygons of a
-single version of \code{watersurfaces_hab}?}
+single version of \code{watersurfaces_hab}, as returned by
+\code{\link{read_watersurfaces_hab}}?}
 
 \item{file_wsh}{The absolute or relative file path of the
 \code{watersurfaces_hab} data source.
@@ -78,15 +79,15 @@ that match the polygons of a single version of \code{watersurfaces_hab}.
 \details{
 \code{watersurfaces_refpoints} is a data source in the
 \href{https://ropensci.github.io/git2rdata}{vc-format}, available at
-\href{https://doi.org/XXXXXXXXXXXXXXXXXXXXXXXXXXXX}{Zenodo}, which provides
+\href{https://doi.org/10.5281/zenodo.18700793}{Zenodo}, which provides
 points that uniquely represent polygons from the \code{watersurfaces_hab}
 data source.
 It represents multiple versions of \code{watersurfaces_hab}, and it is
 complete at least since version \code{watersurfaces_hab_v4}.
 This is accomplished by adding new rows for all polygons with a new ID in a
 new version of \code{watersurfaces_hab}, hereby recycling existing points
-that are overlapped by such polygons (so new IDs don't necessarily mean new
-watersurfaces).
+that are overlapped by such polygons (because new IDs don't necessarily mean
+new watersurfaces).
 
 The R-code for creating the \code{watersurfaces_refpoints} data source can be
 found in the
