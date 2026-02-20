@@ -486,7 +486,7 @@ read_watersurfaces_hab <-
 #'
 #' \code{watersurfaces_refpoints} is a data source in the
 #' \href{https://ropensci.github.io/git2rdata}{vc-format}, available at
-#' \href{https://doi.org/XXXXXXXXXXXXXXXXXXXXXXXXXXXX}{Zenodo}, which provides
+#' \href{https://doi.org/10.5281/zenodo.18700793}{Zenodo}, which provides
 #' points that uniquely represent polygons from the \code{watersurfaces_hab}
 #' data source.
 #' It represents multiple versions of \code{watersurfaces_hab}, and it is
