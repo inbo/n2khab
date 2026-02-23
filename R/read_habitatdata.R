@@ -548,7 +548,7 @@ read_watersurfaces_hab <-
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2024
 #' (52). Instituut voor Natuur en Bosonderzoek, Brussel.
 #' \doi{10.21436/inbor.114075267}.
-#' #' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
+#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
 #' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
 #' Van Dam G., Van Hove M., Wils C. (red.) (2023).
 #' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
