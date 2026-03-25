@@ -188,15 +188,14 @@ read_habitatmap_stdized <-
         )
       )
     } else {
-      habmap_types <- suppressWarnings(
+      habmap_types <-
         read_sf(
           file,
           "habitatmap_types"
         )
-      )
     }
 
-    types <- suppressWarnings(read_types())
+    types <- read_types()
 
     habmap_types <- habmap_types %>%
       mutate(
