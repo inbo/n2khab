@@ -8,7 +8,7 @@ read_habitatmap(
   file = file.path(locate_n2khab_data(), "10_raw/habitatmap"),
   filter_hab = FALSE,
   fix_geom = FALSE,
-  version = c("habitatmap_2023", "habitatmap_2020", "habitatmap_2018")
+  version = c("habitatmap_2025", "habitatmap_2023", "habitatmap_2020", "habitatmap_2018")
 )
 }
 \arguments{
