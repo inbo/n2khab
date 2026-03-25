@@ -13,7 +13,7 @@
 #'   }
 #'
 #' The data source \code{habitatmap_stdized} is the processed version
-#' of the raw data source \code{habitatmap} (De Saeger et al., 2023).
+#' of the raw data source \code{habitatmap} (De Saeger et al., 2025).
 #' Every polygon in the \code{habitatmap} can consist of maximum 5
 #' different types. This information is stored in the
 #' columns 'HAB1', HAB2',..., 'HAB5' of the attribute table. The
@@ -113,13 +113,13 @@
 #' @references
 #'
 #' \itemize{
-#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 #' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 #' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
@@ -326,13 +326,13 @@ read_habitatmap_stdized <-
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2024
 #' (52). Instituut voor Natuur en Bosonderzoek, Brussel.
 #' \doi{10.21436/inbor.114075267}.
-#' #' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' }
 #'
 #' @examples
@@ -548,13 +548,13 @@ read_watersurfaces_hab <-
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2024
 #' (52). Instituut voor Natuur en Bosonderzoek, Brussel.
 #' \doi{10.21436/inbor.114075267}.
-#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' }
 #'
 #' @examples
@@ -1235,7 +1235,7 @@ read_watersurfaces <-
 
 #' Return the data source \code{habitatmap} as an \code{sf} multipolygon layer
 #'
-#' Returns the raw data source \code{habitatmap} (De Saeger et al., 2023)
+#' Returns the raw data source \code{habitatmap} (De Saeger et al., 2025)
 #' as a standardized \code{sf} multipolygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -1269,13 +1269,13 @@ read_watersurfaces <-
 #' @references
 #'
 #' \itemize{
-#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 #' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 #' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
@@ -1455,7 +1455,7 @@ read_habitatmap <-
 #' \code{habitatmap_terr} is the further interpreted, terrestrial part of
 #' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}),
 #' which, in turn, is derived from the raw data source \code{habitatmap}
-#' (De Saeger et al., 2023).
+#' (De Saeger et al., 2025).
 #' By default, occurrences of type \code{7220} are dropped because a more
 #' reliable data source is available for this habitat type (see \code{drop_7220}
 #' argument).
@@ -1560,13 +1560,13 @@ read_habitatmap <-
 #' @references
 #'
 #' \itemize{
-#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 #' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 #' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
@@ -1732,7 +1732,7 @@ read_habitatmap_terr <-
 #' layer or as a list
 #'
 #' Returns the raw data source \code{habitatstreams} (section 'habitat 3260' from
-#' De Saeger et al., 2023) as an \code{sf} linestring
+#' De Saeger et al., 2025) as an \code{sf} linestring
 #' layer or as a list of two objects: the \code{sf} object (CRS:
 #' Belgian Lambert 72 (EPSG-code \href{https://epsg.io/31370}{31370}))
 #' plus a data frame
@@ -1760,13 +1760,13 @@ read_habitatmap_terr <-
 #' @references
 #'
 #' \itemize{
-#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' \item Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
 #' Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 #' behorend tot het \emph{Ranunculion fluitantis} en het
