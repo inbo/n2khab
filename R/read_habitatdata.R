@@ -1325,6 +1325,7 @@ read_habitatmap <-
            filter_hab = FALSE,
            fix_geom = FALSE,
            version = c(
+             "habitatmap_2025",
              "habitatmap_2023",
              "habitatmap_2020",
              "habitatmap_2018"
@@ -1341,7 +1342,9 @@ read_habitatmap <-
         "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"
       ))
 
-      if (version == "habitatmap_2023") {
+      if (version == "habitatmap_2025") {
+        stop("filter_hab is not supported yet for this version")
+      } else if (version == "habitatmap_2023") {
         xxh64sum_habitatmap_stdized_expected <- "5c32f9b5d74eac23"
       } else if (version == "habitatmap_2020") {
         xxh64sum_habitatmap_stdized_expected <- "3109c26f0a27a0f3"
