@@ -157,6 +157,9 @@
 #' %>%
 #' mutate
 #' relocate
+#' across
+#' @importFrom tidyselect
+#' any_of
 #' @importFrom assertthat
 #' assert_that
 #' is.string
@@ -182,10 +185,7 @@ read_habitatmap_stdized <-
     )
 
     habmap_polygons <- habmap_polygons %>%
-      mutate(
-        polygon_id = factor(.data$polygon_id),
-        method_assessment = factor(.data$method_assessment)
-      )
+      mutate(across(any_of(c("polygon_id", "method_assessment")), factor))
 
     suppressWarnings(st_crs(habmap_polygons) <- 31370)
 
