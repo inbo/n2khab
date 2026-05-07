@@ -152,6 +152,7 @@
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
+#' st_crs
 #' @importFrom rlang .data
 #' @importFrom dplyr
 #' %>%
@@ -187,7 +188,9 @@ read_habitatmap_stdized <-
     habmap_polygons <- habmap_polygons %>%
       mutate(across(any_of(c("polygon_id", "method_assessment")), factor))
 
-    suppressWarnings(st_crs(habmap_polygons) <- 31370)
+    if (st_crs(habmap_polygons) != st_crs(31370)) {
+      suppressWarnings(st_crs(habmap_polygons) <- 31370)
+    }
 
     if (version == "habitatmap_stdized_2018_v1") {
       habmap_types <- suppressWarnings(
@@ -1612,6 +1615,7 @@ read_habitatmap <-
 #' @importFrom sf
 #' read_sf
 #' st_crs<-
+#' st_crs
 #' @importFrom rlang .data
 #' @importFrom dplyr
 #' %>%
@@ -1649,7 +1653,9 @@ read_habitatmap_terr <-
         source = factor(.data$source)
       )
 
-    suppressWarnings(st_crs(habmap_terr_polygons) <- 31370)
+    if (st_crs(habmap_terr_polygons) != st_crs(31370)) {
+      suppressWarnings(st_crs(habmap_terr_polygons) <- 31370)
+    }
 
     if (version == "habitatmap_terr_2018_v1") {
       habmap_terr_types <- suppressWarnings(
