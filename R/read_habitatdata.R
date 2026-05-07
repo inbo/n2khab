@@ -1676,11 +1676,13 @@ read_habitatmap_terr <-
 
     habmap_terr_types <- habmap_terr_types %>%
       mutate(
-        polygon_id = factor(.data$polygon_id,
+        polygon_id = factor(
+          .data$polygon_id,
           levels = levels(habmap_terr_polygons$polygon_id)
         ),
         certain = .data$certain == 1,
-        type = factor(.data$type,
+        type = factor(
+          .data$type,
           levels = levels(types$type)
         ),
         source = factor(.data$source)
