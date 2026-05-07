@@ -1691,10 +1691,7 @@ read_habitatmap_terr <-
     if (!keep_aq_types) {
       habmap_terr_types <-
         habmap_terr_types %>%
-        filter(!(.data$type %in% (types %>%
-          filter(.data$hydr_class == "HC3") %>%
-          .$type)
-        ))
+        filter(!(.data$type %in% types[types$hydr_class == "HC3", ]$type))
       # The below step is unneeded (and takes several seconds),
       # because polygons with _no_ terrestrial types were already
       # excluded in the data source.
