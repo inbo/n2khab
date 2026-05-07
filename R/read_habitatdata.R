@@ -1659,12 +1659,11 @@ read_habitatmap_terr <-
         )
       )
     } else {
-      habmap_terr_types <- suppressWarnings(
+      habmap_terr_types <-
         read_sf(
           file,
           "habitatmap_terr_types"
         )
-      )
     }
 
     types <- read_types()
