@@ -173,10 +173,10 @@ France - 2017. Vol. 6: 372-382.
 }
 }
 \seealso{
-Other functions involved in processing the 'habitatmap' data source: 
-\code{\link{read_habitatmap}()},
-\code{\link{read_habitatmap_stdized}()},
-\code{\link{read_watersurfaces_hab}()},
-\code{\link{read_watersurfaces_refpoints}()}
+Other functions involved in processing the 'habitatmap' data source:
+\code{\link[=read_habitatmap]{read_habitatmap()}},
+\code{\link[=read_habitatmap_stdized]{read_habitatmap_stdized()}},
+\code{\link[=read_watersurfaces_hab]{read_watersurfaces_hab()}},
+\code{\link[=read_watersurfaces_refpoints]{read_watersurfaces_refpoints()}}
 }
 \concept{functions involved in processing the 'habitatmap' data source}

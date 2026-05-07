@@ -63,8 +63,8 @@ read_namelist(lang = "nl")
 \seealso{
 \code{\link{namelist}}
 
-Other reading functions for n2khab-referencelists: 
-\code{\link{read_env_pressures}()},
-\code{\link{read_types}()}
+Other reading functions for n2khab-referencelists:
+\code{\link[=read_env_pressures]{read_env_pressures()}},
+\code{\link[=read_types]{read_types()}}
 }
 \concept{reading functions for n2khab-referencelists}

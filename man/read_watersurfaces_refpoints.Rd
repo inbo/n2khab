@@ -127,15 +127,15 @@ Instituut voor Natuur- en Bosonderzoek (INBO).
 }
 }
 \seealso{
-Other functions involved in processing the 'habitatmap' data source: 
-\code{\link{read_habitatmap}()},
-\code{\link{read_habitatmap_stdized}()},
-\code{\link{read_habitatmap_terr}()},
-\code{\link{read_watersurfaces_hab}()}
+Other functions involved in processing the 'habitatmap' data source:
+\code{\link[=read_habitatmap]{read_habitatmap()}},
+\code{\link[=read_habitatmap_stdized]{read_habitatmap_stdized()}},
+\code{\link[=read_habitatmap_terr]{read_habitatmap_terr()}},
+\code{\link[=read_watersurfaces_hab]{read_watersurfaces_hab()}}
 
-Other functions involved in processing the 'watersurfaces' data source: 
-\code{\link{read_watersurfaces}()},
-\code{\link{read_watersurfaces_hab}()}
+Other functions involved in processing the 'watersurfaces' data source:
+\code{\link[=read_watersurfaces]{read_watersurfaces()}},
+\code{\link[=read_watersurfaces_hab]{read_watersurfaces_hab()}}
 }
 \concept{functions involved in processing the 'habitatmap' data source}
 \concept{functions involved in processing the 'watersurfaces' data source}

@@ -29,6 +29,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Floris Vanderhaeghe \email{floris.vanderhaeghe@inbo.be} (\href{https://orcid.org/0000-0002-6378-6229}{ORCID})
   \item Toon Westra \email{toon.westra@inbo.be} (\href{https://orcid.org/0000-0003-2478-9459}{ORCID})
   \item Cécile Herr \email{cecile.herr@inbo.be} (\href{https://orcid.org/0000-0002-2833-6046}{ORCID})
   \item Hans Van Calster \email{hans.vancalster@inbo.be} (\href{https://orcid.org/0000-0001-8595-8426}{ORCID})
