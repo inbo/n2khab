@@ -1719,17 +1719,10 @@ read_habitatmap_terr <-
         )
     }
 
-    if (version == "habitatmap_terr_2018_v1") {
-      result <- list(
-        habitatmap_terr_polygons = habmap_terr_polygons,
-        habitatmap_terr_patches = habmap_terr_types
-      )
-    } else {
-      result <- list(
-        habitatmap_terr_polygons = habmap_terr_polygons,
-        habitatmap_terr_types = habmap_terr_types
-      )
-    }
+    result <- list(
+      habitatmap_terr_polygons = habmap_terr_polygons,
+      habitatmap_terr_types = habmap_terr_types
+    )
 
     return(result)
   }
