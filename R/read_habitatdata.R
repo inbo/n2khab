@@ -1626,6 +1626,7 @@ read_habitatmap_terr <-
            keep_aq_types = TRUE,
            drop_7220 = TRUE,
            version = c(
+             "habitatmap_terr_2025_v1",
              "habitatmap_terr_2023_v1",
              "habitatmap_terr_2020_v2",
              "habitatmap_terr_2020_v1",
