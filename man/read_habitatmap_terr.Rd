@@ -10,9 +10,9 @@ read_habitatmap_terr(
     "20_processed/habitatmap_terr/habitatmap_terr.gpkg"),
   keep_aq_types = TRUE,
   drop_7220 = TRUE,
-  version = c("habitatmap_terr_2023_v1", "habitatmap_terr_2020_v2",
-    "habitatmap_terr_2020_v1", "habitatmap_terr_2018_v2", "habitatmap_terr_2018_v1",
-    "habitatmap_terr_2024_v99_interim")
+  version = c("habitatmap_terr_2025_v1", "habitatmap_terr_2023_v1",
+    "habitatmap_terr_2020_v2", "habitatmap_terr_2020_v1", "habitatmap_terr_2018_v2",
+    "habitatmap_terr_2018_v1", "habitatmap_terr_2024_v99_interim")
 )
 }
 \arguments{
@@ -58,6 +58,12 @@ A list of two objects:
     \item \code{polygon_id}
     \item \code{description_orig}: polygon description based on the
     original type codes in the \code{habitatmap} data source
+    \item \code{year_assessment}: the year when the types in the polygon have
+    been assessed. This column only appears since data source version
+    `habitatmap_terr_2025_v1`.
+    \item \code{method_assessment}: the method used to assess the types in
+    the polygon. This column only appears since data source version
+    `habitatmap_terr_2025_v1`.
     \item \code{description}: based on \code{description_orig} but with the
     interpreted type codes
     \item \code{source}: states where \code{description} comes from: either
@@ -116,11 +122,16 @@ Those are the types where \code{code_orig} contains \code{"bos"} or is
 equal to \code{"6510,gh"} or \code{"9120,gh"};}
 \item{it translates several main type codes into a corresponding
 subtype which they almost always represent:
-\code{6410} -> \code{6410_mo},
-\code{6430} -> \code{6430_hf},
-\code{6510} -> \code{6510_hu},
-\code{7140} -> \code{7140_meso},
-\code{9130} -> \code{9130_end};}
+\itemize{
+\item\code{6230} -> \code{6230_hmo} \strong{\emph{if}} \code{code_orig} is
+\code{6230,6410}
+\item\code{6410} -> \code{6410_mo}
+\item\code{6430} -> \code{6430_hf}
+\item\code{6510} -> \code{6510_hu}
+\item\code{7140} -> \code{7140_meso}
+\item\code{9130} -> \code{9130_end}
+}
+}
 \item{it distinguishes types \code{rbbhfl} and \code{rbbhf}.}
 }
 

@@ -35,9 +35,11 @@ A list of two objects:
     \item \code{description_orig}: polygon description based on the
     orginal type codes in the raw \code{habitatmap}.
     \item \code{year_assessment}: the year when the types in the polygon have
-    been assessed.
+    been assessed. This column only appears since data source version
+    `habitatmap_stdized_2025_v1`.
     \item \code{method_assessment}: the method used to assess the types in
-    the polygon.
+    the polygon. This column only appears since data source version
+    `habitatmap_stdized_2025_v1`.
     }
   }
   \itemize{
