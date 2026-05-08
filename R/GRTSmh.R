@@ -613,9 +613,7 @@ read_GRTSmh_base4frac <-
 #'
 #' @export
 #' @importFrom stringr str_c
-#' @importFrom sf
-#' read_sf
-#' st_crs<-
+#' @importFrom sf read_sf st_crs<-
 read_GRTSmh_diffres <-
   function(dir = file.path(locate_n2khab_data(), "20_processed/GRTSmh_diffres"),
            level,

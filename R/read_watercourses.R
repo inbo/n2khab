@@ -94,11 +94,8 @@
 #' }
 #'
 #' @export
-#' @importFrom assertthat
-#' assert_that
-#' is.string
-#' @importFrom sf
-#' read_sf
+#' @importFrom assertthat assert_that is.string
+#' @importFrom sf read_sf
 read_watercourse_100mseg <-
   function(file = file.path(
              locate_n2khab_data(),

@@ -110,25 +110,11 @@
 #' expand_types(x, type_var = "mycode", mark = TRUE)
 #' expand_types(x, type_var = "mycode", strict = FALSE, mark = TRUE)
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.string
-#' is.flag
-#' noNA
-#' @importFrom tidyr
-#' nest
-#' unnest
-#' @importFrom tidyselect
-#' any_of
-#' @importFrom purrr
-#' map
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' select
-#' pick
-#' group_vars
-#' ungroup
+#' @importFrom assertthat assert_that is.string is.flag noNA
+#' @importFrom tidyr nest unnest
+#' @importFrom tidyselect any_of
+#' @importFrom purrr map
+#' @importFrom dplyr %>% mutate select pick group_vars ungroup
 #' @importFrom rlang .data
 #' @export
 expand_types <- function(x,
@@ -201,26 +187,9 @@ expand_types <- function(x,
 #'
 #' @return A data frame.
 #'
-#' @importFrom dplyr
-#' %>%
-#' left_join
-#' select
-#' filter
-#' rename
-#' group_by
-#' summarise
-#' anti_join
-#' join_by
-#' pull
-#' inner_join
-#' bind_rows
-#' mutate
-#' distinct
-#' case_when
-#' @importFrom tidyselect
-#' all_of
-#' @importFrom magrittr
-#' set_colnames
+#' @importFrom dplyr %>% left_join select filter rename group_by summarise anti_join join_by pull inner_join bind_rows mutate distinct case_when
+#' @importFrom tidyselect all_of
+#' @importFrom magrittr set_colnames
 #' @importFrom rlang .data
 #' @keywords internal
 expand_types_plain <- function(x,
@@ -381,14 +350,8 @@ expand_types_plain <- function(x,
 #' (character) factor variables) converted to the specified encoding.
 #'
 #' @keywords internal
-#' @importFrom dplyr
-#' %>%
-#' mutate_if
-#' @importFrom assertthat
-#' assert_that
-#' is.string
-#' is.flag
-#' noNA
+#' @importFrom dplyr %>% mutate_if
+#' @importFrom assertthat assert_that is.string is.flag noNA
 convertdf_enc <- function(x,
                           from = "",
                           to = "UTF-8",

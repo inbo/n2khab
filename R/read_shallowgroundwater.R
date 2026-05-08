@@ -187,10 +187,8 @@
 #' shallowgroundwater
 #' }
 #'
-#' @importFrom assertthat
-#' assert_that
-#' @importFrom sf
-#' read_sf
+#' @importFrom assertthat assert_that
+#' @importFrom sf read_sf
 #' @export
 read_shallowgroundwater <-
   function(file = file.path(

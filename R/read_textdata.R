@@ -49,9 +49,7 @@
 #'
 #' @export
 #' @importFrom git2rdata read_vc
-#' @importFrom assertthat
-#' assert_that
-#' is.string
+#' @importFrom assertthat assert_that is.string
 #' @importFrom dplyr %>% filter as_tibble
 read_namelist <-
   function(path = pkgdatasource_path("textdata/namelist", ".yml"),
@@ -250,20 +248,8 @@ namelist_factor <-
 #'
 #' @export
 #' @importFrom git2rdata read_vc
-#' @importFrom assertthat
-#' assert_that
-#' is.string
-#' @importFrom dplyr
-#' %>%
-#' distinct
-#' filter
-#' select
-#' mutate
-#' rename
-#' tibble
-#' left_join
-#' as_tibble
-#' pull
+#' @importFrom assertthat assert_that is.string
+#' @importFrom dplyr %>% distinct filter select mutate rename tibble left_join as_tibble pull
 #' @importFrom plyr mapvalues
 #' @importFrom rlang .data
 read_types <-
@@ -514,21 +500,8 @@ read_types <-
 #'
 #' @export
 #' @importFrom git2rdata read_vc
-#' @importFrom assertthat
-#' assert_that
-#' is.string
-#' @importFrom dplyr
-#' %>%
-#' select
-#' distinct
-#' mutate
-#' rename
-#' tibble
-#' left_join
-#' as_tibble
-#' distinct
-#' arrange
-#' pull
+#' @importFrom assertthat assert_that is.string
+#' @importFrom dplyr %>% select distinct mutate rename tibble left_join as_tibble distinct arrange pull
 #' @importFrom rlang .data
 read_env_pressures <-
   function(path = pkgdatasource_path("textdata/env_pressures", ".yml"),

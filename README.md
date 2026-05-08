@@ -20,8 +20,13 @@ The standard reference data include: checklists, spatial habitat distribution, a
 To install the current package version from the `main` branch (latest stable release), run:
 
 ```r
-install.packages("n2khab", repos = c(inbo = "https://inbo.r-universe.dev", 
-                                     CRAN = "https://cloud.r-project.org"))
+install.packages(
+  "n2khab",
+  repos = c(
+    inbo = "https://inbo.r-universe.dev",
+    CRAN = "https://cloud.r-project.org"
+  )
+)
 ```
 
 The above provides a pre-compiled package for Windows and macOS, which should be faster than below approach.
@@ -31,9 +36,7 @@ If you want to install from the source repository, run:
 
 ```r
 Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS = "true") # as a precaution
-remotes::install_github("inbo/n2khab",
-                        build_vignettes = TRUE,
-                        upgrade = TRUE)
+remotes::install_github("inbo/n2khab", build_vignettes = TRUE, upgrade = TRUE)
 ```
 
 Note that this will install the package from the `main` branch.

@@ -28,14 +28,8 @@
 #' ecoregions
 #' }
 #'
-#' @importFrom sf
-#' read_sf
-#' st_drop_geometry
-#' @importFrom dplyr
-#' %>%
-#' select
-#' mutate
-#' arrange
+#' @importFrom sf read_sf st_drop_geometry
+#' @importFrom dplyr %>% select mutate arrange
 #' @importFrom rlang .data
 #' @export
 read_ecoregions <-
