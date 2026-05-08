@@ -1496,11 +1496,16 @@ read_habitatmap <-
 #' equal to \code{"6510,gh"} or \code{"9120,gh"};}
 #' \item{it translates several main type codes into a corresponding
 #' subtype which they almost always represent:
-#' \code{6410} -> \code{6410_mo},
-#' \code{6430} -> \code{6430_hf},
-#' \code{6510} -> \code{6510_hu},
-#' \code{7140} -> \code{7140_meso},
-#' \code{9130} -> \code{9130_end};}
+#' \itemize{
+#' \item\code{6230} -> \code{6230_hmo} \strong{\emph{if}} \code{code_orig} is
+#' \code{6230,6410}
+#' \item\code{6410} -> \code{6410_mo}
+#' \item\code{6430} -> \code{6430_hf}
+#' \item\code{6510} -> \code{6510_hu}
+#' \item\code{7140} -> \code{7140_meso}
+#' \item\code{9130} -> \code{9130_end}
+#' }
+#' }
 #' \item{it distinguishes types \code{rbbhfl} and \code{rbbhf}.}
 #' }
 #'
