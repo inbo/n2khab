@@ -22,10 +22,7 @@
 #'
 #' @family functions regarding file management for N2KHAB projects
 #'
-#' @importFrom rprojroot
-#' find_root
-#' is_git_root
-#' is_rstudio_project
+#' @importFrom rprojroot find_root is_git_root is_rstudio_project
 #'
 #' @export
 #'
@@ -101,20 +98,9 @@ fileman_folders <- function(root = c("rproj", "git"), path = NA) {
 #' @param quiet Logical (\code{FALSE} by default).
 #' Do you want to suppress informative messages (not warnings)?
 #'
-#' @importFrom stringr
-#' fixed
-#' str_remove
-#' str_split
-#' str_match
-#' @importFrom assertthat
-#' assert_that
-#' is.string
-#' is.flag
-#' noNA
-#' @importFrom curl
-#' curl_download
-#' curl_fetch_memory
-#' multi_download
+#' @importFrom stringr fixed str_remove str_split str_match
+#' @importFrom assertthat assert_that is.string is.flag noNA
+#' @importFrom curl curl_download curl_fetch_memory multi_download
 #'
 #' @export
 #' @family functions regarding file management for N2KHAB projects
@@ -244,11 +230,8 @@ download_zenodo <- function(doi,
 #' @return A named vector. The names correspond to version IDs, the values
 #' correspond to DOIs.
 #'
-#' @importFrom stringr
-#' fixed
-#' str_remove
-#' @importFrom curl
-#' curl_fetch_memory
+#' @importFrom stringr fixed str_remove
+#' @importFrom curl curl_fetch_memory
 #'
 get_zenodo_versions <- function(doi) {
   assert_that(is.string(doi), grepl("^10\\.5281/zenodo", doi))
@@ -289,10 +272,8 @@ get_zenodo_versions <- function(doi) {
 #' A character vector.
 #'
 #' @keywords internal
-#' @importFrom assertthat
-#' assert_that
-#' @importFrom dplyr
-#' %>%
+#' @importFrom assertthat assert_that
+#' @importFrom dplyr %>%
 human_filesize <- function(x) {
   assert_that(is.numeric(x))
   assert_that(all(x %% 1 == 0 & x >= 0))
@@ -354,11 +335,8 @@ human_filesize <- function(x) {
 #' fileman_up("n2khab_data")
 #' }
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.string
-#' @importFrom dplyr
-#' %>%
+#' @importFrom assertthat assert_that is.string
+#' @importFrom dplyr %>%
 #' @export
 fileman_up <- function(name,
                        start = ".",
@@ -417,9 +395,7 @@ fileman_up <- function(name,
 #' locate_n2khab_data()
 #' }
 #'
-#' @importFrom rprojroot
-#' find_root_file
-#' has_dir
+#' @importFrom rprojroot find_root_file has_dir
 #'
 #' @export
 locate_n2khab_data <- function() {
@@ -492,10 +468,8 @@ locate_n2khab_data <- function() {
 #' checksum(files)
 #' }
 #'
-#' @importFrom purrr
-#' map_chr
-#' @importFrom stringr
-#' str_detect
+#' @importFrom purrr map_chr
+#' @importFrom stringr str_detect
 #' @export
 checksum <- function(files,
                      hash_fun = c("xxh64", "md5", "sha256")) {
@@ -534,8 +508,7 @@ md5sum <- function(files) checksum(files, hash_fun = "md5")
 sha256sum <- function(files) checksum(files, hash_fun = "sha256")
 
 
-#' @importFrom assertthat
-#' assert_that
+#' @importFrom assertthat assert_that
 #' @keywords internal
 assert_that_allfiles_exist <- function(x) {
   exist <- file.exists(x)
@@ -609,11 +582,7 @@ assert_that_allfiles_exist <- function(x) {
 #'
 #' @family functions regarding file management for N2KHAB projects
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.string
-#' noNA
-#' is.flag
+#' @importFrom assertthat assert_that is.string noNA is.flag
 #'
 #' @examples
 #' \dontrun{

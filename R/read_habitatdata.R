@@ -144,17 +144,10 @@
 #' }
 #'
 #' @export
-#' @importFrom sf
-#' read_sf
-#' st_crs<-
+#' @importFrom sf read_sf st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' relocate
-#' @importFrom assertthat
-#' assert_that
-#' is.string
+#' @importFrom dplyr %>% mutate relocate
+#' @importFrom assertthat assert_that is.string
 #'
 read_habitatmap_stdized <-
   function(file = file.path(
@@ -352,20 +345,11 @@ read_habitatmap_stdized <-
 #' }
 #'
 #' @export
-#' @importFrom sf
-#' read_sf
-#' st_crs<-
+#' @importFrom sf read_sf st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' across
-#' mutate
-#' relocate
-#' summarize
+#' @importFrom dplyr %>% across mutate relocate summarize
 #' @importFrom stringr str_flatten
-#' @importFrom assertthat
-#' assert_that
-#' is.string
+#' @importFrom assertthat assert_that is.string
 #'
 read_watersurfaces_hab <-
   function(file = file.path(
@@ -572,25 +556,11 @@ read_watersurfaces_hab <-
 #' }
 #'
 #' @export
-#' @importFrom rlang
-#' .data
-#' @importFrom git2rdata
-#' read_vc
-#' @importFrom sf
-#' st_as_sf
-#' st_drop_geometry
-#' @importFrom dplyr
-#' %>%
-#' as_tibble
-#' semi_join
-#' tribble
-#' mutate
-#' filter
-#' pull
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
+#' @importFrom rlang .data
+#' @importFrom git2rdata read_vc
+#' @importFrom sf st_as_sf st_drop_geometry
+#' @importFrom dplyr %>% as_tibble semi_join tribble mutate filter pull
+#' @importFrom assertthat assert_that is.flag noNA
 read_watersurfaces_refpoints <-
   function(
     file = file.path(
@@ -832,33 +802,13 @@ read_watersurfaces_refpoints <-
 #' ws2
 #' }
 #'
-#' @importFrom sf
-#' read_sf
-#' st_is_valid
-#' st_make_valid
-#' @importFrom plyr
-#' mapvalues
-#' @importFrom rlang
-#' .data
-#' na_lgl
-#' @importFrom dplyr
-#' %>%
-#' across
-#' arrange
-#' mutate
-#' na_if
-#' rename
-#' select
-#' left_join
-#' everything
-#' tribble
-#' @importFrom assertthat
-#' assert_that
-#' @importFrom stringr
-#' str_replace
-#' @importFrom tidyselect
-#' where
-#' any_of
+#' @importFrom sf read_sf st_is_valid st_make_valid
+#' @importFrom plyr mapvalues
+#' @importFrom rlang .data na_lgl
+#' @importFrom dplyr %>% across arrange mutate na_if rename select left_join everything tribble
+#' @importFrom assertthat assert_that
+#' @importFrom stringr str_replace
+#' @importFrom tidyselect where any_of
 #' @export
 read_watersurfaces <-
   function(file = NULL,
@@ -1303,22 +1253,10 @@ read_watersurfaces <-
 #' }
 #'
 #' @export
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
-#' @importFrom sf
-#' read_sf
-#' st_is_valid
-#' st_make_valid
-#' st_crs<-
+#' @importFrom assertthat assert_that is.flag noNA
+#' @importFrom sf read_sf st_is_valid st_make_valid st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' select
-#' filter
-#' starts_with
+#' @importFrom dplyr %>% mutate select filter starts_with
 #'
 read_habitatmap <-
   function(file = file.path(locate_n2khab_data(), "10_raw/habitatmap"),
@@ -1593,20 +1531,10 @@ read_habitatmap <-
 #' }
 #'
 #' @export
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
-#' is.string
-#' @importFrom sf
-#' read_sf
-#' st_crs<-
+#' @importFrom assertthat assert_that is.flag noNA is.string
+#' @importFrom sf read_sf st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' filter
-#' relocate
+#' @importFrom dplyr %>% mutate filter relocate
 read_habitatmap_terr <-
   function(file = file.path(
              locate_n2khab_data(),
@@ -1797,25 +1725,12 @@ read_habitatmap_terr <-
 #' )
 #' }
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
-#' @importFrom sf
-#' read_sf
-#' st_drop_geometry
+#' @importFrom assertthat assert_that is.flag noNA
+#' @importFrom sf read_sf st_drop_geometry
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' select
-#' distinct
-#' @importFrom forcats
-#' fct_reorder
-#' @importFrom stringr
-#' str_replace
-#' str_squish
-#' str_to_title
+#' @importFrom dplyr %>% mutate select distinct
+#' @importFrom forcats fct_reorder
+#' @importFrom stringr str_replace str_squish str_to_title
 #' @export
 read_habitatstreams <-
   function(file = file.path(
@@ -1993,29 +1908,11 @@ read_habitatstreams <-
 #' hs2
 #' }
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
-#' is.string
-#' @importFrom stringr
-#' str_sub
-#' @importFrom sf
-#' read_sf
-#' st_transform
-#' st_centroid
+#' @importFrom assertthat assert_that is.flag noNA is.string
+#' @importFrom stringr str_sub
+#' @importFrom sf read_sf st_transform st_centroid
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' select
-#' filter
-#' everything
-#' group_by
-#' summarise_if
-#' mutate_at
-#' n
-#' vars
+#' @importFrom dplyr %>% mutate select filter everything group_by summarise_if mutate_at n vars
 #' @export
 read_habitatsprings <-
   function(file = file.path(
@@ -2219,23 +2116,12 @@ read_habitatsprings <-
 #' read_habitatquarries(bibtex = TRUE)
 #' }
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
-#' is.string
-#' @importFrom stringr
-#' str_split
-#' @importFrom sf
-#' read_sf
+#' @importFrom assertthat assert_that is.flag noNA is.string
+#' @importFrom stringr str_split
+#' @importFrom sf read_sf
 #' @importFrom rlang .data
-#' @importFrom magrittr
-#' set_colnames
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' select
-#' filter
+#' @importFrom magrittr set_colnames
+#' @importFrom dplyr %>% mutate select filter
 #' @export
 read_habitatquarries <-
   function(file = file.path(

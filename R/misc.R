@@ -12,10 +12,8 @@
 #' require_pkgs(c("a", "base", "b", "c"))
 #' }
 #'
-#' @importFrom purrr
-#' map_lgl
-#' @importFrom assertthat
-#' assert_that
+#' @importFrom purrr map_lgl
+#' @importFrom assertthat assert_that
 #' @keywords internal
 require_pkgs <- function(pkgs) {
   assert_that(is.character(pkgs))
