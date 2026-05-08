@@ -69,10 +69,10 @@ Resources. Journal of the American Statistical Association 99 (465):
 262–278. \doi{10.1198/016214504000000250}.
 }
 \seealso{
-Other functions involved in processing the 'GRTSmaster_habitats' data source: 
-\code{\link{convert_dec_to_base4frac}()},
-\code{\link{read_GRTSmh}()},
-\code{\link{read_GRTSmh_base4frac}()},
-\code{\link{read_GRTSmh_diffres}()}
+Other functions involved in processing the 'GRTSmaster_habitats' data source:
+\code{\link[=convert_dec_to_base4frac]{convert_dec_to_base4frac()}},
+\code{\link[=read_GRTSmh]{read_GRTSmh()}},
+\code{\link[=read_GRTSmh_base4frac]{read_GRTSmh_base4frac()}},
+\code{\link[=read_GRTSmh_diffres]{read_GRTSmh_diffres()}}
 }
 \concept{functions involved in processing the 'GRTSmaster_habitats' data source}

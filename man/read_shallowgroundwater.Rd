@@ -203,9 +203,9 @@ Geoderma 4 (3): 257–278. \doi{10.1016/0016-7061(70)90006-6}.
 }
 }
 \seealso{
-Other functions returning environmental data sets: 
-\code{\link{read_soilmap}()},
-\code{\link{read_watercourse_100mseg}()},
-\code{\link{read_watersurfaces}()}
+Other functions returning environmental data sets:
+\code{\link[=read_soilmap]{read_soilmap()}},
+\code{\link[=read_watercourse_100mseg]{read_watercourse_100mseg()}},
+\code{\link[=read_watersurfaces]{read_watersurfaces()}}
 }
 \concept{functions returning environmental data sets}
