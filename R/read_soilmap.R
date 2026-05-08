@@ -239,33 +239,11 @@
 #'   glimpse()
 #' }
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
-#' is.string
-#' @importFrom sf
-#' read_sf
-#' @importFrom git2rdata
-#' read_vc
-#' @importFrom dplyr
-#' %>%
-#' select
-#' mutate
-#' mutate_at
-#' mutate_if
-#' filter
-#' filter_at
-#' left_join
-#' vars
-#' contains
-#' recode
-#' matches
-#' distinct
-#' pull
-#' everything
-#' @importFrom stats
-#' setNames
+#' @importFrom assertthat assert_that is.flag noNA is.string
+#' @importFrom sf read_sf
+#' @importFrom git2rdata read_vc
+#' @importFrom dplyr %>% select mutate mutate_at mutate_if filter filter_at left_join vars contains recode matches distinct pull everything
+#' @importFrom stats setNames
 #' @importFrom rlang .data
 #' @export
 read_soilmap <-

@@ -37,22 +37,11 @@
 #' sac <- read_admin_areas(dsn = "sac")
 #' }
 #'
-#' @importFrom assertthat
-#' assert_that
-#' @importFrom sf
-#' read_sf
-#' @importFrom dplyr
-#' %>%
-#' select
-#' mutate
-#' arrange
-#' vars
-#' mutate_at
-#' n
-#' @importFrom forcats
-#' fct_reorder
-#' @importFrom stringr
-#' str_detect
+#' @importFrom assertthat assert_that
+#' @importFrom sf read_sf
+#' @importFrom dplyr %>% select mutate arrange vars mutate_at n
+#' @importFrom forcats fct_reorder
+#' @importFrom stringr str_detect
 #' @importFrom rlang .data
 #' @export
 read_admin_areas <-
