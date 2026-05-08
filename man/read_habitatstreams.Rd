@@ -7,7 +7,9 @@ layer or as a list}
 \usage{
 read_habitatstreams(
   file = file.path(locate_n2khab_data(), "10_raw/habitatstreams"),
-  source_text = FALSE
+  source_text = FALSE,
+  version = c("habitatstreams_2025", "habitatstreams_2023", "habitatstreams_v1.7",
+    "habitatstreams_v1.6")
 )
 }
 \arguments{
@@ -20,6 +22,9 @@ starting from the working directory.}
 
 \item{source_text}{Logical, defaults to \code{FALSE}.
 If \code{TRUE}, a list is returned (see \emph{Value}).}
+
+\item{version}{Version ID of the data source.
+Defaults to the latest available version defined by the package.}
 }
 \value{
 With \code{source_text = FALSE} (default): a Simple feature collection of

@@ -1844,7 +1844,13 @@ read_habitatstreams <-
              locate_n2khab_data(),
              "10_raw/habitatstreams"
            ),
-           source_text = FALSE) {
+           source_text = FALSE,
+           version = c(
+             "habitatstreams_2025",
+             "habitatstreams_2023",
+             "habitatstreams_v1.7",
+             "habitatstreams_v1.6"
+           )) {
     assert_that(file.exists(file))
 
     assert_that(is.flag(source_text), noNA(source_text))
