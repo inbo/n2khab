@@ -32,3 +32,23 @@ require_pkgs <- function(pkgs) {
     )
   }
 }
+
+
+#' Check availability of a URL
+#'
+#' @details The code is based on \url{https://stackoverflow.com/a/60627969}.
+#'
+#' @return A logical of length 1.
+#'
+#' @keywords internal
+url_is_up <- function(url, timeout = 2) {
+  con <- url(url)
+  check <- suppressWarnings(
+    try(
+      open.connection(con, open = "rt", timeout = timeout),
+      silent = TRUE
+    )[1]
+  )
+suppressWarnings(try(close.connection(con), silent = TRUE))
+ifelse(is.null(check), TRUE, FALSE)
+}
