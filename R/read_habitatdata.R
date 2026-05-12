@@ -1885,7 +1885,7 @@ read_habitatstreams <-
 #'     \item \code{point_id}
 #'     \item \code{name}: site name.
 #'     \item \code{system_type}: environmental typology of `7220`: `mire`,
-#'     `rivulet` or `unknown` (non-`7220` types are `NA`)
+#'     `rivulet` or `unknown` (non-`7220` types are `NA` in older versions)
 #'     \item \code{code_orig}: original type code in raw
 #'     \code{habitatsprings}.
 #'     \item \code{type}: habitat type listed in \code{\link{types}}.
@@ -1901,7 +1901,7 @@ read_habitatstreams <-
 #'     \item \code{source}: original data source of the record.
 #'   }
 #'
-#' Note that the \code{type} and \code{system_type} variables have
+#' Note that the \code{type} and \code{system_type} variables can have
 #' implicit \code{NA} values
 #' (i.e. there is
 #' no factor level to represent the missing values).
@@ -1944,11 +1944,14 @@ read_habitatsprings <-
            ),
            filter_hab = FALSE,
            units_7220 = FALSE,
-           version = "habitatsprings_2020v2") {
+           version = c(
+             "habitatsprings_2025v2",
+             "habitatsprings_2020v2"
+           )) {
     assert_that(file.exists(file))
     assert_that(is.flag(filter_hab), noNA(filter_hab))
     assert_that(is.flag(units_7220), noNA(units_7220))
-    assert_that(is.string(version))
+    version <- match.arg(version)
 
     typelevels <-
       read_types() %>%
