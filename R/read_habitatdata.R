@@ -405,12 +405,7 @@ read_watersurfaces_hab <-
         )
       )
     } else {
-      watersurfaces_types <- suppressWarnings(
-        read_sf(
-          file,
-          "watersurfaces_hab_types"
-        )
-      )
+      watersurfaces_types <- read_sf(file, "watersurfaces_hab_types")
     }
 
     if (interpreted) {
@@ -418,7 +413,7 @@ read_watersurfaces_hab <-
         mutate(type = ifelse(.data$type == "3130", "3130_aom", .data$type))
     }
 
-    types <- suppressWarnings(read_types())
+    types <- read_types()
 
     watersurfaces_types <- watersurfaces_types %>%
       mutate(
