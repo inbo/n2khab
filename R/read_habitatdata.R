@@ -1558,6 +1558,7 @@ read_habitatmap <-
 #' @importFrom sf read_sf st_crs<- st_crs
 #' @importFrom rlang .data
 #' @importFrom dplyr %>% mutate filter relocate
+#' @importFrom tidyselect any_of
 read_habitatmap_terr <-
   function(file = file.path(
              locate_n2khab_data(),
@@ -1584,10 +1585,10 @@ read_habitatmap_terr <-
     )
 
     habmap_terr_polygons <- habmap_terr_polygons %>%
-      mutate(
-        polygon_id = factor(.data$polygon_id),
-        source = factor(.data$source)
-      )
+      mutate(across(
+        any_of(c("polygon_id", "source", "method_assessment")),
+        factor
+      ))
 
     if (st_crs(habmap_terr_polygons) != st_crs(31370)) {
       suppressWarnings(st_crs(habmap_terr_polygons) <- 31370)
