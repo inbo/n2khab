@@ -393,7 +393,9 @@ read_watersurfaces_hab <-
         )
       )
 
-    suppressWarnings(st_crs(watersurfaces_polygons) <- 31370)
+    if (st_crs(watersurfaces_polygons) != st_crs(31370)) {
+      suppressWarnings(st_crs(watersurfaces_polygons) <- 31370)
+    }
 
     if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
       watersurfaces_types <- suppressWarnings(
