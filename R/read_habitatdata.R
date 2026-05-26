@@ -282,9 +282,11 @@ read_habitatmap_stdized <-
 #' repository.
 #'
 #'
-#' @param collapse Logical. Should the resulting \code{watersurfaces_types} list
-#'   element have a single row for each combination of \code{polygon_id} and
-#'   \code{type}? This causes collapsing:
+#' @param collapse Logical. Ignored since \code{watersurfaces_hab_v7}. From that
+#'   version on, the 'collapse' step is part of the workflow to create the data
+#'   source. The argument answers: should the resulting
+#'   \code{watersurfaces_types} list element have a single row for each
+#'   combination of \code{polygon_id} and \code{type}? This causes collapsing:
 #' \itemize{
 #'   \item as a single string of different values of \code{code_orig} that led
 #'   to the same \code{type};
