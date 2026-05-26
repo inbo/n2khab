@@ -306,7 +306,13 @@ read_habitatmap_stdized <-
 #'     \item \code{polygon_id_habitatmap}: id's of all overlapping polygons of \code{habitatmap_stdized} that
 #'     contain standing water habitat. The different id's are separated by '+'.
 #'     \item \code{description_orig}: descriptions of all overlapping polygons of \code{habitatmap_stdized} that
-#'     contain standing water habitat. The different descriptions are separated by '+'.}
+#'     contain standing water habitat. The different descriptions are separated by '+'.
+#'     \item \code{year_assessment}: the year when the types in the polygon have
+#'     been assessed. This column only appears since data source version
+#'     \code{watersurfaces_hab_v7}.
+#'     \item \code{method_assessment}: the method used to assess the types in
+#'     the polygon. This column only appears since data source version
+#'     \code{watersurfaces_hab_v7}.}
 #'   }
 #'   \itemize{
 #'   \item \code{watersurfaces_types}: a tibble with following variables:
