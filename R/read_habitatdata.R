@@ -282,9 +282,6 @@ read_habitatmap_stdized <-
 #' repository.
 #'
 #'
-#' @param interpreted If \code{TRUE}, the interpreted subtype is provided when
-#'   the subtype is missing. This only applies to type 3130. When the subtype is
-#'   missing for 3130, we interpret it as 3130_aom.
 #' @param collapse Logical. Should the resulting \code{watersurfaces_types} list
 #'   element have a single row for each combination of \code{polygon_id} and
 #'   \code{type}? This causes collapsing:
@@ -375,7 +372,6 @@ read_watersurfaces_hab <-
              locate_n2khab_data(),
              "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"
            ),
-           interpreted = FALSE,
            collapse = TRUE,
            version = c(
              "watersurfaces_hab_v7",
@@ -411,11 +407,6 @@ read_watersurfaces_hab <-
       watersurfaces_types <- read_sf(file, "watersurfaces_hab_types")
     }
 
-    if (interpreted) {
-      watersurfaces_types <- watersurfaces_types %>%
-        mutate(type = ifelse(.data$type == "3130", "3130_aom", .data$type))
-    }
-
     types <- read_types()
 
     watersurfaces_types <- watersurfaces_types %>%
@@ -431,7 +422,7 @@ read_watersurfaces_hab <-
 
     # collapse needed? Since version watersurfaces_hab_v7 the data source
     # already contains the result of the collapse step
-    if ((!version %in% c("watersurfaces_hab_v7") | interpreted) && collapse) {
+    if (!version %in% c("watersurfaces_hab_v7") && collapse) {
       watersurfaces_types <- watersurfaces_types %>%
         summarize(
           certain = any(.data$certain),
