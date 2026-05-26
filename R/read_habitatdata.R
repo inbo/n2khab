@@ -443,17 +443,10 @@ read_watersurfaces_hab <-
         )
     }
 
-    if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
-      result <- list(
-        watersurfaces_polygons = watersurfaces_polygons,
-        watersurfaces_patches = watersurfaces_types
-      )
-    } else {
-      result <- list(
-        watersurfaces_polygons = watersurfaces_polygons,
-        watersurfaces_types = watersurfaces_types
-      )
-    }
+    result <- list(
+      watersurfaces_polygons = watersurfaces_polygons,
+      watersurfaces_types = watersurfaces_types
+    )
 
     return(result)
   }
