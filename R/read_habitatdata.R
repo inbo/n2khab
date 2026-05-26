@@ -357,6 +357,7 @@ read_habitatmap_stdized <-
 #' @importFrom sf read_sf st_crs<-
 #' @importFrom rlang .data
 #' @importFrom dplyr %>% across mutate relocate summarize
+#' @importFrom tidyselect any_of
 #' @importFrom stringr str_flatten
 #' @importFrom assertthat assert_that is.string
 #'
@@ -368,6 +369,7 @@ read_watersurfaces_hab <-
            interpreted = FALSE,
            collapse = TRUE,
            version = c(
+             "watersurfaces_hab_v7",
              "watersurfaces_hab_v6",
              "watersurfaces_hab_v5",
              "watersurfaces_hab_v4",
@@ -386,7 +388,7 @@ read_watersurfaces_hab <-
     watersurfaces_polygons <- watersurfaces_polygons %>%
       mutate(
         across(
-          starts_with("polygon_id"),
+          c(starts_with("polygon_id"), any_of("method_assessment")),
           factor
         )
       )
@@ -421,7 +423,7 @@ read_watersurfaces_hab <-
         polygon_id = factor(.data$polygon_id, levels = levels(watersurfaces_polygons$polygon_id)),
         certain = .data$certain == 1,
         type = factor(.data$type,
-          levels = levels(types$type)
+                      levels = levels(types$type)
         )
       ) %>%
       relocate(
@@ -430,7 +432,9 @@ read_watersurfaces_hab <-
         "certain"
       )
 
-    if (collapse) {
+    # collapse needed? Since version watersurfaces_hab_v7 the data source
+    # already contains the result of the collapse step
+    if ((!version %in% c("watersurfaces_hab_v7") | interpreted) && collapse) {
       watersurfaces_types <- watersurfaces_types %>%
         summarize(
           certain = any(.data$certain),
