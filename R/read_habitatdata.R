@@ -380,10 +380,7 @@ read_watersurfaces_hab <-
            )) {
     version <- match.arg(version)
 
-    watersurfaces_polygons <- read_sf(
-      file,
-      "watersurfaces_hab_polygons"
-    )
+    watersurfaces_polygons <- read_sf(file, "watersurfaces_hab_polygons")
 
     watersurfaces_polygons <- watersurfaces_polygons %>%
       mutate(
@@ -399,10 +396,7 @@ read_watersurfaces_hab <-
 
     if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
       watersurfaces_types <- suppressWarnings(
-        read_sf(
-          file,
-          "watersurfaces_hab_patches"
-        )
+        read_sf(file, "watersurfaces_hab_patches")
       )
     } else {
       watersurfaces_types <- read_sf(file, "watersurfaces_hab_types")
@@ -417,17 +411,14 @@ read_watersurfaces_hab <-
 
     watersurfaces_types <- watersurfaces_types %>%
       mutate(
-        polygon_id = factor(.data$polygon_id, levels = levels(watersurfaces_polygons$polygon_id)),
+        polygon_id = factor(
+          .data$polygon_id,
+          levels = levels(watersurfaces_polygons$polygon_id)
+        ),
         certain = .data$certain == 1,
-        type = factor(.data$type,
-                      levels = levels(types$type)
-        )
+        type = factor(.data$type, levels = levels(types$type))
       ) %>%
-      relocate(
-        "polygon_id",
-        "type",
-        "certain"
-      )
+      relocate("polygon_id", "type", "certain")
 
     # collapse needed? Since version watersurfaces_hab_v7 the data source
     # already contains the result of the collapse step
