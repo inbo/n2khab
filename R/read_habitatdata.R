@@ -93,10 +93,10 @@
 #'     orginal type codes in the raw \code{habitatmap}.
 #'     \item \code{year_assessment}: the year when the types in the polygon have
 #'     been assessed. This column only appears since data source version
-#'     `habitatmap_stdized_2025_v1`.
+#'     \code{habitatmap_stdized_2025_v1}.
 #'     \item \code{method_assessment}: the method used to assess the types in
 #'     the polygon. This column only appears since data source version
-#'     `habitatmap_stdized_2025_v1`.
+#'     \code{habitatmap_stdized_2025_v1}.
 #'     }
 #'   }
 #'   \itemize{
@@ -1478,10 +1478,10 @@ read_habitatmap <-
 #'     original type codes in the \code{habitatmap} data source
 #'     \item \code{year_assessment}: the year when the types in the polygon have
 #'     been assessed. This column only appears since data source version
-#'     `habitatmap_terr_2025_v1`.
+#'     \code{habitatmap_terr_2025_v1}.
 #'     \item \code{method_assessment}: the method used to assess the types in
 #'     the polygon. This column only appears since data source version
-#'     `habitatmap_terr_2025_v1`.
+#'     \code{habitatmap_terr_2025_v1}.
 #'     \item \code{description}: based on \code{description_orig} but with the
 #'     interpreted type codes
 #'     \item \code{source}: states where \code{description} comes from: either
