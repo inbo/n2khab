@@ -32,7 +32,7 @@
 #'
 #' In order to add main type codes based on
 #' subtype codes that are present in the type column, specific conditions have
-#' to be met:
+#' to be met if \code{strict} is \code{TRUE}:
 #' \itemize{
 #' \item{for 2330: both subtype codes must be present}
 #' \item{for 5130: 5130_hei must be present (note that only the main type code
