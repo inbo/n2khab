@@ -18,6 +18,12 @@
 #' \code{\link{types}} data source.
 #' A warning is given when they don't.
 #'
+#' Only main types and subtypes are appended that do not already occur in the
+#' data frame \code{x} if the latter is ungrouped, or in the respective group of
+#' a grouped data frame \code{x} (i.e. if \code{use_groups} is \code{TRUE}).
+#' Since the operation can take place within groups, it is assumed that the user
+#' makes sensible use of grouping in order to achieve a useful result.
+#'
 #' Main type codes are always expanded with the subtype codes that belong to it.
 #'
 #' The applied approach to add main type codes only makes sense
