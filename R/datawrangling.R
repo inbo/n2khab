@@ -299,10 +299,7 @@ expand_types_plain <- function(x,
       ) %>%
       filter(.data$main_type_abcd %in% join_main_types) %>%
       mutate(orig_abcd = if (is.factor(.data$orig_abcd)) {
-        factor(
-          .data$main_type_abcd,
-          levels = levels(.data$orig_abcd)
-        )
+        factor(.data$main_type_abcd, levels = levels(.data$orig_abcd))
       } else {
         .data$main_type_abcd
       }) %>%
