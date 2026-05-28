@@ -161,7 +161,7 @@ expand_types <- function(x,
     )
   } else {
     x %>%
-      nest(data = -!!(group_vars(x))) %>%
+      nest() %>%
       ungroup() %>%
       mutate(newdata = map(
         .data$data,
