@@ -35,6 +35,7 @@
 #' to be met if \code{strict} is \code{TRUE}:
 #' \itemize{
 #' \item{for 2330: both subtype codes must be present}
+#' \item{for 3130: both subtype codes must be present}
 #' \item{for 5130: 5130_hei must be present (note that only the main type code
 #' occurs in the targeted data sources)}
 #' \item{for 6230: 6230_ha, 6230_hmo and 6230_hn must be present
@@ -47,7 +48,7 @@
 #' This will add the main type code whenever \emph{one} of the above required
 #' subtype codes is present.
 #' In all cases no other main type codes are added apart from
-#' 2330, 5130, 6230 and 91E0.
+#' 2330, 3130, 5130, 6230 and 91E0.
 #' This is because the data sources with which the result
 #' is to be matched (see Description) don't contain certain main type codes,
 #' and because it makes no sense in other cases
@@ -108,6 +109,7 @@
 #'     "2190", 45,
 #'     "2330_bu", 8,
 #'     "2330_dw", 8,
+#'     "3130_na", 12,
 #'     "5130_hei", 7,
 #'     "6410_mo", 78,
 #'     "6410_ve", 4,
@@ -212,7 +214,7 @@ expand_types_plain <- function(x,
     join_main_types <-
       subtypes %>%
       filter(
-        .data$main_type == "2330" |
+        .data$main_type %in% c("2330", "3130") |
           .data$type %in% c(
             "6230_ha", "6230_hmo", "6230_hn",
             "5130_hei",
