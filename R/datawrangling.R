@@ -209,7 +209,6 @@ expand_types_plain <- function(x,
     rename(orig_abcd = all_of(type_var))
 
   # main types to add:
-  suppressWarnings(
     join_main_types <-
       subtypes %>%
       filter(
@@ -223,19 +222,22 @@ expand_types_plain <- function(x,
       left_join(
         orig_types %>%
           mutate(present = 1),
-        by = c("type" = "orig_abcd")
+        join_by("type" == "orig_abcd"),
+        relationship = "one-to-many",
+        unmatched = "drop"
       ) %>%
-      group_by(.data$main_type) %>%
-      summarise(add = if (strict) {
-        all(!is.na(.data$present))
-      } else {
-        any(!is.na(.data$present))
-      }) %>%
+      summarise(
+        add = if (strict) {
+          all(!is.na(.data$present))
+        } else {
+          any(!is.na(.data$present))
+        },
+        .by = "main_type"
+      ) %>%
       filter(.data$add) %>%
       # only adding codes absent from original data frame:
-      anti_join(orig_types, by = c("main_type" = "orig_abcd")) %>%
+      anti_join(orig_types, join_by("main_type" == "orig_abcd")) %>%
       pull("main_type")
-  )
 
   # marking rows that will be expanded
   if (mark) {
@@ -244,7 +246,9 @@ expand_types_plain <- function(x,
       left_join(
         subtypes %>%
           rename(main_type_abcd = "main_type"),
-        join_by({{ type_var }} == "type")
+        join_by({{ type_var }} == "type"),
+        relationship = "many-to-one",
+        unmatched = "drop"
       ) %>%
       mutate(has_been_expanded = case_when(
         .data[[type_var]] %in% subtypes$main_type ~ TRUE,
@@ -256,20 +260,21 @@ expand_types_plain <- function(x,
 
 
   # expanding main types to their subtypes and adding the latter:
-  suppressWarnings(
     x_expanded <-
       x %>%
       rename(orig_abcd = all_of(type_var)) %>%
       inner_join(
         subtypes %>% rename(type_abcd = "type"),
-        by = c("orig_abcd" = "main_type")
+        join_by("orig_abcd" == "main_type"),
+        relationship = "many-to-many",
+        unmatched = "drop"
       ) %>%
       mutate(orig_abcd = .data$type_abcd) %>%
       select(-"type_abcd") %>%
       anti_join(
         x %>%
           rename(orig_abcd = type_var),
-        by = "orig_abcd"
+        join_by("orig_abcd")
       ) %>%
       set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
       {
@@ -280,17 +285,17 @@ expand_types_plain <- function(x,
         }
       } %>%
       bind_rows(x, .)
-  )
 
   # adding main_types:
-  suppressWarnings(
     x_expanded <-
       x %>%
       rename(orig_abcd = all_of(type_var)) %>%
       inner_join(
         subtypes %>%
           rename(main_type_abcd = "main_type"),
-        by = c("orig_abcd" = "type")
+        join_by("orig_abcd" == "type"),
+        relationship = "many-to-one",
+        unmatched = "drop"
       ) %>%
       filter(.data$main_type_abcd %in% join_main_types) %>%
       mutate(orig_abcd = if (is.factor(.data$orig_abcd)) {
@@ -323,7 +328,6 @@ expand_types_plain <- function(x,
           .
         }
       }
-  )
 
   return(x_expanded)
 }
