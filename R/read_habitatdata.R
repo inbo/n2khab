@@ -1254,7 +1254,7 @@ read_watersurfaces <-
 #' @importFrom assertthat assert_that is.flag noNA
 #' @importFrom sf read_sf st_is_valid st_make_valid st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr %>% mutate select filter starts_with
+#' @importFrom dplyr %>% mutate select filter starts_with recode_values
 #'
 read_habitatmap <-
   function(file = file.path(locate_n2khab_data(), "10_raw/habitatmap"),
@@ -1278,14 +1278,16 @@ read_habitatmap <-
         "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"
       ))
 
-      if (version == "habitatmap_2025") {
-        stop("filter_hab is not supported yet for this version")
-      } else if (version == "habitatmap_2023") {
-        xxh64sum_habitatmap_stdized_expected <- "5c32f9b5d74eac23"
-      } else if (version == "habitatmap_2020") {
-        xxh64sum_habitatmap_stdized_expected <- "3109c26f0a27a0f3"
-      } else {
-        xxh64sum_habitatmap_stdized_expected <- c("b80f469f33636c8b", "8e9c4e09f5f67c3e")
+      xxh64sum_habitatmap_stdized_expected <- recode_values(
+        version,
+        "habitatmap_2025" ~ "85d64872c3fb7016",
+        "habitatmap_2023" ~ "5c32f9b5d74eac23",
+        "habitatmap_2020" ~ "3109c26f0a27a0f3",
+        default = NA_character_
+      )
+      if (is.na(xxh64sum_habitatmap_stdized_expected)) {
+        xxh64sum_habitatmap_stdized_expected <-
+          c("b80f469f33636c8b", "8e9c4e09f5f67c3e")
       }
 
       if (!(xxh64sum_habitatmap_stdized_present %in%
