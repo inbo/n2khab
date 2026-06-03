@@ -8,8 +8,9 @@
 read_watersurfaces_refpoints(
   file = file.path(locate_n2khab_data(), "20_processed/watersurfaces_refpoints"),
   spatial = TRUE,
-  version = c("watersurfaces_refpoints_v6", "watersurfaces_refpoints_v5",
-    "watersurfaces_refpoints_v4", "watersurfaces_refpoints_v6.1_interim"),
+  version = c("watersurfaces_refpoints_v7", "watersurfaces_refpoints_v6",
+    "watersurfaces_refpoints_v5", "watersurfaces_refpoints_v4",
+    "watersurfaces_refpoints_v6.1_interim"),
   single_wsh_version = TRUE,
   file_wsh = file.path(locate_n2khab_data(),
     "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
