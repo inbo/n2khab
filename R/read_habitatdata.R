@@ -565,6 +565,7 @@ read_watersurfaces_refpoints <-
     ),
     spatial = TRUE,
     version = c(
+      "watersurfaces_refpoints_v7",
       "watersurfaces_refpoints_v6",
       "watersurfaces_refpoints_v5",
       "watersurfaces_refpoints_v4",
@@ -592,6 +593,7 @@ read_watersurfaces_refpoints <-
       # verify version consistency
       checksums_expected <- tribble(
         ~version, ~checksum_wsh, ~checksum_refpts_tsv,
+        "7", "832d8861293a5942", "49f7a139434f3872",
         "6", "e2920c4932008387", "b075fbc80c0b55a4",
         "5", "bd860c4d8b2b1de7", "8b74e5f80082595b",
         "4", "5792b496a94d0524", "2243f3cf20478b52",
