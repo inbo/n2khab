@@ -8,6 +8,7 @@ It was found (#221) that the rationale for `interpreted = TRUE` was based on wro
 - `read_habitatmap_terr()` and `read_watersurfaces_hab()` now always use the same element names in the returned list, regardless of the data source version.
 (Before, old package behaviour was still imitated for some old data source versions, but this is not the best approach.)
 - The 'xxx_polygons' element in the returned list of `read_habitatmap_stdized()`, `read_habitatmap_terr()` and `read_watersurfaces_hab()` gains two extra attribute columns since the newest data source versions (below): `year_assessment` (the year when the types in the polygon have been assessed) and `method_assessment` (the method used to assess the types in the polygon).
+- `read_habitatsprings(units_7220 = TRUE)` now concatenates the `system_type` and `source` values of the corresponding points.
 
 ## New features
 
@@ -29,6 +30,8 @@ It was found (#221) that the rationale for `interpreted = TRUE` was based on wro
   - `habitatmap_terr_2025_v1`:
     - Less polygons have been regarded as 'exclusively aquatic' (hence excluded from the data set), by no longer using the phab sum to do this.
     - Type `6230` has been interpreted as `6230_hmo` if `code_orig` is `"6230,6410"`.
+- `read_habitatsprings()` has gained an argument `filter_system` to filter the system type in a conservative way, i.e. including system type 'unknown' if 'mire' or 'rivulet' are requested.
+It also works with the concatenated `system_type` column for `read_habitatsprings(units_7220 = TRUE)`.
 
   
 # n2khab 0.14.0 (2026-02-20)
