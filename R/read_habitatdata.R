@@ -2015,39 +2015,37 @@ read_habitatsprings <-
           "version habitatsprings_2019v1."
         )
       )
-      suppressWarnings(
-        habitatsprings <-
-          habitatsprings %>%
-          filter(.data$type == "7220") %>%
-          select(-.data$point_id) %>%
-          mutate(
-            system_type = as.character(.data$system_type),
-            type = as.character(.data$type)
-          ) %>%
-          summarise(
-            nr_of_points = n(),
-            area_m2 = sum(.data$area_m2),
-            across(c("name", "year"), max),
-            across(where(is.logical), any),
-            across(where(is.character), \(x) str_flatten(sort(unique(x)), " + ")),
-            across("geometry", st_union),
-            .by = "unit_id"
-          ) %>%
-          mutate(
-            type = .data$type %>% factor(levels = typelevels),
-            system_type = factor(.data$system_type)
-          ) %>%
-          st_centroid() %>%
-          relocate(
-            .data$unit_id,
-            .data$nr_of_points,
-            .data$name,
-            .data$system_type,
-            .data$code_orig,
-            .data$type,
-            .data$certain,
-          )
-      )
+      habitatsprings <-
+        habitatsprings %>%
+        filter(.data$type == "7220") %>%
+        select(-.data$point_id) %>%
+        mutate(
+          system_type = as.character(.data$system_type),
+          type = as.character(.data$type)
+        ) %>%
+        summarise(
+          nr_of_points = n(),
+          area_m2 = sum(.data$area_m2),
+          across(c("name", "year"), max),
+          across(where(is.logical), any),
+          across(where(is.character), \(x) str_flatten(sort(unique(x)), " + ")),
+          across("geometry", st_union),
+          .by = "unit_id"
+        ) %>%
+        mutate(
+          type = .data$type %>% factor(levels = typelevels),
+          system_type = factor(.data$system_type)
+        ) %>%
+        st_centroid() %>%
+        relocate(
+          .data$unit_id,
+          .data$nr_of_points,
+          .data$name,
+          .data$system_type,
+          .data$code_orig,
+          .data$type,
+          .data$certain,
+        )
     }
 
     return(habitatsprings)
