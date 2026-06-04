@@ -1988,7 +1988,8 @@ read_habitatsprings <-
       ) %>%
       mutate(
         point_id = as.integer(.data$point_id),
-        unit_id = as.integer(.data$unit_id)
+        unit_id = as.integer(.data$unit_id),
+        year = as.integer(.data$year)
       )
 
 
