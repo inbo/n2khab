@@ -1865,8 +1865,10 @@ read_habitatstreams <-
 #' returned at the population unit level.
 #' To accomplish this, the data source is aggregated by `unit_id`.
 #' Multiple points belonging to the same unit are replaced by their
-#' centroid, their area attribute is summed (if all values are known)
-#' and for other attributes the maximum value is returned.
+#' centroid, their area attribute is summed (if all values are known),
+#' logical variables become \code{TRUE} if any is \code{TRUE},
+#' for year and name the maximum value is used and for other character values a
+#' concatenated string is returned.
 #'
 #' @inheritParams read_habitatmap
 #'
@@ -1925,9 +1927,10 @@ read_habitatstreams <-
 #'
 #' @importFrom assertthat assert_that is.flag noNA is.string
 #' @importFrom stringr str_sub
-#' @importFrom sf read_sf st_transform st_centroid
+#' @importFrom sf read_sf st_transform st_centroid st_union
 #' @importFrom rlang .data
-#' @importFrom dplyr %>% mutate select filter everything group_by summarise_if mutate_at n vars
+#' @importFrom dplyr %>% mutate select filter everything group_by summarise_if mutate_at n vars relocate across
+#' @importFrom tidyselect where
 #' @export
 read_habitatsprings <-
   function(file = file.path(
@@ -1970,7 +1973,7 @@ read_habitatsprings <-
       {
         if (filter_hab) filter(., !is.na(.$type)) else .
       } %>%
-      select(
+      relocate(
         point_id = .data$id,
         .data$name,
         code_orig = .data$habitattype,
@@ -1978,8 +1981,8 @@ read_habitatsprings <-
         .data$certain,
         .data$area_m2,
         .data$year,
-        .data$in_sac,
-        everything(),
+        .data$in_sac) %>%
+      select(
         -.data$validity_status,
         -.data$sbz
       ) %>%
@@ -1993,12 +1996,14 @@ read_habitatsprings <-
       habitatsprings <-
         habitatsprings %>%
         mutate(system_type = factor(.data$system_type)) %>%
-        select(
-          1:2,
+        relocate(
+          .data$point_id,
+          .data$name,
           .data$system_type,
-          3:5,
-          .data$unit_id,
-          everything()
+          .data$code_orig,
+          .data$type,
+          .data$certain,
+          .data$unit_id
         )
     }
 
@@ -2014,35 +2019,32 @@ read_habitatsprings <-
           habitatsprings %>%
           filter(.data$type == "7220") %>%
           select(-.data$point_id) %>%
-          group_by(.data$unit_id) %>%
           mutate(
-            area_m2 = sum(.data$area_m2),
             system_type = as.character(.data$system_type),
-            type = as.character(.data$type),
-            nr_of_points = n()
+            type = as.character(.data$type)
           ) %>%
-          summarise_if(
-            function(x) {
-              !inherits(x, "sfc")
-            },
-            max
+          summarise(
+            nr_of_points = n(),
+            area_m2 = sum(.data$area_m2),
+            across(c("name", "year"), max),
+            across(where(is.logical), any),
+            across(where(is.character), \(x) str_flatten(sort(unique(x)), " + ")),
+            across("geometry", st_union),
+            .by = "unit_id"
           ) %>%
           mutate(
             type = .data$type %>% factor(levels = typelevels),
             system_type = factor(.data$system_type)
           ) %>%
-          mutate_at(
-            vars(
-              .data$certain,
-              .data$in_sac
-            ),
-            as.logical
-          ) %>%
           st_centroid() %>%
-          select(
+          relocate(
             .data$unit_id,
             .data$nr_of_points,
-            everything()
+            .data$name,
+            .data$system_type,
+            .data$code_orig,
+            .data$type,
+            .data$certain,
           )
       )
     }
