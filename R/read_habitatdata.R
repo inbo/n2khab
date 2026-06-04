@@ -1861,6 +1861,11 @@ read_habitatstreams <-
 #'
 #' @param filter_hab If \code{TRUE}, only points with (potential) habitat
 #' are returned. The default value is \code{FALSE}.
+#' @param filter_system String; either \code{"all"}, \code{"mire"} or
+#' \code{"rivulet"}. Value \code{"all"} applies no filter, while \code{"mire"}
+#' and \code{"rivulet"} only return rows where the system type is (possibly)
+#' mire or rivulet, respectively. The system type 'unknown' is included in those
+#' cases.
 #' @param units_7220 If \code{TRUE}, an `sf` object of type-`7220`-locations is
 #' returned at the population unit level.
 #' To accomplish this, the data source is aggregated by `unit_id`.
@@ -1926,7 +1931,7 @@ read_habitatstreams <-
 #' }
 #'
 #' @importFrom assertthat assert_that is.flag noNA is.string
-#' @importFrom stringr str_sub
+#' @importFrom stringr str_sub str_detect
 #' @importFrom sf read_sf st_transform st_centroid st_union
 #' @importFrom rlang .data
 #' @importFrom dplyr %>% mutate select filter everything group_by summarise_if mutate_at n vars relocate across
@@ -1938,6 +1943,7 @@ read_habitatsprings <-
              "10_raw/habitatsprings/habitatsprings.geojson"
            ),
            filter_hab = FALSE,
+           filter_system = c("all", "mire", "rivulet"),
            units_7220 = FALSE,
            version = c(
              "habitatsprings_2025v2",
@@ -1946,6 +1952,7 @@ read_habitatsprings <-
     assert_that(file.exists(file))
     assert_that(is.flag(filter_hab), noNA(filter_hab))
     assert_that(is.flag(units_7220), noNA(units_7220))
+    filter_system <- match.arg(filter_system)
     version <- match.arg(version)
 
     typelevels <-
@@ -2046,6 +2053,17 @@ read_habitatsprings <-
           .data$type,
           .data$certain,
         )
+    }
+
+    # for filter_system, we take into account that system_type has been
+    # concatenated if units_7220 is TRUE
+    if (filter_system != "all") {
+      habitatsprings <-
+        habitatsprings %>%
+        filter(str_detect(
+          .data$system_type,
+          paste0(filter_system, "|unknown")
+        ))
     }
 
     return(habitatsprings)
