@@ -301,7 +301,8 @@ read_habitatmap_stdized <-
 #'   \item \code{watersurfaces_polygons}: an sf object of standing water polygons with four attribute variables:
 #'   \itemize{
 #'     \item \code{polygon_id}
-#'     \item \code{polygon_id_ws}: id for the polygon in the \code{watersurface map}
+#'     \item \code{polygon_id_ws}: id for the polygon in the
+#'     \code{watersurfaces} data source
 #'     \item \code{polygon_id_habitatmap}: id's of all overlapping polygons of \code{habitatmap_stdized} that
 #'     contain standing water habitat. The different id's are separated by '+'.
 #'     \item \code{description_orig}: descriptions of all overlapping polygons of \code{habitatmap_stdized} that
