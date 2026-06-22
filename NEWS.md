@@ -25,7 +25,7 @@ It was found (#221) that the rationale for `interpreted = TRUE` was based on wro
   Function documentation was updated accordingly.
   Some noteworthy changes and fixes in data sources:
   
-  - `read_watersurfaces_hab()`: the argument `collapse` is ignored since data source version `watersurfaces_refpoints_v7` because the 'collapse' step is now part of the workflow to create the data source (solving issue #78).
+  - `read_watersurfaces_hab()`: the argument `collapse` is ignored since data source version `watersurfaces_hab_v7` because the 'collapse' step is now part of the workflow to create the data source (solving issue #78).
   - `watersurfaces_hab_v7`: duplication inside concatenated strings is fixed (solving issue #75).
   - `habitatmap_terr_2025_v1`:
     - Less polygons have been regarded as 'exclusively aquatic' (hence excluded from the data set), by no longer using the phab sum to do this.
