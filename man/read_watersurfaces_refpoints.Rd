@@ -8,8 +8,9 @@
 read_watersurfaces_refpoints(
   file = file.path(locate_n2khab_data(), "20_processed/watersurfaces_refpoints"),
   spatial = TRUE,
-  version = c("watersurfaces_refpoints_v6", "watersurfaces_refpoints_v5",
-    "watersurfaces_refpoints_v4", "watersurfaces_refpoints_v6.1_interim"),
+  version = c("watersurfaces_refpoints_v7", "watersurfaces_refpoints_v6",
+    "watersurfaces_refpoints_v5", "watersurfaces_refpoints_v4",
+    "watersurfaces_refpoints_v6.1_interim"),
   single_wsh_version = TRUE,
   file_wsh = file.path(locate_n2khab_data(),
     "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"),
@@ -117,13 +118,13 @@ Vlaanderen. Uitgave 2024.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek 2024
 (52). Instituut voor Natuur en Bosonderzoek, Brussel.
 \doi{10.21436/inbor.114075267}.
-\item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-Van Dam G., Van Hove M., Wils C. (red.) (2023).
-Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-Instituut voor Natuur- en Bosonderzoek (INBO).
-\doi{10.21436/inbor.96375305}.
+\item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+Bosonderzoek, Brussel.
+\doi{10.21436/inbor.129502912}.
 }
 }
 \seealso{

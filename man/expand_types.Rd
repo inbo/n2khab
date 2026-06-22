@@ -50,8 +50,8 @@ and, under certain conditions, adds new rows with codes of the associated
 \emph{subtypes} and \emph{main types}, respectively.
 It allows to do sensible selections and joins with interpreted forms of the
 \code{habitatmap_stdized} and \code{watersurfaces_hab} data sources:
-\code{habitatmap_terr},
-\code{read_watersurfaces_hab(interpreted = TRUE)}.
+\code{read_habitatmap_terr()},
+\code{read_watersurfaces_hab()}.
 If the data frame has one or more grouping variables, by default the
 operation is done independently for each group in turn.
 }
@@ -63,6 +63,12 @@ Type codes in the data frame are verified to comply with the codes from the
 \code{\link{types}} data source.
 A warning is given when they don't.
 
+Only main types and subtypes are appended that do not already occur in the
+data frame \code{x} if the latter is ungrouped, or in the respective group of
+a grouped data frame \code{x} (i.e. if \code{use_groups} is \code{TRUE}).
+Since the operation can take place within groups, it is assumed that the user
+makes sensible use of grouping in order to achieve a useful result.
+
 Main type codes are always expanded with the subtype codes that belong to it.
 
 The applied approach to add main type codes only makes sense
@@ -71,9 +77,10 @@ with one of the \emph{above listed} geospatial data sources.
 
 In order to add main type codes based on
 subtype codes that are present in the type column, specific conditions have
-to be met:
+to be met if \code{strict} is \code{TRUE}:
 \itemize{
 \item{for 2330: both subtype codes must be present}
+\item{for 3130: both subtype codes must be present}
 \item{for 5130: 5130_hei must be present (note that only the main type code
 occurs in the targeted data sources)}
 \item{for 6230: 6230_ha, 6230_hmo and 6230_hn must be present
@@ -86,7 +93,7 @@ However, it is possible to relax this requirement by setting
 This will add the main type code whenever \emph{one} of the above required
 subtype codes is present.
 In all cases no other main type codes are added apart from
-2330, 5130, 6230 and 91E0.
+2330, 3130, 5130, 6230 and 91E0.
 This is because the data sources with which the result
 is to be matched (see Description) don't contain certain main type codes,
 and because it makes no sense in other cases
@@ -115,6 +122,7 @@ x <-
     "2190", 45,
     "2330_bu", 8,
     "2330_dw", 8,
+    "3130_na", 12,
     "5130_hei", 7,
     "6410_mo", 78,
     "6410_ve", 4,

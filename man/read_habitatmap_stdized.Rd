@@ -8,9 +8,9 @@ objects}
 read_habitatmap_stdized(
   file = file.path(locate_n2khab_data(),
     "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"),
-  version = c("habitatmap_stdized_2023_v1", "habitatmap_stdized_2020_v1",
-    "habitatmap_stdized_2018_v2", "habitatmap_stdized_2018_v1",
-    "habitatmap_stdized_2024_v99_interim")
+  version = c("habitatmap_stdized_2025_v1", "habitatmap_stdized_2023_v1",
+    "habitatmap_stdized_2020_v1", "habitatmap_stdized_2018_v2",
+    "habitatmap_stdized_2018_v1", "habitatmap_stdized_2024_v99_interim")
 )
 }
 \arguments{
@@ -29,11 +29,18 @@ Institute for Nature and Forest (INBO) only.}
 \value{
 A list of two objects:
   \itemize{
-  \item \code{habitatmap_polygons}: an sf object of \code{habitatmap} polygons with two attribute variables
+  \item \code{habitatmap_polygons}: an sf object of \code{habitatmap} polygons with four attribute variables
   \itemize{
     \item \code{polygon_id}
     \item \code{description_orig}: polygon description based on the
-    orginal type codes in the raw \code{habitatmap}}
+    orginal type codes in the raw \code{habitatmap}.
+    \item \code{year_assessment}: the year when the types in the polygon have
+    been assessed. This column only appears since data source version
+    \code{habitatmap_stdized_2025_v1}.
+    \item \code{method_assessment}: the method used to assess the types in
+    the polygon. This column only appears since data source version
+    \code{habitatmap_stdized_2025_v1}.
+    }
   }
   \itemize{
   \item \code{habitatmap_types}: a tibble with following variables
@@ -64,7 +71,7 @@ A list of two objects:
 }
 \details{
 The data source \code{habitatmap_stdized} is the processed version
-of the raw data source \code{habitatmap} (De Saeger et al., 2023).
+of the raw data source \code{habitatmap} (De Saeger et al., 2025).
 Every polygon in the \code{habitatmap} can consist of maximum 5
 different types. This information is stored in the
 columns 'HAB1', HAB2',..., 'HAB5' of the attribute table. The
@@ -141,13 +148,13 @@ hms_types
 }
 \references{
 \itemize{
-\item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-Van Dam G., Van Hove M., Wils C. (red.) (2023).
-Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-Instituut voor Natuur- en Bosonderzoek (INBO).
-\doi{10.21436/inbor.96375305}.
+\item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+Bosonderzoek, Brussel.
+\doi{10.21436/inbor.129502912}.
 \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 the Flemish Region of Belgium. Documents phytosociologiques - Actes du

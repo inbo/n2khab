@@ -8,7 +8,7 @@ read_habitatmap(
   file = file.path(locate_n2khab_data(), "10_raw/habitatmap"),
   filter_hab = FALSE,
   fix_geom = FALSE,
-  version = c("habitatmap_2023", "habitatmap_2020", "habitatmap_2018")
+  version = c("habitatmap_2025", "habitatmap_2023", "habitatmap_2020", "habitatmap_2018")
 )
 }
 \arguments{
@@ -42,7 +42,7 @@ A Simple feature collection of
 type \code{MULTIPOLYGON}.
 }
 \description{
-Returns the raw data source \code{habitatmap} (De Saeger et al., 2023)
+Returns the raw data source \code{habitatmap} (De Saeger et al., 2025)
 as a standardized \code{sf} multipolygon layer
 (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -71,13 +71,13 @@ all(sf::st_is_valid(hm_valid))
 }
 \references{
 \itemize{
-\item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-Van Dam G., Van Hove M., Wils C. (red.) (2023).
-Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-Instituut voor Natuur- en Bosonderzoek (INBO).
-\doi{10.21436/inbor.96375305}.
+\item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+Bosonderzoek, Brussel.
+\doi{10.21436/inbor.129502912}.
 \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 the Flemish Region of Belgium. Documents phytosociologiques - Actes du
