@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Climb up in the file system hierarchy to find a file or folder — fileman_up • n2khab</title>
+<title>Check availability of a URL — url_is_up • n2khab</title>
 
 
 <!-- jquery -->
@@ -41,11 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Climb up in the file system hierarchy to find a file or folder — fileman_up" />
-<meta property="og:description" content="Searches for a specific file or folder, starting from the start
-directory and sequentially climbing up one directory level at a time.
-The first match causes this sequence to stop
-and the full path will be returned." />
+<meta property="og:title" content="Check availability of a URL — url_is_up" />
+<meta property="og:description" content="Check availability of a URL" />
 
 
 
@@ -140,65 +137,25 @@ and the full path will be returned." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Climb up in the file system hierarchy to find a file or folder</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/filemanagement.R'><code>R/filemanagement.R</code></a></small>
-    <div class="hidden name"><code>fileman_up.Rd</code></div>
+    <h1>Check availability of a URL</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/misc.R'><code>R/misc.R</code></a></small>
+    <div class="hidden name"><code>url_is_up.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Searches for a specific file or folder, starting from the <code>start</code>
-directory and sequentially climbing up one directory level at a time.
-The first match causes this sequence to stop
-and the full path will be returned.</p>
+    <p>Check availability of a URL</p>
     </div>
 
-    <pre class="usage"><span><span class='fu'>fileman_up</span><span class='op'>(</span><span class='va'>name</span>, start <span class='op'>=</span> <span class='st'>"."</span>, levels <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span></pre>
+    <pre class="usage"><span><span class='fu'>url_is_up</span><span class='op'>(</span><span class='va'>url</span>, timeout <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>name</th>
-      <td><p>Name of file or folder to search for.
-An exact match is needed.
-The matching is case sensitive.</p></td>
-    </tr>
-    <tr>
-      <th>start</th>
-      <td><p>String.
-Directory to start searching from.</p></td>
-    </tr>
-    <tr>
-      <th>levels</th>
-      <td><p>Integer.
-How many levels to sequentially climb up in the file hierarchy,
-if the file or folder is not found in the <code>start</code> directory?</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The path to the specified folder or file (string), or <code>NULL</code> if
-not found.</p>
+    <p>A logical of length 1.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Symbolic links are matched, and in the returned path they are converted.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p>The code is based on <a href='https://stackoverflow.com/a/60627969'>https://stackoverflow.com/a/60627969</a>.</p>
 
-    <div class='dont-index'><p>Other functions regarding file management for N2KHAB projects:
-<code><a href='checksum.html'>checksum()</a></code>,
-<code><a href='convert_line_endings.html'>convert_line_endings()</a></code>,
-<code><a href='download_zenodo.html'>download_zenodo()</a></code>,
-<code><a href='fileman_folders.html'>fileman_folders()</a></code>,
-<code><a href='get_zenodo_versions.html'>get_zenodo_versions()</a></code>,
-<code><a href='locate_n2khab_data.html'>locate_n2khab_data()</a></code></p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>
-<span class='r-in'><span><span class='fu'>fileman_up</span><span class='op'>(</span><span class='st'>"n2khab_data"</span><span class='op'>)</span></span></span>
-<span class='r-in'><span><span class='op'>}</span></span></span>
-<span class='r-in'><span></span></span>
-</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

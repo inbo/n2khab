@@ -80,7 +80,7 @@ returned at the population unit level, through aggregation by unit_id." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.14.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.15.0</span>
       </span>
     </div>
 
@@ -160,8 +160,9 @@ returned at the population unit level, through aggregation by <code>unit_id</cod
     <pre class="usage"><span><span class='fu'>read_habitatsprings</span><span class='op'>(</span></span>
 <span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"10_raw/habitatsprings/habitatsprings.geojson"</span><span class='op'>)</span>,</span>
 <span>  filter_hab <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span>  filter_system <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"all"</span>, <span class='st'>"mire"</span>, <span class='st'>"rivulet"</span><span class='op'>)</span>,</span>
 <span>  units_7220 <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
-<span>  version <span class='op'>=</span> <span class='st'>"habitatsprings_2020v2"</span></span>
+<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"habitatsprings_2025v2"</span>, <span class='st'>"habitatsprings_2020v2"</span><span class='op'>)</span></span>
 <span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -182,13 +183,23 @@ starting from the working directory.</p></td>
 are returned. The default value is <code>FALSE</code>.</p></td>
     </tr>
     <tr>
+      <th>filter_system</th>
+      <td><p>String; either <code>"all"</code>, <code>"mire"</code> or
+<code>"rivulet"</code>. Value <code>"all"</code> applies no filter, while <code>"mire"</code>
+and <code>"rivulet"</code> only return rows where the system type is (possibly)
+mire or rivulet, respectively. The system type 'unknown' is included in those
+cases.</p></td>
+    </tr>
+    <tr>
       <th>units_7220</th>
       <td><p>If <code>TRUE</code>, an <code>sf</code> object of type-<code>7220</code>-locations is
 returned at the population unit level.
 To accomplish this, the data source is aggregated by <code>unit_id</code>.
 Multiple points belonging to the same unit are replaced by their
-centroid, their area attribute is summed (if all values are known)
-and for other attributes the maximum value is returned.</p></td>
+centroid, their area attribute is summed (if all values are known),
+logical variables become <code>TRUE</code> if any is <code>TRUE</code>,
+for year and name the maximum value is used and for other character values a
+concatenated string is returned.</p></td>
     </tr>
     <tr>
       <th>version</th>
@@ -204,7 +215,7 @@ type <code>POINT</code>, with attribute variables:</p><ul>
 <li><p><code>point_id</code></p></li>
 <li><p><code>name</code>: site name.</p></li>
 <li><p><code>system_type</code>: environmental typology of <code>7220</code>: <code>mire</code>,
-<code>rivulet</code> or <code>unknown</code> (non-<code>7220</code> types are <code>NA</code>)</p></li>
+<code>rivulet</code> or <code>unknown</code> (non-<code>7220</code> types are <code>NA</code> in older versions)</p></li>
 <li><p><code>code_orig</code>: original type code in raw
 <code>habitatsprings</code>.</p></li>
 <li><p><code>type</code>: habitat type listed in <code><a href='types.html'>types</a></code>.</p></li>
@@ -220,7 +231,7 @@ Is the site situated within a Special Area of Conservation?</p></li>
 <li><p><code>source</code>: original data source of the record.</p></li>
 </ul>
 
-<p>Note that the <code>type</code> and <code>system_type</code> variables have
+<p>Note that the <code>type</code> and <code>system_type</code> variables can have
 implicit <code>NA</code> values
 (i.e. there is
 no factor level to represent the missing values).

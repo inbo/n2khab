@@ -48,8 +48,8 @@ and, under certain conditions, adds new rows with codes of the associated
 subtypes and main types, respectively.
 It allows to do sensible selections and joins with interpreted forms of the
 habitatmap_stdized and watersurfaces_hab data sources:
-habitatmap_terr,
-read_watersurfaces_hab(interpreted = TRUE).
+read_habitatmap_terr(),
+read_watersurfaces_hab().
 If the data frame has one or more grouping variables, by default the
 operation is done independently for each group in turn." />
 
@@ -83,7 +83,7 @@ operation is done independently for each group in turn." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.14.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.15.0</span>
       </span>
     </div>
 
@@ -158,8 +158,8 @@ and, under certain conditions, adds new rows with codes of the associated
 <em>subtypes</em> and <em>main types</em>, respectively.
 It allows to do sensible selections and joins with interpreted forms of the
 <code>habitatmap_stdized</code> and <code>watersurfaces_hab</code> data sources:
-<code>habitatmap_terr</code>,
-<code>read_watersurfaces_hab(interpreted = TRUE)</code>.
+<code><a href='read_habitatmap_terr.html'>read_habitatmap_terr()</a></code>,
+<code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab()</a></code>.
 If the data frame has one or more grouping variables, by default the
 operation is done independently for each group in turn.</p>
     </div>
@@ -220,14 +220,20 @@ subtype - main type relation.
 Type codes in the data frame are verified to comply with the codes from the
 <code><a href='types.html'>types</a></code> data source.
 A warning is given when they don't.</p>
+<p>Only main types and subtypes are appended that do not already occur in the
+data frame <code>x</code> if the latter is ungrouped, or in the respective group of
+a grouped data frame <code>x</code> (i.e. if <code>use_groups</code> is <code>TRUE</code>).
+Since the operation can take place within groups, it is assumed that the user
+makes sensible use of grouping in order to achieve a useful result.</p>
 <p>Main type codes are always expanded with the subtype codes that belong to it.</p>
 <p>The applied approach to add main type codes only makes sense
 assuming that the result is to be confronted
 with one of the <em>above listed</em> geospatial data sources.</p>
 <p>In order to add main type codes based on
 subtype codes that are present in the type column, specific conditions have
-to be met:</p><ul>
+to be met if <code>strict</code> is <code>TRUE</code>:</p><ul>
 <li><p>for 2330: both subtype codes must be present</p></li>
+<li><p>for 3130: both subtype codes must be present</p></li>
 <li><p>for 5130: 5130_hei must be present (note that only the main type code
 occurs in the targeted data sources)</p></li>
 <li><p>for 6230: 6230_ha, 6230_hmo and 6230_hn must be present
@@ -239,7 +245,7 @@ occurs in the targeted data sources)</p></li>
 This will add the main type code whenever <em>one</em> of the above required
 subtype codes is present.
 In all cases no other main type codes are added apart from
-2330, 5130, 6230 and 91E0.
+2330, 3130, 5130, 6230 and 91E0.
 This is because the data sources with which the result
 is to be matched (see Description) don't contain certain main type codes,
 and because it makes no sense in other cases
@@ -339,31 +345,13 @@ main type but to a non-defined subtype with no specific code).</p>
 <span class='r-in'><span>    <span class='st'>"2190"</span>, <span class='fl'>45</span>,</span></span>
 <span class='r-in'><span>    <span class='st'>"2330_bu"</span>, <span class='fl'>8</span>,</span></span>
 <span class='r-in'><span>    <span class='st'>"2330_dw"</span>, <span class='fl'>8</span>,</span></span>
+<span class='r-in'><span>    <span class='st'>"3130_na"</span>, <span class='fl'>12</span>,</span></span>
 <span class='r-in'><span>    <span class='st'>"5130_hei"</span>, <span class='fl'>7</span>,</span></span>
 <span class='r-in'><span>    <span class='st'>"6410_mo"</span>, <span class='fl'>78</span>,</span></span>
 <span class='r-in'><span>    <span class='st'>"6410_ve"</span>, <span class='fl'>4</span>,</span></span>
 <span class='r-in'><span>    <span class='st'>"91E0_vn"</span>, <span class='fl'>10</span></span></span>
 <span class='r-in'><span>  <span class='op'>)</span></span></span>
 <span class='r-in'><span><span class='fu'>expand_types</span><span class='op'>(</span><span class='va'>x</span>, type_var <span class='op'>=</span> <span class='st'>"mycode"</span>, mark <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 15 × 4</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    mycode        obs has_been_expanded added_by_expansion</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 2130            5 TRUE              FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 2190           45 TRUE              FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 2330_bu         8 TRUE              FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 2330_dw         8 TRUE              FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 5130_hei        7 TRUE              FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 6410_mo        78 FALSE             FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 6410_ve         4 FALSE             FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 91E0_vn        10 FALSE             FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 2130_had        5 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 2130_hd         5 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> 2190_a         45 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> 2190_mp        45 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span> 2190_overig    45 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span> 2330            8 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span> 5130            7 FALSE             TRUE              </span>
-<span class='r-in'><span><span class='fu'>expand_types</span><span class='op'>(</span><span class='va'>x</span>, type_var <span class='op'>=</span> <span class='st'>"mycode"</span>, strict <span class='op'>=</span> <span class='cn'>FALSE</span>, mark <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 16 × 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    mycode        obs has_been_expanded added_by_expansion</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             </span>
@@ -371,18 +359,40 @@ main type but to a non-defined subtype with no specific code).</p>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 2190           45 TRUE              FALSE             </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 2330_bu         8 TRUE              FALSE             </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 2330_dw         8 TRUE              FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 5130_hei        7 TRUE              FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 6410_mo        78 FALSE             FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 6410_ve         4 FALSE             FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 91E0_vn        10 TRUE              FALSE             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 2130_had        5 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 2130_hd         5 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> 2190_a         45 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> 2190_mp        45 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span> 2190_overig    45 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span> 2330            8 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span> 5130            7 FALSE             TRUE              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>16</span> 91E0           10 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 3130_na        12 FALSE             FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 5130_hei        7 TRUE              FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 6410_mo        78 FALSE             FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 6410_ve         4 FALSE             FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 91E0_vn        10 FALSE             FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 2130_had        5 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> 2130_hd         5 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> 2190_a         45 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span> 2190_mp        45 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span> 2190_overig    45 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span> 2330            8 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>16</span> 5130            7 FALSE             TRUE              </span>
+<span class='r-in'><span><span class='fu'>expand_types</span><span class='op'>(</span><span class='va'>x</span>, type_var <span class='op'>=</span> <span class='st'>"mycode"</span>, strict <span class='op'>=</span> <span class='cn'>FALSE</span>, mark <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 18 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    mycode        obs has_been_expanded added_by_expansion</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 2130            5 TRUE              FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 2190           45 TRUE              FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 2330_bu         8 TRUE              FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 2330_dw         8 TRUE              FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 3130_na        12 TRUE              FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 5130_hei        7 TRUE              FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 6410_mo        78 FALSE             FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 6410_ve         4 FALSE             FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 91E0_vn        10 TRUE              FALSE             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 2130_had        5 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> 2130_hd         5 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> 2190_a         45 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span> 2190_mp        45 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span> 2190_overig    45 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span> 2330            8 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>16</span> 3130           12 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>17</span> 5130            7 FALSE             TRUE              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>18</span> 91E0           10 FALSE             TRUE              </span>
 <span class='r-in'><span></span></span>
 </pre>
   </div>

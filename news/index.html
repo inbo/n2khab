@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.14.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.15.0</span>
       </span>
     </div>
 
@@ -140,6 +140,103 @@
       <small>Source: <a href='https://github.com/inbo/n2khab/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="n2khab-0150-2026-06-23" class="section level1">
+<h1 class="page-header" data-toc-text="0.15.0">
+<a href="#n2khab-0150-2026-06-23" class="anchor"></a>n2khab 0.15.0 (2026-06-23)</h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>
+<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code> has lost its argument
+<code>interpreted</code>. Its former default <code>FALSE</code> is the
+behaviour that is continued. It was found (<a href='https://github.com/inbo/n2khab/issues/221'>#221</a>) that the rationale for
+<code>interpreted = TRUE</code> was based on wrong assumptions;
+occurrences coded as main type <code>3130</code> cannot be interpreted
+as one specific subtype.</li>
+<li>
+<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> and
+<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code> now always use the same element
+names in the returned list, regardless of the data source version.
+(Before, old package behaviour was still imitated for some old data
+source versions, but this is not the best approach.)</li>
+<li>The ‘xxx_polygons’ element in the returned list of
+<code><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code>,
+<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code> and
+<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code> gains two extra attribute columns
+since the newest data source versions (below):
+<code>year_assessment</code> (the year when the types in the polygon
+have been assessed) and <code>method_assessment</code> (the method used
+to assess the types in the polygon).</li>
+<li>
+<code>read_habitatsprings(units_7220 = TRUE)</code> now concatenates
+the <code>system_type</code> and <code>source</code> values of the
+corresponding points.</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li><p><code><a href="../reference/expand_types.html">expand_types()</a></code> now expands subtypes
+<code>3130_aom</code> and <code>3130_na</code> to their main type,
+following <a href='https://github.com/inbo/n2khab/issues/221'>#221</a>.</p></li>
+<li>
+<p>The following new data source versions are now supported by the
+corresponding functions (<a href='https://github.com/inbo/n2khab/issues/215'>#215</a>; <a href="https://github.com/inbo/n2khab-preprocessing/pull/84">inbo/n2khab-preprocessing/pull/79</a>):</p>
+<ul>
+<li>
+<code>habitatmap_2025</code> (<code><a href="../reference/read_habitatmap.html">read_habitatmap()</a></code>)</li>
+<li>
+<code>habitatmap_stdized_2025_v1</code>
+(<code><a href="../reference/read_habitatmap_stdized.html">read_habitatmap_stdized()</a></code>)</li>
+<li>
+<code>habitatmap_terr_2025_v1</code>
+(<code><a href="../reference/read_habitatmap_terr.html">read_habitatmap_terr()</a></code>)</li>
+<li>
+<code>watersurfaces_hab_v7</code>
+(<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code>)</li>
+<li>
+<code>watersurfaces_refpoints_v7</code>
+(<code><a href="../reference/read_watersurfaces_refpoints.html">read_watersurfaces_refpoints()</a></code>)</li>
+<li>
+<code>habitatstreams_2025</code>
+(<code><a href="../reference/read_habitatstreams.html">read_habitatstreams()</a></code>)</li>
+<li>
+<code>habitatsprings_2025v2</code>
+(<code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code>)</li>
+</ul>
+<p>Function documentation was updated accordingly. Some noteworthy
+changes and fixes in data sources:</p>
+<ul>
+<li>
+<code><a href="../reference/read_watersurfaces_hab.html">read_watersurfaces_hab()</a></code>: the argument
+<code>collapse</code> is ignored since data source version
+<code>watersurfaces_hab_v7</code> because the ‘collapse’ step is now
+part of the workflow to create the data source (solving issue <a href='https://github.com/inbo/n2khab/issues/78'>#78</a>).</li>
+<li>
+<code>watersurfaces_hab_v7</code>: duplication inside concatenated
+strings is fixed (solving issue <a href='https://github.com/inbo/n2khab/issues/75'>#75</a>).</li>
+<li>
+<code>habitatmap_terr_2025_v1</code>:
+<ul>
+<li>Less polygons have been regarded as ‘exclusively aquatic’ (hence
+excluded from the data set), by no longer using the phab sum to do
+this.</li>
+<li>Type <code>6230</code> has been interpreted as <code>6230_hmo</code>
+if <code>code_orig</code> is <code>"6230,6410"</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code><a href="../reference/read_habitatsprings.html">read_habitatsprings()</a></code> has gained an argument
+<code>filter_system</code> to filter the system type in a conservative
+way, i.e. including system type ‘unknown’ if ‘mire’ or ‘rivulet’ are
+requested. It also works with the concatenated <code>system_type</code>
+column for <code>read_habitatsprings(units_7220 = TRUE)</code>.</p></li>
+</ul>
+</div>
+</div>
     <div id="n2khab-0140-2026-02-20" class="section level1">
 <h1 class="page-header" data-toc-text="0.14.0">
 <a href="#n2khab-0140-2026-02-20" class="anchor"></a>n2khab 0.14.0 (2026-02-20)</h1>
@@ -185,9 +282,9 @@ Refer to <a href="https://github.com/inbo/n2khab-preprocessing/issues/78">inbo/n
 for more information.</li>
 </ul>
 </div>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>New function <code><a href="../reference/read_favenv.html">read_favenv()</a></code> to return favourable
 environmental ranges of types (<a href='https://github.com/inbo/n2khab/issues/195'>#195</a>).</li>
@@ -428,9 +525,9 @@ of type <code>7210</code> in scheme <code>GW_03.3</code> (<a href='https://githu
     <div id="n2khab-060-2022-02-03" class="section level1">
 <h1 class="page-header" data-toc-text="0.6.0">
 <a href="#n2khab-060-2022-02-03" class="anchor"></a>n2khab 0.6.0 (2022-02-03)</h1>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>Function <code><a href="../reference/read_shallowgroundwater.html">read_shallowgroundwater()</a></code> to return the
 <code>shallowgroundwater</code> data source (<a href='https://github.com/inbo/n2khab/issues/156'>#156</a>).
@@ -600,9 +697,9 @@ recommended file organization (see
 <code>path</code> and <code>file</code> arguments.</li>
 </ul>
 </div>
-<div id="new-features-2" class="section level2">
+<div id="new-features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-2" class="anchor"></a>New features</h2>
+<a href="#new-features-3" class="anchor"></a>New features</h2>
 <ul>
 <li>New function <code><a href="../reference/read_habitatquarries.html">read_habitatquarries()</a></code> for reading the
 <code>habitatquarries</code> data source (<a href='https://github.com/inbo/n2khab/issues/83'>#83</a>, <a href='https://github.com/inbo/n2khab/issues/94'>#94</a>, <a href="https://github.com/inbo/n2khab-preprocessing/pull/41">inbo/n2khab-preprocessing/pull/41</a>).</li>
@@ -634,9 +731,9 @@ defining the schemes’ target populations);</li>
     <div id="n2khab-020-2020-05-08" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
 <a href="#n2khab-020-2020-05-08" class="anchor"></a>n2khab 0.2.0 (2020-05-08)</h1>
-<div id="new-features-3" class="section level2">
+<div id="new-features-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-3" class="anchor"></a>New features</h2>
+<a href="#new-features-4" class="anchor"></a>New features</h2>
 <ul>
 <li>Updates in reference lists (<a href='https://github.com/inbo/n2khab/issues/64'>#64</a>, <a href='https://github.com/inbo/n2khab/issues/65'>#65</a>, <a href='https://github.com/inbo/n2khab/issues/69'>#69</a>, <a href="https://github.com/inbo/n2khab/pull/73/commits/e69cd52">e69cd52</a>):
 <ul>

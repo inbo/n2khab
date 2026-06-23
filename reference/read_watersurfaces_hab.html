@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the data source watersurfaces_hab as a list of two
-objects — read_watersurfaces_hab • n2khab</title>
+<title>Return the data source watersurfaces_hab as a list of two objects — read_watersurfaces_hab • n2khab</title>
 
 
 <!-- jquery -->
@@ -42,9 +41,9 @@ objects — read_watersurfaces_hab • n2khab</title>
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Return the data source watersurfaces_hab as a list of two
-objects — read_watersurfaces_hab" />
-<meta property="og:description" content="read_watersurfaces_hab returns the data source watersurfaces_hab as a list of two objects:
+<meta property="og:title" content="Return the data source watersurfaces_hab as a list of two objects — read_watersurfaces_hab" />
+<meta property="og:description" content="read_watersurfaces_hab returns the data source
+watersurfaces_hab as a list of two objects:
 watersurfaces_polygons: an sf object in the Belgian Lambert 72
   CRS (EPSG-code 31370) with all polygons
   that contain standing water types (habitat or RIB).
@@ -84,7 +83,7 @@ watersurfaces_types: a tibble with information on the
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.14.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.15.0</span>
       </span>
     </div>
 
@@ -147,14 +146,14 @@ watersurfaces_types: a tibble with information on the
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the data source <code>watersurfaces_hab</code> as a list of two
-objects</h1>
+    <h1>Return the data source <code>watersurfaces_hab</code> as a list of two objects</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/n2khab/blob/master/R/read_habitatdata.R'><code>R/read_habitatdata.R</code></a></small>
     <div class="hidden name"><code>read_watersurfaces_hab.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>read_watersurfaces_hab</code> returns the data source <code>watersurfaces_hab</code> as a list of two objects:</p><ul>
+    <p><code>read_watersurfaces_hab</code> returns the data source
+<code>watersurfaces_hab</code> as a list of two objects:</p><ul>
 <li><p><code>watersurfaces_polygons</code>: an sf object in the Belgian Lambert 72
   CRS (EPSG-code <a href='https://epsg.io/31370'>31370</a>) with all polygons
   that contain standing water types (habitat or RIB).</p></li>
@@ -168,11 +167,10 @@ objects</h1>
     <pre class="usage"><span><span class='fu'>read_watersurfaces_hab</span><span class='op'>(</span></span>
 <span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
 <span>    <span class='st'>"20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"</span><span class='op'>)</span>,</span>
-<span>  interpreted <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
 <span>  collapse <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
-<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_hab_v6"</span>, <span class='st'>"watersurfaces_hab_v5"</span>, <span class='st'>"watersurfaces_hab_v4"</span>,</span>
-<span>    <span class='st'>"watersurfaces_hab_v3"</span>, <span class='st'>"watersurfaces_hab_v2"</span>, <span class='st'>"watersurfaces_hab_v1"</span>,</span>
-<span>    <span class='st'>"watersurfaces_hab_v6.1_interim"</span><span class='op'>)</span></span>
+<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_hab_v7"</span>, <span class='st'>"watersurfaces_hab_v6"</span>, <span class='st'>"watersurfaces_hab_v5"</span>,</span>
+<span>    <span class='st'>"watersurfaces_hab_v4"</span>, <span class='st'>"watersurfaces_hab_v3"</span>, <span class='st'>"watersurfaces_hab_v2"</span>,</span>
+<span>    <span class='st'>"watersurfaces_hab_v1"</span>, <span class='st'>"watersurfaces_hab_v6.1_interim"</span><span class='op'>)</span></span>
 <span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -188,16 +186,12 @@ sequentially climbing up 0 to 10 levels in the file system hierarchy,
 starting from the working directory.</p></td>
     </tr>
     <tr>
-      <th>interpreted</th>
-      <td><p>If <code>TRUE</code>, the interpreted subtype is provided when the subtype is missing. This only
-applies to type 3130. When the subtype is missing for 3130, we interpret it as 3130_aom.</p></td>
-    </tr>
-    <tr>
       <th>collapse</th>
-      <td><p>Logical.
-Should the resulting <code>watersurfaces_types</code> list element have a single
-row for each combination of <code>polygon_id</code> and <code>type</code>?
-This causes collapsing:</p><ul>
+      <td><p>Logical. Ignored since <code>watersurfaces_hab_v7</code>. From that
+  version on, the 'collapse' step is part of the workflow to create the data
+  source. The argument answers: should the resulting
+  <code>watersurfaces_types</code> list element have a single row for each
+  combination of <code>polygon_id</code> and <code>type</code>? This causes collapsing:</p><ul>
 <li><p>as a single string of different values of <code>code_orig</code> that led
   to the same <code>type</code>;</p></li>
 <li><p>of values of <code>certain</code>, using the <code><a href='https://rdrr.io/r/base/any.html'>any</a></code> summary
@@ -218,11 +212,18 @@ Institute for Nature and Forest (INBO) only.</p></td>
     <p>A list of two objects:</p><ul>
 <li><p><code>watersurfaces_polygons</code>: an sf object of standing water polygons with four attribute variables:</p><ul>
 <li><p><code>polygon_id</code></p></li>
-<li><p><code>polygon_id_ws</code>: id for the polygon in the <code>watersurface map</code></p></li>
+<li><p><code>polygon_id_ws</code>: id for the polygon in the
+    <code>watersurfaces</code> data source</p></li>
 <li><p><code>polygon_id_habitatmap</code>: id's of all overlapping polygons of <code>habitatmap_stdized</code> that
     contain standing water habitat. The different id's are separated by '+'.</p></li>
 <li><p><code>description_orig</code>: descriptions of all overlapping polygons of <code>habitatmap_stdized</code> that
     contain standing water habitat. The different descriptions are separated by '+'.</p></li>
+<li><p><code>year_assessment</code>: the year when the types in the polygon have
+    been assessed. This column only appears since data source version
+    <code>watersurfaces_hab_v7</code>.</p></li>
+<li><p><code>method_assessment</code>: the method used to assess the types in
+    the polygon. This column only appears since data source version
+    <code>watersurfaces_hab_v7</code>.</p></li>
 </ul></li>
 </ul><p></p><ul>
 <li><p><code>watersurfaces_types</code>: a tibble with following variables:</p><ul>
@@ -236,8 +237,8 @@ Institute for Nature and Forest (INBO) only.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The data source <code>watersurfaces_hab</code> is a combination of <code>habitatmap_stdized</code> (see
-<code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a></code>) and the
+    <p>The data source <code>watersurfaces_hab</code> is a combination of
+<code>habitatmap_stdized</code> (see <code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a></code>) and the
 <a href='https://doi.org/10.5281/zenodo.3386857'>watersurface map of Flanders</a>.
 It contains all standing water types in Flanders.</p>
 
@@ -247,13 +248,17 @@ It contains all standing water types in Flanders.</p>
 <li><p><code>watersurfaces_hab_types</code>: a table in which every row corresponds with a combination of polygon and type.</p></li>
 </ul>
 
-<p>The polygons with 2190_a habitat (dune slack ponds) are generated by selecting all watersurface polygons that
-overlap with dune habitat polygons (21xx) of the standardized habitat map.</p>
-<p>For each of the other considered habitat types (31xx and rbbah) we select the watersurface polygons that
-overlap with the selected habitat type polygons of the standardized habitat map. We also select polygons of the
-standardized habitat map that contain standing water types but do not overlap with any watersurface polygon of the
-watersurface map.</p>
-<p>The R-code for creating the <code>watersurfaces_hab</code> data source can be found in the <a href='https://github.com/inbo/n2khab-preprocessing'>n2khab-preprocessing</a>
+<p>The polygons with 2190_a habitat (dune slack ponds) are generated by
+selecting all watersurface polygons that overlap with dune habitat polygons
+(21xx) of the standardized habitat map.</p>
+<p>For each of the other considered habitat types (31xx and rbbah) we select the
+watersurface polygons that overlap with the selected habitat type polygons of
+the standardized habitat map. We also select polygons of the standardized
+habitat map that contain standing water types but do not overlap with any
+watersurface polygon of the watersurface map.</p>
+<p>The R-code for creating the <code>watersurfaces_hab</code> data source can be found
+in the
+<a href='https://github.com/inbo/n2khab-preprocessing'>n2khab-preprocessing</a>
 repository.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -265,28 +270,27 @@ Vlaanderen. Uitgave 2024.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek 2024
 (52). Instituut voor Natuur en Bosonderzoek, Brussel.
 <a href='https://doi.org/10.21436/inbor.114075267'>doi:10.21436/inbor.114075267</a>
-.
-#'</p></li>
-<li><p>De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-Van Dam G., Van Hove M., Wils C. (red.) (2023).
-Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-Instituut voor Natuur- en Bosonderzoek (INBO).
-<a href='https://doi.org/10.21436/inbor.96375305'>doi:10.21436/inbor.96375305</a>
+.</p></li>
+<li><p>De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+Leyssen A., Oosterlynck P., Van Dam G. &amp; Wils C. (red.) (2025). Biologische
+Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+Bosonderzoek, Brussel.
+<a href='https://doi.org/10.21436/inbor.129502912'>doi:10.21436/inbor.129502912</a>
 .</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other functions involved in processing the 'habitatmap' data source: 
-<code><a href='read_habitatmap.html'>read_habitatmap</a>()</code>,
-<code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a>()</code>,
-<code><a href='read_habitatmap_terr.html'>read_habitatmap_terr</a>()</code>,
-<code><a href='read_watersurfaces_refpoints.html'>read_watersurfaces_refpoints</a>()</code></p>
-<p>Other functions involved in processing the 'watersurfaces' data source: 
-<code><a href='read_watersurfaces.html'>read_watersurfaces</a>()</code>,
-<code><a href='read_watersurfaces_refpoints.html'>read_watersurfaces_refpoints</a>()</code></p></div>
+    <div class='dont-index'><p>Other functions involved in processing the 'habitatmap' data source:
+<code><a href='read_habitatmap.html'>read_habitatmap()</a></code>,
+<code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized()</a></code>,
+<code><a href='read_habitatmap_terr.html'>read_habitatmap_terr()</a></code>,
+<code><a href='read_watersurfaces_refpoints.html'>read_watersurfaces_refpoints()</a></code></p>
+<p>Other functions involved in processing the 'watersurfaces' data source:
+<code><a href='read_watersurfaces.html'>read_watersurfaces()</a></code>,
+<code><a href='read_watersurfaces_refpoints.html'>read_watersurfaces_refpoints()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>

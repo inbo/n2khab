@@ -45,7 +45,7 @@ layer or as a list — read_habitatstreams • n2khab</title>
 <meta property="og:title" content="Return the data source habitatstreams as an sf linestring
 layer or as a list — read_habitatstreams" />
 <meta property="og:description" content="Returns the raw data source habitatstreams (section 'habitat 3260' from
-De Saeger et al., 2023) as an sf linestring
+De Saeger et al., 2025) as an sf linestring
 layer or as a list of two objects: the sf object (CRS:
 Belgian Lambert 72 (EPSG-code 31370))
 plus a data frame
@@ -81,7 +81,7 @@ with textual explanation of the values of the source_id variable." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.14.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.15.0</span>
       </span>
     </div>
 
@@ -152,7 +152,7 @@ layer or as a list</h1>
 
     <div class="ref-description">
     <p>Returns the raw data source <code>habitatstreams</code> (section 'habitat 3260' from
-De Saeger et al., 2023) as an <code>sf</code> linestring
+De Saeger et al., 2025) as an <code>sf</code> linestring
 layer or as a list of two objects: the <code>sf</code> object (CRS:
 Belgian Lambert 72 (EPSG-code <a href='https://epsg.io/31370'>31370</a>))
 plus a data frame
@@ -161,7 +161,9 @@ with textual explanation of the values of the <code>source_id</code> variable.</
 
     <pre class="usage"><span><span class='fu'>read_habitatstreams</span><span class='op'>(</span></span>
 <span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"10_raw/habitatstreams"</span><span class='op'>)</span>,</span>
-<span>  source_text <span class='op'>=</span> <span class='cn'>FALSE</span></span>
+<span>  source_text <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"habitatstreams_2025"</span>, <span class='st'>"habitatstreams_2023"</span>, <span class='st'>"habitatstreams_v1.7"</span>,</span>
+<span>    <span class='st'>"habitatstreams_v1.6"</span><span class='op'>)</span></span>
 <span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -180,6 +182,11 @@ starting from the working directory.</p></td>
       <th>source_text</th>
       <td><p>Logical, defaults to <code>FALSE</code>.
 If <code>TRUE</code>, a list is returned (see <em>Value</em>).</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>Version ID of the data source.
+Defaults to the latest available version defined by the package.</p></td>
     </tr>
     </table>
 
@@ -201,13 +208,13 @@ previous version (Leyssen et al., 2020).</p>
 
     
 <ul>
-<li><p>De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-Van Dam G., Van Hove M., Wils C. (red.) (2023).
-Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-Instituut voor Natuur- en Bosonderzoek (INBO).
-<a href='https://doi.org/10.21436/inbor.96375305'>doi:10.21436/inbor.96375305</a>
+<li><p>De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+Leyssen A., Oosterlynck P., Van Dam G. &amp; Wils C. (red.) (2025). Biologische
+Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+Bosonderzoek, Brussel.
+<a href='https://doi.org/10.21436/inbor.129502912'>doi:10.21436/inbor.129502912</a>
 .</p></li>
 <li><p>Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
 Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties

@@ -82,7 +82,7 @@ that match the polygons of a single version of watersurfaces_hab." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">n2khab</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.14.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.15.0</span>
       </span>
     </div>
 
@@ -164,8 +164,9 @@ that match the polygons of a single version of <code>watersurfaces_hab</code>.</
     <pre class="usage"><span><span class='fu'>read_watersurfaces_refpoints</span><span class='op'>(</span></span>
 <span>  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"20_processed/watersurfaces_refpoints"</span><span class='op'>)</span>,</span>
 <span>  spatial <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
-<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_refpoints_v6"</span>, <span class='st'>"watersurfaces_refpoints_v5"</span>,</span>
-<span>    <span class='st'>"watersurfaces_refpoints_v4"</span>, <span class='st'>"watersurfaces_refpoints_v6.1_interim"</span><span class='op'>)</span>,</span>
+<span>  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"watersurfaces_refpoints_v7"</span>, <span class='st'>"watersurfaces_refpoints_v6"</span>,</span>
+<span>    <span class='st'>"watersurfaces_refpoints_v5"</span>, <span class='st'>"watersurfaces_refpoints_v4"</span>,</span>
+<span>    <span class='st'>"watersurfaces_refpoints_v6.1_interim"</span><span class='op'>)</span>,</span>
 <span>  single_wsh_version <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
 <span>  file_wsh <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='locate_n2khab_data.html'>locate_n2khab_data</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
 <span>    <span class='st'>"20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"</span><span class='op'>)</span>,</span>
@@ -269,28 +270,27 @@ Vlaanderen. Uitgave 2024.
 Rapporten van het Instituut voor Natuur- en Bosonderzoek 2024
 (52). Instituut voor Natuur en Bosonderzoek, Brussel.
 <a href='https://doi.org/10.21436/inbor.114075267'>doi:10.21436/inbor.114075267</a>
-.
-#'</p></li>
-<li><p>De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-Van Dam G., Van Hove M., Wils C. (red.) (2023).
-Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-Instituut voor Natuur- en Bosonderzoek (INBO).
-<a href='https://doi.org/10.21436/inbor.96375305'>doi:10.21436/inbor.96375305</a>
+.</p></li>
+<li><p>De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+Leyssen A., Oosterlynck P., Van Dam G. &amp; Wils C. (red.) (2025). Biologische
+Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+Bosonderzoek, Brussel.
+<a href='https://doi.org/10.21436/inbor.129502912'>doi:10.21436/inbor.129502912</a>
 .</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other functions involved in processing the 'habitatmap' data source: 
-<code><a href='read_habitatmap.html'>read_habitatmap</a>()</code>,
-<code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized</a>()</code>,
-<code><a href='read_habitatmap_terr.html'>read_habitatmap_terr</a>()</code>,
-<code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a>()</code></p>
-<p>Other functions involved in processing the 'watersurfaces' data source: 
-<code><a href='read_watersurfaces.html'>read_watersurfaces</a>()</code>,
-<code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab</a>()</code></p></div>
+    <div class='dont-index'><p>Other functions involved in processing the 'habitatmap' data source:
+<code><a href='read_habitatmap.html'>read_habitatmap()</a></code>,
+<code><a href='read_habitatmap_stdized.html'>read_habitatmap_stdized()</a></code>,
+<code><a href='read_habitatmap_terr.html'>read_habitatmap_terr()</a></code>,
+<code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab()</a></code></p>
+<p>Other functions involved in processing the 'watersurfaces' data source:
+<code><a href='read_watersurfaces.html'>read_watersurfaces()</a></code>,
+<code><a href='read_watersurfaces_hab.html'>read_watersurfaces_hab()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span></span>
