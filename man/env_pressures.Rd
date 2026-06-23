@@ -59,7 +59,7 @@ languages).
 \seealso{
 \code{\link{read_env_pressures}}
 
-Other n2khab-referencelists: 
+Other n2khab-referencelists:
 \code{\link{namelist}},
 \code{\link{types}}
 }

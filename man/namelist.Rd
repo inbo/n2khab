@@ -44,7 +44,7 @@ Multiple languages are supported.
 \seealso{
 \code{\link{read_namelist}}
 
-Other n2khab-referencelists: 
+Other n2khab-referencelists:
 \code{\link{env_pressures}},
 \code{\link{types}}
 }

@@ -1,3 +1,39 @@
+# n2khab 0.15.0 (2026-06-23)
+
+## Breaking changes
+
+- `read_watersurfaces_hab()` has lost its argument `interpreted`.
+Its former default `FALSE` is the behaviour that is continued.
+It was found (#221) that the rationale for `interpreted = TRUE` was based on wrong assumptions; occurrences coded as main type `3130` cannot be interpreted as one specific subtype.
+- `read_habitatmap_terr()` and `read_watersurfaces_hab()` now always use the same element names in the returned list, regardless of the data source version.
+(Before, old package behaviour was still imitated for some old data source versions, but this is not the best approach.)
+- The 'xxx_polygons' element in the returned list of `read_habitatmap_stdized()`, `read_habitatmap_terr()` and `read_watersurfaces_hab()` gains two extra attribute columns since the newest data source versions (below): `year_assessment` (the year when the types in the polygon have been assessed) and `method_assessment` (the method used to assess the types in the polygon).
+- `read_habitatsprings(units_7220 = TRUE)` now concatenates the `system_type` and `source` values of the corresponding points.
+
+## New features
+
+- `expand_types()` now expands subtypes `3130_aom` and `3130_na` to their main type, following #221.
+- The following new data source versions are now supported by the corresponding functions (#215; [inbo/n2khab-preprocessing/pull/79](https://github.com/inbo/n2khab-preprocessing/pull/84)):
+  - `habitatmap_2025` (`read_habitatmap()`)
+  - `habitatmap_stdized_2025_v1` (`read_habitatmap_stdized()`)
+  - `habitatmap_terr_2025_v1` (`read_habitatmap_terr()`)
+  - `watersurfaces_hab_v7` (`read_watersurfaces_hab()`)
+  - `watersurfaces_refpoints_v7` (`read_watersurfaces_refpoints()`)
+  - `habitatstreams_2025` (`read_habitatstreams()`)
+  - `habitatsprings_2025v2` (`read_habitatsprings()`)
+
+  Function documentation was updated accordingly.
+  Some noteworthy changes and fixes in data sources:
+  
+  - `read_watersurfaces_hab()`: the argument `collapse` is ignored since data source version `watersurfaces_hab_v7` because the 'collapse' step is now part of the workflow to create the data source (solving issue #78).
+  - `watersurfaces_hab_v7`: duplication inside concatenated strings is fixed (solving issue #75).
+  - `habitatmap_terr_2025_v1`:
+    - Less polygons have been regarded as 'exclusively aquatic' (hence excluded from the data set), by no longer using the phab sum to do this.
+    - Type `6230` has been interpreted as `6230_hmo` if `code_orig` is `"6230,6410"`.
+- `read_habitatsprings()` has gained an argument `filter_system` to filter the system type in a conservative way, i.e. including system type 'unknown' if 'mire' or 'rivulet' are requested.
+It also works with the concatenated `system_type` column for `read_habitatsprings(units_7220 = TRUE)`.
+
+  
 # n2khab 0.14.0 (2026-02-20)
 
 A new function `read_watersurfaces_refpoints()` has been added to read the `watersurfaces_refpoints` data source (#204).

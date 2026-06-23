@@ -115,10 +115,10 @@ str(read_watercourse_100mseg(), give.attr = FALSE)
 
 }
 \seealso{
-Other functions returning environmental data sets: 
-\code{\link{read_shallowgroundwater}()},
-\code{\link{read_soilmap}()},
-\code{\link{read_watersurfaces}()}
+Other functions returning environmental data sets:
+\code{\link[=read_shallowgroundwater]{read_shallowgroundwater()}},
+\code{\link[=read_soilmap]{read_soilmap()}},
+\code{\link[=read_watersurfaces]{read_watersurfaces()}}
 }
 \concept{functions involved in processing the 'watercourses' data source}
 \concept{functions returning environmental data sets}

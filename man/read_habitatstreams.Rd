@@ -7,7 +7,9 @@ layer or as a list}
 \usage{
 read_habitatstreams(
   file = file.path(locate_n2khab_data(), "10_raw/habitatstreams"),
-  source_text = FALSE
+  source_text = FALSE,
+  version = c("habitatstreams_2025", "habitatstreams_2023", "habitatstreams_v1.7",
+    "habitatstreams_v1.6")
 )
 }
 \arguments{
@@ -20,6 +22,9 @@ starting from the working directory.}
 
 \item{source_text}{Logical, defaults to \code{FALSE}.
 If \code{TRUE}, a list is returned (see \emph{Value}).}
+
+\item{version}{Version ID of the data source.
+Defaults to the latest available version defined by the package.}
 }
 \value{
 With \code{source_text = FALSE} (default): a Simple feature collection of
@@ -34,7 +39,7 @@ variable in the \code{sf} object.
 }
 \description{
 Returns the raw data source \code{habitatstreams} (section 'habitat 3260' from
-De Saeger et al., 2023) as an \code{sf} linestring
+De Saeger et al., 2025) as an \code{sf} linestring
 layer or as a list of two objects: the \code{sf} object (CRS:
 Belgian Lambert 72 (EPSG-code \href{https://epsg.io/31370}{31370}))
 plus a data frame
@@ -68,13 +73,13 @@ all.equal(
 }
 \references{
 \itemize{
-\item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-Van Dam G., Van Hove M., Wils C. (red.) (2023).
-Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-(Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-Instituut voor Natuur- en Bosonderzoek (INBO).
-\doi{10.21436/inbor.96375305}.
+\item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+Bosonderzoek, Brussel.
+\doi{10.21436/inbor.129502912}.
 \item Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
 Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 behorend tot het \emph{Ranunculion fluitantis} en het

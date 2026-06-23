@@ -8,8 +8,9 @@ layer}
 read_habitatsprings(
   file = file.path(locate_n2khab_data(), "10_raw/habitatsprings/habitatsprings.geojson"),
   filter_hab = FALSE,
+  filter_system = c("all", "mire", "rivulet"),
   units_7220 = FALSE,
-  version = "habitatsprings_2020v2"
+  version = c("habitatsprings_2025v2", "habitatsprings_2020v2")
 )
 }
 \arguments{
@@ -23,12 +24,20 @@ starting from the working directory.}
 \item{filter_hab}{If \code{TRUE}, only points with (potential) habitat
 are returned. The default value is \code{FALSE}.}
 
+\item{filter_system}{String; either \code{"all"}, \code{"mire"} or
+\code{"rivulet"}. Value \code{"all"} applies no filter, while \code{"mire"}
+and \code{"rivulet"} only return rows where the system type is (possibly)
+mire or rivulet, respectively. The system type 'unknown' is included in those
+cases.}
+
 \item{units_7220}{If \code{TRUE}, an \code{sf} object of type-\code{7220}-locations is
 returned at the population unit level.
 To accomplish this, the data source is aggregated by \code{unit_id}.
 Multiple points belonging to the same unit are replaced by their
-centroid, their area attribute is summed (if all values are known)
-and for other attributes the maximum value is returned.}
+centroid, their area attribute is summed (if all values are known),
+logical variables become \code{TRUE} if any is \code{TRUE},
+for year and name the maximum value is used and for other character values a
+concatenated string is returned.}
 
 \item{version}{Version ID of the data source.
 Defaults to the latest available version defined by the package.}
@@ -40,7 +49,7 @@ type \code{POINT}, with attribute variables:
 \item \code{point_id}
 \item \code{name}: site name.
 \item \code{system_type}: environmental typology of \code{7220}: \code{mire},
-\code{rivulet} or \code{unknown} (non-\code{7220} types are \code{NA})
+\code{rivulet} or \code{unknown} (non-\code{7220} types are \code{NA} in older versions)
 \item \code{code_orig}: original type code in raw
 \code{habitatsprings}.
 \item \code{type}: habitat type listed in \code{\link{types}}.
@@ -56,7 +65,7 @@ Is the site situated within a Special Area of Conservation?
 \item \code{source}: original data source of the record.
 }
 
-Note that the \code{type} and \code{system_type} variables have
+Note that the \code{type} and \code{system_type} variables can have
 implicit \code{NA} values
 (i.e. there is
 no factor level to represent the missing values).

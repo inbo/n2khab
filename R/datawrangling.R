@@ -6,8 +6,8 @@
 #' \emph{subtypes} and \emph{main types}, respectively.
 #' It allows to do sensible selections and joins with interpreted forms of the
 #' \code{habitatmap_stdized} and \code{watersurfaces_hab} data sources:
-#' \code{habitatmap_terr},
-#' \code{read_watersurfaces_hab(interpreted = TRUE)}.
+#' \code{read_habitatmap_terr()},
+#' \code{read_watersurfaces_hab()}.
 #' If the data frame has one or more grouping variables, by default the
 #' operation is done independently for each group in turn.
 #'
@@ -18,6 +18,12 @@
 #' \code{\link{types}} data source.
 #' A warning is given when they don't.
 #'
+#' Only main types and subtypes are appended that do not already occur in the
+#' data frame \code{x} if the latter is ungrouped, or in the respective group of
+#' a grouped data frame \code{x} (i.e. if \code{use_groups} is \code{TRUE}).
+#' Since the operation can take place within groups, it is assumed that the user
+#' makes sensible use of grouping in order to achieve a useful result.
+#'
 #' Main type codes are always expanded with the subtype codes that belong to it.
 #'
 #' The applied approach to add main type codes only makes sense
@@ -26,9 +32,10 @@
 #'
 #' In order to add main type codes based on
 #' subtype codes that are present in the type column, specific conditions have
-#' to be met:
+#' to be met if \code{strict} is \code{TRUE}:
 #' \itemize{
 #' \item{for 2330: both subtype codes must be present}
+#' \item{for 3130: both subtype codes must be present}
 #' \item{for 5130: 5130_hei must be present (note that only the main type code
 #' occurs in the targeted data sources)}
 #' \item{for 6230: 6230_ha, 6230_hmo and 6230_hn must be present
@@ -41,7 +48,7 @@
 #' This will add the main type code whenever \emph{one} of the above required
 #' subtype codes is present.
 #' In all cases no other main type codes are added apart from
-#' 2330, 5130, 6230 and 91E0.
+#' 2330, 3130, 5130, 6230 and 91E0.
 #' This is because the data sources with which the result
 #' is to be matched (see Description) don't contain certain main type codes,
 #' and because it makes no sense in other cases
@@ -102,6 +109,7 @@
 #'     "2190", 45,
 #'     "2330_bu", 8,
 #'     "2330_dw", 8,
+#'     "3130_na", 12,
 #'     "5130_hei", 7,
 #'     "6410_mo", 78,
 #'     "6410_ve", 4,
@@ -110,25 +118,11 @@
 #' expand_types(x, type_var = "mycode", mark = TRUE)
 #' expand_types(x, type_var = "mycode", strict = FALSE, mark = TRUE)
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.string
-#' is.flag
-#' noNA
-#' @importFrom tidyr
-#' nest
-#' unnest
-#' @importFrom tidyselect
-#' any_of
-#' @importFrom purrr
-#' map
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' select
-#' pick
-#' group_vars
-#' ungroup
+#' @importFrom assertthat assert_that is.string is.flag noNA
+#' @importFrom tidyr nest unnest
+#' @importFrom tidyselect any_of
+#' @importFrom purrr map
+#' @importFrom dplyr %>% mutate select pick group_vars ungroup
 #' @importFrom rlang .data
 #' @export
 expand_types <- function(x,
@@ -169,7 +163,7 @@ expand_types <- function(x,
     )
   } else {
     x %>%
-      nest(data = -!!(group_vars(x))) %>%
+      nest() %>%
       ungroup() %>%
       mutate(newdata = map(
         .data$data,
@@ -201,26 +195,9 @@ expand_types <- function(x,
 #'
 #' @return A data frame.
 #'
-#' @importFrom dplyr
-#' %>%
-#' left_join
-#' select
-#' filter
-#' rename
-#' group_by
-#' summarise
-#' anti_join
-#' join_by
-#' pull
-#' inner_join
-#' bind_rows
-#' mutate
-#' distinct
-#' case_when
-#' @importFrom tidyselect
-#' all_of
-#' @importFrom magrittr
-#' set_colnames
+#' @importFrom dplyr %>% left_join select filter rename group_by summarise anti_join join_by pull inner_join bind_rows mutate distinct case_when
+#' @importFrom tidyselect all_of
+#' @importFrom magrittr set_colnames
 #' @importFrom rlang .data
 #' @keywords internal
 expand_types_plain <- function(x,
@@ -234,33 +211,35 @@ expand_types_plain <- function(x,
     rename(orig_abcd = all_of(type_var))
 
   # main types to add:
-  suppressWarnings(
-    join_main_types <-
-      subtypes %>%
-      filter(
-        .data$main_type == "2330" |
-          .data$type %in% c(
-            "6230_ha", "6230_hmo", "6230_hn",
-            "5130_hei",
-            "91E0_va", "91E0_vm", "91E0_vn"
-          )
-      ) %>%
-      left_join(
-        orig_types %>%
-          mutate(present = 1),
-        by = c("type" = "orig_abcd")
-      ) %>%
-      group_by(.data$main_type) %>%
-      summarise(add = if (strict) {
+  join_main_types <-
+    subtypes %>%
+    filter(
+      .data$main_type %in% c("2330", "3130") |
+        .data$type %in% c(
+          "6230_ha", "6230_hmo", "6230_hn",
+          "5130_hei",
+          "91E0_va", "91E0_vm", "91E0_vn"
+        )
+    ) %>%
+    left_join(
+      orig_types %>%
+        mutate(present = 1),
+      join_by("type" == "orig_abcd"),
+      relationship = "one-to-many",
+      unmatched = "drop"
+    ) %>%
+    summarise(
+      add = if (strict) {
         all(!is.na(.data$present))
       } else {
         any(!is.na(.data$present))
-      }) %>%
-      filter(.data$add) %>%
-      # only adding codes absent from original data frame:
-      anti_join(orig_types, by = c("main_type" = "orig_abcd")) %>%
-      pull("main_type")
-  )
+      },
+      .by = "main_type"
+    ) %>%
+    filter(.data$add) %>%
+    # only adding codes absent from original data frame:
+    anti_join(orig_types, join_by("main_type" == "orig_abcd")) %>%
+    pull("main_type")
 
   # marking rows that will be expanded
   if (mark) {
@@ -269,7 +248,9 @@ expand_types_plain <- function(x,
       left_join(
         subtypes %>%
           rename(main_type_abcd = "main_type"),
-        join_by({{ type_var }} == "type")
+        join_by({{ type_var }} == "type"),
+        relationship = "many-to-one",
+        unmatched = "drop"
       ) %>%
       mutate(has_been_expanded = case_when(
         .data[[type_var]] %in% subtypes$main_type ~ TRUE,
@@ -281,74 +262,71 @@ expand_types_plain <- function(x,
 
 
   # expanding main types to their subtypes and adding the latter:
-  suppressWarnings(
-    x_expanded <-
+  x_expanded <-
+    x %>%
+    rename(orig_abcd = all_of(type_var)) %>%
+    inner_join(
+      subtypes %>% rename(type_abcd = "type"),
+      join_by("orig_abcd" == "main_type"),
+      relationship = "many-to-many",
+      unmatched = "drop"
+    ) %>%
+    mutate(orig_abcd = .data$type_abcd) %>%
+    select(-"type_abcd") %>%
+    anti_join(
       x %>%
-      rename(orig_abcd = all_of(type_var)) %>%
-      inner_join(
-        subtypes %>% rename(type_abcd = "type"),
-        by = c("orig_abcd" = "main_type")
-      ) %>%
-      mutate(orig_abcd = .data$type_abcd) %>%
-      select(-"type_abcd") %>%
-      anti_join(
-        x %>%
-          rename(orig_abcd = type_var),
-        by = "orig_abcd"
-      ) %>%
-      set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
-      {
-        if (mark) {
-          mutate(., has_been_expanded = FALSE, added_by_expansion = TRUE)
-        } else {
-          .
-        }
-      } %>%
-      bind_rows(x, .)
-  )
+        rename(orig_abcd = type_var),
+      join_by("orig_abcd")
+    ) %>%
+    set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
+    {
+      if (mark) {
+        mutate(., has_been_expanded = FALSE, added_by_expansion = TRUE)
+      } else {
+        .
+      }
+    } %>%
+    bind_rows(x, .)
 
   # adding main_types:
-  suppressWarnings(
-    x_expanded <-
-      x %>%
-      rename(orig_abcd = all_of(type_var)) %>%
-      inner_join(
-        subtypes %>%
-          rename(main_type_abcd = "main_type"),
-        by = c("orig_abcd" = "type")
-      ) %>%
-      filter(.data$main_type_abcd %in% join_main_types) %>%
-      mutate(orig_abcd = if (is.factor(.data$orig_abcd)) {
-        factor(
-          .data$main_type_abcd,
-          levels = levels(.data$orig_abcd)
-        )
+  x_expanded <-
+    x %>%
+    rename(orig_abcd = all_of(type_var)) %>%
+    inner_join(
+      subtypes %>%
+        rename(main_type_abcd = "main_type"),
+      join_by("orig_abcd" == "type"),
+      relationship = "many-to-one",
+      unmatched = "drop"
+    ) %>%
+    filter(.data$main_type_abcd %in% join_main_types) %>%
+    mutate(orig_abcd = if (is.factor(.data$orig_abcd)) {
+      factor(.data$main_type_abcd, levels = levels(.data$orig_abcd))
+    } else {
+      .data$main_type_abcd
+    }) %>%
+    select(-"main_type_abcd") %>%
+    distinct() %>%
+    set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
+    {
+      if (mark) {
+        mutate(., has_been_expanded = FALSE, added_by_expansion = TRUE)
       } else {
-        .data$main_type_abcd
-      }) %>%
-      select(-"main_type_abcd") %>%
-      distinct() %>%
-      set_colnames(gsub("orig_abcd", type_var, colnames(.))) %>%
-      {
-        if (mark) {
-          mutate(., has_been_expanded = FALSE, added_by_expansion = TRUE)
-        } else {
-          .
-        }
-      } %>%
-      bind_rows(x_expanded, .) %>%
-      {
-        if (mark) {
-          mutate(., added_by_expansion = ifelse(
-            is.na(.data$added_by_expansion),
-            FALSE,
-            .data$added_by_expansion
-          ))
-        } else {
-          .
-        }
+        .
       }
-  )
+    } %>%
+    bind_rows(x_expanded, .) %>%
+    {
+      if (mark) {
+        mutate(., added_by_expansion = ifelse(
+          is.na(.data$added_by_expansion),
+          FALSE,
+          .data$added_by_expansion
+        ))
+      } else {
+        .
+      }
+    }
 
   return(x_expanded)
 }
@@ -381,14 +359,8 @@ expand_types_plain <- function(x,
 #' (character) factor variables) converted to the specified encoding.
 #'
 #' @keywords internal
-#' @importFrom dplyr
-#' %>%
-#' mutate_if
-#' @importFrom assertthat
-#' assert_that
-#' is.string
-#' is.flag
-#' noNA
+#' @importFrom dplyr %>% mutate_if
+#' @importFrom assertthat assert_that is.string is.flag noNA
 convertdf_enc <- function(x,
                           from = "",
                           to = "UTF-8",

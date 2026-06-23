@@ -13,7 +13,7 @@
 #'   }
 #'
 #' The data source \code{habitatmap_stdized} is the processed version
-#' of the raw data source \code{habitatmap} (De Saeger et al., 2023).
+#' of the raw data source \code{habitatmap} (De Saeger et al., 2025).
 #' Every polygon in the \code{habitatmap} can consist of maximum 5
 #' different types. This information is stored in the
 #' columns 'HAB1', HAB2',..., 'HAB5' of the attribute table. The
@@ -86,11 +86,18 @@
 #' @return
 #' A list of two objects:
 #'   \itemize{
-#'   \item \code{habitatmap_polygons}: an sf object of \code{habitatmap} polygons with two attribute variables
+#'   \item \code{habitatmap_polygons}: an sf object of \code{habitatmap} polygons with four attribute variables
 #'   \itemize{
 #'     \item \code{polygon_id}
 #'     \item \code{description_orig}: polygon description based on the
-#'     orginal type codes in the raw \code{habitatmap}}
+#'     orginal type codes in the raw \code{habitatmap}.
+#'     \item \code{year_assessment}: the year when the types in the polygon have
+#'     been assessed. This column only appears since data source version
+#'     \code{habitatmap_stdized_2025_v1}.
+#'     \item \code{method_assessment}: the method used to assess the types in
+#'     the polygon. This column only appears since data source version
+#'     \code{habitatmap_stdized_2025_v1}.
+#'     }
 #'   }
 #'   \itemize{
 #'   \item \code{habitatmap_types}: a tibble with following variables
@@ -113,13 +120,13 @@
 #' @references
 #'
 #' \itemize{
-#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 #' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 #' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
@@ -144,17 +151,10 @@
 #' }
 #'
 #' @export
-#' @importFrom sf
-#' read_sf
-#' st_crs<-
+#' @importFrom sf read_sf st_crs<- st_crs
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' relocate
-#' @importFrom assertthat
-#' assert_that
-#' is.string
+#' @importFrom dplyr %>% mutate relocate
+#' @importFrom assertthat assert_that is.string
 #'
 read_habitatmap_stdized <-
   function(file = file.path(
@@ -162,6 +162,7 @@ read_habitatmap_stdized <-
              "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"
            ),
            version = c(
+             "habitatmap_stdized_2025_v1",
              "habitatmap_stdized_2023_v1",
              "habitatmap_stdized_2020_v1",
              "habitatmap_stdized_2018_v2",
@@ -176,9 +177,11 @@ read_habitatmap_stdized <-
     )
 
     habmap_polygons <- habmap_polygons %>%
-      mutate(polygon_id = factor(.data$polygon_id))
+      mutate(across(any_of(c("polygon_id", "method_assessment")), factor))
 
-    suppressWarnings(st_crs(habmap_polygons) <- 31370)
+    if (st_crs(habmap_polygons) != st_crs(31370)) {
+      suppressWarnings(st_crs(habmap_polygons) <- 31370)
+    }
 
     if (version == "habitatmap_stdized_2018_v1") {
       habmap_types <- suppressWarnings(
@@ -188,15 +191,14 @@ read_habitatmap_stdized <-
         )
       )
     } else {
-      habmap_types <- suppressWarnings(
+      habmap_types <-
         read_sf(
           file,
           "habitatmap_types"
         )
-      )
     }
 
-    types <- suppressWarnings(read_types())
+    types <- read_types()
 
     habmap_types <- habmap_types %>%
       mutate(
@@ -238,10 +240,10 @@ read_habitatmap_stdized <-
 
 
 
-#' Return the data source \code{watersurfaces_hab} as a list of two
-#' objects
+#' Return the data source \code{watersurfaces_hab} as a list of two objects
 #'
-#' \code{read_watersurfaces_hab} returns the data source \code{watersurfaces_hab} as a list of two objects:
+#' \code{read_watersurfaces_hab} returns the data source
+#' \code{watersurfaces_hab} as a list of two objects:
 #' \itemize{
 #'   \item \code{watersurfaces_polygons}: an sf object in the Belgian Lambert 72
 #'   CRS (EPSG-code \href{https://epsg.io/31370}{31370}) with all polygons
@@ -251,8 +253,8 @@ read_habitatmap_stdized <-
 #'   each polygon of \code{watersurfaces_polygons}.
 #'   }
 #'
-#' The data source \code{watersurfaces_hab} is a combination of \code{habitatmap_stdized} (see
-#' \code{\link{read_habitatmap_stdized}}) and the
+#' The data source \code{watersurfaces_hab} is a combination of
+#' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}) and the
 #' \href{https://doi.org/10.5281/zenodo.3386857}{watersurface map of Flanders}.
 #' It contains all standing water types in Flanders.
 #'
@@ -264,24 +266,27 @@ read_habitatmap_stdized <-
 #'   \item \code{watersurfaces_hab_types}: a table in which every row corresponds with a combination of polygon and type.
 #'   }
 #'
-#' The polygons with 2190_a habitat (dune slack ponds) are generated by selecting all watersurface polygons that
-#' overlap with dune habitat polygons (21xx) of the standardized habitat map.
+#' The polygons with 2190_a habitat (dune slack ponds) are generated by
+#' selecting all watersurface polygons that overlap with dune habitat polygons
+#' (21xx) of the standardized habitat map.
 #'
-#' For each of the other considered habitat types (31xx and rbbah) we select the watersurface polygons that
-#' overlap with the selected habitat type polygons of the standardized habitat map. We also select polygons of the
-#' standardized habitat map that contain standing water types but do not overlap with any watersurface polygon of the
-#' watersurface map.
+#' For each of the other considered habitat types (31xx and rbbah) we select the
+#' watersurface polygons that overlap with the selected habitat type polygons of
+#' the standardized habitat map. We also select polygons of the standardized
+#' habitat map that contain standing water types but do not overlap with any
+#' watersurface polygon of the watersurface map.
 #'
-#' The R-code for creating the \code{watersurfaces_hab} data source can be found in the \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
+#' The R-code for creating the \code{watersurfaces_hab} data source can be found
+#' in the
+#' \href{https://github.com/inbo/n2khab-preprocessing}{n2khab-preprocessing}
 #' repository.
 #'
 #'
-#' @param interpreted If \code{TRUE}, the interpreted subtype is provided when the subtype is missing. This only
-#' applies to type 3130. When the subtype is missing for 3130, we interpret it as 3130_aom.
-#' @param collapse Logical.
-#' Should the resulting \code{watersurfaces_types} list element have a single
-#' row for each combination of \code{polygon_id} and \code{type}?
-#' This causes collapsing:
+#' @param collapse Logical. Ignored since \code{watersurfaces_hab_v7}. From that
+#'   version on, the 'collapse' step is part of the workflow to create the data
+#'   source. The argument answers: should the resulting
+#'   \code{watersurfaces_types} list element have a single row for each
+#'   combination of \code{polygon_id} and \code{type}? This causes collapsing:
 #' \itemize{
 #'   \item as a single string of different values of \code{code_orig} that led
 #'   to the same \code{type};
@@ -291,17 +296,23 @@ read_habitatmap_stdized <-
 #'
 #' @inheritParams read_habitatmap_stdized
 #'
-#' @return
-#' A list of two objects:
+#' @return A list of two objects:
 #'   \itemize{
 #'   \item \code{watersurfaces_polygons}: an sf object of standing water polygons with four attribute variables:
 #'   \itemize{
 #'     \item \code{polygon_id}
-#'     \item \code{polygon_id_ws}: id for the polygon in the \code{watersurface map}
+#'     \item \code{polygon_id_ws}: id for the polygon in the
+#'     \code{watersurfaces} data source
 #'     \item \code{polygon_id_habitatmap}: id's of all overlapping polygons of \code{habitatmap_stdized} that
 #'     contain standing water habitat. The different id's are separated by '+'.
 #'     \item \code{description_orig}: descriptions of all overlapping polygons of \code{habitatmap_stdized} that
-#'     contain standing water habitat. The different descriptions are separated by '+'.}
+#'     contain standing water habitat. The different descriptions are separated by '+'.
+#'     \item \code{year_assessment}: the year when the types in the polygon have
+#'     been assessed. This column only appears since data source version
+#'     \code{watersurfaces_hab_v7}.
+#'     \item \code{method_assessment}: the method used to assess the types in
+#'     the polygon. This column only appears since data source version
+#'     \code{watersurfaces_hab_v7}.}
 #'   }
 #'   \itemize{
 #'   \item \code{watersurfaces_types}: a tibble with following variables:
@@ -326,13 +337,13 @@ read_habitatmap_stdized <-
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2024
 #' (52). Instituut voor Natuur en Bosonderzoek, Brussel.
 #' \doi{10.21436/inbor.114075267}.
-#' #' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' }
 #'
 #' @examples
@@ -352,29 +363,21 @@ read_habitatmap_stdized <-
 #' }
 #'
 #' @export
-#' @importFrom sf
-#' read_sf
-#' st_crs<-
+#' @importFrom sf read_sf st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' across
-#' mutate
-#' relocate
-#' summarize
+#' @importFrom dplyr %>% across mutate relocate summarize
+#' @importFrom tidyselect any_of
 #' @importFrom stringr str_flatten
-#' @importFrom assertthat
-#' assert_that
-#' is.string
+#' @importFrom assertthat assert_that is.string
 #'
 read_watersurfaces_hab <-
   function(file = file.path(
              locate_n2khab_data(),
              "20_processed/watersurfaces_hab/watersurfaces_hab.gpkg"
            ),
-           interpreted = FALSE,
            collapse = TRUE,
            version = c(
+             "watersurfaces_hab_v7",
              "watersurfaces_hab_v6",
              "watersurfaces_hab_v5",
              "watersurfaces_hab_v4",
@@ -385,59 +388,44 @@ read_watersurfaces_hab <-
            )) {
     version <- match.arg(version)
 
-    watersurfaces_polygons <- read_sf(
-      file,
-      "watersurfaces_hab_polygons"
-    )
+    watersurfaces_polygons <- read_sf(file, "watersurfaces_hab_polygons")
 
     watersurfaces_polygons <- watersurfaces_polygons %>%
       mutate(
         across(
-          starts_with("polygon_id"),
+          c(starts_with("polygon_id"), any_of("method_assessment")),
           factor
         )
       )
 
-    suppressWarnings(st_crs(watersurfaces_polygons) <- 31370)
+    if (st_crs(watersurfaces_polygons) != st_crs(31370)) {
+      suppressWarnings(st_crs(watersurfaces_polygons) <- 31370)
+    }
 
     if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
       watersurfaces_types <- suppressWarnings(
-        read_sf(
-          file,
-          "watersurfaces_hab_patches"
-        )
+        read_sf(file, "watersurfaces_hab_patches")
       )
     } else {
-      watersurfaces_types <- suppressWarnings(
-        read_sf(
-          file,
-          "watersurfaces_hab_types"
-        )
-      )
+      watersurfaces_types <- read_sf(file, "watersurfaces_hab_types")
     }
 
-    if (interpreted) {
-      watersurfaces_types <- watersurfaces_types %>%
-        mutate(type = ifelse(.data$type == "3130", "3130_aom", .data$type))
-    }
-
-    types <- suppressWarnings(read_types())
+    types <- read_types()
 
     watersurfaces_types <- watersurfaces_types %>%
       mutate(
-        polygon_id = factor(.data$polygon_id, levels = levels(watersurfaces_polygons$polygon_id)),
+        polygon_id = factor(
+          .data$polygon_id,
+          levels = levels(watersurfaces_polygons$polygon_id)
+        ),
         certain = .data$certain == 1,
-        type = factor(.data$type,
-          levels = levels(types$type)
-        )
+        type = factor(.data$type, levels = levels(types$type))
       ) %>%
-      relocate(
-        "polygon_id",
-        "type",
-        "certain"
-      )
+      relocate("polygon_id", "type", "certain")
 
-    if (collapse) {
+    # collapse needed? Since version watersurfaces_hab_v7 the data source
+    # already contains the result of the collapse step
+    if (!version %in% c("watersurfaces_hab_v7") && collapse) {
       watersurfaces_types <- watersurfaces_types %>%
         summarize(
           certain = any(.data$certain),
@@ -446,17 +434,10 @@ read_watersurfaces_hab <-
         )
     }
 
-    if (version %in% c("watersurfaces_hab_v1", "watersurfaces_hab_v2")) {
-      result <- list(
-        watersurfaces_polygons = watersurfaces_polygons,
-        watersurfaces_patches = watersurfaces_types
-      )
-    } else {
-      result <- list(
-        watersurfaces_polygons = watersurfaces_polygons,
-        watersurfaces_types = watersurfaces_types
-      )
-    }
+    result <- list(
+      watersurfaces_polygons = watersurfaces_polygons,
+      watersurfaces_types = watersurfaces_types
+    )
 
     return(result)
   }
@@ -548,13 +529,13 @@ read_watersurfaces_hab <-
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek 2024
 #' (52). Instituut voor Natuur en Bosonderzoek, Brussel.
 #' \doi{10.21436/inbor.114075267}.
-#' #' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' }
 #'
 #' @examples
@@ -572,25 +553,11 @@ read_watersurfaces_hab <-
 #' }
 #'
 #' @export
-#' @importFrom rlang
-#' .data
-#' @importFrom git2rdata
-#' read_vc
-#' @importFrom sf
-#' st_as_sf
-#' st_drop_geometry
-#' @importFrom dplyr
-#' %>%
-#' as_tibble
-#' semi_join
-#' tribble
-#' mutate
-#' filter
-#' pull
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
+#' @importFrom rlang .data
+#' @importFrom git2rdata read_vc
+#' @importFrom sf st_as_sf st_drop_geometry
+#' @importFrom dplyr %>% as_tibble semi_join tribble mutate filter pull
+#' @importFrom assertthat assert_that is.flag noNA
 read_watersurfaces_refpoints <-
   function(
     file = file.path(
@@ -599,6 +566,7 @@ read_watersurfaces_refpoints <-
     ),
     spatial = TRUE,
     version = c(
+      "watersurfaces_refpoints_v7",
       "watersurfaces_refpoints_v6",
       "watersurfaces_refpoints_v5",
       "watersurfaces_refpoints_v4",
@@ -626,6 +594,7 @@ read_watersurfaces_refpoints <-
       # verify version consistency
       checksums_expected <- tribble(
         ~version, ~checksum_wsh, ~checksum_refpts_tsv,
+        "7", "832d8861293a5942", "49f7a139434f3872",
         "6", "e2920c4932008387", "b075fbc80c0b55a4",
         "5", "bd860c4d8b2b1de7", "8b74e5f80082595b",
         "4", "5792b496a94d0524", "2243f3cf20478b52",
@@ -832,33 +801,13 @@ read_watersurfaces_refpoints <-
 #' ws2
 #' }
 #'
-#' @importFrom sf
-#' read_sf
-#' st_is_valid
-#' st_make_valid
-#' @importFrom plyr
-#' mapvalues
-#' @importFrom rlang
-#' .data
-#' na_lgl
-#' @importFrom dplyr
-#' %>%
-#' across
-#' arrange
-#' mutate
-#' na_if
-#' rename
-#' select
-#' left_join
-#' everything
-#' tribble
-#' @importFrom assertthat
-#' assert_that
-#' @importFrom stringr
-#' str_replace
-#' @importFrom tidyselect
-#' where
-#' any_of
+#' @importFrom sf read_sf st_is_valid st_make_valid
+#' @importFrom plyr mapvalues
+#' @importFrom rlang .data na_lgl
+#' @importFrom dplyr %>% across arrange mutate na_if rename select left_join everything tribble
+#' @importFrom assertthat assert_that
+#' @importFrom stringr str_replace
+#' @importFrom tidyselect where any_of
 #' @export
 read_watersurfaces <-
   function(file = NULL,
@@ -1235,7 +1184,7 @@ read_watersurfaces <-
 
 #' Return the data source \code{habitatmap} as an \code{sf} multipolygon layer
 #'
-#' Returns the raw data source \code{habitatmap} (De Saeger et al., 2023)
+#' Returns the raw data source \code{habitatmap} (De Saeger et al., 2025)
 #' as a standardized \code{sf} multipolygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -1269,13 +1218,13 @@ read_watersurfaces <-
 #' @references
 #'
 #' \itemize{
-#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 #' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 #' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
@@ -1303,28 +1252,17 @@ read_watersurfaces <-
 #' }
 #'
 #' @export
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
-#' @importFrom sf
-#' read_sf
-#' st_is_valid
-#' st_make_valid
-#' st_crs<-
+#' @importFrom assertthat assert_that is.flag noNA
+#' @importFrom sf read_sf st_is_valid st_make_valid st_crs<-
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' select
-#' filter
-#' starts_with
+#' @importFrom dplyr %>% mutate select filter starts_with recode_values
 #'
 read_habitatmap <-
   function(file = file.path(locate_n2khab_data(), "10_raw/habitatmap"),
            filter_hab = FALSE,
            fix_geom = FALSE,
            version = c(
+             "habitatmap_2025",
              "habitatmap_2023",
              "habitatmap_2020",
              "habitatmap_2018"
@@ -1341,12 +1279,16 @@ read_habitatmap <-
         "20_processed/habitatmap_stdized/habitatmap_stdized.gpkg"
       ))
 
-      if (version == "habitatmap_2023") {
-        xxh64sum_habitatmap_stdized_expected <- "5c32f9b5d74eac23"
-      } else if (version == "habitatmap_2020") {
-        xxh64sum_habitatmap_stdized_expected <- "3109c26f0a27a0f3"
-      } else {
-        xxh64sum_habitatmap_stdized_expected <- c("b80f469f33636c8b", "8e9c4e09f5f67c3e")
+      xxh64sum_habitatmap_stdized_expected <- recode_values(
+        version,
+        "habitatmap_2025" ~ "85d64872c3fb7016",
+        "habitatmap_2023" ~ "5c32f9b5d74eac23",
+        "habitatmap_2020" ~ "3109c26f0a27a0f3",
+        default = NA_character_
+      )
+      if (is.na(xxh64sum_habitatmap_stdized_expected)) {
+        xxh64sum_habitatmap_stdized_expected <-
+          c("b80f469f33636c8b", "8e9c4e09f5f67c3e")
       }
 
       if (!(xxh64sum_habitatmap_stdized_present %in%
@@ -1371,29 +1313,29 @@ read_habitatmap <-
 
     habitatmap <- habitatmap %>%
       select(
-        polygon_id = .data$tag,
-        .data$eval,
+        polygon_id = "tag",
+        "eval",
         starts_with("eenh"),
-        .data$v1,
-        .data$v2,
-        .data$v3,
-        source = .data$herk,
-        .data$info,
-        bwk_label = .data$bwklabel,
-        .data$hab1,
-        .data$phab1,
-        .data$hab2,
-        .data$phab2,
-        .data$hab3,
-        .data$phab3,
-        .data$hab4,
-        .data$phab4,
-        .data$hab5,
-        .data$phab5,
-        source_hab = .data$herkhab,
-        source_phab = .data$herkphab,
-        hab_legend = .data$hablegende,
-        area_m2 = .data$oppervl
+        "v1",
+        "v2",
+        "v3",
+        source = "herk",
+        "info",
+        bwk_label = "bwklabel",
+        "hab1",
+        "phab1",
+        "hab2",
+        "phab2",
+        "hab3",
+        "phab3",
+        "hab4",
+        "phab4",
+        "hab5",
+        "phab5",
+        source_hab = "herkhab",
+        source_phab = "herkphab",
+        hab_legend = "hablegende",
+        area_m2 = "oppervl"
       )
 
     habitatmap <- habitatmap %>%
@@ -1455,7 +1397,7 @@ read_habitatmap <-
 #' \code{habitatmap_terr} is the further interpreted, terrestrial part of
 #' \code{habitatmap_stdized} (see \code{\link{read_habitatmap_stdized}}),
 #' which, in turn, is derived from the raw data source \code{habitatmap}
-#' (De Saeger et al., 2023).
+#' (De Saeger et al., 2025).
 #' By default, occurrences of type \code{7220} are dropped because a more
 #' reliable data source is available for this habitat type (see \code{drop_7220}
 #' argument).
@@ -1482,11 +1424,16 @@ read_habitatmap <-
 #' equal to \code{"6510,gh"} or \code{"9120,gh"};}
 #' \item{it translates several main type codes into a corresponding
 #' subtype which they almost always represent:
-#' \code{6410} -> \code{6410_mo},
-#' \code{6430} -> \code{6430_hf},
-#' \code{6510} -> \code{6510_hu},
-#' \code{7140} -> \code{7140_meso},
-#' \code{9130} -> \code{9130_end};}
+#' \itemize{
+#' \item\code{6230} -> \code{6230_hmo} \strong{\emph{if}} \code{code_orig} is
+#' \code{6230,6410}
+#' \item\code{6410} -> \code{6410_mo}
+#' \item\code{6430} -> \code{6430_hf}
+#' \item\code{6510} -> \code{6510_hu}
+#' \item\code{7140} -> \code{7140_meso}
+#' \item\code{9130} -> \code{9130_end}
+#' }
+#' }
 #' \item{it distinguishes types \code{rbbhfl} and \code{rbbhf}.}
 #' }
 #'
@@ -1533,6 +1480,12 @@ read_habitatmap <-
 #'     \item \code{polygon_id}
 #'     \item \code{description_orig}: polygon description based on the
 #'     original type codes in the \code{habitatmap} data source
+#'     \item \code{year_assessment}: the year when the types in the polygon have
+#'     been assessed. This column only appears since data source version
+#'     \code{habitatmap_terr_2025_v1}.
+#'     \item \code{method_assessment}: the method used to assess the types in
+#'     the polygon. This column only appears since data source version
+#'     \code{habitatmap_terr_2025_v1}.
 #'     \item \code{description}: based on \code{description_orig} but with the
 #'     interpreted type codes
 #'     \item \code{source}: states where \code{description} comes from: either
@@ -1560,13 +1513,13 @@ read_habitatmap <-
 #' @references
 #'
 #' \itemize{
-#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' \item De Saeger, S., Oosterlynck, P. & Paelinckx, D. (2017). The Biological
 #' Valuation Map (BVM): a field-driven survey of land cover and vegetation in
 #' the Flemish Region of Belgium. Documents phytosociologiques - Actes du
@@ -1593,20 +1546,11 @@ read_habitatmap <-
 #' }
 #'
 #' @export
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
-#' is.string
-#' @importFrom sf
-#' read_sf
-#' st_crs<-
+#' @importFrom assertthat assert_that is.flag noNA is.string
+#' @importFrom sf read_sf st_crs<- st_crs
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' filter
-#' relocate
+#' @importFrom dplyr %>% mutate filter relocate
+#' @importFrom tidyselect any_of
 read_habitatmap_terr <-
   function(file = file.path(
              locate_n2khab_data(),
@@ -1615,6 +1559,7 @@ read_habitatmap_terr <-
            keep_aq_types = TRUE,
            drop_7220 = TRUE,
            version = c(
+             "habitatmap_terr_2025_v1",
              "habitatmap_terr_2023_v1",
              "habitatmap_terr_2020_v2",
              "habitatmap_terr_2020_v1",
@@ -1632,12 +1577,14 @@ read_habitatmap_terr <-
     )
 
     habmap_terr_polygons <- habmap_terr_polygons %>%
-      mutate(
-        polygon_id = factor(.data$polygon_id),
-        source = factor(.data$source)
-      )
+      mutate(across(
+        any_of(c("polygon_id", "source", "method_assessment")),
+        factor
+      ))
 
-    suppressWarnings(st_crs(habmap_terr_polygons) <- 31370)
+    if (st_crs(habmap_terr_polygons) != st_crs(31370)) {
+      suppressWarnings(st_crs(habmap_terr_polygons) <- 31370)
+    }
 
     if (version == "habitatmap_terr_2018_v1") {
       habmap_terr_types <- suppressWarnings(
@@ -1647,23 +1594,24 @@ read_habitatmap_terr <-
         )
       )
     } else {
-      habmap_terr_types <- suppressWarnings(
+      habmap_terr_types <-
         read_sf(
           file,
           "habitatmap_terr_types"
         )
-      )
     }
 
     types <- read_types()
 
     habmap_terr_types <- habmap_terr_types %>%
       mutate(
-        polygon_id = factor(.data$polygon_id,
+        polygon_id = factor(
+          .data$polygon_id,
           levels = levels(habmap_terr_polygons$polygon_id)
         ),
         certain = .data$certain == 1,
-        type = factor(.data$type,
+        type = factor(
+          .data$type,
           levels = levels(types$type)
         ),
         source = factor(.data$source)
@@ -1672,10 +1620,7 @@ read_habitatmap_terr <-
     if (!keep_aq_types) {
       habmap_terr_types <-
         habmap_terr_types %>%
-        filter(!(.data$type %in% (types %>%
-          filter(.data$hydr_class == "HC3") %>%
-          .$type)
-        ))
+        filter(!(.data$type %in% types[types$hydr_class == "HC3", ]$type))
       # The below step is unneeded (and takes several seconds),
       # because polygons with _no_ terrestrial types were already
       # excluded in the data source.
@@ -1703,17 +1648,10 @@ read_habitatmap_terr <-
         )
     }
 
-    if (version == "habitatmap_terr_2018_v1") {
-      result <- list(
-        habitatmap_terr_polygons = habmap_terr_polygons,
-        habitatmap_terr_patches = habmap_terr_types
-      )
-    } else {
-      result <- list(
-        habitatmap_terr_polygons = habmap_terr_polygons,
-        habitatmap_terr_types = habmap_terr_types
-      )
-    }
+    result <- list(
+      habitatmap_terr_polygons = habmap_terr_polygons,
+      habitatmap_terr_types = habmap_terr_types
+    )
 
     return(result)
   }
@@ -1732,7 +1670,7 @@ read_habitatmap_terr <-
 #' layer or as a list
 #'
 #' Returns the raw data source \code{habitatstreams} (section 'habitat 3260' from
-#' De Saeger et al., 2023) as an \code{sf} linestring
+#' De Saeger et al., 2025) as an \code{sf} linestring
 #' layer or as a list of two objects: the \code{sf} object (CRS:
 #' Belgian Lambert 72 (EPSG-code \href{https://epsg.io/31370}{31370}))
 #' plus a data frame
@@ -1760,13 +1698,13 @@ read_habitatmap_terr <-
 #' @references
 #'
 #' \itemize{
-#' \item De Saeger S., Dhaluin P., Erens R., Guelinckx G., Hennebel D.,
-#' Jacobs I., Kumpen M., Van Oost F., Spanhove T., Leyssen A., Oosterlynck P.,
-#' Van Dam G., Van Hove M., Wils C. (red.) (2023).
-#' Biologische Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2023.
-#' (Rapporten van het Instituut voor Natuur- en Bosonderzoek; Nr. 31).
-#' Instituut voor Natuur- en Bosonderzoek (INBO).
-#' \doi{10.21436/inbor.96375305}.
+#' \item De Saeger S., De Bruyn A., Dhaluin P., Erens R., Guelinckx G.,
+#' Hennebel D., Jacobs I., Kumpen M., Van Oost F., Cool R., Spanhove T.,
+#' Leyssen A., Oosterlynck P., Van Dam G. & Wils C. (red.) (2025). Biologische
+#' Waarderingskaart en Natura 2000 Habitatkaart, uitgave 2025. Rapporten van het
+#' Instituut voor Natuur- en Bosonderzoek 2025 (38). Instituut voor Natuur- en
+#' Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.129502912}.
 #' \item Leyssen A., Smeekens V., Denys L. (2020). Indicatieve situering van het
 #' Natura 2000 habitattype 3260. Submontane en laaglandrivieren met vegetaties
 #' behorend tot het \emph{Ranunculion fluitantis} en het
@@ -1797,32 +1735,25 @@ read_habitatmap_terr <-
 #' )
 #' }
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
-#' @importFrom sf
-#' read_sf
-#' st_drop_geometry
+#' @importFrom assertthat assert_that is.flag noNA
+#' @importFrom sf read_sf st_drop_geometry
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' select
-#' distinct
-#' @importFrom forcats
-#' fct_reorder
-#' @importFrom stringr
-#' str_replace
-#' str_squish
-#' str_to_title
+#' @importFrom dplyr %>% mutate select distinct
+#' @importFrom forcats fct_reorder
+#' @importFrom stringr str_replace str_squish str_to_title
 #' @export
 read_habitatstreams <-
   function(file = file.path(
              locate_n2khab_data(),
              "10_raw/habitatstreams"
            ),
-           source_text = FALSE) {
+           source_text = FALSE,
+           version = c(
+             "habitatstreams_2025",
+             "habitatstreams_2023",
+             "habitatstreams_v1.7",
+             "habitatstreams_v1.6"
+           )) {
     assert_that(file.exists(file))
 
     assert_that(is.flag(source_text), noNA(source_text))
@@ -1931,12 +1862,19 @@ read_habitatstreams <-
 #'
 #' @param filter_hab If \code{TRUE}, only points with (potential) habitat
 #' are returned. The default value is \code{FALSE}.
+#' @param filter_system String; either \code{"all"}, \code{"mire"} or
+#' \code{"rivulet"}. Value \code{"all"} applies no filter, while \code{"mire"}
+#' and \code{"rivulet"} only return rows where the system type is (possibly)
+#' mire or rivulet, respectively. The system type 'unknown' is included in those
+#' cases.
 #' @param units_7220 If \code{TRUE}, an `sf` object of type-`7220`-locations is
 #' returned at the population unit level.
 #' To accomplish this, the data source is aggregated by `unit_id`.
 #' Multiple points belonging to the same unit are replaced by their
-#' centroid, their area attribute is summed (if all values are known)
-#' and for other attributes the maximum value is returned.
+#' centroid, their area attribute is summed (if all values are known),
+#' logical variables become \code{TRUE} if any is \code{TRUE},
+#' for year and name the maximum value is used and for other character values a
+#' concatenated string is returned.
 #'
 #' @inheritParams read_habitatmap
 #'
@@ -1947,7 +1885,7 @@ read_habitatstreams <-
 #'     \item \code{point_id}
 #'     \item \code{name}: site name.
 #'     \item \code{system_type}: environmental typology of `7220`: `mire`,
-#'     `rivulet` or `unknown` (non-`7220` types are `NA`)
+#'     `rivulet` or `unknown` (non-`7220` types are `NA` in older versions)
 #'     \item \code{code_orig}: original type code in raw
 #'     \code{habitatsprings}.
 #'     \item \code{type}: habitat type listed in \code{\link{types}}.
@@ -1963,7 +1901,7 @@ read_habitatstreams <-
 #'     \item \code{source}: original data source of the record.
 #'   }
 #'
-#' Note that the \code{type} and \code{system_type} variables have
+#' Note that the \code{type} and \code{system_type} variables can have
 #' implicit \code{NA} values
 #' (i.e. there is
 #' no factor level to represent the missing values).
@@ -1993,29 +1931,12 @@ read_habitatstreams <-
 #' hs2
 #' }
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
-#' is.string
-#' @importFrom stringr
-#' str_sub
-#' @importFrom sf
-#' read_sf
-#' st_transform
-#' st_centroid
+#' @importFrom assertthat assert_that is.flag noNA is.string
+#' @importFrom stringr str_sub str_detect
+#' @importFrom sf read_sf st_transform st_centroid st_union
 #' @importFrom rlang .data
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' select
-#' filter
-#' everything
-#' group_by
-#' summarise_if
-#' mutate_at
-#' n
-#' vars
+#' @importFrom dplyr %>% mutate select filter everything group_by summarise_if mutate_at n vars relocate across
+#' @importFrom tidyselect where
 #' @export
 read_habitatsprings <-
   function(file = file.path(
@@ -2023,12 +1944,17 @@ read_habitatsprings <-
              "10_raw/habitatsprings/habitatsprings.geojson"
            ),
            filter_hab = FALSE,
+           filter_system = c("all", "mire", "rivulet"),
            units_7220 = FALSE,
-           version = "habitatsprings_2020v2") {
+           version = c(
+             "habitatsprings_2025v2",
+             "habitatsprings_2020v2"
+           )) {
     assert_that(file.exists(file))
     assert_that(is.flag(filter_hab), noNA(filter_hab))
     assert_that(is.flag(units_7220), noNA(units_7220))
-    assert_that(is.string(version))
+    filter_system <- match.arg(filter_system)
+    version <- match.arg(version)
 
     typelevels <-
       read_types() %>%
@@ -2055,7 +1981,7 @@ read_habitatsprings <-
       {
         if (filter_hab) filter(., !is.na(.$type)) else .
       } %>%
-      select(
+      relocate(
         point_id = .data$id,
         .data$name,
         code_orig = .data$habitattype,
@@ -2063,14 +1989,15 @@ read_habitatsprings <-
         .data$certain,
         .data$area_m2,
         .data$year,
-        .data$in_sac,
-        everything(),
+        .data$in_sac) %>%
+      select(
         -.data$validity_status,
         -.data$sbz
       ) %>%
       mutate(
         point_id = as.integer(.data$point_id),
-        unit_id = as.integer(.data$unit_id)
+        unit_id = as.integer(.data$unit_id),
+        year = as.integer(.data$year)
       )
 
 
@@ -2078,12 +2005,14 @@ read_habitatsprings <-
       habitatsprings <-
         habitatsprings %>%
         mutate(system_type = factor(.data$system_type)) %>%
-        select(
-          1:2,
+        relocate(
+          .data$point_id,
+          .data$name,
           .data$system_type,
-          3:5,
-          .data$unit_id,
-          everything()
+          .data$code_orig,
+          .data$type,
+          .data$certain,
+          .data$unit_id
         )
     }
 
@@ -2094,42 +2023,48 @@ read_habitatsprings <-
           "version habitatsprings_2019v1."
         )
       )
-      suppressWarnings(
-        habitatsprings <-
-          habitatsprings %>%
-          filter(.data$type == "7220") %>%
-          select(-.data$point_id) %>%
-          group_by(.data$unit_id) %>%
-          mutate(
-            area_m2 = sum(.data$area_m2),
-            system_type = as.character(.data$system_type),
-            type = as.character(.data$type),
-            nr_of_points = n()
-          ) %>%
-          summarise_if(
-            function(x) {
-              !inherits(x, "sfc")
-            },
-            max
-          ) %>%
-          mutate(
-            type = .data$type %>% factor(levels = typelevels),
-            system_type = factor(.data$system_type)
-          ) %>%
-          mutate_at(
-            vars(
-              .data$certain,
-              .data$in_sac
-            ),
-            as.logical
-          ) %>%
-          st_centroid() %>%
-          select(
-            .data$unit_id,
-            .data$nr_of_points,
-            everything()
-          )
-      )
+      habitatsprings <-
+        habitatsprings %>%
+        filter(.data$type == "7220") %>%
+        select(-.data$point_id) %>%
+        mutate(
+          system_type = as.character(.data$system_type),
+          type = as.character(.data$type)
+        ) %>%
+        summarise(
+          nr_of_points = n(),
+          area_m2 = sum(.data$area_m2),
+          across(c("name", "year"), max),
+          across(where(is.logical), any),
+          across(where(is.character), \(x) str_flatten(sort(unique(x)), " + ")),
+          across("geometry", st_union),
+          .by = "unit_id"
+        ) %>%
+        mutate(
+          type = .data$type %>% factor(levels = typelevels),
+          system_type = factor(.data$system_type)
+        ) %>%
+        st_centroid() %>%
+        relocate(
+          .data$unit_id,
+          .data$nr_of_points,
+          .data$name,
+          .data$system_type,
+          .data$code_orig,
+          .data$type,
+          .data$certain,
+        )
+    }
+
+    # for filter_system, we take into account that system_type has been
+    # concatenated if units_7220 is TRUE
+    if (filter_system != "all") {
+      habitatsprings <-
+        habitatsprings %>%
+        filter(str_detect(
+          .data$system_type,
+          paste0(filter_system, "|unknown")
+        ))
     }
 
     return(habitatsprings)
@@ -2219,23 +2154,12 @@ read_habitatsprings <-
 #' read_habitatquarries(bibtex = TRUE)
 #' }
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.flag
-#' noNA
-#' is.string
-#' @importFrom stringr
-#' str_split
-#' @importFrom sf
-#' read_sf
+#' @importFrom assertthat assert_that is.flag noNA is.string
+#' @importFrom stringr str_split
+#' @importFrom sf read_sf
 #' @importFrom rlang .data
-#' @importFrom magrittr
-#' set_colnames
-#' @importFrom dplyr
-#' %>%
-#' mutate
-#' select
-#' filter
+#' @importFrom magrittr set_colnames
+#' @importFrom dplyr %>% mutate select filter
 #' @export
 read_habitatquarries <-
   function(file = file.path(

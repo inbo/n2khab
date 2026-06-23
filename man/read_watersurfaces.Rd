@@ -124,14 +124,14 @@ Vlaanderen. Uitgave 2024. Instituut voor Natuur- en Bosonderzoek.
 }
 }
 \seealso{
-Other functions involved in processing the 'watersurfaces' data source: 
-\code{\link{read_watersurfaces_hab}()},
-\code{\link{read_watersurfaces_refpoints}()}
+Other functions involved in processing the 'watersurfaces' data source:
+\code{\link[=read_watersurfaces_hab]{read_watersurfaces_hab()}},
+\code{\link[=read_watersurfaces_refpoints]{read_watersurfaces_refpoints()}}
 
-Other functions returning environmental data sets: 
-\code{\link{read_shallowgroundwater}()},
-\code{\link{read_soilmap}()},
-\code{\link{read_watercourse_100mseg}()}
+Other functions returning environmental data sets:
+\code{\link[=read_shallowgroundwater]{read_shallowgroundwater()}},
+\code{\link[=read_soilmap]{read_soilmap()}},
+\code{\link[=read_watercourse_100mseg]{read_watercourse_100mseg()}}
 }
 \concept{functions involved in processing the 'watersurfaces' data source}
 \concept{functions returning environmental data sets}

@@ -40,8 +40,7 @@
 #' }
 #'
 #' @export
-#' @importFrom assertthat
-#' assert_that
+#' @importFrom assertthat assert_that
 
 read_raster_runif <-
   function(file = file.path(

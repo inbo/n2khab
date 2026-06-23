@@ -93,21 +93,11 @@
 #' favenv <- read_favenv()
 #' }
 #'
-#' @importFrom assertthat
-#' assert_that
-#' is.string
-#' @importFrom dplyr
-#' as_tibble
-#' filter
-#' rename
-#' if_all
-#' everything
-#' @importFrom curl
-#' has_internet
-#' @importFrom rlang
-#' .data
-#' @importFrom utils
-#' read.delim
+#' @importFrom assertthat assert_that is.string
+#' @importFrom dplyr as_tibble filter rename if_all everything
+#' @importFrom curl has_internet
+#' @importFrom rlang .data
+#' @importFrom utils read.delim
 read_favenv <- function(
   file = file.path(
     locate_n2khab_data(),
