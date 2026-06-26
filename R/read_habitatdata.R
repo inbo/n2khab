@@ -814,7 +814,7 @@ read_watersurfaces <-
            extended = FALSE,
            fix_geom = FALSE,
            version = c(
-             "watersurfaces_v2024",
+             "watersurfaces_2024",
              "watersurfaces_v1.2",
              "watersurfaces_v1.1",
              "watersurfaces_v1.0"
@@ -915,7 +915,7 @@ read_watersurfaces <-
         )
     }
 
-    if (version == "watersurfaces_v2024") {
+    if (version == "watersurfaces_2024") {
       wfd_type_alttransl <- data.frame(wfd_type = "-", wfd_type_name = "geen ander watertype") %>%
         bind_rows(wfd_typetransl) %>%
         bind_rows(wfd_typetransl %>%
@@ -953,7 +953,7 @@ read_watersurfaces <-
             water_level_management = "PEILBEHEER",
             hyla_code = "HYLAC"
           )
-        } else if (version == "watersurfaces_v2024") {
+        } else if (version == "watersurfaces_2024") {
           rename(.,
             wfd_type_alternative = "KRWTYPEA",
             water_level_management = "PEILBEHEER"
@@ -1053,7 +1053,7 @@ read_watersurfaces <-
 
     # corrections per record
     # 2024: wrong polygon_id "d"
-    if (version == "watersurfaces_v2024") {
+    if (version == "watersurfaces_2024") {
       watersurfaces <-
         watersurfaces %>%
         mutate(polygon_id = ifelse(.data$polygon_id == "d",
@@ -1113,7 +1113,7 @@ read_watersurfaces <-
               )
         ) %>%
         {
-          if (version == "watersurfaces_v2024") {
+          if (version == "watersurfaces_2024") {
             left_join(., wfd_type_alttransl, by = "wfd_type_alternative") %>%
               mutate(
                 wfd_type_alt_name =
