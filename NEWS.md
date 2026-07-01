@@ -1,4 +1,4 @@
-# n2khab (development version)
+# n2khab 0.15.1 (2026-07-01)
 
 ## Hotfix
 
