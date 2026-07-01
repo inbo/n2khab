@@ -8,7 +8,7 @@ read_watersurfaces(
   file = NULL,
   extended = FALSE,
   fix_geom = FALSE,
-  version = c("watersurfaces_v2024", "watersurfaces_v1.2", "watersurfaces_v1.1",
+  version = c("watersurfaces_2024", "watersurfaces_v1.2", "watersurfaces_v1.1",
     "watersurfaces_v1.0")
 )
 }

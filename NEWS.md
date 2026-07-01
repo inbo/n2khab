@@ -1,3 +1,9 @@
+# n2khab 0.15.1 (2026-07-01)
+
+## Hotfix
+
+- `read_watersurfaces()`: fix name of the most recent version of `watersurfaces`.
+
 # n2khab 0.15.0 (2026-06-23)
 
 ## Breaking changes
