@@ -38,98 +38,120 @@ export(read_watersurfaces_hab)
 export(read_watersurfaces_refpoints)
 export(sha256sum)
 export(xxh64sum)
-importFrom(assertthat,assert_that)
-importFrom(assertthat,is.flag)
-importFrom(assertthat,is.string)
-importFrom(assertthat,noNA)
-importFrom(curl,curl_download)
-importFrom(curl,curl_fetch_memory)
-importFrom(curl,has_internet)
-importFrom(curl,multi_download)
-importFrom(curl,nslookup)
-importFrom(dplyr,"%>%")
-importFrom(dplyr,across)
-importFrom(dplyr,anti_join)
-importFrom(dplyr,arrange)
-importFrom(dplyr,as_tibble)
-importFrom(dplyr,bind_rows)
-importFrom(dplyr,case_when)
-importFrom(dplyr,contains)
-importFrom(dplyr,distinct)
-importFrom(dplyr,everything)
-importFrom(dplyr,filter)
-importFrom(dplyr,filter_at)
-importFrom(dplyr,group_by)
-importFrom(dplyr,group_vars)
-importFrom(dplyr,if_all)
-importFrom(dplyr,inner_join)
-importFrom(dplyr,join_by)
-importFrom(dplyr,left_join)
-importFrom(dplyr,matches)
-importFrom(dplyr,mutate)
-importFrom(dplyr,mutate_at)
-importFrom(dplyr,mutate_if)
-importFrom(dplyr,n)
-importFrom(dplyr,na_if)
-importFrom(dplyr,pick)
-importFrom(dplyr,pull)
-importFrom(dplyr,recode)
-importFrom(dplyr,recode_values)
-importFrom(dplyr,relocate)
-importFrom(dplyr,rename)
-importFrom(dplyr,select)
-importFrom(dplyr,semi_join)
-importFrom(dplyr,starts_with)
-importFrom(dplyr,summarise)
-importFrom(dplyr,summarise_if)
-importFrom(dplyr,summarize)
-importFrom(dplyr,tibble)
-importFrom(dplyr,tribble)
-importFrom(dplyr,ungroup)
-importFrom(dplyr,vars)
+importFrom(assertthat,
+  assert_that,
+  is.flag,
+  is.string,
+  noNA
+)
+importFrom(curl,
+  curl_download,
+  curl_fetch_memory,
+  has_internet,
+  multi_download,
+  nslookup
+)
+importFrom(dplyr,
+  "%>%",
+  across,
+  anti_join,
+  arrange,
+  as_tibble,
+  bind_rows,
+  case_when,
+  contains,
+  distinct,
+  everything,
+  filter,
+  filter_at,
+  group_by,
+  group_vars,
+  if_all,
+  inner_join,
+  join_by,
+  left_join,
+  matches,
+  mutate,
+  mutate_at,
+  mutate_if,
+  n,
+  na_if,
+  pick,
+  pull,
+  recode,
+  recode_values,
+  relocate,
+  rename,
+  select,
+  semi_join,
+  starts_with,
+  summarise,
+  summarise_if,
+  summarize,
+  tibble,
+  tribble,
+  ungroup,
+  vars
+)
 importFrom(forcats,fct_reorder)
 importFrom(git2rdata,read_vc)
 importFrom(magrittr,set_colnames)
 importFrom(plyr,mapvalues)
-importFrom(purrr,map)
-importFrom(purrr,map_chr)
-importFrom(purrr,map_lgl)
-importFrom(rlang,.data)
-importFrom(rlang,na_lgl)
-importFrom(rprojroot,find_root)
-importFrom(rprojroot,find_root_file)
-importFrom(rprojroot,has_dir)
-importFrom(rprojroot,is_git_root)
-importFrom(rprojroot,is_rstudio_project)
-importFrom(sf,"st_crs<-")
-importFrom(sf,read_sf)
-importFrom(sf,st_as_sf)
-importFrom(sf,st_centroid)
-importFrom(sf,st_crs)
-importFrom(sf,st_drop_geometry)
-importFrom(sf,st_is_valid)
-importFrom(sf,st_make_valid)
-importFrom(sf,st_transform)
-importFrom(sf,st_union)
+importFrom(purrr,
+  map,
+  map_chr,
+  map_lgl
+)
+importFrom(rlang,
+  .data,
+  na_lgl
+)
+importFrom(rprojroot,
+  find_root,
+  find_root_file,
+  has_dir,
+  is_git_root,
+  is_rstudio_project
+)
+importFrom(sf,
+  "st_crs<-",
+  read_sf,
+  st_as_sf,
+  st_centroid,
+  st_crs,
+  st_drop_geometry,
+  st_is_valid,
+  st_make_valid,
+  st_transform,
+  st_union
+)
 importFrom(stats,setNames)
-importFrom(stringr,fixed)
-importFrom(stringr,str_c)
-importFrom(stringr,str_detect)
-importFrom(stringr,str_flatten)
-importFrom(stringr,str_match)
-importFrom(stringr,str_pad)
-importFrom(stringr,str_remove)
-importFrom(stringr,str_replace)
-importFrom(stringr,str_split)
-importFrom(stringr,str_squish)
-importFrom(stringr,str_sub)
-importFrom(stringr,str_to_title)
-importFrom(tidyr,nest)
-importFrom(tidyr,tribble)
-importFrom(tidyr,unnest)
-importFrom(tidyselect,all_of)
-importFrom(tidyselect,any_of)
-importFrom(tidyselect,where)
-importFrom(utils,packageDescription)
-importFrom(utils,packageVersion)
-importFrom(utils,read.delim)
+importFrom(stringr,
+  fixed,
+  str_c,
+  str_detect,
+  str_flatten,
+  str_match,
+  str_pad,
+  str_remove,
+  str_replace,
+  str_split,
+  str_squish,
+  str_sub,
+  str_to_title
+)
+importFrom(tidyr,
+  nest,
+  tribble,
+  unnest
+)
+importFrom(tidyselect,
+  all_of,
+  any_of,
+  where
+)
+importFrom(utils,
+  packageDescription,
+  packageVersion,
+  read.delim
+)
