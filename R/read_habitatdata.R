@@ -167,6 +167,7 @@ read_habitatmap_stdized <-
              "habitatmap_stdized_2020_v1",
              "habitatmap_stdized_2018_v2",
              "habitatmap_stdized_2018_v1",
+             "habitatmap_stdized_2025_v99_interim",
              "habitatmap_stdized_2024_v99_interim"
            )) {
     version <- match.arg(version)
