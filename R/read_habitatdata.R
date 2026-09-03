@@ -1566,6 +1566,7 @@ read_habitatmap_terr <-
              "habitatmap_terr_2020_v1",
              "habitatmap_terr_2018_v2",
              "habitatmap_terr_2018_v1",
+             "habitatmap_terr_2025_v99_interim",
              "habitatmap_terr_2024_v99_interim"
            )) {
     assert_that(is.flag(keep_aq_types), noNA(keep_aq_types))
