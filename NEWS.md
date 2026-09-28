@@ -1,3 +1,14 @@
+# n2khab (development version)
+
+## Support for interim data source versions
+
+The following _interim_ data source versions are now supported by the corresponding functions (#225; [inbo/n2khab-preprocessing/pull/87](https://github.com/inbo/n2khab-preprocessing/pull/87)):
+
+- `habitatmap_stdized_2025_v99_interim` (`read_habitatmap_stdized()`)
+- `habitatmap_terr_2025_v99_interim` (`read_habitatmap_terr()`)
+
+Please note that it is advised to use a regular version of these data sources instead.
+
 # n2khab 0.15.1 (2026-07-01)
 
 ## Hotfix
