@@ -974,11 +974,11 @@ read_watersurfaces <-
           string = .data$depth_class,
           pattern = "\u2265",
           replacement = ">="
-        ),
+        ) %>%
+          factor(levels = c("0 - 2 m", "2 - 4 m", "4 - 6 m", "> 6 m")),
         across(
           c(
             "area_name",
-            "depth_class",
             "connectivity",
             "usage",
             any_of("water_level_management")
