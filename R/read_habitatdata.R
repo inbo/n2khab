@@ -943,24 +943,11 @@ read_watersurfaces <-
 
     watersurfaces <-
       watersurfaces %>%
-      {
-        if (version == "watersurfaces_v1.2") {
-          rename(.,
-            water_level_management = "PEILBEHEER",
-            hyla_code = "HYLAC"
-          )
-        } else if (version == "watersurfaces_2024") {
-          rename(.,
-            wfd_type_alternative = "KRWTYPEA",
-            water_level_management = "PEILBEHEER"
-          ) %>%
-            mutate(
-              across(where(is.character), ~ na_if(., ""))
-            )
-        } else {
-          rename(., hyla_code = "HYLAC")
-        }
-      } %>%
+      rename(any_of(c(
+        water_level_management = "PEILBEHEER",
+        wfd_type_alternative = "KRWTYPEA",
+        hyla_code = "HYLAC"
+      ))) %>%
       select(
         polygon_id = "WVLC",
         wfd_code = "WTRLICHC",
@@ -976,6 +963,11 @@ read_watersurfaces <-
         any_of("water_level_management")
       ) %>%
       mutate(
+        across(where(is.character), \(x) na_if(x, "")),
+        across(
+          c("wfd_code", "name", "area_name"),
+          \(x) ifelse(x == "<Null>", NA, x)
+        ),
         depth_class = str_replace(
           string = .data$depth_class,
           pattern = "\u2265",
@@ -1017,33 +1009,19 @@ read_watersurfaces <-
       watersurfaces <-
         watersurfaces %>%
         mutate(
-          across(
-            c("wfd_code", "name"),
-            ~ ifelse(.x == "<Null>", NA, .x)
-          ),
-          wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+          wfd_type_certain = ifelse(
+            is.na(.data$wfd_type_certain),
             na_lgl,
-            .data$wfd_type_certain %in%
-              c("zeker", "definitief")
+            .data$wfd_type_certain %in% c("zeker", "definitief")
           )
         )
     } else {
       watersurfaces <-
         watersurfaces %>%
-        {
-          if (version != "watersurfaces_v1.2") {
-            .
-          } else {
-            mutate(., area_name = ifelse(.data$area_name == "<Null>",
-              NA,
-              .data$area_name
-            ))
-          }
-        } %>%
-        mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+        mutate(wfd_type_certain = ifelse(
+          is.na(.data$wfd_type_certain),
           na_lgl,
-          .data$wfd_type_certain ==
-            "definitief"
+          .data$wfd_type_certain == "definitief"
         ))
     }
 
