@@ -93,7 +93,10 @@ importFrom(dplyr,
   ungroup,
   vars
 )
-importFrom(forcats,fct_reorder)
+importFrom(forcats,
+  fct,
+  fct_reorder
+)
 importFrom(git2rdata,read_vc)
 importFrom(magrittr,set_colnames)
 importFrom(plyr,mapvalues)
@@ -148,6 +151,7 @@ importFrom(tidyr,
 importFrom(tidyselect,
   all_of,
   any_of,
+  starts_with,
   where
 )
 importFrom(utils,
