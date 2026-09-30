@@ -869,14 +869,8 @@ read_watersurfaces <-
 
       wfd_typetransl <- read_sf(file, layer = "LktKRWTYPE") %>%
         mutate(
-          across(
-            where(is.character),
-            ~ return(`Encoding<-`(.x, "UTF-8"))
-          ),
-          across(
-            "Code",
-            as.factor
-          )
+          across(where(is.character), \(x) return(`Encoding<-`(x, "UTF-8"))),
+          across("Code", fct)
         ) %>%
         select(
           wfd_type = "Code",
@@ -911,11 +905,7 @@ read_watersurfaces <-
           "Zm", "zwak zuur",
           "Zs", "sterk zuur"
         ) %>%
-        mutate(
-          wfd_type = factor(.data$wfd_type,
-            levels = .$wfd_type
-          )
-        )
+        mutate(wfd_type = fct(.data$wfd_type))
     }
 
     if (version %in% c("watersurfaces_2024", "watersurfaces_2026")) {
