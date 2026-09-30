@@ -914,11 +914,13 @@ read_watersurfaces <-
         wfd_type_name = "geen ander watertype"
       ) %>%
         bind_rows(wfd_typetransl) %>%
-        bind_rows(wfd_typetransl %>%
-          mutate(
-            wfd_type = paste0("(", .data$wfd_type, ")"),
-            wfd_type_name = paste(.data$wfd_type_name, "(weinig waarschijnlijk)")
-          )) %>%
+        bind_rows(
+          wfd_typetransl %>%
+            mutate(
+              wfd_type = paste0("(", .data$wfd_type, ")"),
+              wfd_type_name = paste(.data$wfd_type_name, "(weinig waarschijnlijk)")
+            )
+        ) %>%
         rename(
           wfd_type_alt_name = "wfd_type_name",
           wfd_type_alternative = "wfd_type"
@@ -984,24 +986,15 @@ read_watersurfaces <-
           as.factor
         ),
         wfd_type = .data$wfd_type %>%
-          factor(
-            levels =
-              levels(wfd_typetransl$wfd_type)
-          ),
+          factor(levels = levels(wfd_typetransl$wfd_type)),
         across(
           any_of("wfd_type_alternative"),
-          ~ factor(.,
-            levels =
-              levels(wfd_type_alttransl$wfd_type_alternative)
+          \(x) factor(
+            x,
+            levels = levels(wfd_type_alttransl$wfd_type_alternative)
           )
         ),
-        across(
-          any_of("hyla_code"),
-          ~ ifelse(.x == 0,
-            NA,
-            .x
-          )
-        )
+        across(any_of("hyla_code"), \(x) ifelse(x == 0, NA, x))
       ) %>%
       arrange("polygon_id")
 
@@ -1042,7 +1035,7 @@ read_watersurfaces <-
           mutate(
             across(
               where(is.character),
-              ~ return(`Encoding<-`(.x, "UTF-8"))
+              \(x) return(`Encoding<-`(x, "UTF-8"))
             ),
             across("Code", as.factor)
           ) %>%
