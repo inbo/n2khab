@@ -694,7 +694,7 @@ read_watersurfaces_refpoints <-
 
 #' Return the data source \code{watersurfaces} as an \code{sf} polygon layer
 #'
-#' Returns the raw data source \code{watersurfaces} (Leyssen et al., 2024)
+#' Returns the raw data source \code{watersurfaces} (Leyssen et al., 2026)
 #' as a standardized \code{sf} polygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -708,7 +708,7 @@ read_watersurfaces_refpoints <-
 #' is the version corresponding to the \code{file} (note that the \code{version}
 #' defaults to the latest version).
 #'
-#' See Leyssen et al. (2024) for an elaborate explanation of the data source
+#' See Leyssen et al. (2026) for an elaborate explanation of the data source
 #' and its attributes.
 #'
 #' @param file Optional string. An absolute or relative file path of
@@ -754,7 +754,7 @@ read_watersurfaces_refpoints <-
 #'   (Denys, 2009);
 #'   \item \code{wfd_type_alternative}: alternative type code according to the
 #'   Flemish WFD typology, in case there is a gradient between different types
-#'   (only version 2024);
+#'   (since version 2024);
 #'   \item \code{wfd_type_certain}: Logical.
 #'   Is there high confidence about the \code{wfd_type} determination?
 #'   \item \code{depth_class}: class of water depth;
@@ -774,10 +774,11 @@ read_watersurfaces_refpoints <-
 #' wateren in Vlaanderen.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \item Leyssen A., Scheers K., Packet J., Van Hecke F., Wils C. (2024).
-#' Watervlakken 2024: Polygonenkaart van stilstaand water in
-#' Vlaanderen. Uitgave 2024. Instituut voor Natuur- en Bosonderzoek.
-#' \doi{10.21436/inbor.114075267}.
+#' \item Leyssen A., Bruyninckx E., De Bruyn Q., Smeekens V., Scheers K.,
+#' Packet J., Wils C. (2026). Watervlakken 2026: polygonenkaart van stilstaand
+#' water in Vlaanderen. Uitgave 2026. Rapporten van het Instituut voor Natuur-
+#' en Bosonderzoek 2026 (64). Instituut voor Natuur- en Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.155805256}.
 #' }
 #'
 #' @examples
