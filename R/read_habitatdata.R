@@ -970,6 +970,7 @@ read_watersurfaces <-
           c("wfd_code", "name", "area_name"),
           \(x) ifelse(x == "<Null>", NA, x)
         ),
+        across(any_of("hyla_code"), \(x) ifelse(x == 0, NA, x)),
         depth_class = str_replace(
           string = .data$depth_class,
           pattern = "\u2265",
@@ -993,8 +994,7 @@ read_watersurfaces <-
             x,
             levels = levels(wfd_type_alttransl$wfd_type_alternative)
           )
-        ),
-        across(any_of("hyla_code"), \(x) ifelse(x == 0, NA, x))
+        )
       ) %>%
       arrange("polygon_id")
 
