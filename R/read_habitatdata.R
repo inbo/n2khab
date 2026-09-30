@@ -808,13 +808,15 @@ read_watersurfaces_refpoints <-
 #' @importFrom dplyr %>% across arrange mutate na_if rename select left_join everything tribble
 #' @importFrom assertthat assert_that
 #' @importFrom stringr str_replace
-#' @importFrom tidyselect where any_of
+#' @importFrom tidyselect where any_of starts_with
+#' @importFrom forcats fct
 #' @export
 read_watersurfaces <-
   function(file = NULL,
            extended = FALSE,
            fix_geom = FALSE,
            version = c(
+             "watersurfaces_2026",
              "watersurfaces_2024",
              "watersurfaces_v1.2",
              "watersurfaces_v1.1",
@@ -857,7 +859,7 @@ read_watersurfaces <-
       }
     }
 
-    if (version == "watersurfaces_v1.1") {
+    if (version %in% c("watersurfaces_2026", "watersurfaces_v1.1")) {
       suppressWarnings(
         watersurfaces <- read_sf(file,
           layer = "Watervlakken",
@@ -876,7 +878,7 @@ read_watersurfaces <-
             as.factor
           )
         ) %>%
-        rename(
+        select(
           wfd_type = "Code",
           wfd_type_name = "Omschrijving"
         )
@@ -916,8 +918,11 @@ read_watersurfaces <-
         )
     }
 
-    if (version == "watersurfaces_2024") {
-      wfd_type_alttransl <- data.frame(wfd_type = "-", wfd_type_name = "geen ander watertype") %>%
+    if (version %in% c("watersurfaces_2024", "watersurfaces_2026")) {
+      wfd_type_alttransl <- data.frame(
+        wfd_type = "-",
+        wfd_type_name = "geen ander watertype"
+      ) %>%
         bind_rows(wfd_typetransl) %>%
         bind_rows(wfd_typetransl %>%
           mutate(
@@ -1064,7 +1069,7 @@ read_watersurfaces <-
     }
 
     if (extended) {
-      if (version == "watersurfaces_v1.1") {
+      if (version %in% c("watersurfaces_2026", "watersurfaces_v1.1")) {
         connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
           mutate(
             across(
@@ -1073,9 +1078,9 @@ read_watersurfaces <-
             ),
             across("Code", as.factor)
           ) %>%
-          rename(
+          select(
             connectivity = "Code",
-            connectivity_name = "Omschr"
+            connectivity_name = starts_with("Omschr")
           )
       } else {
         connectivitytransl <-
@@ -1114,7 +1119,7 @@ read_watersurfaces <-
               )
         ) %>%
         {
-          if (version == "watersurfaces_2024") {
+          if (version %in% c("watersurfaces_2024", "watersurfaces_2026")) {
             left_join(., wfd_type_alttransl, by = "wfd_type_alternative") %>%
               mutate(
                 wfd_type_alt_name =
