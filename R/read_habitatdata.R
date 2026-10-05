@@ -810,7 +810,7 @@ read_watersurfaces_refpoints <-
 #' @importFrom assertthat assert_that
 #' @importFrom stringr str_replace
 #' @importFrom tidyselect where any_of starts_with
-#' @importFrom forcats fct
+#' @importFrom forcats fct fct_relevel
 #' @export
 read_watersurfaces <-
   function(file = NULL,
@@ -976,11 +976,11 @@ read_watersurfaces <-
           string = .data$depth_class,
           pattern = "\u2265",
           replacement = ">="
-        ) %>%
-          factor(levels = c("0 - 2 m", "2 - 4 m", "4 - 6 m", "> 6 m")),
+        ),
         across(
           c(
             "area_name",
+            "depth_class",
             "connectivity",
             "usage",
             any_of("water_level_management")
@@ -999,6 +999,7 @@ read_watersurfaces <-
       ) %>%
       arrange("polygon_id")
 
+    # version-specific value conversion for wfd_type_certain
     if (version == "watersurfaces_v1.0") {
       watersurfaces <-
         watersurfaces %>%
@@ -1017,6 +1018,22 @@ read_watersurfaces <-
           na_lgl,
           .data$wfd_type_certain == "definitief"
         ))
+    }
+
+    # relevel depth class factor levels since watersurfaces_2024 (before, the
+    # levels were non-standard and left as-is)
+    if (version %in% c("watersurfaces_2024", "watersurfaces_2026")) {
+      watersurfaces <-
+        watersurfaces %>%
+        mutate(
+          depth_class = fct_relevel(
+            depth_class,
+            "0 - 2 m",
+            "2 - 4 m",
+            "4 - 6 m",
+            "> 6 m"
+          )
+        )
     }
 
     # corrections per record
