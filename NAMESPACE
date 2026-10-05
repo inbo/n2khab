@@ -95,6 +95,7 @@ importFrom(dplyr,
 )
 importFrom(forcats,
   fct,
+  fct_relevel,
   fct_reorder
 )
 importFrom(git2rdata,read_vc)
