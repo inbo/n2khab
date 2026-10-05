@@ -8,7 +8,7 @@ The following new data source version is now supported by the corresponding func
 
 ## Minor breaking change
 
-- `read_watersurfaces()` now applies a customized rather than an alphabetic order for the factor levels of `wfd_type`, `wfd_type_alternative` and `depth_class`, as well as for `wfd_type_name` and `wfd_type_alt_name` if `extended = TRUE` (#226).
+- `read_watersurfaces()` now applies a customized rather than an alphabetic order for the factor levels of `wfd_type`, `wfd_type_alternative` and `depth_class`, as well as for `wfd_type_name` and `wfd_type_alt_name` if `extended = TRUE` (#226, #227).
 
 ## Support for interim data source versions
 
