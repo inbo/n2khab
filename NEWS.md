@@ -1,3 +1,24 @@
+# n2khab 0.16.0 (2026-10-06)
+
+## Support for new data source versions
+
+The following new data source version is now supported by the corresponding function (#226):
+
+- `watersurfaces_2026` (`read_watersurfaces()`)
+
+## Minor breaking change
+
+- `read_watersurfaces()` now applies a customized rather than an alphabetic order for the factor levels of `wfd_type`, `wfd_type_alternative` and `depth_class`, as well as for `wfd_type_name` and `wfd_type_alt_name` if `extended = TRUE` (#226, #227).
+
+## Support for interim data source versions
+
+The following _interim_ data source versions are now supported by the corresponding functions (#225; [inbo/n2khab-preprocessing/pull/87](https://github.com/inbo/n2khab-preprocessing/pull/87)):
+
+- `habitatmap_stdized_2025_v99_interim` (`read_habitatmap_stdized()`)
+- `habitatmap_terr_2025_v99_interim` (`read_habitatmap_terr()`)
+
+Please note that it is advised to use a regular version of these data sources instead.
+
 # n2khab 0.15.1 (2026-07-01)
 
 ## Hotfix

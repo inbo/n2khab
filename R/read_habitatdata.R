@@ -167,6 +167,7 @@ read_habitatmap_stdized <-
              "habitatmap_stdized_2020_v1",
              "habitatmap_stdized_2018_v2",
              "habitatmap_stdized_2018_v1",
+             "habitatmap_stdized_2025_v99_interim",
              "habitatmap_stdized_2024_v99_interim"
            )) {
     version <- match.arg(version)
@@ -693,7 +694,7 @@ read_watersurfaces_refpoints <-
 
 #' Return the data source \code{watersurfaces} as an \code{sf} polygon layer
 #'
-#' Returns the raw data source \code{watersurfaces} (Leyssen et al., 2024)
+#' Returns the raw data source \code{watersurfaces} (Leyssen et al., 2026)
 #' as a standardized \code{sf} polygon layer
 #' (tidyverse-styled, internationalized) in the Belgian Lambert 72 CRS
 #' (EPSG-code \href{https://epsg.io/31370}{31370}).
@@ -707,7 +708,7 @@ read_watersurfaces_refpoints <-
 #' is the version corresponding to the \code{file} (note that the \code{version}
 #' defaults to the latest version).
 #'
-#' See Leyssen et al. (2024) for an elaborate explanation of the data source
+#' See Leyssen et al. (2026) for an elaborate explanation of the data source
 #' and its attributes.
 #'
 #' @param file Optional string. An absolute or relative file path of
@@ -753,7 +754,7 @@ read_watersurfaces_refpoints <-
 #'   (Denys, 2009);
 #'   \item \code{wfd_type_alternative}: alternative type code according to the
 #'   Flemish WFD typology, in case there is a gradient between different types
-#'   (only version 2024);
+#'   (since version 2024);
 #'   \item \code{wfd_type_certain}: Logical.
 #'   Is there high confidence about the \code{wfd_type} determination?
 #'   \item \code{depth_class}: class of water depth;
@@ -773,10 +774,11 @@ read_watersurfaces_refpoints <-
 #' wateren in Vlaanderen.
 #' Rapporten van het Instituut voor Natuur- en Bosonderzoek INBO.R.2009.34.
 #' Instituut voor Natuur- en Bosonderzoek, Brussel.
-#' \item Leyssen A., Scheers K., Packet J., Van Hecke F., Wils C. (2024).
-#' Watervlakken 2024: Polygonenkaart van stilstaand water in
-#' Vlaanderen. Uitgave 2024. Instituut voor Natuur- en Bosonderzoek.
-#' \doi{10.21436/inbor.114075267}.
+#' \item Leyssen A., Bruyninckx E., De Bruyn Q., Smeekens V., Scheers K.,
+#' Packet J., Wils C. (2026). Watervlakken 2026: polygonenkaart van stilstaand
+#' water in Vlaanderen. Uitgave 2026. Rapporten van het Instituut voor Natuur-
+#' en Bosonderzoek 2026 (64). Instituut voor Natuur- en Bosonderzoek, Brussel.
+#' \doi{10.21436/inbor.155805256}.
 #' }
 #'
 #' @examples
@@ -807,13 +809,15 @@ read_watersurfaces_refpoints <-
 #' @importFrom dplyr %>% across arrange mutate na_if rename select left_join everything tribble
 #' @importFrom assertthat assert_that
 #' @importFrom stringr str_replace
-#' @importFrom tidyselect where any_of
+#' @importFrom tidyselect where any_of starts_with
+#' @importFrom forcats fct fct_relevel
 #' @export
 read_watersurfaces <-
   function(file = NULL,
            extended = FALSE,
            fix_geom = FALSE,
            version = c(
+             "watersurfaces_2026",
              "watersurfaces_2024",
              "watersurfaces_v1.2",
              "watersurfaces_v1.1",
@@ -856,7 +860,7 @@ read_watersurfaces <-
       }
     }
 
-    if (version == "watersurfaces_v1.1") {
+    if (version %in% c("watersurfaces_2026", "watersurfaces_v1.1")) {
       suppressWarnings(
         watersurfaces <- read_sf(file,
           layer = "Watervlakken",
@@ -866,16 +870,10 @@ read_watersurfaces <-
 
       wfd_typetransl <- read_sf(file, layer = "LktKRWTYPE") %>%
         mutate(
-          across(
-            where(is.character),
-            ~ return(`Encoding<-`(.x, "UTF-8"))
-          ),
-          across(
-            "Code",
-            as.factor
-          )
+          across(where(is.character), \(x) return(`Encoding<-`(x, "UTF-8"))),
+          across("Code", fct)
         ) %>%
-        rename(
+        select(
           wfd_type = "Code",
           wfd_type_name = "Omschrijving"
         )
@@ -908,21 +906,22 @@ read_watersurfaces <-
           "Zm", "zwak zuur",
           "Zs", "sterk zuur"
         ) %>%
-        mutate(
-          wfd_type = factor(.data$wfd_type,
-            levels = .$wfd_type
-          )
-        )
+        mutate(wfd_type = fct(.data$wfd_type))
     }
 
-    if (version == "watersurfaces_2024") {
-      wfd_type_alttransl <- data.frame(wfd_type = "-", wfd_type_name = "geen ander watertype") %>%
+    if (version %in% c("watersurfaces_2024", "watersurfaces_2026")) {
+      wfd_type_alttransl <- data.frame(
+        wfd_type = "-",
+        wfd_type_name = "geen ander watertype"
+      ) %>%
         bind_rows(wfd_typetransl) %>%
-        bind_rows(wfd_typetransl %>%
-          mutate(
-            wfd_type = paste0("(", .data$wfd_type, ")"),
-            wfd_type_name = paste(.data$wfd_type_name, "(weinig waarschijnlijk)")
-          )) %>%
+        bind_rows(
+          wfd_typetransl %>%
+            mutate(
+              wfd_type = paste0("(", .data$wfd_type, ")"),
+              wfd_type_name = paste(.data$wfd_type_name, "(weinig waarschijnlijk)")
+            )
+        ) %>%
         rename(
           wfd_type_alt_name = "wfd_type_name",
           wfd_type_alternative = "wfd_type"
@@ -947,24 +946,11 @@ read_watersurfaces <-
 
     watersurfaces <-
       watersurfaces %>%
-      {
-        if (version == "watersurfaces_v1.2") {
-          rename(.,
-            water_level_management = "PEILBEHEER",
-            hyla_code = "HYLAC"
-          )
-        } else if (version == "watersurfaces_2024") {
-          rename(.,
-            wfd_type_alternative = "KRWTYPEA",
-            water_level_management = "PEILBEHEER"
-          ) %>%
-            mutate(
-              across(where(is.character), ~ na_if(., ""))
-            )
-        } else {
-          rename(., hyla_code = "HYLAC")
-        }
-      } %>%
+      rename(any_of(c(
+        water_level_management = "PEILBEHEER",
+        wfd_type_alternative = "KRWTYPEA",
+        hyla_code = "HYLAC"
+      ))) %>%
       select(
         polygon_id = "WVLC",
         wfd_code = "WTRLICHC",
@@ -980,6 +966,12 @@ read_watersurfaces <-
         any_of("water_level_management")
       ) %>%
       mutate(
+        across(where(is.character), \(x) na_if(x, "")),
+        across(
+          c("wfd_code", "name", "area_name"),
+          \(x) ifelse(x == "<Null>", NA, x)
+        ),
+        across(any_of("hyla_code"), \(x) ifelse(x == 0, NA, x)),
         depth_class = str_replace(
           string = .data$depth_class,
           pattern = "\u2265",
@@ -996,59 +988,52 @@ read_watersurfaces <-
           as.factor
         ),
         wfd_type = .data$wfd_type %>%
-          factor(
-            levels =
-              levels(wfd_typetransl$wfd_type)
-          ),
+          factor(levels = levels(wfd_typetransl$wfd_type)),
         across(
           any_of("wfd_type_alternative"),
-          ~ factor(.,
-            levels =
-              levels(wfd_type_alttransl$wfd_type_alternative)
-          )
-        ),
-        across(
-          any_of("hyla_code"),
-          ~ ifelse(.x == 0,
-            NA,
-            .x
+          \(x) factor(
+            x,
+            levels = levels(wfd_type_alttransl$wfd_type_alternative)
           )
         )
       ) %>%
       arrange("polygon_id")
 
+    # version-specific value conversion for wfd_type_certain
     if (version == "watersurfaces_v1.0") {
       watersurfaces <-
         watersurfaces %>%
         mutate(
-          across(
-            c("wfd_code", "name"),
-            ~ ifelse(.x == "<Null>", NA, .x)
-          ),
-          wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+          wfd_type_certain = ifelse(
+            is.na(.data$wfd_type_certain),
             na_lgl,
-            .data$wfd_type_certain %in%
-              c("zeker", "definitief")
+            .data$wfd_type_certain %in% c("zeker", "definitief")
           )
         )
     } else {
       watersurfaces <-
         watersurfaces %>%
-        {
-          if (version != "watersurfaces_v1.2") {
-            .
-          } else {
-            mutate(., area_name = ifelse(.data$area_name == "<Null>",
-              NA,
-              .data$area_name
-            ))
-          }
-        } %>%
-        mutate(wfd_type_certain = ifelse(is.na(.data$wfd_type_certain),
+        mutate(wfd_type_certain = ifelse(
+          is.na(.data$wfd_type_certain),
           na_lgl,
-          .data$wfd_type_certain ==
-            "definitief"
+          .data$wfd_type_certain == "definitief"
         ))
+    }
+
+    # relevel depth class factor levels since watersurfaces_2024 (before, the
+    # levels were non-standard and left as-is)
+    if (version %in% c("watersurfaces_2024", "watersurfaces_2026")) {
+      watersurfaces <-
+        watersurfaces %>%
+        mutate(
+          depth_class = fct_relevel(
+            depth_class,
+            "0 - 2 m",
+            "2 - 4 m",
+            "4 - 6 m",
+            "> 6 m"
+          )
+        )
     }
 
     # corrections per record
@@ -1063,18 +1048,18 @@ read_watersurfaces <-
     }
 
     if (extended) {
-      if (version == "watersurfaces_v1.1") {
+      if (version %in% c("watersurfaces_2026", "watersurfaces_v1.1")) {
         connectivitytransl <- read_sf(file, layer = "LktCONNECT") %>%
           mutate(
             across(
               where(is.character),
-              ~ return(`Encoding<-`(.x, "UTF-8"))
+              \(x) return(`Encoding<-`(x, "UTF-8"))
             ),
             across("Code", as.factor)
           ) %>%
-          rename(
+          select(
             connectivity = "Code",
-            connectivity_name = "Omschr"
+            connectivity_name = starts_with("Omschr")
           )
       } else {
         connectivitytransl <-
@@ -1113,7 +1098,7 @@ read_watersurfaces <-
               )
         ) %>%
         {
-          if (version == "watersurfaces_2024") {
+          if (version %in% c("watersurfaces_2024", "watersurfaces_2026")) {
             left_join(., wfd_type_alttransl, by = "wfd_type_alternative") %>%
               mutate(
                 wfd_type_alt_name =
@@ -1565,6 +1550,7 @@ read_habitatmap_terr <-
              "habitatmap_terr_2020_v1",
              "habitatmap_terr_2018_v2",
              "habitatmap_terr_2018_v1",
+             "habitatmap_terr_2025_v99_interim",
              "habitatmap_terr_2024_v99_interim"
            )) {
     assert_that(is.flag(keep_aq_types), noNA(keep_aq_types))
